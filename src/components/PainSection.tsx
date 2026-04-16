@@ -35,6 +35,16 @@ export const PainSection = () => (
     zIndex: 10,
     backgroundColor: 'var(--salvia-bg)',
   }}>
+    <style>{`
+      @media (max-width: 768px) {
+        .pain-stat-block { 
+          align-items: flex-start !important; 
+          text-align: left !important; 
+          border-top: 1px solid rgba(0,0,0,0.05);
+          padding-top: 1rem;
+        }
+      }
+    `}</style>
     <div className="container" style={{ maxWidth: '1200px' }}>
 
       {/* Section label */}
@@ -108,10 +118,13 @@ export const PainSection = () => (
             </div>
 
             {/* Right — dominant stat */}
-            <div style={{
-              display: 'flex', flexDirection: 'column',
-              alignItems: 'flex-end', textAlign: 'right',
-            }}>
+            <div 
+              style={{
+                display: 'flex', flexDirection: 'column',
+                alignItems: 'flex-end', textAlign: 'right',
+              }}
+              className="pain-stat-block"
+            >
               <div style={{
                 fontSize: 'clamp(3rem, 5vw, 4.5rem)',
                 fontWeight: 800, letterSpacing: '-0.05em', lineHeight: 1,
