@@ -1,0 +1,154 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  /* Warm Sand & Fire Orange Palette */
+  --salvia-bg: #FCFAF8; /* Warm Sand Beige */
+  --salvia-surface: #FFFFFF;
+  --salvia-text: #0F172A; /* Midnight Navy / Slate */
+  --salvia-text-muted: #475569;
+  --salvia-primary: #0F172A; /* Midnight Navy for buttons/headers */
+  --salvia-accent: #FF4E00; /* Blazing Fire Orange */
+  
+  --salvia-radius-full: 9999px;
+  --salvia-radius-large: 24px;
+  --salvia-radius-base: 12px;
+  
+  --salvia-shadow-soft: 0 12px 40px rgba(25, 56, 46, 0.08);
+  --salvia-shadow-card: 0 8px 24px rgba(25, 56, 46, 0.04);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  color: var(--salvia-text);
+  background-color: var(--salvia-bg);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.2s ease;
+}
+
+ul {
+  list-style: none;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  position: relative;
+  z-index: 10;
+}
+
+/* Base button styles matching the image */
+.pill-button {
+  background-color: var(--salvia-primary);
+  color: #fff;
+  padding: 0.875rem 1.75rem;
+  border-radius: var(--salvia-radius-full);
+  font-weight: 500;
+  font-size: 1rem;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.pill-button:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.pill-button-light {
+  background-color: var(--salvia-surface);
+  color: var(--salvia-text);
+  padding: 0.875rem 1.75rem;
+  border-radius: var(--salvia-radius-full);
+  font-weight: 500;
+  font-size: 1rem;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--salvia-shadow-card);
+}
+
+.pill-button-light:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--salvia-shadow-soft);
+}
+
+/* Feature cards in the background line */
+.feature-card {
+  background-color: var(--salvia-surface);
+  border-radius: var(--salvia-radius-large);
+  padding: 2rem;
+  box-shadow: var(--salvia-shadow-card);
+  transition: transform 0.3s ease;
+  height: 100%;
+}
+
+.feature-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--salvia-shadow-soft);
+}
+
+/* Hero Review Badge */
+.review-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: transparent;
+  border: 1px solid rgba(25, 56, 46, 0.15);
+  padding: 0.35rem 0.5rem;
+  padding-right: 1rem;
+  border-radius: var(--salvia-radius-full);
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--salvia-text-muted);
+}
+
+.avatar-stack {
+  display: flex;
+}
+.avatar-stack img {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 2px solid var(--salvia-bg);
+  margin-left: -8px;
+}
+.avatar-stack img:first-child {
+  margin-left: 0;
+}
+
+/* The decorative background swooping line */
+.bg-swoop {
+  position: absolute;
+  top: 40%;
+  left: 0;
+  width: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
