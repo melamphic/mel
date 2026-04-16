@@ -221,6 +221,19 @@ export const PipelineSection = () => {
 
   return (
     <section id="pipeline" style={{ backgroundColor: 'var(--salvia-bg)', padding: '10rem 0' }}>
+      <style>{`
+        @media (max-width: 768px) {
+          .pipeline-grid {
+             grid-template-columns: 1fr !important;
+          }
+          .connector-set {
+             display: flex !important;
+             flex-direction: column !important;
+             height: auto !important;
+             padding: 1rem 0 !important;
+          }
+        }
+      `}</style>
       <div className="container" style={{ maxWidth: '1200px' }}>
 
         {/* Domain toggle — separate spaced pills */}
@@ -269,17 +282,17 @@ export const PipelineSection = () => {
 
             <Node n={s.top} />
 
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', height: 48 }}>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', height: 48 }} className="connector-set">
               <Connector badge="Automatically" color="#6366F1" />
               <Connector badge="Conditions" color={domain.color} />
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem' }} className="pipeline-grid">
               <Node n={s.left} />
               <Node n={s.right} />
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', height: 48 }}>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', height: 48 }} className="connector-set">
               <Connector badge="Conditions" color="#6366F1" />
               <Connector badge="Automatically" color={domain.color} />
             </div>
