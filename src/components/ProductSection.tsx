@@ -237,7 +237,7 @@ export const ProductSection: React.FC = () => {
   };
 
   return (
-    <section id="products" style={{ padding: '12rem 0 10rem', position: 'relative', zIndex: 10 }}>
+    <section id="products" className="mobile-pad-reduce" style={{ padding: '12rem 0 10rem', position: 'relative', zIndex: 10 }}>
       {/* NO WHITE BOX WRAPPER. It breathes openly on the background. */}
       <div className="container" style={{ maxWidth: '1400px' }}>
 
@@ -247,81 +247,130 @@ export const ProductSection: React.FC = () => {
             Meet our products
           </h2>
 
-          {/* Segmented Control Pill directly below title */}
-          <div style={{ display: 'flex', justifyContent: 'center', marginTop: '1.5rem' }}>
-            <div style={{ display: 'flex', backgroundColor: '#ffffff', borderRadius: '999px', padding: '0.5rem', boxShadow: '0 4px 20px rgba(0,0,0,0.03)', border: '1px solid rgba(0,0,0,0.04)' }}>
-              {products.map((p, idx) => (
-                <button
-                  key={p.id}
-                  onClick={() => setActiveTab(idx)}
-                  style={{
-                    backgroundColor: activeTab === idx ? '#F8FAFC' : 'transparent',
-                    boxShadow: activeTab === idx ? 'inset 0 0 0 1px rgba(0,0,0,0.05)' : 'none',
-                    color: activeTab === idx ? 'var(--salvia-text)' : '#94A3B8',
-                    fontWeight: 700,
-                    fontSize: '0.8rem',
-                    letterSpacing: '0.04em',
-                    border: 'none',
-                    padding: '0.85rem 2rem',
-                    borderRadius: '999px',
-                    cursor: 'pointer',
-                    transition: 'all 0.2s ease',
-                    minWidth: '200px'
-                  }}
-                >
-                  {p.label}
+          {/* --- DESKTOP VIEW: Tabs and Flowchart Grid --- */}
+          <div className="desktop-only">
+            {/* Segmented Control Pill directly below title */}
+            <div style={{ marginTop: '1.5rem', width: '100%', overflow: 'hidden' }}>
+              <div className="scroll-x-mobile" style={{ display: 'inline-flex', margin: '0 auto', maxWidth: '100%', backgroundColor: '#ffffff', borderRadius: '999px', padding: '0.5rem', boxShadow: '0 4px 20px rgba(0,0,0,0.03)', border: '1px solid rgba(0,0,0,0.04)' }}>
+                {products.map((p, idx) => (
+                  <button
+                    key={p.id}
+                    onClick={() => setActiveTab(idx)}
+                    style={{
+                      backgroundColor: activeTab === idx ? '#F8FAFC' : 'transparent',
+                      boxShadow: activeTab === idx ? 'inset 0 0 0 1px rgba(0,0,0,0.05)' : 'none',
+                      color: activeTab === idx ? 'var(--salvia-text)' : '#94A3B8',
+                      fontWeight: 700,
+                      fontSize: '0.8rem',
+                      letterSpacing: '0.04em',
+                      border: 'none',
+                      padding: '0.85rem 2rem',
+                      borderRadius: '999px',
+                      cursor: 'pointer',
+                      transition: 'all 0.2s ease',
+                      minWidth: '200px'
+                    }}
+                  >
+                    {p.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Two-Column Presentation Layout - Using the crisp white background solely for the display box */}
+            <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1.4fr) minmax(0, 1fr)', gap: '0', borderRadius: '24px', overflow: 'hidden', backgroundColor: '#ffffff', boxShadow: '0 24px 60px rgba(0,0,0,0.04)', border: '1px solid #EBECEF', marginTop: '3rem' }}>
+              
+              {/* Left Diagram Column - Light Sage Green Background instead of Dark */}
+              <div style={{ backgroundColor: '#D9E6DE', position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
+                {renderDiagram()}
+              </div>
+
+              {/* Right Details Column */}
+              <div style={{ padding: '5rem 4rem', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+                <h3 style={{ fontSize: '2.4rem', fontWeight: 700, color: 'var(--salvia-primary)', marginBottom: '1rem', letterSpacing: '-0.02em', lineHeight: 1.1 }}>
+                  {products[activeTab].title}
+                </h3>
+                <p style={{ color: 'var(--salvia-text-muted)', fontSize: '1rem', lineHeight: 1.6, marginBottom: '2.5rem' }}>
+                  {products[activeTab].subtitle}
+                </p>
+
+                <ul style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem', marginBottom: '3.5rem' }}>
+                  {products[activeTab].bullets.map((bullet, idx) => (
+                    <li key={idx} style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                      <div style={{ color: 'var(--salvia-accent)', display: 'flex', alignItems: 'center' }}>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                          <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                      </div>
+                      <span style={{ color: 'var(--salvia-primary)', fontWeight: 500, fontSize: '0.95rem' }}>{bullet}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                <button style={{
+                  alignSelf: 'flex-start',
+                  backgroundColor: 'var(--salvia-accent)',
+                  color: '#fff',
+                  fontWeight: 700,
+                  fontSize: '0.9rem',
+                  padding: '1rem 2rem',
+                  border: 'none',
+                  borderRadius: '8px',
+                  cursor: 'pointer',
+                  letterSpacing: '0.02em'
+                }}>
+                  {products[activeTab].cta}
                 </button>
-              ))}
+              </div>
             </div>
           </div>
-        </div>
 
-        {/* Two-Column Presentation Layout - Using the crisp white background solely for the display box */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1.4fr) minmax(0, 1fr)', gap: '0', borderRadius: '24px', overflow: 'hidden', backgroundColor: '#ffffff', boxShadow: '0 24px 60px rgba(0,0,0,0.04)', border: '1px solid #EBECEF' }}>
+          {/* --- MOBILE VIEW: Brutalist Editorial Stack --- */}
+          <div className="mobile-only" style={{ display: 'flex', flexDirection: 'column', marginTop: '1rem', borderTop: '1px solid var(--salvia-primary)' }}>
+            {products.map((p, index) => (
+              <div key={p.id} style={{ 
+                padding: '3.5rem 0', 
+                borderBottom: '1px solid var(--salvia-primary)',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'flex-start'
+              }}>
+                {/* Technical Kicker */}
+                <div style={{ 
+                  color: 'var(--salvia-primary)', 
+                  fontSize: '0.75rem', 
+                  fontWeight: 700, 
+                  marginBottom: '1.25rem', 
+                  letterSpacing: '0.1em',
+                  fontFamily: 'monospace',
+                  textTransform: 'uppercase'
+                }}>
+                  [ 0{index + 1} ] / {p.label}
+                </div>
+                
+                {/* Aggressive Heading */}
+                <h3 style={{ fontSize: '2.5rem', fontWeight: 600, color: 'var(--salvia-text)', marginBottom: '1.25rem', letterSpacing: '-0.04em', lineHeight: 1.05 }}>
+                  {p.title}
+                </h3>
+                
+                {/* Raw Text Body - Hidden on mobile to reduce text density */}
+                <p style={{ display: 'none', color: 'var(--salvia-text-muted)', fontSize: '1.05rem', lineHeight: 1.5, marginBottom: '3rem' }}>
+                  {p.subtitle}
+                </p>
 
-          {/* Left Diagram Column - Light Sage Green Background instead of Dark */}
-          <div style={{ backgroundColor: '#D9E6DE', position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
-            {renderDiagram()}
+                {/* Technical Feature Matrix - Strict Uniform Grid (No Checkmarks) */}
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '0.5rem', width: '100%', color: 'var(--salvia-primary)', fontSize: '0.75rem', fontWeight: 700, letterSpacing: '0.05em' }}>
+                  {p.bullets.map((bullet, idx) => (
+                    <div key={idx} style={{ padding: '0.8rem 1rem', border: '1px solid currentColor', display: 'flex', alignItems: 'center', gap: '0.75rem', width: '100%' }}>
+                      <span style={{ color: 'var(--salvia-accent)' }}>+</span> {bullet.toUpperCase()}
+                    </div>
+                  ))}
+                </div>
+
+                {/* Arrow Link removed per feedback */}
+              </div>
+            ))}
           </div>
-
-          {/* Right Details Column */}
-          <div style={{ padding: '5rem 4rem', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-            <h3 style={{ fontSize: '2.4rem', fontWeight: 700, color: 'var(--salvia-primary)', marginBottom: '1rem', letterSpacing: '-0.02em', lineHeight: 1.1 }}>
-              {products[activeTab].title}
-            </h3>
-            <p style={{ color: 'var(--salvia-text-muted)', fontSize: '1rem', lineHeight: 1.6, marginBottom: '2.5rem' }}>
-              {products[activeTab].subtitle}
-            </p>
-
-            <ul style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem', marginBottom: '3.5rem' }}>
-              {products[activeTab].bullets.map((bullet, idx) => (
-                <li key={idx} style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                  <div style={{ color: 'var(--salvia-accent)', display: 'flex', alignItems: 'center' }}>
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                      <polyline points="20 6 9 17 4 12"></polyline>
-                    </svg>
-                  </div>
-                  <span style={{ color: 'var(--salvia-primary)', fontWeight: 500, fontSize: '0.95rem' }}>{bullet}</span>
-                </li>
-              ))}
-            </ul>
-
-            <button style={{
-              alignSelf: 'flex-start',
-              backgroundColor: 'var(--salvia-accent)',
-              color: '#fff',
-              fontWeight: 700,
-              fontSize: '0.9rem',
-              padding: '1rem 2rem',
-              border: 'none',
-              borderRadius: '8px',
-              cursor: 'pointer',
-              letterSpacing: '0.02em'
-            }}>
-              {products[activeTab].cta}
-            </button>
-          </div>
-
         </div>
       </div>
     </section>
