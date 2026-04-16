@@ -130,8 +130,21 @@ export const DomainSection = () => {
       overflow: 'hidden' // Added to clip the full-bleed stage
     }}>
       <div className="container" style={{ maxWidth: '1200px', marginBottom: '5rem' }}>
+        <style>{`
+          @media (max-width: 768px) {
+            .stage-header {
+              flex-direction: column !important;
+              align-items: flex-start !important;
+              gap: 1.5rem !important;
+            }
+            .stage-header-desc {
+              max-width: 100% !important;
+              font-size: 1rem !important;
+            }
+          }
+        `}</style>
         {/* Title Block */}
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: '2rem' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: '2rem' }} className="stage-header">
           <div style={{ flex: 1, minWidth: '300px' }}>
             <span style={{
               fontSize: '0.75rem', fontWeight: 800, letterSpacing: '0.12em',
@@ -146,7 +159,7 @@ export const DomainSection = () => {
               One platform.<br />Three specialties.
             </h2>
           </div>
-          <div style={{ flex: 1, maxWidth: '450px' }}>
+          <div style={{ flex: 1, maxWidth: '450px' }} className="stage-header-desc">
             <p style={{
               fontSize: '1.15rem', color: 'var(--salvia-text-muted)',
               lineHeight: 1.7, margin: 0
@@ -158,12 +171,31 @@ export const DomainSection = () => {
       </div>
 
       {/* The Asymmetric Full-Bleed Layout */}
-      <div style={{
-        display: 'grid', gridTemplateColumns: 'minmax(280px, 0.8fr) 2fr',
+      <div style={{ 
+        display: 'grid', gridTemplateColumns: 'minmax(280px, 0.8fr) 2fr', 
         gap: '5rem', alignItems: 'start',
-        paddingLeft: 'max(2rem, calc((100vw - 1200px) / 2 + 2rem))',
+        paddingLeft: 'var(--stage-pad-left, max(2rem, calc((100vw - 1200px) / 2 + 2rem)))',
         width: '100vw'
       }} className="mobile-stack">
+        <style>{`
+          @media (max-width: 768px) {
+            #domains { padding: 4rem 0 !important; }
+            .mobile-stack { padding-left: 2rem !important; padding-right: 2rem !important; width: 100% !important; }
+            .stage-app-box { 
+              padding: 2.5rem !important; 
+              border-radius: 32px !important; 
+              width: 100% !important;
+              min-height: auto !important;
+            }
+            .stage-content-grid {
+              grid-template-columns: 1fr !important;
+              gap: 3rem !important;
+            }
+            .stage-metric {
+              font-size: 3.5rem !important;
+            }
+          }
+        `}</style>
 
         {/* Sidebar Selector (Pinned to grid) */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', position: 'sticky', top: '100px' }}>
@@ -206,7 +238,7 @@ export const DomainSection = () => {
         </div>
 
         {/* The App Stage (Extends to right edge) */}
-        <div style={{
+        <div style={{ 
           background: '#fff', borderRadius: '48px 0 0 48px', padding: '5rem',
           border: '1px solid rgba(15, 23, 42, 0.08)',
           borderRight: 'none',
@@ -215,15 +247,15 @@ export const DomainSection = () => {
           width: 'calc(100% + 2rem)', // Small overlap to ensure bleed
           transition: 'all 0.5s cubic-bezier(0.16, 1, 0.3, 1)',
           position: 'relative'
-        }}>
+        }} className="stage-app-box">
 
           {/* Morphing View Content */}
-          <div key={active} style={{
-            position: 'relative', zIndex: 1,
+          <div key={active} style={{ 
+            position: 'relative', zIndex: 1, 
             display: 'grid', gridTemplateColumns: '1.2fr 1.5fr', gap: '5rem',
             animation: 'fadeIn 0.5s ease-out',
             maxWidth: 'calc(100vw - (100vw - 1200px) / 2 - 400px)' // Constraint back to roughly container width inside
-          }} className="mobile-stack">
+          }} className="mobile-stack stage-content-grid">
 
             {/* Left Column: Context & Metric */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: '2.5rem' }}>
@@ -237,7 +269,10 @@ export const DomainSection = () => {
               </div>
 
               <div style={{ marginTop: 'auto', paddingTop: '2.5rem', borderTop: '1px solid rgba(15, 23, 42, 0.05)' }}>
-                <div style={{ fontSize: '4.5rem', fontWeight: 900, color: 'var(--salvia-primary)', letterSpacing: '-0.05em', lineHeight: 1 }}>
+                <div 
+                  style={{ fontSize: '4.5rem', fontWeight: 900, color: 'var(--salvia-primary)', letterSpacing: '-0.05em', lineHeight: 1 }}
+                  className="stage-metric"
+                >
                   {d.metric}
                 </div>
                 <div style={{ fontSize: '0.8rem', fontWeight: 800, color: 'var(--salvia-text-muted)', letterSpacing: '0.12em', marginTop: '0.5rem', textTransform: 'uppercase' }}>
