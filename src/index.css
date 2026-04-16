@@ -273,3 +273,33 @@ nav a:hover {
   border-color: rgba(15, 23, 42, 0.12);
   transform: translateY(-2px);
 }
+
+/* Mobile Utilities */
+@media (max-width: 768px) {
+  .mobile-stack {
+    flex-direction: column !important;
+    grid-template-columns: 1fr !important;
+    gap: 2rem !important;
+  }
+  
+  .hide-mobile {
+    display: none !important;
+  }
+  
+  .show-mobile {
+    display: block !important;
+  }
+
+  .container {
+    padding: 0 1.5rem !important;
+  }
+
+  section {
+    padding: 6rem 0 !important;
+  }
+
+  .hero-title {
+    font-size: 2.75rem !important;
+    line-height: 1.1 !important;
+  }
+}
