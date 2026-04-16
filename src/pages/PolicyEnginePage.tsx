@@ -1,5 +1,5 @@
-import React from 'react';
 import { ProductDetailLayout } from '../components/ProductDetailLayout';
+
 
 export const PolicyEnginePage = () => {
   return (

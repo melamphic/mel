@@ -118,7 +118,7 @@ export const PainSection = () => (
             </div>
 
             {/* Right — dominant stat */}
-            <div 
+            <div
               style={{
                 display: 'flex', flexDirection: 'column',
                 alignItems: 'flex-end', textAlign: 'right',
