@@ -1,6 +1,7 @@
 import { Header } from './components/Header';
 import { Hero } from './components/Hero';
 import { ProductSection } from './components/ProductSection';
+import { PipelineSection } from './components/PipelineSection';
 import './index.css';
 
 function App() {
@@ -36,6 +37,7 @@ function App() {
       <main style={{ flex: 1, zIndex: 10 }}>
         <Hero />
         <ProductSection />
+        <PipelineSection />
       </main>
 
       <footer style={{
