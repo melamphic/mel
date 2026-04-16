@@ -220,7 +220,7 @@ export const PipelineSection = () => {
   const s = SCENARIOS[active];
 
   return (
-    <section id="pipeline" style={{ backgroundColor: 'var(--salvia-bg)', padding: '3.5rem 0 4rem', borderTop: '1px solid rgba(0,0,0,0.06)' }}>
+    <section id="pipeline" style={{ backgroundColor: 'var(--salvia-bg)', padding: '10rem 0' }}>
       <div className="container" style={{ maxWidth: '1200px' }}>
 
         {/* Domain toggle — separate spaced pills */}
