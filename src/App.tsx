@@ -2,6 +2,7 @@ import { Header } from './components/Header';
 import { Hero } from './components/Hero';
 import { ProductSection } from './components/ProductSection';
 import { PipelineSection } from './components/PipelineSection';
+import { Footer } from './components/Footer';
 import './index.css';
 
 function App() {
@@ -40,22 +41,7 @@ function App() {
         <PipelineSection />
       </main>
 
-      <footer style={{
-        padding: '3rem 0',
-        marginTop: 'auto',
-        zIndex: 10,
-        position: 'relative'
-      }}>
-        <div className="container" style={{ display: 'flex', justifyContent: 'space-between', color: 'var(--salvia-text-muted)' }}>
-          <div>
-            <div style={{ fontWeight: 600, color: 'var(--salvia-text)', marginBottom: '0.25rem' }}>Salvia</div>
-            <div style={{ fontSize: '0.85rem' }}>Stop documenting, start caring.</div>
-          </div>
-          <div style={{ fontSize: '0.85rem', alignSelf: 'flex-end' }}>
-            © {new Date().getFullYear()} Melamphic Inc. All rights reserved.
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }
