@@ -1,4 +1,5 @@
 import React from 'react';
+import salviaLogo from '../assets/salvia.png';
 
 const mockData = [
   { id: 1, time: '10:20', patient: 'Luna', owner: 'A. Patel', form: 'Anaesthesia', ver: 'v1.4', asr: 88, status: 'Needs Review', color: '#DBEAFE', text: '#1E40AF' },
@@ -26,9 +27,11 @@ export const DashboardPreview: React.FC = () => {
     }}>
       {/* Sidebar Focus Layer */}
       <div style={{ width: '80px', backgroundColor: '#F8F9FA', borderRight: '1px solid #EBECEF', display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '1.5rem 0', gap: '2rem' }}>
-        <div style={{ width: '40px', height: '40px', borderRadius: '12px', background: 'linear-gradient(135deg, var(--salvia-primary) 0%, var(--salvia-accent) 100%)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-          <div style={{ width: '16px', height: '16px', borderRadius: '4px', backgroundColor: '#fff' }}></div>
-        </div>
+        <img
+          src={salviaLogo}
+          alt="Salvia Logo"
+          style={{ width: '64px', height: '64px', objectFit: 'contain' }}
+        />
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', width: '100%', alignItems: 'center' }}>
           <div style={{ width: '28px', height: '28px', borderRadius: '8px', backgroundColor: '#DFE2E6' }}></div>
           <div style={{ width: '28px', height: '28px', borderRadius: '8px', backgroundColor: '#DFE2E6' }}></div>

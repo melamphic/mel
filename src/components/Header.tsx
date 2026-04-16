@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+import salviaLogo from '../assets/salvia.png';
+
 export const Header: React.FC = () => {
   return (
     <header style={{
@@ -14,15 +16,11 @@ export const Header: React.FC = () => {
       <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', textDecoration: 'none' }}>
           {/* Logo element representing Melamphic / Salvia */}
-          <div style={{
-            width: '32px', height: '32px', borderRadius: '8px',
-            background: 'linear-gradient(135deg, var(--salvia-primary) 0%, var(--salvia-accent) 100%)',
-            display: 'flex', alignItems: 'center', justifyContent: 'center'
-          }}>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M12 2L12 22M2 12L22 12" />
-            </svg>
-          </div>
+          <img
+            src={salviaLogo}
+            alt="Salvia Logo"
+            style={{ width: '56px', height: '56px', objectFit: 'contain' }}
+          />
           <span style={{ fontSize: '1.4rem', fontWeight: 800, letterSpacing: '-0.04em', color: 'var(--salvia-text)' }}>Salvia</span>
         </Link>
 

@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import salviaLogo from '../assets/salvia.png';
 
 export const Footer = () => (
   <footer style={{
@@ -11,15 +12,11 @@ export const Footer = () => (
     <div className="container mobile-stack" style={{ display: 'grid', gridTemplateColumns: '1.5fr 1fr 1fr', gap: '4rem', marginBottom: '4rem' }}>
       <div>
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '1.5rem' }}>
-          <div style={{
-            width: '24px', height: '24px', borderRadius: '6px',
-            background: 'linear-gradient(135deg, var(--salvia-primary) 0%, var(--salvia-accent) 100%)',
-            display: 'flex', alignItems: 'center', justifyContent: 'center'
-          }}>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M12 2L12 22M2 12L22 12" />
-            </svg>
-          </div>
+          <img
+            src={salviaLogo}
+            alt="Salvia Logo"
+            style={{ width: '100px', height: '100px', objectFit: 'contain' }}
+          />
           <span style={{ fontSize: '1.1rem', fontWeight: 800, letterSpacing: '-0.03em', color: 'var(--salvia-text)' }}>Salvia</span>
         </div>
         <p style={{ color: 'var(--salvia-text-muted)', fontSize: '0.9rem', lineHeight: 1.6, maxWidth: '300px' }}>

@@ -1,4 +1,5 @@
 import React from 'react';
+import salviaLogo from '../assets/salvia.png';
 
 const mockData = [
   { id: 1, patient: 'Luna', form: 'Anaesthesia', asr: 88, status: 'Needs Review', color: '#DBEAFE', text: '#1E40AF' },
@@ -46,7 +47,11 @@ export const MobileDevicePreview: React.FC = () => {
         backgroundColor: '#fff'
       }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-          <div style={{ width: '20px', height: '20px', borderRadius: '6px', background: 'linear-gradient(135deg, var(--salvia-primary) 0%, var(--salvia-accent) 100%)' }} />
+          <img
+            src={salviaLogo}
+            alt="Salvia Logo"
+            style={{ width: '32px', height: '32px', objectFit: 'contain' }}
+          />
           <span style={{ fontWeight: 800, fontSize: '0.85rem', color: '#0F172A', letterSpacing: '-0.01em' }}>Clinical Auditor</span>
         </div>
         <div style={{ width: '28px', height: '28px', borderRadius: '50%', background: '#F8FAFC', border: '1px solid #E2E8F0' }} />
@@ -54,7 +59,7 @@ export const MobileDevicePreview: React.FC = () => {
 
       {/* App Scrollable Content */}
       <div style={{ flex: 1, backgroundColor: '#FCFCFD', overflowY: 'auto', padding: '1.25rem' }}>
-        
+
         {/* KPI Stack */}
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem', marginBottom: '1.5rem' }}>
           <div style={{ padding: '1rem', backgroundColor: '#fff', borderRadius: '16px', border: '1px solid #EBECEF', boxShadow: '0 2px 8px rgba(0,0,0,0.02)' }}>
@@ -77,28 +82,28 @@ export const MobileDevicePreview: React.FC = () => {
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
           {mockData.map((row) => (
-            <div key={row.id} style={{ 
-              padding: '1rem', background: '#fff', borderRadius: '16px', 
+            <div key={row.id} style={{
+              padding: '1rem', background: '#fff', borderRadius: '16px',
               border: '1px solid #EBECEF', display: 'flex', alignItems: 'center', gap: '1rem',
               boxShadow: '0 2px 4px rgba(0,0,0,0.01)'
             }}>
-              <div style={{ 
-                width: '8px', height: '8px', borderRadius: '50%', 
-                backgroundColor: row.status === 'Processed' ? '#10B981' : '#F59E0B' 
+              <div style={{
+                width: '8px', height: '8px', borderRadius: '50%',
+                backgroundColor: row.status === 'Processed' ? '#10B981' : '#F59E0B'
               }} />
-              
+
               <div style={{ flex: 1 }}>
                 <div style={{ fontSize: '0.9rem', fontWeight: 700, color: '#0F172A' }}>{row.patient}</div>
                 <div style={{ fontSize: '0.7rem', color: '#64748B' }}>{row.form}</div>
               </div>
 
               <div style={{ textAlign: 'right' }}>
-                 <div style={{ 
-                   fontSize: '0.65rem', fontWeight: 800, color: row.text, 
-                   backgroundColor: row.color, padding: '0.2rem 0.5rem', borderRadius: '89px',
-                   marginBottom: '0.25rem'
-                 }}>{row.status === 'Needs Review' ? 'Review' : 'OK'}</div>
-                 <div style={{ fontSize: '0.65rem', fontWeight: 700, color: '#94A3B8' }}>ASR {row.asr}%</div>
+                <div style={{
+                  fontSize: '0.65rem', fontWeight: 800, color: row.text,
+                  backgroundColor: row.color, padding: '0.2rem 0.5rem', borderRadius: '89px',
+                  marginBottom: '0.25rem'
+                }}>{row.status === 'Needs Review' ? 'Review' : 'OK'}</div>
+                <div style={{ fontSize: '0.65rem', fontWeight: 700, color: '#94A3B8' }}>ASR {row.asr}%</div>
               </div>
             </div>
           ))}
@@ -106,12 +111,12 @@ export const MobileDevicePreview: React.FC = () => {
 
         {/* Quick Action */}
         <div style={{ marginTop: '2rem' }}>
-          <div style={{ 
-            height: '42px', background: 'var(--salvia-primary)', borderRadius: '12px', 
+          <div style={{
+            height: '42px', background: 'var(--salvia-primary)', borderRadius: '12px',
             color: '#fff', fontSize: '0.85rem', fontWeight: 700,
             display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem'
           }}>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><path d="M12 5v14M5 12h14"/></svg>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><path d="M12 5v14M5 12h14" /></svg>
             New Visit Note
           </div>
         </div>
