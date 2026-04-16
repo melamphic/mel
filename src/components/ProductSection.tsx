@@ -325,49 +325,87 @@ export const ProductSection: React.FC = () => {
             </div>
           </div>
 
-          {/* --- MOBILE VIEW: Brutalist Editorial Stack --- */}
-          <div className="mobile-only" style={{ display: 'flex', flexDirection: 'column', marginTop: '1rem', borderTop: '1px solid var(--salvia-primary)' }}>
+          {/* --- MOBILE VIEW: High-Fidelity Clinical Cards --- */}
+          <div className="mobile-only" style={{ display: 'flex', flexDirection: 'column', gap: '3rem', marginTop: '3rem' }}>
             {products.map((p, index) => (
-              <div key={p.id} style={{
-                padding: '3.5rem 0',
-                borderBottom: '1px solid var(--salvia-primary)',
+              <div key={p.id} className="feature-card" style={{
+                textAlign: 'left',
                 display: 'flex',
                 flexDirection: 'column',
-                alignItems: 'flex-start'
+                gap: '2rem',
+                padding: '2.5rem'
               }}>
-                {/* Technical Kicker */}
+                {/* Mini-Diagram Header */}
                 <div style={{
-                  color: 'var(--salvia-primary)',
-                  fontSize: '0.75rem',
-                  fontWeight: 700,
-                  marginBottom: '1.25rem',
-                  letterSpacing: '0.1em',
-                  fontFamily: 'monospace',
-                  textTransform: 'uppercase'
+                  height: '140px',
+                  backgroundColor: '#D9E6DE',
+                  borderRadius: '16px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  overflow: 'hidden',
+                  position: 'relative'
                 }}>
-                  [ 0{index + 1} ] / {p.label}
+                  {/* Simplified Visual Rep of the product */}
+                  {index === 0 && (
+                     <svg width="120" height="80" viewBox="0 0 120 80">
+                        <path d="M 20 20 L 50 40 M 20 60 L 50 40" stroke="var(--salvia-primary)" strokeWidth="2" opacity="0.3" />
+                        <rect x="15" y="15" width="20" height="12" rx="2" fill="#fff" stroke="var(--salvia-text-muted)" strokeWidth="1" />
+                        <rect x="15" y="55" width="20" height="12" rx="2" fill="#fff" stroke="var(--salvia-text-muted)" strokeWidth="1" />
+                        <circle cx="55" cy="40" r="14" fill="var(--salvia-primary)" />
+                        <path d="M 52 40 L 58 40 M 55 37 L 55 43" stroke="#fff" strokeWidth="2" />
+                        <path d="M 69 40 L 100 40" stroke="var(--salvia-accent)" strokeWidth="3" />
+                        <rect x="90" y="32" width="20" height="16" rx="3" fill="var(--salvia-accent)" />
+                     </svg>
+                  )}
+                  {index === 1 && (
+                     <svg width="120" height="80" viewBox="0 0 120 80">
+                        <circle cx="60" cy="20" r="8" fill="var(--salvia-text-muted)" opacity="0.4" />
+                        <path d="M 60 20 L 60 40 M 60 40 L 30 60 M 60 40 L 60 60 M 60 40 L 90 60" stroke="var(--salvia-text-muted)" strokeWidth="2" opacity="0.3" />
+                        <circle cx="60" cy="40" r="4" fill="var(--salvia-text-muted)" />
+                        <rect x="20" y="58" width="20" height="12" rx="2" fill="#fff" stroke="var(--salvia-accent)" strokeWidth="1.5" />
+                        <rect x="50" y="58" width="20" height="12" rx="2" fill="#fff" stroke="var(--salvia-accent)" strokeWidth="1.5" />
+                        <rect x="80" y="58" width="20" height="12" rx="2" fill="#fff" stroke="var(--salvia-accent)" strokeWidth="1.5" />
+                     </svg>
+                  )}
+                  {index === 2 && (
+                     <svg width="120" height="80" viewBox="0 0 120 80">
+                        <path d="M 10 40 Q 20 10 30 40 T 50 40 T 70 40 T 90 40" fill="none" stroke="var(--salvia-text-muted)" strokeWidth="2" strokeDasharray="4 2" />
+                        <rect x="85" y="30" width="20" height="30" rx="4" fill="var(--salvia-accent)" />
+                        <path d="M 90 45 L 93 48 L 98 42" stroke="#fff" strokeWidth="2" fill="none" />
+                        <circle cx="50" cy="40" r="10" fill="var(--salvia-primary)" />
+                     </svg>
+                  )}
                 </div>
 
-                {/* Aggressive Heading */}
-                <h3 style={{ fontSize: '2.5rem', fontWeight: 600, color: 'var(--salvia-text)', marginBottom: '1.25rem', letterSpacing: '-0.04em', lineHeight: 1.05 }}>
-                  {p.title}
-                </h3>
+                <div>
+                  <div style={{ color: 'var(--salvia-accent)', fontSize: '0.7rem', fontWeight: 800, letterSpacing: '0.1em', marginBottom: '0.75rem', textTransform: 'uppercase' }}>
+                    {p.label}
+                  </div>
+                  <h3 style={{ fontSize: '1.75rem', fontWeight: 800, color: 'var(--salvia-primary)', marginBottom: '1rem', letterSpacing: '-0.02em', lineHeight: 1.2 }}>
+                    {p.title}
+                  </h3>
+                  <p style={{ color: 'var(--salvia-text-muted)', fontSize: '1rem', lineHeight: 1.6, marginBottom: '0' }}>
+                    {p.subtitle}
+                  </p>
+                </div>
 
-                {/* Raw Text Body - Hidden on mobile to reduce text density */}
-                <p style={{ display: 'none', color: 'var(--salvia-text-muted)', fontSize: '1.05rem', lineHeight: 1.5, marginBottom: '3rem' }}>
-                  {p.subtitle}
-                </p>
-
-                {/* Technical Feature Matrix - Strict Uniform Grid (No Checkmarks) */}
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '0.5rem', width: '100%', color: 'var(--salvia-primary)', fontSize: '0.75rem', fontWeight: 700, letterSpacing: '0.05em' }}>
+                <ul style={{ display: 'flex', flexDirection: 'column', gap: '1rem', borderTop: '1px solid rgba(0,0,0,0.05)', paddingTop: '1.5rem' }}>
                   {p.bullets.map((bullet, idx) => (
-                    <div key={idx} style={{ padding: '0.8rem 1rem', border: '1px solid currentColor', display: 'flex', alignItems: 'center', gap: '0.75rem', width: '100%' }}>
-                      <span style={{ color: 'var(--salvia-accent)' }}>+</span> {bullet.toUpperCase()}
-                    </div>
+                    <li key={idx} style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                      <div style={{ color: 'var(--salvia-accent)', display: 'flex', alignItems: 'center' }}>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                          <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                      </div>
+                      <span style={{ color: 'var(--salvia-primary)', fontWeight: 600, fontSize: '0.9rem' }}>{bullet}</span>
+                    </li>
                   ))}
-                </div>
+                </ul>
 
-                {/* Arrow Link removed per feedback */}
+                <button className="pill-button" style={{ fontSize: '0.85rem', width: '100%' }}>
+                  {p.cta}
+                </button>
               </div>
             ))}
           </div>
