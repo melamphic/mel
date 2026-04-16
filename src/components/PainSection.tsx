@@ -12,7 +12,7 @@ const PAINS = [
     num: '02',
     tag: 'Compliance Roulette',
     title: 'Policies live in a PDF nobody reads.',
-    body: 'NABH, VMR, NZVA best practice — your team can\'t memorise every clause. Salvia links your policy engine directly to each form field, flagging violations before a note is ever signed.',
+    body: 'VMR, NZVA, and local best practice — your team can\'t memorise every clause. Salvia links your policy engine directly to each form field, flagging violations before a note is ever signed.',
     stat: '68%',
     statSub: 'of audit failures trace back to undocumented or inconsistent notes',
     accent: '#0F172A',
@@ -30,8 +30,7 @@ const PAINS = [
 
 export const PainSection = () => (
   <section style={{
-    padding: '5rem 0',
-    borderTop: '1px solid rgba(0,0,0,0.07)',
+    padding: '10rem 0',
     position: 'relative',
     zIndex: 10,
     backgroundColor: 'var(--salvia-bg)',
