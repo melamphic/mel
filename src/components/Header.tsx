@@ -16,13 +16,13 @@ export const Header: React.FC = () => {
           <span style={{ fontSize: '1.25rem', fontWeight: 600, letterSpacing: '-0.02em', color: 'var(--salvia-text)' }}>Melamphic</span>
         </div>
 
-        <nav style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
+        <nav className="hide-mobile" style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
           <a href="#product" style={{ color: 'var(--salvia-text)', fontSize: '0.95rem', fontWeight: 500 }}>Product</a>
           <a href="#solutions" style={{ color: 'var(--salvia-text)', fontSize: '0.95rem', fontWeight: 500 }}>Solutions</a>
           <a href="#pricing" style={{ color: 'var(--salvia-text)', fontSize: '0.95rem', fontWeight: 500 }}>Pricing</a>
         </nav>
 
-        <button className="pill-button" style={{ fontSize: '0.9rem', padding: '0.6rem 1.2rem' }}>
+        <button className="pill-button hide-mobile" style={{ fontSize: '0.9rem', padding: '0.6rem 1.2rem' }}>
           Get Salvia
         </button>
       </div>

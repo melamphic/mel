@@ -20,7 +20,7 @@ export const Hero: React.FC = () => {
       position: 'relative'
     }}>
       <div className="container" style={{ maxWidth: '900px' }}>
-        
+
         {/* Social Proof Badge */}
         <div style={{ marginBottom: '2rem', display: 'flex', justifyContent: 'center' }}>
           <div className="review-badge">
@@ -29,12 +29,12 @@ export const Hero: React.FC = () => {
               <img src="https://i.pravatar.cc/100?img=2" alt="Avatar 2" />
               <img src="https://i.pravatar.cc/100?img=3" alt="Avatar 3" />
             </div>
-             Loved by {audiences[audienceIdx]}
+            Loved by {audiences[audienceIdx]}
           </div>
         </div>
 
         {/* Headline */}
-        <h1 style={{
+        <h1 className="hero-title" style={{
           fontSize: '4.5rem',
           fontWeight: 600,
           marginBottom: '2rem',
@@ -50,9 +50,9 @@ export const Hero: React.FC = () => {
             </svg>
           </span>
         </h1>
-        
+
         {/* CTAs */}
-        <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', marginBottom: '4rem' }}>
+        <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', marginBottom: '4rem', flexWrap: 'wrap' }}>
           <button className="pill-button">
             Get Salvia now
           </button>
@@ -62,7 +62,7 @@ export const Hero: React.FC = () => {
         </div>
 
         {/* Centered Dashboard Preview overlaying the swoops */}
-        <div style={{ position: 'relative', zIndex: 10, marginTop: '2rem', transform: 'translateY(10%)' }}>
+        <div className="hide-mobile" style={{ position: 'relative', zIndex: 10, marginTop: '2rem', transform: 'translateY(10%)' }}>
           <DashboardPreview />
         </div>
       </div>
