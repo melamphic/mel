@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const products = [
   {
@@ -307,20 +308,24 @@ export const ProductSection: React.FC = () => {
                   ))}
                 </ul>
 
-                <button style={{
-                  alignSelf: 'flex-start',
-                  backgroundColor: 'var(--salvia-accent)',
-                  color: '#fff',
-                  fontWeight: 700,
-                  fontSize: '0.9rem',
-                  padding: '1rem 2rem',
-                  border: 'none',
-                  borderRadius: '8px',
-                  cursor: 'pointer',
-                  letterSpacing: '0.02em'
-                }}>
-                  {products[activeTab].cta}
-                </button>
+                <Link
+                  to={products[activeTab].id === 'audio' ? '/products/audio-to-forms' : `/products/${products[activeTab].id}-engine`}
+                  style={{ alignSelf: 'flex-start', textDecoration: 'none' }}
+                >
+                  <button style={{
+                    backgroundColor: 'var(--salvia-accent)',
+                    color: '#fff',
+                    fontWeight: 700,
+                    fontSize: '0.9rem',
+                    padding: '1rem 2rem',
+                    border: 'none',
+                    borderRadius: '8px',
+                    cursor: 'pointer',
+                    letterSpacing: '0.02em'
+                  }}>
+                    {products[activeTab].cta}
+                  </button>
+                </Link>
               </div>
             </div>
           </div>
@@ -348,33 +353,33 @@ export const ProductSection: React.FC = () => {
                 }}>
                   {/* Simplified Visual Rep of the product */}
                   {index === 0 && (
-                     <svg width="120" height="80" viewBox="0 0 120 80">
-                        <path d="M 20 20 L 50 40 M 20 60 L 50 40" stroke="var(--salvia-primary)" strokeWidth="2" opacity="0.3" />
-                        <rect x="15" y="15" width="20" height="12" rx="2" fill="#fff" stroke="var(--salvia-text-muted)" strokeWidth="1" />
-                        <rect x="15" y="55" width="20" height="12" rx="2" fill="#fff" stroke="var(--salvia-text-muted)" strokeWidth="1" />
-                        <circle cx="55" cy="40" r="14" fill="var(--salvia-primary)" />
-                        <path d="M 52 40 L 58 40 M 55 37 L 55 43" stroke="#fff" strokeWidth="2" />
-                        <path d="M 69 40 L 100 40" stroke="var(--salvia-accent)" strokeWidth="3" />
-                        <rect x="90" y="32" width="20" height="16" rx="3" fill="var(--salvia-accent)" />
-                     </svg>
+                    <svg width="120" height="80" viewBox="0 0 120 80">
+                      <path d="M 20 20 L 50 40 M 20 60 L 50 40" stroke="var(--salvia-primary)" strokeWidth="2" opacity="0.3" />
+                      <rect x="15" y="15" width="20" height="12" rx="2" fill="#fff" stroke="var(--salvia-text-muted)" strokeWidth="1" />
+                      <rect x="15" y="55" width="20" height="12" rx="2" fill="#fff" stroke="var(--salvia-text-muted)" strokeWidth="1" />
+                      <circle cx="55" cy="40" r="14" fill="var(--salvia-primary)" />
+                      <path d="M 52 40 L 58 40 M 55 37 L 55 43" stroke="#fff" strokeWidth="2" />
+                      <path d="M 69 40 L 100 40" stroke="var(--salvia-accent)" strokeWidth="3" />
+                      <rect x="90" y="32" width="20" height="16" rx="3" fill="var(--salvia-accent)" />
+                    </svg>
                   )}
                   {index === 1 && (
-                     <svg width="120" height="80" viewBox="0 0 120 80">
-                        <circle cx="60" cy="20" r="8" fill="var(--salvia-text-muted)" opacity="0.4" />
-                        <path d="M 60 20 L 60 40 M 60 40 L 30 60 M 60 40 L 60 60 M 60 40 L 90 60" stroke="var(--salvia-text-muted)" strokeWidth="2" opacity="0.3" />
-                        <circle cx="60" cy="40" r="4" fill="var(--salvia-text-muted)" />
-                        <rect x="20" y="58" width="20" height="12" rx="2" fill="#fff" stroke="var(--salvia-accent)" strokeWidth="1.5" />
-                        <rect x="50" y="58" width="20" height="12" rx="2" fill="#fff" stroke="var(--salvia-accent)" strokeWidth="1.5" />
-                        <rect x="80" y="58" width="20" height="12" rx="2" fill="#fff" stroke="var(--salvia-accent)" strokeWidth="1.5" />
-                     </svg>
+                    <svg width="120" height="80" viewBox="0 0 120 80">
+                      <circle cx="60" cy="20" r="8" fill="var(--salvia-text-muted)" opacity="0.4" />
+                      <path d="M 60 20 L 60 40 M 60 40 L 30 60 M 60 40 L 60 60 M 60 40 L 90 60" stroke="var(--salvia-text-muted)" strokeWidth="2" opacity="0.3" />
+                      <circle cx="60" cy="40" r="4" fill="var(--salvia-text-muted)" />
+                      <rect x="20" y="58" width="20" height="12" rx="2" fill="#fff" stroke="var(--salvia-accent)" strokeWidth="1.5" />
+                      <rect x="50" y="58" width="20" height="12" rx="2" fill="#fff" stroke="var(--salvia-accent)" strokeWidth="1.5" />
+                      <rect x="80" y="58" width="20" height="12" rx="2" fill="#fff" stroke="var(--salvia-accent)" strokeWidth="1.5" />
+                    </svg>
                   )}
                   {index === 2 && (
-                     <svg width="120" height="80" viewBox="0 0 120 80">
-                        <path d="M 10 40 Q 20 10 30 40 T 50 40 T 70 40 T 90 40" fill="none" stroke="var(--salvia-text-muted)" strokeWidth="2" strokeDasharray="4 2" />
-                        <rect x="85" y="30" width="20" height="30" rx="4" fill="var(--salvia-accent)" />
-                        <path d="M 90 45 L 93 48 L 98 42" stroke="#fff" strokeWidth="2" fill="none" />
-                        <circle cx="50" cy="40" r="10" fill="var(--salvia-primary)" />
-                     </svg>
+                    <svg width="120" height="80" viewBox="0 0 120 80">
+                      <path d="M 10 40 Q 20 10 30 40 T 50 40 T 70 40 T 90 40" fill="none" stroke="var(--salvia-text-muted)" strokeWidth="2" strokeDasharray="4 2" />
+                      <rect x="85" y="30" width="20" height="30" rx="4" fill="var(--salvia-accent)" />
+                      <path d="M 90 45 L 93 48 L 98 42" stroke="#fff" strokeWidth="2" fill="none" />
+                      <circle cx="50" cy="40" r="10" fill="var(--salvia-primary)" />
+                    </svg>
                   )}
                 </div>
 
@@ -403,9 +408,11 @@ export const ProductSection: React.FC = () => {
                   ))}
                 </ul>
 
-                <button className="pill-button" style={{ fontSize: '0.85rem', width: '100%' }}>
-                  {p.cta}
-                </button>
+                <Link to={p.id === 'audio' ? '/products/audio-to-forms' : `/products/${p.id}-engine`} style={{ textDecoration: 'none' }}>
+                  <button className="pill-button" style={{ fontSize: '0.85rem', width: '100%' }}>
+                    {p.cta}
+                  </button>
+                </Link>
               </div>
             ))}
           </div>
