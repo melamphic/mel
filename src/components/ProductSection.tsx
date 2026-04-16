@@ -237,7 +237,7 @@ export const ProductSection: React.FC = () => {
   };
 
   return (
-    <section id="products" className="mobile-pad-reduce" style={{ padding: '5rem 0', position: 'relative', zIndex: 10 }}>
+    <section id="products" className="mobile-pad-reduce" style={{ padding: '10rem 0', position: 'relative', zIndex: 10 }}>
       {/* NO WHITE BOX WRAPPER. It breathes openly on the background. */}
       <div className="container" style={{ maxWidth: '1400px' }}>
 
@@ -279,7 +279,7 @@ export const ProductSection: React.FC = () => {
 
             {/* Two-Column Presentation Layout - Using the crisp white background solely for the display box */}
             <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1.4fr) minmax(0, 1fr)', gap: '0', borderRadius: '24px', overflow: 'hidden', backgroundColor: '#ffffff', boxShadow: '0 24px 60px rgba(0,0,0,0.04)', border: '1px solid #EBECEF', marginTop: '3rem' }}>
-              
+
               {/* Left Diagram Column - Light Sage Green Background instead of Dark */}
               <div style={{ backgroundColor: '#D9E6DE', position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
                 {renderDiagram()}
@@ -328,31 +328,31 @@ export const ProductSection: React.FC = () => {
           {/* --- MOBILE VIEW: Brutalist Editorial Stack --- */}
           <div className="mobile-only" style={{ display: 'flex', flexDirection: 'column', marginTop: '1rem', borderTop: '1px solid var(--salvia-primary)' }}>
             {products.map((p, index) => (
-              <div key={p.id} style={{ 
-                padding: '3.5rem 0', 
+              <div key={p.id} style={{
+                padding: '3.5rem 0',
                 borderBottom: '1px solid var(--salvia-primary)',
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'flex-start'
               }}>
                 {/* Technical Kicker */}
-                <div style={{ 
-                  color: 'var(--salvia-primary)', 
-                  fontSize: '0.75rem', 
-                  fontWeight: 700, 
-                  marginBottom: '1.25rem', 
+                <div style={{
+                  color: 'var(--salvia-primary)',
+                  fontSize: '0.75rem',
+                  fontWeight: 700,
+                  marginBottom: '1.25rem',
                   letterSpacing: '0.1em',
                   fontFamily: 'monospace',
                   textTransform: 'uppercase'
                 }}>
                   [ 0{index + 1} ] / {p.label}
                 </div>
-                
+
                 {/* Aggressive Heading */}
                 <h3 style={{ fontSize: '2.5rem', fontWeight: 600, color: 'var(--salvia-text)', marginBottom: '1.25rem', letterSpacing: '-0.04em', lineHeight: 1.05 }}>
                   {p.title}
                 </h3>
-                
+
                 {/* Raw Text Body - Hidden on mobile to reduce text density */}
                 <p style={{ display: 'none', color: 'var(--salvia-text-muted)', fontSize: '1.05rem', lineHeight: 1.5, marginBottom: '3rem' }}>
                   {p.subtitle}
