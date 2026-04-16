@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { DashboardPreview } from './DashboardPreview';
+import { MobileDevicePreview } from './MobileDevicePreview';
 
 const audiences = ['Clinics', 'Vets', 'Dentists'];
 
@@ -15,10 +16,15 @@ export const Hero: React.FC = () => {
 
   return (
     <section style={{
-      padding: '4rem 0 8rem',
+      padding: 'var(--hero-padding, 4rem 0 8rem)',
       textAlign: 'center',
       position: 'relative'
     }}>
+      <style>{`
+        @media (max-width: 768px) {
+          section { --hero-padding: 4rem 0 2rem !important; }
+        }
+      `}</style>
       <div className="container" style={{ maxWidth: '900px' }}>
 
         {/* Social Proof Badge */}
@@ -61,9 +67,14 @@ export const Hero: React.FC = () => {
           </button>
         </div>
 
-        {/* Centered Dashboard Preview */}
-        <div className="hide-mobile" style={{ position: 'relative', zIndex: 10, marginTop: '2rem' }}>
-          <DashboardPreview />
+        {/* Responsive Previews */}
+        <div style={{ position: 'relative', zIndex: 10, marginTop: '3rem' }}>
+          <div className="hide-mobile">
+            <DashboardPreview />
+          </div>
+          <div className="show-mobile" style={{ display: 'none' }}>
+            <MobileDevicePreview />
+          </div>
         </div>
       </div>
     </section>
