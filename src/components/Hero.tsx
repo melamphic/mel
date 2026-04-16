@@ -15,7 +15,7 @@ export const Hero: React.FC = () => {
 
   return (
     <section style={{
-      padding: '4rem 0 3rem',
+      padding: '4rem 0 8rem',
       textAlign: 'center',
       position: 'relative'
     }}>
