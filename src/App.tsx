@@ -7,7 +7,8 @@ import './index.css';
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={import.meta.env.BASE_URL}>
+
       <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', position: 'relative' }}>
 
         {/* Sophisticated Curved SVG Background */}
