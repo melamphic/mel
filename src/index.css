@@ -2,17 +2,21 @@
 
 :root {
   /* Warm Sand & Fire Orange Palette */
-  --salvia-bg: #FCFAF8; /* Warm Sand Beige */
+  --salvia-bg: #FCFAF8;
+  /* Warm Sand Beige */
   --salvia-surface: #FFFFFF;
-  --salvia-text: #0F172A; /* Midnight Navy / Slate */
+  --salvia-text: #0F172A;
+  /* Midnight Navy / Slate */
   --salvia-text-muted: #475569;
-  --salvia-primary: #0F172A; /* Midnight Navy for buttons/headers */
-  --salvia-accent: #FF4E00; /* Blazing Fire Orange */
-  
+  --salvia-primary: #0F172A;
+  /* Midnight Navy for buttons/headers */
+  --salvia-accent: #FF4E00;
+  /* Blazing Fire Orange */
+
   --salvia-radius-full: 9999px;
   --salvia-radius-large: 24px;
   --salvia-radius-base: 12px;
-  
+
   --salvia-shadow-soft: 0 12px 40px rgba(25, 56, 46, 0.08);
   --salvia-shadow-card: 0 8px 24px rgba(25, 56, 46, 0.04);
 }
@@ -32,7 +36,12 @@ body {
   overflow-x: hidden;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-weight: 600;
   line-height: 1.1;
   letter-spacing: -0.03em;
@@ -46,6 +55,80 @@ a {
 
 ul {
   list-style: none;
+}
+
+/* Navigation Styling */
+nav a {
+  transition: all 0.2s ease-in-out;
+}
+
+nav a:hover {
+  color: var(--salvia-accent);
+}
+
+/* Base Responsive Utilities */
+@media (max-width: 900px) {
+  .hero-title {
+    font-size: 3.5rem !important;
+  }
+}
+
+@media (min-width: 769px) {
+  .mobile-only {
+    display: none !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 2.5rem !important;
+    line-height: 1.2 !important;
+    padding: 0 1rem;
+  }
+
+  .hide-mobile,
+  .desktop-only {
+    display: none !important;
+  }
+
+  .mobile-only {
+    display: block;
+  }
+
+  .mobile-stack {
+    grid-template-columns: 1fr !important;
+    flex-direction: column !important;
+  }
+
+  .mobile-text-center {
+    text-align: center !important;
+    align-items: center !important;
+  }
+
+  .mobile-padding {
+    padding: 2rem 1rem !important;
+  }
+
+  .mobile-pad-reduce {
+    padding: 3rem 0 3rem !important;
+  }
+
+  .flex-row {
+    display: flex !important;
+    flex-direction: row !important;
+  }
+
+  .scroll-x-mobile {
+    overflow-x: auto;
+    width: 100vw;
+    -webkit-overflow-scrolling: touch;
+    flex-wrap: nowrap;
+    padding-bottom: 0.5rem;
+  }
+
+  .scroll-x-mobile button {
+    white-space: nowrap;
+  }
 }
 
 .container {
@@ -132,6 +215,7 @@ ul {
 .avatar-stack {
   display: flex;
 }
+
 .avatar-stack img {
   width: 24px;
   height: 24px;
@@ -139,6 +223,7 @@ ul {
   border: 2px solid var(--salvia-bg);
   margin-left: -8px;
 }
+
 .avatar-stack img:first-child {
   margin-left: 0;
 }
