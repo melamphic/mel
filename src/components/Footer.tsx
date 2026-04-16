@@ -1,31 +1,73 @@
+import { Link } from 'react-router-dom';
+
 export const Footer = () => (
   <footer style={{
     backgroundColor: 'var(--salvia-bg)',
     borderTop: '1px solid rgba(0,0,0,0.07)',
     position: 'relative',
     zIndex: 10,
+    paddingTop: '4rem'
   }}>
+    <div className="container mobile-stack" style={{ display: 'grid', gridTemplateColumns: '1.5fr 1fr 1fr', gap: '4rem', marginBottom: '4rem' }}>
+      <div>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '1.5rem' }}>
+          <div style={{
+            width: '24px', height: '24px', borderRadius: '6px',
+            background: 'linear-gradient(135deg, var(--salvia-primary) 0%, var(--salvia-accent) 100%)',
+            display: 'flex', alignItems: 'center', justifyContent: 'center'
+          }}>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M12 2L12 22M2 12L22 12" />
+            </svg>
+          </div>
+          <span style={{ fontSize: '1.1rem', fontWeight: 800, letterSpacing: '-0.03em', color: 'var(--salvia-text)' }}>Salvia</span>
+        </div>
+        <p style={{ color: 'var(--salvia-text-muted)', fontSize: '0.9rem', lineHeight: 1.6, maxWidth: '300px' }}>
+          Automating clinical governance through high-fidelity AI and immutable evidence systems.
+        </p>
+      </div>
+
+      <div>
+        <h4 style={{ fontSize: '0.85rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '1.5rem' }}>Products</h4>
+        <nav style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+          <Link to="/products/form-engine" style={{ textDecoration: 'none', color: 'var(--salvia-text-muted)', fontSize: '0.9rem' }}>Form Engine</Link>
+          <Link to="/products/policy-engine" style={{ textDecoration: 'none', color: 'var(--salvia-text-muted)', fontSize: '0.9rem' }}>Policy Engine</Link>
+          <Link to="/products/audio-to-forms" style={{ textDecoration: 'none', color: 'var(--salvia-text-muted)', fontSize: '0.9rem' }}>Audio to Forms</Link>
+        </nav>
+      </div>
+
+      <div>
+        <h4 style={{ fontSize: '0.85rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '1.5rem' }}>Company</h4>
+        <nav style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+          <a href="#" style={{ textDecoration: 'none', color: 'var(--salvia-text-muted)', fontSize: '0.9rem' }}>Clinical Ethics</a>
+          <a href="#" style={{ textDecoration: 'none', color: 'var(--salvia-text-muted)', fontSize: '0.9rem' }}>Governance Standards</a>
+          <a href="#" style={{ textDecoration: 'none', color: 'var(--salvia-text-muted)', fontSize: '0.9rem' }}>Contact Sales</a>
+        </nav>
+      </div>
+    </div>
 
     {/* Big wordmark */}
-    <div style={{ textAlign: 'center', padding: '2.5rem 1rem 1.5rem', overflow: 'hidden' }}>
-      <span style={{
-        fontSize: 'clamp(3.5rem, 13vw, 9.5rem)',
-        fontWeight: 600,
-        letterSpacing: '-0.04em',
-        lineHeight: 1,
-        color: 'var(--salvia-primary)',
-        opacity: 0.5,
-        userSelect: 'none',
-        display: 'inline-block',
-      }}>
-        SALVIA
-      </span>
+    <div style={{ textAlign: 'center', padding: '0rem 1rem 1.5rem', overflow: 'hidden' }}>
+      <Link to="/" style={{ textDecoration: 'none' }}>
+        <span style={{
+          fontSize: 'clamp(3.5rem, 13vw, 9.5rem)',
+          fontWeight: 800,
+          letterSpacing: '-0.04em',
+          lineHeight: 1,
+          color: 'var(--salvia-primary)',
+          opacity: 0.1,
+          userSelect: 'none',
+          display: 'inline-block',
+        }}>
+          SALVIA
+        </span>
+      </Link>
     </div>
 
     {/* Bottom bar */}
     <div style={{
       borderTop: '1px solid rgba(0,0,0,0.06)',
-      padding: '1rem 2rem',
+      padding: '1.5rem 2rem',
       maxWidth: '1200px',
       margin: '0 auto',
       display: 'flex',
@@ -51,9 +93,8 @@ export const Footer = () => (
         </span>
       </div>
 
-      {/* Nav */}
       <nav style={{ display: 'flex', gap: '1.5rem' }}>
-        {['Privacy', 'Contact'].map(item => (
+        {['Privacy', 'Legal'].map(item => (
           <a
             key={item}
             href="#"
