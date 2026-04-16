@@ -237,7 +237,7 @@ export const ProductSection: React.FC = () => {
   };
 
   return (
-    <section id="products" className="mobile-pad-reduce" style={{ padding: '12rem 0 10rem', position: 'relative', zIndex: 10 }}>
+    <section id="products" className="mobile-pad-reduce" style={{ padding: '5rem 0', position: 'relative', zIndex: 10 }}>
       {/* NO WHITE BOX WRAPPER. It breathes openly on the background. */}
       <div className="container" style={{ maxWidth: '1400px' }}>
 

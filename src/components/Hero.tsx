@@ -15,7 +15,7 @@ export const Hero: React.FC = () => {
 
   return (
     <section style={{
-      padding: '4rem 0 0rem',
+      padding: '4rem 0 3rem',
       textAlign: 'center',
       position: 'relative'
     }}>
@@ -61,8 +61,8 @@ export const Hero: React.FC = () => {
           </button>
         </div>
 
-        {/* Centered Dashboard Preview overlaying the swoops */}
-        <div className="hide-mobile" style={{ position: 'relative', zIndex: 10, marginTop: '2rem', transform: 'translateY(10%)' }}>
+        {/* Centered Dashboard Preview */}
+        <div className="hide-mobile" style={{ position: 'relative', zIndex: 10, marginTop: '2rem' }}>
           <DashboardPreview />
         </div>
       </div>
