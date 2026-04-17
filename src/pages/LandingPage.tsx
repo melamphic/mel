@@ -6,6 +6,7 @@ import { PipelineSection } from '../components/PipelineSection';
 import { BridgeSection } from '../components/BridgeSection';
 import { PainSection } from '../components/PainSection';
 import { DomainSection } from '../components/DomainSection';
+import { LabTeaser } from '../components/LabTeaser';
 import { Footer } from '../components/Footer';
 
 export const LandingPage = () => {
@@ -19,6 +20,7 @@ export const LandingPage = () => {
         <GovernanceLoop />
         <BridgeSection />
         <PipelineSection />
+        <LabTeaser />
         <DomainSection />
       </main>
       <Footer />
