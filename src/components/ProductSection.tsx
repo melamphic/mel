@@ -4,39 +4,39 @@ import { Link } from 'react-router-dom';
 const products = [
   {
     id: 'form',
-    label: 'STATUTORY FORM INFRASTRUCTURE',
-    title: 'Immutable clinical data architecture.',
-    subtitle: 'High-stakes clinical forms engineered with statutory-grade versioning and immutable history. Built for organizations requiring total defensibility in legal and regulatory reviews.',
+    label: 'CLINICAL FORM INFRASTRUCTURE',
+    title: 'Perfect records. Every single time.',
+    subtitle: 'High-fidelity clinical forms that are impossible to fill out incorrectly. Engineer your practice workflow with zero-error capture, ensuring your records are audit-ready without the extra effort.',
     bullets: [
-      'Unbroken audit trails for every data field',
-      'Immutable min/major/patch versioning system',
-      'Protocol-aligned logic gates for zero-error capture'
+      'Automatic error-checking as you document',
+      'Clean, professional version history for life',
+      'Logic gates that ensure every field is perfect'
     ],
-    cta: 'EXPLORE INFRASTRUCTURE'
+    cta: 'EXPLORE FORMS'
   },
   {
     id: 'policy',
-    label: 'INSTITUTIONAL COMPLIANCE HUB',
-    title: 'Codify governance. Enforce accountability.',
-    subtitle: 'Institutionalize your organizational policies by mapping them directly to point-of-care data capture. Automated attestation tracking ensures staff compliance is a living reality, not a PDF.',
+    label: 'CLINICAL GOVERNANCE HUB',
+    title: 'Total peace of mind for your practice.',
+    subtitle: 'Stay aligned with professional standards without having to memorize the rulebook. We link your practice policies directly to your forms, ensuring your team is compliant with every click.',
     bullets: [
-      'Real-time regulatory mapping (NABH, VMR)',
-      'Automated staff acknowledgment & attestation',
-      'Audit-ready evidence generation in one click'
+      'Latest standards (NABH, VMR) built-in',
+      'Keep your entire team on the same page',
+      'Generate audit-ready evidence in one click'
     ],
-    cta: 'AUDIT THE HUB'
+    cta: 'EXPLORE GOVERNANCE'
   },
   {
     id: 'audio',
-    label: 'POINT OF CARE EVIDENCE CAPTURE',
-    title: 'Ending the memory gap at the exam table.',
-    subtitle: 'Point-of-care evidence recording eliminates the risk of delayed, inaccurate documentation. Salvia’s deterministic AI maps real-time audio to clinical forms while ensuring 100% human-verified fidelity.',
+    label: 'POINT OF CARE CAPTURE',
+    title: 'Go home when the patient does.',
+    subtitle: 'Capture perfect notes at the exam table so you never have to stay late for charting. Salvia turns your audio into precise clinical records, so your paperwork is finished before the visit ends.',
     bullets: [
-      'Contemporaneous documentation standards',
-      'Deterministic AI with zero-hallucination logic',
-      'Eliminate adverse inference risk during audits'
+      'Finish your notes 2x faster than typing',
+      'Focus strictly on the patient, not the screen',
+      'High-precision audio mapped to your forms'
     ],
-    cta: 'DOCUMENT THE MOMENT'
+    cta: 'RECLAIM YOUR TIME'
   }
 ];
 
