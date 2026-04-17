@@ -30,6 +30,7 @@ export const Footer = () => (
           <Link to="/products/point-of-care-capture" style={{ color: 'var(--salvia-text-muted)', fontSize: '0.9rem', textDecoration: 'none' }}>Point of Care Capture</Link>
           <Link to="/products/clinical-form-engine" style={{ color: 'var(--salvia-text-muted)', fontSize: '0.9rem', textDecoration: 'none' }}>Clinical Form Engine</Link>
           <Link to="/products/governance-hub" style={{ color: 'var(--salvia-text-muted)', fontSize: '0.9rem', textDecoration: 'none' }}>Governance Hub</Link>
+          <Link to="/blog" style={{ color: 'var(--salvia-text-muted)', fontSize: '0.9rem', textDecoration: 'none' }}>Blog</Link>
         </div>
       </div>
 
@@ -38,6 +39,7 @@ export const Footer = () => (
         <nav style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
           <a href="#" style={{ textDecoration: 'none', color: 'var(--salvia-text-muted)', fontSize: '0.9rem' }}>Clinical Ethics</a>
           <a href="#" style={{ textDecoration: 'none', color: 'var(--salvia-text-muted)', fontSize: '0.9rem' }}>Governance Standards</a>
+          <Link to="/blog" style={{ textDecoration: 'none', color: 'var(--salvia-text-muted)', fontSize: '0.9rem' }}>Blog</Link>
           <a href="#" style={{ textDecoration: 'none', color: 'var(--salvia-text-muted)', fontSize: '0.9rem' }}>Contact Sales</a>
         </nav>
       </div>
