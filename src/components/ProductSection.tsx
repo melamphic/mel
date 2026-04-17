@@ -4,39 +4,39 @@ import { Link } from 'react-router-dom';
 const products = [
   {
     id: 'form',
-    label: 'CLINICAL FORM ENGINE',
-    title: 'Architect highly intelligent clinical forms.',
-    subtitle: 'Dynamic, version-controlled forms engineered for high-stakes medical workflows. Infuse custom AI processing instructions directly into every field.',
+    label: 'STATUTORY FORM INFRASTRUCTURE',
+    title: 'Immutable clinical data architecture.',
+    subtitle: 'High-stakes clinical forms engineered with statutory-grade versioning and immutable history. Built for organizations requiring total defensibility in legal and regulatory reviews.',
     bullets: [
-      'Visual builder with advanced clinical data types',
-      'Per-field AI context & extraction prompts',
-      'Strict version control and audit history'
+      'Unbroken audit trails for every data field',
+      'Immutable min/major/patch versioning system',
+      'Protocol-aligned logic gates for zero-error capture'
     ],
-    cta: 'EXPLORE FORM ENGINE'
+    cta: 'EXPLORE INFRASTRUCTURE'
   },
   {
     id: 'policy',
-    label: 'POLICY ENGINE',
-    title: 'Codify and enforce operational standards.',
-    subtitle: 'Digitize your organization\'s rulebooks. Map global policies directly to form logic to guarantee continuous compliance at the point of care.',
+    label: 'INSTITUTIONAL COMPLIANCE HUB',
+    title: 'Codify governance. Enforce accountability.',
+    subtitle: 'Institutionalize your organizational policies by mapping them directly to point-of-care data capture. Automated attestation tracking ensures staff compliance is a living reality, not a PDF.',
     bullets: [
-      'Block-based regulatory digitization',
-      'Enforceable clauses structured by severity',
-      'Real-time automated compliance evaluation'
+      'Real-time regulatory mapping (NABH, VMR)',
+      'Automated staff acknowledgment & attestation',
+      'Audit-ready evidence generation in one click'
     ],
-    cta: 'VIEW POLICY ENGINE'
+    cta: 'AUDIT THE HUB'
   },
   {
     id: 'audio',
-    label: 'AUDIO TO FORMS',
-    title: 'From voice to structured clinical evidence.',
-    subtitle: 'Leverage our Nova Medical transcription to capture point-of-care audio. AI structures the evidence, but a human is always in the loop to guarantee accuracy.',
+    label: 'POINT OF CARE EVIDENCE CAPTURE',
+    title: 'Ending the memory gap at the exam table.',
+    subtitle: 'Point-of-care evidence recording eliminates the risk of delayed, inaccurate documentation. Salvia’s deterministic AI maps real-time audio to clinical forms while ensuring 100% human-verified fidelity.',
     bullets: [
-      'Medical-grade terminology recognition',
-      'Deterministic inference & confidence scoring',
-      'Mandatory human-in-the-loop review gates'
+      'Contemporaneous documentation standards',
+      'Deterministic AI with zero-hallucination logic',
+      'Eliminate adverse inference risk during audits'
     ],
-    cta: 'SEE HOW IT WORKS'
+    cta: 'DOCUMENT THE MOMENT'
   }
 ];
 
@@ -210,7 +210,7 @@ export const ProductSection: React.FC = () => {
 
         {activeTab === 2 && (
           <>
-            <DiagramCard x={30} y={265} title="Point of Care" content="Raw Voice Audio" badge="REC" />
+            <DiagramCard x={30} y={265} title="Point of Care" content="Captured Evidence" badge="REC" />
 
             <div style={{
               position: 'absolute', top: '190px', left: '300px', transform: 'translateX(-50%)',
@@ -230,7 +230,7 @@ export const ProductSection: React.FC = () => {
               <div style={{ fontSize: '0.8rem', fontWeight: 700, color: '#fff', marginTop: '0.2rem' }}>Human Check</div>
             </div>
 
-            <DiagramCard x={630} y={265} title="Audit Record" content="Verified Document" type="output" highlight={true} />
+            <DiagramCard x={630} y={265} title="Statutory Record" content="Defensible Doc" type="output" highlight={true} />
           </>
         )}
       </div>
@@ -238,14 +238,14 @@ export const ProductSection: React.FC = () => {
   };
 
   return (
-    <section id="products" className="mobile-pad-reduce" style={{ padding: '10rem 0', position: 'relative', zIndex: 10 }}>
+    <section id="products" className="mobile-pad-reduce" style={{ padding: '6rem 0', position: 'relative', zIndex: 10 }}>
       {/* NO WHITE BOX WRAPPER. It breathes openly on the background. */}
       <div className="container" style={{ maxWidth: '1400px' }}>
 
         {/* Streamlined Header - Just the title and the pill */}
         <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
           <h2 style={{ fontSize: '3rem', fontWeight: 700, color: 'var(--salvia-primary)', marginTop: '1.25rem', letterSpacing: '-0.03em' }}>
-            Meet our products
+            Governance Ecosystem
           </h2>
 
           {/* --- DESKTOP VIEW: Tabs and Flowchart Grid --- */}
@@ -309,7 +309,7 @@ export const ProductSection: React.FC = () => {
                 </ul>
 
                 <Link
-                  to={products[activeTab].id === 'audio' ? '/products/audio-to-forms' : `/products/${products[activeTab].id}-engine`}
+                  to={products[activeTab].id === 'audio' ? '/products/point-of-care-evidence' : (products[activeTab].id === 'form' ? '/products/statutory-form-infrastructure' : '/products/institutional-compliance-hub')}
                   style={{ alignSelf: 'flex-start', textDecoration: 'none' }}
                 >
                   <button style={{
@@ -408,7 +408,7 @@ export const ProductSection: React.FC = () => {
                   ))}
                 </ul>
 
-                <Link to={p.id === 'audio' ? '/products/audio-to-forms' : `/products/${p.id}-engine`} style={{ textDecoration: 'none' }}>
+                <Link to={p.id === 'audio' ? '/products/point-of-care-evidence' : (p.id === 'form' ? '/products/statutory-form-infrastructure' : '/products/institutional-compliance-hub')} style={{ textDecoration: 'none' }}>
                   <button className="pill-button" style={{ fontSize: '0.85rem', width: '100%' }}>
                     {p.cta}
                   </button>
