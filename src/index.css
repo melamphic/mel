@@ -182,6 +182,129 @@ nav a:hover {
   box-shadow: var(--salvia-shadow-soft);
 }
 
+/* Premium Institutional CTAs */
+.btn-primary {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
+  color: #fff;
+  border: none;
+  border-radius: var(--salvia-radius-full);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  box-shadow: 0 10px 15px -3px rgba(15, 23, 42, 0.4);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 20px 25px -5px rgba(15, 23, 42, 0.4);
+  filter: brightness(1.1);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.btn-secondary {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: var(--salvia-primary);
+  border: 1px solid rgba(15, 23, 42, 0.1);
+  border-radius: var(--salvia-radius-full);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  box-shadow: var(--salvia-shadow-card);
+}
+
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.9);
+  border-color: rgba(15, 23, 42, 0.2);
+  transform: translateY(-2px);
+  box-shadow: var(--salvia-shadow-soft);
+}
+
+/* Shimmer Animation */
+.shimmer {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(90deg,
+      transparent,
+      rgba(255, 255, 255, 0.1),
+      transparent);
+  transform: skewX(-20deg);
+  animation: shimmer 4s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    left: -100%;
+  }
+
+  25% {
+    left: 150%;
+  }
+
+  100% {
+    left: 150%;
+  }
+}
+
+/* Premium Headline Cycler Animation */
+.headline-cycler {
+  display: block;
+  min-height: 1.2em;
+}
+
+.headline-text {
+  display: block;
+  animation: slideBlurIn 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+  opacity: 0;
+}
+
+@keyframes slideBlurIn {
+  0% {
+    transform: translateY(20px);
+    filter: blur(10px);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(0);
+    filter: blur(0);
+    opacity: 1;
+  }
+}
+
+.headline-exit {
+  animation: slideBlurOut 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+@keyframes slideBlurOut {
+  0% {
+    transform: translateY(0);
+    filter: blur(0);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(-20px);
+    filter: blur(5px);
+    opacity: 0;
+  }
+}
+
 /* Feature cards in the background line */
 .feature-card {
   background-color: var(--salvia-surface);
@@ -247,7 +370,7 @@ nav a:hover {
 }
 
 .subtle-shadow-airy {
-  box-shadow: 
+  box-shadow:
     0 1px 3px rgba(0, 0, 0, 0.02),
     0 20px 48px -12px rgba(15, 23, 42, 0.08);
 }
@@ -281,11 +404,11 @@ nav a:hover {
     grid-template-columns: 1fr !important;
     gap: 2rem !important;
   }
-  
+
   .hide-mobile {
     display: none !important;
   }
-  
+
   .show-mobile {
     display: block !important;
   }
