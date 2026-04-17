@@ -3,43 +3,38 @@ import React from 'react';
 const steps = [
   {
     id: '01',
-    label: 'SYSTEM ORIGIN',
-    title: 'Design Statutory Forms',
-    desc: 'Engineer immutable clinical templates with protocol-aligned logic gates.',
-    metadata: 'SCHEMA v4.0.1 · SIGNED',
-    linkType: 'Form Linkage'
+    title: 'The Right Template',
+    desc: 'Select a clinical form that matches your specialty. Every field is designed to capture the exact data you need for professional excellence.',
+    metadata: 'CLINICAL v4.0 · READY',
+    linkType: 'Form Structure'
   },
   {
     id: '02',
-    label: 'GOVERNANCE MAPPING',
-    title: 'Link Institutional Policy',
-    desc: 'Directly anchor clinical fields to institutional policy blocks and regulatory codes.',
-    metadata: 'POLICY v12.2 · VERSIONED',
-    linkType: 'Policy Linkage'
+    title: 'Standards Linked',
+    desc: 'Your practice policies and clinical standards are linked directly to your forms. No more guessing—the guidance you need is built-in.',
+    metadata: 'POLICY v12.2 · ACTIVE',
+    linkType: 'Policy Safety'
   },
   {
     id: '03',
-    label: 'EVIDENCE CAPTURE',
-    title: 'Contemporaneous Recording',
-    desc: 'Audio linked to Patient → Mapped to Form Field → Validated against Policy.',
-    metadata: 'ASSET #8821 · ENCRYPTED',
-    linkType: 'Evidence Chain'
+    title: 'Point of Care Capture',
+    desc: 'Our audio engine captures the visit in real-time. Focus on your patient while Salvia handles the technical record-keeping.',
+    metadata: 'ASSET #8821 · SECURE',
+    linkType: 'Patient Evidence'
   },
   {
     id: '04',
-    label: 'GOVERNANCE GATE',
-    title: 'AI & Human-in-Loop Audit',
-    desc: 'Deterministic AI identifies discrepancies; Human verification ensures absolute fidelity.',
+    title: 'The Precision Check',
+    desc: 'Every note is verified for absolute accuracy. Human-in-the-loop validation ensures your records are perfect before they are signed.',
     metadata: 'AUDITED · VERIFIED',
-    linkType: 'Audit Trail'
+    linkType: 'Quality Gate'
   },
   {
     id: '05',
-    label: 'STATIC REPOSITORY',
-    title: 'Immutable Evidence Archive',
-    desc: 'Every artifact versioned, hashed, and archived for lifelong institutional protection.',
-    metadata: 'ARCHIVE_v2026 · LOCKED',
-    linkType: 'Immutable Proof'
+    title: 'Safe & Protected',
+    desc: 'Records are locked and archived with professional-grade security. A permanent, auditable proof of your clinical excellence.',
+    metadata: 'ARCHIVE v2026 · LOCKED',
+    linkType: 'Permanent Proof'
   }
 ];
 
