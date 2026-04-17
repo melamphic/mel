@@ -26,11 +26,10 @@ export const Header: React.FC = () => {
 
         <nav className="hide-mobile" style={{ display: 'flex', gap: '2.5rem', alignItems: 'center' }}>
           <div style={{ position: 'relative', cursor: 'pointer' }} className="nav-group">
-            <span style={{ color: 'var(--salvia-text)', fontSize: '0.9rem', fontWeight: 600 }}>Products</span>
-            {/* Simple CSS-only hover dropdown concept or just link */}
+            <span style={{ color: 'var(--salvia-text)', fontSize: '0.9rem', fontWeight: 600 }}>Infrastructure</span>
           </div>
-          <a href="/#pipeline" style={{ color: 'var(--salvia-text)', fontSize: '0.9rem', fontWeight: 600 }}>Compliance</a>
-          <a href="/#domains" style={{ color: 'var(--salvia-text)', fontSize: '0.9rem', fontWeight: 600 }}>Specialties</a>
+          <a href="/#pipeline" style={{ color: 'var(--salvia-text)', fontSize: '0.9rem', fontWeight: 600 }}>Governance</a>
+          <a href="/#domains" style={{ color: 'var(--salvia-text)', fontSize: '0.9rem', fontWeight: 600 }}>Statutory Domains</a>
         </nav>
 
         <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
