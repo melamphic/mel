@@ -37,9 +37,9 @@ function App() {
 
         <Routes>
           <Route path="/" element={<LandingPage />} />
-          <Route path="/products/form-engine" element={<FormEnginePage />} />
-          <Route path="/products/policy-engine" element={<PolicyEnginePage />} />
-          <Route path="/products/audio-to-forms" element={<AudioToFormsPage />} />
+          <Route path="/products/statutory-form-infrastructure" element={<FormEnginePage />} />
+          <Route path="/products/institutional-compliance-hub" element={<PolicyEnginePage />} />
+          <Route path="/products/point-of-care-evidence" element={<AudioToFormsPage />} />
         </Routes>
 
       </div>
