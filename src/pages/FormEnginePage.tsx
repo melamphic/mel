@@ -4,33 +4,33 @@ import { ProductDetailLayout } from '../components/ProductDetailLayout';
 export const FormEnginePage = () => {
   return (
     <ProductDetailLayout
-      title="Eliminate Click Fatigue"
-      kicker="CLINICAL FORM ENGINE"
+      title="Statutory Form Infrastructure"
+      kicker="IMMUTABLE DATA ASSETS"
       accentColor="#FF4E00"
     >
       <div className="container" style={{ padding: '8rem 0', maxWidth: '1100px' }}>
 
-        {/* Pain Point Solution 1 */}
+        {/* Pain Point Solution: Audit Trail */}
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '6rem', alignItems: 'center', marginBottom: '10rem' }} className="mobile-stack">
           <div>
             <h2 style={{ fontSize: '2.5rem', fontWeight: 800, color: 'var(--salvia-primary)', marginBottom: '1.5rem', letterSpacing: '-0.02em' }}>
-              Your documentation shouldn't be a chore.
+              Built for the Auditor's Lens.
             </h2>
             <p style={{ fontSize: '1.15rem', lineHeight: 1.7, color: 'var(--salvia-text-muted)', marginBottom: '2rem' }}>
-              Standard EMR forms are cluttered with irrelevant fields that slow you down. Salvia’s Form Engine uses <strong>Contextual Logic</strong> to hide the noise, showing only what matters for the specific subject and visit type.
+              Standard forms are flimsy. Salvia's <strong>Statutory Form Infrastructure</strong> treats every clinical note as an immutable asset. With a built-in <strong>Min/Major/Patch versioning system</strong>, every change is tracked, hashed, and defensible. We don't just record data; we preserve the chain of custody.
             </p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
               <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
                 <div style={{ width: '24px', height: '24px', borderRadius: '50%', backgroundColor: '#FF4E00', color: '#fff', fontSize: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>✓</div>
-                <span style={{ fontWeight: 600 }}>Specialty-Specific Field Types</span>
+                <span style={{ fontWeight: 600 }}>Unbreakable Version History</span>
               </div>
               <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
                 <div style={{ width: '24px', height: '24px', borderRadius: '50%', backgroundColor: '#FF4E00', color: '#fff', fontSize: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>✓</div>
-                <span style={{ fontWeight: 600 }}>Zero-Double-Entry Architecture</span>
+                <span style={{ fontWeight: 600 }}>Zero-Delete Archive Policy</span>
               </div>
               <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
                 <div style={{ width: '24px', height: '24px', borderRadius: '50%', backgroundColor: '#FF4E00', color: '#fff', fontSize: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>✓</div>
-                <span style={{ fontWeight: 600 }}>Mobile-Native Evidence Capture</span>
+                <span style={{ fontWeight: 600 }}>Real-time Protocol Alignment Checks</span>
               </div>
             </div>
           </div>
@@ -39,30 +39,31 @@ export const FormEnginePage = () => {
             border: '1px solid rgba(0,0,0,0.05)', position: 'relative'
           }}>
             <div style={{ padding: '1.5rem', backgroundColor: '#fff', borderRadius: '16px', boxShadow: '0 4px 12px rgba(0,0,0,0.05)' }}>
-              <div style={{ fontSize: '0.75rem', color: '#FF4E00', fontWeight: 800, marginBottom: '0.5rem' }}>LOGIC RULE ACTIVE</div>
-              <div style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '1rem' }}>Surgical Assessment</div>
+              <div style={{ fontSize: '0.75rem', color: '#FF4E00', fontWeight: 800, marginBottom: '0.5rem' }}>VERSION ASSET v3.1.2</div>
+              <div style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '1rem' }}>Surgical Protocol Alpha</div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-                <div style={{ height: '40px', backgroundColor: '#F1F5F9', borderRadius: '8px', opacity: 0.5 }} />
-                <div style={{ height: '40px', backgroundColor: '#FFF5F0', border: '1px solid #FF4E00', borderRadius: '8px' }} />
-                <div style={{ height: '40px', backgroundColor: '#F1F5F9', borderRadius: '8px', opacity: 0.5 }} />
+                <div style={{ height: '8px', backgroundColor: '#F1F5F9', borderRadius: '4px' }} />
+                <div style={{ height: '8px', backgroundColor: '#F1F5F9', borderRadius: '4px' }} />
+                <div style={{ height: '8px', backgroundColor: '#FF4E00', borderRadius: '4px', width: '60%' }} />
               </div>
+              <div style={{ marginTop: '1rem', fontSize: '0.65rem', color: 'var(--salvia-text-muted)' }}>Last Audit Trace: 4m ago</div>
             </div>
           </div>
         </div>
 
-        {/* Clinician Q&A / Value Grid */}
+        {/* Value Grid */}
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '4rem' }} className="mobile-stack">
           <div>
-            <h3 style={{ fontSize: '1.25rem', fontWeight: 800, marginBottom: '1.25rem' }}>"Can I build this myself?"</h3>
-            <p style={{ color: 'var(--salvia-text-muted)', lineHeight: 1.6 }}>Yes. Our drag-and-drop builder is as intuitive as Google Forms but with medical-grade constraints. No IT ticket required to update your workflow.</p>
+            <h3 style={{ fontSize: '1.25rem', fontWeight: 800, marginBottom: '1.25rem' }}>"Can we rollback changes?"</h3>
+            <p style={{ color: 'var(--salvia-text-muted)', lineHeight: 1.6 }}>Yes. Salvia allows for seamless rollbacks to any historical version, but each rollback is itself <strong>logged as a major institutional event</strong> with a mandatory reason-for-change signature.</p>
           </div>
           <div>
-            <h3 style={{ fontSize: '1.25rem', fontWeight: 800, marginBottom: '1.25rem' }}>"Is it Legal/Audit proof?"</h3>
-            <p style={{ color: 'var(--salvia-text-muted)', lineHeight: 1.6 }}>Every form version is cryptographically hashed. We provide a <strong>Digital Mirror</strong>—high-fidelity PDF exports that match legacy paper standards for court or audit.</p>
+            <h3 style={{ fontSize: '1.25rem', fontWeight: 800, marginBottom: '1.25rem' }}>"Is data capture mandatory?"</h3>
+            <p style={{ color: 'var(--salvia-text-muted)', lineHeight: 1.6 }}>Our logic engine can enforce mandatory fields based on the <strong>clinical severity</strong> of the encounter. Ensure every "Must-Follow" step of your protocol is validated before submission.</p>
           </div>
           <div>
-            <h3 style={{ fontSize: '1.25rem', fontWeight: 800, marginBottom: '1.25rem' }}>"Does it handle complex data?"</h3>
-            <p style={{ color: 'var(--salvia-text-muted)', lineHeight: 1.6 }}>From anesthesia sliders to dental charting and aged care vitals. Salvia handles the data types specific to <strong>your</strong> clinical domain.</p>
+            <h3 style={{ fontSize: '1.25rem', fontWeight: 800, marginBottom: '1.25rem' }}>"How is the output rendered?"</h3>
+            <p style={{ color: 'var(--salvia-text-muted)', lineHeight: 1.6 }}>We provide a <strong>Statutory PDF Mirror</strong>—a perfect, high-fidelity export of the digital record that satisfies legacy paper audit requirements while maintaining digital metadata.</p>
           </div>
         </div>
 
