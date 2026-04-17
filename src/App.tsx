@@ -1,9 +1,18 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
+import { useEffect } from 'react';
 import { LandingPage } from './pages/LandingPage';
 import { FormEnginePage } from './pages/FormEnginePage';
 import { PolicyEnginePage } from './pages/PolicyEnginePage';
 import { AudioToFormsPage } from './pages/AudioToFormsPage';
+import { InsightsPage } from './pages/InsightsPage';
+import { ArticlePage } from './pages/ArticlePage';
 import './index.css';
+
+function ScrollToTop() {
+  const { pathname } = useLocation();
+  useEffect(() => { window.scrollTo(0, 0); }, [pathname]);
+  return null;
+}
 
 function App() {
   return (
@@ -35,11 +44,14 @@ function App() {
           </g>
         </svg>
 
+        <ScrollToTop />
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/products/statutory-form-infrastructure" element={<FormEnginePage />} />
           <Route path="/products/institutional-compliance-hub" element={<PolicyEnginePage />} />
           <Route path="/products/point-of-care-evidence" element={<AudioToFormsPage />} />
+          <Route path="/blog" element={<InsightsPage />} />
+          <Route path="/blog/:id" element={<ArticlePage />} />
         </Routes>
 
       </div>
