@@ -30,7 +30,7 @@ const PAINS = [
 
 export const PainSection = () => (
   <section style={{
-    padding: '10rem 0',
+    padding: '6rem 0',
     position: 'relative',
     zIndex: 10,
     backgroundColor: 'var(--salvia-bg)',
