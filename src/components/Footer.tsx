@@ -20,16 +20,16 @@ export const Footer = () => (
           <span style={{ fontSize: '1.1rem', fontWeight: 800, letterSpacing: '-0.03em', color: 'var(--salvia-text)' }}>Salvia</span>
         </div>
         <p style={{ color: 'var(--salvia-text-muted)', fontSize: '0.9rem', lineHeight: 1.6, maxWidth: '300px' }}>
-          Automating clinical governance through high-fidelity AI and immutable evidence systems.
+          Professional clinical records and automated governance. Built for the elite standards of modern medicine.
         </p>
       </div>
 
       <div>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-          <div style={{ fontSize: '0.9rem', fontWeight: 800, color: 'var(--salvia-primary)', letterSpacing: '0.05em' }}>INFRASTRUCTURE</div>
-          <Link to="/products/point-of-care-evidence" style={{ color: 'var(--salvia-text-muted)', fontSize: '0.9rem', textDecoration: 'none' }}>Point of Care Evidence</Link>
-          <Link to="/products/statutory-form-infrastructure" style={{ color: 'var(--salvia-text-muted)', fontSize: '0.9rem', textDecoration: 'none' }}>Statutory Form Engine</Link>
-          <Link to="/products/institutional-compliance-hub" style={{ color: 'var(--salvia-text-muted)', fontSize: '0.9rem', textDecoration: 'none' }}>Compliance Hub</Link>
+          <div style={{ fontSize: '0.9rem', fontWeight: 800, color: 'var(--salvia-primary)', letterSpacing: '0.05em' }}>SOLUTIONS</div>
+          <Link to="/products/point-of-care-capture" style={{ color: 'var(--salvia-text-muted)', fontSize: '0.9rem', textDecoration: 'none' }}>Point of Care Capture</Link>
+          <Link to="/products/clinical-form-engine" style={{ color: 'var(--salvia-text-muted)', fontSize: '0.9rem', textDecoration: 'none' }}>Clinical Form Engine</Link>
+          <Link to="/products/governance-hub" style={{ color: 'var(--salvia-text-muted)', fontSize: '0.9rem', textDecoration: 'none' }}>Governance Hub</Link>
         </div>
       </div>
 
