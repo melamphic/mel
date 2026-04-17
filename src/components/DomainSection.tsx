@@ -123,7 +123,7 @@ export const DomainSection = () => {
 
   return (
     <section id="domains" style={{
-      padding: '10rem 0',
+      padding: '6rem 0',
       backgroundColor: 'var(--salvia-bg)',
       position: 'relative',
       zIndex: 10,
