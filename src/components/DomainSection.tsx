@@ -150,7 +150,7 @@ export const DomainSection = () => {
               fontSize: '0.75rem', fontWeight: 800, letterSpacing: '0.12em',
               color: 'var(--salvia-accent)', textTransform: 'uppercase',
               display: 'block', marginBottom: '1rem'
-            }}>Modular clinical architecture</span>
+            }}>Tailored for your specialty</span>
             <h2 style={{
               fontSize: 'clamp(2.5rem, 5vw, 4rem)',
               fontWeight: 800, letterSpacing: '-0.04em', lineHeight: 1.1,
@@ -164,15 +164,15 @@ export const DomainSection = () => {
               fontSize: '1.15rem', color: 'var(--salvia-text-muted)',
               lineHeight: 1.7, margin: 0
             }}>
-              Salvia isn't just a general AI wrapper. Each domain uses a specialized version of our engines tuned for unique clinical governance and audit requirements.
+              Salvia is designed for the specific needs of your practice. We provide built-in clinical intelligence that understands the nuances of your work—so you can focus strictly on quality care.
             </p>
           </div>
         </div>
       </div>
 
       {/* The Asymmetric Full-Bleed Layout */}
-      <div style={{ 
-        display: 'grid', gridTemplateColumns: 'minmax(280px, 0.8fr) 2fr', 
+      <div style={{
+        display: 'grid', gridTemplateColumns: 'minmax(280px, 0.8fr) 2fr',
         gap: '5rem', alignItems: 'start',
         paddingLeft: 'var(--stage-pad-left, max(2rem, calc((100vw - 1200px) / 2 + 2rem)))',
         width: '100vw'
@@ -238,7 +238,7 @@ export const DomainSection = () => {
         </div>
 
         {/* The App Stage (Extends to right edge) */}
-        <div style={{ 
+        <div style={{
           background: '#fff', borderRadius: '48px 0 0 48px', padding: '5rem',
           border: '1px solid rgba(15, 23, 42, 0.08)',
           borderRight: 'none',
@@ -250,8 +250,8 @@ export const DomainSection = () => {
         }} className="stage-app-box">
 
           {/* Morphing View Content */}
-          <div key={active} style={{ 
-            position: 'relative', zIndex: 1, 
+          <div key={active} style={{
+            position: 'relative', zIndex: 1,
             display: 'grid', gridTemplateColumns: '1.2fr 1.5fr', gap: '5rem',
             animation: 'fadeIn 0.5s ease-out',
             maxWidth: 'calc(100vw - (100vw - 1200px) / 2 - 400px)' // Constraint back to roughly container width inside
@@ -269,7 +269,7 @@ export const DomainSection = () => {
               </div>
 
               <div style={{ marginTop: 'auto', paddingTop: '2.5rem', borderTop: '1px solid rgba(15, 23, 42, 0.05)' }}>
-                <div 
+                <div
                   style={{ fontSize: '4.5rem', fontWeight: 900, color: 'var(--salvia-primary)', letterSpacing: '-0.05em', lineHeight: 1 }}
                   className="stage-metric"
                 >
