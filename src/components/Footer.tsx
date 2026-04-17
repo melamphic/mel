@@ -25,12 +25,12 @@ export const Footer = () => (
       </div>
 
       <div>
-        <h4 style={{ fontSize: '0.85rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '1.5rem' }}>Products</h4>
-        <nav style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-          <Link to="/products/form-engine" style={{ textDecoration: 'none', color: 'var(--salvia-text-muted)', fontSize: '0.9rem' }}>Form Engine</Link>
-          <Link to="/products/policy-engine" style={{ textDecoration: 'none', color: 'var(--salvia-text-muted)', fontSize: '0.9rem' }}>Policy Engine</Link>
-          <Link to="/products/audio-to-forms" style={{ textDecoration: 'none', color: 'var(--salvia-text-muted)', fontSize: '0.9rem' }}>Audio to Forms</Link>
-        </nav>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+          <div style={{ fontSize: '0.9rem', fontWeight: 800, color: 'var(--salvia-primary)', letterSpacing: '0.05em' }}>INFRASTRUCTURE</div>
+          <Link to="/products/point-of-care-evidence" style={{ color: 'var(--salvia-text-muted)', fontSize: '0.9rem', textDecoration: 'none' }}>Point of Care Evidence</Link>
+          <Link to="/products/statutory-form-infrastructure" style={{ color: 'var(--salvia-text-muted)', fontSize: '0.9rem', textDecoration: 'none' }}>Statutory Form Engine</Link>
+          <Link to="/products/institutional-compliance-hub" style={{ color: 'var(--salvia-text-muted)', fontSize: '0.9rem', textDecoration: 'none' }}>Compliance Hub</Link>
+        </div>
       </div>
 
       <div>
