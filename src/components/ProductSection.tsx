@@ -129,41 +129,30 @@ export const ProductSection: React.FC = () => {
 
             {activeTab === 0 && ( /* FORM ENGINE CONCEPTUAL DIAGRAM */
               <>
-                <path d="M 230 180 C 320 180 320 300 400 300" stroke="#94A3B8" />
-                <path d="M 230 420 C 320 420 320 300 400 300" stroke="#94A3B8" />
-                <path d="M 400 300 L 580 300" stroke="var(--salvia-accent)" strokeWidth="3" />
-
-                <circle cx="400" cy="300" r="32" fill="#0F172A" stroke="none" />
-                <circle cx="400" cy="300" r="12" fill="none" stroke="#fff" strokeWidth="2" strokeDasharray="4 4" />
-                <path d="M 396 296 L 404 304 M 404 296 L 396 304" stroke="#fff" strokeWidth="2" />
+                <path d="M 210 190 C 290 190 310 260 380 260" stroke="#94A3B8" strokeWidth="2" strokeDasharray="4 4" />
+                <path d="M 210 390 C 290 390 310 260 380 260" stroke="#94A3B8" strokeWidth="2" strokeDasharray="4 4" />
+                <path d="M 440 260 L 590 285" stroke="var(--salvia-accent)" strokeWidth="3" />
+                <circle cx="380" cy="260" r="6" fill="var(--salvia-accent)" />
+                <circle cx="440" cy="260" r="6" fill="var(--salvia-accent)" />
               </>
             )}
 
             {activeTab === 1 && ( /* POLICY ENGINE CONCEPTUAL DIAGRAM */
               <>
-                <path d="M 400 160 L 400 240" stroke="#94A3B8" strokeWidth="2" />
-                <path d="M 400 240 L 220 340 M 400 240 L 400 340 M 400 240 L 580 340" stroke="#94A3B8" strokeWidth="2" strokeDasharray="6 6" />
-                <circle cx="400" cy="240" r="8" fill="#94A3B8" stroke="none" />
-
-                <path d="M 220 420 C 220 480 580 480 580 420" stroke="var(--salvia-accent)" strokeWidth="2" />
-                <circle cx="400" cy="465" r="5" fill="var(--salvia-accent)" stroke="none" />
+                <path d="M 250 140 C 280 140 280 235 320 235" stroke="#94A3B8" strokeWidth="2" strokeDasharray="4 4" />
+                <path d="M 370 235 C 410 235 410 120 470 120" stroke="var(--salvia-accent)" strokeWidth="3" />
+                <path d="M 370 235 L 470 270" stroke="#94A3B8" strokeWidth="2" strokeDasharray="4 4" />
+                <path d="M 370 235 C 410 235 410 420 470 420" stroke="#0F172A" strokeWidth="3" />
               </>
             )}
 
             {activeTab === 2 && ( /* AUDIO TO FORMS CLINCAL WORKFLOW PIPELINE */
               <>
-                <path d="M 160 300 L 300 300" stroke="#94A3B8" strokeWidth="3" />
-                <path d="M 300 300 L 460 300" stroke="var(--salvia-accent)" strokeWidth="3" strokeDasharray="6 6" />
-                <path d="M 460 300 L 620 300" stroke="#0F172A" strokeWidth="4" />
-
-                {/* AI Processing Node */}
-                <circle cx="300" cy="300" r="24" fill="#0F172A" stroke="none" />
-                <polygon points="295,292 308,300 295,308" fill="#fff" />
-
-                {/* Human Validation Gate */}
-                <rect x="440" y="270" width="40" height="60" fill="var(--salvia-accent)" rx="6" stroke="none" />
-                <circle cx="460" cy="300" r="10" fill="none" stroke="#fff" strokeWidth="2" />
-                <path d="M 455 300 L 458 304 L 465 296" stroke="#fff" strokeWidth="2" />
+                <path d="M 190 305 C 230 305 230 180 280 180" stroke="#94A3B8" strokeWidth="2" strokeDasharray="4 4" />
+                <path d="M 320 180 C 400 180 400 370 440 370" stroke="var(--salvia-accent)" strokeWidth="3" />
+                <path d="M 480 370 L 590 305" stroke="#0F172A" strokeWidth="4" />
+                <circle cx="280" cy="180" r="4" fill="#94A3B8" />
+                <circle cx="440" cy="370" r="6" fill="var(--salvia-accent)" />
               </>
             )}
           </g>
@@ -172,65 +161,66 @@ export const ProductSection: React.FC = () => {
         {/* Crisp HTML Node Architecture Layer */}
         {activeTab === 0 && (
           <>
-            <DiagramCard x={70} y={145} title="Schema Builder" content="Clinical Data Types" badge="UI" />
-            <DiagramCard x={70} y={385} title="System Context" content="AI Inference Prompts" badge="LLM" />
+            <DiagramCard x={60} y={150} title="Zero-Error Capture" content="Automatic Checking" badge="INPUT" />
+            <DiagramCard x={60} y={350} title="Field Logic Gates" content="Ensures Perfection" badge="GUARD" />
 
             <div style={{
-              position: 'absolute', top: '235px', left: '400px', transform: 'translateX(-50%)',
-              backgroundColor: '#fff', borderRadius: '4px', padding: '0.2rem 0.5rem',
-              fontSize: '0.55rem', fontWeight: 800, color: 'var(--salvia-text)', letterSpacing: '0.05em',
-              boxShadow: '0 4px 10px rgba(0,0,0,0.05)', zIndex: 10
+              position: 'absolute', top: '235px', left: '410px', transform: 'translateX(-50%)',
+              backgroundColor: '#fff', borderRadius: '4px', padding: '0.4rem 0.8rem',
+              fontSize: '0.65rem', fontWeight: 800, color: 'var(--salvia-text)', letterSpacing: '0.05em',
+              boxShadow: '0 8px 20px rgba(0,0,0,0.08)', zIndex: 10, textAlign: 'center'
             }}>
-              SCHEMA COMPILATION
+              LIFETIME VERSION HISTORY
+              <div style={{ color: 'var(--salvia-accent)', fontSize: '0.8rem', marginTop: '4px' }}>Clean, Professional Log</div>
             </div>
 
-            <DiagramCard x={590} y={265} title="Immutable Asset" content="Runtime Form v3.1" type="output" highlight={true} />
-            <div style={{ position: 'absolute', left: '600px', top: '350px', fontSize: '0.65rem', color: 'var(--salvia-text-muted)', fontWeight: 600 }}>Active in Operations</div>
+            <DiagramCard x={600} y={245} title="Final Assessment" content="Audit-Ready Record" type="output" highlight={true} badge="INSTANT" />
           </>
         )}
 
         {activeTab === 1 && (
           <>
-            <DiagramCard x={330} y={85} title="Knowledge Base" content="Global Org Policy" badge="ROOT" />
+            <DiagramCard x={100} y={100} title="Rulebook Intake" content="Standards (NABH/VMR)" badge="POLICY" />
 
             <div style={{
-              position: 'absolute', top: '215px', left: '480px',
-              backgroundColor: '#fff', borderRadius: '8px', padding: '0.3rem 0.6rem',
-              fontSize: '0.6rem', fontWeight: 700, color: 'var(--salvia-text-muted)',
-              border: '1px solid #E2E8F0', zIndex: 10
+              position: 'absolute', top: '235px', left: '345px', transform: 'translate(-50%, -50%)',
+              backgroundColor: '#fff', borderRadius: '8px', padding: '0.4rem 0.8rem',
+              fontSize: '0.65rem', fontWeight: 800, color: 'var(--salvia-text-muted)',
+              border: '1px solid #E2E8F0', zIndex: 10, textAlign: 'center'
             }}>
-              RULE EXTRACTION ENGINE
+              TEAM ALIGNMENT HUB
+              <div style={{ color: 'var(--salvia-primary)', fontSize: '0.8rem', marginTop: '2px' }}>Everyone on same page</div>
             </div>
 
-            <DiagramCard x={120} y={345} title="Enforceable Clause" content="Rule 4.1.a" badge="HIGH" />
-            <DiagramCard x={330} y={345} title="Guideline" content="Recommendation" badge="LOW" />
-            <DiagramCard x={540} y={345} title="Enforceable Clause" content="Section 8 Drugs" badge="CRIT" />
+            <DiagramCard x={480} y={80} title="Compliance Link" content="Active Enforcement" badge="FORMS" highlight={true} />
+            <DiagramCard x={480} y={230} title="Live Dashboard" content="Team Monitoring" badge="SYNC" />
+            <DiagramCard x={480} y={380} title="1-Click Export" content="Audit Evidence Gen" type="output" />
           </>
         )}
 
         {activeTab === 2 && (
           <>
-            <DiagramCard x={30} y={265} title="Point of Care" content="Captured Evidence" badge="REC" />
+            <DiagramCard x={40} y={265} title="Exam Room" content="Focus on patient" badge="AUDIO" />
 
             <div style={{
-              position: 'absolute', top: '190px', left: '300px', transform: 'translateX(-50%)',
-              backgroundColor: '#fff', borderRadius: '8px', padding: '0.5rem 1rem', textAlign: 'center',
-              boxShadow: '0 4px 15px rgba(0,0,0,0.06)', zIndex: 10, width: '160px'
+              position: 'absolute', top: '160px', left: '300px', transform: 'translateX(-50%)',
+              backgroundColor: '#fff', borderRadius: '8px', padding: '0.6rem 1.2rem', textAlign: 'center',
+              boxShadow: '0 4px 15px rgba(0,0,0,0.06)', zIndex: 10, width: '180px'
             }}>
-              <div style={{ fontSize: '0.55rem', fontWeight: 800, color: 'var(--salvia-text-muted)', letterSpacing: '0.05em' }}>NOVA MEDICAL AI</div>
-              <div style={{ fontSize: '0.8rem', fontWeight: 700, color: 'var(--salvia-primary)', marginTop: '0.2rem' }}>Confidence Mapping</div>
+              <div style={{ fontSize: '0.6rem', fontWeight: 800, color: 'var(--salvia-text-muted)', letterSpacing: '0.05em' }}>HIGH-PRECISION ENGINE</div>
+              <div style={{ fontSize: '0.85rem', fontWeight: 700, color: 'var(--salvia-primary)', marginTop: '0.2rem' }}>Audio Mapped to Forms</div>
             </div>
 
             <div style={{
-              position: 'absolute', top: '190px', left: '460px', transform: 'translateX(-50%)',
-              backgroundColor: 'var(--salvia-primary)', borderRadius: '8px', padding: '0.5rem 1rem', textAlign: 'center',
-              boxShadow: '0 8px 25px rgba(0,0,0,0.15)', zIndex: 10, width: '140px'
+              position: 'absolute', top: '350px', left: '460px', transform: 'translateX(-50%)',
+              backgroundColor: 'var(--salvia-primary)', borderRadius: '8px', padding: '0.6rem 1.2rem', textAlign: 'center',
+              boxShadow: '0 8px 25px rgba(0,0,0,0.15)', zIndex: 10, width: '160px'
             }}>
-              <div style={{ fontSize: '0.55rem', fontWeight: 800, color: 'rgba(255,255,255,0.6)', letterSpacing: '0.05em' }}>MANDATORY GATE</div>
-              <div style={{ fontSize: '0.8rem', fontWeight: 700, color: '#fff', marginTop: '0.2rem' }}>Human Check</div>
+              <div style={{ fontSize: '0.6rem', fontWeight: 800, color: 'rgba(255,255,255,0.6)', letterSpacing: '0.05em' }}>SPEED MULTIPLIER</div>
+              <div style={{ fontSize: '0.85rem', fontWeight: 700, color: '#fff', marginTop: '0.2rem' }}>2x Faster Charting</div>
             </div>
 
-            <DiagramCard x={630} y={265} title="Statutory Record" content="Defensible Doc" type="output" highlight={true} />
+            <DiagramCard x={600} y={265} title="Completed Visit" content="Finished Paperwork" type="output" highlight={true} badge="ON TIME" />
           </>
         )}
       </div>
@@ -354,31 +344,31 @@ export const ProductSection: React.FC = () => {
                   {/* Simplified Visual Rep of the product */}
                   {index === 0 && (
                     <svg width="120" height="80" viewBox="0 0 120 80">
-                      <path d="M 20 20 L 50 40 M 20 60 L 50 40" stroke="var(--salvia-primary)" strokeWidth="2" opacity="0.3" />
-                      <rect x="15" y="15" width="20" height="12" rx="2" fill="#fff" stroke="var(--salvia-text-muted)" strokeWidth="1" />
-                      <rect x="15" y="55" width="20" height="12" rx="2" fill="#fff" stroke="var(--salvia-text-muted)" strokeWidth="1" />
-                      <circle cx="55" cy="40" r="14" fill="var(--salvia-primary)" />
-                      <path d="M 52 40 L 58 40 M 55 37 L 55 43" stroke="#fff" strokeWidth="2" />
-                      <path d="M 69 40 L 100 40" stroke="var(--salvia-accent)" strokeWidth="3" />
-                      <rect x="90" y="32" width="20" height="16" rx="3" fill="var(--salvia-accent)" />
+                      {/* Form Engine Versioning Concept */}
+                      <rect x="20" y="20" width="80" height="12" rx="3" fill="#fff" stroke="var(--salvia-text-muted)" strokeWidth="1" />
+                      <rect x="20" y="38" width="60" height="12" rx="3" fill="#fff" stroke="var(--salvia-text-muted)" strokeWidth="1" />
+                      <path d="M 85 44 L 95 44 M 90 39 L 90 49" stroke="var(--salvia-accent)" strokeWidth="2" strokeLinecap="round" />
+                      <rect x="20" y="56" width="40" height="8" rx="2" fill="var(--salvia-primary)" opacity="0.1" />
+                      <circle cx="95" cy="26" r="6" fill="#0EA5E9" />
                     </svg>
                   )}
                   {index === 1 && (
                     <svg width="120" height="80" viewBox="0 0 120 80">
-                      <circle cx="60" cy="20" r="8" fill="var(--salvia-text-muted)" opacity="0.4" />
-                      <path d="M 60 20 L 60 40 M 60 40 L 30 60 M 60 40 L 60 60 M 60 40 L 90 60" stroke="var(--salvia-text-muted)" strokeWidth="2" opacity="0.3" />
-                      <circle cx="60" cy="40" r="4" fill="var(--salvia-text-muted)" />
-                      <rect x="20" y="58" width="20" height="12" rx="2" fill="#fff" stroke="var(--salvia-accent)" strokeWidth="1.5" />
-                      <rect x="50" y="58" width="20" height="12" rx="2" fill="#fff" stroke="var(--salvia-accent)" strokeWidth="1.5" />
-                      <rect x="80" y="58" width="20" height="12" rx="2" fill="#fff" stroke="var(--salvia-accent)" strokeWidth="1.5" />
+                      {/* Policy Engine Block Concept */}
+                      <rect x="30" y="15" width="60" height="15" rx="2" fill="#0F172A" />
+                      <rect x="30" y="35" width="45" height="12" rx="2" fill="var(--salvia-primary)" opacity="0.1" />
+                      <rect x="30" y="52" width="55" height="12" rx="2" fill="#fff" stroke="var(--salvia-text-muted)" strokeWidth="1" />
+                      <circle cx="100" cy="22" r="5" fill="var(--salvia-accent)" />
+                      <circle cx="85" cy="41" r="4" fill="#0EA5E9" />
+                      <path d="M 90 22 L 100 22 M 75 41 L 85 41" stroke="var(--salvia-text-muted)" strokeWidth="1" strokeDasharray="2 2" />
                     </svg>
                   )}
                   {index === 2 && (
                     <svg width="120" height="80" viewBox="0 0 120 80">
-                      <path d="M 10 40 Q 20 10 30 40 T 50 40 T 70 40 T 90 40" fill="none" stroke="var(--salvia-text-muted)" strokeWidth="2" strokeDasharray="4 2" />
-                      <rect x="85" y="30" width="20" height="30" rx="4" fill="var(--salvia-accent)" />
-                      <path d="M 90 45 L 93 48 L 98 42" stroke="#fff" strokeWidth="2" fill="none" />
-                      <circle cx="50" cy="40" r="10" fill="var(--salvia-primary)" />
+                      {/* Audio waveform to JSON extraction Concept */}
+                      <path d="M 15 40 Q 25 10 35 40 T 55 40 Q 65 70 75 40 M 15 40 L 5 40 M 75 40 L 85 40" fill="none" stroke="var(--salvia-primary)" strokeWidth="3" strokeLinecap="round" opacity="0.3" />
+                      <rect x="80" y="25" width="30" height="30" rx="6" fill="var(--salvia-accent)" />
+                      <path d="M 87 40 L 92 45 L 100 35" stroke="#fff" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
                   )}
                 </div>
