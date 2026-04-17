@@ -94,77 +94,77 @@ const SignOff = ({ name, role, note }: { name: string; role: string; note: strin
 const SCENARIOS: Record<DomainId, DomainScenario> = {
   clinic: {
     top: {
-      color: '#FF4E00', tag: 'AUDIO', title: 'Staff Records Visit',
+      color: '#FF4E00', tag: 'EVIDENCE', title: 'Point of Care Capture',
       body: <Transcript text='"Patient is a 58-year-old female with a 10-day productive cough, worse at night. Chest tightness. Temp 99.8°F, SpO₂ 97%, mild expiratory wheezing right lower lobe."' />,
     },
     left: {
-      color: '#6366F1', tag: 'AI', title: 'Form Auto-Filled',
+      color: '#6366F1', tag: 'MAPPING', title: 'Deterministic Extraction',
       body: <FormFields fields={[['Patient', 'Ms. Carter · 58F'], ['Complaint', 'Productive cough ×10d'], ['Vitals', '99.8°F · SpO₂ 97%'], ['Assessment', 'Viral bronchitis'], ['Plan', 'Albuterol 2 puffs QID']]} />,
     },
     right: {
-      color: '#D97706', tag: 'POLICY', title: 'Policy Check',
+      color: '#D97706', tag: 'GOVERNANCE', title: 'Compliance Validation',
       body: <PolicyItems items={[['Vitals documented', 'ok'], ['Chief complaint recorded', 'ok'], ['Diagnosis stated', 'ok'], ['Rx requires MD sign-off', 'warn']]} />,
     },
     bottom: {
-      color: '#059669', tag: 'REVIEW', title: 'Clinician Reviews & Signs',
+      color: '#059669', tag: 'VERIFY', title: 'Statutory Verification',
       body: <SignOff name="Dr. R. Patel" role="General Practitioner" note="Albuterol 2 puffs QID confirmed. Policy acknowledged. Note published to patient record." />,
     },
     timeline: [
-      { time: '08:14', actor: 'Nurse', action: 'Visit recorded — Ms. Carter, 58F, respiratory complaint', status: 'done' },
-      { time: '08:14', actor: 'Salvia', action: 'Consultation form filled from recording', status: 'done' },
-      { time: '08:15', actor: 'Policy Engine', action: 'Prescription field flagged — MD sign-off required', status: 'flag' },
-      { time: '08:16', actor: 'Dr. Patel', action: 'Reviewed, Albuterol confirmed & note published', status: 'done' },
-      { time: '08:16', actor: 'Salvia', action: 'Note locked & audit PDF queued', status: 'locked' },
+      { time: '08:14', actor: 'Nurse', action: 'Evidence captured — Ms. Carter, 58F', status: 'done' },
+      { time: '08:14', actor: 'Salvia', action: 'Deterministic form extraction complete', status: 'done' },
+      { time: '08:15', actor: 'Compliance Hub', action: 'Regulatory flag identified — MD signature required', status: 'flag' },
+      { time: '08:16', actor: 'Dr. Patel', action: 'Verified, signed & published to infrastructure', status: 'done' },
+      { time: '08:16', actor: 'Salvia', action: 'Record hashed & immutable PDF generated', status: 'locked' },
     ],
   },
   vet: {
     top: {
-      color: '#0EA5E9', tag: 'AUDIO', title: 'Staff Records Consult',
+      color: '#0EA5E9', tag: 'EVIDENCE', title: 'Point of Care Capture',
       body: <Transcript text='"Bella, 4-year-old DSH cat. Owner reports vomiting once daily for three days, partially digested food. Temp 101.5°F, weight 10.2 lbs, mild dehydration present."' />,
     },
     left: {
-      color: '#6366F1', tag: 'AI', title: 'Form Auto-Filled',
+      color: '#6366F1', tag: 'MAPPING', title: 'Deterministic Extraction',
       body: <FormFields fields={[['Patient', 'Bella · Cat · 4yr DSH'], ['Complaint', 'Vomiting ×3 days'], ['Weight', '10.2 lbs (−0.3 lbs)'], ['Assessment', 'Acute GI upset'], ['Treatment', 'Cerenia · Bland diet ×5d']]} />,
     },
     right: {
-      color: '#D97706', tag: 'POLICY', title: 'Policy Check',
+      color: '#D97706', tag: 'GOVERNANCE', title: 'Compliance Validation',
       body: <PolicyItems items={[['Weight & temp recorded', 'ok'], ['Hydration status noted', 'ok'], ['Diagnosis documented', 'ok'], ['Medication admin needs consent', 'warn']]} />,
     },
     bottom: {
-      color: '#059669', tag: 'REVIEW', title: 'Vet Reviews & Signs',
+      color: '#059669', tag: 'VERIFY', title: 'Statutory Verification',
       body: <SignOff name="Dr. S. Reid" role="Veterinarian" note="Cerenia 1mg/kg confirmed. Owner consent noted. Record published and discharge summary generated." />,
     },
     timeline: [
-      { time: '11:30', actor: 'Tech', action: 'Consult recorded — Bella (cat), vomiting ×3 days', status: 'done' },
-      { time: '11:31', actor: 'Salvia', action: 'Physical exam form filled from recording', status: 'done' },
-      { time: '11:31', actor: 'Policy Engine', action: 'Medication admin flagged — owner consent needed', status: 'flag' },
-      { time: '11:32', actor: 'Dr. Reid', action: 'Confirmed, consent noted & record published', status: 'done' },
-      { time: '11:33', actor: 'Salvia', action: 'Chart locked & discharge summary ready', status: 'locked' },
+      { time: '11:30', actor: 'Tech', action: 'Evidence captured — Bella (cat), vomiting ×3 days', status: 'done' },
+      { time: '11:31', actor: 'Salvia', action: 'Physical exam form extraction complete', status: 'done' },
+      { time: '11:31', actor: 'Compliance Hub', action: 'Consent flag identified — owner signature needed', status: 'flag' },
+      { time: '11:32', actor: 'Dr. Reid', action: 'Verified, consent noted & published', status: 'done' },
+      { time: '11:33', actor: 'Salvia', action: 'Record hashed & immutable PDF generated', status: 'locked' },
     ],
   },
   dental: {
     top: {
-      color: '#7C3AED', tag: 'AUDIO', title: 'Staff Records Appointment',
+      color: '#7C3AED', tag: 'EVIDENCE', title: 'Point of Care Capture',
       body: <Transcript text='"Mr. Osei, 34-year-old male. Sharp pain upper-left molar, tooth 14, provoked by cold water for two months. No spontaneous pain. Probing 2–3mm, occlusal decay visible."' />,
     },
     left: {
-      color: '#6366F1', tag: 'AI', title: 'Form Auto-Filled',
+      color: '#6366F1', tag: 'MAPPING', title: 'Deterministic Extraction',
       body: <FormFields fields={[['Patient', 'Mr. K. Osei · 34M'], ['Tooth', '#14 — Upper left molar'], ['Finding', 'Occlusal caries · Class I'], ['Diagnosis', 'Reversible pulpitis'], ['Treatment', 'Composite restoration (D2391)']]} />,
     },
     right: {
-      color: '#D97706', tag: 'POLICY', title: 'Policy Check',
+      color: '#D97706', tag: 'GOVERNANCE', title: 'Compliance Validation',
       body: <PolicyItems items={[['Probing depths recorded', 'ok'], ['Radiograph reference noted', 'ok'], ['Diagnosis & CDT code present', 'ok'], ['Restoration needs pre-auth', 'warn']]} />,
     },
     bottom: {
-      color: '#7C3AED', tag: 'REVIEW', title: 'Dentist Reviews & Signs',
+      color: '#7C3AED', tag: 'VERIFY', title: 'Statutory Verification',
       body: <SignOff name="Dr. E. Kwame" role="General Dentist" note="D2391 confirmed. Pre-auth packet approved. Note published to patient record." />,
     },
     timeline: [
-      { time: '09:05', actor: 'Hygienist', action: 'Appointment recorded — Mr. Osei, tooth #14 pain', status: 'done' },
-      { time: '09:06', actor: 'Salvia', action: 'Charting form filled from recording', status: 'done' },
-      { time: '09:06', actor: 'Policy Engine', action: 'Restoration flagged — pre-auth required', status: 'flag' },
-      { time: '09:08', actor: 'Dr. Kwame', action: 'D2391 confirmed, pre-auth approved & published', status: 'done' },
-      { time: '09:09', actor: 'Salvia', action: 'Record locked & pre-auth packet queued', status: 'locked' },
+      { time: '09:05', actor: 'Hygienist', action: 'Evidence captured — Mr. Osei, tooth #14 pain', status: 'done' },
+      { time: '09:06', actor: 'Salvia', action: 'Clinical form extraction complete', status: 'done' },
+      { time: '09:06', actor: 'Compliance Hub', action: 'Pre-auth flag identified — insurance check needed', status: 'flag' },
+      { time: '09:08', actor: 'Dr. Kwame', action: 'Verified, pre-auth approved & published', status: 'done' },
+      { time: '09:09', actor: 'Salvia', action: 'Record hashed & immutable PDF generated', status: 'locked' },
     ],
   },
 };
@@ -220,7 +220,7 @@ export const PipelineSection = () => {
   const s = SCENARIOS[active];
 
   return (
-    <section id="pipeline" style={{ backgroundColor: 'var(--salvia-bg)', padding: '10rem 0' }}>
+    <section id="pipeline" style={{ backgroundColor: 'var(--salvia-bg)', padding: '6rem 0' }}>
       <style>{`
         @media (max-width: 768px) {
           .pipeline-grid {
@@ -312,8 +312,8 @@ export const PipelineSection = () => {
           }}>
             <div style={{ padding: '1rem 1.2rem', borderBottom: '1px solid #F1F5F9', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
               <div>
-                <div style={{ fontSize: '0.9rem', fontWeight: 600, color: '#0F172A', letterSpacing: '-0.01em' }}>Visit Timeline</div>
-                <div style={{ fontSize: '0.73rem', color: '#94A3B8', marginTop: '1px' }}>Locked on publish · audit-ready</div>
+                <div style={{ fontSize: '0.9rem', fontWeight: 600, color: '#0F172A', letterSpacing: '-0.01em' }}>Governance Trail</div>
+                <div style={{ fontSize: '0.73rem', color: '#94A3B8', marginTop: '1px' }}>Immutable Record · Statutory Proof</div>
               </div>
               <div style={{ fontSize: '0.68rem', fontWeight: 600, color: domain.color, backgroundColor: `${domain.color}12`, padding: '0.22rem 0.65rem', borderRadius: '999px' }}>
                 {s.timeline.length} events
