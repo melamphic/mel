@@ -4,26 +4,26 @@ import { MobileDevicePreview } from './MobileDevicePreview';
 
 const audiences = ['Clinics', 'Vets', 'Dentists'];
 const phrases = [
-  'Automated Clinical Evidence.',
-  'Statutory Audit Trails.',
-  'Immutable Documentation.',
-  'Adverse Inference Protection.',
-  'Contemporaneous Record Capture.',
-  'Protocol-Aligned Verification.',
-  'Deterministic Data Mapping.',
-  'Chain of Evidence Security.',
-  'Regulatory Workflow Integrity.',
-  'Professional Liability Defense.',
-  'Audit-Ready Infrastructure.',
-  'Human-in-the-Loop Validation.',
-  'Algorithmic Fidelity.',
-  'Clinical Risk Mitigation.',
-  'Policy-Engine Connectivity.',
-  'Versioned Evidence Assets.',
-  'Defensive Record Logic.',
-  'Statutory Compliance Hub.',
-  'Unbroken Governance Trail.',
-  'Institutional Accountability.'
+  'Notes done before they leave.',
+  'Focus on your patient.',
+  'Protected from legal gaps.',
+  'Professional peace of mind.',
+  'Perfect records, effortlessly.',
+  'Statutory security, automated.',
+  'Reclaim your after-hours.',
+  'Clinical governance made easy.',
+  'Verified documentation at source.',
+  'The proof you need, always.',
+  'Secure your practice.',
+  'Audit-ready in seconds.',
+  'Less paperwork. More care.',
+  'Your policy, automatically.',
+  'Unbroken record chain.',
+  'Defensibly secure records.',
+  'No more documentation debt.',
+  'Versioned protection for life.',
+  'Strategic peace of mind.',
+  'Institutional confidence.'
 ];
 
 export const Hero: React.FC = () => {
@@ -41,7 +41,7 @@ export const Hero: React.FC = () => {
       setTimeout(() => {
         setPhraseIdx((prev) => (prev + 1) % phrases.length);
         setIsExiting(false);
-      }, 600); // Wait for exit animation
+      }, 1200); // Wait for exit animation
     }, 3200);
 
     return () => {
@@ -87,7 +87,7 @@ export const Hero: React.FC = () => {
         }}>
           Institutional Governance. <br />
           <div className="headline-cycler">
-            <span 
+            <span
               key={phraseIdx}
               className={`headline-text ${isExiting ? 'headline-exit' : ''}`}
               style={{ position: 'relative', display: 'inline-block' }}
@@ -133,11 +133,11 @@ export const Hero: React.FC = () => {
         <div style={{ display: 'flex', gap: '1.2rem', justifyContent: 'center' }} className="mobile-stack">
           <button className="btn-primary" style={{ padding: '1.2rem 3rem', fontSize: '1.1rem', fontWeight: 700 }}>
             <div className="shimmer" />
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
             Deploy Salvia
           </button>
           <button className="btn-secondary" style={{ padding: '1.2rem 3rem', fontSize: '1.1rem', fontWeight: 700 }}>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" /></svg>
             Audit the Engine
           </button>
         </div>
