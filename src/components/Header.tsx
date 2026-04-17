@@ -29,6 +29,7 @@ export const Header: React.FC = () => {
             <span style={{ color: 'var(--salvia-text)', fontSize: '0.9rem', fontWeight: 600 }}>Clinical Hub</span>
           </div>
           <a href="/#pipeline" style={{ color: 'var(--salvia-text)', fontSize: '0.9rem', fontWeight: 600 }}>The Loop</a>
+          <Link to="/blog" style={{ color: 'var(--salvia-text)', fontSize: '0.9rem', fontWeight: 600, textDecoration: 'none' }}>Blog</Link>
           <a href="/#domains" style={{ color: 'var(--salvia-text)', fontSize: '0.9rem', fontWeight: 600 }}>Specialties</a>
         </nav>
 
