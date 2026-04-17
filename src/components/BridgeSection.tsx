@@ -23,7 +23,7 @@ export const BridgeSection = () => (
             marginBottom: '1rem',
           }}>
             <div style={{ width: 18, height: 2, backgroundColor: 'var(--salvia-accent)', borderRadius: '1px' }} />
-            The workflow
+            The Record Loop
           </div>
           <h2 style={{
             fontSize: 'clamp(1.8rem, 3.5vw, 2.6rem)',
@@ -33,7 +33,7 @@ export const BridgeSection = () => (
             lineHeight: 1.15,
             marginBottom: '1rem',
           }}>
-            All three engines.<br />One seamless loop.
+            Three tools.<br />One effortless loop.
           </h2>
           <p style={{
             fontSize: '1rem',
@@ -41,8 +41,8 @@ export const BridgeSection = () => (
             lineHeight: 1.65,
             maxWidth: '380px',
           }}>
-            From voice capture to signed, auditable clinical record —
-            Salvia runs the entire documentation pipeline, automatically, every time.
+            From your first word to a perfectly protected record —
+            Salvia handles the paperwork automatically, so you can focus on the care.
           </p>
         </div>
 
