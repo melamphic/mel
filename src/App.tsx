@@ -6,6 +6,8 @@ import { PolicyEnginePage } from './pages/PolicyEnginePage';
 import { AudioToFormsPage } from './pages/AudioToFormsPage';
 import { InsightsPage } from './pages/InsightsPage';
 import { ArticlePage } from './pages/ArticlePage';
+import { PricingPage } from './pages/PricingPage';
+import { SignupPage } from './pages/SignupPage';
 import './index.css';
 
 function ScrollToTop() {
@@ -52,6 +54,8 @@ function App() {
           <Route path="/products/point-of-care-evidence" element={<AudioToFormsPage />} />
           <Route path="/blog" element={<InsightsPage />} />
           <Route path="/blog/:id" element={<ArticlePage />} />
+          <Route path="/pricing" element={<PricingPage />} />
+          <Route path="/start" element={<SignupPage />} />
         </Routes>
 
       </div>

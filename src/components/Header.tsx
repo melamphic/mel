@@ -29,17 +29,18 @@ export const Header: React.FC = () => {
             <span style={{ color: 'var(--salvia-text)', fontSize: '0.9rem', fontWeight: 600 }}>Clinical Hub</span>
           </div>
           <a href="/#pipeline" style={{ color: 'var(--salvia-text)', fontSize: '0.9rem', fontWeight: 600 }}>The Loop</a>
+          <Link to="/pricing" style={{ color: 'var(--salvia-text)', fontSize: '0.9rem', fontWeight: 600, textDecoration: 'none' }}>Pricing</Link>
           <Link to="/blog" style={{ color: 'var(--salvia-text)', fontSize: '0.9rem', fontWeight: 600, textDecoration: 'none' }}>Blog</Link>
           <a href="/#domains" style={{ color: 'var(--salvia-text)', fontSize: '0.9rem', fontWeight: 600 }}>Specialties</a>
         </nav>
 
         <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
-          <button className="pill-button-light hide-mobile" style={{ fontSize: '0.85rem', padding: '0.6rem 1.2rem' }}>
+          <Link to="/pricing" className="pill-button-light hide-mobile" style={{ fontSize: '0.85rem', padding: '0.6rem 1.2rem', textDecoration: 'none' }}>
             Sign In
-          </button>
-          <button className="pill-button" style={{ fontSize: '0.85rem', padding: '0.6rem 1.4rem' }}>
-            Book Demo
-          </button>
+          </Link>
+          <Link to="/pricing" className="pill-button" style={{ fontSize: '0.85rem', padding: '0.6rem 1.4rem', textDecoration: 'none' }}>
+            Start free trial
+          </Link>
         </div>
       </div>
     </header>
