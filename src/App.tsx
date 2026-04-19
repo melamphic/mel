@@ -8,6 +8,7 @@ import { InsightsPage } from './pages/InsightsPage';
 import { ArticlePage } from './pages/ArticlePage';
 import { PricingPage } from './pages/PricingPage';
 import { SignupPage } from './pages/SignupPage';
+import { ContactSalesPage } from './pages/ContactSalesPage';
 import './index.css';
 
 function ScrollToTop() {
@@ -56,6 +57,7 @@ function App() {
           <Route path="/blog/:id" element={<ArticlePage />} />
           <Route path="/pricing" element={<PricingPage />} />
           <Route path="/start" element={<SignupPage />} />
+          <Route path="/contact-sales" element={<ContactSalesPage />} />
         </Routes>
 
       </div>

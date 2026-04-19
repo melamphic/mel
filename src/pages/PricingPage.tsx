@@ -11,7 +11,6 @@ import {
   type Tier,
   type Vertical,
 } from '../data/pricing';
-import { SUPPORT_EMAIL } from '../config';
 
 const DOMAIN_ICON: Record<Vertical, string> = {
   veterinary: 'Paws',
@@ -471,8 +470,8 @@ function EnterpriseBanner() {
           Custom pricing, SSO, volume commits, dedicated onboarding.
         </div>
       </div>
-      <a
-        href={`mailto:${SUPPORT_EMAIL}?subject=Salvia%20Enterprise%20enquiry`}
+      <Link
+        to="/contact-sales"
         style={{
           textDecoration: 'none',
           padding: '0.75rem 1.4rem',
@@ -484,7 +483,7 @@ function EnterpriseBanner() {
         }}
       >
         Contact sales
-      </a>
+      </Link>
     </div>
   );
 }
