@@ -94,19 +94,19 @@ const SignOff = ({ name, role, note }: { name: string; role: string; note: strin
 const SCENARIOS: Record<DomainId, DomainScenario> = {
   clinic: {
     top: {
-      color: '#FF4E00', tag: 'EVIDENCE', title: 'Point of Care Capture',
+      color: '#FF4E00', tag: 'AUDIO', title: 'Voice note captured',
       body: <Transcript text='"Patient is a 58-year-old female with a 10-day productive cough, worse at night. Chest tightness. Temp 99.8°F, SpO₂ 97%, mild expiratory wheezing right lower lobe."' />,
     },
     left: {
-      color: '#6366F1', tag: 'MAPPING', title: 'Deterministic Extraction',
+      color: '#6366F1', tag: 'FORM', title: 'AI fills the form',
       body: <FormFields fields={[['Patient', 'Ms. Carter · 58F'], ['Complaint', 'Productive cough ×10d'], ['Vitals', '99.8°F · SpO₂ 97%'], ['Assessment', 'Viral bronchitis'], ['Plan', 'Albuterol 2 puffs QID']]} />,
     },
     right: {
-      color: '#D97706', tag: 'GOVERNANCE', title: 'Compliance Validation',
+      color: '#D97706', tag: 'POLICY', title: 'Policy check',
       body: <PolicyItems items={[['Vitals documented', 'ok'], ['Chief complaint recorded', 'ok'], ['Diagnosis stated', 'ok'], ['Rx requires MD sign-off', 'warn']]} />,
     },
     bottom: {
-      color: '#059669', tag: 'VERIFY', title: 'Statutory Verification',
+      color: '#059669', tag: 'PUBLISH', title: 'Staff review & publish',
       body: <SignOff name="Dr. R. Patel" role="General Practitioner" note="Albuterol 2 puffs QID confirmed. Policy acknowledged. Note published to patient record." />,
     },
     timeline: [
@@ -119,19 +119,19 @@ const SCENARIOS: Record<DomainId, DomainScenario> = {
   },
   vet: {
     top: {
-      color: '#0EA5E9', tag: 'EVIDENCE', title: 'Point of Care Capture',
+      color: '#0EA5E9', tag: 'AUDIO', title: 'Voice note captured',
       body: <Transcript text='"Bella, 4-year-old DSH cat. Owner reports vomiting once daily for three days, partially digested food. Temp 101.5°F, weight 10.2 lbs, mild dehydration present."' />,
     },
     left: {
-      color: '#6366F1', tag: 'MAPPING', title: 'Deterministic Extraction',
+      color: '#6366F1', tag: 'FORM', title: 'AI fills the form',
       body: <FormFields fields={[['Patient', 'Bella · Cat · 4yr DSH'], ['Complaint', 'Vomiting ×3 days'], ['Weight', '10.2 lbs (−0.3 lbs)'], ['Assessment', 'Acute GI upset'], ['Treatment', 'Cerenia · Bland diet ×5d']]} />,
     },
     right: {
-      color: '#D97706', tag: 'GOVERNANCE', title: 'Compliance Validation',
+      color: '#D97706', tag: 'POLICY', title: 'Policy check',
       body: <PolicyItems items={[['Weight & temp recorded', 'ok'], ['Hydration status noted', 'ok'], ['Diagnosis documented', 'ok'], ['Medication admin needs consent', 'warn']]} />,
     },
     bottom: {
-      color: '#059669', tag: 'VERIFY', title: 'Statutory Verification',
+      color: '#059669', tag: 'PUBLISH', title: 'Staff review & publish',
       body: <SignOff name="Dr. S. Reid" role="Veterinarian" note="Cerenia 1mg/kg confirmed. Owner consent noted. Record published and discharge summary generated." />,
     },
     timeline: [
@@ -144,19 +144,19 @@ const SCENARIOS: Record<DomainId, DomainScenario> = {
   },
   dental: {
     top: {
-      color: '#7C3AED', tag: 'EVIDENCE', title: 'Point of Care Capture',
+      color: '#7C3AED', tag: 'AUDIO', title: 'Voice note captured',
       body: <Transcript text='"Mr. Osei, 34-year-old male. Sharp pain upper-left molar, tooth 14, provoked by cold water for two months. No spontaneous pain. Probing 2–3mm, occlusal decay visible."' />,
     },
     left: {
-      color: '#6366F1', tag: 'MAPPING', title: 'Deterministic Extraction',
+      color: '#6366F1', tag: 'FORM', title: 'AI fills the form',
       body: <FormFields fields={[['Patient', 'Mr. K. Osei · 34M'], ['Tooth', '#14 — Upper left molar'], ['Finding', 'Occlusal caries · Class I'], ['Diagnosis', 'Reversible pulpitis'], ['Treatment', 'Composite restoration (D2391)']]} />,
     },
     right: {
-      color: '#D97706', tag: 'GOVERNANCE', title: 'Compliance Validation',
+      color: '#D97706', tag: 'POLICY', title: 'Policy check',
       body: <PolicyItems items={[['Probing depths recorded', 'ok'], ['Radiograph reference noted', 'ok'], ['Diagnosis & CDT code present', 'ok'], ['Restoration needs pre-auth', 'warn']]} />,
     },
     bottom: {
-      color: '#7C3AED', tag: 'VERIFY', title: 'Statutory Verification',
+      color: '#7C3AED', tag: 'PUBLISH', title: 'Staff review & publish',
       body: <SignOff name="Dr. E. Kwame" role="General Dentist" note="D2391 confirmed. Pre-auth packet approved. Note published to patient record." />,
     },
     timeline: [
@@ -236,6 +236,26 @@ export const PipelineSection = () => {
       `}</style>
       <div className="container" style={{ maxWidth: '1200px' }}>
 
+        {/* Section header */}
+        <div style={{ textAlign: 'center', marginBottom: '3rem', maxWidth: '720px', marginInline: 'auto' }}>
+          <span style={{
+            fontSize: '0.7rem', fontWeight: 700, letterSpacing: '0.14em',
+            textTransform: 'uppercase', color: 'var(--salvia-accent)',
+          }}>
+            Live in your vertical
+          </span>
+          <h2 style={{
+            fontSize: 'clamp(2rem, 4vw, 3rem)',
+            fontWeight: 700, letterSpacing: '-0.04em', lineHeight: 1.1,
+            color: 'var(--salvia-primary)', marginTop: '0.6rem',
+          }}>
+            A real note, end-to-end.
+          </h2>
+          <p style={{ color: 'var(--salvia-text-muted)', fontSize: '1.05rem', lineHeight: 1.6, marginTop: '1rem' }}>
+            Pick a vertical and watch what happens — audio → filled form → policy check → publish → immutable record.
+          </p>
+        </div>
+
         {/* Domain toggle — separate spaced pills */}
         <div style={{ display: 'flex', justifyContent: 'center', gap: '0.6rem', marginBottom: '2rem', flexWrap: 'wrap' }}>
           {DOMAINS.map(d => (
@@ -312,8 +332,8 @@ export const PipelineSection = () => {
           }}>
             <div style={{ padding: '1rem 1.2rem', borderBottom: '1px solid #F1F5F9', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
               <div>
-                <div style={{ fontSize: '0.9rem', fontWeight: 600, color: '#0F172A', letterSpacing: '-0.01em' }}>Governance Trail</div>
-                <div style={{ fontSize: '0.73rem', color: '#94A3B8', marginTop: '1px' }}>Immutable Record · Statutory Proof</div>
+                <div style={{ fontSize: '0.9rem', fontWeight: 600, color: '#0F172A', letterSpacing: '-0.01em' }}>Audit trail</div>
+                <div style={{ fontSize: '0.73rem', color: '#94A3B8', marginTop: '1px' }}>Immutable · Hashed on lock</div>
               </div>
               <div style={{ fontSize: '0.68rem', fontWeight: 600, color: domain.color, backgroundColor: `${domain.color}12`, padding: '0.22rem 0.65rem', borderRadius: '999px' }}>
                 {s.timeline.length} events
