@@ -25,13 +25,11 @@ export const Header: React.FC = () => {
         </Link>
 
         <nav className="hide-mobile" style={{ display: 'flex', gap: '2.5rem', alignItems: 'center' }}>
-          <div style={{ position: 'relative', cursor: 'pointer' }} className="nav-group">
-            <span style={{ color: 'var(--salvia-text)', fontSize: '0.9rem', fontWeight: 600 }}>Clinical Hub</span>
-          </div>
-          <a href="/#pipeline" style={{ color: 'var(--salvia-text)', fontSize: '0.9rem', fontWeight: 600 }}>The Loop</a>
+          <a href="/#products" style={{ color: 'var(--salvia-text)', fontSize: '0.9rem', fontWeight: 600 }}>Product</a>
+          <a href="/#pipeline" style={{ color: 'var(--salvia-text)', fontSize: '0.9rem', fontWeight: 600 }}>How it works</a>
+          <a href="/#domains" style={{ color: 'var(--salvia-text)', fontSize: '0.9rem', fontWeight: 600 }}>Verticals</a>
           <Link to="/pricing" style={{ color: 'var(--salvia-text)', fontSize: '0.9rem', fontWeight: 600, textDecoration: 'none' }}>Pricing</Link>
           <Link to="/blog" style={{ color: 'var(--salvia-text)', fontSize: '0.9rem', fontWeight: 600, textDecoration: 'none' }}>Blog</Link>
-          <a href="/#domains" style={{ color: 'var(--salvia-text)', fontSize: '0.9rem', fontWeight: 600 }}>Specialties</a>
         </nav>
 
         <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
