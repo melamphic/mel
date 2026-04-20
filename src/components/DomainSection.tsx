@@ -3,11 +3,11 @@ import { useState } from 'react';
 const DOMAINS = [
   {
     id: 'clinic',
-    label: 'Salvia Clinic',
-    tagline: 'General Practice & Specialists',
-    accent: '#F43F5E', // Compliance Red
-    title: 'Clinical Governance Matching',
-    desc: 'Verify that every note satisfies national regulatory standards. Salvia maps form fields directly to mandatory compliance clauses.',
+    label: 'Clinics',
+    tagline: 'GP, specialists & allied health',
+    accent: '#F43F5E',
+    title: 'Policy-checked before it\u2019s signed.',
+    desc: 'Upload HIPAA, NABH, RACGP, BESTPRACTICE — or your own internal SOPs. Salvia links clauses to form fields and scores every note against them before the clinician approves it.',
     metric: '98%',
     metricLabel: 'CLAUSE COVERAGE',
     ui: (
@@ -42,13 +42,13 @@ const DOMAINS = [
   },
   {
     id: 'vet',
-    label: 'Salvia Paws',
-    tagline: 'Veterinary Medicine',
-    accent: '#0EA5E9', // Record Blue
-    title: 'Precision Evidence Tracing',
-    desc: 'Audit-ready transcription with Deepgram Nova Medical. See the exact word in the transcript that generated each clinical value.',
+    label: 'Vets',
+    tagline: 'Small animal, equine & mixed practice',
+    accent: '#0EA5E9',
+    title: 'Every field, tied to the exact words you said.',
+    desc: 'Deepgram Nova Medical transcribes the audio. Salvia shows you the source line that generated each value — so you (and any auditor) can verify the note in seconds.',
     metric: '42s',
-    metricLabel: 'CHARTING SPEED',
+    metricLabel: 'MEDIAN TIME TO FILLED FORM',
     ui: (
       <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
         <div style={{ fontSize: '0.7rem', fontWeight: 800, color: '#0EA5E9', letterSpacing: '0.08em' }}>AUDIT TRACE: NOVA MEDICAL</div>
@@ -78,11 +78,11 @@ const DOMAINS = [
   },
   {
     id: 'dental',
-    label: 'Salvia Smile',
-    tagline: 'Dental Surgery',
-    accent: '#10B981', // Goal Green
-    title: 'Guideline Alignment Score',
-    desc: 'Automated treatment plans generated from chairside audio, instantly cross-checked against Practice Guidelines and CDT Coding rules.',
+    label: 'Dental',
+    tagline: 'General & specialist practices',
+    accent: '#10B981',
+    title: 'Treatment plans, cross-checked against CDT.',
+    desc: 'Voice-note the case. Salvia fills the form, assigns the right CDT codes, and checks the plan against the practice guidelines and pre-auth rules you\u2019ve linked.',
     metric: '92%',
     metricLabel: 'CDT ALIGNMENT',
     ui: (
@@ -150,13 +150,13 @@ export const DomainSection = () => {
               fontSize: '0.75rem', fontWeight: 800, letterSpacing: '0.12em',
               color: 'var(--salvia-accent)', textTransform: 'uppercase',
               display: 'block', marginBottom: '1rem'
-            }}>Tailored for your specialty</span>
+            }}>Built for your vertical</span>
             <h2 style={{
               fontSize: 'clamp(2.5rem, 5vw, 4rem)',
               fontWeight: 800, letterSpacing: '-0.04em', lineHeight: 1.1,
               color: 'var(--salvia-primary)', margin: 0
             }}>
-              One platform.<br />Three specialties.
+              One platform.<br />Every vertical you run.
             </h2>
           </div>
           <div style={{ flex: 1, maxWidth: '450px' }} className="stage-header-desc">
@@ -164,35 +164,44 @@ export const DomainSection = () => {
               fontSize: '1.15rem', color: 'var(--salvia-text-muted)',
               lineHeight: 1.7, margin: 0
             }}>
-              Salvia is designed for the specific needs of your practice. We provide built-in clinical intelligence that understands the nuances of your work—so you can focus strictly on quality care.
+              Clinics, vet practices, dental surgeries, aged care. Same engine, same compliance guarantees — tuned to the regulations, terminology, and forms that govern your specialty.
             </p>
           </div>
         </div>
       </div>
 
       {/* The Asymmetric Full-Bleed Layout */}
-      <div style={{
+      <div className="domains-stage-grid mobile-stack" style={{
         display: 'grid', gridTemplateColumns: 'minmax(280px, 0.8fr) 2fr',
         gap: '5rem', alignItems: 'start',
         paddingLeft: 'var(--stage-pad-left, max(2rem, calc((100vw - 1200px) / 2 + 2rem)))',
-        width: '100vw'
-      }} className="mobile-stack">
+        width: '100vw', maxWidth: '100vw', overflowX: 'hidden',
+      }}>
         <style>{`
           @media (max-width: 768px) {
-            #domains { padding: 4rem 0 !important; }
-            .mobile-stack { padding-left: 2rem !important; padding-right: 2rem !important; width: 100% !important; }
-            .stage-app-box { 
-              padding: 2.5rem !important; 
-              border-radius: 32px !important; 
+            #domains { padding: 4rem 0 !important; overflow-x: hidden !important; }
+            .domains-stage-grid {
+              width: 100% !important;
+              max-width: 100% !important;
+              padding-left: 1.25rem !important;
+              padding-right: 1.25rem !important;
+              gap: 2rem !important;
+            }
+            .stage-app-box {
+              padding: 2rem !important;
+              border-radius: 24px !important;
+              border-right: 1px solid rgba(15, 23, 42, 0.08) !important;
               width: 100% !important;
               min-height: auto !important;
+              box-shadow: 0 12px 32px rgba(15,23,42,0.06) !important;
             }
             .stage-content-grid {
               grid-template-columns: 1fr !important;
-              gap: 3rem !important;
+              gap: 2.5rem !important;
+              max-width: 100% !important;
             }
             .stage-metric {
-              font-size: 3.5rem !important;
+              font-size: 3rem !important;
             }
           }
         `}</style>
