@@ -2,28 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { DashboardPreview } from './DashboardPreview';
 import { MobileDevicePreview } from './MobileDevicePreview';
 
-const audiences = ['Clinics', 'Vets', 'Dentists'];
+const audiences = ['Clinics', 'Vets', 'Dentists', 'Aged Care'];
 const phrases = [
-  'Notes done before they leave.',
-  'Focus on your patient.',
-  'Protected from legal gaps.',
-  'Professional peace of mind.',
-  'Perfect records, effortlessly.',
-  'Statutory security, automated.',
-  'Reclaim your after-hours.',
-  'Clinical governance made easy.',
-  'Verified documentation at source.',
-  'The proof you need, always.',
-  'Secure your practice.',
-  'Audit-ready in seconds.',
-  'Less paperwork. More care.',
-  'Your policy, automatically.',
-  'Unbroken record chain.',
-  'Defensibly secure records.',
-  'No more documentation debt.',
-  'Versioned protection for life.',
-  'Strategic peace of mind.',
-  'Institutional confidence.'
+  'built for compliance.',
+  'audit-ready at sign-off.',
+  'policy-checked in real time.',
 ];
 
 export const Hero: React.FC = () => {
@@ -85,7 +68,7 @@ export const Hero: React.FC = () => {
           marginBottom: '2rem',
           maxWidth: '1000px'
         }}>
-          Institutional Governance. <br />
+          AI clinical documentation, <br />
           <div className="headline-cycler">
             <span
               key={phraseIdx}
@@ -122,23 +105,24 @@ export const Hero: React.FC = () => {
           fontSize: 'clamp(1.1rem, 2.5vw, 1.35rem)',
           color: 'var(--salvia-text-muted)',
           lineHeight: 1.6,
-          maxWidth: '700px',
+          maxWidth: '720px',
           margin: '0 auto 3rem auto'
         }}>
-          Close the memory gap with <strong>Point of Care Evidence Capture</strong>.
-          Salvia provides the statutory infrastructure needed to guarantee defensible clinical records
-          and unbroken institutional oversight across any domain.
+          Record a voice note after the encounter. Pick your own forms. Salvia's AI
+          turns the <strong>audio</strong> into filled <strong>clinical documentation</strong> —
+          and checks every note against your linked policies before you approve it.
+          One <strong>compliance</strong>-grade platform, not a stand-alone scribe.
         </p>
 
         <div style={{ display: 'flex', gap: '1.2rem', justifyContent: 'center' }} className="mobile-stack">
           <button className="btn-primary" style={{ padding: '1.2rem 3rem', fontSize: '1.1rem', fontWeight: 700 }}>
             <div className="shimmer" />
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
-            Deploy Salvia
+            Start free trial
           </button>
           <button className="btn-secondary" style={{ padding: '1.2rem 3rem', fontSize: '1.1rem', fontWeight: 700 }}>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" /></svg>
-            Audit the Engine
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            See a 90-second demo
           </button>
         </div>
 
