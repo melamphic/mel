@@ -20,16 +20,16 @@ export const Footer = () => (
           <span style={{ fontSize: '1.1rem', fontWeight: 800, letterSpacing: '-0.03em', color: 'var(--salvia-text)' }}>Salvia</span>
         </div>
         <p style={{ color: 'var(--salvia-text-muted)', fontSize: '0.9rem', lineHeight: 1.6, maxWidth: '300px' }}>
-          Professional clinical records and automated governance. Built for the elite standards of modern medicine.
+          Compliance-grade AI clinical documentation for clinics, vets, dental practices, and aged care. Audio in, audit-ready records out.
         </p>
       </div>
 
       <div>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-          <div style={{ fontSize: '0.9rem', fontWeight: 800, color: 'var(--salvia-primary)', letterSpacing: '0.05em' }}>SOLUTIONS</div>
-          <Link to="/products/point-of-care-capture" style={{ color: 'var(--salvia-text-muted)', fontSize: '0.9rem', textDecoration: 'none' }}>Point of Care Capture</Link>
-          <Link to="/products/clinical-form-engine" style={{ color: 'var(--salvia-text-muted)', fontSize: '0.9rem', textDecoration: 'none' }}>Clinical Form Engine</Link>
-          <Link to="/products/governance-hub" style={{ color: 'var(--salvia-text-muted)', fontSize: '0.9rem', textDecoration: 'none' }}>Governance Hub</Link>
+          <div style={{ fontSize: '0.9rem', fontWeight: 800, color: 'var(--salvia-primary)', letterSpacing: '0.05em' }}>MODULES</div>
+          <Link to="/products/point-of-care-evidence" style={{ color: 'var(--salvia-text-muted)', fontSize: '0.9rem', textDecoration: 'none' }}>Audio → Forms</Link>
+          <Link to="/products/statutory-form-infrastructure" style={{ color: 'var(--salvia-text-muted)', fontSize: '0.9rem', textDecoration: 'none' }}>Form Engine</Link>
+          <Link to="/products/institutional-compliance-hub" style={{ color: 'var(--salvia-text-muted)', fontSize: '0.9rem', textDecoration: 'none' }}>Policy Engine</Link>
           <Link to="/blog" style={{ color: 'var(--salvia-text-muted)', fontSize: '0.9rem', textDecoration: 'none' }}>Blog</Link>
         </div>
       </div>
@@ -37,10 +37,10 @@ export const Footer = () => (
       <div>
         <h4 style={{ fontSize: '0.85rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '1.5rem' }}>Company</h4>
         <nav style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-          <a href="#" style={{ textDecoration: 'none', color: 'var(--salvia-text-muted)', fontSize: '0.9rem' }}>Clinical Ethics</a>
-          <a href="#" style={{ textDecoration: 'none', color: 'var(--salvia-text-muted)', fontSize: '0.9rem' }}>Governance Standards</a>
+          <a href="#" style={{ textDecoration: 'none', color: 'var(--salvia-text-muted)', fontSize: '0.9rem' }}>About</a>
+          <a href="#" style={{ textDecoration: 'none', color: 'var(--salvia-text-muted)', fontSize: '0.9rem' }}>Security</a>
           <Link to="/blog" style={{ textDecoration: 'none', color: 'var(--salvia-text-muted)', fontSize: '0.9rem' }}>Blog</Link>
-          <a href="#" style={{ textDecoration: 'none', color: 'var(--salvia-text-muted)', fontSize: '0.9rem' }}>Contact Sales</a>
+          <Link to="/contact-sales" style={{ textDecoration: 'none', color: 'var(--salvia-text-muted)', fontSize: '0.9rem' }}>Contact sales</Link>
         </nav>
       </div>
     </div>
