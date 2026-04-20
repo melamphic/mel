@@ -23,7 +23,7 @@ export const BridgeSection = () => (
             marginBottom: '1rem',
           }}>
             <div style={{ width: 18, height: 2, backgroundColor: 'var(--salvia-accent)', borderRadius: '1px' }} />
-            The Record Loop
+            The numbers
           </div>
           <h2 style={{
             fontSize: 'clamp(1.8rem, 3.5vw, 2.6rem)',
@@ -33,7 +33,7 @@ export const BridgeSection = () => (
             lineHeight: 1.15,
             marginBottom: '1rem',
           }}>
-            Three tools.<br />One effortless loop.
+            What you actually get.
           </h2>
           <p style={{
             fontSize: '1rem',
@@ -41,17 +41,17 @@ export const BridgeSection = () => (
             lineHeight: 1.65,
             maxWidth: '380px',
           }}>
-            From your first word to a perfectly protected record —
-            Salvia handles the paperwork automatically, so you can focus on the care.
+            Not AI theatre. Measurable outputs on every note — so you can prove, defend, and
+            audit the record the second anyone asks.
           </p>
         </div>
 
         {/* Right — stats */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
           {[
-            { value: '< 60s',   label: 'From audio to a completed clinical note' },
-            { value: '100%',    label: 'Policy compliance enforced on every form' },
-            { value: 'Day one', label: 'Audit-ready records, locked on sign-off' },
+            { value: '~60s',     label: 'From voice note to a fully filled clinical form' },
+            { value: 'Every',    label: 'Linked policy is auto-checked on the filled record' },
+            { value: '1-click',  label: 'Audit Pack export — note, audio, transcript, policy trace' },
           ].map(({ value, label }) => (
             <div key={value} style={{
               display: 'flex', alignItems: 'center', gap: '1.25rem',
