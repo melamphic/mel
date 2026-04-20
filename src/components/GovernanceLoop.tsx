@@ -3,38 +3,38 @@ import React from 'react';
 const steps = [
   {
     id: '01',
-    title: 'The Right Template',
-    desc: 'Select a clinical form that matches your specialty. Every field is designed to capture the exact data you need for professional excellence.',
-    metadata: 'CLINICAL v4.0 · READY',
-    linkType: 'Form Structure'
+    title: 'Build the form',
+    desc: 'Clinic admin creates the forms the team uses daily — rich field types, per-field AI prompts, mandatory flags. Versioned with semver from day one.',
+    metadata: 'FORM v4.0 · DRAFT',
+    linkType: 'Form Engine'
   },
   {
     id: '02',
-    title: 'Standards Linked',
-    desc: 'Your practice policies and clinical standards are linked directly to your forms. No more guessing—the guidance you need is built-in.',
-    metadata: 'POLICY v12.2 · ACTIVE',
-    linkType: 'Policy Safety'
+    title: 'Link the policy',
+    desc: 'Admin links the relevant clauses from the policy engine to the form. Each clause tagged must-follow, maybe-follow, or try-to-follow.',
+    metadata: 'POLICY v12.2 · LINKED',
+    linkType: 'Policy Engine'
   },
   {
     id: '03',
-    title: 'Point of Care Capture',
-    desc: 'Our audio engine captures the visit in real-time. Focus on your patient while Salvia handles the technical record-keeping.',
-    metadata: 'ASSET #8821 · SECURE',
-    linkType: 'Patient Evidence'
+    title: 'Staff captures audio',
+    desc: 'In daily use: staff picks the subject, records a voice note, selects one to three forms. AI transcribes and fills the fields — with confidence scores.',
+    metadata: 'AUDIO #8821 · PROCESSED',
+    linkType: 'Audio → Forms'
   },
   {
     id: '04',
-    title: 'The Precision Check',
-    desc: 'Every note is verified for absolute accuracy. Human-in-the-loop validation ensures your records are perfect before they are signed.',
-    metadata: 'AUDITED · VERIFIED',
-    linkType: 'Quality Gate'
+    title: 'Evidence + policy check',
+    desc: 'Every field traced back to the transcript. If a policy is linked, Salvia scores clause-by-clause satisfaction. The same staff member reviews, edits, and approves.',
+    metadata: 'COMPLIANCE · VERIFIED',
+    linkType: 'Compliance Engine'
   },
   {
     id: '05',
-    title: 'Safe & Protected',
-    desc: 'Records are locked and archived with professional-grade security. A permanent, auditable proof of your clinical excellence.',
-    metadata: 'ARCHIVE v2026 · LOCKED',
-    linkType: 'Permanent Proof'
+    title: 'Posted to the timeline',
+    desc: 'Record hashed, archived, and pinned to the subject\u2019s timeline with full edit history. Audit Pack is one click away, forever.',
+    metadata: 'RECORD v2026 · LOCKED',
+    linkType: 'Audit Pack'
   }
 ];
 
@@ -45,18 +45,18 @@ export const GovernanceLoop: React.FC = () => {
             
             {/* Context Heading */}
             <div style={{ marginBottom: '6rem', textAlign: 'center' }}>
-                <span style={{ 
-                    fontSize: '0.75rem', fontWeight: 800, color: 'var(--salvia-accent)', 
-                    letterSpacing: '0.15em', textTransform: 'uppercase' 
+                <span style={{
+                    fontSize: '0.75rem', fontWeight: 800, color: 'var(--salvia-accent)',
+                    letterSpacing: '0.15em', textTransform: 'uppercase'
                 }}>
-                    The Governance Loop
+                    The full loop
                 </span>
-                <h2 style={{ 
-                    fontSize: 'clamp(2.5rem, 5vw, 3.5rem)', fontWeight: 800, 
-                    color: 'var(--salvia-primary)', marginTop: '1.5rem', letterSpacing: '-0.04em' 
+                <h2 style={{
+                    fontSize: 'clamp(2.5rem, 5vw, 3.5rem)', fontWeight: 800,
+                    color: 'var(--salvia-primary)', marginTop: '1.5rem', letterSpacing: '-0.04em'
                 }}>
-                    Institutional Connectivity. <br />
-                    <span style={{ color: 'var(--salvia-text-muted)', fontWeight: 400 }}>Unbroken Chain of Evidence.</span>
+                    Forms + policies + audio. <br />
+                    <span style={{ color: 'var(--salvia-text-muted)', fontWeight: 400 }}>A single compliance-grade record.</span>
                 </h2>
             </div>
 
