@@ -1,28 +1,75 @@
 
 export const content = (
   <>
-    <p>If you’re a busy clinician, you know "Pajama Time" all too well. It’s that second shift of the day—often between 8 PM and 11 PM—where you sit on the couch with your laptop, finally finishing the <strong>documentation debt</strong> for the patients you saw eight hours ago.</p>
-    <p>While it feels like a necessary evil of modern medicine to combat <strong>clinician burnout</strong>, from a clinical compliance and legal standpoint, it is a high-risk practice that leaves an undeniable <strong>EMR audit trail</strong>.</p>
+    <p>
+      If you're reading this at 10:47pm with a laptop on your knees and three charts left to
+      sign, you are not alone. A 2024 AMA survey put it at 72% of primary care physicians doing
+      at least one hour of "pajama time" per weekday. The real number is probably higher because
+      the burned-out people stop filling out the surveys.
+    </p>
 
-    <h3>The Memory Gap and Medical Accuracy</h3>
-    <p>The most immediate risk of delayed documentation is <strong>memory decay</strong>. Studies published in the Journal of Medical Practice indicate that clinical recall drops significantly after just 120 minutes. By the time you’re sitting at home, the specific nuances of a patient’s cough, the exact location of a lesion, or the nuanced phrasing of a <strong>informed refusal of care</strong> can become blurred or generic.</p>
-    <p>In a medical malpractice deposition, opposing counsel won't just ask if you're a good doctor; they will perform a <strong>EHR forensic analysis</strong> of your record. If your note says "lungs clear" but the patient was admitted for respiratory distress six hours later, that 8 PM documentation timestamp becomes almost impossible to defend.</p>
+    <p>
+      The honest answer to "how do I stop this" is: you probably can't, not with the workflow
+      you have. But you <em>can</em> make it a lot less bad, and — more importantly for anyone
+      who's ever had a patient lawyer over a chart — you can stop the pajama-time workflow from
+      quietly destroying your legal defensibility.
+    </p>
 
-    <div style={{ backgroundColor: '#F8FAFC', padding: '2rem', borderRadius: '16px', margin: '2.5rem 0', borderLeft: '4px solid var(--salvia-accent)' }}>
-      <h4 style={{ marginTop: 0 }}>The "Silent Witness": Your Metadata</h4>
-      <p style={{ marginBottom: 0 }}>Modern EHR systems are designed for <strong>contemporaneous documentation</strong>. Every action—every click, scroll, and sign-off—is recorded as <strong>medical records metadata</strong>. If you are consistently signing notes hours after the encounter, you are creating a record that appears "reconstructive" rather than observational.</p>
-    </div>
+    <h3>What's actually happening at 11pm</h3>
+    <p>
+      Two problems compound. The first is medical: recall drops measurably after 90–120 minutes.
+      By the time you're writing the note, your description of that rash, that cough, that "patient
+      seemed a bit off today" is reconstructed, not observed. The second is legal: every EMR stamps
+      a server-side <strong>"note entered"</strong> timestamp that your signature cannot override.
+      You can date the encounter 2:30pm. The audit trail says 11:04pm.
+    </p>
+    <p>
+      In a malpractice deposition, this combination is brutal. Opposing counsel doesn't need to
+      prove you did the wrong thing — they need to prove your documentation is unreliable. An 11pm
+      timestamp for a 2:30pm visit, twelve days in a row across your chart set, does that work for
+      them before you've opened your mouth.
+    </p>
 
-    <h3>Checklist: Minimizing Pajama Time Liability</h3>
-    <ul style={{ border: '1px solid #E2E8F0', padding: '2rem', borderRadius: '16px', listStyleType: 'none' }}>
-      <li style={{ marginBottom: '1rem' }}>✅ <strong>The "Flash Note" Strategy:</strong> Record vitals and the 'Assessment' portion of the SOAP note while the patient is still in the room.</li>
-      <li style={{ marginBottom: '1rem' }}>✅ <strong>Timestamp Clarification:</strong> If you must document late, add a deliberate addendum stating: "Note completed at [Time] based on contemporaneous hand-written notes."</li>
-      <li style={{ marginBottom: '1rem' }}>✅ <strong>Standardize Logic:</strong> Use <strong>clinical documentation templates</strong> that focus on high-yield clinical data first.</li>
+    <h3>The three things that actually help</h3>
+
+    <p><strong>1. Capture at the encounter, finalise later.</strong> The legally defensible version
+    of late charting isn't "write the whole note at 11pm." It's "record what happened while you
+    can prove the patient was still in front of you, then tidy the language later." That can be
+    handwritten bullet points with a timestamp, a two-minute voice note on your phone, a structured
+    EMR draft with the vitals and assessment blocks filled in. The later prose polish is addendum
+    work and is fine. The clinical observations need to be anchored to the visit.</p>
+
+    <p>This is where AI documentation tools like Salvia earn their keep — not because they save
+    time on the note itself, but because the recording of your voice-note <em>becomes the
+    contemporaneous evidence</em>. The filled form is timestamped to when you spoke it, not when
+    you reviewed it. If a jury ever needs to know when the clinical information was actually
+    captured, there's a waveform, not a guess.</p>
+
+    <p><strong>2. If you must finish at home, make it an addendum, not a first draft.</strong>
+    If your EMR allows it, the safest way to complete a note late is to:
+    </p>
+    <ul>
+      <li>Save a structured skeleton during the encounter (vitals, chief complaint, key findings).</li>
+      <li>Mark the note as a draft and timestamp the skeleton yourself in the body: <em>"Clinical findings documented at time of visit; narrative finalised [time]."</em></li>
+      <li>Sign once, don't edit-after-sign unless you use the formal addendum workflow (overwriting a signed note is how billing mistakes become insurance-fraud investigations — see <a href="/blog/signed-edits-dental" style={{ color: 'var(--salvia-accent)' }}>this post</a>).</li>
     </ul>
 
-    <div style={{ borderTop: '1px solid #E2E8F0', marginTop: '4rem', paddingTop: '3rem' }}>
-      <h4>The Salvia Solution</h4>
-      <p>Salvia’s Point of Care Capture engine is designed to eliminate documentation debt entirely. By capturing the conversation at the source and mapping it to your governing policy in real-time, the "Signed and Completed" record is ready before the patient even leaves the exam room. No more Pajama Time, just perfect, permanent records.</p>
-    </div>
+    <p><strong>3. Fix the part of your workflow that's stealing the time.</strong> For most
+    clinicians it's not "typing is slow" — it's "I need to be present with the patient and I can't
+    split attention." That's why dictation and ambient AI tools work: the cognitive load of
+    capturing information moves off your attention during the visit. For others it's template
+    hell, or an EMR that buries the right fields three clicks deep. The answer depends which one
+    it is for you. Be specific about the bottleneck before you buy a solution.</p>
+
+    <h3>What good looks like</h3>
+    <p>
+      A defensible note is one where the clinical content is captured at the encounter and the
+      timestamps reflect that, regardless of when the prose gets polished. A tool that records
+      your voice in the room, drops evidence into structured fields with confidence scores, and
+      retains the audio as part of the record — that's a note that stops being a liability.
+    </p>
+    <p>
+      And you get your evenings back. Which is, frankly, the actual win.
+    </p>
   </>
 );
