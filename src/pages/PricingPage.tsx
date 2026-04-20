@@ -135,7 +135,7 @@ export const PricingPage = () => {
 
       {/* Tier cards for the active product */}
       <section style={{ padding: '2.5rem 0 6rem' }}>
-        <div className="container" style={{ maxWidth: '960px' }}>
+        <div className="container" style={{ maxWidth: product.tiers.length >= 3 ? '1080px' : '960px' }}>
           <div
             style={{
               textAlign: 'center',
@@ -160,7 +160,7 @@ export const PricingPage = () => {
             className="tier-grid"
             style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(2, 1fr)',
+              gridTemplateColumns: `repeat(${product.tiers.length}, 1fr)`,
               gap: '1.25rem',
             }}
           >
