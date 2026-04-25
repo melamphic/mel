@@ -2,7 +2,7 @@
 // Source of truth for the marketing pricing page.
 
 export type Vertical = 'veterinary' | 'dental' | 'general_clinic';
-export type TierKey = 'solo' | 'practice' | 'pro';
+export type TierKey = 'practice' | 'pro';
 export type Cycle = 'monthly' | 'annual';
 
 export interface Tier {
@@ -31,16 +31,9 @@ export const PRODUCTS: Product[] = [
     seatLabel: 'vets',
     tiers: [
       {
-        key: 'solo',
-        name: 'Solo',
-        seats: '1 vet',
-        notesPerMonth: 500,
-        priceUSD: 99,
-      },
-      {
         key: 'practice',
         name: 'Practice',
-        seats: '2–3 vets',
+        seats: '1–3 vets',
         notesPerMonth: 1500,
         priceUSD: 229,
         highlight: 'Most popular',
