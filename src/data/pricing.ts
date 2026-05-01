@@ -27,7 +27,7 @@ export const PRODUCTS: Product[] = [
   {
     key: 'veterinary',
     brand: 'Salvia Paws',
-    tagline: 'Ambient notes for veterinary clinics.',
+    tagline: 'Point-of-care clinical notes for veterinary clinics.',
     seatLabel: 'vets',
     tiers: [
       {
@@ -73,7 +73,7 @@ export const PRODUCTS: Product[] = [
   {
     key: 'general_clinic',
     brand: 'Salvia Clinic',
-    tagline: 'Ambient notes for GPs and primary care.',
+    tagline: 'Point-of-care clinical notes for GPs and primary care.',
     seatLabel: 'providers',
     tiers: [
       {
