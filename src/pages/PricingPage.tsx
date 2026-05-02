@@ -94,7 +94,7 @@ export const PricingPage = () => {
               lineHeight: 1.6,
             }}
           >
-            14-day free trial. No credit card. Unlimited nurses, hygienists, and admin staff on every plan.
+            21-day free trial. No credit card. Unlimited nurses, hygienists, and admin staff on every plan.
             Prices shown in {marketMeta.currency}, {marketMeta.taxNote.toLowerCase()}.
           </p>
           <MarketSelector market={market} onChange={onMarketChange} />
