@@ -1,12 +1,16 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Header } from '../components/Header';
 import { Footer } from '../components/Footer';
 import {
+  MARKETS,
   PRODUCTS,
-  planCode,
+  detectMarket,
   displayedMonthly,
+  marketMetaFor,
+  planCode,
   type Cycle,
+  type Market,
   type Product,
   type Tier,
   type Vertical,
@@ -18,11 +22,37 @@ const DOMAIN_ICON: Record<Vertical, string> = {
   general_clinic: 'Clinic',
 };
 
+const MARKET_STORAGE_KEY = 'salvia.pricing.market';
+
 export const PricingPage = () => {
   const [active, setActive] = useState<Vertical>('veterinary');
   const [annual, setAnnual] = useState(false);
+  // Market drives the displayed currency. Pre-select from a persisted
+  // choice when present, otherwise from the browser's locale and
+  // time-zone signals.
+  const [market, setMarket] = useState<Market>('US');
+
+  useEffect(() => {
+    const stored = typeof window !== 'undefined'
+      ? (window.localStorage.getItem(MARKET_STORAGE_KEY) as Market | null)
+      : null;
+    if (stored && MARKETS.some((m) => m.key === stored)) {
+      setMarket(stored);
+      return;
+    }
+    setMarket(detectMarket());
+  }, []);
+
+  const onMarketChange = (next: Market) => {
+    setMarket(next);
+    if (typeof window !== 'undefined') {
+      window.localStorage.setItem(MARKET_STORAGE_KEY, next);
+    }
+  };
+
   const cycle: Cycle = annual ? 'annual' : 'monthly';
   const product = PRODUCTS.find((p) => p.key === active) ?? PRODUCTS[0];
+  const marketMeta = marketMetaFor(market);
 
   return (
     <>
@@ -65,8 +95,9 @@ export const PricingPage = () => {
             }}
           >
             14-day free trial. No credit card. Unlimited nurses, hygienists, and admin staff on every plan.
-            Prices shown in USD, excl. local tax.
+            Prices shown in {marketMeta.currency}, {marketMeta.taxNote.toLowerCase()}.
           </p>
+          <MarketSelector market={market} onChange={onMarketChange} />
         </div>
       </section>
 
@@ -170,6 +201,7 @@ export const PricingPage = () => {
                 product={product}
                 tier={tier}
                 cycle={cycle}
+                market={market}
               />
             ))}
           </div>
@@ -291,10 +323,12 @@ interface TierCardProps {
   product: Product;
   tier: Tier;
   cycle: Cycle;
+  market: Market;
 }
 
-function TierCard({ product, tier, cycle }: TierCardProps) {
-  const amount = displayedMonthly(tier, cycle);
+function TierCard({ product, tier, cycle, market }: TierCardProps) {
+  const amount = displayedMonthly(tier, market, cycle);
+  const meta = marketMetaFor(market);
   const highlighted = Boolean(tier.highlight);
 
   return (
@@ -353,10 +387,10 @@ function TierCard({ product, tier, cycle }: TierCardProps) {
               color: highlighted ? '#fff' : 'var(--salvia-primary)',
             }}
           >
-            ${amount}
+            {meta.symbol}{amount.toLocaleString()}
           </span>
           <span style={{ fontSize: '0.95rem', color: highlighted ? 'rgba(255,255,255,0.7)' : 'var(--salvia-text-muted)' }}>
-            /mo USD
+            /mo {meta.currency}
           </span>
         </div>
         <div
@@ -367,7 +401,7 @@ function TierCard({ product, tier, cycle }: TierCardProps) {
           }}
         >
           {cycle === 'annual'
-            ? `Billed annually · $${(amount * 12).toLocaleString()}/yr`
+            ? `Billed annually · ${meta.symbol}${(amount * 12).toLocaleString()}/yr`
             : 'Billed monthly · cancel anytime'}
         </div>
       </div>
@@ -484,6 +518,60 @@ function EnterpriseBanner() {
       >
         Contact sales
       </Link>
+    </div>
+  );
+}
+
+interface MarketSelectorProps {
+  market: Market;
+  onChange: (next: Market) => void;
+}
+
+/// Compact pill-row selector for the display market. Locale and
+/// time-zone signals pre-select on first render; the choice persists in
+/// localStorage so a clinician revisiting the page sees their currency.
+function MarketSelector({ market, onChange }: MarketSelectorProps) {
+  return (
+    <div
+      role="radiogroup"
+      aria-label="Pricing market"
+      style={{
+        display: 'inline-flex',
+        gap: '0.4rem',
+        marginTop: '1.5rem',
+        padding: '0.3rem',
+        backgroundColor: 'rgba(15, 23, 42, 0.05)',
+        borderRadius: 'var(--salvia-radius-full)',
+        flexWrap: 'wrap',
+        justifyContent: 'center',
+      }}
+    >
+      {MARKETS.map((m) => {
+        const active = m.key === market;
+        return (
+          <button
+            key={m.key}
+            type="button"
+            role="radio"
+            aria-checked={active}
+            onClick={() => onChange(m.key)}
+            style={{
+              padding: '0.4rem 0.9rem',
+              border: 'none',
+              borderRadius: 'var(--salvia-radius-full)',
+              cursor: 'pointer',
+              fontSize: '0.8rem',
+              fontWeight: 700,
+              letterSpacing: '0.02em',
+              backgroundColor: active ? 'var(--salvia-primary)' : 'transparent',
+              color: active ? '#fff' : 'var(--salvia-text-muted)',
+              transition: 'all 0.18s ease',
+            }}
+          >
+            {m.label} · {m.currency}
+          </button>
+        );
+      })}
     </div>
   );
 }
