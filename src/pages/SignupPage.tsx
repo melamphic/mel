@@ -45,7 +45,7 @@ export const SignupPage = () => {
       };
 
       // When a plan was selected on the pricing page we send the user
-      // through Stripe Checkout (card up front, 14-day trial). When no
+      // through Stripe Checkout (card up front, 21-day trial). When no
       // plan is set the legacy trial-only handoff still applies.
       if (planCode) {
         const res = await fetch(`${SAL_API_BASE}/api/v1/signup/checkout-start`, {
@@ -101,7 +101,7 @@ export const SignupPage = () => {
               marginBottom: '0.75rem',
             }}
           >
-            {planCode ? '14-day free trial · cancel anytime' : '14-day free trial · no card'}
+            {planCode ? '21-day free trial · cancel anytime' : '21-day free trial · no card'}
           </div>
           <h1
             style={{
@@ -185,7 +185,7 @@ export const SignupPage = () => {
                 }}
               >
                 Selected plan: <code>{planCode}</code>. You'll be sent to Stripe to add a payment method.
-                We won't charge until your 14-day trial ends — cancel anytime before then.
+                We won't charge until your 21-day trial ends — cancel anytime before then.
               </div>
             )}
 
