@@ -30,6 +30,11 @@ export interface Tier {
   name: string;
   seats: string;
   notesPerMonth: number;
+  /// Number of staff who can RECORD with AI (audio capture + AI form
+  /// extraction). Practice = 3, Pro = 7. Other staff (nurses,
+  /// reception) join free with view + handoff access. Enforced
+  /// server-side by sal/internal/staff (see ErrAISeatCapReached).
+  aiSeats: number;
   /// Per-market list price in the local display currency. Locked at
   /// rollout per pricing-model-v3 §4–§6, reviewed quarterly.
   prices: Record<Market, number>;
@@ -56,6 +61,7 @@ export const PRODUCTS: Product[] = [
         name: 'Practice',
         seats: '1–3 vets',
         notesPerMonth: 1500,
+        aiSeats: 3,
         prices: { US: 229, NZ: 385, AU: 365, UK: 181 },
         highlight: 'Most popular',
       },
@@ -64,6 +70,7 @@ export const PRODUCTS: Product[] = [
         name: 'Pro',
         seats: '4–7 vets',
         notesPerMonth: 4000,
+        aiSeats: 7,
         prices: { US: 499, NZ: 839, AU: 795, UK: 395 },
       },
     ],
@@ -79,6 +86,7 @@ export const PRODUCTS: Product[] = [
         name: 'Practice',
         seats: '1–3 dentists',
         notesPerMonth: 1200,
+        aiSeats: 3,
         prices: { US: 229, NZ: 385, AU: 365, UK: 181 },
       },
       {
@@ -86,6 +94,7 @@ export const PRODUCTS: Product[] = [
         name: 'Pro',
         seats: '4–7 dentists',
         notesPerMonth: 3000,
+        aiSeats: 7,
         prices: { US: 499, NZ: 839, AU: 795, UK: 395 },
         highlight: 'Most popular',
       },
@@ -102,6 +111,7 @@ export const PRODUCTS: Product[] = [
         name: 'Practice',
         seats: '1–3 providers',
         notesPerMonth: 2000,
+        aiSeats: 3,
         prices: { US: 249, NZ: 419, AU: 395, UK: 199 },
       },
       {
@@ -109,6 +119,7 @@ export const PRODUCTS: Product[] = [
         name: 'Pro',
         seats: '4–7 providers',
         notesPerMonth: 5000,
+        aiSeats: 7,
         prices: { US: 599, NZ: 1005, AU: 945, UK: 475 },
         highlight: 'Most popular',
       },

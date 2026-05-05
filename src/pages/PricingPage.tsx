@@ -418,9 +418,13 @@ function TierCard({ product, tier, cycle, market }: TierCardProps) {
         }}
       >
         <Feature highlighted={highlighted}>
-          Unlimited notes (fair-use {tier.notesPerMonth.toLocaleString()}/mo)
+          <strong>{tier.aiSeats} AI recording seat{tier.aiSeats === 1 ? '' : 's'}</strong> &middot;
+          {' '}point-of-care voice → audit-grade note
         </Feature>
-        <Feature highlighted={highlighted}>Unlimited nurses, admin, and reception</Feature>
+        <Feature highlighted={highlighted}>
+          Unlimited transcribed notes (fair-use {tier.notesPerMonth.toLocaleString()}/mo)
+        </Feature>
+        <Feature highlighted={highlighted}>Unlimited nurses, admin, and reception (free seats)</Feature>
         <Feature highlighted={highlighted}>Audit-grade clinical notes + policy engine</Feature>
         <Feature highlighted={highlighted}>PDF branding + e-sign</Feature>
       </ul>
