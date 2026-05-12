@@ -12,8 +12,26 @@ import { ContactSalesPage } from './pages/ContactSalesPage';
 import './index.css';
 
 function ScrollToTop() {
-  const { pathname } = useLocation();
-  useEffect(() => { window.scrollTo(0, 0); }, [pathname]);
+  const { pathname, hash } = useLocation();
+  useEffect(() => {
+    if (hash) {
+      // Section may not be mounted yet on a cross-route nav; retry a few
+      // frames before falling back to top.
+      const id = hash.slice(1);
+      let tries = 0;
+      const tick = () => {
+        const el = document.getElementById(id);
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          return;
+        }
+        if (tries++ < 10) requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+      return;
+    }
+    window.scrollTo(0, 0);
+  }, [pathname, hash]);
   return null;
 }
 
