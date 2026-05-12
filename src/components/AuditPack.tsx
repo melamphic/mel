@@ -90,7 +90,7 @@ export const AuditPack: React.FC = () => (
               <polyline points="7 10 12 15 17 10" />
               <line x1="12" y1="15" x2="12" y2="3" />
             </svg>
-            Exports as a single signed ZIP — ~12 MB per record
+            Exports as a single signed ZIP per record
           </div>
         </div>
 
