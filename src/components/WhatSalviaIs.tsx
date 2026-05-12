@@ -282,7 +282,7 @@ export const WhatSalviaIs: React.FC = () => {
                     {t.ui}
                   </div>
 
-                  <div style={{ textAlign: 'center' }}>
+                  <div style={{ textAlign: 'center', marginTop: 'auto' }}>
                     <div style={{
                       fontSize: '0.95rem', fontWeight: 800,
                       color: 'var(--salvia-primary)',
