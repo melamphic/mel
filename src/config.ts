@@ -6,3 +6,6 @@ export const SAL_API_BASE: string =
 
 export const SUPPORT_EMAIL: string =
   import.meta.env.VITE_SUPPORT_EMAIL ?? 'sales@salvia.nz';
+
+export const APP_URL: string =
+  import.meta.env.VITE_APP_URL ?? 'https://app.salvia.nz';
