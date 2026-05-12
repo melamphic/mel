@@ -6,12 +6,18 @@ const AudioTile: React.FC = () => {
   return (
     <div style={{ display: 'flex', alignItems: 'center', gap: '2px', height: '48px', padding: '0 0.25rem' }}>
       {bars.map((h, i) => (
-        <div key={i} style={{
-          flex: 1, height: `${h}px`,
-          backgroundColor: i < 8 ? '#FF4E00' : '#CBD5E1',
-          opacity: i < 8 ? 1 : 0.55,
-          borderRadius: '1.5px',
-        }} />
+        <div
+          key={i}
+          className={i < 8 ? 'salvia-audio-bar' : undefined}
+          style={{
+            flex: 1, height: `${h}px`,
+            backgroundColor: i < 8 ? '#FF4E00' : '#CBD5E1',
+            opacity: i < 8 ? 1 : 0.55,
+            borderRadius: '1.5px',
+            transformOrigin: 'center',
+            animationDelay: i < 8 ? `${i * 90}ms` : undefined,
+          }}
+        />
       ))}
     </div>
   );
@@ -25,13 +31,16 @@ const FormTile: React.FC = () => (
       { w: '80%', c: '#FF4E00' },
       { w: '40%', c: '#475569' },
     ].map((r, i) => (
-      <div key={i} style={{
-        display: 'flex', alignItems: 'center', gap: '6px',
-        padding: '0.3rem 0.4rem',
-        backgroundColor: i === 2 ? '#FFF7F2' : '#F8FAFC',
-        borderRadius: '3px',
-        border: i === 2 ? '1px solid rgba(255,78,0,0.25)' : '1px solid transparent',
-      }}>
+      <div
+        key={i}
+        className={i === 2 ? 'salvia-form-active' : undefined}
+        style={{
+          display: 'flex', alignItems: 'center', gap: '6px',
+          padding: '0.3rem 0.4rem',
+          backgroundColor: i === 2 ? '#FFF7F2' : '#F8FAFC',
+          borderRadius: '3px',
+          border: i === 2 ? '1px solid rgba(255,78,0,0.25)' : '1px solid transparent',
+        }}>
         <div style={{ width: 5, height: 5, backgroundColor: r.c, borderRadius: '50%' }} />
         <div style={{ width: r.w, height: 4, backgroundColor: r.c, opacity: 0.55, borderRadius: '2px' }} />
       </div>
@@ -48,11 +57,14 @@ const PolicyTile: React.FC = () => (
       { tag: 'TRY', color: '#059669', bg: '#ECFDF5', w: '45%' },
     ].map((r, i) => (
       <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
-        <div style={{
-          fontSize: '0.48rem', fontWeight: 800, color: r.color, backgroundColor: r.bg,
-          padding: '0.12rem 0.3rem', borderRadius: '2px', letterSpacing: '0.05em',
-          width: 34, textAlign: 'center',
-        }}>
+        <div
+          className={r.tag === 'MUST' ? 'salvia-policy-must' : undefined}
+          style={{
+            fontSize: '0.48rem', fontWeight: 800, color: r.color, backgroundColor: r.bg,
+            padding: '0.12rem 0.3rem', borderRadius: '2px', letterSpacing: '0.05em',
+            width: 34, textAlign: 'center',
+            animationDelay: i === 0 ? '0ms' : i === 1 ? '300ms' : undefined,
+          }}>
           {r.tag}
         </div>
         <div style={{ flex: 1, height: 3, backgroundColor: '#CBD5E1', borderRadius: '2px', width: r.w }} />
@@ -77,14 +89,17 @@ const AuditTile: React.FC = () => (
       <div style={{ position: 'absolute', top: 6, left: 6, right: 6, height: 2, backgroundColor: '#CBD5E1', borderRadius: 1 }} />
       <div style={{ position: 'absolute', top: 12, left: 6, right: 12, height: 2, backgroundColor: '#CBD5E1', borderRadius: 1 }} />
       <div style={{ position: 'absolute', top: 18, left: 6, right: 10, height: 2, backgroundColor: '#CBD5E1', borderRadius: 1 }} />
-      <div style={{
-        position: 'absolute', bottom: -8, right: -6,
-        width: 22, height: 22, borderRadius: '50%',
-        backgroundColor: '#FF4E00',
-        display: 'flex', alignItems: 'center', justifyContent: 'center',
-        color: '#fff', fontSize: '0.55rem', fontWeight: 800,
-        boxShadow: '0 2px 6px rgba(255,78,0,0.35)',
-      }}>
+      <div
+        className="salvia-audit-check"
+        style={{
+          position: 'absolute', bottom: -8, right: -6,
+          width: 22, height: 22, borderRadius: '50%',
+          backgroundColor: '#FF4E00',
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+          color: '#fff', fontSize: '0.55rem', fontWeight: 800,
+          boxShadow: '0 2px 6px rgba(255,78,0,0.35)',
+          transformOrigin: 'center',
+        }}>
         ✓
       </div>
     </div>
@@ -97,8 +112,12 @@ const AuditTile: React.FC = () => (
   </div>
 );
 
-const Arrow: React.FC = () => (
-  <svg width="28" height="16" viewBox="0 0 28 16" fill="none" style={{ flexShrink: 0 }}>
+const Arrow: React.FC<{ index: number }> = ({ index }) => (
+  <svg
+    width="28" height="16" viewBox="0 0 28 16" fill="none"
+    className="salvia-arrow"
+    style={{ flexShrink: 0, animationDelay: `${index * 200}ms` }}
+  >
     <path d="M1 8 H22 M17 3 L22 8 L17 13" stroke="#FF4E00" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
   </svg>
 );
@@ -248,7 +267,7 @@ export const WhatSalviaIs: React.FC = () => {
                   <div className="salvia-eq-arrow" style={{
                     display: 'flex', alignItems: 'center',
                   }}>
-                    <Arrow />
+                    <Arrow index={i} />
                   </div>
                 )}
               </React.Fragment>
@@ -289,6 +308,56 @@ export const WhatSalviaIs: React.FC = () => {
           .salvia-eq-arrow {
             justify-content: center !important;
             transform: rotate(90deg);
+          }
+        }
+
+        .salvia-audio-bar {
+          animation: salvia-bar-wave 1.4s ease-in-out infinite;
+        }
+        @keyframes salvia-bar-wave {
+          0%, 100% { transform: scaleY(0.45); }
+          50%     { transform: scaleY(1.05); }
+        }
+
+        .salvia-arrow {
+          animation: salvia-arrow-glide 1.8s ease-in-out infinite;
+        }
+        @keyframes salvia-arrow-glide {
+          0%, 100% { opacity: 0.4; transform: translateX(-3px); }
+          50%     { opacity: 1;   transform: translateX(2px); }
+        }
+
+        .salvia-form-active {
+          animation: salvia-form-pulse 2.2s ease-in-out infinite;
+        }
+        @keyframes salvia-form-pulse {
+          0%, 100% { box-shadow: 0 0 0 0 rgba(255,78,0,0); }
+          50%     { box-shadow: 0 0 0 3px rgba(255,78,0,0.18); }
+        }
+
+        .salvia-policy-must {
+          animation: salvia-policy-blink 1.9s ease-in-out infinite;
+        }
+        @keyframes salvia-policy-blink {
+          0%, 100% { background-color: #FEF2F2; }
+          50%     { background-color: #FECACA; }
+        }
+
+        .salvia-audit-check {
+          animation: salvia-audit-pop 2.4s ease-in-out infinite;
+        }
+        @keyframes salvia-audit-pop {
+          0%, 100% { transform: scale(1);    box-shadow: 0 2px 6px rgba(255,78,0,0.35); }
+          50%     { transform: scale(1.08); box-shadow: 0 4px 12px rgba(255,78,0,0.5); }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .salvia-audio-bar,
+          .salvia-arrow,
+          .salvia-form-active,
+          .salvia-policy-must,
+          .salvia-audit-check {
+            animation: none !important;
           }
         }
       `}</style>
