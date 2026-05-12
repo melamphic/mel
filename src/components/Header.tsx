@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import salviaLogo from '../assets/salvia.png';
+import { APP_URL } from '../config';
 
 export const Header: React.FC = () => {
   return (
@@ -25,18 +26,18 @@ export const Header: React.FC = () => {
         </Link>
 
         <nav className="hide-mobile" style={{ display: 'flex', gap: '2.5rem', alignItems: 'center' }}>
-          <a href="/#products" style={{ color: 'var(--salvia-text)', fontSize: '0.9rem', fontWeight: 600 }}>Product</a>
-          <a href="/#pipeline" style={{ color: 'var(--salvia-text)', fontSize: '0.9rem', fontWeight: 600 }}>How it works</a>
-          <a href="/#domains" style={{ color: 'var(--salvia-text)', fontSize: '0.9rem', fontWeight: 600 }}>Verticals</a>
+          <Link to="/#products" style={{ color: 'var(--salvia-text)', fontSize: '0.9rem', fontWeight: 600, textDecoration: 'none' }}>Product</Link>
+          <Link to="/#pipeline" style={{ color: 'var(--salvia-text)', fontSize: '0.9rem', fontWeight: 600, textDecoration: 'none' }}>How it works</Link>
+          <Link to="/#domains" style={{ color: 'var(--salvia-text)', fontSize: '0.9rem', fontWeight: 600, textDecoration: 'none' }}>Verticals</Link>
           <Link to="/pricing" style={{ color: 'var(--salvia-text)', fontSize: '0.9rem', fontWeight: 600, textDecoration: 'none' }}>Pricing</Link>
           <Link to="/blog" style={{ color: 'var(--salvia-text)', fontSize: '0.9rem', fontWeight: 600, textDecoration: 'none' }}>Blog</Link>
         </nav>
 
         <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
-          <Link to="/pricing" className="pill-button-light hide-mobile" style={{ fontSize: '0.85rem', padding: '0.6rem 1.2rem', textDecoration: 'none' }}>
+          <a href={APP_URL} className="pill-button-light hide-mobile" style={{ fontSize: '0.85rem', padding: '0.6rem 1.2rem', textDecoration: 'none' }}>
             Sign In
-          </Link>
-          <Link to="/pricing" className="pill-button" style={{ fontSize: '0.85rem', padding: '0.6rem 1.4rem', textDecoration: 'none' }}>
+          </a>
+          <Link to="/start" className="pill-button" style={{ fontSize: '0.85rem', padding: '0.6rem 1.4rem', textDecoration: 'none' }}>
             Start free trial
           </Link>
         </div>
