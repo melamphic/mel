@@ -33,16 +33,30 @@ const FormTile: React.FC = () => (
     ].map((r, i) => (
       <div
         key={i}
-        className={i === 2 ? 'salvia-form-active' : undefined}
+        className={i === 2 ? 'salvia-form-row salvia-form-active' : 'salvia-form-row'}
         style={{
           display: 'flex', alignItems: 'center', gap: '6px',
           padding: '0.3rem 0.4rem',
           backgroundColor: i === 2 ? '#FFF7F2' : '#F8FAFC',
           borderRadius: '3px',
           border: i === 2 ? '1px solid rgba(255,78,0,0.25)' : '1px solid transparent',
+          animationDelay: `${i * 250}ms`,
         }}>
-        <div style={{ width: 5, height: 5, backgroundColor: r.c, borderRadius: '50%' }} />
-        <div style={{ width: r.w, height: 4, backgroundColor: r.c, opacity: 0.55, borderRadius: '2px' }} />
+        <div
+          className="salvia-form-dot"
+          style={{
+            width: 5, height: 5, backgroundColor: r.c, borderRadius: '50%',
+            animationDelay: `${i * 250}ms`,
+          }}
+        />
+        <div
+          className="salvia-form-bar"
+          style={{
+            width: r.w, height: 4, backgroundColor: r.c, opacity: 0.55, borderRadius: '2px',
+            transformOrigin: 'left',
+            animationDelay: `${i * 250}ms`,
+          }}
+        />
       </div>
     ))}
   </div>
@@ -58,16 +72,25 @@ const PolicyTile: React.FC = () => (
     ].map((r, i) => (
       <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
         <div
-          className={r.tag === 'MUST' ? 'salvia-policy-must' : undefined}
+          className="salvia-policy-tag"
           style={{
             fontSize: '0.48rem', fontWeight: 800, color: r.color, backgroundColor: r.bg,
             padding: '0.12rem 0.3rem', borderRadius: '2px', letterSpacing: '0.05em',
             width: 34, textAlign: 'center',
-            animationDelay: i === 0 ? '0ms' : i === 1 ? '300ms' : undefined,
+            animationDelay: `${i * 280}ms`,
           }}>
           {r.tag}
         </div>
-        <div style={{ flex: 1, height: 3, backgroundColor: '#CBD5E1', borderRadius: '2px', width: r.w }} />
+        <div
+          className="salvia-policy-bar"
+          style={{
+            flex: 1, height: 3, backgroundColor: '#CBD5E1', borderRadius: '2px', width: r.w,
+            transformOrigin: 'left',
+            // CSS var used by the keyframe to tint the bar to its tag color
+            ['--bar-color' as never]: r.color,
+            animationDelay: `${i * 280}ms`,
+          }}
+        />
       </div>
     ))}
   </div>
@@ -78,17 +101,31 @@ const AuditTile: React.FC = () => (
     display: 'flex', flexDirection: 'column', alignItems: 'center',
     gap: '4px', padding: '0.15rem 0',
   }}>
-    <div style={{
-      width: 46, height: 56,
-      backgroundColor: '#fff',
-      border: '1.5px solid #0F172A',
-      borderRadius: '4px',
-      position: 'relative',
-      boxShadow: '2px 2px 0 #0F172A',
-    }}>
-      <div style={{ position: 'absolute', top: 6, left: 6, right: 6, height: 2, backgroundColor: '#CBD5E1', borderRadius: 1 }} />
-      <div style={{ position: 'absolute', top: 12, left: 6, right: 12, height: 2, backgroundColor: '#CBD5E1', borderRadius: 1 }} />
-      <div style={{ position: 'absolute', top: 18, left: 6, right: 10, height: 2, backgroundColor: '#CBD5E1', borderRadius: 1 }} />
+    <div
+      className="salvia-audit-doc"
+      style={{
+        width: 46, height: 56,
+        backgroundColor: '#fff',
+        border: '1.5px solid #0F172A',
+        borderRadius: '4px',
+        position: 'relative',
+        boxShadow: '2px 2px 0 #0F172A',
+        overflow: 'hidden',
+      }}>
+      <div
+        className="salvia-audit-line"
+        style={{ position: 'absolute', top: 6, left: 6, right: 6, height: 2, backgroundColor: '#CBD5E1', borderRadius: 1, transformOrigin: 'left', animationDelay: '0ms' }}
+      />
+      <div
+        className="salvia-audit-line"
+        style={{ position: 'absolute', top: 12, left: 6, right: 12, height: 2, backgroundColor: '#CBD5E1', borderRadius: 1, transformOrigin: 'left', animationDelay: '200ms' }}
+      />
+      <div
+        className="salvia-audit-line"
+        style={{ position: 'absolute', top: 18, left: 6, right: 10, height: 2, backgroundColor: '#CBD5E1', borderRadius: 1, transformOrigin: 'left', animationDelay: '400ms' }}
+      />
+      {/* Sealing shimmer sweeps across once the lines are drawn */}
+      <div className="salvia-audit-shimmer" />
       <div
         className="salvia-audit-check"
         style={{
@@ -103,7 +140,7 @@ const AuditTile: React.FC = () => (
         ✓
       </div>
     </div>
-    <div style={{
+    <div className="salvia-audit-sha" style={{
       fontFamily: 'monospace', fontSize: '0.52rem', fontWeight: 600,
       color: '#94A3B8', letterSpacing: '0.05em', marginTop: '6px',
     }}>
@@ -311,6 +348,7 @@ export const WhatSalviaIs: React.FC = () => {
           }
         }
 
+        /* Audio: bars wave continuously, staggered */
         .salvia-audio-bar {
           animation: salvia-bar-wave 1.4s ease-in-out infinite;
         }
@@ -319,6 +357,7 @@ export const WhatSalviaIs: React.FC = () => {
           50%     { transform: scaleY(1.05); }
         }
 
+        /* Arrows: orange glide between tiles */
         .salvia-arrow {
           animation: salvia-arrow-glide 1.8s ease-in-out infinite;
         }
@@ -327,38 +366,124 @@ export const WhatSalviaIs: React.FC = () => {
           50%     { opacity: 1;   transform: translateX(2px); }
         }
 
+        /* Forms: each row's progress bar fills L→R in sequence,
+           the dot pulses as its row "lands", and the accent row gets a soft ring. */
+        .salvia-form-bar {
+          animation: salvia-form-fill 3.6s cubic-bezier(.4,0,.2,1) infinite;
+        }
+        @keyframes salvia-form-fill {
+          0%      { transform: scaleX(0);   opacity: 0.25; }
+          22%     { transform: scaleX(1);   opacity: 0.9; }
+          85%     { transform: scaleX(1);   opacity: 0.9; }
+          95%     { transform: scaleX(1);   opacity: 0.55; }
+          100%    { transform: scaleX(0);   opacity: 0.25; }
+        }
+        .salvia-form-dot {
+          animation: salvia-form-dot 3.6s ease-out infinite;
+        }
+        @keyframes salvia-form-dot {
+          0%, 18%  { transform: scale(0.6); opacity: 0.35; }
+          25%      { transform: scale(1.4); opacity: 1; }
+          40%, 90% { transform: scale(1);   opacity: 1; }
+          100%     { transform: scale(0.6); opacity: 0.35; }
+        }
         .salvia-form-active {
-          animation: salvia-form-pulse 2.2s ease-in-out infinite;
+          animation: salvia-form-pulse 3.6s ease-in-out infinite;
         }
         @keyframes salvia-form-pulse {
-          0%, 100% { box-shadow: 0 0 0 0 rgba(255,78,0,0); }
-          50%     { box-shadow: 0 0 0 3px rgba(255,78,0,0.18); }
+          0%, 60%, 100% { box-shadow: 0 0 0 0 rgba(255,78,0,0); }
+          75%           { box-shadow: 0 0 0 3px rgba(255,78,0,0.20); }
         }
 
-        .salvia-policy-must {
-          animation: salvia-policy-blink 1.9s ease-in-out infinite;
+        /* Policy: bars grow from gray to their tag color in sequence,
+           tags flash slightly when their rule "fires". */
+        .salvia-policy-bar {
+          background-color: #CBD5E1;
+          animation: salvia-policy-check 3.6s cubic-bezier(.4,0,.2,1) infinite;
         }
-        @keyframes salvia-policy-blink {
-          0%, 100% { background-color: #FEF2F2; }
-          50%     { background-color: #FECACA; }
+        @keyframes salvia-policy-check {
+          0%, 12%  { background-color: #CBD5E1; transform: scaleX(0.6); }
+          32%      { background-color: var(--bar-color); transform: scaleX(1); }
+          85%      { background-color: var(--bar-color); transform: scaleX(1); }
+          100%     { background-color: #CBD5E1; transform: scaleX(0.6); }
+        }
+        .salvia-policy-tag {
+          animation: salvia-policy-tag 3.6s ease-out infinite;
+        }
+        @keyframes salvia-policy-tag {
+          0%, 18%  { transform: scale(1);    filter: brightness(1); }
+          25%      { transform: scale(1.12); filter: brightness(1.15); }
+          40%, 100% { transform: scale(1);   filter: brightness(1); }
         }
 
+        /* Audit: doc lines draw L→R staggered, shimmer sweeps across the
+           sealed page, then the check badge stamps in. */
+        .salvia-audit-line {
+          animation: salvia-audit-draw 4.2s cubic-bezier(.5,.0,.2,1) infinite;
+        }
+        @keyframes salvia-audit-draw {
+          0%, 5%   { transform: scaleX(0); opacity: 0.4; }
+          22%      { transform: scaleX(1); opacity: 1; }
+          90%      { transform: scaleX(1); opacity: 1; }
+          100%     { transform: scaleX(0); opacity: 0.4; }
+        }
+        .salvia-audit-shimmer {
+          position: absolute;
+          top: 0; bottom: 0;
+          left: -40%;
+          width: 40%;
+          background: linear-gradient(
+            90deg,
+            rgba(255,255,255,0) 0%,
+            rgba(255,78,0,0.18) 50%,
+            rgba(255,255,255,0) 100%
+          );
+          pointer-events: none;
+          animation: salvia-audit-shimmer 4.2s ease-in-out infinite;
+          animation-delay: 0.6s;
+        }
+        @keyframes salvia-audit-shimmer {
+          0%, 35%   { transform: translateX(0);    opacity: 0; }
+          45%       { opacity: 1; }
+          70%       { transform: translateX(300%); opacity: 0; }
+          100%      { transform: translateX(300%); opacity: 0; }
+        }
         .salvia-audit-check {
-          animation: salvia-audit-pop 2.4s ease-in-out infinite;
+          opacity: 0;
+          animation: salvia-audit-stamp 4.2s cubic-bezier(.34,1.56,.64,1) infinite;
         }
-        @keyframes salvia-audit-pop {
-          0%, 100% { transform: scale(1);    box-shadow: 0 2px 6px rgba(255,78,0,0.35); }
-          50%     { transform: scale(1.08); box-shadow: 0 4px 12px rgba(255,78,0,0.5); }
+        @keyframes salvia-audit-stamp {
+          0%, 55%   { transform: scale(0); opacity: 0; }
+          65%       { transform: scale(1.25); opacity: 1; box-shadow: 0 4px 14px rgba(255,78,0,0.55); }
+          75%, 92%  { transform: scale(1);   opacity: 1; box-shadow: 0 2px 6px rgba(255,78,0,0.35); }
+          100%      { transform: scale(0);   opacity: 0; }
+        }
+        .salvia-audit-sha {
+          animation: salvia-audit-sha 4.2s ease-out infinite;
+        }
+        @keyframes salvia-audit-sha {
+          0%, 60%   { opacity: 0.35; }
+          75%, 92%  { opacity: 1; color: #475569; }
+          100%      { opacity: 0.35; color: #94A3B8; }
         }
 
         @media (prefers-reduced-motion: reduce) {
           .salvia-audio-bar,
           .salvia-arrow,
+          .salvia-form-bar,
+          .salvia-form-dot,
           .salvia-form-active,
-          .salvia-policy-must,
-          .salvia-audit-check {
+          .salvia-policy-bar,
+          .salvia-policy-tag,
+          .salvia-audit-line,
+          .salvia-audit-shimmer,
+          .salvia-audit-check,
+          .salvia-audit-sha {
             animation: none !important;
+            opacity: 1 !important;
+            transform: none !important;
           }
+          .salvia-policy-bar { background-color: #CBD5E1 !important; }
         }
       `}</style>
     </section>
