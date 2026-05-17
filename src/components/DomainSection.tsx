@@ -114,6 +114,52 @@ const DOMAINS = [
         </div>
       </div>
     )
+  },
+  {
+    id: 'aged-care',
+    label: 'Aged Care',
+    tagline: 'Residential, home care & memory support',
+    accent: '#059669',
+    title: 'Every incident logged. Every obligation met.',
+    desc: 'SIRS, Aged Care Quality Standards, CQC, Te Tiriti — Salvia captures the incident from a voice note, classifies it against your reporting obligations, and files an immutable record before the 24-hour window closes.',
+    metric: '24h',
+    metricLabel: 'SIRS PRIORITY 1 WINDOW',
+    ui: (
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+        <div style={{ fontSize: '0.7rem', fontWeight: 800, color: '#059669', letterSpacing: '0.08em' }}>INCIDENT CLASSIFICATION: SIRS AU</div>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+          {[
+            { label: 'Incident type', value: 'Unexplained absence', priority: null },
+            { label: 'SIRS category', value: 'Priority 1', priority: 'high' },
+            { label: 'Notification window', value: '24 hours', priority: 'high' },
+            { label: 'Record status', value: 'Immutably locked', priority: 'ok' },
+          ].map((row, i) => (
+            <div key={i} style={{
+              padding: '1rem 1.25rem', background: '#fff', borderRadius: '14px',
+              border: '1px solid rgba(15, 23, 42, 0.06)',
+              display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+              boxShadow: '0 2px 4px rgba(0,0,0,0.01)'
+            }}>
+              <div style={{ fontSize: '0.8rem', fontWeight: 600, color: 'var(--salvia-text-muted)' }}>{row.label}</div>
+              <div style={{
+                fontSize: '0.75rem', fontWeight: 800, padding: '0.3rem 0.7rem',
+                borderRadius: '8px',
+                background: row.priority === 'high' ? '#FEF2F2' : row.priority === 'ok' ? '#F0FDF4' : '#F8FAFC',
+                color: row.priority === 'high' ? '#DC2626' : row.priority === 'ok' ? '#16A34A' : 'var(--salvia-primary)',
+                border: `1px solid ${row.priority === 'high' ? 'rgba(220,38,38,0.12)' : row.priority === 'ok' ? 'rgba(22,163,74,0.12)' : 'rgba(15,23,42,0.06)'}`,
+              }}>{row.value}</div>
+            </div>
+          ))}
+        </div>
+        <div style={{
+          padding: '1rem 1.25rem', background: 'rgba(5,150,105,0.05)',
+          border: '1px solid rgba(5,150,105,0.15)', borderRadius: '14px',
+          fontSize: '0.82rem', color: '#065F46', fontWeight: 600, lineHeight: 1.45
+        }}>
+          Reportable event automatically queued for regulator notification.
+        </div>
+      </div>
+    )
   }
 ];
 
