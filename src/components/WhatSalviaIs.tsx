@@ -200,8 +200,7 @@ export const WhatSalviaIs: React.FC = () => {
           maxWidth: '880px',
           margin: '0 auto 1.5rem',
         }}>
-          <span style={{ color: 'var(--salvia-accent)' }}>AI clinical documentation</span> for clinics,
-          vets, dental practices, and aged care — built as a <em style={{ fontStyle: 'normal', textDecoration: 'underline', textDecorationColor: 'var(--salvia-accent)', textDecorationThickness: '3px', textUnderlineOffset: '6px' }}>compliance suite</em>, not a scribe.
+          <span style={{ color: 'var(--salvia-accent)' }}>AI clinical documentation</span> — built as a <em style={{ fontStyle: 'normal', textDecoration: 'underline', textDecorationColor: 'var(--salvia-accent)', textDecorationThickness: '3px', textUnderlineOffset: '6px' }}>compliance suite</em>, not a scribe.
         </h2>
 
         {/* Two-paragraph explainer */}
