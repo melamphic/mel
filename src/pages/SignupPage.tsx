@@ -6,13 +6,14 @@ import { SAL_API_BASE } from '../config';
 import type { Vertical } from '../data/pricing';
 
 const VERTICAL_LABEL: Record<Vertical, string> = {
-  veterinary: 'Salvia Paws · Veterinary',
-  dental: 'Salvia Smile · Dental',
-  general_clinic: 'Salvia Clinic · General practice',
+  veterinary: 'Salvia · Veterinary',
+  dental: 'Salvia · Dental',
+  general_clinic: 'Salvia · General practice',
+  aged_care: 'Salvia · Aged Care',
 };
 
 function isVertical(v: string | null): v is Vertical {
-  return v === 'veterinary' || v === 'dental' || v === 'general_clinic';
+  return v === 'veterinary' || v === 'dental' || v === 'general_clinic' || v === 'aged_care';
 }
 
 export const SignupPage = () => {
