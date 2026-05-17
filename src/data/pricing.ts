@@ -1,7 +1,7 @@
 // Pricing data mirrors /pricing-model-v3.md (locked).
 // Source of truth for the marketing pricing page.
 
-export type Vertical = 'veterinary' | 'dental' | 'general_clinic';
+export type Vertical = 'veterinary' | 'dental' | 'general_clinic' | 'aged_care';
 export type TierKey = 'practice' | 'pro';
 export type Cycle = 'monthly' | 'annual';
 

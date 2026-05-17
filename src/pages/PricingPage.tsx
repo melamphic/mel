@@ -20,6 +20,7 @@ const DOMAIN_ICON: Record<Vertical, string> = {
   veterinary: 'Veterinary',
   dental: 'Dental',
   general_clinic: 'General Practice',
+  aged_care: 'Aged Care',
 };
 
 const MARKET_STORAGE_KEY = 'salvia.pricing.market';
