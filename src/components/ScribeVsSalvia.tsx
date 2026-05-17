@@ -166,6 +166,14 @@ export const ScribeVsSalvia: React.FC = () => (
         If an auditor calls tomorrow, an AI scribe can't tell you which note has a problem.
         Salvia can — and can hand them the evidence before they finish the sentence.
       </p>
+
+      <div style={{ display: 'flex', justifyContent: 'center', marginTop: '2.5rem' }}>
+        <button className="btn-primary" style={{ padding: '1.1rem 2.75rem', fontSize: '1rem', fontWeight: 700 }}>
+          <div className="shimmer" />
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
+          Book a demo
+        </button>
+      </div>
     </div>
   </section>
 );
