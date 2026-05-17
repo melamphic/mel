@@ -52,8 +52,8 @@ export interface Product {
 export const PRODUCTS: Product[] = [
   {
     key: 'veterinary',
-    brand: 'Salvia Paws',
-    tagline: 'Point-of-care clinical notes for veterinary clinics.',
+    brand: 'Salvia',
+    tagline: 'Compliance-grade clinical documentation for veterinary practices.',
     seatLabel: 'vets',
     tiers: [
       {
@@ -77,8 +77,8 @@ export const PRODUCTS: Product[] = [
   },
   {
     key: 'dental',
-    brand: 'Salvia Smile',
-    tagline: 'Clinical notes for dental practices.',
+    brand: 'Salvia',
+    tagline: 'Compliance-grade clinical documentation for dental practices.',
     seatLabel: 'dentists',
     tiers: [
       {
@@ -102,8 +102,8 @@ export const PRODUCTS: Product[] = [
   },
   {
     key: 'general_clinic',
-    brand: 'Salvia Clinic',
-    tagline: 'Point-of-care clinical notes for GPs and primary care.',
+    brand: 'Salvia',
+    tagline: 'Compliance-grade clinical documentation for GPs and primary care.',
     seatLabel: 'providers',
     tiers: [
       {
