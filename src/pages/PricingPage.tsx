@@ -17,9 +17,9 @@ import {
 } from '../data/pricing';
 
 const DOMAIN_ICON: Record<Vertical, string> = {
-  veterinary: 'Paws',
-  dental: 'Smile',
-  general_clinic: 'Clinic',
+  veterinary: 'Veterinary',
+  dental: 'Dental',
+  general_clinic: 'General Practice',
 };
 
 const MARKET_STORAGE_KEY = 'salvia.pricing.market';
@@ -94,7 +94,7 @@ export const PricingPage = () => {
               lineHeight: 1.6,
             }}
           >
-            21-day free trial. No credit card. Unlimited nurses, hygienists, and admin staff on every plan.
+            No credit card required. Unlimited nurses, hygienists, and admin staff on every plan.
             Prices shown in {marketMeta.currency}, {marketMeta.taxNote.toLowerCase()}.
           </p>
           <MarketSelector market={market} onChange={onMarketChange} />
@@ -444,7 +444,7 @@ function TierCard({ product, tier, cycle, market }: TierCardProps) {
           transition: 'opacity 0.2s',
         }}
       >
-        Start free trial
+        Get started
       </Link>
     </div>
   );
