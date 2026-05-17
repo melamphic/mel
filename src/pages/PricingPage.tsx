@@ -111,7 +111,7 @@ export const PricingPage = () => {
             aria-label="Product"
             style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(3, 1fr)',
+              gridTemplateColumns: 'repeat(4, 1fr)',
               gap: '0.75rem',
               backgroundColor: 'rgba(15, 23, 42, 0.04)',
               padding: '0.5rem',

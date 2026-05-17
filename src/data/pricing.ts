@@ -157,7 +157,7 @@ export const ANNUAL_DISCOUNT = 10 / 12;
 
 // Stable plan_code for the sal backend. Format `{product}_{tier}_{cycle}`.
 export function planCode(v: Vertical, tier: TierKey, cycle: Cycle): string {
-  const product = v === 'veterinary' ? 'paws' : v === 'dental' ? 'smile' : 'clinic';
+  const product = v === 'veterinary' ? 'paws' : v === 'dental' ? 'smile' : v === 'aged_care' ? 'care' : 'clinic';
   return `${product}_${tier}_${cycle}`;
 }
 
