@@ -2,9 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const FEATURED_QS = [
-  { id: 'pajama-time', q: "Is it okay to finish clinical notes at home after my shift?" },
-  { id: 'informed-refusal', q: "How can I prove a patient refused a diagnostic test?" },
-  { id: 'copy-paste', q: "Why do I get flagged for copy-pasting SOAP notes?" }
+  { id: 'controlled-drug-audit', q: "How do you prove a controlled drug was dispensed correctly when an auditor calls?" },
+  { id: 'voice-notes-compliance', q: "Can a voice note replace a handwritten record for compliance sign-off?" },
+  { id: 'spot-audit-flag', q: "What happens when a clinical record gets flagged in a spot audit — and how do you respond?" }
 ];
 
 export const LabTeaser: React.FC = () => {
@@ -18,11 +18,11 @@ export const LabTeaser: React.FC = () => {
           }}>
             LATEST FROM THE BLOG
           </span>
-          <h2 style={{ 
-            fontSize: 'clamp(2rem, 4vw, 2.8rem)', fontWeight: 800, 
-            color: 'var(--salvia-primary)', marginTop: '1rem', letterSpacing: '-0.03em' 
+          <h2 style={{
+            fontSize: 'clamp(2rem, 4vw, 2.8rem)', fontWeight: 800,
+            color: 'var(--salvia-primary)', marginTop: '1rem', letterSpacing: '-0.03em'
           }}>
-            Critical Insights
+            From the compliance desk
           </h2>
         </div>
 

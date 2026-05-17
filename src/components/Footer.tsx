@@ -15,12 +15,12 @@ export const Footer = () => (
           <img
             src={salviaLogo}
             alt="Salvia Logo"
-            style={{ width: '100px', height: '100px', objectFit: 'contain' }}
+            style={{ width: '40px', height: '40px', objectFit: 'contain' }}
           />
           <span style={{ fontSize: '1.1rem', fontWeight: 800, letterSpacing: '-0.03em', color: 'var(--salvia-text)' }}>Salvia</span>
         </div>
         <p style={{ color: 'var(--salvia-text-muted)', fontSize: '0.9rem', lineHeight: 1.6, maxWidth: '300px' }}>
-          Compliance-grade AI clinical documentation for clinics, vets, dental practices, and aged care. Audio in, audit-ready records out.
+          Compliance-grade clinical documentation — built as a compliance suite, not a scribe. Audio in, audit-ready records out.
         </p>
       </div>
 
@@ -37,9 +37,7 @@ export const Footer = () => (
       <div>
         <h4 style={{ fontSize: '0.85rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '1.5rem' }}>Company</h4>
         <nav style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-          <a href="#" style={{ textDecoration: 'none', color: 'var(--salvia-text-muted)', fontSize: '0.9rem' }}>About</a>
-          <a href="#" style={{ textDecoration: 'none', color: 'var(--salvia-text-muted)', fontSize: '0.9rem' }}>Security</a>
-          <Link to="/blog" style={{ textDecoration: 'none', color: 'var(--salvia-text-muted)', fontSize: '0.9rem' }}>Blog</Link>
+          <Link to="/contact-sales" style={{ textDecoration: 'none', color: 'var(--salvia-text-muted)', fontSize: '0.9rem' }}>Book a demo</Link>
           <Link to="/contact-sales" style={{ textDecoration: 'none', color: 'var(--salvia-text-muted)', fontSize: '0.9rem' }}>Contact sales</Link>
         </nav>
       </div>

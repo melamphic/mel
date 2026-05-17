@@ -185,7 +185,7 @@ export const AuditPack: React.FC = () => (
             fontSize: '0.72rem',
             color: 'var(--salvia-text-muted)',
           }}>
-            <span>Generated 2026-04-20 · 14:32</span>
+            <span>Generated 2026-05-17 · 09:14</span>
             <span style={{ fontFamily: 'monospace' }}>Tamper-evident</span>
           </div>
         </div>
