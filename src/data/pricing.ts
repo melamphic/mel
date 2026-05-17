@@ -125,6 +125,31 @@ export const PRODUCTS: Product[] = [
       },
     ],
   },
+  {
+    key: 'aged_care',
+    brand: 'Salvia',
+    tagline: 'Compliance-grade clinical documentation for residential and home aged care.',
+    seatLabel: 'care staff',
+    tiers: [
+      {
+        key: 'practice',
+        name: 'Practice',
+        seats: '1–3 care staff',
+        notesPerMonth: 2000,
+        aiSeats: 3,
+        prices: { US: 249, NZ: 419, AU: 395, UK: 199 },
+      },
+      {
+        key: 'pro',
+        name: 'Pro',
+        seats: '4–7 care staff',
+        notesPerMonth: 5000,
+        aiSeats: 7,
+        prices: { US: 599, NZ: 1005, AU: 945, UK: 475 },
+        highlight: 'Most popular',
+      },
+    ],
+  },
 ];
 
 // Annual plan: pay for 10 months, get 12 — 17% discount.
