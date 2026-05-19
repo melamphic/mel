@@ -264,7 +264,7 @@ nav a:hover {
 /* Premium Headline Cycler Animation */
 .headline-cycler {
   display: block;
-  min-height: 1.2em;
+  min-height: 2.4em; /* reserve 2 lines — prevents layout shift when phrase wraps */
 }
 
 .headline-text {
