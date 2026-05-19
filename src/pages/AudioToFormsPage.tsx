@@ -73,7 +73,7 @@ export const AudioToFormsPage = () => {
                 The #1 cause of audit failure is delayed documentation. Notes written hours after the consult lose accuracy and lose cases. Salvia captures at the point of care — structured, contemporaneous, defensible.
               </p>
               <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
-                <Link to="/contact-sales" style={{
+                <Link to="/start" style={{
                   display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
                   backgroundColor: '#10B981', color: '#fff',
                   padding: '0.85rem 1.75rem', borderRadius: '12px',
@@ -219,7 +219,7 @@ export const AudioToFormsPage = () => {
             Book a 20-minute demo. We'll show you the voice-to-record workflow in a real clinical setting.
           </p>
           <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-            <Link to="/contact-sales" style={{
+            <Link to="/start" style={{
               display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
               backgroundColor: '#10B981', color: '#fff',
               padding: '0.85rem 1.75rem', borderRadius: '12px',

@@ -140,7 +140,7 @@ export const NotFoundPage = () => {
               </svg>
               Back to home
             </Link>
-            <Link to="/contact-sales" style={{
+            <Link to="/start" style={{
               display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
               backgroundColor: 'transparent',
               color: 'var(--salvia-accent)',

@@ -71,7 +71,7 @@ export const PolicyEnginePage = () => {
                 Most practices have policies. Almost none can prove their staff have read them, understand them, or follow them. Salvia turns your static PDF manuals into active governance — mapped to regulatory codes, attested by staff, and auditable on demand.
               </p>
               <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
-                <Link to="/contact-sales" style={{
+                <Link to="/start" style={{
                   display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
                   backgroundColor: '#6366F1', color: '#fff',
                   padding: '0.85rem 1.75rem', borderRadius: '12px',
@@ -184,7 +184,7 @@ export const PolicyEnginePage = () => {
             Book a 20-minute demo to see how the compliance hub works in a real practice setting.
           </p>
           <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-            <Link to="/contact-sales" style={{
+            <Link to="/start" style={{
               display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
               backgroundColor: '#6366F1', color: '#fff',
               padding: '0.85rem 1.75rem', borderRadius: '12px',

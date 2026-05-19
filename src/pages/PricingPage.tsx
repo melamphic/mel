@@ -517,7 +517,7 @@ function EnterpriseBanner() {
         </div>
       </div>
       <Link
-        to="/contact-sales"
+        to="/start"
         style={{
           textDecoration: 'none',
           padding: '0.75rem 1.4rem',

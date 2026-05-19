@@ -73,7 +73,7 @@ export const ProductDetailLayout: React.FC<ProductDetailLayoutProps> = ({ childr
             Book a 20-minute demo — no slides, no pitch. We'll walk through how it works in a real clinical setting.
           </p>
           <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-            <Link to="/contact-sales" style={{
+            <Link to="/start" style={{
               display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
               backgroundColor: accentColor, color: '#fff',
               padding: '0.85rem 1.75rem', borderRadius: '12px',

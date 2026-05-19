@@ -83,7 +83,7 @@ export const GeneralClinicPage = () => {
             CQC, AHPRA, MCNZ. Voice note after each consult — Salvia structures the clinical record, prescribing log, referral trail, and consent. Audit-ready before you leave the room.
           </p>
           <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-            <Link to="/contact-sales" style={{
+            <Link to="/start" style={{
               display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
               backgroundColor: '#D97706', color: '#fff',
               padding: '0.85rem 1.75rem', borderRadius: '12px',
@@ -151,7 +151,7 @@ export const GeneralClinicPage = () => {
           <p style={{ color: 'var(--salvia-text-muted)', lineHeight: 1.65, marginBottom: '2.5rem' }}>
             Book a 20-minute demo to see how Salvia works in a GP or general clinic workflow.
           </p>
-          <Link to="/contact-sales" style={{
+          <Link to="/start" style={{
             display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
             backgroundColor: '#D97706', color: '#fff',
             padding: '0.9rem 2rem', borderRadius: '12px',

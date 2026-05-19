@@ -237,7 +237,7 @@ export const ROICalculator = () => {
             {/* divider */}
             <div style={{ height: '1px', backgroundColor: 'rgba(15,23,42,0.06)' }} />
 
-            <Link to="/contact-sales" style={{ textDecoration: 'none' }}>
+            <Link to="/start" style={{ textDecoration: 'none' }}>
               <button className="btn-primary" style={{ width: '100%', justifyContent: 'center', padding: '0.9rem', fontSize: '0.92rem', fontWeight: 700 }}>
                 <div className="shimmer" />
                 Book a demo

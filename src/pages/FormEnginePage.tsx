@@ -75,7 +75,7 @@ export const FormEnginePage = () => {
                 Immutable from the moment you sign. Every field enforced before submission. Every correction an addendum. Built to the exact structure regulators look for — not a general form tool adapted for clinics.
               </p>
               <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
-                <Link to="/contact-sales" style={{
+                <Link to="/start" style={{
                   display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
                   backgroundColor: 'var(--salvia-accent)', color: '#fff',
                   padding: '0.85rem 1.75rem', borderRadius: '12px',
@@ -197,7 +197,7 @@ export const FormEnginePage = () => {
             Book a 20-minute demo to see how the form engine works in your clinical setting.
           </p>
           <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-            <Link to="/contact-sales" style={{
+            <Link to="/start" style={{
               display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
               backgroundColor: 'var(--salvia-accent)', color: '#fff',
               padding: '0.85rem 1.75rem', borderRadius: '12px',
