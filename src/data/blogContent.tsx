@@ -21,6 +21,12 @@ import { content as difficultPatients } from '../content/blog/difficult-patients
 import { content as institutionalEthics } from '../content/blog/institutional-ethics';
 import { content as pediatricRecords } from '../content/blog/pediatric-records';
 import { content as dentalSurgical } from '../content/blog/surgical-notes';
+import { content as cmaVetDeadline } from '../content/blog/cma-vet-deadline';
+import { content as rcvsRecordInspection } from '../content/blog/rcvs-record-inspection';
+import { content as cqcDental2026 } from '../content/blog/cqc-dental-2026';
+import { content as avmaAuRecords } from '../content/blog/avma-au-records';
+import { content as ahpraDentalAu } from '../content/blog/ahpra-dental-au';
+import { content as vcnzRecordsNz } from '../content/blog/vcnz-records-nz';
 
 export type Domain = 'GENERAL' | 'VETERINARY' | 'DENTAL';
 
@@ -261,5 +267,81 @@ export const BLOG_CONTENT: Record<string, BlogPost> = {
     date: 'May 6, 2026',
     keywords: ['oral surgery', 'hospital', 'report'],
     content: dentalSurgical,
+  },
+
+  // --- UK VETERINARY ---
+  'cma-vet-deadline': {
+    tag: 'CMA Compliance',
+    domain: 'VETERINARY',
+    q: "September 23 2026: which of the 21 CMA remedies does your vet practice actually need to act on?",
+    excerpt: "Most practices have ticked the price list box and stopped there. The four CMA remedies with direct clinical records implications — itemised billing, written estimates, controlled drug transparency, complaint trail — are the ones that will catch practices off guard.",
+    readTime: '8 min read',
+    author: 'Salvia Editorial',
+    date: 'May 8, 2026',
+    keywords: ['CMA compliance', 'CMA veterinary', 'vet records UK', 'CMA remedies 2026', 'Competition and Markets Authority vets'],
+    content: cmaVetDeadline,
+  },
+  'rcvs-record-inspection': {
+    tag: 'RCVS Standards',
+    domain: 'VETERINARY',
+    q: "What do RCVS Practice Standards assessors actually check in your clinical records?",
+    excerpt: "PSS assessors aren't primarily looking at your facilities — they're looking at your records. A look at the specific record elements that trigger findings, and the three structural gaps most UK practices have.",
+    readTime: '7 min read',
+    author: 'Salvia Editorial',
+    date: 'May 10, 2026',
+    keywords: ['RCVS records', 'Practice Standards Scheme', 'RCVS compliance', 'UK vet records', 'veterinary board UK'],
+    content: rcvsRecordInspection,
+  },
+
+  // --- UK DENTAL ---
+  'cqc-dental-2026': {
+    tag: 'CQC Inspection',
+    domain: 'DENTAL',
+    q: "CQC dental inspection 2026 — what Regulation 17 actually requires in your clinical notes",
+    excerpt: "The Assurance framework model changed what inspectors look for. A breakdown of the specific record elements that generate 'requires improvement' findings in dental practices — BPE, STE, radiology justification, and written treatment plans.",
+    readTime: '7 min read',
+    author: 'Salvia Editorial',
+    date: 'May 12, 2026',
+    keywords: ['CQC dental', 'Regulation 17', 'CQC inspection dental', 'GDC records', 'dental compliance UK'],
+    content: cqcDental2026,
+  },
+
+  // --- AU VETERINARY ---
+  'au-vet-board-records': {
+    tag: 'VPB Compliance',
+    domain: 'VETERINARY',
+    q: "What do Australian vet boards actually cite in complaints? A look at VIC, NSW and QLD records findings",
+    excerpt: "State board fitness-to-practise decisions are published, and the records failures they cite are consistent. Controlled drug register discrepancies, generic consent, late timestamps, and weight-based dose gaps — a pattern worth knowing before it applies to you.",
+    readTime: '7 min read',
+    author: 'Salvia Editorial',
+    date: 'May 14, 2026',
+    keywords: ['Australian vet board', 'VPB records', 'veterinary compliance Australia', 'controlled drug register AU', 'AVA records'],
+    content: avmaAuRecords,
+  },
+
+  // --- AU DENTAL ---
+  'ahpra-dental-records': {
+    tag: 'AHPRA',
+    domain: 'DENTAL',
+    q: "AHPRA dental complaints are records-first — is your charting defensible?",
+    excerpt: "Australia's Dental Board doesn't do routine inspections, but a single complaint triggers a records audit that moves fast. The three categories of records failure that feature in almost every substantiated AHPRA dental complaint.",
+    readTime: '6 min read',
+    author: 'Salvia Editorial',
+    date: 'May 15, 2026',
+    keywords: ['AHPRA dental', 'Dental Board Australia', 'AHPRA records', 'dental compliance Australia', 'AHPRA complaint records'],
+    content: ahpraDentalAu,
+  },
+
+  // --- NZ VETERINARY ---
+  'vcnz-records-standard': {
+    tag: 'VCNZ Code',
+    domain: 'VETERINARY',
+    q: "VCNZ's 2024 Code of Professional Conduct — what changed for clinical records?",
+    excerpt: "The updated VCNZ Code is the most operationally demanding it's ever been. A breakdown of the new explicit requirements for vitals, drug dose tracing, consent, and the controlled drug register — and how fast the complaints process moves if these aren't met.",
+    readTime: '7 min read',
+    author: 'Salvia Editorial',
+    date: 'May 16, 2026',
+    keywords: ['VCNZ records', 'VCNZ 2024 code', 'New Zealand vet records', 'veterinary compliance NZ', 'controlled drugs NZ vets'],
+    content: vcnzRecordsNz,
   },
 };

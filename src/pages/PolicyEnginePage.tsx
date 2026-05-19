@@ -7,6 +7,11 @@ export const PolicyEnginePage = () => {
       title="Institutional Compliance Hub"
       kicker="ACTIVE GOVERNANCE"
       accentColor="#6366F1"
+      seo={{
+        description: 'Turn static policy PDFs into active clinical governance. Salvia maps your internal rules to CQC, VMR, and GDC frameworks — every staff action backed by an auditable mandate.',
+        path: '/products/institutional-compliance-hub',
+        keywords: ['clinical governance software', 'CQC compliance', 'VMR compliance', 'policy management veterinary', 'institutional compliance'],
+      }}
     >
       <div className="container" style={{ padding: '8rem 0', maxWidth: '1100px' }}>
 

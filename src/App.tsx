@@ -1,15 +1,17 @@
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
-import { useEffect } from 'react';
-import { LandingPage } from './pages/LandingPage';
-import { FormEnginePage } from './pages/FormEnginePage';
-import { PolicyEnginePage } from './pages/PolicyEnginePage';
-import { AudioToFormsPage } from './pages/AudioToFormsPage';
-import { InsightsPage } from './pages/InsightsPage';
-import { ArticlePage } from './pages/ArticlePage';
-import { PricingPage } from './pages/PricingPage';
-import { SignupPage } from './pages/SignupPage';
-import { ContactSalesPage } from './pages/ContactSalesPage';
+import { useEffect, lazy, Suspense } from 'react';
 import './index.css';
+
+const LandingPage     = lazy(() => import('./pages/LandingPage').then(m => ({ default: m.LandingPage })));
+const FormEnginePage  = lazy(() => import('./pages/FormEnginePage').then(m => ({ default: m.FormEnginePage })));
+const PolicyEnginePage = lazy(() => import('./pages/PolicyEnginePage').then(m => ({ default: m.PolicyEnginePage })));
+const AudioToFormsPage = lazy(() => import('./pages/AudioToFormsPage').then(m => ({ default: m.AudioToFormsPage })));
+const InsightsPage    = lazy(() => import('./pages/InsightsPage').then(m => ({ default: m.InsightsPage })));
+const ArticlePage     = lazy(() => import('./pages/ArticlePage').then(m => ({ default: m.ArticlePage })));
+const PricingPage     = lazy(() => import('./pages/PricingPage').then(m => ({ default: m.PricingPage })));
+const SignupPage      = lazy(() => import('./pages/SignupPage').then(m => ({ default: m.SignupPage })));
+const ContactSalesPage = lazy(() => import('./pages/ContactSalesPage').then(m => ({ default: m.ContactSalesPage })));
+const NotFoundPage    = lazy(() => import('./pages/NotFoundPage').then(m => ({ default: m.NotFoundPage })));
 
 function ScrollToTop() {
   const { pathname, hash } = useLocation();
@@ -66,17 +68,20 @@ function App() {
         </svg>
 
         <ScrollToTop />
-        <Routes>
-          <Route path="/" element={<LandingPage />} />
-          <Route path="/products/statutory-form-infrastructure" element={<FormEnginePage />} />
-          <Route path="/products/institutional-compliance-hub" element={<PolicyEnginePage />} />
-          <Route path="/products/point-of-care-evidence" element={<AudioToFormsPage />} />
-          <Route path="/blog" element={<InsightsPage />} />
-          <Route path="/blog/:id" element={<ArticlePage />} />
-          <Route path="/pricing" element={<PricingPage />} />
-          <Route path="/start" element={<SignupPage />} />
-          <Route path="/contact-sales" element={<ContactSalesPage />} />
-        </Routes>
+        <Suspense fallback={null}>
+          <Routes>
+            <Route path="/" element={<LandingPage />} />
+            <Route path="/products/statutory-form-infrastructure" element={<FormEnginePage />} />
+            <Route path="/products/institutional-compliance-hub" element={<PolicyEnginePage />} />
+            <Route path="/products/point-of-care-evidence" element={<AudioToFormsPage />} />
+            <Route path="/blog" element={<InsightsPage />} />
+            <Route path="/blog/:id" element={<ArticlePage />} />
+            <Route path="/pricing" element={<PricingPage />} />
+            <Route path="/start" element={<SignupPage />} />
+            <Route path="/contact-sales" element={<ContactSalesPage />} />
+            <Route path="*" element={<NotFoundPage />} />
+          </Routes>
+        </Suspense>
 
       </div>
     </BrowserRouter>

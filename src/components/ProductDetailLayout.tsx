@@ -2,17 +2,20 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Header } from './Header';
 import { Footer } from './Footer';
+import { SEO } from './SEO';
 
 interface ProductDetailLayoutProps {
   children: React.ReactNode;
   title: string;
   kicker: string;
   accentColor?: string;
+  seo?: { description: string; path: string; keywords?: string[] };
 }
 
-export const ProductDetailLayout: React.FC<ProductDetailLayoutProps> = ({ children, title, kicker, accentColor = 'var(--salvia-accent)' }) => {
+export const ProductDetailLayout: React.FC<ProductDetailLayoutProps> = ({ children, title, kicker, accentColor = 'var(--salvia-accent)', seo }) => {
   return (
     <>
+      {seo && <SEO title={title} description={seo.description} path={seo.path} keywords={seo.keywords} />}
       <Header />
       
       {/* Detail Hero Section */}

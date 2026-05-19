@@ -49,6 +49,7 @@ export const ArticlePage: React.FC = () => {
         path={`/blog/${id}`}
         keywords={article.keywords}
         type="article"
+        article={{ author: article.author, date: article.date }}
       />
       <Header />
 
@@ -131,6 +132,54 @@ export const ArticlePage: React.FC = () => {
             lineHeight: 1.75,
           }}>
             {article.content}
+          </div>
+
+          {/* Internal product link */}
+          <div style={{
+            margin: '3rem 0',
+            padding: '1.5rem 2rem',
+            borderRadius: '14px',
+            backgroundColor: 'rgba(255,78,0,0.04)',
+            border: '1px solid rgba(255,78,0,0.12)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            gap: '1.5rem',
+            flexWrap: 'wrap',
+          }}>
+            <div>
+              <div style={{ fontSize: '0.7rem', fontWeight: 800, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--salvia-accent)', marginBottom: '0.3rem' }}>
+                {article.domain === 'VETERINARY' ? 'VMR & CMA compliance' : article.domain === 'DENTAL' ? 'GDC & CQC compliance' : 'Clinical governance'}
+              </div>
+              <div style={{ fontSize: '0.95rem', fontWeight: 700, color: 'var(--salvia-primary)' }}>
+                {article.domain === 'VETERINARY'
+                  ? 'See how Salvia keeps vet records audit-ready'
+                  : article.domain === 'DENTAL'
+                  ? 'See how Salvia handles dental charting compliance'
+                  : 'See how Salvia automates clinical governance'}
+              </div>
+            </div>
+            <Link
+              to={
+                article.domain === 'VETERINARY'
+                  ? '/products/point-of-care-evidence'
+                  : article.domain === 'DENTAL'
+                  ? '/products/statutory-form-infrastructure'
+                  : '/products/institutional-compliance-hub'
+              }
+              style={{
+                textDecoration: 'none',
+                fontSize: '0.85rem', fontWeight: 700,
+                color: 'var(--salvia-accent)',
+                whiteSpace: 'nowrap',
+                display: 'flex', alignItems: 'center', gap: '0.35rem',
+              }}
+            >
+              Learn more
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                <line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" />
+              </svg>
+            </Link>
           </div>
 
           {/* Keyword chips */}

@@ -3,10 +3,15 @@ import { ProductDetailLayout } from '../components/ProductDetailLayout';
 
 export const AudioToFormsPage = () => {
   return (
-    <ProductDetailLayout 
-      title="Statutory Evidence Capture" 
+    <ProductDetailLayout
+      title="Statutory Evidence Capture"
       kicker="POINT OF CARE EVIDENCE"
       accentColor="#10B981"
+      seo={{
+        description: 'Voice note after each consult — Salvia maps audio directly to compliance-grade clinical records, controlled drug logs, and audit trails. No manual charting, no memory gaps.',
+        path: '/products/point-of-care-evidence',
+        keywords: ['veterinary clinical records', 'voice to clinical notes', 'AI clinical documentation', 'controlled drug records', 'CMA compliance vets'],
+      }}
     >
       <div className="container" style={{ padding: '8rem 0', maxWidth: '1100px' }}>
         

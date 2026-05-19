@@ -10,11 +10,53 @@ interface SEOProps {
   path: string;
   keywords?: string[];
   type?: 'website' | 'article';
+  article?: {
+    author: string;
+    date: string;
+  };
 }
 
-export const SEO = ({ title, description = DEFAULT_DESC, path, keywords, type = 'website' }: SEOProps) => {
+const ORG_SCHEMA = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'Salvia',
+  url: SITE,
+  description: DEFAULT_DESC,
+  sameAs: [],
+};
+
+export const SEO = ({ title, description = DEFAULT_DESC, path, keywords, type = 'website', article }: SEOProps) => {
   const url = `${SITE}${path}`;
   const fullTitle = `${title} | ${SITE_NAME}`;
+
+  const breadcrumbSchema = type === 'article' ? JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: SITE },
+      { '@type': 'ListItem', position: 2, name: 'Blog', item: `${SITE}/blog` },
+      { '@type': 'ListItem', position: 3, name: title, item: url },
+    ],
+  }) : null;
+
+  const articleSchema = article ? JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: title,
+    description,
+    url,
+    author: {
+      '@type': 'Organization',
+      name: article.author,
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: SITE_NAME,
+      url: SITE,
+    },
+    datePublished: article.date,
+    mainEntityOfPage: { '@type': 'WebPage', '@id': url },
+  }) : null;
 
   return (
     <Helmet>
@@ -36,6 +78,17 @@ export const SEO = ({ title, description = DEFAULT_DESC, path, keywords, type = 
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content={fullTitle} />
       <meta name="twitter:description" content={description} />
+
+      {/* JSON-LD schema */}
+      {type === 'website' && (
+        <script type="application/ld+json">{JSON.stringify(ORG_SCHEMA)}</script>
+      )}
+      {articleSchema && (
+        <script type="application/ld+json">{articleSchema}</script>
+      )}
+      {breadcrumbSchema && (
+        <script type="application/ld+json">{breadcrumbSchema}</script>
+      )}
     </Helmet>
   );
 };

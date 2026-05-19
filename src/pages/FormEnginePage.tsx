@@ -7,6 +7,11 @@ export const FormEnginePage = () => {
       title="Statutory Form Infrastructure"
       kicker="IMMUTABLE DATA ASSETS"
       accentColor="#FF4E00"
+      seo={{
+        description: 'Salvia\'s form infrastructure turns clinical notes into immutable, versioned records. Every change tracked, hashed, and audit-ready — built for CQC, VMR, and GDC compliance.',
+        path: '/products/statutory-form-infrastructure',
+        keywords: ['clinical form compliance', 'immutable clinical records', 'dental charting software', 'audit-ready notes'],
+      }}
     >
       <div className="container" style={{ padding: '8rem 0', maxWidth: '1100px' }}>
 

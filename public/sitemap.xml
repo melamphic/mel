@@ -40,7 +40,7 @@
     <priority>0.8</priority>
   </url>
 
-  <!-- Blog posts -->
+  <!-- Blog posts — General / Clinic -->
   <url>
     <loc>https://hellosalvia.com/blog/pajama-time</loc>
     <changefreq>monthly</changefreq>
@@ -48,21 +48,6 @@
   </url>
   <url>
     <loc>https://hellosalvia.com/blog/informed-refusal</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://hellosalvia.com/blog/copy-paste</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://hellosalvia.com/blog/vet-tpr</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://hellosalvia.com/blog/malpractice-dental</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -82,52 +67,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://hellosalvia.com/blog/emr-crash</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://hellosalvia.com/blog/wound-photos</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://hellosalvia.com/blog/ai-legal-status</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://hellosalvia.com/blog/clinical-guidelines</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://hellosalvia.com/blog/signed-edits</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://hellosalvia.com/blog/telehealth-standards</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://hellosalvia.com/blog/retention-policy</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://hellosalvia.com/blog/manual-charting-liability</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
     <loc>https://hellosalvia.com/blog/difficult-patients</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://hellosalvia.com/blog/institutional-ethics</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -136,8 +76,112 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
+
+  <!-- Blog posts — Veterinary -->
   <url>
-    <loc>https://hellosalvia.com/blog/surgical-notes</loc>
+    <loc>https://hellosalvia.com/blog/vet-tpr</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://hellosalvia.com/blog/copy-paste-vet</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://hellosalvia.com/blog/emr-crash-vet</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://hellosalvia.com/blog/ai-vet-legal</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://hellosalvia.com/blog/vet-audit-prep</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://hellosalvia.com/blog/retention-vet</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://hellosalvia.com/blog/logic-vet</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Blog posts — Veterinary UK -->
+  <url>
+    <loc>https://hellosalvia.com/blog/cma-vet-deadline</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://hellosalvia.com/blog/rcvs-record-inspection</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Blog posts — Veterinary AU -->
+  <url>
+    <loc>https://hellosalvia.com/blog/au-vet-board-records</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Blog posts — Veterinary NZ -->
+  <url>
+    <loc>https://hellosalvia.com/blog/vcnz-records-standard</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Blog posts — Dental -->
+  <url>
+    <loc>https://hellosalvia.com/blog/malpractice-dental</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://hellosalvia.com/blog/oral-photography</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://hellosalvia.com/blog/signed-edits-dental</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://hellosalvia.com/blog/teledentistry-standards</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://hellosalvia.com/blog/manual-dental-risk</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://hellosalvia.com/blog/surgical-prep-dental</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Blog posts — Dental UK -->
+  <url>
+    <loc>https://hellosalvia.com/blog/cqc-dental-2026</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Blog posts — Dental AU -->
+  <url>
+    <loc>https://hellosalvia.com/blog/ahpra-dental-records</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
