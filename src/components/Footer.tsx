@@ -9,7 +9,7 @@ export const Footer = () => (
     zIndex: 10,
     paddingTop: '4rem'
   }}>
-    <div className="container mobile-stack" style={{ display: 'grid', gridTemplateColumns: '1.5fr 1fr 1fr', gap: '4rem', marginBottom: '4rem' }}>
+    <div className="container mobile-stack" style={{ display: 'grid', gridTemplateColumns: '1.5fr 1fr 1fr 1fr', gap: '3rem', marginBottom: '4rem' }}>
       <div>
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '1.5rem' }}>
           <img
@@ -25,21 +25,32 @@ export const Footer = () => (
       </div>
 
       <div>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-          <div style={{ fontSize: '0.9rem', fontWeight: 800, color: 'var(--salvia-primary)', letterSpacing: '0.05em' }}>MODULES</div>
-          <Link to="/products/point-of-care-evidence" style={{ color: 'var(--salvia-text-muted)', fontSize: '0.9rem', textDecoration: 'none' }}>Audio → Forms</Link>
-          <Link to="/products/statutory-form-infrastructure" style={{ color: 'var(--salvia-text-muted)', fontSize: '0.9rem', textDecoration: 'none' }}>Form Engine</Link>
-          <Link to="/products/institutional-compliance-hub" style={{ color: 'var(--salvia-text-muted)', fontSize: '0.9rem', textDecoration: 'none' }}>Policy Engine</Link>
-          <Link to="/blog" style={{ color: 'var(--salvia-text-muted)', fontSize: '0.9rem', textDecoration: 'none' }}>Blog</Link>
+        <div style={{ fontSize: '0.75rem', fontWeight: 800, color: 'var(--salvia-primary)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '1.25rem' }}>By Practice</div>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+          <Link to="/veterinary" style={{ color: 'var(--salvia-text-muted)', fontSize: '0.9rem', textDecoration: 'none' }}>Veterinary</Link>
+          <Link to="/dental" style={{ color: 'var(--salvia-text-muted)', fontSize: '0.9rem', textDecoration: 'none' }}>Dental</Link>
+          <Link to="/aged-care" style={{ color: 'var(--salvia-text-muted)', fontSize: '0.9rem', textDecoration: 'none' }}>Aged Care</Link>
+          <Link to="/general-practice" style={{ color: 'var(--salvia-text-muted)', fontSize: '0.9rem', textDecoration: 'none' }}>General Practice</Link>
         </div>
       </div>
 
       <div>
-        <h4 style={{ fontSize: '0.85rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '1.5rem' }}>Company</h4>
-        <nav style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+        <div style={{ fontSize: '0.75rem', fontWeight: 800, color: 'var(--salvia-primary)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '1.25rem' }}>Modules</div>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+          <Link to="/products/point-of-care-evidence" style={{ color: 'var(--salvia-text-muted)', fontSize: '0.9rem', textDecoration: 'none' }}>Audio → Forms</Link>
+          <Link to="/products/statutory-form-infrastructure" style={{ color: 'var(--salvia-text-muted)', fontSize: '0.9rem', textDecoration: 'none' }}>Form Engine</Link>
+          <Link to="/products/institutional-compliance-hub" style={{ color: 'var(--salvia-text-muted)', fontSize: '0.9rem', textDecoration: 'none' }}>Policy Engine</Link>
+          <Link to="/blog" style={{ color: 'var(--salvia-text-muted)', fontSize: '0.9rem', textDecoration: 'none' }}>Blog</Link>
+          <Link to="/pricing" style={{ color: 'var(--salvia-text-muted)', fontSize: '0.9rem', textDecoration: 'none' }}>Pricing</Link>
+        </div>
+      </div>
+
+      <div>
+        <div style={{ fontSize: '0.75rem', fontWeight: 800, color: 'var(--salvia-primary)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '1.25rem' }}>Company</div>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
           <Link to="/contact-sales" style={{ textDecoration: 'none', color: 'var(--salvia-text-muted)', fontSize: '0.9rem' }}>Book a demo</Link>
           <Link to="/contact-sales" style={{ textDecoration: 'none', color: 'var(--salvia-text-muted)', fontSize: '0.9rem' }}>Contact sales</Link>
-        </nav>
+        </div>
       </div>
     </div>
 

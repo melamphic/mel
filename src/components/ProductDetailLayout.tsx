@@ -60,18 +60,39 @@ export const ProductDetailLayout: React.FC<ProductDetailLayoutProps> = ({ childr
         {children}
       </main>
 
-      {/* Final "Book Demo" CTA section shared across all products */}
-      <section style={{ padding: '8rem 0', backgroundColor: 'var(--salvia-primary)', color: '#fff', textAlign: 'center' }}>
-        <div className="container">
-          <h2 style={{ fontSize: '3rem', fontWeight: 800, marginBottom: '2rem', letterSpacing: '-0.03em' }}>
-            Ready for a secure audit?
+      {/* CTA */}
+      <section style={{ padding: '7rem 0', backgroundColor: 'var(--salvia-bg)', borderTop: '1px solid #F1F5F9', textAlign: 'center' }}>
+        <div className="container" style={{ maxWidth: '580px' }}>
+          <div style={{ fontSize: '0.72rem', fontWeight: 800, color: accentColor, letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: '1rem' }}>
+            Get started
+          </div>
+          <h2 style={{ fontSize: 'clamp(2rem, 5vw, 3rem)', fontWeight: 800, color: 'var(--salvia-primary)', letterSpacing: '-0.03em', marginBottom: '1rem' }}>
+            See it in your workflow.
           </h2>
-          <p style={{ fontSize: '1.25rem', color: 'rgba(255,255,255,0.7)', maxWidth: '600px', margin: '0 auto 3rem' }}>
-            Join elite clinical organizations already automating their governance.
+          <p style={{ color: 'var(--salvia-text-muted)', lineHeight: 1.65, marginBottom: '2.5rem' }}>
+            Book a 20-minute demo — no slides, no pitch. We'll walk through how it works in a real clinical setting.
           </p>
-          <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-            <button className="pill-button" style={{ backgroundColor: accentColor }}>Get Started</button>
-            <Link to="/" className="pill-button-light" style={{ backgroundColor: 'transparent', color: '#fff', border: '1px solid rgba(255,255,255,0.3)' }}>Back to Overview</Link>
+          <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+            <Link to="/contact-sales" style={{
+              display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
+              backgroundColor: accentColor, color: '#fff',
+              padding: '0.85rem 1.75rem', borderRadius: '12px',
+              fontWeight: 700, fontSize: '0.95rem', textDecoration: 'none',
+            }}>
+              Book a demo
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                <line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" />
+              </svg>
+            </Link>
+            <Link to="/pricing" style={{
+              display: 'inline-flex', alignItems: 'center',
+              backgroundColor: 'transparent', color: 'var(--salvia-primary)',
+              padding: '0.85rem 1.75rem', borderRadius: '12px',
+              fontWeight: 700, fontSize: '0.95rem', textDecoration: 'none',
+              border: '1.5px solid rgba(15,23,42,0.15)',
+            }}>
+              See pricing
+            </Link>
           </div>
         </div>
       </section>

@@ -14,6 +14,8 @@ const ContactSalesPage = lazy(() => import('./pages/ContactSalesPage').then(m =>
 const NotFoundPage    = lazy(() => import('./pages/NotFoundPage').then(m => ({ default: m.NotFoundPage })));
 const VeterinaryPage  = lazy(() => import('./pages/VeterinaryPage').then(m => ({ default: m.VeterinaryPage })));
 const DentalPage      = lazy(() => import('./pages/DentalPage').then(m => ({ default: m.DentalPage })));
+const AgedCarePage    = lazy(() => import('./pages/AgedCarePage').then(m => ({ default: m.AgedCarePage })));
+const GeneralClinicPage = lazy(() => import('./pages/GeneralClinicPage').then(m => ({ default: m.GeneralClinicPage })));
 
 function ScrollToTop() {
   const { pathname, hash } = useLocation();
@@ -83,6 +85,8 @@ function App() {
             <Route path="/contact-sales" element={<ContactSalesPage />} />
             <Route path="/veterinary" element={<VeterinaryPage />} />
             <Route path="/dental" element={<DentalPage />} />
+            <Route path="/aged-care" element={<AgedCarePage />} />
+            <Route path="/general-practice" element={<GeneralClinicPage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </Suspense>

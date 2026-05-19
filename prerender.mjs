@@ -22,6 +22,8 @@ const STATIC_ROUTES = [
   '/contact-sales',
   '/veterinary',
   '/dental',
+  '/aged-care',
+  '/general-practice',
   '/products/point-of-care-evidence',
   '/products/statutory-form-infrastructure',
   '/products/institutional-compliance-hub',
@@ -81,6 +83,14 @@ const META = {
   '/dental': {
     title: 'Dental Compliance Software | Salvia',
     desc: 'Salvia keeps dental practice records audit-ready for CQC, GDC, and AHPRA. BPE, STE, radiograph justification, and treatment plans captured at every visit.',
+  },
+  '/aged-care': {
+    title: 'Aged Care Compliance Software | Salvia',
+    desc: 'Salvia keeps aged care and care home records audit-ready for CQC. Medication administration, incident trails, safeguarding records, and care plans — structured and signed at the point of care.',
+  },
+  '/general-practice': {
+    title: 'General Practice Compliance Software | Salvia',
+    desc: 'Salvia keeps GP and general clinic records audit-ready for CQC, AHPRA, and MCNZ. Voice note after each consult — structured clinical records, prescribing logs, referral trails, and consent documentation.',
   },
   '/products/point-of-care-evidence': {
     title: 'Statutory Evidence Capture | Salvia',
