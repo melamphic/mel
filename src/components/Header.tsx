@@ -37,7 +37,7 @@ export const Header: React.FC = () => {
           <a href={APP_URL} className="pill-button-light hide-mobile" style={{ fontSize: '0.85rem', padding: '0.6rem 1.2rem', textDecoration: 'none' }}>
             Sign In
           </a>
-          <Link to="/contact-sales" className="pill-button" style={{ fontSize: '0.85rem', padding: '0.6rem 1.4rem', textDecoration: 'none' }}>
+          <Link to="/start" className="pill-button" style={{ fontSize: '0.85rem', padding: '0.6rem 1.4rem', textDecoration: 'none' }}>
             Book a demo
           </Link>
         </div>
