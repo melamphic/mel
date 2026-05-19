@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { Header } from '../components/Header';
 import { Footer } from '../components/Footer';
 import { BLOG_CONTENT } from '../data/blogContent';
+import { SEO } from '../components/SEO';
 
 const DOMAIN_META = {
   GENERAL: { label: 'Clinic', color: '#FF4E00', bg: 'rgba(255,78,0,0.08)' },
@@ -42,6 +43,13 @@ export const ArticlePage: React.FC = () => {
 
   return (
     <div style={{ backgroundColor: '#fff', minHeight: '100vh' }}>
+      <SEO
+        title={article.q}
+        description={article.excerpt}
+        path={`/blog/${id}`}
+        keywords={article.keywords}
+        type="article"
+      />
       <Header />
 
       <main style={{ paddingTop: '8rem', paddingBottom: '6rem' }}>

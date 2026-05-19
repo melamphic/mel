@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Header } from '../components/Header';
 import { Footer } from '../components/Footer';
 import { BLOG_CONTENT } from '../data/blogContent';
+import { SEO } from '../components/SEO';
 
 type BlogDomain = 'GENERAL' | 'VETERINARY' | 'DENTAL';
 
@@ -46,6 +47,12 @@ export const InsightsPage: React.FC = () => {
 
   return (
     <div style={{ backgroundColor: '#fff', minHeight: '100vh' }}>
+      <SEO
+        title="From the compliance desk"
+        description="Clinical documentation, compliance law, and audit readiness — written for vets, dentists, and clinicians who've been burned by bad records."
+        path="/blog"
+        keywords={['clinical documentation', 'veterinary compliance', 'dental records', 'CQC audit', 'CMA compliance']}
+      />
       <Header />
 
       <main style={{ paddingTop: '9rem', paddingBottom: '6rem' }}>

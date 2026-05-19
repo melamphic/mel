@@ -1,5 +1,6 @@
 import { useState, type CSSProperties, type FormEvent, type ReactNode } from 'react';
 import { Link } from 'react-router-dom';
+import { SEO } from '../components/SEO';
 import { Header } from '../components/Header';
 import { Footer } from '../components/Footer';
 import { SAL_API_BASE, SUPPORT_EMAIL } from '../config';
@@ -116,6 +117,11 @@ export const ContactSalesPage = () => {
 
   return (
     <>
+      <SEO
+        title="Book a demo"
+        description="See Salvia in action — compliance and governance automation for vet, dental, and clinical practices. Book a confidential demo before we launch publicly."
+        path="/contact-sales"
+      />
       <Header />
 
       <section style={{ padding: '10rem 0 6rem', backgroundColor: 'var(--salvia-bg)', minHeight: '80vh' }}>

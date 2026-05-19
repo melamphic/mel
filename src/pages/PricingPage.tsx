@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { SEO } from '../components/SEO';
 import { Header } from '../components/Header';
 import { Footer } from '../components/Footer';
 import {
@@ -57,6 +58,12 @@ export const PricingPage = () => {
 
   return (
     <>
+      <SEO
+        title="Pricing"
+        description="Salvia pricing for veterinary, dental, general practice, and aged care. Practice plan from $229/mo — compliance-grade clinical documentation, controlled drug logs, audit trails."
+        path="/pricing"
+        keywords={['veterinary practice software pricing', 'clinical documentation software cost', 'compliance software vet practice']}
+      />
       <Header />
 
       {/* Hero */}
