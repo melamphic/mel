@@ -64,38 +64,41 @@ export const NotFoundPage = () => {
         <div className="container" style={{ maxWidth: '720px', textAlign: 'center' }}>
 
           {/* 404 visual */}
-          <div style={{ marginBottom: '2rem', position: 'relative', display: 'inline-block' }}>
+          <div style={{ marginBottom: '2.5rem' }}>
             <div style={{
-              fontSize: 'clamp(5rem, 18vw, 9rem)',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '0.5rem',
+              backgroundColor: 'rgba(255,78,0,0.07)',
+              border: '1.5px solid rgba(255,78,0,0.18)',
+              borderRadius: '10px',
+              padding: '0.4rem 0.9rem',
+              marginBottom: '1.75rem',
+            }}>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FF4E00" strokeWidth="2.5">
+                <circle cx="11" cy="11" r="8" />
+                <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                <line x1="11" y1="8" x2="11" y2="12" />
+                <line x1="11" y1="16" x2="11.01" y2="16" />
+              </svg>
+              <span style={{ fontSize: '0.78rem', fontWeight: 700, color: '#FF4E00', letterSpacing: '0.06em' }}>
+                PAGE NOT FOUND
+              </span>
+            </div>
+
+            <div style={{
+              fontSize: 'clamp(5.5rem, 20vw, 10rem)',
               fontWeight: 900,
               letterSpacing: '-0.06em',
-              color: '#F1F5F9',
-              lineHeight: 1,
+              lineHeight: 0.9,
+              background: 'linear-gradient(135deg, #0F172A 0%, #475569 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
               userSelect: 'none',
+              marginBottom: '0.25rem',
             }}>
               404
-            </div>
-            <div style={{
-              position: 'absolute',
-              inset: 0,
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}>
-              <div style={{
-                width: '56px', height: '56px',
-                borderRadius: '16px',
-                backgroundColor: 'rgba(255,78,0,0.08)',
-                border: '1.5px solid rgba(255,78,0,0.18)',
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-              }}>
-                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#FF4E00" strokeWidth="2">
-                  <circle cx="11" cy="11" r="8" />
-                  <line x1="21" y1="21" x2="16.65" y2="16.65" />
-                  <line x1="11" y1="8" x2="11" y2="12" />
-                  <line x1="11" y1="16" x2="11.01" y2="16" />
-                </svg>
-              </div>
             </div>
           </div>
 
