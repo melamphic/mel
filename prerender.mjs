@@ -20,6 +20,8 @@ const STATIC_ROUTES = [
   '/pricing',
   '/blog',
   '/contact-sales',
+  '/veterinary',
+  '/dental',
   '/products/point-of-care-evidence',
   '/products/statutory-form-infrastructure',
   '/products/institutional-compliance-hub',
@@ -71,6 +73,14 @@ const META = {
   '/contact-sales': {
     title: 'Book a demo | Salvia',
     desc: 'See Salvia in action — compliance and governance automation for vet, dental, and clinical practices.',
+  },
+  '/veterinary': {
+    title: 'Veterinary Compliance Software | Salvia',
+    desc: 'Salvia keeps vet practice records audit-ready for RCVS, VCNZ, VPB and CMA. Voice note after each consult — clinical records, controlled drug logs, consent, and audit trail out the other side.',
+  },
+  '/dental': {
+    title: 'Dental Compliance Software | Salvia',
+    desc: 'Salvia keeps dental practice records audit-ready for CQC, GDC, and AHPRA. BPE, STE, radiograph justification, and treatment plans captured at every visit.',
   },
   '/products/point-of-care-evidence': {
     title: 'Statutory Evidence Capture | Salvia',

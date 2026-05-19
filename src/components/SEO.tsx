@@ -3,6 +3,7 @@ import { Helmet } from 'react-helmet-async';
 const SITE = 'https://hellosalvia.com';
 const SITE_NAME = 'Salvia';
 const DEFAULT_DESC = 'Salvia is a compliance and governance suite for clinical practices — voice notes in, audit-ready records out. Clinical documentation, controlled drug logs, and incident trails, automated.';
+const DEFAULT_OG_IMAGE = 'https://hellosalvia.com/og-image.png';
 
 interface SEOProps {
   title: string;
@@ -73,11 +74,15 @@ export const SEO = ({ title, description = DEFAULT_DESC, path, keywords, type = 
       <meta property="og:url" content={url} />
       <meta property="og:type" content={type} />
       <meta property="og:site_name" content={SITE_NAME} />
+      <meta property="og:image" content={DEFAULT_OG_IMAGE} />
+      <meta property="og:image:width" content="1200" />
+      <meta property="og:image:height" content="630" />
 
       {/* Twitter */}
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content={fullTitle} />
       <meta name="twitter:description" content={description} />
+      <meta name="twitter:image" content={DEFAULT_OG_IMAGE} />
 
       {/* JSON-LD schema */}
       {type === 'website' && (
