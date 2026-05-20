@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const SCRIBE_GIVES = [
   'A SOAP note from the visit audio',
@@ -168,11 +169,11 @@ export const ScribeVsSalvia: React.FC = () => (
       </p>
 
       <div style={{ display: 'flex', justifyContent: 'center', marginTop: '2.5rem' }}>
-        <button className="btn-primary" style={{ padding: '1.1rem 2.75rem', fontSize: '1rem', fontWeight: 700 }}>
+        <Link to="/start" className="btn-primary" style={{ padding: '1.1rem 2.75rem', fontSize: '1rem', fontWeight: 700, textDecoration: 'none' }}>
           <div className="shimmer" />
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
           Book a demo
-        </button>
+        </Link>
       </div>
     </div>
   </section>
