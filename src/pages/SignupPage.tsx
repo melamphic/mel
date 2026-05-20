@@ -31,6 +31,25 @@ const COUNTRY_OPTIONS = [
   { value: 'OTHER', label: 'Other' },
 ];
 
+// Country → default E.164 dial code. OTHER intentionally has no default —
+// we render an editable dial-code field instead. Used to seed the phone
+// prefix when the user picks a country.
+const DIAL_CODE_BY_COUNTRY: Record<string, string> = {
+  NZ: '+64',
+  AU: '+61',
+  UK: '+44',
+  IE: '+353',
+  CA: '+1',
+  US: '+1',
+};
+
+const CALL_WINDOW_OPTIONS = [
+  { value: 'weekday_morning', label: 'Weekday morning' },
+  { value: 'weekday_afternoon', label: 'Weekday afternoon' },
+  { value: 'weekday_evening', label: 'Weekday evening' },
+  { value: 'weekend', label: 'Weekend' },
+];
+
 const STEPS = [
   {
     title: 'Submit this form',
@@ -74,8 +93,21 @@ export const SignupPage = () => {
   const [clinicName, setClinicName] = useState('');
   const [contactName, setContactName] = useState('');
   const [contactEmail, setContactEmail] = useState('');
+  const [dialCode, setDialCode] = useState('+64');
+  const [phoneLocal, setPhoneLocal] = useState('');
+  const [callWindow, setCallWindow] = useState('weekday_morning');
   const [numStaff, setNumStaff] = useState('');
   const [pain, setPain] = useState('');
+
+  // When the user picks a country, seed the dial code with that country's
+  // default. They can still override the dial code afterward (e.g. an NZ
+  // clinic with a UK mobile). For "OTHER", leave dialCode blank — the
+  // input becomes editable.
+  function onCountryChange(next: string) {
+    setCountry(next);
+    const next_dial = DIAL_CODE_BY_COUNTRY[next] ?? '';
+    setDialCode(next_dial);
+  }
 
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -87,10 +119,15 @@ export const SignupPage = () => {
     setError(null);
     setSubmitting(true);
     try {
+      const dial = dialCode.trim();
+      const local = phoneLocal.trim();
+      const fullPhone = dial && local ? `${dial} ${local}` : local;
       const payload: Record<string, unknown> = {
         clinic_name: clinicName.trim(),
         contact_name: contactName.trim(),
         contact_email: contactEmail.trim(),
+        phone: fullPhone,
+        preferred_call_window: callWindow,
         vertical,
         country,
         ...(numStaff.trim() ? { num_staff: Number(numStaff.trim()) } : {}),
@@ -239,7 +276,7 @@ export const SignupPage = () => {
                       <select
                         id="country"
                         value={country}
-                        onChange={(e) => setCountry(e.target.value)}
+                        onChange={(e) => onCountryChange(e.target.value)}
                         required
                         style={inputStyle}
                       >
@@ -249,6 +286,58 @@ export const SignupPage = () => {
                       </select>
                     </Field>
                   </div>
+
+                  <Field
+                    label="Phone"
+                    htmlFor="phoneLocal"
+                    required
+                    hint="So we can call to walk you through Salvia"
+                  >
+                    <div style={phoneRowStyle}>
+                      <input
+                        id="dialCode"
+                        type="text"
+                        required
+                        aria-label="Country dial code"
+                        value={dialCode}
+                        onChange={(e) => setDialCode(e.target.value)}
+                        placeholder="+64"
+                        maxLength={5}
+                        style={{ ...inputStyle, width: 80, textAlign: 'center', fontWeight: 600 }}
+                      />
+                      <input
+                        id="phoneLocal"
+                        type="tel"
+                        required
+                        minLength={4}
+                        maxLength={32}
+                        value={phoneLocal}
+                        onChange={(e) => setPhoneLocal(e.target.value)}
+                        autoComplete="tel-national"
+                        placeholder="21 555 0123"
+                        style={{ ...inputStyle, flex: 1 }}
+                      />
+                    </div>
+                  </Field>
+
+                  <Field
+                    label="When's the best time for us to call?"
+                    htmlFor="callWindow"
+                    required
+                    hint="20-minute walkthrough — pick a slot in your local time"
+                  >
+                    <select
+                      id="callWindow"
+                      value={callWindow}
+                      onChange={(e) => setCallWindow(e.target.value)}
+                      required
+                      style={inputStyle}
+                    >
+                      {CALL_WINDOW_OPTIONS.map((o) => (
+                        <option key={o.value} value={o.value}>{o.label}</option>
+                      ))}
+                    </select>
+                  </Field>
 
                   <Field label="How many clinical staff?" htmlFor="numStaff" hint="Optional">
                     <input
@@ -625,6 +714,12 @@ const fieldRowStyle: CSSProperties = {
   display: 'grid',
   gridTemplateColumns: '1fr 1fr',
   gap: '0.9rem',
+};
+
+const phoneRowStyle: CSSProperties = {
+  display: 'flex',
+  gap: '0.5rem',
+  alignItems: 'stretch',
 };
 
 const fieldLabelStyle: CSSProperties = {
