@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useLocation, Navigate } from 'react-router-dom';
 import { useEffect, lazy, Suspense } from 'react';
 import './index.css';
 
@@ -10,7 +10,6 @@ const InsightsPage    = lazy(() => import('./pages/InsightsPage').then(m => ({ d
 const ArticlePage     = lazy(() => import('./pages/ArticlePage').then(m => ({ default: m.ArticlePage })));
 const PricingPage     = lazy(() => import('./pages/PricingPage').then(m => ({ default: m.PricingPage })));
 const SignupPage      = lazy(() => import('./pages/SignupPage').then(m => ({ default: m.SignupPage })));
-const ContactSalesPage = lazy(() => import('./pages/ContactSalesPage').then(m => ({ default: m.ContactSalesPage })));
 const NotFoundPage    = lazy(() => import('./pages/NotFoundPage').then(m => ({ default: m.NotFoundPage })));
 const VeterinaryPage  = lazy(() => import('./pages/VeterinaryPage').then(m => ({ default: m.VeterinaryPage })));
 const DentalPage      = lazy(() => import('./pages/DentalPage').then(m => ({ default: m.DentalPage })));
@@ -82,7 +81,7 @@ function App() {
             <Route path="/blog/:id" element={<ArticlePage />} />
             <Route path="/pricing" element={<PricingPage />} />
             <Route path="/start" element={<SignupPage />} />
-            <Route path="/contact-sales" element={<ContactSalesPage />} />
+            <Route path="/contact-sales" element={<Navigate to="/start" replace />} />
             <Route path="/veterinary" element={<VeterinaryPage />} />
             <Route path="/dental" element={<DentalPage />} />
             <Route path="/aged-care" element={<AgedCarePage />} />
