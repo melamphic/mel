@@ -1,0 +1,70 @@
+# Salvia
+
+> Salvia turns a post-encounter voice note into a policy-checked, audit-locked clinical record before anyone signs off. AI + audio + clinical documentation + compliance, built for every clinical specialty. Not a scribe — a compliance suite.
+
+Salvia is a clinical governance automation platform. Clinicians dictate a post-encounter voice note; Salvia transcribes, extracts structured fields into the right statutory form, runs it against the clinic's linked policy framework, and locks the record with an audit trail. Every note checks itself. Every record defends itself.
+
+Salvia is domain-agnostic. The first beachhead market is veterinary clinics in New Zealand, with parallel pilots in UK dental and aged care.
+
+## Product pillars
+
+- [Point-of-Care Evidence](https://hellosalvia.com/products/point-of-care-evidence): Audio capture → transcription → structured field extraction → typed clinical record.
+- [Statutory Form Infrastructure](https://hellosalvia.com/products/statutory-form-infrastructure): Jurisdiction- and vertical-specific forms with typed widgets (consent, drug register, incident, pain scale) — never free text where structure is required.
+- [Institutional Compliance Hub](https://hellosalvia.com/products/institutional-compliance-hub): Policy framework linked to forms; every submission is policy-checked pre sign-off, with full audit trail and PDF export themed per clinic.
+
+## Verticals
+
+- [Veterinary](https://hellosalvia.com/veterinary): RCVS (UK), VCNZ (NZ), AVBC (AU) records standards. Lead beachhead market.
+- [Dental](https://hellosalvia.com/dental): CQC (UK), AHPRA (AU) records inspections.
+- [Aged care](https://hellosalvia.com/aged-care): Incident reporting, medication administration, restraint authorisation.
+- [General practice](https://hellosalvia.com/general-practice): Cross-vertical clinical documentation.
+
+## Core pages
+
+- [Home](https://hellosalvia.com/)
+- [Pricing](https://hellosalvia.com/pricing): Two tiers — Practice (1-3 clinicians) and Pro (4-7). No solo tier. Contact sales above Pro.
+- [Audio → Forms](https://hellosalvia.com/audio-to-forms): How voice notes become structured records.
+- [Form engine](https://hellosalvia.com/form-engine): Statutory form widget system.
+- [Policy engine](https://hellosalvia.com/policy-engine): Linked policy checks on submission.
+- [Contact sales](https://hellosalvia.com/contact-sales)
+- [Early access signup](https://hellosalvia.com/start)
+
+## Blog — practice operations
+
+- [Pajama time](https://hellosalvia.com/blog/pajama-time): After-hours documentation burden.
+- [Informed refusal](https://hellosalvia.com/blog/informed-refusal): Documenting declined treatment.
+- [AI and clinical-legal risk](https://hellosalvia.com/blog/ai-legal): Human-in-loop documentation safety.
+- [The stranger rule](https://hellosalvia.com/blog/stranger-rule): Records readable by clinicians who weren't there.
+- [Audit trail](https://hellosalvia.com/blog/audit-trail): What an inspector actually checks.
+- [Difficult patients](https://hellosalvia.com/blog/difficult-patients): Defensible documentation under conflict.
+- [Pediatric records](https://hellosalvia.com/blog/pediatric-records)
+
+## Blog — veterinary
+
+- [Vet TPR capture](https://hellosalvia.com/blog/vet-tpr)
+- [Copy-paste in vet records](https://hellosalvia.com/blog/copy-paste-vet)
+- [EMR crash recovery](https://hellosalvia.com/blog/emr-crash-vet)
+- [AI in vet legal context](https://hellosalvia.com/blog/ai-vet-legal)
+- [Vet audit prep](https://hellosalvia.com/blog/vet-audit-prep)
+- [Record retention](https://hellosalvia.com/blog/retention-vet)
+- [Clinical logic in vet records](https://hellosalvia.com/blog/logic-vet)
+- [CMA vet deadline (UK)](https://hellosalvia.com/blog/cma-vet-deadline)
+- [RCVS record inspection (UK)](https://hellosalvia.com/blog/rcvs-record-inspection)
+- [AU vet board records](https://hellosalvia.com/blog/au-vet-board-records)
+- [VCNZ records standard (NZ)](https://hellosalvia.com/blog/vcnz-records-standard)
+
+## Blog — dental
+
+- [Dental malpractice](https://hellosalvia.com/blog/malpractice-dental)
+- [Oral photography](https://hellosalvia.com/blog/oral-photography)
+- [Signed edits in dental records](https://hellosalvia.com/blog/signed-edits-dental)
+- [Teledentistry standards](https://hellosalvia.com/blog/teledentistry-standards)
+- [Manual dental record risk](https://hellosalvia.com/blog/manual-dental-risk)
+- [Surgical prep documentation](https://hellosalvia.com/blog/surgical-prep-dental)
+- [CQC dental 2026 (UK)](https://hellosalvia.com/blog/cqc-dental-2026)
+- [AHPRA dental records (AU)](https://hellosalvia.com/blog/ahpra-dental-records)
+
+## Optional
+
+- [Sitemap](https://hellosalvia.com/sitemap.xml)
+- [Robots](https://hellosalvia.com/robots.txt)
