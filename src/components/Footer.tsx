@@ -48,8 +48,8 @@ export const Footer = () => (
       <div>
         <div style={{ fontSize: '0.75rem', fontWeight: 800, color: 'var(--salvia-primary)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '1.25rem' }}>Company</div>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-          <Link to="/contact-sales" style={{ textDecoration: 'none', color: 'var(--salvia-text-muted)', fontSize: '0.9rem' }}>Book a demo</Link>
-          <Link to="/contact-sales" style={{ textDecoration: 'none', color: 'var(--salvia-text-muted)', fontSize: '0.9rem' }}>Contact sales</Link>
+          <Link to="/start" style={{ textDecoration: 'none', color: 'var(--salvia-text-muted)', fontSize: '0.9rem' }}>Book a demo</Link>
+          <Link to="/start" style={{ textDecoration: 'none', color: 'var(--salvia-text-muted)', fontSize: '0.9rem' }}>Contact sales</Link>
         </div>
       </div>
     </div>
