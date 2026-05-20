@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { DashboardPreview } from './DashboardPreview';
 import { MobileDevicePreview } from './MobileDevicePreview';
 
@@ -103,11 +104,11 @@ export const Hero: React.FC = () => {
         </p>
 
         <div style={{ display: 'flex', gap: '1.2rem', justifyContent: 'center' }} className="mobile-stack">
-          <button className="btn-primary" style={{ padding: '1.2rem 3rem', fontSize: '1.1rem', fontWeight: 700 }}>
+          <Link to="/start" className="btn-primary" style={{ padding: '1.2rem 3rem', fontSize: '1.1rem', fontWeight: 700, textDecoration: 'none' }}>
             <div className="shimmer" />
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
             Book a demo
-          </button>
+          </Link>
         </div>
 
         {/* Responsive Previews */}
