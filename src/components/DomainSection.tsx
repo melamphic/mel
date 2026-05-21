@@ -227,14 +227,37 @@ export const DomainSection = () => {
           @media (max-width: 768px) {
             #domains { padding: 4rem 0 !important; overflow-x: hidden !important; }
             .domains-stage-grid {
+              display: flex !important;
+              flex-direction: column !important;
               width: 100% !important;
               max-width: 100% !important;
               padding-left: 1.25rem !important;
               padding-right: 1.25rem !important;
-              gap: 2rem !important;
+              gap: 1.5rem !important;
             }
+            .stage-sidebar {
+              position: static !important;
+              flex-direction: row !important;
+              gap: 0.5rem !important;
+              overflow-x: auto !important;
+              -webkit-overflow-scrolling: touch !important;
+              padding-bottom: 0.5rem !important;
+              margin: 0 -1.25rem !important;
+              padding-left: 1.25rem !important;
+              padding-right: 1.25rem !important;
+              scrollbar-width: none !important;
+            }
+            .stage-sidebar::-webkit-scrollbar { display: none !important; }
+            .stage-sidebar-btn {
+              flex: 0 0 auto !important;
+              padding: 0.85rem 1.1rem !important;
+              border-radius: 14px !important;
+              min-width: max-content !important;
+            }
+            .stage-sidebar-label { font-size: 0.95rem !important; }
+            .stage-sidebar-sub { display: none !important; }
             .stage-app-box {
-              padding: 2rem !important;
+              padding: 1.5rem !important;
               border-radius: 24px !important;
               border-right: 1px solid rgba(15, 23, 42, 0.08) !important;
               width: 100% !important;
@@ -243,20 +266,21 @@ export const DomainSection = () => {
             }
             .stage-content-grid {
               grid-template-columns: 1fr !important;
-              gap: 2.5rem !important;
+              gap: 2rem !important;
               max-width: 100% !important;
             }
-            .stage-metric {
-              font-size: 3rem !important;
-            }
+            .stage-title { font-size: 1.65rem !important; }
+            .stage-metric { font-size: 3rem !important; }
+            .stage-evidence { padding: 1.5rem !important; border-radius: 20px !important; }
           }
         `}</style>
 
-        {/* Sidebar Selector (Pinned to grid) */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', position: 'sticky', top: '100px' }}>
+        {/* Sidebar Selector (Pinned on desktop, horizontal scroll chip strip on mobile) */}
+        <div className="stage-sidebar" style={{ display: 'flex', flexDirection: 'column', gap: '1rem', position: 'sticky', top: '100px' }}>
           {DOMAINS.map((domain, index) => (
             <button
               key={domain.id}
+              className="stage-sidebar-btn"
               onClick={() => setActive(index)}
               onMouseEnter={() => setActive(index)}
               style={{
@@ -272,7 +296,7 @@ export const DomainSection = () => {
                 display: 'flex', flexDirection: 'column', gap: '0.35rem'
               }}
             >
-              <span style={{
+              <span className="stage-sidebar-label" style={{
                 fontSize: '1.5rem', fontWeight: 800,
                 color: active === index ? 'var(--salvia-primary)' : 'rgba(15, 23, 42, 0.3)',
                 letterSpacing: '-0.02em',
@@ -280,7 +304,7 @@ export const DomainSection = () => {
               }}>
                 {domain.label}
               </span>
-              <span style={{
+              <span className="stage-sidebar-sub" style={{
                 fontSize: '0.8rem', fontWeight: 600,
                 color: active === index ? domain.accent : 'rgba(15, 23, 42, 0.25)',
                 transition: 'color 0.3s ease',
@@ -315,7 +339,7 @@ export const DomainSection = () => {
             {/* Left Column: Context & Metric */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: '2.5rem' }}>
               <div>
-                <h3 style={{ fontSize: '2.6rem', fontWeight: 800, letterSpacing: '-0.04em', color: 'var(--salvia-primary)', marginBottom: '1.25rem', lineHeight: 1.1 }}>
+                <h3 className="stage-title" style={{ fontSize: '2.6rem', fontWeight: 800, letterSpacing: '-0.04em', color: 'var(--salvia-primary)', marginBottom: '1.25rem', lineHeight: 1.1 }}>
                   {d.title}
                 </h3>
                 <p style={{ fontSize: '1.1rem', color: 'var(--salvia-text-muted)', lineHeight: 1.6, margin: 0 }}>
