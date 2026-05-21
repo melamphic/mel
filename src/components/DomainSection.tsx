@@ -361,7 +361,7 @@ export const DomainSection = () => {
             </div>
 
             {/* Right Column: Mini UI Slice (The "Evidence") */}
-            <div style={{
+            <div className="stage-evidence" style={{
               background: '#F8FAFC', borderRadius: '32px',
               border: '1px solid rgba(15, 23, 42, 0.04)',
               padding: '3rem', display: 'flex', alignItems: 'center', justifyContent: 'center',
