@@ -155,7 +155,19 @@ export const ROICalculator = () => {
         .roi-range::-webkit-slider-thumb { -webkit-appearance: none; width: 18px; height: 18px; border-radius: 50%; background: #fff; border: 2.5px solid #FF4E00; box-shadow: 0 1px 6px rgba(255,78,0,0.3); cursor: pointer; }
         .roi-range::-moz-range-thumb { width: 14px; height: 14px; border-radius: 50%; background: #fff; border: 2.5px solid #FF4E00; cursor: pointer; }
         .roi-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: start; }
-        @media (max-width: 768px) { .roi-wrap { grid-template-columns: 1fr !important; } }
+        .roi-card { padding: 2rem; }
+        .roi-donut-row { display: flex; gap: 1.5rem; align-items: center; }
+        .roi-summary { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+        .roi-summary-num { font-size: 2.75rem; }
+        @media (max-width: 768px) {
+          .roi-wrap { grid-template-columns: 1fr !important; gap: 1.25rem !important; }
+          .roi-card { padding: 1.25rem !important; }
+          .roi-donut-row { flex-direction: column; align-items: stretch; gap: 1.25rem; }
+          .roi-summary-num { font-size: 2rem !important; }
+        }
+        @media (max-width: 380px) {
+          .roi-summary { grid-template-columns: 1fr; }
+        }
       `}</style>
 
       <div className="container" style={{ maxWidth: '1020px' }}>
@@ -174,7 +186,7 @@ export const ROICalculator = () => {
         <div className="roi-wrap">
 
           {/* LEFT — inputs */}
-          <div style={{ backgroundColor: '#fff', border: '1px solid rgba(15,23,42,0.07)', borderRadius: '20px', padding: '2rem', boxShadow: 'var(--salvia-shadow-card)', display: 'flex', flexDirection: 'column', gap: '1.6rem' }}>
+          <div className="roi-card" style={{ backgroundColor: '#fff', border: '1px solid rgba(15,23,42,0.07)', borderRadius: '20px', boxShadow: 'var(--salvia-shadow-card)', display: 'flex', flexDirection: 'column', gap: '1.6rem' }}>
             <ChipGroup label="Specialty" options={VERTICALS.map(v => ({ key: v.key, label: v.label }))} value={vertical} onChange={setVertical} />
             <ChipGroup
               label="Practice size"
@@ -195,10 +207,10 @@ export const ROICalculator = () => {
           </div>
 
           {/* RIGHT — unified output */}
-          <div style={{ backgroundColor: '#fff', border: '1px solid rgba(15,23,42,0.07)', borderRadius: '20px', padding: '2rem', boxShadow: 'var(--salvia-shadow-card)', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+          <div className="roi-card" style={{ backgroundColor: '#fff', border: '1px solid rgba(15,23,42,0.07)', borderRadius: '20px', boxShadow: 'var(--salvia-shadow-card)', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
 
-            {/* donut + legend side by side */}
-            <div style={{ display: 'flex', gap: '1.5rem', alignItems: 'center' }}>
+            {/* donut + legend side by side on desktop, stacked on mobile */}
+            <div className="roi-donut-row">
               <Donut segments={segments} centerLabel={fmt(totalValue)} />
               <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
                 {rows.map((row, i) => (
@@ -220,14 +232,14 @@ export const ROICalculator = () => {
             <div style={{ height: '1px', backgroundColor: 'rgba(15,23,42,0.06)' }} />
 
             {/* ROI summary row */}
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+            <div className="roi-summary">
               <div>
                 <div style={{ fontSize: '0.6rem', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--salvia-text-muted)', marginBottom: '0.3rem' }}>Return on spend</div>
-                <div style={{ fontSize: '2.75rem', fontWeight: 900, color: 'var(--salvia-accent)', letterSpacing: '-0.05em', lineHeight: 1 }}>{roi.toFixed(1)}×</div>
+                <div className="roi-summary-num" style={{ fontWeight: 900, color: 'var(--salvia-accent)', letterSpacing: '-0.05em', lineHeight: 1 }}>{roi.toFixed(1)}×</div>
               </div>
               <div>
                 <div style={{ fontSize: '0.6rem', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--salvia-text-muted)', marginBottom: '0.3rem' }}>Salvia costs</div>
-                <div style={{ fontSize: '2.75rem', fontWeight: 900, color: 'var(--salvia-primary)', letterSpacing: '-0.05em', lineHeight: 1 }}>{fmt(monthlyCost)}</div>
+                <div className="roi-summary-num" style={{ fontWeight: 900, color: 'var(--salvia-primary)', letterSpacing: '-0.05em', lineHeight: 1 }}>{fmt(monthlyCost)}</div>
                 <div style={{ fontSize: '0.72rem', color: 'var(--salvia-text-muted)', marginTop: '0.25rem' }}>
                   <strong style={{ color: 'var(--salvia-accent)' }}>{fmt(totalValue - monthlyCost)}</strong> monthly surplus
                 </div>
