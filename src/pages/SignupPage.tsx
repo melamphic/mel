@@ -4,6 +4,7 @@ import { Header } from '../components/Header';
 import { Footer } from '../components/Footer';
 import { SAL_API_BASE } from '../config';
 import type { Vertical } from '../data/pricing';
+import { identify, track } from '../lib/posthog';
 
 // ── Static option data ───────────────────────────────────────────────────────
 
@@ -145,6 +146,21 @@ export const SignupPage = () => {
         const title = typeof body?.title === 'string' ? body.title : null;
         throw new Error(detail ?? title ?? `HTTP ${res.status}`);
       }
+      const email = contactEmail.trim();
+      if (email) {
+        identify(email, {
+          email,
+          clinic_name: clinicName.trim(),
+          contact_name: contactName.trim(),
+          vertical,
+          country,
+        });
+      }
+      track('signup_submitted', {
+        vertical,
+        country,
+        num_staff: numStaff.trim() ? Number(numStaff.trim()) : null,
+      });
       setSubmitted(true);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Something went wrong. Please email hello@hellosalvia.com instead.');
