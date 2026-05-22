@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route, useLocation, Navigate } from 'react-router-dom';
 import { useEffect, lazy, Suspense } from 'react';
 import './index.css';
+import { capturePageview } from './lib/posthog';
 
 const LandingPage     = lazy(() => import('./pages/LandingPage').then(m => ({ default: m.LandingPage })));
 const FormEnginePage  = lazy(() => import('./pages/FormEnginePage').then(m => ({ default: m.FormEnginePage })));
@@ -15,6 +16,14 @@ const VeterinaryPage  = lazy(() => import('./pages/VeterinaryPage').then(m => ({
 const DentalPage      = lazy(() => import('./pages/DentalPage').then(m => ({ default: m.DentalPage })));
 const AgedCarePage    = lazy(() => import('./pages/AgedCarePage').then(m => ({ default: m.AgedCarePage })));
 const GeneralClinicPage = lazy(() => import('./pages/GeneralClinicPage').then(m => ({ default: m.GeneralClinicPage })));
+
+function PageviewTracker() {
+  const { pathname, search } = useLocation();
+  useEffect(() => {
+    capturePageview(pathname + search, document.title);
+  }, [pathname, search]);
+  return null;
+}
 
 function ScrollToTop() {
   const { pathname, hash } = useLocation();
@@ -71,6 +80,7 @@ function App() {
         </svg>
 
         <ScrollToTop />
+        <PageviewTracker />
         <Suspense fallback={null}>
           <Routes>
             <Route path="/" element={<LandingPage />} />
