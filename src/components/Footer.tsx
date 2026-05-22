@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom';
 import salviaLogo from '../assets/salvia.png';
+import wordmarkDesktop from '../assets/salvia-wordmark-desktop.svg';
+import wordmarkMobile from '../assets/salvia-wordmark-mobile.svg';
 
 export const Footer = () => (
   <footer style={{
@@ -54,23 +56,28 @@ export const Footer = () => (
       </div>
     </div>
 
-    {/* Big wordmark */}
-    <div style={{ textAlign: 'center', padding: '0rem 1rem 1.5rem', overflow: 'hidden' }}>
-      <Link to="/" style={{ textDecoration: 'none' }}>
-        <span style={{
-          fontSize: 'clamp(3.5rem, 13vw, 9.5rem)',
-          fontWeight: 800,
-          letterSpacing: '-0.04em',
-          lineHeight: 1,
-          color: 'var(--salvia-primary)',
-          opacity: 0.1,
-          userSelect: 'none',
-          display: 'inline-block',
-        }}>
-          SALVIA
-        </span>
-      </Link>
-    </div>
+    {/* Big wordmark — responsive SVG art, full-bleed */}
+    <Link to="/" style={{ textDecoration: 'none', display: 'block', lineHeight: 0, width: '100%' }} aria-label="Salvia home">
+      <picture>
+        <source media="(max-width: 768px)" srcSet={wordmarkMobile} />
+        <img
+          src={wordmarkDesktop}
+          alt="Salvia"
+          style={{
+            display: 'block',
+            width: '100%',
+            height: 'auto',
+            userSelect: 'none',
+            pointerEvents: 'none',
+            mixBlendMode: 'multiply',
+            WebkitMaskImage:
+              'linear-gradient(to bottom, transparent 0%, #000 12%, #000 88%, transparent 100%)',
+            maskImage:
+              'linear-gradient(to bottom, transparent 0%, #000 12%, #000 88%, transparent 100%)',
+          }}
+        />
+      </picture>
+    </Link>
 
     {/* Bottom bar */}
     <div style={{
