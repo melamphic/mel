@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { SEO } from '../components/SEO';
 import { Header } from '../components/Header';
 import { Footer } from '../components/Footer';
+import { track } from '../lib/posthog';
 import {
   MARKETS,
   PRODUCTS,
@@ -439,6 +440,11 @@ function TierCard({ product, tier, cycle, market }: TierCardProps) {
 
       <Link
         to={`/start?plan=${planCode(product.key, tier.key, cycle)}&vertical=${product.key}`}
+        onClick={() => track('pricing_tier_selected', {
+          vertical: product.key,
+          tier: tier.key,
+          cycle,
+        })}
         style={{
           display: 'block',
           textAlign: 'center',
@@ -518,6 +524,7 @@ function EnterpriseBanner() {
       </div>
       <Link
         to="/start"
+        onClick={() => track('cta_clicked', { cta_id: 'pricing_enterprise_contact_sales' })}
         style={{
           textDecoration: 'none',
           padding: '0.75rem 1.4rem',
