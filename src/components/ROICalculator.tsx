@@ -16,7 +16,11 @@ const VERTICALS: { key: Vertical; label: string }[] = [
   { key: 'veterinary',     label: 'Vets'      },
   { key: 'dental',         label: 'Dental'    },
   { key: 'general_clinic', label: 'Clinics'   },
-  { key: 'aged_care',      label: 'Aged Care' },
+  // Aged Care option removed from picker 2026-05-24 — vertical paused.
+  // The CONFIG entry above + special-case branches further down
+  // (consults-per-day shifts label, no-billing-leakage) are kept so
+  // re-enabling is just adding this line back. DO NOT delete the
+  // aged_care config map entry.
 ];
 
 const SEG_COLORS = ['#FF4E00', '#0F172A', '#CBD5E1'];

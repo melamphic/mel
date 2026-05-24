@@ -31,7 +31,7 @@ export const Footer = () => (
         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
           <Link to="/veterinary" style={{ color: 'var(--salvia-text-muted)', fontSize: '0.9rem', textDecoration: 'none' }}>Veterinary</Link>
           <Link to="/dental" style={{ color: 'var(--salvia-text-muted)', fontSize: '0.9rem', textDecoration: 'none' }}>Dental</Link>
-          <Link to="/aged-care" style={{ color: 'var(--salvia-text-muted)', fontSize: '0.9rem', textDecoration: 'none' }}>Aged Care</Link>
+          {/* Aged Care link removed 2026-05-24 — vertical paused */}
           <Link to="/general-practice" style={{ color: 'var(--salvia-text-muted)', fontSize: '0.9rem', textDecoration: 'none' }}>General Practice</Link>
         </div>
       </div>

@@ -14,7 +14,10 @@ const SignupPage      = lazy(() => import('./pages/SignupPage').then(m => ({ def
 const NotFoundPage    = lazy(() => import('./pages/NotFoundPage').then(m => ({ default: m.NotFoundPage })));
 const VeterinaryPage  = lazy(() => import('./pages/VeterinaryPage').then(m => ({ default: m.VeterinaryPage })));
 const DentalPage      = lazy(() => import('./pages/DentalPage').then(m => ({ default: m.DentalPage })));
-const AgedCarePage    = lazy(() => import('./pages/AgedCarePage').then(m => ({ default: m.AgedCarePage })));
+// AgedCarePage import removed 2026-05-24 — aged care is paused while
+// vet (NZ pilot), dental and GP get focused. File kept on disk; bring
+// the import back when the vertical re-launches.
+// const AgedCarePage    = lazy(() => import('./pages/AgedCarePage').then(m => ({ default: m.AgedCarePage })));
 const GeneralClinicPage = lazy(() => import('./pages/GeneralClinicPage').then(m => ({ default: m.GeneralClinicPage })));
 
 function PageviewTracker() {
@@ -94,7 +97,10 @@ function App() {
             <Route path="/contact-sales" element={<Navigate to="/start" replace />} />
             <Route path="/veterinary" element={<VeterinaryPage />} />
             <Route path="/dental" element={<DentalPage />} />
-            <Route path="/aged-care" element={<AgedCarePage />} />
+            {/* Aged care route paused 2026-05-24 — clean 404 is acceptable
+                while we focus on vet/dental/GP. Old inbound links
+                gracefully hit NotFoundPage which already exists. */}
+            {/* <Route path="/aged-care" element={<AgedCarePage />} /> */}
             <Route path="/general-practice" element={<GeneralClinicPage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>

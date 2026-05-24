@@ -115,6 +115,12 @@ const DOMAINS = [
       </div>
     )
   },
+  // Aged Care domain card removed from public marketing 2026-05-24 —
+  // vertical paused while vet (NZ pilot), dental and GP get focus.
+  // Full code preserved in git history; re-add this object to DOMAINS
+  // when the vertical re-launches. DO NOT change DOMAINS index-based
+  // assumptions elsewhere without a search-and-fix pass.
+  /* AGED CARE ENTRY — PAUSED
   {
     id: 'aged-care',
     label: 'Aged Care',
@@ -161,6 +167,7 @@ const DOMAINS = [
       </div>
     )
   }
+  END AGED CARE ENTRY */
 ];
 
 export const DomainSection = () => {

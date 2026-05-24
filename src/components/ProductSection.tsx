@@ -20,7 +20,7 @@ const products = [
     title: 'Your rulebook, turned into enforceable clauses.',
     subtitle: 'Block-based policy editor (think Notion, but for compliance). Upload your existing PDFs and Salvia imports them. Mark clauses as must-follow, maybe-follow, or try-to-follow — then link them to the forms they govern.',
     bullets: [
-      'Built-in frameworks: HIPAA, NABH, VMR, ADA, BESTPRACTICE, aged-care standards',
+      'Built-in frameworks: HIPAA, NABH, VMR, ADA, BESTPRACTICE',
       'Upload your own policy docs — Salvia converts them into editable blocks',
       'Clause parity tagging: High / Medium / Low enforceability',
     ],
