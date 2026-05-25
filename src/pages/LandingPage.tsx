@@ -10,6 +10,7 @@ import { AuditPack } from '../components/AuditPack';
 import { BridgeSection } from '../components/BridgeSection';
 import { FrameworksRail } from '../components/FrameworksRail';
 import { DomainSection } from '../components/DomainSection';
+import { FindYourPractice } from '../components/FindYourPractice';
 import { ROICalculator } from '../components/ROICalculator';
 import { LabTeaser } from '../components/LabTeaser';
 import { Footer } from '../components/Footer';
@@ -35,6 +36,7 @@ export const LandingPage = () => {
         <BridgeSection />
         <FrameworksRail />
         <DomainSection />
+        <FindYourPractice />
         <ROICalculator />
         <LabTeaser />
       </main>

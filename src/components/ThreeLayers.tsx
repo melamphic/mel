@@ -17,7 +17,7 @@ const LAYERS = [
     label: 'Compliance',
     tag: 'Our wedge',
     headline: 'Every note is checked against your policies — before it\'s signed.',
-    body: 'This is the layer other scribes skip. Upload your rulebook (NABH, VMR, BESTPRACTICE, ADA, aged-care standards — whatever governs you), link clauses to form fields, and Salvia enforces them on every single record.',
+    body: 'This is the layer other scribes skip. Upload your rulebook (NABH, VMR, BESTPRACTICE, ADA — whatever governs you), link clauses to form fields, and Salvia enforces them on every single record.',
     items: ['Policy engine (block-based, versioned)', 'Clause-to-field enforcement', 'Policy-satisfaction score per note', 'Flags surfaced at human-review step'],
     accent: 'rgba(255,78,0,0.06)',
     border: 'var(--salvia-accent)',

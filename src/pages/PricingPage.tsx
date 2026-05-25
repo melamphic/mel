@@ -22,7 +22,16 @@ const DOMAIN_ICON: Record<Vertical, string> = {
   veterinary: 'Veterinary',
   dental: 'Dental',
   general_clinic: 'General Practice',
-  aged_care: 'Aged Care',
+  allied_health: 'Allied Health',
+};
+
+// Per-vertical seat label override. Used for the tab subtitle since
+// the [Product.seatLabel] field is also used in tier copy.
+const DOMAIN_SEAT_LABEL: Record<Vertical, string> = {
+  veterinary: 'For vets',
+  dental: 'For dentists',
+  general_clinic: 'For providers',
+  allied_health: 'For allied clinicians',
 };
 
 const MARKET_STORAGE_KEY = 'salvia.pricing.market';
@@ -61,7 +70,7 @@ export const PricingPage = () => {
     <>
       <SEO
         title="Pricing"
-        description="Salvia pricing for veterinary, dental, general practice, and aged care. Practice plan from $229/mo — compliance-grade clinical documentation, controlled drug logs, audit trails."
+        description="Salvia pricing for veterinary, dental, general practice, and allied health (physio, osteo, chiro, OT, podiatry, speech). Practice plan from $229/mo — compliance-grade clinical documentation, controlled drug logs, audit trails."
         path="/pricing"
         keywords={['veterinary practice software pricing', 'clinical documentation software cost', 'compliance software vet practice']}
       />
@@ -119,8 +128,8 @@ export const PricingPage = () => {
             aria-label="Product"
             style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(4, 1fr)',
-              gap: '0.75rem',
+              gridTemplateColumns: `repeat(${PRODUCTS.length}, minmax(0, 1fr))`,
+              gap: '0.5rem',
               backgroundColor: 'rgba(15, 23, 42, 0.04)',
               padding: '0.5rem',
               borderRadius: 'var(--salvia-radius-base)',
@@ -246,7 +255,7 @@ function DomainTab({ product, active, onSelect }: DomainTabProps) {
       onClick={onSelect}
       style={{
         textAlign: 'left',
-        padding: '1rem 1.25rem',
+        padding: '0.85rem 1rem',
         border: 'none',
         borderRadius: 'calc(var(--salvia-radius-base) - 2px)',
         cursor: 'pointer',
@@ -256,31 +265,33 @@ function DomainTab({ product, active, onSelect }: DomainTabProps) {
         display: 'flex',
         flexDirection: 'column',
         gap: '0.15rem',
+        minWidth: 0,
       }}
     >
       <span
         style={{
-          fontSize: '0.7rem',
+          fontSize: '0.65rem',
           fontWeight: 700,
-          letterSpacing: '0.12em',
+          letterSpacing: '0.1em',
           textTransform: 'uppercase',
           color: active ? 'var(--salvia-accent)' : 'var(--salvia-text-muted)',
+          whiteSpace: 'nowrap',
+          overflow: 'hidden',
+          textOverflow: 'ellipsis',
         }}
       >
         {DOMAIN_ICON[product.key]}
       </span>
       <span
         style={{
-          fontSize: '1rem',
-          fontWeight: 700,
-          color: active ? 'var(--salvia-primary)' : 'var(--salvia-text)',
-          letterSpacing: '-0.01em',
+          fontSize: '0.75rem',
+          color: 'var(--salvia-text-muted)',
+          whiteSpace: 'nowrap',
+          overflow: 'hidden',
+          textOverflow: 'ellipsis',
         }}
       >
-        {product.brand}
-      </span>
-      <span style={{ fontSize: '0.8rem', color: 'var(--salvia-text-muted)' }}>
-        For {product.seatLabel}
+        {DOMAIN_SEAT_LABEL[product.key]}
       </span>
     </button>
   );

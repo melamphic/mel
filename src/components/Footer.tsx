@@ -3,6 +3,20 @@ import salviaLogo from '../assets/salvia.png';
 import wordmarkDesktop from '../assets/salvia-wordmark-desktop.svg';
 import wordmarkMobile from '../assets/salvia-wordmark-mobile.svg';
 
+const linkStyle = {
+  color: 'var(--salvia-text-muted)',
+  fontSize: '0.88rem',
+  textDecoration: 'none',
+};
+const colHeadingStyle = {
+  fontSize: '0.72rem',
+  fontWeight: 800,
+  color: 'var(--salvia-primary)',
+  letterSpacing: '0.08em',
+  textTransform: 'uppercase' as const,
+  marginBottom: '1.25rem',
+};
+
 export const Footer = () => (
   <footer style={{
     backgroundColor: 'var(--salvia-bg)',
@@ -11,7 +25,18 @@ export const Footer = () => (
     zIndex: 10,
     paddingTop: '4rem'
   }}>
-    <div className="container mobile-stack" style={{ display: 'grid', gridTemplateColumns: '1.5fr 1fr 1fr 1fr', gap: '3rem', marginBottom: '4rem' }}>
+    <div
+      className="footer-grid mobile-stack"
+      style={{
+        display: 'grid',
+        gridTemplateColumns: '1.5fr 1fr 1fr 1fr 1fr',
+        gap: '2.5rem',
+        marginBottom: '4rem',
+        maxWidth: '1200px',
+        margin: '0 auto 4rem',
+        padding: '0 2rem',
+      }}
+    >
       <div>
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '1.5rem' }}>
           <img
@@ -27,31 +52,43 @@ export const Footer = () => (
       </div>
 
       <div>
-        <div style={{ fontSize: '0.75rem', fontWeight: 800, color: 'var(--salvia-primary)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '1.25rem' }}>By Practice</div>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-          <Link to="/veterinary" style={{ color: 'var(--salvia-text-muted)', fontSize: '0.9rem', textDecoration: 'none' }}>Veterinary</Link>
-          <Link to="/dental" style={{ color: 'var(--salvia-text-muted)', fontSize: '0.9rem', textDecoration: 'none' }}>Dental</Link>
-          <Link to="/aged-care" style={{ color: 'var(--salvia-text-muted)', fontSize: '0.9rem', textDecoration: 'none' }}>Aged Care</Link>
-          <Link to="/general-practice" style={{ color: 'var(--salvia-text-muted)', fontSize: '0.9rem', textDecoration: 'none' }}>General Practice</Link>
+        <div style={colHeadingStyle}>By Practice</div>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.65rem' }}>
+          <Link to="/veterinary" style={linkStyle}>Veterinary</Link>
+          <Link to="/dental" style={linkStyle}>Dental</Link>
+          <Link to="/general-practice" style={linkStyle}>General Practice</Link>
+          <Link to="/allied-health" style={linkStyle}>Allied Health</Link>
         </div>
       </div>
 
       <div>
-        <div style={{ fontSize: '0.75rem', fontWeight: 800, color: 'var(--salvia-primary)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '1.25rem' }}>Modules</div>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-          <Link to="/products/point-of-care-evidence" style={{ color: 'var(--salvia-text-muted)', fontSize: '0.9rem', textDecoration: 'none' }}>Audio → Forms</Link>
-          <Link to="/products/statutory-form-infrastructure" style={{ color: 'var(--salvia-text-muted)', fontSize: '0.9rem', textDecoration: 'none' }}>Form Engine</Link>
-          <Link to="/products/institutional-compliance-hub" style={{ color: 'var(--salvia-text-muted)', fontSize: '0.9rem', textDecoration: 'none' }}>Policy Engine</Link>
-          <Link to="/blog" style={{ color: 'var(--salvia-text-muted)', fontSize: '0.9rem', textDecoration: 'none' }}>Blog</Link>
-          <Link to="/pricing" style={{ color: 'var(--salvia-text-muted)', fontSize: '0.9rem', textDecoration: 'none' }}>Pricing</Link>
+        <div style={colHeadingStyle}>Allied Disciplines</div>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.65rem' }}>
+          <Link to="/physiotherapy" style={linkStyle}>Physiotherapy</Link>
+          <Link to="/osteopathy" style={linkStyle}>Osteopathy</Link>
+          <Link to="/chiropractic" style={linkStyle}>Chiropractic</Link>
+          <Link to="/occupational-therapy" style={linkStyle}>Occupational Therapy</Link>
+          <Link to="/podiatry" style={linkStyle}>Podiatry</Link>
+          <Link to="/speech-therapy" style={linkStyle}>Speech Therapy</Link>
         </div>
       </div>
 
       <div>
-        <div style={{ fontSize: '0.75rem', fontWeight: 800, color: 'var(--salvia-primary)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '1.25rem' }}>Company</div>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-          <Link to="/start" style={{ textDecoration: 'none', color: 'var(--salvia-text-muted)', fontSize: '0.9rem' }}>Book a demo</Link>
-          <Link to="/start" style={{ textDecoration: 'none', color: 'var(--salvia-text-muted)', fontSize: '0.9rem' }}>Contact sales</Link>
+        <div style={colHeadingStyle}>Modules</div>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.65rem' }}>
+          <Link to="/products/point-of-care-evidence" style={linkStyle}>Audio → Forms</Link>
+          <Link to="/products/statutory-form-infrastructure" style={linkStyle}>Form Engine</Link>
+          <Link to="/products/institutional-compliance-hub" style={linkStyle}>Policy Engine</Link>
+          <Link to="/blog" style={linkStyle}>Blog</Link>
+          <Link to="/pricing" style={linkStyle}>Pricing</Link>
+        </div>
+      </div>
+
+      <div>
+        <div style={colHeadingStyle}>Company</div>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.65rem' }}>
+          <Link to="/start" style={linkStyle}>Book a demo</Link>
+          <Link to="/start" style={linkStyle}>Contact sales</Link>
         </div>
       </div>
     </div>
@@ -91,7 +128,6 @@ export const Footer = () => (
       flexWrap: 'wrap',
       gap: '0.75rem',
     }}>
-      {/* Made in Malabar */}
       <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem' }}>
         <div style={{
           width: 6, height: 6, borderRadius: '50%',
@@ -128,7 +164,6 @@ export const Footer = () => (
         ))}
       </nav>
 
-      {/* Copyright */}
       <span style={{
         fontSize: '0.72rem',
         fontWeight: 400,
@@ -138,5 +173,19 @@ export const Footer = () => (
         © {new Date().getFullYear()} Melamphic Inc.
       </span>
     </div>
+
+    <style>{`
+      @media (max-width: 900px) {
+        .footer-grid {
+          grid-template-columns: 1fr 1fr !important;
+          gap: 2rem !important;
+        }
+      }
+      @media (max-width: 560px) {
+        .footer-grid {
+          grid-template-columns: 1fr !important;
+        }
+      }
+    `}</style>
   </footer>
 );

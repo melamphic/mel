@@ -77,6 +77,82 @@ const DOMAINS = [
     )
   },
   {
+    id: 'allied',
+    label: 'Allied Health',
+    tagline: 'Physio, osteo, chiro, OT, podiatry, speech',
+    accent: '#0891B2',
+    title: 'Outcome measures, tracked episode-over-episode.',
+    desc: 'CORU, HCPC, AHPRA, PBNZ. Validated scales (NPRS, ODI, COPM, AAC) as first-class fields — score at intake, repeat at review, trend on the discharge summary. Framework-aware record generation tuned to your discipline.',
+    metric: '6',
+    metricLabel: 'DISCIPLINES, ONE PRODUCT',
+    ui: (
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+        <div style={{ fontSize: '0.7rem', fontWeight: 800, color: '#0891B2', letterSpacing: '0.08em' }}>EPISODE OF CARE · PHYSIOTHERAPY</div>
+
+        {/* Outcome trend card */}
+        <div style={{
+          padding: '2rem', background: '#fff', borderRadius: '24px',
+          border: '1px solid rgba(15, 23, 42, 0.08)',
+          boxShadow: '0 8px 24px rgba(0,0,0,0.03)',
+        }}>
+          <div style={{
+            display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start',
+            marginBottom: '1.5rem',
+          }}>
+            <div>
+              <div style={{ fontSize: '0.7rem', fontWeight: 800, color: 'var(--salvia-text-muted)', letterSpacing: '0.08em', marginBottom: '0.2rem' }}>
+                NPRS (PAIN, 0–10)
+              </div>
+              <div style={{ fontSize: '0.95rem', fontWeight: 700, color: 'var(--salvia-primary)' }}>Lumbar strain · 6 sessions</div>
+            </div>
+            <div style={{
+              fontSize: '0.65rem', fontWeight: 800,
+              padding: '0.3rem 0.7rem', borderRadius: '8px',
+              background: '#F0FDF4', color: '#16A34A',
+              border: '1px solid rgba(22,163,74,0.12)',
+            }}>−5 over episode</div>
+          </div>
+
+          {/* Mini chart */}
+          <div style={{
+            display: 'flex', alignItems: 'flex-end',
+            gap: '0.65rem', height: '64px', marginBottom: '0.5rem',
+          }}>
+            {[8, 7, 6, 5, 4, 3].map((v, i) => (
+              <div key={i} style={{
+                flex: 1, display: 'flex', flexDirection: 'column',
+                alignItems: 'center', gap: '0.3rem',
+              }}>
+                <div style={{
+                  width: '100%', height: `${(v / 10) * 100}%`,
+                  background: `linear-gradient(180deg, #0891B2 0%, #06B6D4 100%)`,
+                  borderRadius: '4px 4px 0 0',
+                  opacity: i === 5 ? 1 : 0.55,
+                }} />
+              </div>
+            ))}
+          </div>
+          <div style={{
+            display: 'flex', gap: '0.65rem',
+            fontSize: '0.65rem', fontWeight: 700, color: 'var(--salvia-text-muted)',
+          }}>
+            {['S1', 'S2', 'S3', 'S4', 'S5', 'S6'].map((s) => (
+              <div key={s} style={{ flex: 1, textAlign: 'center' }}>{s}</div>
+            ))}
+          </div>
+        </div>
+
+        <div style={{
+          padding: '1rem 1.25rem', background: 'rgba(8,145,178,0.05)',
+          border: '1px solid rgba(8,145,178,0.15)', borderRadius: '14px',
+          fontSize: '0.82rem', color: '#0E7490', fontWeight: 600, lineHeight: 1.45,
+        }}>
+          Framework: CORU Physiotherapists Registration Board · Episode summary auto-drafted for discharge.
+        </div>
+      </div>
+    ),
+  },
+  {
     id: 'dental',
     label: 'Dental',
     tagline: 'General & specialist practices',
@@ -115,52 +191,6 @@ const DOMAINS = [
       </div>
     )
   },
-  {
-    id: 'aged-care',
-    label: 'Aged Care',
-    tagline: 'Residential, home care & memory support',
-    accent: '#059669',
-    title: 'Every incident logged. Every obligation met.',
-    desc: 'SIRS, Aged Care Quality Standards, CQC, Te Tiriti — Salvia captures the incident from a voice note, classifies it against your reporting obligations, and files an immutable record before the 24-hour window closes.',
-    metric: '24h',
-    metricLabel: 'SIRS PRIORITY 1 WINDOW',
-    ui: (
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-        <div style={{ fontSize: '0.7rem', fontWeight: 800, color: '#059669', letterSpacing: '0.08em' }}>INCIDENT CLASSIFICATION: SIRS AU</div>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-          {[
-            { label: 'Incident type', value: 'Unexplained absence', priority: null },
-            { label: 'SIRS category', value: 'Priority 1', priority: 'high' },
-            { label: 'Notification window', value: '24 hours', priority: 'high' },
-            { label: 'Record status', value: 'Immutably locked', priority: 'ok' },
-          ].map((row, i) => (
-            <div key={i} style={{
-              padding: '1rem 1.25rem', background: '#fff', borderRadius: '14px',
-              border: '1px solid rgba(15, 23, 42, 0.06)',
-              display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-              boxShadow: '0 2px 4px rgba(0,0,0,0.01)'
-            }}>
-              <div style={{ fontSize: '0.8rem', fontWeight: 600, color: 'var(--salvia-text-muted)' }}>{row.label}</div>
-              <div style={{
-                fontSize: '0.75rem', fontWeight: 800, padding: '0.3rem 0.7rem',
-                borderRadius: '8px',
-                background: row.priority === 'high' ? '#FEF2F2' : row.priority === 'ok' ? '#F0FDF4' : '#F8FAFC',
-                color: row.priority === 'high' ? '#DC2626' : row.priority === 'ok' ? '#16A34A' : 'var(--salvia-primary)',
-                border: `1px solid ${row.priority === 'high' ? 'rgba(220,38,38,0.12)' : row.priority === 'ok' ? 'rgba(22,163,74,0.12)' : 'rgba(15,23,42,0.06)'}`,
-              }}>{row.value}</div>
-            </div>
-          ))}
-        </div>
-        <div style={{
-          padding: '1rem 1.25rem', background: 'rgba(5,150,105,0.05)',
-          border: '1px solid rgba(5,150,105,0.15)', borderRadius: '14px',
-          fontSize: '0.82rem', color: '#065F46', fontWeight: 600, lineHeight: 1.45
-        }}>
-          Reportable event automatically queued for regulator notification.
-        </div>
-      </div>
-    )
-  }
 ];
 
 export const DomainSection = () => {
@@ -210,7 +240,7 @@ export const DomainSection = () => {
               fontSize: '1.15rem', color: 'var(--salvia-text-muted)',
               lineHeight: 1.7, margin: 0
             }}>
-              Clinics, vet practices, dental surgeries, aged care. Same engine, same compliance guarantees — tuned to the regulations, terminology, and forms that govern your specialty.
+              Clinics, vet practices, dental surgeries, allied health. Same engine, same compliance guarantees — tuned to the regulations, terminology, and forms that govern your specialty.
             </p>
           </div>
         </div>

@@ -14,8 +14,9 @@ const SignupPage      = lazy(() => import('./pages/SignupPage').then(m => ({ def
 const NotFoundPage    = lazy(() => import('./pages/NotFoundPage').then(m => ({ default: m.NotFoundPage })));
 const VeterinaryPage  = lazy(() => import('./pages/VeterinaryPage').then(m => ({ default: m.VeterinaryPage })));
 const DentalPage      = lazy(() => import('./pages/DentalPage').then(m => ({ default: m.DentalPage })));
-const AgedCarePage    = lazy(() => import('./pages/AgedCarePage').then(m => ({ default: m.AgedCarePage })));
 const GeneralClinicPage = lazy(() => import('./pages/GeneralClinicPage').then(m => ({ default: m.GeneralClinicPage })));
+const AlliedHealthPage  = lazy(() => import('./pages/AlliedHealthPage').then(m => ({ default: m.AlliedHealthPage })));
+const AlliedDisciplineTemplate = lazy(() => import('./pages/AlliedDisciplineTemplate').then(m => ({ default: m.AlliedDisciplineTemplate })));
 
 function PageviewTracker() {
   const { pathname, search } = useLocation();
@@ -94,8 +95,14 @@ function App() {
             <Route path="/contact-sales" element={<Navigate to="/start" replace />} />
             <Route path="/veterinary" element={<VeterinaryPage />} />
             <Route path="/dental" element={<DentalPage />} />
-            <Route path="/aged-care" element={<AgedCarePage />} />
             <Route path="/general-practice" element={<GeneralClinicPage />} />
+            <Route path="/allied-health" element={<AlliedHealthPage />} />
+            <Route path="/physiotherapy" element={<AlliedDisciplineTemplate slug="physiotherapy" />} />
+            <Route path="/osteopathy" element={<AlliedDisciplineTemplate slug="osteopathy" />} />
+            <Route path="/chiropractic" element={<AlliedDisciplineTemplate slug="chiropractic" />} />
+            <Route path="/occupational-therapy" element={<AlliedDisciplineTemplate slug="occupational-therapy" />} />
+            <Route path="/podiatry" element={<AlliedDisciplineTemplate slug="podiatry" />} />
+            <Route path="/speech-therapy" element={<AlliedDisciplineTemplate slug="speech-therapy" />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </Suspense>
