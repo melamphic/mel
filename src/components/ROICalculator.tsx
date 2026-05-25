@@ -6,21 +6,17 @@ const CFG: Record<Vertical, {
   complianceMonthly: number; complianceLabel: string;
   billingPct: number; annualRevPerSeat: number; noteUnit: string;
 }> = {
-  veterinary:     { complianceMonthly: 250,  complianceLabel: 'VMR & NZVC audit avoidance',        billingPct: 0.02, annualRevPerSeat: 200000, noteUnit: 'consults/day' },
-  dental:         { complianceMonthly: 208,  complianceLabel: 'GDC / DCNZ audit avoidance',        billingPct: 0.03, annualRevPerSeat: 250000, noteUnit: 'patients/day' },
-  general_clinic: { complianceMonthly: 667,  complianceLabel: 'Medicare / ACC claw-back avoidance',billingPct: 0.02, annualRevPerSeat: 300000, noteUnit: 'patients/day' },
-  aged_care:      { complianceMonthly: 3125, complianceLabel: 'SIRS Priority 1 fine avoidance',    billingPct: 0,    annualRevPerSeat: 0,      noteUnit: 'shifts/day'   },
+  veterinary:     { complianceMonthly: 250,  complianceLabel: 'VMR & NZVC audit avoidance',           billingPct: 0.02, annualRevPerSeat: 200000, noteUnit: 'consults/day' },
+  dental:         { complianceMonthly: 208,  complianceLabel: 'GDC / DCNZ audit avoidance',           billingPct: 0.03, annualRevPerSeat: 250000, noteUnit: 'patients/day' },
+  general_clinic: { complianceMonthly: 667,  complianceLabel: 'Medicare / ACC claw-back avoidance',   billingPct: 0.02, annualRevPerSeat: 300000, noteUnit: 'patients/day' },
+  allied_health:  { complianceMonthly: 250,  complianceLabel: 'CORU / HCPC / AHPRA audit avoidance',  billingPct: 0.02, annualRevPerSeat: 180000, noteUnit: 'sessions/day' },
 };
 
 const VERTICALS: { key: Vertical; label: string }[] = [
   { key: 'veterinary',     label: 'Vets'      },
   { key: 'dental',         label: 'Dental'    },
   { key: 'general_clinic', label: 'Clinics'   },
-  // Aged Care option removed from picker 2026-05-24 — vertical paused.
-  // The CONFIG entry above + special-case branches further down
-  // (consults-per-day shifts label, no-billing-leakage) are kept so
-  // re-enabling is just adding this line back. DO NOT delete the
-  // aged_care config map entry.
+  { key: 'allied_health',  label: 'Allied'    },
 ];
 
 const SEG_COLORS = ['#FF4E00', '#0F172A', '#CBD5E1'];
@@ -131,12 +127,12 @@ export const ROICalculator = () => {
 
   const cfg   = CFG[vertical];
   const seats = staff === '1-3' ? 3 : 7;
-  const days  = vertical === 'aged_care' ? 26 : 22;
+  const days  = 22;
   const saved = Math.max(0, minNow - 3);
 
   const timeValue       = (saved * consults * days * seats / 60) * hourly;
   const complianceValue = cfg.complianceMonthly;
-  const billingValue    = vertical !== 'aged_care' ? (cfg.annualRevPerSeat * seats * cfg.billingPct) / 12 : 0;
+  const billingValue    = (cfg.annualRevPerSeat * seats * cfg.billingPct) / 12;
   const totalValue      = timeValue + complianceValue + billingValue;
 
   const product    = PRODUCTS.find(p => p.key === vertical)!;
@@ -201,12 +197,12 @@ export const ROICalculator = () => {
               value={staff} onChange={setStaff}
             />
             <div style={{ height: '1px', backgroundColor: 'rgba(15,23,42,0.06)' }} />
-            <Slider label={`${vertical === 'aged_care' ? 'Shifts' : 'Consults'} per day, per clinician`} value={consults} min={1} max={40} onChange={setConsults} display={`${consults} ${cfg.noteUnit}`} />
+            <Slider label="Consults per day, per clinician" value={consults} min={1} max={40} onChange={setConsults} display={`${consults} ${cfg.noteUnit}`} />
             <Slider label="Minutes on documentation per note today" value={minNow} min={3} max={45} onChange={setMinNow} display={`${minNow} min`} />
             <Slider label="Hourly staff cost" value={hourly} min={20} max={150} step={5} onChange={setHourly} display={`$${hourly}/hr`} />
             <p style={{ fontSize: '0.67rem', color: 'var(--salvia-text-muted)', fontFamily: 'monospace', lineHeight: 1.7, borderTop: '1px solid rgba(15,23,42,0.06)', paddingTop: '1rem', margin: 0 }}>
               Salvia reduces documentation to ~3 min (review + sign). Saving {saved} min/note.
-              {vertical !== 'aged_care' ? ` Billing: ${(cfg.billingPct * 100).toFixed(0)}% leakage on $${(cfg.annualRevPerSeat / 1000).toFixed(0)}K rev/clinician/yr.` : ''}
+              {` Billing: ${(cfg.billingPct * 100).toFixed(0)}% leakage on $${(cfg.annualRevPerSeat / 1000).toFixed(0)}K rev/clinician/yr.`}
             </p>
           </div>
 

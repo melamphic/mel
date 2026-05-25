@@ -38,15 +38,15 @@ const VERTICALS = [
     ],
   },
   {
-    name: 'Aged Care',
-    accent: '#059669',
+    name: 'Allied Health',
+    accent: '#0891B2',
     frameworks: [
-      { code: 'SIRS', region: 'AU' },
-      { code: 'Aged Care Quality Standards', region: 'AU' },
-      { code: 'CQC KLOEs', region: 'UK' },
-      { code: 'Te Tiriti Standards', region: 'NZ' },
-      { code: 'CMS MDS 3.0', region: 'US' },
-      { code: 'ISO 9001', region: 'Global' },
+      { code: 'CORU', region: 'IE' },
+      { code: 'HCPC', region: 'UK' },
+      { code: 'AHPRA', region: 'AU' },
+      { code: 'PBNZ / OTBNZ', region: 'NZ' },
+      { code: 'GOsC', region: 'UK' },
+      { code: 'NBCOT / ASHA', region: 'US' },
     ],
   },
 ];

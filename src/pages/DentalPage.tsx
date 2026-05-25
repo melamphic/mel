@@ -2,6 +2,15 @@ import { Link } from 'react-router-dom';
 import { Header } from '../components/Header';
 import { Footer } from '../components/Footer';
 import { SEO } from '../components/SEO';
+import {
+  WorkflowSection,
+  StatsBar,
+  BeforeAfter,
+  HonestScope,
+  PricingTeaser,
+} from '../components/VerticalSections';
+
+const ACCENT = '#10B981';
 
 const FAQS = [
   {
@@ -227,6 +236,16 @@ export const DentalPage = () => {
         </div>
       </section>
 
+      {/* Stats bar */}
+      <StatsBar accent={ACCENT} />
+
+      {/* Workflow */}
+      <WorkflowSection
+        accent={ACCENT}
+        verticalLabel="Dental"
+        audioStepCopy="After each appointment, leave a brief voice note. 30 seconds to a few minutes — natural language, no template-bashing."
+      />
+
       {/* Feature grid */}
       <section style={{ padding: '7rem 0', backgroundColor: '#fff' }}>
         <div className="container" style={{ maxWidth: '1100px' }}>
@@ -259,6 +278,51 @@ export const DentalPage = () => {
           </div>
         </div>
       </section>
+
+      {/* Before vs After */}
+      <BeforeAfter
+        accent={ACCENT}
+        beforeLines={[
+          `End-of-day chart updates. BPE scoring skipped on a busy day.`,
+          `Radiograph justification captured "in my head" — ARPANSA inspector finds gaps.`,
+          `Treatment plan discussed verbally. Patient disputes the bill afterwards.`,
+          `Locum sees a hygiene check. Different note format, different completeness, different defensibility.`,
+          `CQC inspector asks for evidence of medical history review. You scroll for fifteen minutes.`,
+        ]}
+        afterLines={[
+          `Voice note after each appointment. BPE field required — note cannot save without it.`,
+          `Radiograph justification captured at time of exposure. ARPANSA-compliant trail produced automatically.`,
+          `Treatment plan with itemised costs, signed before the appointment. GDC Standard 4 ready.`,
+          `Every locum signs with their registration number. Records visually attributed.`,
+          `CQC inspector asks. You filter for medical-history-review entries and export in seconds.`,
+        ]}
+      />
+
+      {/* Honest scope */}
+      <HonestScope
+        accent={ACCENT}
+        doLines={[
+          `Audio → structured dental record with BPE, STE, charting`,
+          `Radiograph justification + ARPANSA/CQC audit trail`,
+          `Treatment plan + itemised cost estimate with e-signature`,
+          `Immutable audit trail per CQC Reg 17, GDC, AHPRA Dental Board`,
+          `Multi-dentist practice with role-based access for hygienists, nurses, admin`,
+        ]}
+        dontLines={[
+          `Replace your practice management software`,
+          `Bill insurers or process claims directly`,
+          `Claim regulatory sign-off on your behalf`,
+          `Auto-publish records without your review`,
+          `Provide clinical decision-making — you stay in the loop`,
+        ]}
+      />
+
+      {/* Pricing teaser */}
+      <PricingTeaser
+        accent={ACCENT}
+        vertical="dental"
+        fromPriceCopy="Dental compliance, from US$229/mo."
+      />
 
       {/* FAQ section */}
       <section style={{ padding: '7rem 0', backgroundColor: 'var(--salvia-bg)', borderTop: '1px solid #F1F5F9' }}>

@@ -2,6 +2,15 @@ import { Link } from 'react-router-dom';
 import { Header } from '../components/Header';
 import { Footer } from '../components/Footer';
 import { SEO } from '../components/SEO';
+import {
+  WorkflowSection,
+  StatsBar,
+  BeforeAfter,
+  HonestScope,
+  PricingTeaser,
+} from '../components/VerticalSections';
+
+const ACCENT = '#FF4E00';
 
 const FAQS = [
   {
@@ -229,6 +238,16 @@ export const VeterinaryPage = () => {
         </div>
       </section>
 
+      {/* Stats bar */}
+      <StatsBar accent={ACCENT} />
+
+      {/* Workflow */}
+      <WorkflowSection
+        accent={ACCENT}
+        verticalLabel="Veterinary"
+        audioStepCopy="After each consult, leave a brief voice note. 30 seconds to a few minutes — natural language, no template-bashing."
+      />
+
       {/* Feature grid */}
       <section style={{ padding: '7rem 0', backgroundColor: '#fff' }}>
         <div className="container" style={{ maxWidth: '1100px' }}>
@@ -261,6 +280,52 @@ export const VeterinaryPage = () => {
           </div>
         </div>
       </section>
+
+      {/* Before vs After */}
+      <BeforeAfter
+        accent={ACCENT}
+        beforeLines={[
+          `End-of-day typing into a generic SOAP template — or worse, end-of-week catch-up.`,
+          `Controlled drug register kept on paper. Running balance drifts. CMA inspector finds gaps.`,
+          `Written estimate captured verbally. Owner disputes the bill. No paper trail.`,
+          `Locum sees Mrs Smith's dog. Different handwriting, different format, no clear attribution.`,
+          `RCVS assessor asks for a complete inspection file. Two-hour fire drill.`,
+        ]}
+        afterLines={[
+          `Voice note after each consult. Structured record — history, exam, assessment, plan, drugs — ready in seconds.`,
+          `Controlled drug register auto-populated on every administration. Running balance always accurate.`,
+          `Written estimate signed before treatment. Locked to the record. CMA-ready.`,
+          `Every locum signs with their own registration number. Records visually attributed.`,
+          `RCVS assessor asks for a file. Exported with one click, fully timestamped.`,
+        ]}
+      />
+
+      {/* Honest scope */}
+      <HonestScope
+        accent={ACCENT}
+        doLines={[
+          `Audio → structured vet consultation record`,
+          `Controlled drug register (Schedule 2 & 3) with witness fields`,
+          `Procedure-specific consent + written cost estimate`,
+          `Immutable audit trail per RCVS, VCNZ, VPB requirements`,
+          `CMA September 2026 remedies — itemised billing, estimates, complaint trail`,
+          `Multi-vet practice with role-based access for principals, associates, locums, nurses`,
+        ]}
+        dontLines={[
+          `Replace your practice management software (PMS sits alongside)`,
+          `Bill clients or process payments directly`,
+          `Claim regulatory sign-off on your behalf`,
+          `Auto-publish records without your review`,
+          `Provide clinical decision-making — you stay in the loop`,
+        ]}
+      />
+
+      {/* Pricing teaser */}
+      <PricingTeaser
+        accent={ACCENT}
+        vertical="veterinary"
+        fromPriceCopy="Veterinary compliance, from US$229/mo."
+      />
 
       {/* FAQ section */}
       <section style={{ padding: '7rem 0', backgroundColor: 'var(--salvia-bg)', borderTop: '1px solid #F1F5F9' }}>

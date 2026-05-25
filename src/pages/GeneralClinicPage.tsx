@@ -2,6 +2,15 @@ import { Link } from 'react-router-dom';
 import { Header } from '../components/Header';
 import { Footer } from '../components/Footer';
 import { SEO } from '../components/SEO';
+import {
+  WorkflowSection,
+  StatsBar,
+  BeforeAfter,
+  HonestScope,
+  PricingTeaser,
+} from '../components/VerticalSections';
+
+const ACCENT = '#D97706';
 
 const FAQS = [
   {
@@ -107,6 +116,16 @@ export const GeneralClinicPage = () => {
         </div>
       </section>
 
+      {/* Stats bar */}
+      <StatsBar accent={ACCENT} />
+
+      {/* Workflow */}
+      <WorkflowSection
+        accent={ACCENT}
+        verticalLabel="General practice"
+        audioStepCopy="After each consult, leave a brief voice note. 30 seconds to a few minutes — natural language, no template-bashing."
+      />
+
       <section style={{ padding: '7rem 0', backgroundColor: '#fff' }}>
         <div className="container" style={{ maxWidth: '1100px' }}>
           <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
@@ -125,6 +144,51 @@ export const GeneralClinicPage = () => {
           </div>
         </div>
       </section>
+
+      {/* Before vs After */}
+      <BeforeAfter
+        accent={ACCENT}
+        beforeLines={[
+          `End-of-day catch-up on records. Some details remembered, some not.`,
+          `Prescribing log kept by hand. CD register drifts. Inspector finds a gap.`,
+          `Referral sent — patient drops off the radar. Lost-in-the-system defence at complaints.`,
+          `Locum sees the patient. Different note style, different completeness.`,
+          `CQC inspector asks for evidence of consent for procedure X. Long search.`,
+        ]}
+        afterLines={[
+          `Voice note after each consult. Structured SOAP record ready before you leave the room.`,
+          `Every prescription logged with drug, dose, route, indication. CD register accurate, witnessed.`,
+          `Referral sent + receipt + follow-up captured in one trail. Defensible.`,
+          `Every clinician signs with their own registration. Records visually attributed.`,
+          `CQC inspector asks. You filter and export in seconds.`,
+        ]}
+      />
+
+      {/* Honest scope */}
+      <HonestScope
+        accent={ACCENT}
+        doLines={[
+          `Audio → structured GP consultation record (history, exam, assessment, plan)`,
+          `Prescribing log + controlled drug register`,
+          `Referral and follow-up trail`,
+          `Immutable audit trail per CQC Reg 17, AHPRA, MCNZ`,
+          `Multi-GP practice with role-based access for nurses, reception, admin`,
+        ]}
+        dontLines={[
+          `Replace your practice management software`,
+          `Bill insurers or process claims directly`,
+          `Connect to NHS Spine, MyHealth or national systems (yet)`,
+          `Claim regulatory sign-off on your behalf`,
+          `Provide clinical decision-making — you stay in the loop`,
+        ]}
+      />
+
+      {/* Pricing teaser */}
+      <PricingTeaser
+        accent={ACCENT}
+        vertical="general_clinic"
+        fromPriceCopy="General practice compliance, from US$249/mo."
+      />
 
       <section style={{ padding: '7rem 0', backgroundColor: 'var(--salvia-bg)', borderTop: '1px solid #F1F5F9' }}>
         <div className="container" style={{ maxWidth: '760px' }}>

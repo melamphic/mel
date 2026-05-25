@@ -1,14 +1,19 @@
 // Pricing data mirrors /pricing-model-v3.md (locked).
 // Source of truth for the marketing pricing page.
 
-export type Vertical = 'veterinary' | 'dental' | 'general_clinic' | 'aged_care';
+export type Vertical =
+  | 'veterinary'
+  | 'dental'
+  | 'general_clinic'
+  | 'allied_health';
 export type TierKey = 'practice' | 'pro';
 export type Cycle = 'monthly' | 'annual';
 
 /// ISO market identifiers matching pricing-model-v3 §11. USD is the
 /// canonical cost-modelling currency; the others are display-only and
-/// rounded to clean numbers.
-export type Market = 'US' | 'NZ' | 'AU' | 'UK';
+/// rounded to clean numbers. EU = euro-area pricing (any EU country),
+/// with VAT excluded since rates vary by member state.
+export type Market = 'US' | 'NZ' | 'AU' | 'UK' | 'EU';
 
 export interface MarketMeta {
   key: Market;
@@ -19,10 +24,11 @@ export interface MarketMeta {
 }
 
 export const MARKETS: MarketMeta[] = [
-  { key: 'US', label: 'United States',   currency: 'USD', symbol: '$',  taxNote: 'Excl. local sales tax' },
+  { key: 'US', label: 'United States',   currency: 'USD', symbol: '$',   taxNote: 'Excl. local sales tax' },
   { key: 'NZ', label: 'New Zealand',     currency: 'NZD', symbol: 'NZ$', taxNote: 'Excl. GST 15%' },
-  { key: 'AU', label: 'Australia',       currency: 'AUD', symbol: 'A$', taxNote: 'Excl. GST 10%' },
-  { key: 'UK', label: 'United Kingdom',  currency: 'GBP', symbol: '£',  taxNote: 'Excl. VAT 20%' },
+  { key: 'AU', label: 'Australia',       currency: 'AUD', symbol: 'A$',  taxNote: 'Excl. GST 10%' },
+  { key: 'UK', label: 'United Kingdom',  currency: 'GBP', symbol: '£',   taxNote: 'Excl. VAT 20%' },
+  { key: 'EU', label: 'Europe',          currency: 'EUR', symbol: '€',   taxNote: 'Excl. VAT (rate varies by country)' },
 ];
 
 export interface Tier {
@@ -62,7 +68,7 @@ export const PRODUCTS: Product[] = [
         seats: '1–3 vets',
         notesPerMonth: 1500,
         aiSeats: 3,
-        prices: { US: 229, NZ: 385, AU: 365, UK: 181 },
+        prices: { US: 229, NZ: 385, AU: 365, UK: 181, EU: 209 },
         highlight: 'Most popular',
       },
       {
@@ -71,7 +77,7 @@ export const PRODUCTS: Product[] = [
         seats: '4–7 vets',
         notesPerMonth: 4000,
         aiSeats: 7,
-        prices: { US: 499, NZ: 839, AU: 795, UK: 395 },
+        prices: { US: 499, NZ: 839, AU: 795, UK: 395, EU: 459 },
       },
     ],
   },
@@ -87,7 +93,7 @@ export const PRODUCTS: Product[] = [
         seats: '1–3 dentists',
         notesPerMonth: 1200,
         aiSeats: 3,
-        prices: { US: 229, NZ: 385, AU: 365, UK: 181 },
+        prices: { US: 229, NZ: 385, AU: 365, UK: 181, EU: 209 },
       },
       {
         key: 'pro',
@@ -95,7 +101,7 @@ export const PRODUCTS: Product[] = [
         seats: '4–7 dentists',
         notesPerMonth: 3000,
         aiSeats: 7,
-        prices: { US: 499, NZ: 839, AU: 795, UK: 395 },
+        prices: { US: 499, NZ: 839, AU: 795, UK: 395, EU: 459 },
         highlight: 'Most popular',
       },
     ],
@@ -112,7 +118,7 @@ export const PRODUCTS: Product[] = [
         seats: '1–3 providers',
         notesPerMonth: 2000,
         aiSeats: 3,
-        prices: { US: 249, NZ: 419, AU: 395, UK: 199 },
+        prices: { US: 249, NZ: 419, AU: 395, UK: 199, EU: 229 },
       },
       {
         key: 'pro',
@@ -120,33 +126,33 @@ export const PRODUCTS: Product[] = [
         seats: '4–7 providers',
         notesPerMonth: 5000,
         aiSeats: 7,
-        prices: { US: 599, NZ: 1005, AU: 945, UK: 475 },
+        prices: { US: 599, NZ: 1005, AU: 945, UK: 475, EU: 549 },
         highlight: 'Most popular',
       },
     ],
   },
   {
-    key: 'aged_care',
+    key: 'allied_health',
     brand: 'Salvia',
-    tagline: 'Compliance-grade clinical documentation for residential and home aged care.',
-    seatLabel: 'care staff',
+    tagline: 'Compliance-grade clinical documentation for allied health — physio, osteo, chiro, OT, podiatry, speech.',
+    seatLabel: 'clinicians',
     tiers: [
       {
         key: 'practice',
         name: 'Practice',
-        seats: '1–3 care staff',
-        notesPerMonth: 8000,
+        seats: '1–3 clinicians',
+        notesPerMonth: 1800,
         aiSeats: 3,
-        prices: { US: 499, NZ: 839, AU: 789, UK: 395 },
+        prices: { US: 229, NZ: 385, AU: 365, UK: 181, EU: 209 },
+        highlight: 'Most popular',
       },
       {
         key: 'pro',
         name: 'Pro',
-        seats: '4–7 care staff',
-        notesPerMonth: 18000,
+        seats: '4–7 clinicians',
+        notesPerMonth: 4500,
         aiSeats: 7,
-        prices: { US: 1099, NZ: 1845, AU: 1739, UK: 869 },
-        highlight: 'Most popular',
+        prices: { US: 499, NZ: 839, AU: 795, UK: 395, EU: 459 },
       },
     ],
   },
@@ -157,7 +163,11 @@ export const ANNUAL_DISCOUNT = 10 / 12;
 
 // Stable plan_code for the sal backend. Format `{product}_{tier}_{cycle}`.
 export function planCode(v: Vertical, tier: TierKey, cycle: Cycle): string {
-  const product = v === 'veterinary' ? 'paws' : v === 'dental' ? 'smile' : v === 'aged_care' ? 'care' : 'clinic';
+  const product =
+    v === 'veterinary' ? 'paws'
+    : v === 'dental' ? 'smile'
+    : v === 'allied_health' ? 'motion'
+    : 'clinic';
   return `${product}_${tier}_${cycle}`;
 }
 
@@ -188,13 +198,30 @@ export function detectMarket(): Market {
     if (l.endsWith('-nz') || l === 'mi' || l === 'mi-nz') return 'NZ';
     if (l.endsWith('-au')) return 'AU';
     if (l.endsWith('-gb') || l === 'cy' || l === 'cy-gb') return 'UK';
+    if (
+      l.endsWith('-ie') || l === 'ga' || l === 'ga-ie' ||
+      l.startsWith('de') || l.startsWith('fr') || l.startsWith('es') ||
+      l.startsWith('it') || l.startsWith('nl') || l.startsWith('pt') ||
+      l.startsWith('fi') || l.startsWith('sv') || l.startsWith('da') ||
+      l.startsWith('el') || l.startsWith('pl') || l.startsWith('cs') ||
+      l.startsWith('hu') || l.startsWith('ro') || l.startsWith('bg') ||
+      l.startsWith('et') || l.startsWith('lv') || l.startsWith('lt') ||
+      l.startsWith('mt') || l.startsWith('hr') || l.startsWith('sl') ||
+      l.startsWith('sk')
+    ) return 'EU';
   }
   // Time-zone heuristic for users with English-only language settings.
   try {
     const tz = Intl.DateTimeFormat().resolvedOptions().timeZone ?? '';
     if (tz.startsWith('Pacific/Auckland') || tz === 'Pacific/Chatham') return 'NZ';
     if (tz.startsWith('Australia/')) return 'AU';
-    if (tz === 'Europe/London' || tz === 'Europe/Belfast') return 'UK';
+    if (
+      tz === 'Europe/London' || tz === 'Europe/Belfast' ||
+      tz === 'Europe/Isle_of_Man' || tz === 'Europe/Jersey' ||
+      tz === 'Europe/Guernsey'
+    ) return 'UK';
+    // Any other Europe/* timezone falls into the EU market.
+    if (tz.startsWith('Europe/') || tz === 'Atlantic/Madeira' || tz === 'Atlantic/Azores' || tz === 'Atlantic/Canary') return 'EU';
   } catch {
     // Ignore — fall through to US default.
   }

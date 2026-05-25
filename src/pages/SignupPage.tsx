@@ -12,19 +12,14 @@ const VERTICAL_LABEL: Record<Vertical, string> = {
   veterinary: 'Veterinary clinic',
   dental: 'Dental practice',
   general_clinic: 'General practice',
-  // aged_care label retained in the type system + backend; not exposed
-  // to signup until the vertical is re-enabled. See note below.
-  aged_care: 'Aged care home',
+  allied_health: 'Allied health practice',
 };
 
-// Aged care was paused in May 2026 — vet (NZ pilot), dental and GP are
-// the focus through H2. The aged_care option is kept in the Vertical
-// type + backend (enums, templates, incident taxonomy) so re-enabling
-// is a one-line flip here. DO NOT delete the aged_care entry above.
 const VERTICAL_OPTIONS: { value: Vertical; label: string }[] = [
   { value: 'veterinary', label: VERTICAL_LABEL.veterinary },
   { value: 'dental', label: VERTICAL_LABEL.dental },
   { value: 'general_clinic', label: VERTICAL_LABEL.general_clinic },
+  { value: 'allied_health', label: VERTICAL_LABEL.allied_health },
 ];
 
 const COUNTRY_OPTIONS = [
@@ -82,7 +77,7 @@ const TRUST_BULLETS = [
 ];
 
 function isVertical(v: string | null): v is Vertical {
-  return v === 'veterinary' || v === 'dental' || v === 'general_clinic' || v === 'aged_care';
+  return v === 'veterinary' || v === 'dental' || v === 'general_clinic' || v === 'allied_health';
 }
 
 // ── Page ─────────────────────────────────────────────────────────────────────
