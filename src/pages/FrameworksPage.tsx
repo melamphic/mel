@@ -18,7 +18,7 @@ const ACCENT = '#0F172A';
 type CountryFilter = FrameworkCountry | 'all';
 type VerticalFilter = FrameworkVertical | 'all';
 
-const COUNTRIES_ORDER: CountryFilter[] = ['all', 'IE', 'UK', 'AU', 'NZ', 'US', 'EU', 'Global'];
+const COUNTRIES_ORDER: CountryFilter[] = ['all', 'IE', 'UK', 'AU', 'NZ', 'US'];
 const VERTICALS_ORDER: VerticalFilter[] = ['all', 'vet', 'dental', 'gp', 'allied'];
 
 export const FrameworksPage = () => {
@@ -54,6 +54,7 @@ export const FrameworksPage = () => {
     FRAMEWORKS.forEach((f) => { t[f.country]++; });
     return t;
   }, []);
+  void totalsByCountry; // referenced in totals bar below
 
   // Structured data — list of regulatory frameworks (helps Google
   // index each as a discoverable entity).
@@ -121,7 +122,7 @@ export const FrameworksPage = () => {
             display: 'flex', gap: '0.75rem', flexWrap: 'wrap', justifyContent: 'center',
             marginTop: '1.5rem',
           }}>
-            {(['IE','UK','AU','NZ','US','EU','Global'] as FrameworkCountry[]).map((c) => (
+            {(['IE','UK','AU','NZ','US'] as FrameworkCountry[]).map((c) => (
               <button
                 key={c}
                 onClick={() => setCountry(c)}
@@ -141,8 +142,8 @@ export const FrameworksPage = () => {
                 <span style={{
                   fontSize: '0.7rem', fontWeight: 800,
                   padding: '0.1rem 0.45rem', borderRadius: '5px',
-                  backgroundColor: `${COUNTRY_META[c].accent}15`,
-                  color: COUNTRY_META[c].accent,
+                  backgroundColor: 'rgba(15,23,42,0.06)',
+                  color: 'var(--salvia-text-muted)',
                 }}>{totalsByCountry[c]}</span>
               </button>
             ))}
@@ -314,14 +315,25 @@ export const FrameworksPage = () => {
       </section>
 
       <Footer />
+
+      <style>{`
+        .framework-card:hover {
+          border-color: rgba(15,23,42,0.12);
+          box-shadow: 0 6px 18px rgba(15,23,42,0.04);
+          transform: translateY(-1px);
+        }
+        .fw-tag-interactive:hover {
+          background-color: rgba(15,23,42,0.1) !important;
+        }
+      `}</style>
     </div>
   );
 };
 
 function FilterChip({
-  active, label, onClick, accent,
+  active, label, onClick,
 }: {
-  active: boolean; label: string; onClick: () => void; accent: string;
+  active: boolean; label: string; onClick: () => void; accent?: string;
 }) {
   return (
     <button
@@ -330,9 +342,9 @@ function FilterChip({
       style={{
         padding: '0.4rem 0.85rem',
         borderRadius: '999px',
-        border: active ? `1.5px solid ${accent}` : '1.5px solid transparent',
-        backgroundColor: active ? `${accent}15` : 'rgba(15,23,42,0.04)',
-        color: active ? accent : 'var(--salvia-text-muted)',
+        border: active ? '1.5px solid var(--salvia-primary)' : '1.5px solid transparent',
+        backgroundColor: active ? 'var(--salvia-primary)' : 'rgba(15,23,42,0.04)',
+        color: active ? '#fff' : 'var(--salvia-text-muted)',
         fontSize: '0.78rem', fontWeight: 700,
         cursor: 'pointer',
         transition: 'all 0.15s',
@@ -351,7 +363,7 @@ function CountryGroup({ country, frameworks }: { country: FrameworkCountry; fram
       <div style={{
         display: 'flex', alignItems: 'center', gap: '0.75rem',
         marginBottom: '1.25rem', paddingBottom: '0.75rem',
-        borderBottom: `2px solid ${meta.accent}25`,
+        borderBottom: '1px solid #EEF2F6',
       }}>
         <span style={{ fontSize: '1.5rem' }}>{meta.flag}</span>
         <h2 style={{
@@ -362,10 +374,10 @@ function CountryGroup({ country, frameworks }: { country: FrameworkCountry; fram
           {meta.label}
         </h2>
         <span style={{
-          fontSize: '0.75rem', fontWeight: 800,
-          color: meta.accent,
+          fontSize: '0.72rem', fontWeight: 700,
+          color: 'var(--salvia-text-muted)',
           padding: '0.25rem 0.65rem', borderRadius: '6px',
-          backgroundColor: `${meta.accent}12`,
+          backgroundColor: 'rgba(15,23,42,0.04)',
         }}>
           {frameworks.length} framework{frameworks.length === 1 ? '' : 's'}
         </span>
@@ -386,63 +398,73 @@ function FrameworkCard({ f }: { f: typeof FRAMEWORKS[number] }) {
   return (
     <article style={{
       padding: '1.5rem',
-      borderRadius: '16px',
-      backgroundColor: '#FAFBFC',
+      borderRadius: '14px',
+      backgroundColor: '#fff',
       border: '1px solid #EEF2F6',
       display: 'flex', flexDirection: 'column', gap: '0.85rem',
-    }}>
+      transition: 'all 0.18s ease',
+    }} className="framework-card">
       <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: '0.65rem' }}>
-        <div>
+        <div style={{ flex: 1, minWidth: 0 }}>
           <div style={{
-            fontSize: '1.2rem', fontWeight: 900,
-            color: countryMeta.accent, letterSpacing: '-0.02em',
-            marginBottom: '0.2rem',
+            fontSize: '1.15rem', fontWeight: 800,
+            color: 'var(--salvia-primary)', letterSpacing: '-0.02em',
+            marginBottom: '0.25rem',
           }}>
             {f.code}
           </div>
           <div style={{
-            fontSize: '0.82rem', color: 'var(--salvia-text)',
+            fontSize: '0.8rem', color: 'var(--salvia-text-muted)',
             fontWeight: 600, lineHeight: 1.4,
           }}>
             {f.fullName}
           </div>
         </div>
         <span style={{
-          fontSize: '1.1rem', flexShrink: 0,
-        }}>{countryMeta.flag}</span>
+          fontSize: '0.65rem', fontWeight: 800,
+          padding: '0.25rem 0.5rem', borderRadius: '6px',
+          backgroundColor: 'rgba(15,23,42,0.04)',
+          color: 'var(--salvia-text-muted)',
+          letterSpacing: '0.06em', textTransform: 'uppercase',
+          flexShrink: 0, whiteSpace: 'nowrap',
+          display: 'inline-flex', alignItems: 'center', gap: '0.3rem',
+        }}>
+          <span style={{ fontSize: '0.8rem' }}>{countryMeta.flag}</span>
+          {f.country}
+        </span>
       </div>
 
       <p style={{
-        fontSize: '0.82rem', color: 'var(--salvia-text-muted)',
+        fontSize: '0.82rem', color: 'var(--salvia-text)',
         lineHeight: 1.55, margin: 0,
       }}>
         {f.summary}
       </p>
 
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.3rem' }}>
-        <Tag label={FRAMEWORK_CATEGORY_LABEL[f.category]} colour="var(--salvia-text-muted)" />
+        <Tag label={FRAMEWORK_CATEGORY_LABEL[f.category]} />
         {f.verticals.map((v) => (
           <Link key={v} to={VERTICAL_META[v].slug} style={{ textDecoration: 'none' }}>
-            <Tag label={VERTICAL_META[v].label} colour={VERTICAL_META[v].accent} />
+            <Tag label={VERTICAL_META[v].label} interactive />
           </Link>
         ))}
         {f.disciplines?.map((d) => (
           <Link key={d} to={DISCIPLINE_META[d].slug} style={{ textDecoration: 'none' }}>
-            <Tag label={DISCIPLINE_META[d].label} colour={DISCIPLINE_META[d].accent} />
+            <Tag label={DISCIPLINE_META[d].label} interactive />
           </Link>
         ))}
       </div>
 
       <div style={{
-        marginTop: 'auto', paddingTop: '0.5rem',
+        marginTop: 'auto', paddingTop: '0.75rem',
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
         fontSize: '0.7rem', color: 'var(--salvia-text-muted)',
-        borderTop: '1px solid #EEF2F6',
+        borderTop: '1px solid #F1F5F9',
       }}>
         <span>Reviewed {new Date(f.currencyDate).toLocaleDateString('en-GB', { year: 'numeric', month: 'short', day: 'numeric' })}</span>
         {f.sourceUrl && (
           <a href={f.sourceUrl} target="_blank" rel="noreferrer noopener" style={{
-            color: countryMeta.accent, textDecoration: 'none', fontWeight: 700,
+            color: 'var(--salvia-primary)', textDecoration: 'none', fontWeight: 700,
             display: 'inline-flex', alignItems: 'center', gap: '0.25rem',
           }}>
             Source
@@ -458,15 +480,19 @@ function FrameworkCard({ f }: { f: typeof FRAMEWORKS[number] }) {
   );
 }
 
-function Tag({ label, colour }: { label: string; colour: string }) {
+function Tag({ label, interactive }: { label: string; interactive?: boolean }) {
   return (
     <span style={{
       fontSize: '0.65rem', fontWeight: 700,
-      padding: '0.2rem 0.5rem', borderRadius: '5px',
-      backgroundColor: `${colour}10`,
-      color: colour,
+      padding: '0.2rem 0.55rem', borderRadius: '5px',
+      backgroundColor: 'rgba(15,23,42,0.05)',
+      color: 'var(--salvia-text)',
       letterSpacing: '0.02em',
-    }}>{label}</span>
+      transition: 'background-color 0.15s ease',
+      cursor: interactive ? 'pointer' : 'default',
+    }} className={interactive ? 'fw-tag-interactive' : undefined}>
+      {label}
+    </span>
   );
 }
 

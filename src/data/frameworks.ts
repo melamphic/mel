@@ -446,25 +446,6 @@ export const FRAMEWORKS: Framework[] = [
     currencyDate: '2026-04-15',
   },
 
-  // ── Cross-cutting data protection ────────────────────────────
-  {
-    code: 'GDPR',
-    fullName: 'General Data Protection Regulation (EU/UK)',
-    country: 'EU', verticals: ['vet', 'dental', 'gp', 'allied'],
-    category: 'data-protection',
-    summary: 'Health data is special category data. Lawful basis, retention limits, subject access requests, breach notification. UK GDPR mirrors with UK ICO.',
-    sourceUrl: 'https://gdpr.eu/',
-    currencyDate: '2026-04-15',
-  },
-  {
-    code: 'ISO 27001',
-    fullName: 'Information Security Management System',
-    country: 'Global', verticals: ['vet', 'dental', 'gp', 'allied'],
-    category: 'data-protection',
-    summary: 'Internationally recognised information security standard. Salvia infrastructure aligns with ISO 27001 controls.',
-    sourceUrl: 'https://www.iso.org/standard/27001',
-    currencyDate: '2026-04-15',
-  },
 ];
 
 export const FRAMEWORK_CATEGORY_LABEL: Record<FrameworkCategory, string> = {
