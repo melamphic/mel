@@ -2,9 +2,9 @@
 
 > Salvia turns a post-encounter voice note into a policy-checked, audit-locked clinical record before anyone signs off. AI + audio + clinical documentation + compliance, built for every clinical specialty. Not a scribe — a compliance suite.
 
-Salvia is a clinical governance automation platform. Clinicians dictate a post-encounter voice note; Salvia transcribes, extracts structured fields into the right statutory form, runs it against the clinic's linked policy framework, and locks the record with an audit trail. Every note checks itself. Every record defends itself.
+Salvia is a clinical governance automation platform. Clinicians dictate a post-encounter voice note; Salvia transcribes, extracts structured fields into the right statutory form, runs it against the clinic's linked regulatory framework pack, and locks the record with an audit trail. Every note checks itself. Every record defends itself.
 
-Salvia is domain-agnostic. The first beachhead market is veterinary clinics in New Zealand, with parallel pilots in UK dental and aged care.
+Salvia is domain-agnostic. The first beachhead market is veterinary clinics in New Zealand, with parallel pilots in UK dental and allied health (physio).
 
 ## Product pillars
 
@@ -14,20 +14,38 @@ Salvia is domain-agnostic. The first beachhead market is veterinary clinics in N
 
 ## Verticals
 
-- [Veterinary](https://hellosalvia.com/veterinary): RCVS (UK), VCNZ (NZ), AVBC (AU) records standards. Lead beachhead market.
-- [Dental](https://hellosalvia.com/dental): CQC (UK), AHPRA (AU) records inspections.
-- [Aged care](https://hellosalvia.com/aged-care): Incident reporting, medication administration, restraint authorisation.
-- [General practice](https://hellosalvia.com/general-practice): Cross-vertical clinical documentation.
+- [Veterinary](https://hellosalvia.com/veterinary): RCVS PSS (UK), VCNZ (NZ), AVA Code (AU), CMA September 2026 remedies (UK). Lead beachhead market.
+- [Dental](https://hellosalvia.com/dental): CQC Regulation 17 (UK), GDC Standards, AHPRA Dental Board (AU), ARPANSA radiograph (AU).
+- [General practice](https://hellosalvia.com/general-practice): CQC, AHPRA Medical Board, MCNZ, RACGP, BESTPRACTICE.
+- [Allied health](https://hellosalvia.com/allied-health): CORU (IE), HCPC (UK), AHPRA boards (AU), PBNZ/OTBNZ/OCNZ/CBNZ (NZ), GOsC, GCC. Six disciplines as dedicated pages.
+
+## Allied health disciplines
+
+- [Physiotherapy](https://hellosalvia.com/physiotherapy): CORU (IE), HCPC (UK), AHPRA Physiotherapy Board (AU), PBNZ (NZ), FSBPT (US). Outcome measures (NPRS, ODI, NDI, LEFS).
+- [Osteopathy](https://hellosalvia.com/osteopathy): GOsC (UK), AHPRA Osteopathy Board (AU), OCNZ (NZ). OPS Standard D6 record format.
+- [Chiropractic](https://hellosalvia.com/chiropractic): GCC (UK), AHPRA Chiropractic Board (AU), CBNZ (NZ). GCC Code C3 alignment.
+- [Occupational therapy](https://hellosalvia.com/occupational-therapy): CORU (IE), HCPC (UK), AHPRA OT Board (AU), OTBNZ (NZ), NBCOT (US). Goal-setting + ADL tracking.
+- [Podiatry](https://hellosalvia.com/podiatry): CORU (IE), HCPC (UK), AHPRA Podiatry Board (AU), Podiatrists Board NZ. Wound register + sharps log.
+- [Speech & language therapy](https://hellosalvia.com/speech-therapy): CORU (IE), HCPC (UK), Speech Pathology Australia, NZSTA, ASHA (US).
 
 ## Core pages
 
 - [Home](https://hellosalvia.com/)
-- [Pricing](https://hellosalvia.com/pricing): Two tiers — Practice (1-3 clinicians) and Pro (4-7). No solo tier. Contact sales above Pro.
-- [Audio → Forms](https://hellosalvia.com/audio-to-forms): How voice notes become structured records.
-- [Form engine](https://hellosalvia.com/form-engine): Statutory form widget system.
-- [Policy engine](https://hellosalvia.com/policy-engine): Linked policy checks on submission.
+- [Pricing](https://hellosalvia.com/pricing): Two tiers — Practice (1-3 clinicians) and Pro (4-7). Five markets: US, NZ, AU, UK, Europe. No solo tier. Group/Enterprise above Pro.
+- [Frameworks](https://hellosalvia.com/frameworks): Public catalog of every regulatory framework Salvia generates records against. Filter by country, vertical, discipline. Currently 40+ frameworks across 5 countries.
 - [Contact sales](https://hellosalvia.com/contact-sales)
 - [Early access signup](https://hellosalvia.com/start)
+
+## Regulatory frameworks supported
+
+Salvia ships a hand-curated regulatory framework pack per clinic context (country + vertical + discipline). The pack splices into every AI form-gen prompt automatically.
+
+- Ireland: CORU (Physiotherapists, OT, Podiatry, SLT registration boards).
+- UK: RCVS PSS, CMA Remedies, VMR, CQC Reg 17, GDC, HCPC, GOsC, GCC.
+- Australia: AHPRA Boards (Vet, Medical, Dental, Physiotherapy, OT, Osteopathy, Chiropractic, Podiatry), ARPANSA, AVA, SPA.
+- New Zealand: VCNZ, NZDA, MCNZ, BESTPRACTICE, PBNZ, OTBNZ, OCNZ, CBNZ, Podiatrists Board, NZSTA.
+- United States: AVMA, AAHA, ADA CDT, FSBPT, NBCOT, NBCE, APMA, ASHA, HIPAA.
+- Cross-cutting: GDPR (EU/UK), ISO 27001.
 
 ## Blog — practice operations
 
@@ -37,7 +55,7 @@ Salvia is domain-agnostic. The first beachhead market is veterinary clinics in N
 - [The stranger rule](https://hellosalvia.com/blog/stranger-rule): Records readable by clinicians who weren't there.
 - [Audit trail](https://hellosalvia.com/blog/audit-trail): What an inspector actually checks.
 - [Difficult patients](https://hellosalvia.com/blog/difficult-patients): Defensible documentation under conflict.
-- [Pediatric records](https://hellosalvia.com/blog/pediatric-records)
+- [Pediatric records](https://hellosalvia.com/blog/pediatric-records).
 
 ## Blog — veterinary
 

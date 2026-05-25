@@ -159,10 +159,7 @@ export const ALLIED_DISCIPLINES: AlliedDiscipline[] = [
         a: 'Role-based access. Sports doctor sees the medical layer, physios see the physio layer, admin sees scheduling. Records are attributed to whoever signed them — registration number on every entry.',
       },
     ],
-    recentPosts: [
-      { slug: 'coru-physio-records', title: 'What CORU’s Code of Professional Conduct says about physio records — and how to evidence it', tag: 'CORU' },
-      { slug: 'hcpc-record-keeping', title: 'HCPC Standard 10 in practice: what your physio notes actually need to show', tag: 'HCPC' },
-    ],
+    recentPosts: [],
     metaTitle: 'Physiotherapy Compliance Software — CORU, HCPC, AHPRA, PBNZ',
     metaDescription:
       'Salvia keeps physiotherapy records audit-ready for CORU, HCPC, AHPRA and PBNZ. Voice note after each session — SOAP record, outcome measures, treatment log, discharge summary out the other side.',
@@ -224,10 +221,7 @@ export const ALLIED_DISCIPLINES: AlliedDiscipline[] = [
         a: 'Yes. The treatment record captures the approach used per session. Useful both for clinical continuity and for satisfying inspection questions about your scope of practice.',
       },
     ],
-    recentPosts: [
-      { slug: 'gosc-record-keeping', title: 'OPS Standard D6: what a GOsC-aligned osteopathy record actually contains', tag: 'GOsC' },
-      { slug: 'ahpra-osteo-conduct', title: 'AHPRA Osteopathy Code of Conduct: the record-keeping clauses that matter', tag: 'AHPRA' },
-    ],
+    recentPosts: [],
     metaTitle: 'Osteopathy Practice Software — GOsC, AHPRA, OCNZ Compliant',
     metaDescription:
       'Salvia generates osteopathy records aligned with GOsC Osteopathic Practice Standards, AHPRA Osteopathy Board, and OCNZ requirements. Voice note → structured treatment record.',
@@ -289,10 +283,7 @@ export const ALLIED_DISCIPLINES: AlliedDiscipline[] = [
         a: 'Role-based access. Each chiropractor signs their own records with their registration number. Locum visits are clearly attributed for any audit.',
       },
     ],
-    recentPosts: [
-      { slug: 'gcc-record-keeping', title: 'GCC Code C3: what your chiropractic records have to show', tag: 'GCC' },
-      { slug: 'ahpra-chiro-conduct', title: 'AHPRA Chiropractic Code of Conduct — the documentation clauses', tag: 'AHPRA' },
-    ],
+    recentPosts: [],
     metaTitle: 'Chiropractic Practice Software — GCC, AHPRA, CBNZ Records',
     metaDescription:
       'Salvia generates chiropractic records aligned with GCC, AHPRA Chiropractic Board, and CBNZ. Voice note → structured adjustment record, imaging log, consent, audit trail.',
@@ -353,10 +344,7 @@ export const ALLIED_DISCIPLINES: AlliedDiscipline[] = [
         a: 'Salvia generates the clinical record — what was assessed, intervention, progress against goals, recommendation. NDIS-aligned reports can be exported from the structured record without separate templates.',
       },
     ],
-    recentPosts: [
-      { slug: 'coru-ot-records', title: 'CORU OT Code: the record-keeping clauses you have to evidence', tag: 'CORU' },
-      { slug: 'hcpc-ot-record-keeping', title: 'HCPC SoP Standard 9: what an OT inspection actually checks', tag: 'HCPC' },
-    ],
+    recentPosts: [],
     metaTitle: 'Occupational Therapy Software — CORU, HCPC, AHPRA, OTBNZ',
     metaDescription:
       'Salvia keeps OT records audit-ready for CORU, HCPC, AHPRA OT Board and OTBNZ. Voice note → functional assessment, goals, intervention, outcome review.',
@@ -422,10 +410,7 @@ export const ALLIED_DISCIPLINES: AlliedDiscipline[] = [
         a: 'Yes. Records are clinician + location tagged. Mobile clinicians work offline; sync on reconnect. The audit trail captures every visit regardless of location.',
       },
     ],
-    recentPosts: [
-      { slug: 'coru-podiatry-records', title: 'CORU Podiatry Code: assessment, treatment, outcome — what to evidence', tag: 'CORU' },
-      { slug: 'diabetic-foot-pathway', title: 'The diabetic foot pathway: what your records have to show', tag: 'Clinical' },
-    ],
+    recentPosts: [],
     metaTitle: 'Podiatry Practice Software — CORU, HCPC, AHPRA Records',
     metaDescription:
       'Salvia keeps podiatry records audit-ready for CORU, HCPC, AHPRA Podiatry Board and PBNZ. Voice note → assessment, wound register, sharps log, consent, treatment record.',
@@ -486,10 +471,7 @@ export const ALLIED_DISCIPLINES: AlliedDiscipline[] = [
         a: 'Salvia generates the clinical record. NDIS-aligned reports can be exported from the structured record — assessment summary, goals, progress evidence, recommendations.',
       },
     ],
-    recentPosts: [
-      { slug: 'coru-slt-records', title: 'CORU SLT Code: the record-keeping clauses', tag: 'CORU' },
-      { slug: 'hcpc-slt-sop', title: 'HCPC SoP for SLTs: Standard 9 in practice', tag: 'HCPC' },
-    ],
+    recentPosts: [],
     metaTitle: 'Speech Therapy Software — CORU, HCPC, SPA, ASHA',
     metaDescription:
       'Salvia keeps speech and language therapy records audit-ready for CORU, HCPC, SPA, NZSTA and ASHA. Voice note → assessment, goals, intervention, progress review.',

@@ -42,7 +42,7 @@ export const Header: React.FC = () => {
 
         <nav className="hide-mobile" style={{ display: 'flex', gap: '2.5rem', alignItems: 'center' }}>
           <Link to="/#products" style={{ color: 'var(--salvia-text)', fontSize: '0.9rem', fontWeight: 600, textDecoration: 'none' }}>Product</Link>
-          <Link to="/#pipeline" style={{ color: 'var(--salvia-text)', fontSize: '0.9rem', fontWeight: 600, textDecoration: 'none' }}>How it works</Link>
+          <Link to="/#how-it-works" style={{ color: 'var(--salvia-text)', fontSize: '0.9rem', fontWeight: 600, textDecoration: 'none' }}>How it works</Link>
 
           {/* Verticals — hover dropdown */}
           <div className="vertical-dropdown" style={{ position: 'relative' }}>
@@ -140,9 +140,33 @@ export const Header: React.FC = () => {
                   </div>
                 </div>
               </div>
+
+              {/* Frameworks browser footer link */}
+              <div style={{
+                marginTop: '1.25rem',
+                paddingTop: '1rem',
+                borderTop: '1px solid #EEF2F6',
+                display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+              }}>
+                <span style={{ fontSize: '0.78rem', color: 'var(--salvia-text-muted)' }}>
+                  40+ regulatory frameworks across 5 countries
+                </span>
+                <Link to="/frameworks" style={{
+                  fontSize: '0.82rem', fontWeight: 700,
+                  color: 'var(--salvia-accent)', textDecoration: 'none',
+                  display: 'inline-flex', alignItems: 'center', gap: '0.25rem',
+                }}>
+                  Browse all frameworks
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                    <line x1="5" y1="12" x2="19" y2="12" />
+                    <polyline points="12 5 19 12 12 19" />
+                  </svg>
+                </Link>
+              </div>
             </div>
           </div>
 
+          <Link to="/frameworks" style={{ color: 'var(--salvia-text)', fontSize: '0.9rem', fontWeight: 600, textDecoration: 'none' }}>Frameworks</Link>
           <Link to="/pricing" style={{ color: 'var(--salvia-text)', fontSize: '0.9rem', fontWeight: 600, textDecoration: 'none' }}>Pricing</Link>
           <Link to="/blog" style={{ color: 'var(--salvia-text)', fontSize: '0.9rem', fontWeight: 600, textDecoration: 'none' }}>Blog</Link>
         </nav>

@@ -20,10 +20,17 @@ const STATIC_ROUTES = [
   '/pricing',
   '/blog',
   '/contact-sales',
+  '/frameworks',
   '/veterinary',
   '/dental',
-  '/aged-care',
   '/general-practice',
+  '/allied-health',
+  '/physiotherapy',
+  '/osteopathy',
+  '/chiropractic',
+  '/occupational-therapy',
+  '/podiatry',
+  '/speech-therapy',
   '/products/point-of-care-evidence',
   '/products/statutory-form-infrastructure',
   '/products/institutional-compliance-hub',
@@ -66,7 +73,7 @@ const META = {
   },
   '/pricing': {
     title: 'Pricing | Salvia',
-    desc: 'Salvia pricing for veterinary, dental, general practice, and aged care. Practice plan from $229/mo — compliance-grade clinical documentation, controlled drug logs, audit trails.',
+    desc: 'Salvia pricing for veterinary, dental, general practice, and allied health (physio, osteo, chiro, OT, podiatry, speech). Practice plan from $229/mo — compliance-grade clinical documentation, controlled drug logs, audit trails.',
   },
   '/blog': {
     title: 'From the compliance desk | Salvia',
@@ -84,13 +91,41 @@ const META = {
     title: 'Dental Compliance Software | Salvia',
     desc: 'Salvia keeps dental practice records audit-ready for CQC, GDC, and AHPRA. BPE, STE, radiograph justification, and treatment plans captured at every visit.',
   },
-  '/aged-care': {
-    title: 'Aged Care Compliance Software | Salvia',
-    desc: 'Salvia keeps aged care and care home records audit-ready for CQC. Medication administration, incident trails, safeguarding records, and care plans — structured and signed at the point of care.',
-  },
   '/general-practice': {
     title: 'General Practice Compliance Software | Salvia',
     desc: 'Salvia keeps GP and general clinic records audit-ready for CQC, AHPRA, and MCNZ. Voice note after each consult — structured clinical records, prescribing logs, referral trails, and consent documentation.',
+  },
+  '/allied-health': {
+    title: 'Allied Health Compliance Software | Salvia',
+    desc: 'Salvia keeps allied health records audit-ready for CORU, HCPC, AHPRA, PBNZ, OTBNZ, GOsC, GCC and more. Voice note → SOAP record, outcome measures, treatment log, discharge summary. Physio, osteo, chiro, OT, podiatry, speech.',
+  },
+  '/physiotherapy': {
+    title: 'Physiotherapy Compliance Software | CORU, HCPC, AHPRA, PBNZ | Salvia',
+    desc: 'Salvia keeps physiotherapy records audit-ready for CORU, HCPC, AHPRA and PBNZ. Voice note → SOAP record, outcome measures (NPRS, ODI, NDI, LEFS), treatment log, discharge summary.',
+  },
+  '/osteopathy': {
+    title: 'Osteopathy Practice Software | GOsC, AHPRA, OCNZ | Salvia',
+    desc: 'Salvia generates osteopathy records aligned with GOsC Osteopathic Practice Standards, AHPRA Osteopathy Board, and OCNZ. Voice note → structured treatment record.',
+  },
+  '/chiropractic': {
+    title: 'Chiropractic Practice Software | GCC, AHPRA, CBNZ | Salvia',
+    desc: 'Salvia generates chiropractic records aligned with GCC, AHPRA Chiropractic Board, and CBNZ. Voice note → structured adjustment record, imaging log, consent, audit trail.',
+  },
+  '/occupational-therapy': {
+    title: 'Occupational Therapy Software | CORU, HCPC, AHPRA, OTBNZ | Salvia',
+    desc: 'Salvia keeps OT records audit-ready for CORU, HCPC, AHPRA OT Board and OTBNZ. Voice note → functional assessment, goals, intervention, outcome review.',
+  },
+  '/podiatry': {
+    title: 'Podiatry Practice Software | CORU, HCPC, AHPRA | Salvia',
+    desc: 'Salvia keeps podiatry records audit-ready for CORU, HCPC, AHPRA Podiatry Board and PBNZ. Voice note → assessment, wound register, sharps log, consent, treatment record.',
+  },
+  '/speech-therapy': {
+    title: 'Speech Therapy Software | CORU, HCPC, SPA, ASHA | Salvia',
+    desc: 'Salvia keeps speech and language therapy records audit-ready for CORU, HCPC, SPA, NZSTA and ASHA. Voice note → assessment, goals, intervention, progress review.',
+  },
+  '/frameworks': {
+    title: 'Regulatory Frameworks We Support | Salvia',
+    desc: 'Salvia generates audit-ready clinical records against 40+ regulatory frameworks across veterinary, dental, general practice and allied health — CORU, HCPC, AHPRA, RCVS, CQC, GDC, GOsC, GCC, AVA, VCNZ, MCNZ and more.',
   },
   '/products/point-of-care-evidence': {
     title: 'Statutory Evidence Capture | Salvia',

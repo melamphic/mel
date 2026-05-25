@@ -87,6 +87,7 @@ export const Footer = () => (
       <div>
         <div style={colHeadingStyle}>Company</div>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.65rem' }}>
+          <Link to="/frameworks" style={linkStyle}>Frameworks we support</Link>
           <Link to="/start" style={linkStyle}>Book a demo</Link>
           <Link to="/start" style={linkStyle}>Contact sales</Link>
         </div>

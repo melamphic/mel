@@ -17,6 +17,7 @@ const DentalPage      = lazy(() => import('./pages/DentalPage').then(m => ({ def
 const GeneralClinicPage = lazy(() => import('./pages/GeneralClinicPage').then(m => ({ default: m.GeneralClinicPage })));
 const AlliedHealthPage  = lazy(() => import('./pages/AlliedHealthPage').then(m => ({ default: m.AlliedHealthPage })));
 const AlliedDisciplineTemplate = lazy(() => import('./pages/AlliedDisciplineTemplate').then(m => ({ default: m.AlliedDisciplineTemplate })));
+const FrameworksPage = lazy(() => import('./pages/FrameworksPage').then(m => ({ default: m.FrameworksPage })));
 
 function PageviewTracker() {
   const { pathname, search } = useLocation();
@@ -103,6 +104,7 @@ function App() {
             <Route path="/occupational-therapy" element={<AlliedDisciplineTemplate slug="occupational-therapy" />} />
             <Route path="/podiatry" element={<AlliedDisciplineTemplate slug="podiatry" />} />
             <Route path="/speech-therapy" element={<AlliedDisciplineTemplate slug="speech-therapy" />} />
+            <Route path="/frameworks" element={<FrameworksPage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </Suspense>

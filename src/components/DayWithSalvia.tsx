@@ -68,7 +68,7 @@ const STOPS = [
 ];
 
 export const DayWithSalvia: React.FC = () => (
-  <section style={{
+  <section id="how-it-works" style={{
     padding: '6rem 0',
     position: 'relative',
     zIndex: 10,
