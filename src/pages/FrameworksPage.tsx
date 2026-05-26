@@ -90,8 +90,13 @@ export const FrameworksPage = () => {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: itemListLd }} />
       <Header />
 
-      {/* Hero */}
-      <section style={{ padding: '11rem 0 5rem', backgroundColor: 'var(--salvia-bg)' }}>
+      {/* Hero — padding clamped so the navbar clears on desktop but
+          mobile doesn't waste a viewport on whitespace before the
+          country totals appear. */}
+      <section style={{
+        padding: 'clamp(5.5rem, 14vw, 11rem) 0 clamp(2rem, 6vw, 5rem)',
+        backgroundColor: 'var(--salvia-bg)',
+      }}>
         <div className="container" style={{ maxWidth: '900px', textAlign: 'center' }}>
           <div style={{
             display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
@@ -151,10 +156,12 @@ export const FrameworksPage = () => {
         </div>
       </section>
 
-      {/* Filters bar */}
+      {/* Filters bar — sticky padding clamped so on mobile the chips
+          + search take less vertical space and don't shove the country
+          headings past the fold. */}
       <section style={{
         position: 'sticky', top: 0, zIndex: 50,
-        padding: '1.25rem 0',
+        padding: 'clamp(0.65rem, 2.5vw, 1.25rem) 0',
         backgroundColor: 'rgba(255,255,255,0.92)',
         backdropFilter: 'blur(12px)',
         borderBottom: '1px solid #EEF2F6',
@@ -195,11 +202,11 @@ export const FrameworksPage = () => {
 
           {/* Search */}
           <div style={{
-            position: 'relative', marginTop: '0.85rem',
+            position: 'relative', marginTop: 'clamp(0.45rem, 1.5vw, 0.85rem)',
             backgroundColor: '#fff',
             border: '1.5px solid #EEF2F6',
             borderRadius: '12px',
-            padding: '0.65rem 1rem 0.65rem 2.5rem',
+            padding: '0.5rem 0.85rem 0.5rem 2.25rem',
             display: 'flex', alignItems: 'center',
           }}>
             <svg
@@ -245,7 +252,10 @@ export const FrameworksPage = () => {
       </section>
 
       {/* Results */}
-      <section style={{ padding: '4rem 0 6rem', backgroundColor: '#fff' }}>
+      <section style={{
+        padding: 'clamp(1.5rem, 5vw, 4rem) 0 clamp(3rem, 8vw, 6rem)',
+        backgroundColor: '#fff',
+      }}>
         <div className="container" style={{ maxWidth: '1100px' }}>
           {filtered.length === 0 ? (
             <EmptyState />
