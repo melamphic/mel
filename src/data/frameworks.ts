@@ -118,6 +118,15 @@ export const FRAMEWORKS: Framework[] = [
     currencyDate: '2026-04-15',
   },
   {
+    code: 'VCI',
+    fullName: 'Veterinary Council of Ireland Code of Professional Conduct',
+    country: 'IE', verticals: ['vet'],
+    category: 'professional-conduct',
+    summary: 'Statutory regulator for Irish vets under the Veterinary Practice Act 2005. Contemporaneous records, informed consent, controlled drug register (5-year retention), and GDPR-compliant data practices. 7-year record retention.',
+    sourceUrl: 'https://www.vci.ie/',
+    currencyDate: '2026-05-27',
+  },
+  {
     code: 'AVMA',
     fullName: 'American Veterinary Medical Association Standards',
     country: 'US', verticals: ['vet'],
@@ -180,6 +189,15 @@ export const FRAMEWORKS: Framework[] = [
     currencyDate: '2026-04-15',
   },
   {
+    code: 'DCI',
+    fullName: 'Dental Council of Ireland — Standards Guidance for Dental Practitioners',
+    country: 'IE', verticals: ['dental'],
+    category: 'professional-conduct',
+    summary: 'Statutory regulator under the Dentists Act 1985. Contemporaneous records, radiograph justification, BPE score at every adult check-up, written consent for irreversible procedures, and GDPR compliance. 10-year retention for minor patients.',
+    sourceUrl: 'https://www.dentalcouncil.ie/',
+    currencyDate: '2026-05-27',
+  },
+  {
     code: 'ADA CDT',
     fullName: 'American Dental Association Current Dental Terminology',
     country: 'US', verticals: ['dental'],
@@ -223,6 +241,15 @@ export const FRAMEWORKS: Framework[] = [
     category: 'safety',
     summary: 'Clinical decision support and audit framework integrated with NZ GP records. Documentation standards align with MCNZ and HDC requirements.',
     currencyDate: '2026-04-15',
+  },
+  {
+    code: 'MCI',
+    fullName: 'Medical Council of Ireland — Guide to Professional Conduct and Ethics',
+    country: 'IE', verticals: ['gp'],
+    category: 'professional-conduct',
+    summary: 'Statutory regulator under the Medical Practitioners Act 2007. Contemporaneous, attributable records; documented informed consent for material-risk treatments; prescribing rationale including off-label use; referral documentation; GDPR compliance. 8-year retention.',
+    sourceUrl: 'https://www.medicalcouncil.ie/',
+    currencyDate: '2026-05-27',
   },
   {
     code: 'HIPAA',
