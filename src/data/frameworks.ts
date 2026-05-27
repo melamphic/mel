@@ -7,7 +7,7 @@
 // drafts reviewed quarterly. currency_date marks when the entry was
 // last verified against the regulator's published standards.
 
-export type FrameworkCountry = 'IE' | 'UK' | 'AU' | 'NZ' | 'US' | 'EU' | 'Global';
+export type FrameworkCountry = 'IE' | 'GB' | 'AU' | 'NZ' | 'US' | 'EU' | 'Global';
 export type FrameworkVertical = 'vet' | 'dental' | 'gp' | 'allied';
 export type FrameworkDiscipline =
   | 'physio'
@@ -40,7 +40,7 @@ export interface Framework {
 
 export const COUNTRY_META: Record<FrameworkCountry, { label: string; accent: string; flag: string }> = {
   IE:     { label: 'Ireland',          accent: '#0891B2', flag: '🇮🇪' },
-  UK:     { label: 'United Kingdom',   accent: '#FF4E00', flag: '🇬🇧' },
+  GB:     { label: 'United Kingdom',   accent: '#FF4E00', flag: '🇬🇧' },
   AU:     { label: 'Australia',        accent: '#F59E0B', flag: '🇦🇺' },
   NZ:     { label: 'New Zealand',      accent: '#10B981', flag: '🇳🇿' },
   US:     { label: 'United States',    accent: '#6366F1', flag: '🇺🇸' },
@@ -69,7 +69,7 @@ export const FRAMEWORKS: Framework[] = [
   {
     code: 'RCVS PSS',
     fullName: 'RCVS Practice Standards Scheme',
-    country: 'UK', verticals: ['vet'],
+    country: 'GB', verticals: ['vet'],
     category: 'inspection',
     summary: 'Royal College of Veterinary Surgeons Practice Standards — clinical records, drug control, consent, premises, professional behaviour. Assessor visits validate compliance.',
     sourceUrl: 'https://www.rcvs.org.uk/setting-standards/practice-standards-scheme/',
@@ -78,7 +78,7 @@ export const FRAMEWORKS: Framework[] = [
   {
     code: 'CMA Remedies',
     fullName: 'UK Competition and Markets Authority — Veterinary Sector Final Report 2026',
-    country: 'UK', verticals: ['vet'],
+    country: 'GB', verticals: ['vet'],
     category: 'billing',
     summary: 'Twenty-one CMA remedies binding from 23 September 2026. Records-implicated: itemised billing, written treatment estimates, controlled drug dispensing transparency, complaint audit trails.',
     sourceUrl: 'https://www.gov.uk/cma-cases/veterinary-services',
@@ -87,7 +87,7 @@ export const FRAMEWORKS: Framework[] = [
   {
     code: 'VMR',
     fullName: 'Veterinary Medicines Regulations (UK)',
-    country: 'UK', verticals: ['vet'],
+    country: 'GB', verticals: ['vet'],
     category: 'safety',
     summary: 'Prescribing and dispensing requirements for veterinary medicines including Schedule 2 and 3 controlled drugs. Register, witness, balance, retention.',
     currencyDate: '2026-04-15',
@@ -147,7 +147,7 @@ export const FRAMEWORKS: Framework[] = [
   {
     code: 'CQC Reg 17',
     fullName: 'Care Quality Commission Regulation 17 (UK Dental)',
-    country: 'UK', verticals: ['dental', 'gp'],
+    country: 'GB', verticals: ['dental', 'gp'],
     category: 'records',
     summary: 'Good governance — accurate, complete, contemporaneous records securely kept. Inspector checks for BPE scoring at every check-up, soft-tissue examination, radiograph justification.',
     sourceUrl: 'https://www.cqc.org.uk/guidance-providers/regulations/regulation-17-good-governance',
@@ -156,7 +156,7 @@ export const FRAMEWORKS: Framework[] = [
   {
     code: 'GDC',
     fullName: 'General Dental Council Standards (UK)',
-    country: 'UK', verticals: ['dental'],
+    country: 'GB', verticals: ['dental'],
     category: 'professional-conduct',
     summary: 'Standards 4 (good record-keeping with cost estimate), 1 (consent), 2 (communication). Statutory regulator for UK dental professionals.',
     sourceUrl: 'https://www.gdc-uk.org/',
@@ -275,7 +275,7 @@ export const FRAMEWORKS: Framework[] = [
   {
     code: 'HCPC',
     fullName: 'Health & Care Professions Council (UK)',
-    country: 'UK', verticals: ['allied'],
+    country: 'GB', verticals: ['allied'],
     disciplines: ['physio', 'ot', 'podiatry', 'speech'],
     category: 'professional-conduct',
     summary: 'UK regulator for 15 allied health professions. Standards of Conduct, Performance and Ethics (Standard 10 — record keeping) and discipline-specific Standards of Proficiency.',
@@ -385,7 +385,7 @@ export const FRAMEWORKS: Framework[] = [
   {
     code: 'GOsC',
     fullName: 'General Osteopathic Council (UK)',
-    country: 'UK', verticals: ['allied'],
+    country: 'GB', verticals: ['allied'],
     disciplines: ['osteo'],
     category: 'professional-conduct',
     summary: 'Statutory UK regulator for osteopaths. Osteopathic Practice Standards — Standard D6 (records), B1 (consent), A2 (clinical assessment).',
@@ -395,7 +395,7 @@ export const FRAMEWORKS: Framework[] = [
   {
     code: 'GCC',
     fullName: 'General Chiropractic Council (UK)',
-    country: 'UK', verticals: ['allied'],
+    country: 'GB', verticals: ['allied'],
     disciplines: ['chiro'],
     category: 'professional-conduct',
     summary: 'Statutory UK regulator for chiropractors. Code (C3 — record keeping, C1 — patient autonomy) and standards of education.',
