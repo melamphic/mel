@@ -13,7 +13,10 @@ export type Cycle = 'monthly' | 'annual';
 /// canonical cost-modelling currency; the others are display-only and
 /// rounded to clean numbers. EU = euro-area pricing (any EU country),
 /// with VAT excluded since rates vary by member state.
-export type Market = 'US' | 'NZ' | 'AU' | 'UK' | 'EU';
+/// GlobalMarket is the subset used for product tier pricing (Practice/Pro).
+/// Market adds IN for the India-specific tier model.
+export type GlobalMarket = 'US' | 'NZ' | 'AU' | 'UK' | 'EU';
+export type Market = GlobalMarket | 'IN';
 
 export interface MarketMeta {
   key: Market;
@@ -29,6 +32,7 @@ export const MARKETS: MarketMeta[] = [
   { key: 'AU', label: 'Australia',       currency: 'AUD', symbol: 'A$',  taxNote: 'Excl. GST 10%' },
   { key: 'UK', label: 'United Kingdom',  currency: 'GBP', symbol: '£',   taxNote: 'Excl. VAT 20%' },
   { key: 'EU', label: 'Europe',          currency: 'EUR', symbol: '€',   taxNote: 'Excl. VAT (rate varies by country)' },
+  { key: 'IN', label: 'India',           currency: 'INR', symbol: '₹',   taxNote: 'Excl. GST 18%' },
 ];
 
 export interface Tier {
@@ -43,7 +47,8 @@ export interface Tier {
   aiSeats: number;
   /// Per-market list price in the local display currency. Locked at
   /// rollout per pricing-model-v3 §4–§6, reviewed quarterly.
-  prices: Record<Market, number>;
+  /// India (IN) uses a separate tier model — see INDIA_TIERS.
+  prices: Record<GlobalMarket, number>;
   highlight?: string;
 }
 
@@ -174,8 +179,8 @@ export function planCode(v: Vertical, tier: TierKey, cycle: Cycle): string {
 /// Displayed monthly price for a (tier, market, cycle) triple. The
 /// monthly figure is the locked list price; annual shows the
 /// monthly-equivalent after the 17% discount, rounded to a clean
-/// number.
-export function displayedMonthly(tier: Tier, market: Market, cycle: Cycle): number {
+/// number. Only valid for GlobalMarket — India uses indiaDisplayedMonthly.
+export function displayedMonthly(tier: Tier, market: GlobalMarket, cycle: Cycle): number {
   const list = tier.prices[market];
   return cycle === 'annual' ? Math.round(list * ANNUAL_DISCOUNT) : list;
 }
@@ -197,6 +202,7 @@ export function detectMarket(): Market {
   for (const l of langs) {
     if (l.endsWith('-nz') || l === 'mi' || l === 'mi-nz') return 'NZ';
     if (l.endsWith('-au')) return 'AU';
+    if (l.endsWith('-in') || l === 'hi' || l === 'bn' || l === 'ta' || l === 'te' || l === 'mr' || l === 'gu' || l === 'kn' || l === 'ml') return 'IN';
     if (l.endsWith('-gb') || l === 'cy' || l === 'cy-gb') return 'UK';
     if (
       l.endsWith('-ie') || l === 'ga' || l === 'ga-ie' ||
@@ -215,6 +221,7 @@ export function detectMarket(): Market {
     const tz = Intl.DateTimeFormat().resolvedOptions().timeZone ?? '';
     if (tz.startsWith('Pacific/Auckland') || tz === 'Pacific/Chatham') return 'NZ';
     if (tz.startsWith('Australia/')) return 'AU';
+    if (tz === 'Asia/Kolkata' || tz === 'Asia/Calcutta') return 'IN';
     if (
       tz === 'Europe/London' || tz === 'Europe/Belfast' ||
       tz === 'Europe/Isle_of_Man' || tz === 'Europe/Jersey' ||
@@ -226,4 +233,81 @@ export function detectMarket(): Market {
     // Ignore — fall through to US default.
   }
   return 'US';
+}
+
+// ---------------------------------------------------------------------------
+// India market — separate 3-tier model (Base / Growth / Unlimited).
+// Not per-seat; differentiated by total monthly draft cap and AI inclusion.
+// ---------------------------------------------------------------------------
+
+export type IndiaTierKey = 'base' | 'growth' | 'unlimited';
+
+export interface IndiaTier {
+  key: IndiaTierKey;
+  name: string;
+  monthlyINR: number;
+  annualINR: number;    // 10-month price (2 months free)
+  draftCap: number | null; // null = no per-clinic cap (global pool ceiling only)
+  aiIncluded: boolean;
+  highlight?: string;
+  features: string[];
+}
+
+export const INDIA_TIERS: IndiaTier[] = [
+  {
+    key: 'base',
+    name: 'Base',
+    monthlyINR: 2500,
+    annualINR: 25000,
+    draftCap: null,
+    aiIncluded: false,
+    features: [
+      'Drug register + controlled substance log',
+      'Forms, policies & PDF export',
+      'Incident & consent management',
+      'Patient records',
+      'Email support — 48hr',
+    ],
+  },
+  {
+    key: 'growth',
+    name: 'Growth',
+    monthlyINR: 6000,
+    annualINR: 60000,
+    draftCap: 750,
+    aiIncluded: true,
+    highlight: 'Most popular',
+    features: [
+      'Everything in Base',
+      'AI voice → clinical note',
+      'AI form & policy generation',
+      '750 AI drafts / month',
+      'Email support — 24hr',
+    ],
+  },
+  {
+    key: 'unlimited',
+    name: 'Unlimited',
+    monthlyINR: 14000,
+    annualINR: 140000,
+    draftCap: null,
+    aiIncluded: true,
+    features: [
+      'Everything in Growth',
+      'Unlimited AI drafts',
+      'Priority AI queue',
+      'Multi-location support',
+      'Dedicated onboarding call',
+    ],
+  },
+];
+
+/// Monthly-equivalent price to display for an India tier.
+/// Annual shows the per-month equivalent of the 10-month annual price.
+export function indiaDisplayedMonthly(tier: IndiaTier, cycle: Cycle): number {
+  return cycle === 'annual' ? Math.round(tier.annualINR / 12) : tier.monthlyINR;
+}
+
+export function indiaPlanCode(tier: IndiaTierKey, cycle: Cycle): string {
+  return `in_${tier}_${cycle}`;
 }
