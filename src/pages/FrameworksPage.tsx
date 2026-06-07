@@ -18,7 +18,7 @@ const ACCENT = '#0F172A';
 type CountryFilter = FrameworkCountry | 'all';
 type VerticalFilter = FrameworkVertical | 'all';
 
-const COUNTRIES_ORDER: CountryFilter[] = ['all', 'IE', 'UK', 'AU', 'NZ', 'US'];
+const COUNTRIES_ORDER: CountryFilter[] = ['all', 'IE', 'GB', 'AU', 'NZ', 'US'];
 const VERTICALS_ORDER: VerticalFilter[] = ['all', 'vet', 'dental', 'gp', 'allied'];
 
 export const FrameworksPage = () => {
@@ -43,14 +43,14 @@ export const FrameworksPage = () => {
   const grouped = useMemo(() => {
     if (country !== 'all') return null;
     const buckets: Record<FrameworkCountry, typeof FRAMEWORKS> = {
-      IE: [], UK: [], AU: [], NZ: [], US: [], EU: [], Global: [],
+      IE: [], GB: [], AU: [], NZ: [], US: [], EU: [], Global: [],
     };
     filtered.forEach((f) => buckets[f.country].push(f));
     return buckets;
   }, [filtered, country]);
 
   const totalsByCountry = useMemo(() => {
-    const t: Record<FrameworkCountry, number> = { IE: 0, UK: 0, AU: 0, NZ: 0, US: 0, EU: 0, Global: 0 };
+    const t: Record<FrameworkCountry, number> = { IE: 0, GB: 0, AU: 0, NZ: 0, US: 0, EU: 0, Global: 0 };
     FRAMEWORKS.forEach((f) => { t[f.country]++; });
     return t;
   }, []);
@@ -127,7 +127,7 @@ export const FrameworksPage = () => {
             display: 'flex', gap: '0.75rem', flexWrap: 'wrap', justifyContent: 'center',
             marginTop: '1.5rem',
           }}>
-            {(['IE','UK','AU','NZ','US'] as FrameworkCountry[]).map((c) => (
+            {(['IE','GB','AU','NZ','US'] as FrameworkCountry[]).map((c) => (
               <button
                 key={c}
                 onClick={() => setCountry(c)}
@@ -261,7 +261,7 @@ export const FrameworksPage = () => {
             <EmptyState />
           ) : grouped ? (
             <>
-              {(['IE','UK','AU','NZ','US','EU','Global'] as FrameworkCountry[]).map((c) => {
+              {(['IE','GB','AU','NZ','US','EU','Global'] as FrameworkCountry[]).map((c) => {
                 const list = grouped[c];
                 if (list.length === 0) return null;
                 return (
