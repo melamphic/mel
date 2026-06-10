@@ -25,6 +25,7 @@ const VERTICAL_OPTIONS: { value: Vertical; label: string }[] = [
 const COUNTRY_OPTIONS = [
   { value: 'NZ', label: 'New Zealand' },
   { value: 'AU', label: 'Australia' },
+  { value: 'IN', label: 'India' },
   { value: 'UK', label: 'United Kingdom' },
   { value: 'IE', label: 'Ireland' },
   { value: 'CA', label: 'Canada' },
@@ -38,6 +39,7 @@ const COUNTRY_OPTIONS = [
 const DIAL_CODE_BY_COUNTRY: Record<string, string> = {
   NZ: '+64',
   AU: '+61',
+  IN: '+91',
   UK: '+44',
   IE: '+353',
   CA: '+1',
@@ -302,6 +304,15 @@ export const SignupPage = () => {
                       </select>
                     </Field>
                   </div>
+
+                  {country === 'IN' && (
+                    <div style={indiaLangNoteStyle}>
+                      <span style={{ fontSize: '1rem', lineHeight: 1 }}>🇮🇳</span>
+                      <span>
+                        Salvia supports recording in <strong>English, Hindi, Malayalam, Tamil</strong>, or any mix — notes are extracted to English automatically. No extra setup needed.
+                      </span>
+                    </div>
+                  )}
 
                   <Field
                     label="Phone"
@@ -805,4 +816,17 @@ const fineprintStyle: CSSProperties = {
   textAlign: 'center',
   margin: 0,
   lineHeight: 1.55,
+};
+
+const indiaLangNoteStyle: CSSProperties = {
+  display: 'flex',
+  alignItems: 'flex-start',
+  gap: '0.6rem',
+  padding: '0.75rem 1rem',
+  borderRadius: 'var(--salvia-radius-base)',
+  backgroundColor: 'rgba(99, 102, 241, 0.06)',
+  border: '1px solid rgba(99, 102, 241, 0.15)',
+  fontSize: '0.82rem',
+  color: 'var(--salvia-text)',
+  lineHeight: 1.5,
 };
