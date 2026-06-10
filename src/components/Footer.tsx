@@ -171,7 +171,7 @@ export const Footer = () => (
         color: 'var(--salvia-text-muted)',
         opacity: 0.6,
       }}>
-        © {new Date().getFullYear()} Melamphic Inc.
+        © {new Date().getFullYear()} Melamphic AI Pvt Ltd.
       </span>
     </div>
 
