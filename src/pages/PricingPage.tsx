@@ -57,12 +57,20 @@ export const PricingPage = () => {
     const next = stored && MARKETS.some((m) => m.key === stored)
       ? stored
       : detectMarket();
-    // Client-only detection (localStorage + browser locale) must run after
-    // hydration, otherwise the prerendered HTML and the first client render
-    // disagree on market. A single post-mount setState is the intended
-    // React pattern here, so the synchronous-setState rule doesn't apply.
+    // Pre-select the vertical from a ?vertical= deep link so a visitor who
+    // clicked through from a vertical landing page lands on their product
+    // already chosen.
+    const v = new URLSearchParams(window.location.search).get('vertical');
+    const nextVertical = PRODUCTS.some((p) => p.key === v) ? (v as Vertical) : null;
+    // Client-only detection (localStorage + browser locale + URL) must run
+    // after hydration, otherwise the prerendered HTML and the first client
+    // render disagree. Post-mount setState is the intended React pattern here,
+    // so the synchronous-setState rule doesn't apply.
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setMarket(next);
+    if (nextVertical) {
+      setActive(nextVertical);
+    }
   }, []);
 
   const onMarketChange = (next: Market) => {
