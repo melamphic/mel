@@ -54,11 +54,15 @@ export const PricingPage = () => {
     const stored = typeof window !== 'undefined'
       ? (window.localStorage.getItem(MARKET_STORAGE_KEY) as Market | null)
       : null;
-    if (stored && MARKETS.some((m) => m.key === stored)) {
-      setMarket(stored);
-      return;
-    }
-    setMarket(detectMarket());
+    const next = stored && MARKETS.some((m) => m.key === stored)
+      ? stored
+      : detectMarket();
+    // Client-only detection (localStorage + browser locale) must run after
+    // hydration, otherwise the prerendered HTML and the first client render
+    // disagree on market. A single post-mount setState is the intended
+    // React pattern here, so the synchronous-setState rule doesn't apply.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setMarket(next);
   }, []);
 
   const onMarketChange = (next: Market) => {

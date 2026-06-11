@@ -32,11 +32,14 @@ function Donut({ segments, centerLabel }: {
   const circ = 2 * Math.PI * r;
   const total = segments.reduce((s, x) => s + x.value, 0);
   const gap = 4;
-  let cum = 0;
-  const paths = segments.map(seg => {
-    const len = Math.max((seg.value / total) * circ - gap, 0);
-    const rotate = (cum / circ) * 360 - 90;
-    cum += (seg.value / total) * circ;
+  const fractions = segments.map((seg) => seg.value / total);
+  const paths = segments.map((seg, i) => {
+    // Cumulative fraction of the segments before this one — a prefix sum
+    // computed without mutating an accumulator during render (segments are
+    // few, so the repeated slice is cheap).
+    const start = fractions.slice(0, i).reduce((a, b) => a + b, 0);
+    const len = Math.max(fractions[i] * circ - gap, 0);
+    const rotate = start * 360 - 90;
     return { color: seg.color, dasharray: `${len} ${circ}`, rotate };
   });
 
