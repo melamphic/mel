@@ -12,7 +12,7 @@ const PAINS = [
     num: '02',
     tag: 'Policy drift',
     title: 'Policies live in a PDF nobody reads.',
-    body: 'HIPAA, NABH, VMR, ADA — your team can\'t memorise every clause. Salvia links your rulebook directly to each form field and flags gaps before a note is ever signed.',
+    body: 'HIPAA, VMR, CQC, GDC — your team can\'t memorise every clause. Salvia links your rulebook directly to each form field and flags gaps before a note is ever signed.',
     stat: '68%',
     statSub: 'of audit failures trace back to undocumented or inconsistent notes',
     accent: '#0F172A',
