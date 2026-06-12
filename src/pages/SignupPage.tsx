@@ -170,7 +170,7 @@ export const SignupPage = () => {
   }
 
   if (submitted) {
-    return <SuccessPage email={contactEmail} clinicName={clinicName} />;
+    return <SuccessPage email={contactEmail} clinicName={clinicName} country={country} />;
   }
 
   return (
@@ -431,7 +431,9 @@ export const SignupPage = () => {
 
 // ── Success page ─────────────────────────────────────────────────────────────
 
-function SuccessPage({ email, clinicName }: { email: string; clinicName: string }) {
+function SuccessPage({ email, clinicName, country }: { email: string; clinicName: string; country: string }) {
+  const countryLabel =
+    COUNTRY_OPTIONS.find((c) => c.value === country)?.label ?? 'local';
   return (
     <>
       <Header />
@@ -449,7 +451,7 @@ function SuccessPage({ email, clinicName }: { email: string; clinicName: string 
           <p style={{ ...leadStyle, maxWidth: '480px', margin: '0 auto 3rem' }}>
             We’ll be in touch at{' '}
             <strong style={{ color: 'var(--salvia-primary)' }}>{email || 'your inbox'}</strong>{' '}
-            within 24 hours — usually faster during business hours (NZT).
+            within 24 hours — usually faster during {countryLabel} business hours.
           </p>
           <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'center', flexWrap: 'wrap' }}>
             <Link to="/" className="pill-button">Back to home</Link>
