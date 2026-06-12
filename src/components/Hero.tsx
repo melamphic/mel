@@ -98,10 +98,10 @@ export const Hero: React.FC = () => {
           maxWidth: '720px',
           margin: '0 auto 3rem auto'
         }}>
-          Salvia turns a post-encounter voice note into a policy-checked, audit-locked
-          clinical record — before anyone signs off. Link your <strong>compliance framework</strong>.
-          Every note checks itself. Every record <strong>defends itself</strong>.
-          Not a scribe — a <strong>compliance suite</strong>.
+          Salvia's <strong>AI</strong> turns a post-encounter <strong>audio note</strong> into a
+          policy-checked, audit-locked <strong>clinical record</strong> — before anyone signs off.
+          Your <strong>compliance framework</strong> runs automatically on every form.
+          Every record defends itself. Not a scribe — a <strong>compliance suite</strong>.
         </p>
 
         <div style={{ display: 'flex', gap: '1.2rem', justifyContent: 'center' }} className="mobile-stack">
