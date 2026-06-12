@@ -30,12 +30,11 @@ const COUNTRY_OPTIONS = [
   { value: 'IE', label: 'Ireland' },
   { value: 'CA', label: 'Canada' },
   { value: 'US', label: 'United States' },
-  { value: 'OTHER', label: 'Other' },
 ];
 
-// Country → default E.164 dial code. OTHER intentionally has no default —
-// we render an editable dial-code field instead. Used to seed the phone
-// prefix when the user picks a country.
+// Country → default E.164 dial code. Used to seed the phone prefix when
+// the user picks a country; the dial-code field stays editable so a clinic
+// can override it (e.g. an NZ clinic with a UK mobile).
 const DIAL_CODE_BY_COUNTRY: Record<string, string> = {
   NZ: '+64',
   AU: '+61',
@@ -104,8 +103,7 @@ export const SignupPage = () => {
 
   // When the user picks a country, seed the dial code with that country's
   // default. They can still override the dial code afterward (e.g. an NZ
-  // clinic with a UK mobile). For "OTHER", leave dialCode blank — the
-  // input becomes editable.
+  // clinic with a UK mobile).
   function onCountryChange(next: string) {
     setCountry(next);
     const next_dial = DIAL_CODE_BY_COUNTRY[next] ?? '';
