@@ -30,7 +30,7 @@ const STOPS = [
     n: '3',
     tag: 'Process',
     title: 'Pick 1–3 forms',
-    body: 'Select the forms this note should fill. If a form has a policy linked to it, Salvia runs the compliance check automatically after fill-in.',
+    body: 'Select the forms this note should fill. If a form has a linked policy, Salvia runs the compliance check automatically once the form is filled.',
     icon: (
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <rect x="3" y="4" width="18" height="18" rx="2" />
