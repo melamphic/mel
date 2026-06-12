@@ -43,7 +43,7 @@ export const DashboardPreview: React.FC = () => {
       <div style={{ flex: 1, display: 'flex', flexDirection: 'column', backgroundColor: '#FCFCFD' }}>
 
         {/* Dashboard Content */}
-        <div style={{ padding: '2rem', display: 'flex', flexDirection: 'column', gap: '2rem', flex: 1, overflowY: 'auto' }}>
+        <div style={{ padding: '2rem', display: 'flex', flexDirection: 'column', gap: '2rem', flex: 1, overflow: 'hidden' }}>
 
           {/* KPI Row */}
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '1.5rem' }}>
