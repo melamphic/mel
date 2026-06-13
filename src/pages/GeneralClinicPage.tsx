@@ -15,29 +15,29 @@ const ACCENT = '#D97706';
 const FAQS = [
   {
     q: 'Which regulatory frameworks does Salvia support for general practice?',
-    a: 'Salvia supports CQC Regulation 17 (UK), AHPRA Medical Board guidelines (Australia), the Medical Council of New Zealand Code of Professional Conduct, and AMC/RACGP standards for clinical record-keeping.',
+    a: 'Salvia keeps records aligned with NMC clinical record-keeping requirements, the Clinical Establishments Act 2010 register and documentation norms, NABH documentation standards, and CGHS / PM-JAY (AB-PMJAY) claim record needs.',
   },
   {
     q: 'Does it handle controlled drug and prescribing records?',
-    a: 'Yes. Every prescription and controlled drug administration is logged with the required fields — drug, dose, route, patient, date, prescribing clinician. Schedule 2 and 3 drugs maintain a running register with witness fields.',
+    a: 'Yes. Every prescription and controlled substance administration is logged with the required fields — drug, dose, route, patient, date, prescribing doctor. Schedule X and other controlled drugs maintain a running register with witness fields.',
   },
   {
     q: 'How does it handle after-hours and locum documentation?',
-    a: 'Locum records are signed by the treating clinician with their own registration number. The practice record shows exactly who saw the patient and when — no ambiguity about authorship for complaints or audits.',
+    a: 'Locum records are signed by the treating doctor with their own NMC registration number. The practice record shows exactly who saw the patient and when — no ambiguity about authorship for complaints or audits.',
   },
   {
-    q: 'Can it be used for multi-GP practices?',
-    a: "Yes. Role-based access means each GP signs their own records. Practice managers can view the full practice record set. Each clinician's records are independent and auditable separately.",
+    q: 'Can it be used for multi-doctor practices?',
+    a: "Yes. Role-based access means each doctor signs their own records. Practice managers can view the full practice record set. Each clinician's records are independent and auditable separately.",
   },
 ];
 
 const FEATURES = [
-  { title: 'Voice → clinical note', desc: 'Post-consult voice note maps to structured SOAP record — history, examination, assessment, plan. Contemporaneous timestamp on every entry.' },
+  { title: 'Voice → clinical note', desc: 'Speak in any Indian language after the consult — Salvia maps it to a structured SOAP record: history, examination, assessment, plan. Timestamp on every entry.' },
   { title: 'Prescribing and drug records', desc: 'Every prescription logged with drug, dose, route, indication. Controlled drug register maintained automatically on administration.' },
   { title: 'Referral and follow-up trail', desc: "Referral sent, referral received, follow-up due — all tracked in the record. No 'lost in the system' defence at a complaints hearing." },
   { title: 'Consent documentation', desc: 'Procedure-specific consent with risk discussion captured and signed. Treatment plan in writing before invasive procedures.' },
   { title: 'Immutable audit trail', desc: 'Every edit, addendum, and version locked with timestamp. Produce a complete encounter record for any complaint or medico-legal request in seconds.' },
-  { title: 'CQC and AHPRA ready', desc: 'Record structure satisfies CQC Regulation 17, AHPRA Medical Board guidelines, and MCNZ Code of Professional Conduct contemporaneous record requirements.' },
+  { title: 'NMC and ABDM ready', desc: 'Record structure satisfies NMC contemporaneous record-keeping norms and Clinical Establishments Act documentation, with ABDM-ready output (ABHA-linked, FHIR-structured).' },
 ];
 
 export const GeneralClinicPage = () => {
@@ -55,12 +55,12 @@ export const GeneralClinicPage = () => {
     <div style={{ backgroundColor: '#fff', minHeight: '100vh' }}>
       <SEO
         title="General Practice Compliance Software"
-        description="Salvia keeps GP and general clinic records audit-ready for CQC, AHPRA, and MCNZ. Voice note after each consult — structured clinical records, prescribing logs, referral trails, and consent documentation."
+        description="Salvia keeps clinic and general practice records audit-ready for NMC, NABH, and ABDM. Voice note in any Indian language after each consult — structured clinical records, prescribing logs, referral trails, and consent documentation."
         path="/general-practice"
         keywords={[
-          'general practice compliance software', 'GP records software', 'CQC general practice',
-          'AHPRA medical records', 'MCNZ records', 'clinical documentation GP',
-          'general clinic audit trail', 'GP prescribing records',
+          'general practice compliance software', 'clinic records software', 'NMC record-keeping',
+          'ABDM medical records', 'NABH documentation', 'clinical documentation doctor',
+          'general clinic audit trail', 'prescribing records software India',
         ]}
       />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: faqSchema }} />
@@ -89,7 +89,7 @@ export const GeneralClinicPage = () => {
             color: 'var(--salvia-text-muted)', lineHeight: 1.65,
             maxWidth: '640px', margin: '0 auto 3rem',
           }}>
-            CQC, AHPRA, MCNZ. Voice note after each consult — Salvia structures the clinical record, prescribing log, referral trail, and consent. Audit-ready before you leave the room.
+            NMC, NABH, ABDM. Speak in any Indian language after each consult — Salvia structures the clinical record, prescribing log, referral trail, and consent. Audit-ready before you leave the room.
           </p>
           <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'center', flexWrap: 'wrap' }}>
             <Link to="/start" style={{
@@ -150,17 +150,17 @@ export const GeneralClinicPage = () => {
         accent={ACCENT}
         beforeLines={[
           `End-of-day catch-up on records. Some details remembered, some not.`,
-          `Prescribing log kept by hand. CD register drifts. Inspector finds a gap.`,
+          `Prescribing log kept by hand. Controlled drug register drifts. Inspector finds a gap.`,
           `Referral sent — patient drops off the radar. Lost-in-the-system defence at complaints.`,
           `Locum sees the patient. Different note style, different completeness.`,
-          `CQC inspector asks for evidence of consent for procedure X. Long search.`,
+          `Clinical Establishments inspector asks for evidence of consent for procedure X. Long search.`,
         ]}
         afterLines={[
-          `Voice note after each consult. Structured SOAP record ready before you leave the room.`,
-          `Every prescription logged with drug, dose, route, indication. CD register accurate, witnessed.`,
+          `Speak in any Indian language after each consult. Structured SOAP record ready before you leave the room.`,
+          `Every prescription logged with drug, dose, route, indication. Controlled drug register accurate, witnessed.`,
           `Referral sent + receipt + follow-up captured in one trail. Defensible.`,
-          `Every clinician signs with their own registration. Records visually attributed.`,
-          `CQC inspector asks. You filter and export in seconds.`,
+          `Every clinician signs with their own NMC registration. Records visually attributed.`,
+          `Clinical Establishments inspector asks. You filter and export in seconds.`,
         ]}
       />
 
@@ -168,17 +168,17 @@ export const GeneralClinicPage = () => {
       <HonestScope
         accent={ACCENT}
         doLines={[
-          `Audio → structured GP consultation record (history, exam, assessment, plan)`,
+          `Audio in any Indian language → structured consultation record (history, exam, assessment, plan)`,
           `Prescribing log + controlled drug register`,
           `Referral and follow-up trail`,
-          `Immutable audit trail per CQC Reg 17, AHPRA, MCNZ`,
-          `Multi-GP practice with role-based access for nurses, reception, admin`,
+          `Immutable audit trail aligned to NMC, NABH documentation, Clinical Establishments Act`,
+          `Multi-doctor practice with role-based access for nurses, reception, admin`,
         ]}
         dontLines={[
           `Replace your practice management software`,
-          `Bill insurers or process claims directly`,
-          `Connect to NHS Spine, MyHealth or national systems (yet)`,
-          `Claim regulatory sign-off on your behalf`,
+          `Bill insurers or process CGHS / PM-JAY claims directly`,
+          `Connect to ABDM / national health systems (ABHA-ready output, full integration coming)`,
+          `Make you NABH-accredited or claim regulatory sign-off on your behalf`,
           `Provide clinical decision-making — you stay in the loop`,
         ]}
       />
@@ -187,7 +187,7 @@ export const GeneralClinicPage = () => {
       <PricingTeaser
         accent={ACCENT}
         vertical="general_clinic"
-        fromPriceCopy="General practice compliance, from US$249/mo."
+        fromPriceCopy="General practice compliance, from ₹2,500/mo."
       />
 
       <section style={{ padding: '7rem 0', backgroundColor: 'var(--salvia-bg)', borderTop: '1px solid #F1F5F9' }}>
