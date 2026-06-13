@@ -20,7 +20,7 @@ const SALVIA_GIVES = [
 export const ScribeVsSalvia: React.FC = () => (
   <section style={{
     padding: '6rem 0',
-    backgroundColor: 'var(--salvia-bg)',
+    backgroundColor: 'transparent',
     position: 'relative',
     zIndex: 10,
   }}>
