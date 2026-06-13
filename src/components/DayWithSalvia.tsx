@@ -72,7 +72,7 @@ export const DayWithSalvia: React.FC = () => (
     padding: '6rem 0',
     position: 'relative',
     zIndex: 10,
-    backgroundColor: 'var(--salvia-bg)',
+    backgroundColor: 'transparent',
   }}>
     <style>{`
       @media (max-width: 768px) {
