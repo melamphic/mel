@@ -1041,51 +1041,32 @@ interface MarketSelectorProps {
   onChange: (next: Market) => void;
 }
 
-/// Compact pill-row selector for the display market. Locale and
-/// time-zone signals pre-select on first render; the choice persists in
-/// localStorage so a clinician revisiting the page sees their currency.
+/// Compact currency dropdown. The market is auto-detected from locale /
+/// time-zone on first render and persisted in localStorage, so most
+/// visitors never touch this — it's just an escape hatch to change currency.
 function MarketSelector({ market, onChange }: MarketSelectorProps) {
   return (
-    <div
-      role="radiogroup"
-      aria-label="Pricing market"
-      style={{
-        display: 'inline-flex',
-        gap: '0.4rem',
-        marginTop: '1.5rem',
-        padding: '0.3rem',
-        backgroundColor: 'rgba(15, 23, 42, 0.05)',
-        borderRadius: 'var(--salvia-radius-full)',
-        flexWrap: 'wrap',
-        justifyContent: 'center',
-      }}
-    >
-      {MARKETS.map((m) => {
-        const active = m.key === market;
-        return (
-          <button
-            key={m.key}
-            type="button"
-            role="radio"
-            aria-checked={active}
-            onClick={() => onChange(m.key)}
-            style={{
-              padding: '0.4rem 0.9rem',
-              border: 'none',
-              borderRadius: 'var(--salvia-radius-full)',
-              cursor: 'pointer',
-              fontSize: '0.8rem',
-              fontWeight: 700,
-              letterSpacing: '0.02em',
-              backgroundColor: active ? 'var(--salvia-primary)' : 'transparent',
-              color: active ? '#fff' : 'var(--salvia-text-muted)',
-              transition: 'all 0.18s ease',
-            }}
-          >
-            {m.label} · {m.currency}
-          </button>
-        );
-      })}
+    <div style={{ marginTop: '1.25rem', display: 'inline-flex', alignItems: 'center', gap: '0.45rem', fontSize: '0.82rem', color: 'var(--salvia-text-muted)' }}>
+      <span>Prices in</span>
+      <select
+        aria-label="Pricing currency"
+        value={market}
+        onChange={(e) => onChange(e.target.value as Market)}
+        style={{
+          padding: '0.35rem 0.6rem',
+          borderRadius: 'var(--salvia-radius-base)',
+          border: '1px solid rgba(15, 23, 42, 0.15)',
+          backgroundColor: 'var(--salvia-surface)',
+          color: 'var(--salvia-primary)',
+          fontSize: '0.82rem',
+          fontWeight: 700,
+          cursor: 'pointer',
+        }}
+      >
+        {MARKETS.map((m) => (
+          <option key={m.key} value={m.key}>{m.label} · {m.currency}</option>
+        ))}
+      </select>
     </div>
   );
 }
