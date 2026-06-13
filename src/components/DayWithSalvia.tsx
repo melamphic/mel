@@ -4,8 +4,8 @@ const STOPS = [
   {
     n: '1',
     tag: 'Start',
-    title: 'Pick the subject',
-    body: 'Select the patient, animal, or resident you just worked with. One tap, from staff or admin roles.',
+    title: 'Pick the patient',
+    body: 'Select the patient or resident you just saw — pulled straight from your HMIS/EMR. One tap, from any clinical or admin role.',
     icon: (
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
@@ -16,8 +16,8 @@ const STOPS = [
   {
     n: '2',
     tag: 'Capture',
-    title: 'Record what you did',
-    body: 'Voice note, any length — post-encounter, not mid-visit. Keep it natural; talk it out in your own words.',
+    title: 'Speak in any language',
+    body: 'Voice note, any length — Hindi, Malayalam, Tamil or English. Post-consult or ambient at the bedside. Keep it natural; talk it out in your own words.',
     icon: (
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" />
@@ -30,7 +30,7 @@ const STOPS = [
     n: '3',
     tag: 'Process',
     title: 'Pick 1–3 forms',
-    body: 'Select the forms this note should fill. If a form has a linked policy, Salvia runs the compliance check automatically once the form is filled.',
+    body: 'Select the forms this note should fill — consent, drug register, discharge summary. If a form has a linked policy, Salvia runs the linked policy check automatically once the form is filled.',
     icon: (
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <rect x="3" y="4" width="18" height="18" rx="2" />
@@ -56,7 +56,7 @@ const STOPS = [
     n: '5',
     tag: 'Publish',
     title: 'Posted to the timeline',
-    body: 'Record goes onto the subject\u2019s timeline, hashed and audit-locked. Edit history, policy trace, audio, transcript — all bundled into a one-click Audit Pack.',
+    body: 'Record goes onto the patient\u2019s timeline, hashed and audit-locked, ready to sync to ABDM. Edit history, policy trace, audio, transcript — all bundled into a one-click Audit Pack for the assessor.',
     icon: (
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
@@ -104,7 +104,7 @@ export const DayWithSalvia: React.FC = () => (
           marginTop: '1rem',
           maxWidth: '640px',
         }}>
-          The staff member drives the whole loop — subject, audio, forms, review, approval —
+          The clinician drives the whole loop — patient, audio, forms, review, approval —
           with Salvia handling the transcription, the form-fill, the compliance check, and the versioning
           in the background.
         </p>
