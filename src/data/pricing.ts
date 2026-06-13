@@ -236,8 +236,9 @@ export function detectMarket(): Market {
 }
 
 // ---------------------------------------------------------------------------
-// India market — separate 3-tier model (Base / Growth / Unlimited).
-// Not per-seat; differentiated by total monthly draft cap and AI inclusion.
+// India market — separate 3-tier model (Base / Growth / Clinic+), plus Custom.
+// Not per-seat; differentiated by monthly AI-note cap. AI is included on every
+// tier (Base bundles a small allowance); above Clinic+ is a Custom quote.
 // ---------------------------------------------------------------------------
 
 export type IndiaTierKey = 'base' | 'growth' | 'unlimited';
@@ -259,13 +260,13 @@ export const INDIA_TIERS: IndiaTier[] = [
     name: 'Base',
     monthlyINR: 2500,
     annualINR: 25000,
-    draftCap: null,
-    aiIncluded: false,
+    draftCap: 100,
+    aiIncluded: true,
     features: [
-      'Drug register + controlled substance log',
-      'Forms, policies & PDF export',
-      'Incident & consent management',
-      'Patient records',
+      '100 AI notes / month (~3 a day)',
+      'Full compliance suite — drug register, incidents, consent',
+      'Forms, policies & branded PDF export',
+      'Unlimited staff',
       'Email support — 48hr',
     ],
   },
@@ -274,30 +275,30 @@ export const INDIA_TIERS: IndiaTier[] = [
     name: 'Growth',
     monthlyINR: 6000,
     annualINR: 60000,
-    draftCap: 750,
+    draftCap: 600,
     aiIncluded: true,
     highlight: 'Most popular',
     features: [
       'Everything in Base',
-      'AI voice → clinical note',
+      '600 AI notes / month',
       'AI form & policy generation',
-      '750 AI drafts / month',
+      'Unlimited staff',
       'Email support — 24hr',
     ],
   },
   {
     key: 'unlimited',
-    name: 'Unlimited',
+    name: 'Clinic+',
     monthlyINR: 14000,
     annualINR: 140000,
-    draftCap: null,
+    draftCap: 1500,
     aiIncluded: true,
     features: [
       'Everything in Growth',
-      'Unlimited AI drafts',
+      '1,500 AI notes / month',
       'Priority AI queue',
       'Multi-location support',
-      'Dedicated onboarding call',
+      'Custom plans above 1,500 — talk to us',
     ],
   },
 ];
@@ -310,4 +311,72 @@ export function indiaDisplayedMonthly(tier: IndiaTier, cycle: Cycle): number {
 
 export function indiaPlanCode(tier: IndiaTierKey, cycle: Cycle): string {
   return `in_${tier}_${cycle}`;
+}
+
+// ---------------------------------------------------------------------------
+// Unified note-pool model (v3.2, 2026-06-13) — FORWARD source of truth.
+// Supersedes the seat-based PRODUCTS (Practice/Pro) and INDIA_TIERS above once
+// PricingPage is migrated. ONE tier shape across every market, vertical-
+// agnostic, unlimited staff. Differentiated only by monthly AI-note pool.
+// Pools are market-tuned (developed markets run bigger practices); price is
+// market-tuned to local willingness-to-pay (PPP — India ~6x below developed).
+// Above the top pool = Custom quote (all markets). Numbers are a v3.2 starter,
+// reviewed before launch. FX basis (early Jun 2026): INR 95, GBP 0.746,
+// NZD 1.714, AUD 1.419, EUR 0.864 per USD. Cost ≈ $0.05/note ($0.042 India).
+// ---------------------------------------------------------------------------
+
+export type PoolTierKey = 'base' | 'growth' | 'clinic_plus';
+
+export interface PoolTier {
+  key: PoolTierKey;
+  name: string;
+  notesPerMonth: number; // monthly AI-note pool (the only differentiator)
+  monthly: number;       // monthly list price, market's local currency
+  highlight?: string;
+}
+
+/// Per-market note-pool tiers. `marketMetaFor(market)` gives currency/symbol/tax.
+/// Annual = 10-month equivalent via ANNUAL_DISCOUNT. Custom plans sit above the
+/// top pool in every market (handled as a Contact-Sales CTA, not a row here).
+export const MARKET_PRICING: Record<Market, PoolTier[]> = {
+  IN: [
+    { key: 'base',        name: 'Base',    notesPerMonth: 100,  monthly: 2500 },
+    { key: 'growth',      name: 'Growth',  notesPerMonth: 600,  monthly: 6000, highlight: 'Most popular' },
+    { key: 'clinic_plus', name: 'Clinic+', notesPerMonth: 1500, monthly: 14000 },
+  ],
+  US: [
+    { key: 'base',        name: 'Base',    notesPerMonth: 250,  monthly: 69 },
+    { key: 'growth',      name: 'Growth',  notesPerMonth: 1000, monthly: 199, highlight: 'Most popular' },
+    { key: 'clinic_plus', name: 'Clinic+', notesPerMonth: 2500, monthly: 399 },
+  ],
+  UK: [
+    { key: 'base',        name: 'Base',    notesPerMonth: 250,  monthly: 49 },
+    { key: 'growth',      name: 'Growth',  notesPerMonth: 1000, monthly: 149, highlight: 'Most popular' },
+    { key: 'clinic_plus', name: 'Clinic+', notesPerMonth: 2500, monthly: 299 },
+  ],
+  NZ: [
+    { key: 'base',        name: 'Base',    notesPerMonth: 250,  monthly: 119 },
+    { key: 'growth',      name: 'Growth',  notesPerMonth: 1000, monthly: 339, highlight: 'Most popular' },
+    { key: 'clinic_plus', name: 'Clinic+', notesPerMonth: 2500, monthly: 679 },
+  ],
+  AU: [
+    { key: 'base',        name: 'Base',    notesPerMonth: 250,  monthly: 99 },
+    { key: 'growth',      name: 'Growth',  notesPerMonth: 1000, monthly: 285, highlight: 'Most popular' },
+    { key: 'clinic_plus', name: 'Clinic+', notesPerMonth: 2500, monthly: 569 },
+  ],
+  EU: [
+    { key: 'base',        name: 'Base',    notesPerMonth: 250,  monthly: 59 },
+    { key: 'growth',      name: 'Growth',  notesPerMonth: 1000, monthly: 175, highlight: 'Most popular' },
+    { key: 'clinic_plus', name: 'Clinic+', notesPerMonth: 2500, monthly: 349 },
+  ],
+};
+
+/// Monthly-equivalent price to display for a pool tier + cycle.
+export function poolDisplayedMonthly(tier: PoolTier, cycle: Cycle): number {
+  return cycle === 'annual' ? Math.round(tier.monthly * ANNUAL_DISCOUNT) : tier.monthly;
+}
+
+/// Stable plan_code for the unified model: `{market}_{tier}_{cycle}`, lowercased.
+export function poolPlanCode(market: Market, tier: PoolTierKey, cycle: Cycle): string {
+  return `${market.toLowerCase()}_${tier}_${cycle}`;
 }
