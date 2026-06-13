@@ -610,7 +610,7 @@ function IndiaPricingSection({ annual, onAnnualChange }: { annual: boolean; onAn
             </span>
             <p style={{ color: 'var(--salvia-text-muted)', fontSize: '0.95rem', maxWidth: '540px', margin: '0 auto' }}>
               All plans include unlimited staff accounts, the full clinical software stack, and GST-compliant invoicing.
-              AI is included from Growth onwards.
+              AI is included on every plan.
             </p>
           </div>
           <AnnualToggle annual={annual} onChange={onAnnualChange} />
@@ -902,7 +902,7 @@ function IndiaFeatureGrid() {
       heading: 'Clinical tools',
       rows: [
         { label: 'Staff accounts',        cells: ['Unlimited', 'Unlimited', 'Unlimited'] },
-        { label: 'Clinical notes',        cells: ['Manual', 'AI + Manual', 'AI + Manual'] },
+        { label: 'Clinical notes',        cells: ['AI + Manual', 'AI + Manual', 'AI + Manual'] },
         { label: 'Forms',                 cells: ['Build & publish', 'Build & AI-generate', 'Build & AI-generate'] },
         { label: 'Policy library',        cells: ['Manual', 'AI-generate', 'AI-generate'] },
         { label: 'Drug register',         cells: [true, true, true] },
@@ -917,10 +917,10 @@ function IndiaFeatureGrid() {
     {
       heading: 'AI',
       rows: [
-        { label: 'AI voice → clinical note', cells: [false, true, true] },
+        { label: 'AI voice → clinical note', cells: [true, true, true] },
         { label: 'AI form generation',       cells: [false, true, true] },
         { label: 'AI policy generation',     cells: [false, true, true] },
-        { label: 'Monthly draft cap',        cells: ['—', '750', 'None'] },
+        { label: 'Monthly AI-note cap',      cells: ['100', '600', '1,500'] },
         { label: 'AI queue priority',        cells: ['—', 'Standard', 'Priority'] },
       ],
     },
@@ -962,7 +962,7 @@ function IndiaFeatureGrid() {
         }}
       >
         <FeatureGrid
-          columns={['Base · ₹2,500', 'Growth · ₹6,000', 'Unlimited · ₹14,000']}
+          columns={['Base · ₹2,500', 'Growth · ₹6,000', 'Clinic+ · ₹14,000']}
           sections={sections}
           highlightCol={1}
         />
