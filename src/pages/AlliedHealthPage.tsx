@@ -16,34 +16,34 @@ const ACCENT_SOFT = 'rgba(8,145,178,0.07)';
 
 const COUNTRY_GROUPS = [
   {
-    code: 'IE',
-    label: 'Ireland',
+    code: 'IN',
+    label: 'India',
     accent: '#0891B2',
-    note: 'CORU statutory register; voluntary regimes where statutory regulation is pending.',
+    note: 'NCAHP statutory register; RCI registration for rehabilitation professionals.',
   },
   {
-    code: 'UK',
-    label: 'United Kingdom',
+    code: 'IN',
+    label: 'India',
     accent: '#FF4E00',
-    note: 'HCPC for physio, OT, podiatry, SLT; GOsC for osteopathy; GCC for chiropractic.',
+    note: 'NCAHP profession councils for physio, OT, podiatry; RCI for audiology & speech-language pathology.',
   },
   {
-    code: 'AU',
-    label: 'Australia',
+    code: 'IN',
+    label: 'India',
     accent: '#F59E0B',
-    note: 'AHPRA boards for physio, OT, osteo, chiro, podiatry; SPA for speech pathology.',
+    note: 'State Allied & Healthcare Councils under NCAHP for physio, OT, osteo, chiro, podiatry.',
   },
   {
-    code: 'NZ',
-    label: 'New Zealand',
+    code: 'IN',
+    label: 'India',
     accent: '#10B981',
-    note: 'HPCA Act profession-specific boards (PBNZ, OTBNZ, OCNZ, CBNZ, podiatrists, NZSTA).',
+    note: 'NCAHP discipline-specific categories plus RCI for rehabilitation and communication disorders.',
   },
   {
-    code: 'US',
-    label: 'United States',
+    code: 'IN',
+    label: 'India',
     accent: '#6366F1',
-    note: 'State boards per discipline plus national bodies (FSBPT, NBCOT, NBCE, APMA, ASHA).',
+    note: 'ABDM-aligned record-keeping and DPDP Act data-protection duties across every discipline.',
   },
 ];
 
@@ -54,7 +54,7 @@ const FAQS = [
   },
   {
     q: 'Does it actually know my discipline-specific frameworks?',
-    a: 'Yes. Each clinic registers a discipline at onboarding (physio / osteo / chiro / OT / podiatry / SLT) and a country. Salvia loads the matching regulator pack (CORU clauses, HCPC SoP, AHPRA codes etc) into every AI generation. You can adjust the active framework set in settings.',
+    a: 'Yes. Each clinic registers a discipline at onboarding (physio / osteo / chiro / OT / podiatry / SLT) and a country. Salvia loads the matching framework pack (NCAHP record-keeping norms, RCI standards, ABDM record formats etc) into every AI generation. You can adjust the active framework set in settings.',
   },
   {
     q: 'What if my clinic has clinicians from multiple disciplines?',
@@ -62,11 +62,15 @@ const FAQS = [
   },
   {
     q: 'Can we pick which frameworks apply to our records?',
-    a: 'Yes. Settings → Compliance Frameworks lists every framework valid for your country and discipline. Multi-select what applies (e.g. CORU + EU GDPR-clinical + ISO 15189 if relevant). All AI generation honours the selected set.',
+    a: 'Yes. Settings → Compliance Frameworks lists every framework valid for your country and discipline. Multi-select what applies (e.g. NCAHP + DPDP Act + ABDM record formats if relevant). All AI generation honours the selected set.',
   },
   {
     q: 'How is the pricing different from your dental or vet pricing?',
     a: 'Same tier structure (Practice 1–3 clinicians, Pro 4–7 clinicians), same per-market pricing. Allied health has a slightly higher monthly note cap because allied caseloads typically run more frequent, shorter sessions than vet or GP.',
+  },
+  {
+    q: 'Can clinicians dictate in their own language?',
+    a: 'Yes. A clinician can speak the note in English, Hindi, or another Indian language and Salvia returns a clean, structured English record. The time saved on typing is the same whichever language you work in.',
   },
 ];
 
@@ -84,13 +88,13 @@ export const AlliedHealthPage = () => {
   return (
     <div style={{ backgroundColor: '#fff', minHeight: '100vh' }}>
       <SEO
-        title="Allied Health Compliance Software"
-        description="Salvia keeps allied health records audit-ready for CORU, HCPC, AHPRA, PBNZ, OTBNZ and more. Voice note after each session — SOAP record, outcome measures, treatment log, discharge summary, audit trail. Physio, osteo, chiro, OT, podiatry, speech."
+        title="Allied Health Documentation & Records Software"
+        description="Salvia keeps allied health records audit-ready for NCAHP, RCI, ABDM and the DPDP Act. Voice note after each session in any Indian language — SOAP record, outcome measures, treatment log, discharge summary, audit trail. Physio, osteo, chiro, OT, podiatry, speech."
         path="/allied-health"
         keywords={[
-          'allied health software', 'allied health records', 'physiotherapy compliance software',
-          'CORU allied health', 'HCPC records', 'AHPRA allied', 'physio osteo chiro OT podiatry speech',
-          'allied health audit trail', 'allied health practice management',
+          'allied health software India', 'allied health records', 'physiotherapy documentation software',
+          'NCAHP allied health', 'RCI records', 'ABDM allied', 'physio osteo chiro OT podiatry speech',
+          'allied health audit trail', 'allied health practice management India',
         ]}
       />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: faqSchema }} />
@@ -120,7 +124,7 @@ export const AlliedHealthPage = () => {
             color: 'var(--salvia-text-muted)', lineHeight: 1.65,
             maxWidth: '700px', margin: '0 auto 3rem',
           }}>
-            CORU. HCPC. AHPRA. PBNZ. GOsC. GCC. One voice note per session — Salvia generates the structured record, outcome measures, consent, treatment log, and discharge summary against the framework that governs you.
+            NCAHP. RCI. ABDM. DPDP Act. One voice note per session, in any Indian language — Salvia generates the structured record, outcome measures, consent, treatment log, and discharge summary against the framework that governs you.
           </p>
           <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'center', flexWrap: 'wrap' }}>
             <Link to="/start" style={{
@@ -369,7 +373,7 @@ export const AlliedHealthPage = () => {
           `Consent form signed once, filed once, lost twice during the audit.`,
           `Inspector asks for a complete file. You spend the afternoon searching.`,
           `Locum signs the same generic note your principal does — no clear attribution.`,
-          `Framework changes every couple of years. You scramble to update your templates.`,
+          `NCAHP norms change every couple of years. You scramble to update your templates.`,
         ]}
         afterLines={[
           `Voice note after each session. AI lays the structured record out. You review and sign in seconds.`,
@@ -406,7 +410,7 @@ export const AlliedHealthPage = () => {
       <PricingTeaser
         accent={ACCENT}
         vertical="allied_health"
-        fromPriceCopy="Allied health compliance, from US$229/mo."
+        fromPriceCopy="Allied health documentation, from ₹2,500/mo."
       />
 
       {/* FAQ */}
