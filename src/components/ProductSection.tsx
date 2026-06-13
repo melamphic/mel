@@ -20,7 +20,7 @@ const products = [
     title: 'Your rulebook, turned into enforceable clauses.',
     subtitle: 'Block-based policy editor (think Notion, but for compliance). Upload your existing PDFs and Salvia imports them. Mark clauses as must-follow, maybe-follow, or try-to-follow — then link them to the forms they govern.',
     bullets: [
-      'Built-in frameworks: HIPAA, NABH, VMR, ADA, BESTPRACTICE',
+      'Built-in frameworks: DPDP, NABH, ABDM, Clinical Establishments Act',
       'Upload your own policy docs — Salvia converts them into editable blocks',
       'Clause parity tagging: High / Medium / Low enforceability',
     ],
@@ -30,7 +30,7 @@ const products = [
     id: 'audio',
     label: 'AUDIO → FORMS',
     title: 'Go home when the patient does.',
-    subtitle: 'Record the visit. Deepgram Nova Medical transcribes the audio. Our AI maps the transcript into your forms — with evidence scoring so every field traces back to the exact words that generated it.',
+    subtitle: 'Record the visit in any Indian language. Deepgram Nova Medical transcribes the audio. Our AI maps the transcript into your forms — with evidence scoring so every field traces back to the exact words that generated it.',
     bullets: [
       'Deterministic confidence scoring per field',
       'Every value tagged with source line + transformation type',
@@ -89,7 +89,7 @@ const FormEngineMock: React.FC = () => {
     { label: 'Treatment plan', type: 'Button group', required: true, hint: 'AI: multi-select ok' },
   ];
   return (
-    <MockWindow title="Vet intake form" subtitle="v4.2 · draft · linked to VMR §4.1–§4.3">
+    <MockWindow title="Vet intake form" subtitle="v4.2 · draft · linked to NABH §4.1–§4.3">
       {/* Field list */}
       <div style={{ display: 'flex', flexDirection: 'column', gap: '0.55rem', marginBottom: '1rem' }}>
         {fields.map((f, i) => (
@@ -170,7 +170,7 @@ const FormEngineMock: React.FC = () => {
 const PolicyEngineMock: React.FC = () => {
   const clauses = [
     { parity: 'MUST', text: 'Record patient ID, species, weight, and presenting complaint on every visit.', forms: 4 },
-    { parity: 'MUST', text: 'Owner consent is required for any Schedule-4 medication prescribed.', forms: 2 },
+    { parity: 'MUST', text: 'Owner consent is required for any Schedule H1 medication prescribed.', forms: 2 },
     { parity: 'MAYBE', text: 'Pain score should be documented using a validated 0–10 scale.', forms: 3 },
     { parity: 'TRY', text: 'Photographs of visible conditions are preferred when practical.', forms: 1 },
   ];
@@ -178,7 +178,7 @@ const PolicyEngineMock: React.FC = () => {
   const parityBg = (p: string) => p === 'MUST' ? '#FEF2F2' : p === 'MAYBE' ? '#FFFBEB' : '#ECFDF5';
 
   return (
-    <MockWindow title="VMR Clinical Records" subtitle="v12.2 · linked to 4 forms · imported from PDF" accent="#0EA5E9">
+    <MockWindow title="NABH Clinical Records" subtitle="v12.2 · linked to 4 forms · imported from PDF" accent="#0EA5E9">
       {/* Section heading */}
       <div style={{ textAlign: 'left', marginBottom: '0.75rem' }}>
         <div style={{ fontSize: '0.62rem', fontWeight: 700, color: '#94A3B8', letterSpacing: '0.08em', textTransform: 'uppercase' }}>
@@ -280,16 +280,16 @@ const AudioFormsMock: React.FC = () => {
       }}>
         "Bella, four-year-old DSH cat, owner reports vomiting{' '}
         <mark style={{ backgroundColor: 'rgba(255,78,0,0.18)', color: '#0F172A', padding: '0 3px', borderRadius: '3px', fontStyle: 'normal', fontWeight: 600 }}>once daily for three days</mark>,
-        partially digested food. Weight <mark style={{ backgroundColor: 'rgba(255,78,0,0.18)', color: '#0F172A', padding: '0 3px', borderRadius: '3px', fontStyle: 'normal', fontWeight: 600 }}>10.2 pounds</mark>,
-        temp <mark style={{ backgroundColor: 'rgba(255,78,0,0.18)', color: '#0F172A', padding: '0 3px', borderRadius: '3px', fontStyle: 'normal', fontWeight: 600 }}>101.5°F</mark>..."
+        partially digested food. Weight <mark style={{ backgroundColor: 'rgba(255,78,0,0.18)', color: '#0F172A', padding: '0 3px', borderRadius: '3px', fontStyle: 'normal', fontWeight: 600 }}>4.6 kilograms</mark>,
+        temp <mark style={{ backgroundColor: 'rgba(255,78,0,0.18)', color: '#0F172A', padding: '0 3px', borderRadius: '3px', fontStyle: 'normal', fontWeight: 600 }}>38.6°C</mark>..."
       </div>
 
       {/* Filled form fields with confidence + source */}
       <div style={{ display: 'flex', flexDirection: 'column', gap: '0.45rem' }}>
         {[
           { field: 'Complaint', value: 'Vomiting ×3 days', conf: 98, line: 'L1' },
-          { field: 'Weight',    value: '10.2 lbs',         conf: 99, line: 'L2' },
-          { field: 'Temp',      value: '101.5°F',          conf: 99, line: 'L2' },
+          { field: 'Weight',    value: '4.6 kg',           conf: 99, line: 'L2' },
+          { field: 'Temp',      value: '38.6°C',           conf: 99, line: 'L2' },
           { field: 'Assessment', value: 'Acute GI upset',  conf: 78, line: '—',  inferred: true },
         ].map((r) => (
           <div key={r.field} style={{
