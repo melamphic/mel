@@ -44,7 +44,7 @@ export const Hero: React.FC = () => {
         {/* Social Proof Badge */}
         <div style={{ marginBottom: '3rem', display: 'flex', justifyContent: 'center' }}>
           <div className="review-badge" style={{ backgroundColor: 'rgba(0,0,0,0.02)' }}>
-            Built for every clinical specialty
+            Built for Indian clinics &amp; hospitals
           </div>
         </div>
 
@@ -98,10 +98,10 @@ export const Hero: React.FC = () => {
           maxWidth: '720px',
           margin: '0 auto 3rem auto'
         }}>
-          Salvia's <strong>AI</strong> turns a post-encounter <strong>audio note</strong> into a
-          policy-checked, audit-locked <strong>clinical record</strong> — before anyone signs off.
-          Your <strong>compliance framework</strong> runs automatically on every form.
-          Every record defends itself. Not a scribe — a <strong>compliance suite</strong>.
+          Salvia's <strong>AI</strong> turns a post-consult <strong>audio note</strong>, spoken in any
+          Indian language, into a policy-checked, audit-ready <strong>clinical record</strong> — before anyone signs off.
+          Your <strong>drug register, consent and incident records</strong> build themselves on every form.
+          Every record defends itself in an audit. Not a scribe — a <strong>compliance suite</strong>.
         </p>
 
         <div style={{ display: 'flex', gap: '1.2rem', justifyContent: 'center' }} className="mobile-stack">
