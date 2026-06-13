@@ -14,33 +14,33 @@ const ACCENT = '#10B981';
 
 const FAQS = [
   {
-    q: 'Does Salvia meet CQC Regulation 17 requirements for dental practices?',
-    a: 'Yes. Salvia structures records to include the elements CQC inspectors check: medical history review at every appointment, BPE scoring, soft tissue examination, radiograph justification, and written treatment plans signed before treatment begins.',
+    q: 'Does Salvia help dental clinics meet Clinical Establishments Act and DCI record-keeping requirements?',
+    a: 'Yes. Salvia structures records to include the elements regulators and NABH assessors look for: medical history review at every appointment, BPE scoring, soft tissue examination, radiograph justification, and written treatment plans signed before treatment begins.',
   },
   {
     q: 'Does it capture BPE scores and periodontal records?',
     a: 'Yes. BPE scoring is a required field in every examination record — it cannot be skipped before the note is saved. Six-point pocket depths are captured for patients with identified periodontal disease.',
   },
   {
-    q: 'What about radiograph justification for CQC and ARPANSA compliance?',
-    a: 'Every radiograph requires a documented justification — clinical indication, patient history, and decision rationale — at the time of exposure. The record produces an ARPANSA-compliant justification trail automatically.',
+    q: 'What about radiograph justification for AERB radiation safety compliance?',
+    a: 'Every radiograph requires a documented justification — clinical indication, patient history, and decision rationale — at the time of exposure. The record produces an AERB-aligned justification trail automatically.',
   },
   {
-    q: 'Does it work for AHPRA and the Australian Dental Board?',
-    a: "Yes. Salvia's records meet Dental Board of Australia guidelines: contemporaneous notes, medical history reviewed at every visit, treatment plans in writing with costs documented before treatment, and a complete radiograph audit trail.",
+    q: 'Does it work for DCI and the Dentists Act 1948?',
+    a: "Yes. Salvia's records support Dental Council of India expectations under the Dentists Act 1948: contemporaneous notes, medical history reviewed at every visit, treatment plans in writing with costs documented before treatment, and a complete radiograph audit trail.",
   },
   {
     q: 'How does the consent workflow work for treatment plans?',
-    a: 'Salvia generates a written treatment plan with itemised costs before the treatment appointment. The patient signs digitally. The signed plan, cost estimate, and date are locked into the record — exactly what GDC Standard 4 and AHPRA require.',
+    a: 'Salvia generates a written treatment plan with itemised costs before the treatment appointment. The patient signs digitally. The signed plan, cost estimate, and date are locked into the record — the documented consent NABH assessors and DCI expect.',
   },
 ];
 
 const REGULATORS = [
-  { label: 'CQC', sub: 'UK', color: '#0EA5E9' },
-  { label: 'GDC', sub: 'UK', color: '#FF4E00' },
-  { label: 'AHPRA', sub: 'Australia', color: '#10B981' },
-  { label: 'ARPANSA', sub: 'Australia', color: '#F59E0B' },
-  { label: 'NZDA', sub: 'New Zealand', color: '#8B5CF6' },
+  { label: 'DCI', sub: 'India', color: '#0EA5E9' },
+  { label: 'NABH', sub: 'India', color: '#FF4E00' },
+  { label: 'AERB', sub: 'India', color: '#10B981' },
+  { label: 'CEA 2010', sub: 'India', color: '#F59E0B' },
+  { label: 'DPDP Act', sub: 'India', color: '#8B5CF6' },
 ];
 
 const FEATURES = [
@@ -62,7 +62,7 @@ const FEATURES = [
       </svg>
     ),
     title: 'BPE required at every exam',
-    desc: 'BPE cannot be skipped before saving a check-up record. CQC finds missing BPE in the majority of "requires improvement" dental inspections.',
+    desc: 'BPE cannot be skipped before saving a check-up record. Missing BPE is among the most common gaps assessors flag in dental record audits.',
   },
   {
     icon: (
@@ -81,7 +81,7 @@ const FEATURES = [
       </svg>
     ),
     title: 'Radiograph justification',
-    desc: 'Clinical indication logged per exposure. ARPANSA-compliant justification trail. Produces documentation for any "unnecessary X-ray" complaint.',
+    desc: 'Clinical indication logged per exposure. AERB-aligned justification trail. Produces documentation for any "unnecessary X-ray" complaint.',
   },
   {
     icon: (
@@ -91,7 +91,7 @@ const FEATURES = [
       </svg>
     ),
     title: 'Written treatment plans',
-    desc: 'Itemised treatment plan with costs generated before treatment. Patient signs digitally. Satisfies GDC Standard 4 and AHPRA consent requirements.',
+    desc: 'Itemised treatment plan with costs generated before treatment. Patient signs digitally. Documents the informed consent DCI and NABH expect.',
   },
   {
     icon: (
@@ -100,15 +100,15 @@ const FEATURES = [
       </svg>
     ),
     title: 'Medical history at every visit',
-    desc: 'System prompts medical history review at appointment start. Review date locked to the record. CQC finds this missing in most sampled charts.',
+    desc: 'System prompts medical history review at appointment start. Review date locked to the record. This is a frequent gap in audited dental charts.',
   },
 ];
 
 const RECENT_POSTS = [
-  { slug: 'cqc-dental-2026', title: 'CQC dental inspection 2026 — what Regulation 17 actually requires in your clinical notes', tag: 'CQC Inspection' },
-  { slug: 'ahpra-dental-records', title: 'AHPRA dental complaints are records-first — is your charting defensible?', tag: 'AHPRA' },
+  { slug: 'cqc-dental-2026', title: 'NABH dental accreditation 2026 — what assessors actually expect in your clinical notes', tag: 'NABH Assessment' },
+  { slug: 'ahpra-dental-records', title: 'DCI dental complaints are records-first — is your charting defensible?', tag: 'DCI' },
   { slug: 'malpractice-dental', title: "Missed a perio pocket two years ago — patient now has bone loss. How do I defend my charting?", tag: 'Malpractice' },
-  { slug: 'signed-edits-dental', title: "Billed the wrong CDT code on a signed note — how do I fix it without looking dodgy?", tag: 'Corrections' },
+  { slug: 'signed-edits-dental', title: "Billed the wrong NHCX code on a signed note — how do I fix it without looking dodgy?", tag: 'Corrections' },
 ];
 
 export const DentalPage = () => {
@@ -126,13 +126,13 @@ export const DentalPage = () => {
     <div style={{ backgroundColor: '#fff', minHeight: '100vh' }}>
       <SEO
         title="Dental Compliance Software"
-        description="Salvia keeps dental practice records audit-ready for CQC, GDC, and AHPRA. BPE, STE, radiograph justification, and treatment plans captured at every visit — no inspection catches you off guard."
+        description="Salvia keeps dental clinic records audit-ready for DCI, NABH, and AERB. BPE, STE, radiograph justification, and treatment plans captured at every visit — no audit catches you off guard."
         path="/dental"
         keywords={[
-          'dental compliance software', 'CQC dental records', 'GDC records requirements',
-          'AHPRA dental compliance', 'dental charting software', 'BPE recording software',
+          'dental compliance software India', 'DCI dental records', 'NABH dental accreditation',
+          'AERB dental compliance', 'dental charting software', 'BPE recording software',
           'radiograph justification dental', 'dental audit trail', 'dental governance software',
-          'CQC Regulation 17 dental',
+          'Clinical Establishments Act dental',
         ]}
       />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: faqSchema }} />
@@ -155,14 +155,14 @@ export const DentalPage = () => {
             letterSpacing: '-0.04em', lineHeight: 1,
             color: 'var(--salvia-primary)', marginBottom: '1.75rem',
           }}>
-            Every field CQC<br />looks for, captured.
+            Every field an audit<br />looks for, captured.
           </h1>
           <p style={{
             fontSize: 'clamp(1rem, 2.5vw, 1.25rem)',
             color: 'var(--salvia-text-muted)', lineHeight: 1.65,
             maxWidth: '640px', margin: '0 auto 3rem',
           }}>
-            CQC Regulation 17. GDC Standards. AHPRA Dental Board guidelines. Voice note after each consult — BPE, STE, radiograph justification, treatment plan, and audit trail all handled.
+            DCI record-keeping. NABH standards. AERB radiation safety. Voice note after each consult, in any Indian language — BPE, STE, radiograph justification, treatment plan, and audit trail all handled.
           </p>
           <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'center', flexWrap: 'wrap' }}>
             <Link to="/start" style={{
@@ -211,22 +211,22 @@ export const DentalPage = () => {
         <div className="container" style={{ maxWidth: '880px' }}>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: '3rem', alignItems: 'center' }} className="mobile-stack">
             <div style={{ textAlign: 'center' }}>
-              <div style={{ fontSize: '0.7rem', fontWeight: 800, color: '#059669', letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: '0.5rem' }}>CQC Finding</div>
+              <div style={{ fontSize: '0.7rem', fontWeight: 800, color: '#059669', letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: '0.5rem' }}>Audit Finding</div>
               <div style={{ fontSize: '3.5rem', fontWeight: 900, color: 'var(--salvia-primary)', letterSpacing: '-0.04em', lineHeight: 1 }}>9/20</div>
               <div style={{ fontSize: '0.9rem', fontWeight: 600, color: 'var(--salvia-text-muted)', marginTop: '0.25rem' }}>records missing BPE</div>
             </div>
             <div>
               <h2 style={{ fontSize: '1.5rem', fontWeight: 800, color: 'var(--salvia-primary)', marginBottom: '0.75rem', letterSpacing: '-0.02em' }}>
-                CQC finds BPE missing in nearly half of sampled records.
+                Audits find BPE missing in nearly half of sampled records.
               </h2>
               <p style={{ color: 'var(--salvia-text-muted)', lineHeight: 1.65, marginBottom: '1.25rem' }}>
-                In a typical "requires improvement" inspection, 9 of 20 records are missing BPE scores, 11 lack written treatment plans, and 7 have no radiograph reporting. These aren't complex clinical failures — they're missing fields. Salvia makes them required.
+                In a typical underprepared clinic audit, 9 of 20 records are missing BPE scores, 11 lack written treatment plans, and 7 have no radiograph reporting. These aren't complex clinical failures — they're missing fields. Salvia makes them required.
               </p>
               <Link to="/blog/cqc-dental-2026" style={{
                 fontSize: '0.85rem', fontWeight: 700, color: '#059669',
                 display: 'inline-flex', alignItems: 'center', gap: '0.35rem', textDecoration: 'none',
               }}>
-                Read the CQC inspection breakdown
+                Read the dental audit breakdown
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                   <line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" />
                 </svg>
@@ -284,17 +284,17 @@ export const DentalPage = () => {
         accent={ACCENT}
         beforeLines={[
           `End-of-day chart updates. BPE scoring skipped on a busy day.`,
-          `Radiograph justification captured "in my head" — ARPANSA inspector finds gaps.`,
+          `Radiograph justification captured "in my head" — an AERB review finds gaps.`,
           `Treatment plan discussed verbally. Patient disputes the bill afterwards.`,
-          `Locum sees a hygiene check. Different note format, different completeness, different defensibility.`,
-          `CQC inspector asks for evidence of medical history review. You scroll for fifteen minutes.`,
+          `Visiting dentist sees a hygiene check. Different note format, different completeness, different defensibility.`,
+          `An assessor asks for evidence of medical history review. You scroll for fifteen minutes.`,
         ]}
         afterLines={[
-          `Voice note after each appointment. BPE field required — note cannot save without it.`,
-          `Radiograph justification captured at time of exposure. ARPANSA-compliant trail produced automatically.`,
-          `Treatment plan with itemised costs, signed before the appointment. GDC Standard 4 ready.`,
-          `Every locum signs with their registration number. Records visually attributed.`,
-          `CQC inspector asks. You filter for medical-history-review entries and export in seconds.`,
+          `Voice note after each appointment, in any Indian language. BPE field required — note cannot save without it.`,
+          `Radiograph justification captured at time of exposure. AERB-aligned trail produced automatically.`,
+          `Treatment plan with itemised costs, signed before the appointment. Consent documented and DCI-ready.`,
+          `Every visiting dentist signs with their DCI registration number. Records visually attributed.`,
+          `An assessor asks. You filter for medical-history-review entries and export in seconds.`,
         ]}
       />
 
@@ -302,16 +302,16 @@ export const DentalPage = () => {
       <HonestScope
         accent={ACCENT}
         doLines={[
-          `Audio → structured dental record with BPE, STE, charting`,
-          `Radiograph justification + ARPANSA/CQC audit trail`,
+          `Audio in any Indian language → structured dental record with BPE, STE, charting`,
+          `Radiograph justification + AERB-aligned audit trail`,
           `Treatment plan + itemised cost estimate with e-signature`,
-          `Immutable audit trail per CQC Reg 17, GDC, AHPRA Dental Board`,
-          `Multi-dentist practice with role-based access for hygienists, nurses, admin`,
+          `Immutable audit trail for DCI, NABH, and Clinical Establishments Act records`,
+          `Multi-dentist clinic with role-based access for hygienists, nurses, admin`,
         ]}
         dontLines={[
-          `Replace your practice management software`,
-          `Bill insurers or process claims directly`,
-          `Claim regulatory sign-off on your behalf`,
+          `Replace your clinic management software`,
+          `Bill insurers or process NHCX claims directly`,
+          `Make you NABH-accredited or claim regulatory sign-off on your behalf`,
           `Auto-publish records without your review`,
           `Provide clinical decision-making — you stay in the loop`,
         ]}
@@ -321,7 +321,7 @@ export const DentalPage = () => {
       <PricingTeaser
         accent={ACCENT}
         vertical="dental"
-        fromPriceCopy="Dental compliance, from US$229/mo."
+        fromPriceCopy="Dental compliance, from ₹2,500/mo."
       />
 
       {/* FAQ section */}
@@ -332,7 +332,7 @@ export const DentalPage = () => {
               Common questions
             </div>
             <h2 style={{ fontSize: 'clamp(1.8rem, 4vw, 2.4rem)', fontWeight: 800, color: 'var(--salvia-primary)', letterSpacing: '-0.03em' }}>
-              What dental practices ask us
+              What dental clinics ask us
             </h2>
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
@@ -389,10 +389,10 @@ export const DentalPage = () => {
             Get started
           </div>
           <h2 style={{ fontSize: 'clamp(2rem, 5vw, 3rem)', fontWeight: 800, color: 'var(--salvia-primary)', letterSpacing: '-0.03em', marginBottom: '1rem' }}>
-            Pass your next inspection, first time.
+            Pass your next audit, first time.
           </h2>
           <p style={{ color: 'var(--salvia-text-muted)', lineHeight: 1.65, marginBottom: '2.5rem' }}>
-            See how Salvia works in a real dental practice — no slides, no pitch. Book a 20-minute demo.
+            See how Salvia works in a real dental clinic — no slides, no pitch. Book a 20-minute demo.
           </p>
           <Link to="/start" style={{
             display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
