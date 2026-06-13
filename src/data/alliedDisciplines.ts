@@ -121,13 +121,13 @@ export const ALLIED_DISCIPLINES: AlliedDiscipline[] = [
     heroBadge: 'Allied Health · Physiotherapy',
     heroHeadline: ['Records that hold up,', 'session after session.'],
     heroSubtitle:
-      'CORU. HCPC. AHPRA. PBNZ. One voice note per session — Salvia handles the SOAP record, outcome scales, treatment log, discharge summary, and audit trail.',
+      'NCAHP. RCI. ABDM. DPDP Act. One voice note per session — Salvia handles the SOAP record, outcome scales, treatment log, discharge summary, and audit trail.',
     regulators: [
-      { countryCode: 'IE', country: 'Ireland',        body: 'CORU',  bodyFull: 'Physiotherapists Registration Board',        color: '#0891B2' },
-      { countryCode: 'UK', country: 'United Kingdom', body: 'HCPC',  bodyFull: 'Health & Care Professions Council',          color: '#FF4E00' },
-      { countryCode: 'AU', country: 'Australia',      body: 'AHPRA', bodyFull: 'Physiotherapy Board of Australia',           color: '#F59E0B' },
-      { countryCode: 'NZ', country: 'New Zealand',    body: 'PBNZ',  bodyFull: 'Physiotherapy Board of New Zealand',         color: '#10B981' },
-      { countryCode: 'US', country: 'United States',  body: 'FSBPT', bodyFull: 'State physical therapy boards',              color: '#6366F1' },
+      { countryCode: 'IN', country: 'India', body: 'NCAHP',  bodyFull: 'National Commission for Allied & Healthcare Professions',  color: '#0891B2' },
+      { countryCode: 'IN', country: 'India', body: 'Physio Council', bodyFull: 'Physiotherapy Professional Council (under NCAHP)',  color: '#FF4E00' },
+      { countryCode: 'IN', country: 'India', body: 'RCI',    bodyFull: 'Rehabilitation Council of India',                        color: '#F59E0B' },
+      { countryCode: 'IN', country: 'India', body: 'NABH',   bodyFull: 'National Accreditation Board for Hospitals & Healthcare',  color: '#10B981' },
+      { countryCode: 'IN', country: 'India', body: 'ABDM',   bodyFull: 'Ayushman Bharat Digital Mission',                        color: '#6366F1' },
     ],
     features: [
       ...COMMON_FEATURES('physiotherapy', 'clinician'),
@@ -139,12 +139,12 @@ export const ALLIED_DISCIPLINES: AlliedDiscipline[] = [
     ],
     faqs: [
       {
-        q: 'Is Salvia CORU-aware for Irish physios?',
-        a: 'Yes. The Physiotherapists Registration Board (CORU) Code of Professional Conduct & Ethics requires contemporaneous, legible, attributable records. Salvia’s structured records, immutable timestamps, and per-clinician sign-off cover those requirements out of the box.',
+        q: 'Is Salvia NCAHP-aware for Indian physios?',
+        a: 'Yes. The National Commission for Allied & Healthcare Professions (NCAHP) Act and its profession-specific councils expect contemporaneous, legible, attributable records. Salvia’s structured records, immutable timestamps, and per-clinician sign-off cover those expectations out of the box.',
       },
       {
-        q: 'Does it cover HCPC standards for UK physios?',
-        a: 'Yes. HCPC Standards of Conduct, Performance and Ethics (Standard 10 — record keeping) maps directly to Salvia’s structured records and audit trail. Every session note carries the clinician’s registration and a locked timestamp.',
+        q: 'Does it cover Clinical Establishments Act record-keeping?',
+        a: 'Yes. The Clinical Establishments Act and ABDM record-keeping expectations map directly to Salvia’s structured records and audit trail. Every session note carries the clinician’s registration and a locked timestamp.',
       },
       {
         q: 'How do outcome measures work?',
@@ -152,7 +152,7 @@ export const ALLIED_DISCIPLINES: AlliedDiscipline[] = [
       },
       {
         q: 'Does it handle MSK private-practice billing notes?',
-        a: 'Salvia produces the clinical record — what was assessed, what was done, response, plan. It does not bill insurers directly; it generates the documentation that insurers and ACC (NZ) audits actually look for.',
+        a: 'Salvia produces the clinical record — what was assessed, what was done, response, plan. It does not bill insurers directly; it generates the documentation that insurers and cashless-claim (₹) audits actually look for.',
       },
       {
         q: 'What about MDT clinics with sports doctors and physios?',
@@ -160,13 +160,13 @@ export const ALLIED_DISCIPLINES: AlliedDiscipline[] = [
       },
     ],
     recentPosts: [],
-    metaTitle: 'Physiotherapy Compliance Software — CORU, HCPC, AHPRA, PBNZ',
+    metaTitle: 'Physiotherapy Compliance Software — NCAHP, RCI, ABDM, NABH',
     metaDescription:
-      'Salvia keeps physiotherapy records audit-ready for CORU, HCPC, AHPRA and PBNZ. Voice note after each session — SOAP record, outcome measures, treatment log, discharge summary out the other side.',
+      'Salvia keeps physiotherapy records audit-ready for NCAHP, RCI, ABDM and the Clinical Establishments Act. Voice note after each session — SOAP record, outcome measures, treatment log, discharge summary out the other side.',
     metaKeywords: [
-      'physiotherapy compliance software', 'physio records software Ireland', 'CORU physiotherapy records',
-      'HCPC physio records', 'physiotherapy SOAP notes', 'physio outcome measures software',
-      'AHPRA physiotherapy', 'PBNZ records', 'physiotherapy audit trail',
+      'physiotherapy compliance software', 'physio records software India', 'NCAHP physiotherapy records',
+      'physiotherapy council records', 'physiotherapy SOAP notes', 'physio outcome measures software',
+      'RCI physiotherapy', 'ABDM records', 'physiotherapy audit trail',
     ],
   },
 
@@ -182,39 +182,39 @@ export const ALLIED_DISCIPLINES: AlliedDiscipline[] = [
     heroBadge: 'Allied Health · Osteopathy',
     heroHeadline: ['Treatment records that', 'satisfy the standards.'],
     heroSubtitle:
-      'GOsC. AHPRA Osteopathy Board. Osteopathic Council of NZ. Salvia captures the case history, examination, treatment, and outcome — all under your regulator’s record-keeping requirements.',
+      'NCAHP. NABH. Clinical Establishments Act. Salvia captures the case history, examination, treatment, and outcome — all under your regulator’s record-keeping requirements.',
     regulators: [
-      { countryCode: 'UK', country: 'United Kingdom', body: 'GOsC',  bodyFull: 'General Osteopathic Council',         color: '#8B5CF6' },
-      { countryCode: 'AU', country: 'Australia',      body: 'AHPRA', bodyFull: 'Osteopathy Board of Australia',       color: '#F59E0B' },
-      { countryCode: 'NZ', country: 'New Zealand',    body: 'OCNZ',  bodyFull: 'Osteopathic Council of New Zealand',  color: '#10B981' },
-      { countryCode: 'IE', country: 'Ireland',        body: 'ICO',   bodyFull: 'Irish College of Osteopaths (voluntary register)', color: '#0891B2',
-        note: 'Statutory CORU registration anticipated; ICO standards followed in the interim.' },
-      { countryCode: 'US', country: 'United States',  body: 'AOA',   bodyFull: 'State osteopathic medical boards',    color: '#6366F1' },
+      { countryCode: 'IN', country: 'India', body: 'NCAHP',  bodyFull: 'National Commission for Allied & Healthcare Professions', color: '#8B5CF6' },
+      { countryCode: 'IN', country: 'India', body: 'NABH',   bodyFull: 'National Accreditation Board for Hospitals & Healthcare', color: '#F59E0B' },
+      { countryCode: 'IN', country: 'India', body: 'ABDM',   bodyFull: 'Ayushman Bharat Digital Mission',                       color: '#10B981' },
+      { countryCode: 'IN', country: 'India', body: 'CEA',    bodyFull: 'Clinical Establishments (Registration & Regulation) Act', color: '#0891B2',
+        note: 'Osteopathy is not yet a statutorily licensed profession in India; manual-therapy practice standards followed in the interim.' },
+      { countryCode: 'IN', country: 'India', body: 'DPDP',   bodyFull: 'Digital Personal Data Protection Act',                  color: '#6366F1' },
     ],
     features: [
       ...COMMON_FEATURES('osteopathic', 'clinician'),
       {
         icon: 'framework',
-        title: 'GOsC OPS-aligned record format',
-        desc: 'Case history, examination findings, working diagnosis, treatment, response — the record format the GOsC Osteopathic Practice Standards expect.',
+        title: 'Practice-standard-aligned record format',
+        desc: 'Case history, examination findings, working diagnosis, treatment, response — the structured record format manual-therapy practice standards and Clinical Establishments Act expect.',
       },
     ],
     faqs: [
       {
-        q: 'Does Salvia satisfy the GOsC Osteopathic Practice Standards?',
-        a: 'Yes. OPS Standard D (communication and patient partnership) and Standard D6 (record keeping) require structured, contemporaneous, identifiable records. Salvia’s case-history → examination → diagnosis → treatment record format and immutable audit trail are designed for it.',
+        q: 'Does Salvia satisfy manual-therapy practice-standard record-keeping?',
+        a: 'Yes. Practice standards on patient partnership and record keeping require structured, contemporaneous, identifiable records. Salvia’s case-history → examination → diagnosis → treatment record format and immutable audit trail are designed for it.',
       },
       {
-        q: 'What about AHPRA Osteopathy Board record-keeping guidelines?',
-        a: 'Yes. The Code of Conduct for Osteopaths (Mar 2022) sections 8.4 (medical records) and 5.2 (informed consent) map to Salvia’s consent + treatment record + audit trail. Records remain accessible for the minimum 7-year retention.',
+        q: 'What about Clinical Establishments Act record-keeping guidelines?',
+        a: 'Yes. The Clinical Establishments Act record and informed-consent requirements map to Salvia’s consent + treatment record + audit trail. Records remain accessible for the retention period your state mandates.',
       },
       {
         q: 'How is treatment captured — manual technique narrative?',
         a: 'Voice-note the session. Salvia maps the audio to a structured treatment record: areas treated, techniques used, response, plan for next visit. Free-text where it matters; structured where the record demands it.',
       },
       {
-        q: 'Is statutory regulation in Ireland a concern?',
-        a: 'Statutory CORU registration for osteopaths is anticipated. Until it arrives, Salvia follows the Irish College of Osteopaths standards. The audit trail and structured records will transfer cleanly to whatever CORU mandates.',
+        q: 'Is the evolving statutory landscape in India a concern?',
+        a: 'Osteopathy is not yet a separately licensed allied-health profession in India. Until council recognition arrives, Salvia follows accepted manual-therapy practice standards. The audit trail and structured records will transfer cleanly to whatever the NCAHP eventually mandates.',
       },
       {
         q: 'Cranial, structural, visceral — can the record reflect approach?',
@@ -222,12 +222,12 @@ export const ALLIED_DISCIPLINES: AlliedDiscipline[] = [
       },
     ],
     recentPosts: [],
-    metaTitle: 'Osteopathy Practice Software — GOsC, AHPRA, OCNZ Compliant',
+    metaTitle: 'Osteopathy Practice Software — NCAHP, NABH, ABDM Aligned',
     metaDescription:
-      'Salvia generates osteopathy records aligned with GOsC Osteopathic Practice Standards, AHPRA Osteopathy Board, and OCNZ requirements. Voice note → structured treatment record.',
+      'Salvia generates osteopathy records aligned with manual-therapy practice standards, the Clinical Establishments Act, and ABDM requirements. Voice note → structured treatment record.',
     metaKeywords: [
-      'osteopathy software', 'GOsC compliance', 'osteopathy records UK',
-      'AHPRA osteopath', 'OCNZ osteopathy', 'osteopathy practice management',
+      'osteopathy software', 'osteopathy compliance', 'osteopathy records India',
+      'manual therapy India', 'clinical establishments act osteopathy', 'osteopathy practice management',
       'manual therapy notes', 'osteopath audit trail',
     ],
   },
@@ -244,27 +244,27 @@ export const ALLIED_DISCIPLINES: AlliedDiscipline[] = [
     heroBadge: 'Allied Health · Chiropractic',
     heroHeadline: ['Adjustment records,', 'audit-grade.'],
     heroSubtitle:
-      'GCC. AHPRA Chiropractic Board. CBNZ. Salvia structures the case history, exam, imaging review, plan, and visit notes — under the record-keeping standards every chiropractic regulator expects.',
+      'NCAHP. NABH. Clinical Establishments Act. Salvia structures the case history, exam, imaging review, plan, and visit notes — under the record-keeping standards Indian regulators expect.',
     regulators: [
-      { countryCode: 'UK', country: 'United Kingdom', body: 'GCC',   bodyFull: 'General Chiropractic Council',          color: '#F97316' },
-      { countryCode: 'AU', country: 'Australia',      body: 'AHPRA', bodyFull: 'Chiropractic Board of Australia',       color: '#F59E0B' },
-      { countryCode: 'NZ', country: 'New Zealand',    body: 'CBNZ',  bodyFull: 'Chiropractic Board of New Zealand',     color: '#10B981' },
-      { countryCode: 'US', country: 'United States',  body: 'NBCE',  bodyFull: 'State chiropractic boards',             color: '#6366F1' },
-      { countryCode: 'IE', country: 'Ireland',        body: 'CAI',   bodyFull: 'Chiropractic Association of Ireland (voluntary)', color: '#0891B2',
-        note: 'Statutory regulation pending; CAI standards followed in the interim.' },
+      { countryCode: 'IN', country: 'India', body: 'NCAHP',  bodyFull: 'National Commission for Allied & Healthcare Professions', color: '#F97316' },
+      { countryCode: 'IN', country: 'India', body: 'NABH',   bodyFull: 'National Accreditation Board for Hospitals & Healthcare', color: '#F59E0B' },
+      { countryCode: 'IN', country: 'India', body: 'ABDM',   bodyFull: 'Ayushman Bharat Digital Mission',                       color: '#10B981' },
+      { countryCode: 'IN', country: 'India', body: 'DPDP',   bodyFull: 'Digital Personal Data Protection Act',                  color: '#6366F1' },
+      { countryCode: 'IN', country: 'India', body: 'CEA',    bodyFull: 'Clinical Establishments (Registration & Regulation) Act', color: '#0891B2',
+        note: 'Chiropractic is not yet a separately licensed council profession in India; accepted practice standards followed in the interim.' },
     ],
     features: [
       ...COMMON_FEATURES('chiropractic', 'clinician'),
       {
         icon: 'framework',
         title: 'Imaging review + treatment plan log',
-        desc: 'X-ray request, report, and treatment-plan rationale captured together — the GCC Code C3 record-keeping standard out of the box.',
+        desc: 'X-ray request, report, and treatment-plan rationale captured together — the structured record-keeping the Clinical Establishments Act expects out of the box.',
       },
     ],
     faqs: [
       {
-        q: 'Does Salvia meet GCC record-keeping requirements?',
-        a: 'Yes. The GCC Code (C3 — record keeping) requires legible, accurate, contemporaneous records covering history, examination, diagnosis, plan, and visit notes. Salvia’s structured record format and immutable audit trail cover the standard.',
+        q: 'Does Salvia meet Clinical Establishments Act record-keeping requirements?',
+        a: 'Yes. The Clinical Establishments Act and accepted practice standards require legible, accurate, contemporaneous records covering history, examination, diagnosis, plan, and visit notes. Salvia’s structured record format and immutable audit trail cover the standard.',
       },
       {
         q: 'How is informed consent for adjustments captured?',
@@ -272,10 +272,10 @@ export const ALLIED_DISCIPLINES: AlliedDiscipline[] = [
       },
       {
         q: 'Can imaging requests be tracked?',
-        a: 'Yes. Imaging request, indication, report received, and treatment-plan change captured in one log per patient. Useful for both clinical continuity and for GCC C3 record requirements.',
+        a: 'Yes. Imaging request, indication, report received, and treatment-plan change captured in one log per patient. Useful for both clinical continuity and for Clinical Establishments Act record requirements.',
       },
       {
-        q: 'AHPRA Chiropractic Board guidance on advertising and records?',
+        q: 'Guidance on advertising and records under Indian rules?',
         a: 'Salvia handles the record-keeping side: structured visit notes, consent, treatment plan rationale. Advertising compliance is your obligation; Salvia stays out of marketing claims.',
       },
       {
@@ -284,12 +284,12 @@ export const ALLIED_DISCIPLINES: AlliedDiscipline[] = [
       },
     ],
     recentPosts: [],
-    metaTitle: 'Chiropractic Practice Software — GCC, AHPRA, CBNZ Records',
+    metaTitle: 'Chiropractic Practice Software — NCAHP, NABH, ABDM Records',
     metaDescription:
-      'Salvia generates chiropractic records aligned with GCC, AHPRA Chiropractic Board, and CBNZ. Voice note → structured adjustment record, imaging log, consent, audit trail.',
+      'Salvia generates chiropractic records aligned with NCAHP, the Clinical Establishments Act, and ABDM. Voice note → structured adjustment record, imaging log, consent, audit trail.',
     metaKeywords: [
-      'chiropractic software', 'GCC compliance chiropractic', 'chiropractic records UK',
-      'AHPRA chiropractor', 'CBNZ chiropractic', 'chiropractic SOAP notes',
+      'chiropractic software', 'chiropractic compliance India', 'chiropractic records India',
+      'NCAHP chiropractor', 'clinical establishments act chiropractic', 'chiropractic SOAP notes',
       'adjustment record software',
     ],
   },
@@ -306,13 +306,13 @@ export const ALLIED_DISCIPLINES: AlliedDiscipline[] = [
     heroBadge: 'Allied Health · Occupational Therapy',
     heroHeadline: ['Functional records,', 'every visit.'],
     heroSubtitle:
-      'CORU. HCPC. AHPRA OT Board. OTBNZ. Salvia handles intake, functional assessment, goal-setting, intervention, and outcome review — under your regulator’s standards.',
+      'NCAHP. RCI. NABH. ABDM. Salvia handles intake, functional assessment, goal-setting, intervention, and outcome review — under your regulator’s standards.',
     regulators: [
-      { countryCode: 'IE', country: 'Ireland',        body: 'CORU',  bodyFull: 'Occupational Therapists Registration Board', color: '#0891B2' },
-      { countryCode: 'UK', country: 'United Kingdom', body: 'HCPC',  bodyFull: 'Health & Care Professions Council',          color: '#FF4E00' },
-      { countryCode: 'AU', country: 'Australia',      body: 'AHPRA', bodyFull: 'Occupational Therapy Board of Australia',    color: '#F59E0B' },
-      { countryCode: 'NZ', country: 'New Zealand',    body: 'OTBNZ', bodyFull: 'Occupational Therapy Board of New Zealand',  color: '#10B981' },
-      { countryCode: 'US', country: 'United States',  body: 'NBCOT', bodyFull: 'National Board for Certification in OT + state boards', color: '#6366F1' },
+      { countryCode: 'IN', country: 'India', body: 'NCAHP',  bodyFull: 'National Commission for Allied & Healthcare Professions', color: '#0891B2' },
+      { countryCode: 'IN', country: 'India', body: 'OT Council', bodyFull: 'Occupational Therapy Professional Council (under NCAHP)', color: '#FF4E00' },
+      { countryCode: 'IN', country: 'India', body: 'RCI',    bodyFull: 'Rehabilitation Council of India',                      color: '#F59E0B' },
+      { countryCode: 'IN', country: 'India', body: 'NABH',   bodyFull: 'National Accreditation Board for Hospitals & Healthcare', color: '#10B981' },
+      { countryCode: 'IN', country: 'India', body: 'ABDM',   bodyFull: 'Ayushman Bharat Digital Mission',                       color: '#6366F1' },
     ],
     features: [
       ...COMMON_FEATURES('occupational therapy', 'clinician'),
@@ -324,12 +324,12 @@ export const ALLIED_DISCIPLINES: AlliedDiscipline[] = [
     ],
     faqs: [
       {
-        q: 'Is Salvia CORU-aligned for Irish OTs?',
-        a: 'Yes. The Occupational Therapists Registration Board (CORU) Code of Professional Conduct & Ethics requires contemporaneous, attributable records. Salvia’s structured assessment → goal → intervention → review format covers the requirement.',
+        q: 'Is Salvia NCAHP-aligned for Indian OTs?',
+        a: 'Yes. The NCAHP and its Occupational Therapy Professional Council expect contemporaneous, attributable records. Salvia’s structured assessment → goal → intervention → review format covers the requirement.',
       },
       {
-        q: 'HCPC Standards of Proficiency for OT?',
-        a: 'Yes. HCPC SoP for Occupational Therapists (Standard 9 — record keeping) maps to Salvia’s record format. Clinician registration appears on every record; immutable audit trail evidences contemporaneity.',
+        q: 'Clinical Establishments Act record-keeping for OT?',
+        a: 'Yes. Clinical Establishments Act and RCI rehabilitation record-keeping expectations map to Salvia’s record format. Clinician registration appears on every record; immutable audit trail evidences contemporaneity.',
       },
       {
         q: 'How are functional assessments handled?',
@@ -340,17 +340,17 @@ export const ALLIED_DISCIPLINES: AlliedDiscipline[] = [
         a: 'Yes. Care plans with school-style goal frameworks (long-term + short-term goals, intervention strategies, review cadence) are supported. Parental consent and information-sharing notices are template-driven.',
       },
       {
-        q: 'NDIS support documentation in Australia?',
-        a: 'Salvia generates the clinical record — what was assessed, intervention, progress against goals, recommendation. NDIS-aligned reports can be exported from the structured record without separate templates.',
+        q: 'Disability and rehabilitation scheme documentation in India?',
+        a: 'Salvia generates the clinical record — what was assessed, intervention, progress against goals, recommendation. RCI- and scheme-aligned reports can be exported from the structured record without separate templates.',
       },
     ],
     recentPosts: [],
-    metaTitle: 'Occupational Therapy Software — CORU, HCPC, AHPRA, OTBNZ',
+    metaTitle: 'Occupational Therapy Software — NCAHP, RCI, NABH, ABDM',
     metaDescription:
-      'Salvia keeps OT records audit-ready for CORU, HCPC, AHPRA OT Board and OTBNZ. Voice note → functional assessment, goals, intervention, outcome review.',
+      'Salvia keeps OT records audit-ready for NCAHP, RCI, NABH and ABDM. Voice note → functional assessment, goals, intervention, outcome review.',
     metaKeywords: [
-      'occupational therapy software', 'OT records software', 'CORU OT records',
-      'HCPC occupational therapy', 'AHPRA OT', 'OTBNZ records',
+      'occupational therapy software', 'OT records software', 'NCAHP OT records',
+      'RCI occupational therapy', 'OT council India', 'ABDM records',
       'COPM software', 'functional assessment software',
     ],
   },
@@ -367,13 +367,13 @@ export const ALLIED_DISCIPLINES: AlliedDiscipline[] = [
     heroBadge: 'Allied Health · Podiatry',
     heroHeadline: ['Foot care records that', 'never miss the wound log.'],
     heroSubtitle:
-      'CORU. HCPC. AHPRA Podiatry Board. PBNZ. Salvia handles assessment, wound register, nail care, sharps log, treatment record, and audit trail — under your regulator.',
+      'NCAHP. NABH. ABDM. Clinical Establishments Act. Salvia handles assessment, wound register, nail care, sharps log, treatment record, and audit trail — under your regulator.',
     regulators: [
-      { countryCode: 'IE', country: 'Ireland',        body: 'CORU',  bodyFull: 'Podiatrists Registration Board',         color: '#0891B2' },
-      { countryCode: 'UK', country: 'United Kingdom', body: 'HCPC',  bodyFull: 'Health & Care Professions Council',     color: '#FF4E00' },
-      { countryCode: 'AU', country: 'Australia',      body: 'AHPRA', bodyFull: 'Podiatry Board of Australia',           color: '#F59E0B' },
-      { countryCode: 'NZ', country: 'New Zealand',    body: 'PBNZ',  bodyFull: 'Podiatrists Board of New Zealand',      color: '#10B981' },
-      { countryCode: 'US', country: 'United States',  body: 'APMA',  bodyFull: 'State podiatric medical boards',        color: '#6366F1' },
+      { countryCode: 'IN', country: 'India', body: 'NCAHP',  bodyFull: 'National Commission for Allied & Healthcare Professions', color: '#0891B2' },
+      { countryCode: 'IN', country: 'India', body: 'Podiatry Council', bodyFull: 'Podiatry Professional Council (under NCAHP)', color: '#FF4E00' },
+      { countryCode: 'IN', country: 'India', body: 'NABH',   bodyFull: 'National Accreditation Board for Hospitals & Healthcare', color: '#F59E0B' },
+      { countryCode: 'IN', country: 'India', body: 'ABDM',   bodyFull: 'Ayushman Bharat Digital Mission',                       color: '#10B981' },
+      { countryCode: 'IN', country: 'India', body: 'CEA',    bodyFull: 'Clinical Establishments (Registration & Regulation) Act', color: '#6366F1' },
     ],
     features: [
       ...COMMON_FEATURES('podiatry', 'clinician'),
@@ -390,8 +390,8 @@ export const ALLIED_DISCIPLINES: AlliedDiscipline[] = [
     ],
     faqs: [
       {
-        q: 'Does Salvia cover CORU podiatry standards?',
-        a: 'Yes. The Podiatrists Registration Board (CORU) Code of Professional Conduct & Ethics requires structured records covering assessment, treatment, and outcome. Salvia’s podiatric assessment template and wound register cover the requirement.',
+        q: 'Does Salvia cover NCAHP podiatry standards?',
+        a: 'Yes. The NCAHP and its Podiatry Professional Council expect structured records covering assessment, treatment, and outcome. Salvia’s podiatric assessment template and wound register cover the requirement.',
       },
       {
         q: 'How is the diabetic foot pathway handled?',
@@ -399,7 +399,7 @@ export const ALLIED_DISCIPLINES: AlliedDiscipline[] = [
       },
       {
         q: 'Infection control + sharps record?',
-        a: 'Sharps disposal logged per visit. Autoclave cycle ID linked to procedures performed. Instrument traceability evidenced for any HCPC, AHPRA, or HSE inspection.',
+        a: 'Sharps disposal logged per visit. Autoclave cycle ID linked to procedures performed. Instrument traceability evidenced for any NABH, Clinical Establishments Act, or Bio-Medical Waste inspection.',
       },
       {
         q: 'Can it handle nail surgery with consent + post-op?',
@@ -411,12 +411,12 @@ export const ALLIED_DISCIPLINES: AlliedDiscipline[] = [
       },
     ],
     recentPosts: [],
-    metaTitle: 'Podiatry Practice Software — CORU, HCPC, AHPRA Records',
+    metaTitle: 'Podiatry Practice Software — NCAHP, NABH, ABDM Records',
     metaDescription:
-      'Salvia keeps podiatry records audit-ready for CORU, HCPC, AHPRA Podiatry Board and PBNZ. Voice note → assessment, wound register, sharps log, consent, treatment record.',
+      'Salvia keeps podiatry records audit-ready for NCAHP, NABH, ABDM and the Clinical Establishments Act. Voice note → assessment, wound register, sharps log, consent, treatment record.',
     metaKeywords: [
-      'podiatry software', 'podiatrist records software', 'CORU podiatry',
-      'HCPC podiatry records', 'AHPRA podiatrist', 'podiatry wound register',
+      'podiatry software', 'podiatrist records software', 'NCAHP podiatry',
+      'podiatry records India', 'podiatry council India', 'podiatry wound register',
       'diabetic foot software', 'podiatry sharps log',
     ],
   },
@@ -433,13 +433,13 @@ export const ALLIED_DISCIPLINES: AlliedDiscipline[] = [
     heroBadge: 'Allied Health · Speech & Language Therapy',
     heroHeadline: ['Therapy records,', 'goal-by-goal.'],
     heroSubtitle:
-      'CORU. HCPC. SPA. ASHA. Salvia structures the assessment, goals, intervention, and progress review — under the framework your regulator or association expects.',
+      'NCAHP. RCI. NABH. ABDM. Salvia structures the assessment, goals, intervention, and progress review — under the framework your regulator or council expects.',
     regulators: [
-      { countryCode: 'IE', country: 'Ireland',        body: 'CORU', bodyFull: 'Speech & Language Therapists Registration Board', color: '#0891B2' },
-      { countryCode: 'UK', country: 'United Kingdom', body: 'HCPC', bodyFull: 'Health & Care Professions Council',               color: '#FF4E00' },
-      { countryCode: 'AU', country: 'Australia',      body: 'SPA',  bodyFull: 'Speech Pathology Australia (self-regulated)',     color: '#F59E0B' },
-      { countryCode: 'NZ', country: 'New Zealand',    body: 'NZSTA',bodyFull: 'New Zealand Speech-language Therapists’ Association', color: '#10B981' },
-      { countryCode: 'US', country: 'United States',  body: 'ASHA', bodyFull: 'American Speech-Language-Hearing Association + state licensure', color: '#6366F1' },
+      { countryCode: 'IN', country: 'India', body: 'NCAHP', bodyFull: 'National Commission for Allied & Healthcare Professions', color: '#0891B2' },
+      { countryCode: 'IN', country: 'India', body: 'SLP Council', bodyFull: 'Speech-Language Pathology Professional Council (under NCAHP)', color: '#FF4E00' },
+      { countryCode: 'IN', country: 'India', body: 'RCI',   bodyFull: 'Rehabilitation Council of India',                       color: '#F59E0B' },
+      { countryCode: 'IN', country: 'India', body: 'NABH',  bodyFull: 'National Accreditation Board for Hospitals & Healthcare', color: '#10B981' },
+      { countryCode: 'IN', country: 'India', body: 'ABDM',  bodyFull: 'Ayushman Bharat Digital Mission',                       color: '#6366F1' },
     ],
     features: [
       ...COMMON_FEATURES('speech therapy', 'clinician'),
@@ -451,12 +451,12 @@ export const ALLIED_DISCIPLINES: AlliedDiscipline[] = [
     ],
     faqs: [
       {
-        q: 'Does Salvia satisfy CORU speech and language therapy records?',
-        a: 'Yes. The Speech & Language Therapists Registration Board (CORU) Code of Professional Conduct & Ethics requires structured, contemporaneous records. Salvia’s assessment → goal → intervention → review format covers the requirement.',
+        q: 'Does Salvia satisfy NCAHP speech and language therapy records?',
+        a: 'Yes. The NCAHP and its Speech-Language Pathology Professional Council expect structured, contemporaneous records. Salvia’s assessment → goal → intervention → review format covers the requirement.',
       },
       {
-        q: 'HCPC Standards for SLTs?',
-        a: 'Yes. HCPC Standards of Proficiency for SLTs Standard 9 (record keeping) maps to Salvia’s record format. Each entry attributed to the registered clinician; audit trail evidences contemporaneity.',
+        q: 'RCI and Clinical Establishments Act standards for SLPs?',
+        a: 'Yes. RCI rehabilitation record-keeping and Clinical Establishments Act expectations map to Salvia’s record format. Each entry attributed to the registered clinician; audit trail evidences contemporaneity.',
       },
       {
         q: 'Can it capture AAC assessments and voice samples?',
@@ -467,17 +467,17 @@ export const ALLIED_DISCIPLINES: AlliedDiscipline[] = [
         a: 'Yes. Caseload management by school + classroom. Long-term goals + short-term objectives, parent and teacher communications, IEP review notes — all linked to the student record.',
       },
       {
-        q: 'NDIS reports in Australia?',
-        a: 'Salvia generates the clinical record. NDIS-aligned reports can be exported from the structured record — assessment summary, goals, progress evidence, recommendations.',
+        q: 'Disability and rehabilitation scheme reports in India?',
+        a: 'Salvia generates the clinical record. RCI- and scheme-aligned reports can be exported from the structured record — assessment summary, goals, progress evidence, recommendations.',
       },
     ],
     recentPosts: [],
-    metaTitle: 'Speech Therapy Software — CORU, HCPC, SPA, ASHA',
+    metaTitle: 'Speech Therapy Software — NCAHP, RCI, NABH, ABDM',
     metaDescription:
-      'Salvia keeps speech and language therapy records audit-ready for CORU, HCPC, SPA, NZSTA and ASHA. Voice note → assessment, goals, intervention, progress review.',
+      'Salvia keeps speech and language therapy records audit-ready for NCAHP, RCI, NABH and ABDM. Voice note → assessment, goals, intervention, progress review.',
     metaKeywords: [
-      'speech therapy software', 'SLT records software', 'CORU speech therapy',
-      'HCPC SLT records', 'SPA speech pathology', 'speech pathology Australia software',
+      'speech therapy software', 'SLP records software', 'NCAHP speech therapy',
+      'RCI speech therapy', 'speech-language pathology India', 'SLP council India',
       'AAC assessment software', 'speech therapy goals software',
     ],
   },
