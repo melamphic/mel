@@ -5,10 +5,10 @@ import salviaLogo from '../assets/salvia.png';
 import { APP_URL } from '../config';
 
 const PRIMARY_VERTICALS = [
-  { to: '/veterinary',        label: 'Veterinary',       sub: 'RCVS · VCNZ · AHPRA' },
-  { to: '/dental',            label: 'Dental',           sub: 'CQC · GDC · AHPRA' },
-  { to: '/general-practice',  label: 'General Practice', sub: 'CQC · AHPRA · MCNZ' },
-  { to: '/allied-health',     label: 'Allied Health',    sub: 'CORU · HCPC · AHPRA' },
+  { to: '/veterinary',        label: 'Veterinary',       sub: 'VCI · NABH · CCSEA' },
+  { to: '/dental',            label: 'Dental',           sub: 'DCI · NABH · CGHS' },
+  { to: '/general-practice',  label: 'General Practice', sub: 'NMC · NABH · ABDM' },
+  { to: '/allied-health',     label: 'Allied Health',    sub: 'NCAHP · NABH · ABDM' },
 ];
 
 const ALLIED_DISCIPLINES = [
@@ -149,7 +149,7 @@ export const Header: React.FC = () => {
                 display: 'flex', justifyContent: 'space-between', alignItems: 'center',
               }}>
                 <span style={{ fontSize: '0.78rem', color: 'var(--salvia-text-muted)' }}>
-                  40+ regulatory frameworks across 5 countries
+                  40+ regulatory frameworks across India
                 </span>
                 <Link to="/frameworks" style={{
                   fontSize: '0.82rem', fontWeight: 700,
