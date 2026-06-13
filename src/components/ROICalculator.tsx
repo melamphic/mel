@@ -122,14 +122,14 @@ function Slider({ label, value, min, max, step = 1, display, onChange }: {
 
 /* ── main ────────────────────────────────────────────────────── */
 export const ROICalculator = () => {
-  const [vertical, setVertical] = useState<Vertical>('veterinary');
-  const [staff, setStaff]       = useState<'1-3' | '4-7'>('1-3');
-  const [consults, setConsults] = useState(15);
-  const [minNow, setMinNow]     = useState(12);
-  const [hourly, setHourly]     = useState(400);
+  const [vertical, setVertical]     = useState<Vertical>('veterinary');
+  const [clinicians, setClinicians] = useState(3);
+  const [consults, setConsults]     = useState(15);
+  const [minNow, setMinNow]         = useState(12);
+  const [hourly, setHourly]         = useState(400);
 
   const cfg   = CFG[vertical];
-  const seats = staff === '1-3' ? 3 : 7;
+  const seats = clinicians;
   const days  = 22;
   const saved = Math.max(0, minNow - 3);
 
@@ -138,9 +138,14 @@ export const ROICalculator = () => {
   const billingValue    = (cfg.annualRevPerSeat * seats * cfg.billingPct) / 12;
   const totalValue      = timeValue + complianceValue + billingValue;
 
-  const indiaTier  = INDIA_TIERS.find(t => t.key === (staff === '1-3' ? 'growth' : 'unlimited'))!;
+  // India is note-based, not seat-based: the plan follows from monthly AI-note volume.
+  const notesPerMonth = consults * seats * days;
+  const tierKey: 'base' | 'growth' | 'unlimited' =
+    notesPerMonth <= 100 ? 'base' : notesPerMonth <= 600 ? 'growth' : 'unlimited';
+  const indiaTier   = INDIA_TIERS.find(t => t.key === tierKey)!;
+  const isCustom    = notesPerMonth > 1500;
   const monthlyCost = indiaTier.monthlyINR;
-  const roi        = totalValue / monthlyCost;
+  const roi         = totalValue / monthlyCost;
 
   const rows = [
     { label: 'Time on documentation', value: timeValue, hint: `${Math.round(saved * consults * days * seats / 60)} hrs/month · ${saved} min saved/note` },
@@ -190,20 +195,14 @@ export const ROICalculator = () => {
           {/* LEFT — inputs */}
           <div className="roi-card" style={{ backgroundColor: '#fff', border: '1px solid rgba(15,23,42,0.07)', borderRadius: '20px', boxShadow: 'var(--salvia-shadow-card)', display: 'flex', flexDirection: 'column', gap: '1.6rem' }}>
             <ChipGroup label="Specialty" options={VERTICALS.map(v => ({ key: v.key, label: v.label }))} value={vertical} onChange={setVertical} />
-            <ChipGroup
-              label="Practice size"
-              options={[
-                { key: '1-3' as const, label: '1–3 clinicians', sub: `Growth · ₹6,000/mo` },
-                { key: '4-7' as const, label: '4–7 clinicians', sub: `Clinic+ · ₹14,000/mo` },
-              ]}
-              value={staff} onChange={setStaff}
-            />
             <div style={{ height: '1px', backgroundColor: 'rgba(15,23,42,0.06)' }} />
+            <Slider label="Clinicians" value={clinicians} min={1} max={15} onChange={setClinicians} display={`${clinicians} clinician${clinicians > 1 ? 's' : ''}`} />
             <Slider label="Consults per day, per clinician" value={consults} min={1} max={40} onChange={setConsults} display={`${consults} ${cfg.noteUnit}`} />
             <Slider label="Minutes on documentation per note today" value={minNow} min={3} max={45} onChange={setMinNow} display={`${minNow} min`} />
             <Slider label="Hourly staff cost" value={hourly} min={100} max={2000} step={50} onChange={setHourly} display={`₹${hourly}/hr`} />
             <p style={{ fontSize: '0.67rem', color: 'var(--salvia-text-muted)', fontFamily: 'monospace', lineHeight: 1.7, borderTop: '1px solid rgba(15,23,42,0.06)', paddingTop: '1rem', margin: 0 }}>
               Salvia reduces documentation to ~3 min (review + sign). Saving {saved} min/note.
+              {` ~${notesPerMonth.toLocaleString('en-IN')} AI notes/mo → ${isCustom ? 'Custom plan (1,500+ notes)' : indiaTier.name + ' plan'}.`}
               {` Billing: ${(cfg.billingPct * 100).toFixed(0)}% leakage on ₹${(cfg.annualRevPerSeat / 100000).toFixed(0)}L rev/clinician/yr.`}
             </p>
           </div>
@@ -242,6 +241,7 @@ export const ROICalculator = () => {
               <div>
                 <div style={{ fontSize: '0.6rem', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--salvia-text-muted)', marginBottom: '0.3rem' }}>Salvia costs</div>
                 <div className="roi-summary-num" style={{ fontWeight: 900, color: 'var(--salvia-primary)', letterSpacing: '-0.05em', lineHeight: 1 }}>{fmt(monthlyCost)}</div>
+                <div style={{ fontSize: '0.62rem', color: 'var(--salvia-text-muted)', marginTop: '0.2rem', fontFamily: 'monospace' }}>{isCustom ? 'Custom · 1,500+ notes/mo' : `${indiaTier.name} · ${indiaTier.draftCap} AI notes/mo`}</div>
                 <div style={{ fontSize: '0.72rem', color: 'var(--salvia-text-muted)', marginTop: '0.25rem' }}>
                   <strong style={{ color: 'var(--salvia-accent)' }}>{fmt(totalValue - monthlyCost)}</strong> monthly surplus
                 </div>
