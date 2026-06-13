@@ -162,7 +162,7 @@ const Arrow: React.FC<{ index: number }> = ({ index }) => (
 // ── Main section ─────────────────────────────────────────────────────
 export const WhatSalviaIs: React.FC = () => {
   const tiles = [
-    { label: 'Audio', sub: 'Voice note', ui: <AudioTile /> },
+    { label: 'Audio', sub: 'Any Indian language', ui: <AudioTile /> },
     { label: 'Forms', sub: 'AI-filled fields', ui: <FormTile /> },
     { label: 'Policy', sub: 'Your rulebook', ui: <PolicyTile /> },
     { label: 'Audit Pack', sub: 'Sealed + signed', ui: <AuditTile /> },
@@ -211,9 +211,10 @@ export const WhatSalviaIs: React.FC = () => {
             lineHeight: 1.7,
             margin: '0 0 1rem',
           }}>
-            Staff picks the subject, records a voice note, and selects the forms to fill. Salvia
-            transcribes the audio, drops evidence into each field with a confidence score, and — if
-            the form has a linked policy — runs the policy check automatically.
+            Staff picks the subject, speaks in any Indian language — Hindi, Malayalam, Tamil,
+            English or code-mixed — and selects the forms to fill. Salvia transcribes the audio,
+            drops evidence into each field, and — if the form has a linked policy — runs the
+            policy check automatically.
           </p>
           <p style={{
             fontSize: 'clamp(1rem, 1.6vw, 1.1rem)',
@@ -222,7 +223,7 @@ export const WhatSalviaIs: React.FC = () => {
             margin: 0,
           }}>
             Other AI scribes end at the note. Salvia keeps going — every record is versioned,
-            edit-tracked, compliance-checked, and audit-ready the moment it's approved.
+            edit-tracked, policy-checked, and audit-ready the moment it's approved.
           </p>
         </div>
 
