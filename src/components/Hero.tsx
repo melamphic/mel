@@ -37,7 +37,29 @@ export const Hero: React.FC = () => {
           color: var(--salvia-primary);
           margin: 0 0 1.5rem;
         }
+        .hv1-grid > div { min-width: 0; }
         .hv1-preview-wrap { position: relative; }
+        .hv1-preview-inner { width: 100%; }
+        .hv1-glow {
+          position: absolute;
+          inset: -18% -12%;
+          z-index: 0;
+          pointer-events: none;
+          background: radial-gradient(closest-side, rgba(255, 78, 0, 0.14), transparent 72%);
+        }
+        .hv1-orbit {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          width: 126%;
+          height: 126%;
+          transform: translate(-50%, -50%);
+          z-index: 0;
+          pointer-events: none;
+          animation: hv1spin 90s linear infinite;
+        }
+        @keyframes hv1spin { to { transform: translate(-50%, -50%) rotate(360deg); } }
+        @media (prefers-reduced-motion: reduce) { .hv1-orbit { animation: none; } }
         .hv1-card {
           position: absolute;
           background: var(--salvia-surface);
@@ -61,7 +83,16 @@ export const Hero: React.FC = () => {
           .hv1-left { text-align: left; }
           .hv1-headline { font-size: clamp(2.2rem, 9vw, 2.9rem); }
           .hv1-card { display: none; }
+          .hv1-orbit, .hv1-glow { display: none; }
           .hv1-rail-row { gap: 1rem 1.4rem !important; }
+          /* scale the wide dashboard down into a clean mini-preview that fits */
+          .hv1-preview-wrap { overflow: hidden; height: 248px; border-radius: 24px; }
+          .hv1-preview-inner {
+            width: 700px;
+            transform: scale(0.46);
+            transform-origin: top left;
+            margin-left: calc(50% - 161px);
+          }
         }
       `}</style>
 
@@ -139,7 +170,17 @@ export const Hero: React.FC = () => {
 
         {/* RIGHT */}
         <div className="hv1-preview-wrap">
-          <DashboardPreview />
+          <div className="hv1-glow" />
+          <svg className="hv1-orbit" viewBox="0 0 600 600" fill="none" aria-hidden="true">
+            <circle cx="300" cy="300" r="150" stroke="rgba(15, 23, 42, 0.10)" strokeWidth="1.5" strokeDasharray="2 9" />
+            <circle cx="300" cy="300" r="222" stroke="rgba(15, 23, 42, 0.08)" strokeWidth="1.5" strokeDasharray="2 9" />
+            <circle cx="300" cy="300" r="295" stroke="rgba(255, 78, 0, 0.16)" strokeWidth="1.5" strokeDasharray="2 9" />
+            <circle cx="300" cy="5" r="5" fill="#FF4E00" />
+            <circle cx="595" cy="300" r="4" fill="#0F172A" />
+          </svg>
+          <div className="hv1-preview-inner">
+            <DashboardPreview />
+          </div>
 
           <div className="hv1-card hv1-card-top">
             <span
