@@ -82,14 +82,14 @@ const MockWindow: React.FC<{ title: string; subtitle?: string; accent?: string; 
 // ── FORM ENGINE mock — a form editor ─────────────────────────────────────
 const FormEngineMock: React.FC = () => {
   const fields = [
-    { label: 'Subject ID', type: 'Text', required: true, hint: 'Auto-linked' },
-    { label: 'Body weight', type: 'Number', required: true, hint: 'kg · decimals ok' },
+    { label: 'Patient ID (ABHA)', type: 'Text', required: true, hint: 'Auto-linked' },
+    { label: 'Vitals · BP/HR', type: 'Number', required: true, hint: 'auto-validated' },
     { label: 'Presenting symptoms', type: 'Long text', required: true, hint: 'AI: pulls from audio' },
     { label: 'Pain score', type: 'Slider', required: false, hint: '0–10' },
     { label: 'Treatment plan', type: 'Button group', required: true, hint: 'AI: multi-select ok' },
   ];
   return (
-    <MockWindow title="Vet intake form" subtitle="v4.2 · draft · linked to NABH §4.1–§4.3">
+    <MockWindow title="OPD consult form" subtitle="v4.2 · draft · linked to NABH §4.1–§4.3">
       {/* Field list */}
       <div style={{ display: 'flex', flexDirection: 'column', gap: '0.55rem', marginBottom: '1rem' }}>
         {fields.map((f, i) => (
@@ -169,8 +169,8 @@ const FormEngineMock: React.FC = () => {
 // ── POLICY ENGINE mock — a block-based policy doc ────────────────────────
 const PolicyEngineMock: React.FC = () => {
   const clauses = [
-    { parity: 'MUST', text: 'Record patient ID, species, weight, and presenting complaint on every visit.', forms: 4 },
-    { parity: 'MUST', text: 'Owner consent is required for any Schedule H1 medication prescribed.', forms: 2 },
+    { parity: 'MUST', text: 'Record patient ID, vitals, and presenting complaint on every visit.', forms: 4 },
+    { parity: 'MUST', text: 'Patient consent is required for any Schedule H1 medication prescribed.', forms: 2 },
     { parity: 'MAYBE', text: 'Pain score should be documented using a validated 0–10 scale.', forms: 3 },
     { parity: 'TRY', text: 'Photographs of visible conditions are preferred when practical.', forms: 1 },
   ];
@@ -278,9 +278,9 @@ const AudioFormsMock: React.FC = () => {
         marginBottom: '0.9rem',
         fontStyle: 'italic',
       }}>
-        "Bella, four-year-old DSH cat, owner reports vomiting{' '}
+        "Mr. Rakesh Nair, 54-year-old male, reports vomiting{' '}
         <mark style={{ backgroundColor: 'rgba(255,78,0,0.18)', color: '#0F172A', padding: '0 3px', borderRadius: '3px', fontStyle: 'normal', fontWeight: 600 }}>once daily for three days</mark>,
-        partially digested food. Weight <mark style={{ backgroundColor: 'rgba(255,78,0,0.18)', color: '#0F172A', padding: '0 3px', borderRadius: '3px', fontStyle: 'normal', fontWeight: 600 }}>4.6 kilograms</mark>,
+        partially digested food. Weight <mark style={{ backgroundColor: 'rgba(255,78,0,0.18)', color: '#0F172A', padding: '0 3px', borderRadius: '3px', fontStyle: 'normal', fontWeight: 600 }}>72 kilograms</mark>,
         temp <mark style={{ backgroundColor: 'rgba(255,78,0,0.18)', color: '#0F172A', padding: '0 3px', borderRadius: '3px', fontStyle: 'normal', fontWeight: 600 }}>38.6°C</mark>..."
       </div>
 
@@ -288,7 +288,7 @@ const AudioFormsMock: React.FC = () => {
       <div style={{ display: 'flex', flexDirection: 'column', gap: '0.45rem' }}>
         {[
           { field: 'Complaint', value: 'Vomiting ×3 days', conf: 98, line: 'L1' },
-          { field: 'Weight',    value: '4.6 kg',           conf: 99, line: 'L2' },
+          { field: 'Weight',    value: '72 kg',            conf: 99, line: 'L2' },
           { field: 'Temp',      value: '38.6°C',           conf: 99, line: 'L2' },
           { field: 'Assessment', value: 'Acute GI upset',  conf: 78, line: '—',  inferred: true },
         ].map((r) => (
@@ -423,12 +423,12 @@ export const ProductSection: React.FC = () => {
             }}
           >
             {/* Left Diagram Column */}
-            <div className="product-diagram-cell" style={{ backgroundColor: '#D9E6DE', position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden', padding: '3rem' }}>
+            <div className="product-diagram-cell" style={{ background: 'radial-gradient(75% 60% at 22% 12%, rgba(255,78,0,0.20), transparent 60%), linear-gradient(150deg, #0F172A 0%, #1E293B 100%)', position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden', padding: '3rem' }}>
               {renderDiagram()}
             </div>
 
             {/* Right Details Column */}
-            <div className="product-details-cell" style={{ padding: '5rem 4rem', display: 'flex', flexDirection: 'column', justifyContent: 'center', textAlign: 'left' }}>
+            <div className="product-details-cell" style={{ padding: '3.5rem 3.25rem', display: 'flex', flexDirection: 'column', justifyContent: 'center', textAlign: 'left' }}>
               <div style={{ color: 'var(--salvia-accent)', fontSize: '0.7rem', fontWeight: 800, letterSpacing: '0.1em', marginBottom: '0.75rem', textTransform: 'uppercase' }}>
                 {products[activeTab].label}
               </div>
