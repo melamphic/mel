@@ -435,7 +435,7 @@ export function PricingTeaser({ accent, fromPriceCopy, vertical }: PricingTeaser
               fontSize: 'clamp(1.4rem, 2.5vw, 1.8rem)', fontWeight: 800,
               color: 'var(--salvia-primary)', letterSpacing: '-0.02em', margin: '0 0 0.5rem',
             }}>
-              {fromPriceCopy ?? 'Compliance-grade documentation, from US$229/mo.'}
+              {fromPriceCopy ?? 'Compliance-grade documentation, from ₹2,500/mo.'}
             </h3>
             <p style={{ color: 'var(--salvia-text-muted)', fontSize: '0.9rem', lineHeight: 1.55, margin: 0 }}>
               Up to 3 AI recording seats. Unlimited free seats for admin and reception. No credit card required to start.
