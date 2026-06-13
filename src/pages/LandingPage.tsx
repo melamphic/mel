@@ -19,10 +19,10 @@ export const LandingPage = () => {
   return (
     <>
       <SEO
-        title="Clinical Governance Automation"
-        description="Salvia is a compliance and governance suite for vet, dental, and clinical practices. Voice note after each consult — audit-ready records, controlled drug logs, and incident trails out the other side."
+        title="AI Clinical Documentation & Compliance Software for India"
+        description="Salvia is an AI documentation and compliance suite for Indian clinics, nursing homes and hospitals. Doctors speak in any Indian language; out comes a structured clinical note, drug register, consent and incident records — audit-ready by default."
         path="/"
-        keywords={['veterinary compliance software', 'clinical documentation AI', 'dental charting compliance', 'CMA veterinary compliance', 'controlled drug records', 'audit-ready clinical notes']}
+        keywords={['NABH compliance software', 'AI medical scribe India', 'clinical documentation software India', 'ABDM compliant software', 'drug register software', 'CGHS empanelment software', 'audit-ready clinical notes']}
       />
       <Header />
       <main style={{ flex: 1, zIndex: 10 }}>
