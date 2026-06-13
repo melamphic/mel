@@ -8,10 +8,10 @@ import { Link } from 'react-router-dom';
 import { ALLIED_DISCIPLINES } from '../data/alliedDisciplines';
 
 const PRIMARY = [
-  { to: '/veterinary',        label: 'Veterinary',       sub: 'RCVS · VCNZ · AHPRA · CMA', accent: '#FF4E00' },
-  { to: '/dental',            label: 'Dental',           sub: 'CQC · GDC · AHPRA · ARPANSA', accent: '#10B981' },
-  { to: '/general-practice',  label: 'General Practice', sub: 'CQC · AHPRA · MCNZ · RACGP', accent: '#D97706' },
-  { to: '/allied-health',     label: 'Allied Health',    sub: 'CORU · HCPC · AHPRA · PBNZ', accent: '#0891B2' },
+  { to: '/veterinary',        label: 'Veterinary',       sub: 'VCI · NABH · Clinical Establishments Act · DPDP', accent: '#FF4E00' },
+  { to: '/dental',            label: 'Dental',           sub: 'DCI · NABH · AERB · DPDP', accent: '#10B981' },
+  { to: '/general-practice',  label: 'General Practice', sub: 'NABH · NMC · ABDM · CGHS', accent: '#D97706' },
+  { to: '/allied-health',     label: 'Allied Health',    sub: 'NCAHP · NABH · ABDM · DPDP', accent: '#0891B2' },
 ];
 
 export const FindYourPractice = () => {
@@ -93,7 +93,7 @@ export const FindYourPractice = () => {
               type="search"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              placeholder="Try 'physio', 'CORU', 'GP', 'CMA'…"
+              placeholder="Try 'physio', 'NABH', 'GP', 'ABDM'…"
               style={{
                 flex: 1, border: 'none', outline: 'none',
                 fontSize: '0.95rem', color: 'var(--salvia-text)',
