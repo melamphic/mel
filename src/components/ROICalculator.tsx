@@ -1,15 +1,15 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { PRODUCTS, type Vertical } from '../data/pricing';
+import { INDIA_TIERS, type Vertical } from '../data/pricing';
 
 const CFG: Record<Vertical, {
   complianceMonthly: number; complianceLabel: string;
   billingPct: number; annualRevPerSeat: number; noteUnit: string;
 }> = {
-  veterinary:     { complianceMonthly: 250,  complianceLabel: 'VMR & NZVC audit avoidance',           billingPct: 0.02, annualRevPerSeat: 200000, noteUnit: 'consults/day' },
-  dental:         { complianceMonthly: 208,  complianceLabel: 'GDC / DCNZ audit avoidance',           billingPct: 0.03, annualRevPerSeat: 250000, noteUnit: 'patients/day' },
-  general_clinic: { complianceMonthly: 667,  complianceLabel: 'Medicare / ACC claw-back avoidance',   billingPct: 0.02, annualRevPerSeat: 300000, noteUnit: 'patients/day' },
-  allied_health:  { complianceMonthly: 250,  complianceLabel: 'CORU / HCPC / AHPRA audit avoidance',  billingPct: 0.02, annualRevPerSeat: 180000, noteUnit: 'sessions/day' },
+  veterinary:     { complianceMonthly: 6000,  complianceLabel: 'VCI & state board audit avoidance',        billingPct: 0.02, annualRevPerSeat: 1500000, noteUnit: 'consults/day' },
+  dental:         { complianceMonthly: 8000,  complianceLabel: 'DCI audit-failure avoidance',             billingPct: 0.03, annualRevPerSeat: 2500000, noteUnit: 'patients/day' },
+  general_clinic: { complianceMonthly: 12000, complianceLabel: 'CGHS claw-back avoidance',        billingPct: 0.02, annualRevPerSeat: 2000000, noteUnit: 'patients/day' },
+  allied_health:  { complianceMonthly: 6000,  complianceLabel: 'NCAHP / state council audit avoidance',  billingPct: 0.02, annualRevPerSeat: 1200000, noteUnit: 'sessions/day' },
 };
 
 const VERTICALS: { key: Vertical; label: string }[] = [
@@ -21,7 +21,7 @@ const VERTICALS: { key: Vertical; label: string }[] = [
 
 const SEG_COLORS = ['#FF4E00', '#0F172A', '#CBD5E1'];
 
-function fmt(n: number) { return '$' + Math.round(n).toLocaleString(); }
+function fmt(n: number) { return '₹' + Math.round(n).toLocaleString('en-IN'); }
 
 /* ── Donut ───────────────────────────────────────────────────── */
 function Donut({ segments, centerLabel }: {
@@ -126,7 +126,7 @@ export const ROICalculator = () => {
   const [staff, setStaff]       = useState<'1-3' | '4-7'>('1-3');
   const [consults, setConsults] = useState(15);
   const [minNow, setMinNow]     = useState(12);
-  const [hourly, setHourly]     = useState(45);
+  const [hourly, setHourly]     = useState(400);
 
   const cfg   = CFG[vertical];
   const seats = staff === '1-3' ? 3 : 7;
@@ -138,9 +138,8 @@ export const ROICalculator = () => {
   const billingValue    = (cfg.annualRevPerSeat * seats * cfg.billingPct) / 12;
   const totalValue      = timeValue + complianceValue + billingValue;
 
-  const product    = PRODUCTS.find(p => p.key === vertical)!;
-  const tierData   = product.tiers[staff === '1-3' ? 0 : 1];
-  const monthlyCost = tierData.prices['US'];
+  const indiaTier  = INDIA_TIERS.find(t => t.key === (staff === '1-3' ? 'growth' : 'unlimited'))!;
+  const monthlyCost = indiaTier.monthlyINR;
   const roi        = totalValue / monthlyCost;
 
   const rows = [
@@ -182,7 +181,7 @@ export const ROICalculator = () => {
             What does Salvia return?
           </h2>
           <p style={{ fontSize: '0.95rem', color: 'var(--salvia-text-muted)', marginTop: '0.6rem', lineHeight: 1.6 }}>
-            Move the sliders. Every number updates live.
+            Doctors lose a third to half their day to records and paperwork. Move the sliders. Every number updates live.
           </p>
         </div>
 
@@ -194,18 +193,18 @@ export const ROICalculator = () => {
             <ChipGroup
               label="Practice size"
               options={[
-                { key: '1-3' as const, label: '1–3 staff', sub: `Practice · ${fmt(product.tiers[0].prices['US'])}/mo` },
-                { key: '4-7' as const, label: '4–7 staff', sub: `Pro · ${fmt(product.tiers[1].prices['US'])}/mo` },
+                { key: '1-3' as const, label: '1–3 clinicians', sub: `Growth · ₹6,000/mo` },
+                { key: '4-7' as const, label: '4–7 clinicians', sub: `Clinic+ · ₹14,000/mo` },
               ]}
               value={staff} onChange={setStaff}
             />
             <div style={{ height: '1px', backgroundColor: 'rgba(15,23,42,0.06)' }} />
             <Slider label="Consults per day, per clinician" value={consults} min={1} max={40} onChange={setConsults} display={`${consults} ${cfg.noteUnit}`} />
             <Slider label="Minutes on documentation per note today" value={minNow} min={3} max={45} onChange={setMinNow} display={`${minNow} min`} />
-            <Slider label="Hourly staff cost" value={hourly} min={20} max={150} step={5} onChange={setHourly} display={`$${hourly}/hr`} />
+            <Slider label="Hourly staff cost" value={hourly} min={100} max={2000} step={50} onChange={setHourly} display={`₹${hourly}/hr`} />
             <p style={{ fontSize: '0.67rem', color: 'var(--salvia-text-muted)', fontFamily: 'monospace', lineHeight: 1.7, borderTop: '1px solid rgba(15,23,42,0.06)', paddingTop: '1rem', margin: 0 }}>
               Salvia reduces documentation to ~3 min (review + sign). Saving {saved} min/note.
-              {` Billing: ${(cfg.billingPct * 100).toFixed(0)}% leakage on $${(cfg.annualRevPerSeat / 1000).toFixed(0)}K rev/clinician/yr.`}
+              {` Billing: ${(cfg.billingPct * 100).toFixed(0)}% leakage on ₹${(cfg.annualRevPerSeat / 100000).toFixed(0)}L rev/clinician/yr.`}
             </p>
           </div>
 
@@ -260,7 +259,7 @@ export const ROICalculator = () => {
             </Link>
 
             <p style={{ fontSize: '0.65rem', color: 'var(--salvia-text-muted)', fontStyle: 'italic', lineHeight: 1.6, margin: 0 }}>
-              Time valued at blended staff cost. Compliance is annualised expected value. Not a guarantee.
+              Time valued at blended staff cost. Compliance is annualised expected value from cleaner records and fewer audit claw-backs. Not a guarantee.
             </p>
           </div>
         </div>
