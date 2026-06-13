@@ -27,6 +27,12 @@ import { content as cqcDental2026 } from '../content/blog/cqc-dental-2026';
 import { content as avmaAuRecords } from '../content/blog/avma-au-records';
 import { content as ahpraDentalAu } from '../content/blog/ahpra-dental-au';
 import { content as vcnzRecordsNz } from '../content/blog/vcnz-records-nz';
+// India
+import { content as consumerCourtRecords } from '../content/blog/consumer-court-records';
+import { content as patientRecordsAccessIndia } from '../content/blog/patient-records-access-india';
+import { content as nabhSmallClinicWorthIt } from '../content/blog/nabh-small-clinic-worth-it';
+import { content as abdmMandatoryClinic } from '../content/blog/abdm-mandatory-clinic';
+import { content as aiScribeIndianLanguages } from '../content/blog/ai-scribe-indian-languages';
 
 export type Domain = 'GENERAL' | 'VETERINARY' | 'DENTAL';
 
@@ -43,6 +49,63 @@ export interface BlogPost {
 }
 
 export const BLOG_CONTENT: Record<string, BlogPost> = {
+  // --- INDIA ---
+  'consumer-court-records': {
+    tag: 'Medico-Legal',
+    domain: 'GENERAL',
+    q: "Will I lose the consumer case if my records aren't there?",
+    excerpt: "Under the Consumer Protection Act 2019, a thin file loses cases that good care should win. How the burden of proof works, when it shifts onto the doctor, and what a defensible Indian medical record actually contains.",
+    readTime: '7 min read',
+    author: 'Salvia Editorial',
+    date: 'June 13, 2026',
+    keywords: ['Consumer Protection Act', 'medical negligence India', 'medical records'],
+    content: consumerCourtRecords,
+  },
+  'patient-records-access-india': {
+    tag: 'Medico-Legal',
+    domain: 'GENERAL',
+    q: "Can a patient demand their full hospital file in India?",
+    excerpt: "Yes, and the law gives you 72 hours. The NMC regulation, the RTI route for government hospitals, why stalling reads as concealment, and what a complete file actually includes.",
+    readTime: '6 min read',
+    author: 'Salvia Editorial',
+    date: 'June 13, 2026',
+    keywords: ['patient records access', 'NMC regulations', 'medical records India'],
+    content: patientRecordsAccessIndia,
+  },
+  'nabh-small-clinic-worth-it': {
+    tag: 'NABH',
+    domain: 'GENERAL',
+    q: "Is NABH Entry-Level worth it for a small clinic, or just a sticker?",
+    excerpt: "An honest look, without the brochure language. The 10% PM-JAY incentive that decides it, the real total cost, the SHCO and Entry-Level routes, and exactly where software helps and where it cannot.",
+    readTime: '7 min read',
+    author: 'Salvia Editorial',
+    date: 'June 13, 2026',
+    keywords: ['NABH Entry-Level', 'NABH small clinic', 'PM-JAY incentive'],
+    content: nabhSmallClinicWorthIt,
+  },
+  'abdm-mandatory-clinic': {
+    tag: 'ABDM',
+    domain: 'GENERAL',
+    q: "Is ABDM / ABHA actually mandatory for my clinic in 2026?",
+    excerpt: "Voluntary for patients, but mandatory in practice for PM-JAY empanelment and insurance. HFR and HPR registration, what 'ABDM compliant' really means, and why a QR code is not a structured record.",
+    readTime: '6 min read',
+    author: 'Salvia Editorial',
+    date: 'June 13, 2026',
+    keywords: ['ABDM compliance', 'ABHA', 'HFR HPR registration'],
+    content: abdmMandatoryClinic,
+  },
+  'ai-scribe-indian-languages': {
+    tag: 'AI & Scribes',
+    domain: 'GENERAL',
+    q: "Do AI scribes actually work in Hindi or Malayalam?",
+    excerpt: "Most demos are filmed in clean English. A real Indian OPD is code-mixed and noisy. Where English-first scribes break, how to test one on your worst Tuesday, and why a perfect transcript still is not a record.",
+    readTime: '6 min read',
+    author: 'Salvia Editorial',
+    date: 'June 13, 2026',
+    keywords: ['AI medical scribe India', 'multilingual clinical documentation', 'code-mixed speech'],
+    content: aiScribeIndianLanguages,
+  },
+
   // --- GENERAL CLINIC ---
   'pajama-time': {
     tag: 'Burnout',
