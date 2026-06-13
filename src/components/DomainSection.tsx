@@ -7,12 +7,12 @@ const DOMAINS = [
     tagline: 'GP, specialists & allied health',
     accent: '#F43F5E',
     title: 'Policy-checked before it\u2019s signed.',
-    desc: 'Upload HIPAA, NABH, RACGP, BESTPRACTICE — or your own internal SOPs. Salvia links clauses to form fields and scores every note against them before the clinician approves it.',
+    desc: 'Upload NABH, ABDM, Clinical Establishments Act, CGHS — or your own internal SOPs. Salvia links clauses to form fields and scores every note against them before the clinician approves it.',
     metric: '98%',
     metricLabel: 'CLAUSE COVERAGE',
     ui: (
       <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-        <div style={{ fontSize: '0.7rem', fontWeight: 800, color: '#F43F5E', letterSpacing: '0.08em' }}>REGULATORY COMPLIANCE: BESTPRACTICE</div>
+        <div style={{ fontSize: '0.7rem', fontWeight: 800, color: '#F43F5E', letterSpacing: '0.08em' }}>REGULATORY COMPLIANCE: NABH</div>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
           {[
             { label: 'Patient Identification', status: 'Satisfied', detail: 'Clause 4.1' },
@@ -82,7 +82,7 @@ const DOMAINS = [
     tagline: 'Physio, osteo, chiro, OT, podiatry, speech',
     accent: '#0891B2',
     title: 'Outcome measures, tracked episode-over-episode.',
-    desc: 'CORU, HCPC, AHPRA, PBNZ. Validated scales (NPRS, ODI, COPM, AAC) as first-class fields — score at intake, repeat at review, trend on the discharge summary. Framework-aware record generation tuned to your discipline.',
+    desc: 'NCAHP, IAP, RCI, NABH. Validated scales (NPRS, ODI, COPM, AAC) as first-class fields — score at intake, repeat at review, trend on the discharge summary. Framework-aware record generation tuned to your discipline.',
     metric: '6',
     metricLabel: 'DISCIPLINES, ONE PRODUCT',
     ui: (
@@ -147,7 +147,7 @@ const DOMAINS = [
           border: '1px solid rgba(8,145,178,0.15)', borderRadius: '14px',
           fontSize: '0.82rem', color: '#0E7490', fontWeight: 600, lineHeight: 1.45,
         }}>
-          Framework: CORU Physiotherapists Registration Board · Episode summary auto-drafted for discharge.
+          Framework: NCAHP Physiotherapy Professional Council · Episode summary auto-drafted for discharge.
         </div>
       </div>
     ),
@@ -157,13 +157,13 @@ const DOMAINS = [
     label: 'Dental',
     tagline: 'General & specialist practices',
     accent: '#10B981',
-    title: 'Treatment plans, cross-checked against CDT.',
-    desc: 'Voice-note the case. Salvia fills the form, assigns the right CDT codes, and checks the plan against the practice guidelines and pre-auth rules you\u2019ve linked.',
+    title: 'Treatment plans, cross-checked against NHCX.',
+    desc: 'Voice-note the case. Salvia fills the form, assigns the right NHCX billing codes, and checks the plan against the practice guidelines and PM-JAY pre-auth rules you\u2019ve linked.',
     metric: '92%',
-    metricLabel: 'CDT ALIGNMENT',
+    metricLabel: 'NHCX ALIGNMENT',
     ui: (
       <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-        <div style={{ fontSize: '0.7rem', fontWeight: 800, color: '#10B981', letterSpacing: '0.08em' }}>COMPLIANCE SCORE: CDT 2024</div>
+        <div style={{ fontSize: '0.7rem', fontWeight: 800, color: '#10B981', letterSpacing: '0.08em' }}>COMPLIANCE SCORE: NHCX 2024</div>
 
         {/* Spacious Decompressed Scoreboard */}
         <div style={{ padding: '2.5rem', background: '#fff', borderRadius: '24px', border: '1px solid rgba(15, 23, 42, 0.08)', boxShadow: '0 8px 24px rgba(0,0,0,0.03)' }}>
