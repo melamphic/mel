@@ -200,7 +200,7 @@ export const DomainSection = () => {
   return (
     <section id="domains" style={{
       padding: '6rem 0',
-      backgroundColor: 'var(--salvia-bg)',
+      backgroundColor: 'transparent',
       position: 'relative',
       zIndex: 10,
       overflow: 'hidden' // Added to clip the full-bleed stage
