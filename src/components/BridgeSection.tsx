@@ -49,7 +49,7 @@ export const BridgeSection = () => (
         {/* Right — stats */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
           {[
-            { value: '~60s',     label: 'From voice note to a fully filled clinical form' },
+            { value: '~60s',     label: 'From a voice note in any Indian language to a fully filled clinical form' },
             { value: 'Every',    label: 'Linked policy is auto-checked on the filled record' },
             { value: '1-click',  label: 'Audit Pack export — note, audio, transcript, policy trace' },
           ].map(({ value, label }) => (
