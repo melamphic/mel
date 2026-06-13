@@ -18,7 +18,7 @@ const PTS: Array<[number, number, number]> = [];
   }
 }
 
-export const ParticleSphere: React.FC = () => {
+export const ParticleSphere: React.FC<{ style?: React.CSSProperties }> = ({ style }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -73,12 +73,12 @@ export const ParticleSphere: React.FC = () => {
         // color: warm near the top, cool near the bottom; fade with depth
         const t = (sy - (cy - R)) / (2 * R); // 0 top .. 1 bottom
         let cr: number, cg: number, cb: number;
-        if (t < 0.5) { // top: white -> warm orange
+        if (t < 0.5) { // top: warm orange highlight -> brand navy
           const k = t / 0.5;
-          cr = 255; cg = 255 - k * 70; cb = 255 - k * 150;
-        } else { // bottom: white -> brand blue
+          cr = 255 - k * 225; cg = 140 - k * 99; cb = 60 + k * 10;
+        } else { // bottom: navy -> deep ink
           const k = (t - 0.5) / 0.5;
-          cr = 255 - k * 120; cg = 255 - k * 90; cb = 255;
+          cr = 30 - k * 15; cg = 41 - k * 18; cb = 70 - k * 28;
         }
         const alpha = (0.15 + depth * 0.75) * 0.9;
         ctx.beginPath();
@@ -96,9 +96,9 @@ export const ParticleSphere: React.FC = () => {
   }, []);
 
   return (
-    <div style={{ position: 'relative', width: '100%', aspectRatio: '1 / 1', maxWidth: 560, margin: '0 auto' }}>
+    <div style={{ position: 'relative', width: '100%', aspectRatio: '1 / 1', maxWidth: 560, margin: '0 auto', ...style }}>
       {/* glow backdrops */}
-      <div style={{ position: 'absolute', inset: '6%', borderRadius: '50%', background: 'radial-gradient(circle at 38% 30%, rgba(255,78,0,0.22), transparent 55%), radial-gradient(circle at 60% 78%, rgba(79,108,255,0.30), transparent 60%)', filter: 'blur(8px)' }} />
+      <div style={{ position: 'absolute', inset: '6%', borderRadius: '50%', background: 'radial-gradient(circle at 40% 26%, rgba(255,90,20,0.22), transparent 56%), radial-gradient(circle at 60% 82%, rgba(15,23,42,0.20), transparent 62%)', filter: 'blur(8px)' }} />
       <canvas ref={canvasRef} style={{ position: 'relative', width: '100%', height: '100%', display: 'block' }} />
     </div>
   );
