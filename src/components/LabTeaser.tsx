@@ -2,8 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const FEATURED_QS = [
-  { id: 'controlled-drug-audit', q: "How do you prove a controlled drug was dispensed correctly when an auditor calls?" },
-  { id: 'voice-notes-compliance', q: "Can a voice note replace a handwritten record for compliance sign-off?" },
+  { id: 'controlled-drug-audit', q: "How do you prove a controlled drug was dispensed correctly when an NABH auditor calls?" },
+  { id: 'voice-notes-compliance', q: "Can a voice note replace a handwritten record for Clinical Establishments Act sign-off?" },
   { id: 'spot-audit-flag', q: "What happens when a clinical record gets flagged in a spot audit — and how do you respond?" }
 ];
 
