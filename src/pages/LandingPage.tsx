@@ -1,16 +1,14 @@
 import { SEO } from '../components/SEO';
 import { Header } from '../components/Header';
 import { Hero } from '../components/Hero';
-import { WhatSalviaIs } from '../components/WhatSalviaIs';
 import { PainSection } from '../components/PainSection';
+import { WhatSalviaIs } from '../components/WhatSalviaIs';
 import { DayWithSalvia } from '../components/DayWithSalvia';
 import { ProductSection } from '../components/ProductSection';
+import { BentoReinvented } from '../components/BentoReinvented';
 import { ScribeVsSalvia } from '../components/ScribeVsSalvia';
-import { AuditPack } from '../components/AuditPack';
-import { BridgeSection } from '../components/BridgeSection';
-import { FrameworksRail } from '../components/FrameworksRail';
 import { DomainSection } from '../components/DomainSection';
-import { FindYourPractice } from '../components/FindYourPractice';
+import { FrameworksRail } from '../components/FrameworksRail';
 import { ROICalculator } from '../components/ROICalculator';
 import { LabTeaser } from '../components/LabTeaser';
 import { Footer } from '../components/Footer';
@@ -26,18 +24,27 @@ export const LandingPage = () => {
       />
       <Header />
       <main style={{ flex: 1, zIndex: 10 }}>
+        {/* Hook */}
         <Hero />
-        <WhatSalviaIs />
+        {/* Problem */}
         <PainSection />
+        {/* What it is — a compliance suite, not a scribe */}
+        <WhatSalviaIs />
+        {/* How it works — voice note in, locked record out */}
         <DayWithSalvia />
+        {/* The product — three engines */}
         <ProductSection />
+        {/* The output — records an assessor can read */}
+        <BentoReinvented />
+        {/* Why it beats a generic scribe */}
         <ScribeVsSalvia />
-        <AuditPack />
-        <BridgeSection />
-        <FrameworksRail />
+        {/* Who it's for — verticals */}
         <DomainSection />
-        <FindYourPractice />
+        {/* Your rulebook — frameworks */}
+        <FrameworksRail />
+        {/* The payoff — ROI */}
         <ROICalculator />
+        {/* Learn more */}
         <LabTeaser />
       </main>
       <Footer />
