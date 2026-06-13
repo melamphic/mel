@@ -1,130 +1,256 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { DashboardPreview } from './DashboardPreview';
-import { MobileDevicePreview } from './MobileDevicePreview';
 import { track } from '../lib/posthog';
 
-const phrases = [
-  'built into every note.',
-  'checked before sign-off.',
-  'audit-ready by default.',
-];
+const regulators: string[] = ['NABH', 'ABDM', 'DPDP', 'VCI', 'DCI', 'NCAHP'];
 
 export const Hero: React.FC = () => {
-  const [phraseIdx, setPhraseIdx] = useState(0);
-  const [isExiting, setIsExiting] = useState(false);
-
-  useEffect(() => {
-    const phraseInterval = setInterval(() => {
-      setIsExiting(true);
-      setTimeout(() => {
-        setPhraseIdx((prev) => (prev + 1) % phrases.length);
-        setIsExiting(false);
-      }, 1200); // Wait for exit animation
-    }, 3200);
-
-    return () => {
-      clearInterval(phraseInterval);
-    };
-  }, []);
-
   return (
-    <section style={{
-      padding: 'var(--hero-padding, 7rem 0 5rem)',
-      textAlign: 'center',
-      position: 'relative'
-    }}>
+    <section className="hero-v1">
       <style>{`
-        @media (max-width: 768px) {
-          section { --hero-padding: 3rem 0 2rem !important; }
+        .hero-v1 {
+          background-color: transparent;
+          min-height: 100vh;
+          display: flex;
+          flex-direction: column;
+          padding: 10rem 0 2.5rem;
+          position: relative;
+          overflow: hidden;
+        }
+        .hv1-grid {
+          flex: 1;
+          display: grid;
+          grid-template-columns: 1.05fr 1fr;
+          gap: 3rem;
+          align-items: center;
+          max-width: 1200px;
+          width: 100%;
+          margin: 0 auto;
+          padding: 0 1.5rem;
+        }
+        .hv1-headline {
+          font-size: clamp(2.7rem, 4.6vw, 4.2rem);
+          font-weight: 800;
+          line-height: 1.05;
+          letter-spacing: -0.03em;
+          color: var(--salvia-primary);
+          margin: 0 0 1.5rem;
+        }
+        .hv1-preview-wrap { position: relative; }
+        .hv1-card {
+          position: absolute;
+          background: var(--salvia-surface);
+          border-radius: 16px;
+          box-shadow: 0 18px 44px rgba(15, 23, 42, 0.14), 0 0 0 1px rgba(15, 23, 42, 0.04);
+          padding: 0.95rem 1.15rem;
+          display: flex;
+          align-items: center;
+          gap: 0.7rem;
+          z-index: 20;
+        }
+        .hv1-card-top { top: -5%; right: 6%; }
+        .hv1-card-low { bottom: -5%; left: 6%; }
+        @media (max-width: 900px) {
+          .hero-v1 { min-height: auto; padding: 7rem 0 3rem; }
+          .hv1-grid {
+            grid-template-columns: 1fr;
+            gap: 2.5rem;
+            text-align: left;
+          }
+          .hv1-left { text-align: left; }
+          .hv1-headline { font-size: clamp(2.2rem, 9vw, 2.9rem); }
+          .hv1-card { display: none; }
+          .hv1-rail-row { gap: 1rem 1.4rem !important; }
         }
       `}</style>
-      <div className="container" style={{ maxWidth: '900px' }}>
 
-        {/* Social Proof Badge */}
-        <div style={{ marginBottom: '3rem', display: 'flex', justifyContent: 'center' }}>
-          <div className="review-badge" style={{ backgroundColor: 'rgba(0,0,0,0.02)' }}>
-            Built for Indian clinics &amp; hospitals
-          </div>
-        </div>
-
-        {/* Headline */}
-        <h1 style={{
-          fontSize: 'clamp(3rem, 8vw, 5rem)',
-          fontWeight: 900,
-          color: 'var(--salvia-primary)',
-          lineHeight: 1.1,
-          letterSpacing: '-0.04em',
-          marginBottom: '2rem',
-          maxWidth: '1000px'
-        }}>
-          Clinical compliance, <br />
-          <div className="headline-cycler">
-            <span
-              key={phraseIdx}
-              className={`headline-text ${isExiting ? 'headline-exit' : ''}`}
-              style={{ position: 'relative', display: 'inline-block' }}
-            >
-              {phrases[phraseIdx]}
-              <svg
-                viewBox="0 0 400 60"
+      <div className="hv1-grid">
+        {/* LEFT */}
+        <div className="hv1-left" style={{ textAlign: 'left' }}>
+          <h1 className="hv1-headline">
+            Clinical compliance, built into{' '}
+            <span style={{ position: 'relative', whiteSpace: 'nowrap', color: 'var(--salvia-accent)' }}>
+              every note
+              <span
                 style={{
                   position: 'absolute',
-                  bottom: '-5px',
-                  left: '-5%',
-                  width: '110%',
-                  height: 'auto',
-                  zIndex: -1,
-                  overflow: 'visible'
+                  left: 0,
+                  right: 0,
+                  bottom: '0.05em',
+                  height: '3px',
+                  borderRadius: '999px',
+                  backgroundColor: 'var(--salvia-accent)',
+                  opacity: 0.55,
                 }}
-              >
-                <path
-                  d="M10,45 Q150,55 380,42"
-                  fill="none"
-                  stroke="#FF4E00"
-                  strokeWidth="2.5"
-                  strokeLinecap="round"
-                  style={{ filter: 'drop-shadow(0 2px 4px rgba(255,78,0,0.2))' }}
-                />
-              </svg>
+              />
             </span>
-          </div>
-        </h1>
+            .
+          </h1>
 
-        <p style={{
-          fontSize: 'clamp(1.1rem, 2.5vw, 1.35rem)',
-          color: 'var(--salvia-text-muted)',
-          lineHeight: 1.6,
-          maxWidth: '720px',
-          margin: '0 auto 3rem auto'
-        }}>
-          Salvia's <strong>AI</strong> turns a post-consult <strong>audio note</strong>, spoken in any
-          Indian language, into a policy-checked, audit-ready <strong>clinical record</strong> — before anyone signs off.
-          Your <strong>drug register, consent and incident records</strong> build themselves on every form.
-          Every record defends itself in an audit. Not a scribe — a <strong>compliance suite</strong>.
-        </p>
-
-        <div style={{ display: 'flex', gap: '1.2rem', justifyContent: 'center' }} className="mobile-stack">
-          <Link
-            to="/start"
-            className="btn-primary"
-            style={{ padding: '1.2rem 3rem', fontSize: '1.1rem', fontWeight: 700, textDecoration: 'none' }}
-            onClick={() => track('cta_clicked', { cta_id: 'hero_book_demo' })}
+          <p
+            style={{
+              color: 'var(--salvia-text-muted)',
+              fontSize: '1.1rem',
+              lineHeight: 1.6,
+              maxWidth: '460px',
+              margin: '0 0 2.25rem',
+            }}
           >
-            <div className="shimmer" />
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
-            Book a demo
-          </Link>
+            Salvia&apos;s AI turns a post-consult audio note — spoken in any Indian language — into a
+            policy-checked, audit-ready clinical record before anyone signs off. Not a scribe — a
+            compliance suite.
+          </p>
+
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.9rem' }}>
+            <Link
+              to="/start"
+              onClick={() => track('cta_clicked', { cta_id: 'hero_book_demo' })}
+              style={{
+                backgroundColor: 'var(--salvia-primary)',
+                color: '#ffffff',
+                fontWeight: 700,
+                fontSize: '1.02rem',
+                padding: '0.95rem 2rem',
+                borderRadius: '999px',
+                textDecoration: 'none',
+                boxShadow: '0 10px 24px rgba(15, 23, 42, 0.18)',
+              }}
+            >
+              Book a demo
+            </Link>
+            <Link
+              to="/#how-it-works"
+              style={{
+                backgroundColor: 'var(--salvia-surface)',
+                color: 'var(--salvia-primary)',
+                fontWeight: 700,
+                fontSize: '1.02rem',
+                padding: '0.95rem 2rem',
+                borderRadius: '999px',
+                textDecoration: 'none',
+                border: '1px solid rgba(15, 23, 42, 0.18)',
+              }}
+            >
+              See how it works
+            </Link>
+          </div>
         </div>
 
-        {/* Responsive Previews */}
-        <div style={{ position: 'relative', zIndex: 10, marginTop: '3rem' }}>
-          <div className="hide-mobile">
-            <DashboardPreview />
+        {/* RIGHT */}
+        <div className="hv1-preview-wrap">
+          <DashboardPreview />
+
+          <div className="hv1-card hv1-card-top">
+            <span
+              style={{
+                width: '34px',
+                height: '34px',
+                borderRadius: '10px',
+                backgroundColor: 'rgba(22, 163, 74, 0.12)',
+                color: '#16A34A',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontWeight: 800,
+                fontSize: '1rem',
+              }}
+            >
+              ↑
+            </span>
+            <div>
+              <div style={{ fontSize: '0.72rem', color: 'var(--salvia-text-muted)', fontWeight: 600 }}>
+                Avg confidence
+              </div>
+              <div style={{ fontSize: '1.05rem', fontWeight: 800, color: '#16A34A', lineHeight: 1.1 }}>
+                95.4%
+              </div>
+            </div>
           </div>
-          <div className="show-mobile" style={{ display: 'none' }}>
-            <MobileDevicePreview />
+
+          <div className="hv1-card hv1-card-low">
+            <span
+              style={{
+                width: '34px',
+                height: '34px',
+                borderRadius: '10px',
+                backgroundColor: 'rgba(22, 163, 74, 0.12)',
+                color: '#16A34A',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontWeight: 800,
+                fontSize: '1.05rem',
+              }}
+            >
+              ✓
+            </span>
+            <div>
+              <div style={{ fontSize: '0.72rem', color: 'var(--salvia-text-muted)', fontWeight: 600 }}>
+                Policy check
+              </div>
+              <div style={{ fontSize: '1.05rem', fontWeight: 800, color: '#16A34A', lineHeight: 1.1 }}>
+                Satisfied
+              </div>
+            </div>
           </div>
+        </div>
+      </div>
+
+      {/* TRUST RAIL */}
+      <div
+        style={{
+          maxWidth: '1200px',
+          margin: '2.5rem auto 0',
+          padding: '0 1.5rem',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          gap: '1.25rem',
+        }}
+      >
+        <div
+          style={{
+            fontSize: '0.72rem',
+            letterSpacing: '0.18em',
+            textTransform: 'uppercase',
+            fontWeight: 700,
+            color: 'var(--salvia-text-muted)',
+            opacity: 0.7,
+          }}
+        >
+          Trusted against
+        </div>
+        <div
+          className="hv1-rail-row"
+          style={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            justifyContent: 'center',
+            alignItems: 'center',
+            gap: '1.25rem 2.25rem',
+          }}
+        >
+          {regulators.map((name, i) => (
+            <React.Fragment key={name}>
+              {i > 0 && (
+                <span style={{ color: 'rgba(15, 23, 42, 0.18)', fontWeight: 700 }} aria-hidden="true">
+                  ·
+                </span>
+              )}
+              <span
+                style={{
+                  fontWeight: 700,
+                  fontSize: '1rem',
+                  letterSpacing: '0.02em',
+                  color: 'rgba(71, 85, 105, 0.55)',
+                  filter: 'grayscale(1)',
+                }}
+              >
+                {name}
+              </span>
+            </React.Fragment>
+          ))}
         </div>
       </div>
     </section>
