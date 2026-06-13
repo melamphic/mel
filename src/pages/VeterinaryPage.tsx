@@ -14,34 +14,34 @@ const ACCENT = '#FF4E00';
 
 const FAQS = [
   {
-    q: 'Does Salvia work for UK vets under the CMA remedies?',
-    a: 'Yes. Salvia covers the four CMA remedies with direct records implications: itemised billing accuracy, written treatment estimates, controlled drug dispensing transparency, and complaint audit trails. The September 2026 deadline is hard — Salvia gets you there without changing how you see patients.',
+    q: 'Does Salvia work for Indian vets under VCI requirements?',
+    a: 'Yes. Salvia keeps your clinical documentation and daily records audit-ready against the Indian Veterinary Council Act 1984 and your state veterinary council expectations: structured case records, written treatment estimates, controlled drug logs, and complaint audit trails. It does not make your practice accredited — it makes sure that when an assessor asks, your records are ready.',
   },
   {
-    q: 'Does it handle the Schedule 3 controlled drug register?',
-    a: 'Yes. Every drug administration flows into the controlled drug register automatically — date, patient, drug, quantity, dose, route, administering vet. Running balance is maintained. The register is audit-ready on demand.',
+    q: 'Does it handle the Schedule H1 controlled drug register?',
+    a: 'Yes. Every drug administration flows into the controlled drug register automatically — date, patient, drug, quantity, dose, route, administering vet. Running balance is maintained. The register is audit-ready on demand, in line with Schedule H1 of the Drugs & Cosmetics Act.',
   },
   {
     q: 'Is it compatible with our existing practice management software?',
-    a: 'Salvia sits alongside your PMS — it handles the compliance and governance layer (structured records, drug logs, consent, audit trail) rather than replacing appointment booking or billing.',
+    a: 'Salvia sits alongside your PMS — it handles the compliance and records layer (structured records, drug logs, consent, audit trail) rather than replacing appointment booking or billing.',
   },
   {
     q: 'What regulatory frameworks does it support?',
-    a: 'RCVS Practice Standards, VCNZ Code of Professional Conduct (2024), AVA Code of Conduct, VPB requirements for Victoria, NSW and Queensland, and the UK Veterinary Medicines Regulations.',
+    a: 'The Indian Veterinary Council Act 1984, VCI standards of professional conduct, state veterinary council requirements, CCSEA animal-ethics expectations, Schedule H1 of the Drugs & Cosmetics Act, and the DPDP Act for data protection.',
   },
   {
     q: 'How does the voice note workflow work?',
-    a: 'After each consult, you leave a brief voice note — anything from 30 seconds to a few minutes. Salvia maps the audio to a structured clinical record: history, exam findings, assessment, plan, drugs administered. You review and sign. No typing, no templates to fill.',
+    a: 'After each consult, you leave a brief voice note in any Indian language — anything from 30 seconds to a few minutes. Salvia maps the audio to a structured clinical record: history, exam findings, assessment, plan, drugs administered. You review and sign. No typing, no templates to fill.',
   },
 ];
 
 const REGULATORS = [
-  { label: 'RCVS', sub: 'UK', color: '#0EA5E9' },
-  { label: 'CMA', sub: 'UK', color: '#FF4E00' },
-  { label: 'VMR', sub: 'UK', color: '#8B5CF6' },
-  { label: 'VCNZ', sub: 'New Zealand', color: '#10B981' },
-  { label: 'AVA', sub: 'Australia', color: '#F59E0B' },
-  { label: 'VPB', sub: 'Australia', color: '#6366F1' },
+  { label: 'VCI', sub: 'India', color: '#0EA5E9' },
+  { label: 'IVC Act 1984', sub: 'India', color: '#FF4E00' },
+  { label: 'Schedule H1', sub: 'India', color: '#8B5CF6' },
+  { label: 'CCSEA', sub: 'India', color: '#10B981' },
+  { label: 'State Councils', sub: 'India', color: '#F59E0B' },
+  { label: 'DPDP Act', sub: 'India', color: '#6366F1' },
 ];
 
 const FEATURES = [
@@ -54,7 +54,7 @@ const FEATURES = [
       </svg>
     ),
     title: 'Voice → structured record',
-    desc: 'Post-consult voice note maps to history, exam, assessment, plan, and drug entry. Contemporaneous timestamps built in.',
+    desc: 'Post-consult voice note in any Indian language maps to history, exam, assessment, plan, and drug entry. Contemporaneous timestamps built in.',
   },
   {
     icon: (
@@ -63,7 +63,7 @@ const FEATURES = [
       </svg>
     ),
     title: 'Controlled drug register',
-    desc: 'Schedule 2 & 3 entries auto-populated on drug administration. Running balance, witness fields, reconciliation reports.',
+    desc: 'Schedule H1 entries auto-populated on drug administration. Running balance, witness fields, reconciliation reports.',
   },
   {
     icon: (
@@ -90,7 +90,7 @@ const FEATURES = [
         <circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" />
       </svg>
     ),
-    title: 'CMA September 2026 ready',
+    title: 'Audit-ready every day',
     desc: 'Itemised billing maps to clinical record. Written estimates captured before treatment. Complaint trail with full encounter record.',
   },
   {
@@ -101,15 +101,15 @@ const FEATURES = [
       </svg>
     ),
     title: 'Multi-vet practice support',
-    desc: 'Role-based access for principals, associates, nurses, and locums. Each clinician signs their own records with their registration number.',
+    desc: 'Role-based access for principals, associates, technicians, and visiting vets. Each clinician signs their own records with their VCI registration number.',
   },
 ];
 
 const RECENT_POSTS = [
-  { slug: 'cma-vet-deadline', title: 'September 23 2026: which of the 21 CMA remedies does your vet practice actually need to act on?', tag: 'CMA Compliance' },
-  { slug: 'rcvs-record-inspection', title: 'What do RCVS Practice Standards assessors actually check in your clinical records?', tag: 'RCVS Standards' },
-  { slug: 'vcnz-records-standard', title: "VCNZ's 2024 Code of Professional Conduct — what changed for clinical records?", tag: 'VCNZ Code' },
-  { slug: 'au-vet-board-records', title: 'What do Australian vet boards actually cite in complaints?', tag: 'VPB Compliance' },
+  { slug: 'cma-vet-deadline', title: 'Daily records that hold up: what your state veterinary council actually checks', tag: 'VCI Compliance' },
+  { slug: 'rcvs-record-inspection', title: 'What assessors actually check in your clinical records under the IVC Act 1984', tag: 'VCI Standards' },
+  { slug: 'vcnz-records-standard', title: 'Schedule H1 controlled drugs — keeping a register your inspector can trust', tag: 'Schedule H1' },
+  { slug: 'au-vet-board-records', title: 'Multilingual case notes: capturing consults in any Indian language', tag: 'Documentation' },
 ];
 
 export const VeterinaryPage = () => {
@@ -127,12 +127,12 @@ export const VeterinaryPage = () => {
     <div style={{ backgroundColor: '#fff', minHeight: '100vh' }}>
       <SEO
         title="Veterinary Compliance Software"
-        description="Salvia keeps vet practice records audit-ready for RCVS, VCNZ, VPB and CMA. Voice note after each consult — clinical records, controlled drug logs, consent, and audit trail out the other side."
+        description="Salvia keeps vet practice records audit-ready for VCI, the IVC Act 1984, Schedule H1 and state veterinary councils. Voice note in any Indian language after each consult — clinical records, controlled drug logs, consent, and audit trail out the other side."
         path="/veterinary"
         keywords={[
-          'veterinary compliance software', 'vet records software UK', 'RCVS records', 'CMA vet compliance',
-          'controlled drug register vets', 'VCNZ records', 'VPB compliance', 'veterinary audit trail',
-          'vet clinical documentation', 'veterinary governance software',
+          'veterinary compliance software', 'vet records software India', 'VCI records', 'IVC Act 1984 compliance',
+          'controlled drug register vets', 'Schedule H1 register', 'state veterinary council compliance', 'veterinary audit trail',
+          'vet clinical documentation', 'multilingual vet notes',
         ]}
       />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: faqSchema }} />
@@ -162,7 +162,7 @@ export const VeterinaryPage = () => {
             color: 'var(--salvia-text-muted)', lineHeight: 1.65,
             maxWidth: '640px', margin: '0 auto 3rem',
           }}>
-            RCVS PSS. VCNZ 2024 Code. CMA September 2026 deadline. One voice note after each consult — Salvia handles the structured record, controlled drug log, consent, and audit trail.
+            VCI standards. IVC Act 1984. Schedule H1 drug register. One voice note in any Indian language after each consult — Salvia handles the structured record, controlled drug log, consent, and audit trail.
           </p>
           <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'center', flexWrap: 'wrap' }}>
             <Link to="/start" style={{
@@ -206,23 +206,23 @@ export const VeterinaryPage = () => {
         </div>
       </section>
 
-      {/* CMA deadline callout */}
+      {/* Daily records callout */}
       <section style={{ padding: '5rem 0', backgroundColor: 'rgba(255,78,0,0.03)', borderBottom: '1px solid rgba(255,78,0,0.08)' }}>
         <div className="container" style={{ maxWidth: '880px' }}>
           <div style={{
             display: 'grid', gridTemplateColumns: '1fr 2fr', gap: '3rem', alignItems: 'center',
           }} className="mobile-stack">
             <div style={{ textAlign: 'center' }}>
-              <div style={{ fontSize: '0.7rem', fontWeight: 800, color: '#FF4E00', letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: '0.5rem' }}>CMA Deadline</div>
-              <div style={{ fontSize: '3.5rem', fontWeight: 900, color: 'var(--salvia-primary)', letterSpacing: '-0.04em', lineHeight: 1 }}>23 Sep</div>
-              <div style={{ fontSize: '1.5rem', fontWeight: 700, color: 'var(--salvia-primary)' }}>2026</div>
+              <div style={{ fontSize: '0.7rem', fontWeight: 800, color: '#FF4E00', letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: '0.5rem' }}>Daily Records</div>
+              <div style={{ fontSize: '3.5rem', fontWeight: 900, color: 'var(--salvia-primary)', letterSpacing: '-0.04em', lineHeight: 1 }}>365</div>
+              <div style={{ fontSize: '1.5rem', fontWeight: 700, color: 'var(--salvia-primary)' }}>days/yr</div>
             </div>
             <div>
               <h2 style={{ fontSize: '1.5rem', fontWeight: 800, color: 'var(--salvia-primary)', marginBottom: '0.75rem', letterSpacing: '-0.02em' }}>
-                21 mandatory CMA remedies are legally binding from September.
+                Audit-readiness isn&apos;t a one-day event — it&apos;s your daily records.
               </h2>
               <p style={{ color: 'var(--salvia-text-muted)', lineHeight: 1.65, marginBottom: '1.25rem' }}>
-                Most practices have ticked the price list box. The four remedies with direct records implications — itemised billing, written estimates, controlled drug transparency, and complaint trail — are where practices will be caught. Salvia covers all four.
+                Most practices keep good case notes but lose hours when the assessor asks. The four records that get scrutinised — itemised billing, written estimates, Schedule H1 drug logs, and complaint trail — are where time disappears. Salvia keeps all four ready every day.
               </p>
               <Link to="/blog/cma-vet-deadline" style={{
                 fontSize: '0.85rem', fontWeight: 700, color: 'var(--salvia-accent)',
@@ -286,17 +286,17 @@ export const VeterinaryPage = () => {
         accent={ACCENT}
         beforeLines={[
           `End-of-day typing into a generic SOAP template — or worse, end-of-week catch-up.`,
-          `Controlled drug register kept on paper. Running balance drifts. CMA inspector finds gaps.`,
+          `Controlled drug register kept on paper. Running balance drifts. The inspector finds gaps.`,
           `Written estimate captured verbally. Owner disputes the bill. No paper trail.`,
-          `Locum sees Mrs Smith's dog. Different handwriting, different format, no clear attribution.`,
-          `RCVS assessor asks for a complete inspection file. Two-hour fire drill.`,
+          `A visiting vet sees Mrs Sharma's dog. Different handwriting, different format, no clear attribution.`,
+          `The assessor asks for a complete records file. Two-hour fire drill.`,
         ]}
         afterLines={[
-          `Voice note after each consult. Structured record — history, exam, assessment, plan, drugs — ready in seconds.`,
+          `Voice note in any Indian language after each consult. Structured record — history, exam, assessment, plan, drugs — ready in seconds.`,
           `Controlled drug register auto-populated on every administration. Running balance always accurate.`,
-          `Written estimate signed before treatment. Locked to the record. CMA-ready.`,
-          `Every locum signs with their own registration number. Records visually attributed.`,
-          `RCVS assessor asks for a file. Exported with one click, fully timestamped.`,
+          `Written estimate signed before treatment. Locked to the record. Audit-ready.`,
+          `Every visiting vet signs with their own VCI registration number. Records visually attributed.`,
+          `The assessor asks for a file. Exported with one click, fully timestamped.`,
         ]}
       />
 
@@ -304,17 +304,17 @@ export const VeterinaryPage = () => {
       <HonestScope
         accent={ACCENT}
         doLines={[
-          `Audio → structured vet consultation record`,
-          `Controlled drug register (Schedule 2 & 3) with witness fields`,
+          `Audio in any Indian language → structured vet consultation record`,
+          `Controlled drug register (Schedule H1) with witness fields`,
           `Procedure-specific consent + written cost estimate`,
-          `Immutable audit trail per RCVS, VCNZ, VPB requirements`,
-          `CMA September 2026 remedies — itemised billing, estimates, complaint trail`,
-          `Multi-vet practice with role-based access for principals, associates, locums, nurses`,
+          `Immutable audit trail aligned to the IVC Act 1984 and state council requirements`,
+          `Daily records ready for assessment — itemised billing, estimates, complaint trail`,
+          `Multi-vet practice with role-based access for principals, associates, visiting vets, technicians`,
         ]}
         dontLines={[
           `Replace your practice management software (PMS sits alongside)`,
           `Bill clients or process payments directly`,
-          `Claim regulatory sign-off on your behalf`,
+          `Make your practice NABH-accredited or grant regulatory sign-off`,
           `Auto-publish records without your review`,
           `Provide clinical decision-making — you stay in the loop`,
         ]}
@@ -324,7 +324,7 @@ export const VeterinaryPage = () => {
       <PricingTeaser
         accent={ACCENT}
         vertical="veterinary"
-        fromPriceCopy="Veterinary compliance, from US$229/mo."
+        fromPriceCopy="Veterinary compliance, from ₹2,500/mo."
       />
 
       {/* FAQ section */}
