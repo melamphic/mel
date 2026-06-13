@@ -30,10 +30,25 @@
 body {
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
   color: var(--salvia-text);
+  /* main brand colour kept; visible dot-grid texture instead of a gradient */
   background-color: var(--salvia-bg);
+  background-image: radial-gradient(rgba(15, 23, 42, 0.16) 1.5px, transparent 1.6px);
+  background-size: 22px 22px;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
+}
+
+/* fine paper grain — adds tactile depth, kills the flat / washed-out feel */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  pointer-events: none;
+  opacity: 0.06;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
 h1,
