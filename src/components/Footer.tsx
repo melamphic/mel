@@ -19,7 +19,7 @@ const colHeadingStyle = {
 
 export const Footer = () => (
   <footer style={{
-    backgroundColor: 'var(--salvia-bg)',
+    backgroundColor: 'transparent',
     borderTop: '1px solid rgba(0,0,0,0.07)',
     position: 'relative',
     zIndex: 10,
