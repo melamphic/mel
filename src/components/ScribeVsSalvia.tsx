@@ -2,16 +2,16 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const SCRIBE_GIVES = [
-  'A SOAP note from the visit audio',
+  'An English SOAP note from the visit audio',
   'A structured form field here and there',
   'A "looks about right" confidence score',
-  'A copy-paste into your EHR',
+  'A copy-paste into your HMS or EHR',
 ];
 
 const SALVIA_GIVES = [
-  'A SOAP note — plus every field traced to its source line',
+  'A note in Hindi, Malayalam or Tamil — every field traced to its source line',
   'Your own forms, versioned, with evidence scoring',
-  'A real policy-satisfaction check against your rulebook',
+  'A real policy check against your linked rulebook',
   'Flags surfaced before the note is signed, not during the audit',
   'An immutable record with hashed history and one-click export',
   'A governance timeline per patient, per clinic, per org',
@@ -164,7 +164,7 @@ export const ScribeVsSalvia: React.FC = () => (
         marginInline: 'auto',
         fontStyle: 'italic',
       }}>
-        If an auditor calls tomorrow, an AI scribe can't tell you which note has a problem.
+        If an NABH assessor visits tomorrow, an AI scribe can't tell you which note has a problem.
         Salvia can — and can hand them the evidence before they finish the sentence.
       </p>
 
