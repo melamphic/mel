@@ -156,7 +156,7 @@ export const ROICalculator = () => {
   const segments = rows.map((r, i) => ({ value: r.value, color: SEG_COLORS[i] }));
 
   return (
-    <section style={{ padding: '6rem 0', backgroundColor: 'var(--salvia-bg)', position: 'relative', zIndex: 10 }}>
+    <section style={{ padding: '6rem 0', backgroundColor: 'transparent', position: 'relative', zIndex: 10 }}>
       <style>{`
         .roi-range { -webkit-appearance: none; appearance: none; width: 100%; height: 3px; border-radius: 2px; outline: none; cursor: pointer; background: linear-gradient(to right, #FF4E00 var(--fill), rgba(15,23,42,0.1) var(--fill)); margin: 0; display: block; }
         .roi-range::-webkit-slider-thumb { -webkit-appearance: none; width: 18px; height: 18px; border-radius: 50%; background: #fff; border: 2.5px solid #FF4E00; box-shadow: 0 1px 6px rgba(255,78,0,0.3); cursor: pointer; }
