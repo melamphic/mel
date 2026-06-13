@@ -5,7 +5,7 @@ const CONTENTS = [
   { label: 'Original audio', sub: 'Encrypted · immutable', icon: 'audio' },
   { label: 'Full transcript', sub: 'With per-word confidence', icon: 'txt' },
   { label: 'Evidence trace', sub: 'Every field → source line', icon: 'link' },
-  { label: 'Policy report', sub: 'Clause-by-clause satisfaction', icon: 'shield' },
+  { label: 'NABH policy report', sub: 'Clause-by-clause satisfaction', icon: 'shield' },
   { label: 'Edit history', sub: 'Who, what, when, why', icon: 'history' },
   { label: 'Form snapshot', sub: 'Version at time of sign-off', icon: 'form' },
   { label: 'Policy snapshot', sub: 'Version at time of sign-off', icon: 'gov' },
@@ -61,7 +61,7 @@ export const AuditPack: React.FC = () => (
             lineHeight: 1.65,
             marginBottom: '1.5rem',
           }}>
-            When an auditor, insurer, or regulator asks for the record — you hand them an Audit Pack.
+            When an NABH assessor, insurer, or CGHS auditor asks for the record — you hand them an Audit Pack.
             Everything they need to verify the note is inside, already tied together, already hashed.
           </p>
           <p style={{
@@ -70,7 +70,7 @@ export const AuditPack: React.FC = () => (
             lineHeight: 1.65,
             marginBottom: '2rem',
           }}>
-            You don't go scrambling through chart software, audio storage, version logs, and policy PDFs.
+            You don't go scrambling through your HMIS, audio storage, version logs, and policy PDFs.
             One click. One file. Defensible.
           </p>
 
