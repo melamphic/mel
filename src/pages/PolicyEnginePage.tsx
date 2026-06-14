@@ -47,6 +47,7 @@ export const PolicyEnginePage = () => {
         keywords={['clinical governance software', 'CQC compliance', 'VMR compliance', 'policy management veterinary', 'institutional compliance', 'GDC policy management']}
       />
       <Header />
+      <main style={{ flex: 1, zIndex: 10 }}>
 
       {/* Hero */}
       <section style={{ padding: '11rem 0 7rem', backgroundColor: 'var(--salvia-bg)', borderBottom: '1px solid #F1F5F9' }}>
@@ -208,6 +209,7 @@ export const PolicyEnginePage = () => {
         </div>
       </section>
 
+      </main>
       <Footer />
     </div>
   );
