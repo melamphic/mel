@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import salviaLogo from '../assets/salvia.png';
-import wordmarkDesktop from '../assets/salvia-wordmark-desktop.svg';
-import wordmarkMobile from '../assets/salvia-wordmark-mobile.svg';
+import wordmarkDesktop from '../assets/salvia-wordmark-desktop.jpg';
+import wordmarkMobile from '../assets/salvia-wordmark-mobile.jpg';
 
 const linkStyle = {
   color: 'var(--salvia-text-muted)',
@@ -101,6 +101,10 @@ export const Footer = () => (
         <img
           src={wordmarkDesktop}
           alt="Salvia"
+          loading="lazy"
+          decoding="async"
+          width={1456}
+          height={724}
           style={{
             display: 'block',
             width: '100%',
