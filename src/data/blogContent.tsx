@@ -33,6 +33,7 @@ import { content as patientRecordsAccessIndia } from '../content/blog/patient-re
 import { content as nabhSmallClinicWorthIt } from '../content/blog/nabh-small-clinic-worth-it';
 import { content as abdmMandatoryClinic } from '../content/blog/abdm-mandatory-clinic';
 import { content as aiScribeIndianLanguages } from '../content/blog/ai-scribe-indian-languages';
+import { content as aiScribePricingIndia } from '../content/blog/ai-scribe-pricing-india';
 
 export type Domain = 'GENERAL' | 'VETERINARY' | 'DENTAL';
 
@@ -50,6 +51,17 @@ export interface BlogPost {
 
 export const BLOG_CONTENT: Record<string, BlogPost> = {
   // --- INDIA ---
+  'ai-scribe-pricing-india': {
+    tag: 'Pricing',
+    domain: 'GENERAL',
+    q: "What does an AI medical scribe cost in India?",
+    excerpt: "From free trial tiers to ~₹1,500 per doctor per month for pure dictation — and why per-clinic compliance suites start around ₹2,500. The real 2026 pricing math for Indian clinics, including the compliance line item nobody quotes.",
+    readTime: '6 min read',
+    author: 'Salvia Editorial',
+    date: 'June 14, 2026',
+    keywords: ['AI medical scribe pricing India', 'AI scribe cost India', 'medical scribe price India', 'clinical documentation software pricing India', 'AI scribe cost per month'],
+    content: aiScribePricingIndia,
+  },
   'consumer-court-records': {
     tag: 'Medico-Legal',
     domain: 'GENERAL',
