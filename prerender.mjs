@@ -207,24 +207,89 @@ const BLOG_META = {
   },
 };
 
+// --- JSON-LD schema, baked into static HTML so non-JS crawlers and AI engines
+// (GPTBot, ClaudeBot, PerplexityBot) actually see it. react-helmet also emits
+// these client-side, but those bots don't run JS — so the static copy is what
+// earns the structured-data + E-E-A-T credit. -----------------------------------
+const SITE = 'https://hellosalvia.com';
+const ORG_SCHEMA = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'Salvia',
+  url: SITE,
+  logo: `${SITE}/favicon.png`,
+  description: 'AI clinical documentation and compliance suite for Indian clinics, nursing homes and hospitals — voice notes in any Indian language in, audit-ready records out.',
+  areaServed: { '@type': 'Country', name: 'India' },
+  sameAs: [],
+};
+const SOFTWARE_SCHEMA = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: 'Salvia',
+  applicationCategory: 'HealthApplication',
+  operatingSystem: 'Web',
+  url: SITE,
+  description: ORG_SCHEMA.description,
+  areaServed: { '@type': 'Country', name: 'India' },
+  offers: { '@type': 'Offer', priceCurrency: 'INR', price: '2500', category: 'subscription' },
+  publisher: { '@type': 'Organization', name: 'Salvia', url: SITE },
+  featureList: [
+    'AI clinical documentation from voice notes in Indian languages',
+    'NABH, ABDM and DPDP compliance checks',
+    'Controlled-drug register', 'Consent and incident records', 'Audit-ready report export',
+  ],
+};
+const BLOG_DATES = {
+  'ai-scribe-pricing-india': '2026-06-14', 'consumer-court-records': '2026-06-13',
+  'patient-records-access-india': '2026-06-13', 'nabh-small-clinic-worth-it': '2026-06-13',
+  'abdm-mandatory-clinic': '2026-06-13', 'ai-scribe-indian-languages': '2026-06-13',
+};
+const ld = (obj) => `<script type="application/ld+json">${JSON.stringify(obj)}</script>`;
+
+function injectSchema(html, route, title, desc) {
+  const scripts = [ld(ORG_SCHEMA)];
+  if (route === '/') scripts.push(ld(SOFTWARE_SCHEMA));
+  if (route.startsWith('/blog/')) {
+    const slug = route.replace('/blog/', '');
+    scripts.push(ld({
+      '@context': 'https://schema.org', '@type': 'Article',
+      headline: (title || '').replace(/ \| Salvia$/, ''), description: desc,
+      url: `${SITE}${route}`,
+      author: { '@type': 'Organization', name: 'Salvia Editorial', url: SITE },
+      publisher: { '@type': 'Organization', name: 'Salvia', url: SITE, logo: { '@type': 'ImageObject', url: `${SITE}/favicon.png` } },
+      ...(BLOG_DATES[slug] ? { datePublished: BLOG_DATES[slug], dateModified: BLOG_DATES[slug] } : {}),
+      mainEntityOfPage: { '@type': 'WebPage', '@id': `${SITE}${route}` },
+    }));
+    scripts.push(ld({
+      '@context': 'https://schema.org', '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: SITE },
+        { '@type': 'ListItem', position: 2, name: 'Blog', item: `${SITE}/blog` },
+        { '@type': 'ListItem', position: 3, name: (title || '').replace(/ \| Salvia$/, ''), item: `${SITE}${route}` },
+      ],
+    }));
+  }
+  return html.replace('</head>', `${scripts.join('\n    ')}\n  </head>`);
+}
+
 let count = 0;
 for (const route of ALL_ROUTES) {
   const meta = META[route];
   let html = template;
+  let title, desc;
 
   if (meta) {
-    html = injectMeta(template, meta.title, meta.desc, route);
+    title = meta.title; desc = meta.desc;
+    html = injectMeta(template, title, desc, route);
   } else if (route.startsWith('/blog/')) {
     const slug = route.replace('/blog/', '');
     const bm = BLOG_META[slug];
-    html = injectMeta(
-      template,
-      bm ? bm.title : `${slug.replace(/-/g, ' ')} | Salvia`,
-      bm ? bm.desc : 'Clinical documentation, compliance and governance insights from the Salvia team.',
-      route,
-    );
+    title = bm ? bm.title : `${slug.replace(/-/g, ' ')} | Salvia`;
+    desc = bm ? bm.desc : 'Clinical documentation, compliance and governance insights from the Salvia team.';
+    html = injectMeta(template, title, desc, route);
   }
 
+  html = injectSchema(html, route, title, desc);
   writePage(route, html);
   count++;
 }
