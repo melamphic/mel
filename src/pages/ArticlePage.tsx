@@ -167,6 +167,13 @@ export const ArticlePage: React.FC = () => {
                   ? '/products/statutory-form-infrastructure'
                   : '/products/institutional-compliance-hub'
               }
+              aria-label={
+                article.domain === 'VETERINARY'
+                  ? 'Learn how Salvia keeps vet records audit-ready'
+                  : article.domain === 'DENTAL'
+                  ? 'Learn how Salvia handles dental charting compliance'
+                  : 'Learn how Salvia automates clinical governance'
+              }
               style={{
                 textDecoration: 'none',
                 fontSize: '0.85rem', fontWeight: 700,
