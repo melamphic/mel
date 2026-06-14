@@ -89,6 +89,7 @@ export const FrameworksPage = () => {
       />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: itemListLd }} />
       <Header />
+      <main style={{ flex: 1, zIndex: 10 }}>
 
       {/* Hero — padding clamped so the navbar clears on desktop but
           mobile doesn't waste a viewport on whitespace before the
@@ -324,6 +325,7 @@ export const FrameworksPage = () => {
         </div>
       </section>
 
+      </main>
       <Footer />
 
       <style>{`
