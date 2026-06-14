@@ -1,11 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { BLOG_CONTENT } from '../data/blogContent';
 
-const FEATURED_QS = [
-  { id: 'controlled-drug-audit', q: "How do you prove a controlled drug was dispensed correctly when an NABH auditor calls?" },
-  { id: 'voice-notes-compliance', q: "Can a voice note replace a handwritten record for Clinical Establishments Act sign-off?" },
-  { id: 'spot-audit-flag', q: "What happens when a clinical record gets flagged in a spot audit — and how do you respond?" }
-];
+// Pull the three newest real posts straight from the blog data so these cards
+// can never link to a slug that doesn't exist.
+const FEATURED_QS = Object.entries(BLOG_CONTENT)
+  .slice(0, 3)
+  .map(([id, post]) => ({ id, q: post.q, tag: post.tag }));
 
 export const LabTeaser: React.FC = () => {
   return (
@@ -39,7 +40,7 @@ export const LabTeaser: React.FC = () => {
                 cursor: 'pointer'
               }} className="lab-teaser-card">
                 <div style={{ fontFamily: 'monospace', fontSize: '0.65rem', color: 'var(--salvia-accent)', fontWeight: 700, marginBottom: '1rem' }}>
-                  CLINICAL_INSIGHT // 2026
+                  {art.tag.toUpperCase().replace(/[\s&]+/g, '_')} // 2026
                 </div>
                 <h4 style={{ 
                   fontSize: '1.2rem', fontWeight: 700, 
