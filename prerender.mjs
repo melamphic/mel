@@ -72,11 +72,11 @@ const ALL_ROUTES = [
 const META = {
   '/': {
     title: 'Clinical Governance Automation | Salvia',
-    desc: 'Salvia is a compliance and governance suite for vet, dental, and clinical practices. Voice note after each consult — audit-ready records, controlled drug logs, and incident trails out the other side.',
+    desc: 'Salvia is an AI compliance suite for vet, dental and clinical practices. Voice note in — audit-ready records, controlled-drug logs and incident trails out.',
   },
   '/pricing': {
     title: 'Pricing | Salvia',
-    desc: 'Salvia pricing for veterinary, dental, general practice, and allied health (physio, osteo, chiro, OT, podiatry, speech). Practice plan from $229/mo — compliance-grade clinical documentation, controlled drug logs, audit trails.',
+    desc: 'Salvia pricing for vet, dental, GP and allied health — Practice plan from $229/mo. Compliance-grade documentation, controlled-drug logs and audit trails.',
   },
   '/blog': {
     title: 'From the compliance desk | Salvia',
@@ -88,7 +88,7 @@ const META = {
   },
   '/veterinary': {
     title: 'Veterinary Compliance Software | Salvia',
-    desc: 'Salvia keeps vet practice records audit-ready for RCVS, VCNZ, VPB and CMA. Voice note after each consult — clinical records, controlled drug logs, consent, and audit trail out the other side.',
+    desc: 'Salvia keeps vet records audit-ready for RCVS, VCNZ, VPB and CMA — clinical records, controlled-drug logs, consent and audit trail from one voice note.',
   },
   '/dental': {
     title: 'Dental Compliance Software | Salvia',
@@ -96,15 +96,15 @@ const META = {
   },
   '/general-practice': {
     title: 'General Practice Compliance Software | Salvia',
-    desc: 'Salvia keeps GP and general clinic records audit-ready for CQC, AHPRA, and MCNZ. Voice note after each consult — structured clinical records, prescribing logs, referral trails, and consent documentation.',
+    desc: 'Salvia keeps GP and clinic records audit-ready for CQC, AHPRA and MCNZ — structured records, prescribing logs, referral trails and consent from a voice note.',
   },
   '/allied-health': {
     title: 'Allied Health Compliance Software | Salvia',
-    desc: 'Salvia keeps allied health records audit-ready for CORU, HCPC, AHPRA, PBNZ, OTBNZ, GOsC, GCC and more. Voice note → SOAP record, outcome measures, treatment log, discharge summary. Physio, osteo, chiro, OT, podiatry, speech.',
+    desc: 'Salvia keeps allied-health records audit-ready for CORU, HCPC, AHPRA, PBNZ and more — voice note to SOAP record, outcome measures, treatment log and discharge.',
   },
   '/physiotherapy': {
     title: 'Physiotherapy Compliance Software | CORU, HCPC, AHPRA, PBNZ | Salvia',
-    desc: 'Salvia keeps physiotherapy records audit-ready for CORU, HCPC, AHPRA and PBNZ. Voice note → SOAP record, outcome measures (NPRS, ODI, NDI, LEFS), treatment log, discharge summary.',
+    desc: 'Salvia keeps physiotherapy records audit-ready for CORU, HCPC, AHPRA and PBNZ — voice note to SOAP record, outcome measures, treatment log and discharge.',
   },
   '/osteopathy': {
     title: 'Osteopathy Practice Software | GOsC, AHPRA, OCNZ | Salvia',
@@ -112,7 +112,7 @@ const META = {
   },
   '/chiropractic': {
     title: 'Chiropractic Practice Software | GCC, AHPRA, CBNZ | Salvia',
-    desc: 'Salvia generates chiropractic records aligned with GCC, AHPRA Chiropractic Board, and CBNZ. Voice note → structured adjustment record, imaging log, consent, audit trail.',
+    desc: 'Salvia generates chiropractic records aligned with GCC, AHPRA and CBNZ — voice note to a structured adjustment record, imaging log, consent and audit trail.',
   },
   '/occupational-therapy': {
     title: 'Occupational Therapy Software | CORU, HCPC, AHPRA, OTBNZ | Salvia',
@@ -120,7 +120,7 @@ const META = {
   },
   '/podiatry': {
     title: 'Podiatry Practice Software | CORU, HCPC, AHPRA | Salvia',
-    desc: 'Salvia keeps podiatry records audit-ready for CORU, HCPC, AHPRA Podiatry Board and PBNZ. Voice note → assessment, wound register, sharps log, consent, treatment record.',
+    desc: 'Salvia keeps podiatry records audit-ready for CORU, HCPC, AHPRA and PBNZ — voice note to assessment, wound register, sharps log, consent and treatment record.',
   },
   '/speech-therapy': {
     title: 'Speech Therapy Software | CORU, HCPC, SPA, ASHA | Salvia',
@@ -128,7 +128,7 @@ const META = {
   },
   '/frameworks': {
     title: 'Regulatory Frameworks We Support | Salvia',
-    desc: 'Salvia generates audit-ready clinical records against 40+ regulatory frameworks across veterinary, dental, general practice and allied health — CORU, HCPC, AHPRA, RCVS, CQC, GDC, GOsC, GCC, AVA, VCNZ, MCNZ and more.',
+    desc: 'Salvia generates audit-ready clinical records against 40+ regulatory frameworks across vet, dental, GP and allied health — CORU, HCPC, AHPRA, RCVS, CQC and more.',
   },
   '/products/point-of-care-evidence': {
     title: 'Statutory Evidence Capture | Salvia',
