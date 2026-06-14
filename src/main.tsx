@@ -1,26 +1,23 @@
 import { StrictMode } from 'react'
-import { createRoot, hydrateRoot } from 'react-dom/client'
+import { createRoot } from 'react-dom/client'
 import { HelmetProvider } from 'react-helmet-async'
 import './index.css'
 import App from './App.tsx'
 import { initPostHog } from './lib/posthog'
 
+// Prerendered pages (snapshot.mjs) ship real HTML in #root so crawlers and AI
+// bots see full content with no JS. The client renders over that snapshot —
+// identical output, so the swap is invisible, and we avoid hydration-mismatch
+// errors that a complex animated/stateful tree would otherwise throw.
 const container = document.getElementById('root')!
-const app = (
+container.innerHTML = ''
+createRoot(container).render(
   <StrictMode>
     <HelmetProvider>
       <App />
     </HelmetProvider>
-  </StrictMode>
+  </StrictMode>,
 )
-
-// Prerendered pages (snapshot.mjs) ship real HTML in #root — hydrate it.
-// In dev / un-snapshotted pages #root is empty — client-render instead.
-if (container.hasChildNodes()) {
-  hydrateRoot(container, app)
-} else {
-  createRoot(container).render(app)
-}
 
 // Load + init analytics after the page is interactive, off the critical path.
 const bootAnalytics = () => { void initPostHog(); };
