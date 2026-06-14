@@ -144,7 +144,7 @@ const META = {
   },
 };
 
-function injectMeta(html, title, desc, path) {
+function injectMeta(html, title, desc, path, author = 'Salvia') {
   const canonical = `https://hellosalvia.com${path}`;
   const ogImage = 'https://hellosalvia.com/og-image.png';
   // Strip the template's default <title>/<meta description> so each page emits
@@ -155,6 +155,7 @@ function injectMeta(html, title, desc, path) {
   const metaTags = `
     <title>${title}</title>
     <meta name="description" content="${desc}" />
+    <meta name="author" content="${author}" />
     <link rel="canonical" href="${canonical}" />
     <meta property="og:title" content="${title}" />
     <meta property="og:description" content="${desc}" />
@@ -286,7 +287,7 @@ for (const route of ALL_ROUTES) {
     const bm = BLOG_META[slug];
     title = bm ? bm.title : `${slug.replace(/-/g, ' ')} | Salvia`;
     desc = bm ? bm.desc : 'Clinical documentation, compliance and governance insights from the Salvia team.';
-    html = injectMeta(template, title, desc, route);
+    html = injectMeta(template, title, desc, route, 'Salvia Editorial');
   }
 
   html = injectSchema(html, route, title, desc);
