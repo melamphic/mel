@@ -37,6 +37,9 @@ const STATIC_ROUTES = [
 ];
 
 const BLOG_SLUGS = [
+  // India
+  'ai-scribe-pricing-india', 'consumer-court-records', 'patient-records-access-india',
+  'nabh-small-clinic-worth-it', 'abdm-mandatory-clinic', 'ai-scribe-indian-languages',
   // General clinic
   'pajama-time', 'informed-refusal', 'ai-legal', 'stranger-rule',
   'audit-trail', 'difficult-patients', 'pediatric-records',
@@ -143,6 +146,12 @@ const META = {
 
 function injectMeta(html, title, desc, path) {
   const canonical = `https://hellosalvia.com${path}`;
+  const ogImage = 'https://hellosalvia.com/og-image.png';
+  // Strip the template's default <title>/<meta description> so each page emits
+  // exactly one of each (no duplicate tags for crawlers to disagree over).
+  html = html
+    .replace(/\s*<title>[\s\S]*?<\/title>/i, '')
+    .replace(/\s*<meta\s+name="description"[^>]*>/i, '');
   const metaTags = `
     <title>${title}</title>
     <meta name="description" content="${desc}" />
@@ -152,9 +161,11 @@ function injectMeta(html, title, desc, path) {
     <meta property="og:url" content="${canonical}" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Salvia" />
+    <meta property="og:image" content="${ogImage}" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="${title}" />
-    <meta name="twitter:description" content="${desc}" />`;
+    <meta name="twitter:description" content="${desc}" />
+    <meta name="twitter:image" content="${ogImage}" />`;
 
   return html.replace('</head>', `${metaTags}\n  </head>`);
 }
@@ -167,6 +178,35 @@ function writePage(route, html) {
   writeFileSync(filePath, html, 'utf-8');
 }
 
+// Per-post title + description for key blog routes, so crawlers and AI engines
+// see unique, keyword-rich meta (not one generic line repeated across posts).
+const BLOG_META = {
+  'ai-scribe-pricing-india': {
+    title: 'AI Medical Scribe Pricing in India (2026) | Salvia',
+    desc: 'AI medical scribes in India cost from free trials to ~₹1,500 per doctor/month; per-clinic compliance suites start around ₹2,500. The real 2026 pricing math.',
+  },
+  'consumer-court-records': {
+    title: 'Thin Records & Consumer Court Cases in India | Salvia',
+    desc: 'Under the Consumer Protection Act 2019, a thin file loses cases good care should win — how the burden of proof shifts onto the doctor, and what a defensible record holds.',
+  },
+  'patient-records-access-india': {
+    title: 'Can Patients Demand Their Hospital File in India? | Salvia',
+    desc: 'Yes — and the law gives you 72 hours. The NMC rule, the RTI route for government hospitals, why stalling reads as concealment, and what a complete file includes.',
+  },
+  'nabh-small-clinic-worth-it': {
+    title: 'Is NABH Entry-Level Worth It for a Small Clinic? | Salvia',
+    desc: 'An honest 2026 take: the 10% PM-JAY incentive that decides it, the real total cost, the SHCO and Entry-Level routes, and where software helps and where it cannot.',
+  },
+  'abdm-mandatory-clinic': {
+    title: 'Is ABDM / ABHA Mandatory for My Clinic in 2026? | Salvia',
+    desc: 'Voluntary for patients, mandatory in practice for PM-JAY and insurance. HFR/HPR registration, what "ABDM compliant" really means, and why a QR code is not a record.',
+  },
+  'ai-scribe-indian-languages': {
+    title: 'Do AI Scribes Really Work in Hindi or Malayalam? | Salvia',
+    desc: 'Most demos are filmed in clean English; a real Indian OPD is code-mixed and noisy. Where English-first scribes break, and why a perfect transcript still is not a record.',
+  },
+};
+
 let count = 0;
 for (const route of ALL_ROUTES) {
   const meta = META[route];
@@ -175,13 +215,12 @@ for (const route of ALL_ROUTES) {
   if (meta) {
     html = injectMeta(template, meta.title, meta.desc, route);
   } else if (route.startsWith('/blog/')) {
-    // Blog posts get a generic title baked in — react-helmet overwrites
-    // with the full title client-side, but crawlers see this first.
     const slug = route.replace('/blog/', '');
+    const bm = BLOG_META[slug];
     html = injectMeta(
       template,
-      `${slug.replace(/-/g, ' ')} | Salvia`,
-      'Clinical documentation, compliance and governance insights from the Salvia team.',
+      bm ? bm.title : `${slug.replace(/-/g, ' ')} | Salvia`,
+      bm ? bm.desc : 'Clinical documentation, compliance and governance insights from the Salvia team.',
       route,
     );
   }
