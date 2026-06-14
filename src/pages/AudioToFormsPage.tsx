@@ -49,6 +49,7 @@ export const AudioToFormsPage = () => {
         keywords={['veterinary clinical records', 'voice to clinical notes', 'controlled drug records', 'CMA compliance vets', 'RCVS records', 'VCNZ records']}
       />
       <Header />
+      <main style={{ flex: 1, zIndex: 10 }}>
 
       {/* Hero */}
       <section style={{ padding: '11rem 0 7rem', backgroundColor: 'var(--salvia-bg)', borderBottom: '1px solid #F1F5F9' }}>
@@ -243,6 +244,7 @@ export const AudioToFormsPage = () => {
         </div>
       </section>
 
+      </main>
       <Footer />
     </div>
   );
