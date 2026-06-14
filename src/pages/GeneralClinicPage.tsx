@@ -65,6 +65,7 @@ export const GeneralClinicPage = () => {
       />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: faqSchema }} />
       <Header />
+      <main style={{ flex: 1, zIndex: 10 }}>
 
       <section style={{ padding: '11rem 0 7rem', backgroundColor: 'var(--salvia-bg)' }}>
         <div className="container" style={{ maxWidth: '1000px', textAlign: 'center' }}>
@@ -229,6 +230,7 @@ export const GeneralClinicPage = () => {
         </div>
       </section>
 
+      </main>
       <Footer />
     </div>
   );
