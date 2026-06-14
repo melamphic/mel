@@ -93,6 +93,7 @@ export const PricingPage = () => {
         keywords={['veterinary practice software pricing', 'clinical documentation software cost', 'compliance software vet practice']}
       />
       <Header />
+      <main style={{ flex: 1, zIndex: 10 }}>
 
       {/* Hero */}
       <section style={{ padding: '9rem 0 2rem', backgroundColor: 'var(--salvia-bg)' }}>
@@ -222,6 +223,7 @@ export const PricingPage = () => {
         </>
       )}
 
+      </main>
       <Footer />
 
       <style>{`
