@@ -176,6 +176,7 @@ export const SignupPage = () => {
   return (
     <>
       <Header />
+      <main style={{ flex: 1, zIndex: 10 }}>
       <ResponsiveStyles />
 
       <section style={pageSectionStyle} className="signup-section">
@@ -424,6 +425,7 @@ export const SignupPage = () => {
         </div>
       </section>
 
+      </main>
       <Footer />
     </>
   );
@@ -437,6 +439,7 @@ function SuccessPage({ email, clinicName, country }: { email: string; clinicName
   return (
     <>
       <Header />
+      <main style={{ flex: 1, zIndex: 10 }}>
       <ResponsiveStyles />
       <section style={pageSectionStyle} className="signup-section signup-success">
         <div style={bgGradientStyle} aria-hidden="true" />
@@ -465,6 +468,7 @@ function SuccessPage({ email, clinicName, country }: { email: string; clinicName
           </div>
         </div>
       </section>
+      </main>
       <Footer />
     </>
   );
