@@ -141,6 +141,7 @@ function DisciplinePage({ discipline }: DisciplinePageProps) {
       />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: faqSchema }} />
       <Header />
+      <main style={{ flex: 1, zIndex: 10 }}>
 
       {/* Hero */}
       <section style={{ padding: '11rem 0 7rem', backgroundColor: 'var(--salvia-bg)' }}>
@@ -466,6 +467,7 @@ function DisciplinePage({ discipline }: DisciplinePageProps) {
         </div>
       </section>
 
+      </main>
       <Footer />
 
       <style>{`
