@@ -110,6 +110,7 @@ function Slider({ label, value, min, max, step = 1, display, onChange }: {
       <input type="range" min={min} max={max} step={step} value={value}
         onChange={e => onChange(Number(e.target.value))}
         className="roi-range"
+        aria-label={label}
         style={{ '--fill': `${pct}%` } as React.CSSProperties}
       />
       <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '0.25rem' }}>
