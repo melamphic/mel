@@ -52,3 +52,25 @@ export function track(event: string, props?: Record<string, unknown>): void {
 export function identify(distinctId: string, props?: Record<string, unknown>): void {
   enqueue((p) => p.identify(distinctId, props));
 }
+
+// --- Cookie / analytics consent -------------------------------------------
+// Analytics (PostHog) only runs after the user grants consent via the banner.
+export const CONSENT_KEY = 'salvia.cookie-consent'; // 'granted' | 'denied'
+
+export function getConsent(): 'granted' | 'denied' | null {
+  try { return localStorage.getItem(CONSENT_KEY) as 'granted' | 'denied' | null; } catch { return null; }
+}
+
+export function hasAnalyticsConsent(): boolean {
+  return getConsent() === 'granted';
+}
+
+/** Persist the choice and start/stop analytics accordingly. */
+export function setAnalyticsConsent(granted: boolean): void {
+  try { localStorage.setItem(CONSENT_KEY, granted ? 'granted' : 'denied'); } catch { /* ignore */ }
+  if (granted) {
+    void initPostHog();
+  } else if (ph) {
+    ph.opt_out_capturing();
+  }
+}

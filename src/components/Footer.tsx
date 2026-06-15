@@ -102,6 +102,13 @@ export const Footer = () => (
           <Link to="/subprocessors" style={linkStyle}>Sub-processors</Link>
           <Link to="/security" style={linkStyle}>Security</Link>
           <Link to="/cookies" style={linkStyle}>Cookie Policy</Link>
+          <button
+            type="button"
+            onClick={() => window.dispatchEvent(new Event('salvia:cookie-settings'))}
+            style={{ ...linkStyle, background: 'none', border: 'none', padding: 0, textAlign: 'left', cursor: 'pointer', font: 'inherit' }}
+          >
+            Cookie settings
+          </button>
         </div>
       </div>
     </div>

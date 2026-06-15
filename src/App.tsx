@@ -3,6 +3,7 @@ import { useEffect, lazy, Suspense } from 'react';
 import './index.css';
 import { capturePageview } from './lib/posthog';
 import { BackgroundField } from './components/BackgroundField';
+import { CookieConsent } from './components/CookieConsent';
 
 const LandingPage = lazy(() => import('./pages/LandingPage').then(m => ({ default: m.LandingPage })));
 const FormEnginePage = lazy(() => import('./pages/FormEnginePage').then(m => ({ default: m.FormEnginePage })));
@@ -97,6 +98,8 @@ function App() {
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </Suspense>
+
+        <CookieConsent />
 
       </div>
     </BrowserRouter>
