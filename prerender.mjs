@@ -252,14 +252,17 @@ const BLOG_META = {
 // these client-side, but those bots don't run JS — so the static copy is what
 // earns the structured-data + E-E-A-T credit. -----------------------------------
 const SITE = 'https://hellosalvia.com';
+// Salvia is a GLOBAL product — India is one market, not the whole company.
+const AREA_SERVED = ['Australia', 'New Zealand', 'United Kingdom', 'Ireland', 'United States', 'India']
+  .map((name) => ({ '@type': 'Country', name }));
 const ORG_SCHEMA = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
   name: 'Salvia',
   url: SITE,
   logo: `${SITE}/favicon.png`,
-  description: 'AI clinical documentation and compliance suite for Indian clinics, nursing homes and hospitals — voice notes in any Indian language in, audit-ready records out.',
-  areaServed: { '@type': 'Country', name: 'India' },
+  description: 'AI clinical documentation and compliance suite for veterinary, dental, general-practice and allied-health clinics — a post-consult voice note in, an audit-ready, regulator-compliant record out. Serving Australia, New Zealand, the UK, the EU, the US and India.',
+  areaServed: AREA_SERVED,
   sameAs: [],
 };
 const SOFTWARE_SCHEMA = {
@@ -270,12 +273,12 @@ const SOFTWARE_SCHEMA = {
   operatingSystem: 'Web',
   url: SITE,
   description: ORG_SCHEMA.description,
-  areaServed: { '@type': 'Country', name: 'India' },
-  offers: { '@type': 'Offer', priceCurrency: 'INR', price: '2500', category: 'subscription' },
+  areaServed: AREA_SERVED,
+  offers: { '@type': 'Offer', category: 'subscription' },
   publisher: { '@type': 'Organization', name: 'Salvia', url: SITE },
   featureList: [
-    'AI clinical documentation from voice notes in Indian languages',
-    'NABH, ABDM and DPDP compliance checks',
+    'AI clinical documentation from voice notes (multilingual)',
+    'Regulator-mapped compliance checks — RCVS, CQC, GDC, AHPRA, VCNZ, NABH, ABDM and more',
     'Controlled-drug register', 'Consent and incident records', 'Audit-ready report export',
   ],
 };
