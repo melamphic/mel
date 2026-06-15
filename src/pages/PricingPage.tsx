@@ -4,11 +4,11 @@ import { SEO } from '../components/SEO';
 import { Header } from '../components/Header';
 import { Footer } from '../components/Footer';
 import { track } from '../lib/posthog';
+import { getStoredMarket, setStoredMarket, MARKET_EVENT } from '../lib/market';
 import {
   INDIA_TIERS,
   MARKETS,
   PRODUCTS,
-  detectMarket,
   displayedMonthly,
   indiaPlanCode,
   indiaDisplayedMonthly,
@@ -40,8 +40,6 @@ const DOMAIN_SEAT_LABEL: Record<Vertical, string> = {
   allied_health: 'For allied clinicians',
 };
 
-const MARKET_STORAGE_KEY = 'salvia.pricing.market';
-
 export const PricingPage = () => {
   const [active, setActive] = useState<Vertical>('veterinary');
   const [annual, setAnnual] = useState(false);
@@ -51,33 +49,21 @@ export const PricingPage = () => {
   const [market, setMarket] = useState<Market>('US');
 
   useEffect(() => {
-    const stored = typeof window !== 'undefined'
-      ? (window.localStorage.getItem(MARKET_STORAGE_KEY) as Market | null)
-      : null;
-    const next = stored && MARKETS.some((m) => m.key === stored)
-      ? stored
-      : detectMarket();
-    // Pre-select the vertical from a ?vertical= deep link so a visitor who
-    // clicked through from a vertical landing page lands on their product
-    // already chosen.
+    // Shared market preference (also set by the header CountrySwitcher).
     const v = new URLSearchParams(window.location.search).get('vertical');
     const nextVertical = PRODUCTS.some((p) => p.key === v) ? (v as Vertical) : null;
-    // Client-only detection (localStorage + browser locale + URL) must run
-    // after hydration, otherwise the prerendered HTML and the first client
-    // render disagree. Post-mount setState is the intended React pattern here,
-    // so the synchronous-setState rule doesn't apply.
     // eslint-disable-next-line react-hooks/set-state-in-effect
-    setMarket(next);
-    if (nextVertical) {
-      setActive(nextVertical);
-    }
+    setMarket(getStoredMarket());
+    if (nextVertical) setActive(nextVertical);
+    // React live when the country is changed from the header (or elsewhere).
+    const onMarket = (e: Event) => setMarket(((e as CustomEvent).detail as Market) ?? getStoredMarket());
+    window.addEventListener(MARKET_EVENT, onMarket);
+    return () => window.removeEventListener(MARKET_EVENT, onMarket);
   }, []);
 
   const onMarketChange = (next: Market) => {
     setMarket(next);
-    if (typeof window !== 'undefined') {
-      window.localStorage.setItem(MARKET_STORAGE_KEY, next);
-    }
+    setStoredMarket(next); // persists + broadcasts to the header switcher
   };
 
   const cycle: Cycle = annual ? 'annual' : 'monthly';

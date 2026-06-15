@@ -2,10 +2,13 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { DashboardPreview } from './DashboardPreview';
 import { track } from '../lib/posthog';
-
-const regulators: string[] = ['NABH', 'ABDM', 'DPDP', 'VCI', 'DCI', 'NCAHP'];
+import { useIsIndia } from '../lib/market';
 
 export const Hero: React.FC = () => {
+  const isIndia = useIsIndia();
+  const regulators: string[] = isIndia
+    ? ['NABH', 'ABDM', 'DPDP', 'VCI', 'DCI', 'NCAHP']
+    : ['RCVS', 'CQC', 'GDC', 'AHPRA', 'VCNZ', 'HCPC'];
   return (
     <section className="hero-v1">
       <style>{`
@@ -128,7 +131,7 @@ export const Hero: React.FC = () => {
               margin: '0 0 2.25rem',
             }}
           >
-            Salvia&apos;s AI turns a post-consult audio note — spoken in any Indian language — into a
+            Salvia&apos;s AI turns a post-consult audio note — spoken in {isIndia ? 'any Indian language' : 'any language'} — into a
             policy-checked, audit-ready clinical record before anyone signs off. Not a scribe — a
             compliance suite.
           </p>

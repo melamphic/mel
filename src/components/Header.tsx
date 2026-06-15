@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 import salviaLogo from '../assets/salvia.png';
 import { APP_URL } from '../config';
+import { CountrySwitcher } from './CountrySwitcher';
 
 const PRIMARY_VERTICALS = [
   { to: '/veterinary',        label: 'Veterinary',       sub: 'VCI · NABH · CCSEA' },
@@ -172,6 +173,7 @@ export const Header: React.FC = () => {
         </nav>
 
         <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+          <CountrySwitcher />
           <a href={APP_URL} className="pill-button-light hide-mobile" style={{ fontSize: '0.85rem', padding: '0.6rem 1.2rem', textDecoration: 'none' }}>
             Sign In
           </a>
