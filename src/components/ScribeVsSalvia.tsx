@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useIsIndia } from '../lib/market';
 
 const SCRIBE_GIVES = [
   'An English SOAP note from the visit audio',
@@ -17,7 +18,11 @@ const SALVIA_GIVES = [
   'A governance timeline per patient, per clinic, per org',
 ];
 
-export const ScribeVsSalvia: React.FC = () => (
+export const ScribeVsSalvia: React.FC = () => {
+  const isIndia = useIsIndia();
+  const salviaGives = SALVIA_GIVES.map((x, i) =>
+    i === 0 && !isIndia ? 'A note in any language — every field traced to its source line' : x);
+  return (
   <section style={{
     padding: '6rem 0',
     backgroundColor: 'transparent',
@@ -126,7 +131,7 @@ export const ScribeVsSalvia: React.FC = () => (
             Gets you a note that defends itself.
           </h3>
           <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-            {SALVIA_GIVES.map((item) => (
+            {salviaGives.map((item) => (
               <li key={item} style={{
                 display: 'flex', alignItems: 'flex-start', gap: '0.6rem',
                 fontSize: '0.92rem',
@@ -164,7 +169,7 @@ export const ScribeVsSalvia: React.FC = () => (
         marginInline: 'auto',
         fontStyle: 'italic',
       }}>
-        If an NABH assessor visits tomorrow, an AI scribe can't tell you which note has a problem.
+        If {isIndia ? 'an NABH assessor' : 'a CQC inspector'} visits tomorrow, an AI scribe can't tell you which note has a problem.
         Salvia can — and can hand them the evidence before they finish the sentence.
       </p>
 
@@ -177,4 +182,5 @@ export const ScribeVsSalvia: React.FC = () => (
       </div>
     </div>
   </section>
-);
+  );
+};

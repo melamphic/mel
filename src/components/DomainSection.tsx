@@ -1,18 +1,21 @@
 import { useState } from 'react';
+import { useIsIndia } from '../lib/market';
 
-const DOMAINS = [
+const domainsFor = (isIndia: boolean) => [
   {
     id: 'clinic',
     label: 'Clinics',
     tagline: 'GP, specialists & allied health',
     accent: '#F43F5E',
     title: 'Policy-checked before it\u2019s signed.',
-    desc: 'Upload NABH, ABDM, Clinical Establishments Act, CGHS — or your own internal SOPs. Salvia links clauses to form fields and scores every note against them before the clinician approves it.',
+    desc: isIndia
+      ? 'Upload NABH, ABDM, Clinical Establishments Act, CGHS — or your own internal SOPs. Salvia links clauses to form fields and scores every note against them before the clinician approves it.'
+      : 'Upload CQC, GDC, RCVS, AHPRA — or your own internal SOPs. Salvia links clauses to form fields and scores every note against them before the clinician approves it.',
     metric: '98%',
     metricLabel: 'CLAUSE COVERAGE',
     ui: (
       <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-        <div style={{ fontSize: '0.7rem', fontWeight: 800, color: '#F43F5E', letterSpacing: '0.08em' }}>REGULATORY COMPLIANCE: NABH</div>
+        <div style={{ fontSize: '0.7rem', fontWeight: 800, color: '#F43F5E', letterSpacing: '0.08em' }}>REGULATORY COMPLIANCE: {isIndia ? 'NABH' : 'CQC'}</div>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
           {[
             { label: 'Patient Identification', status: 'Satisfied', detail: 'Clause 4.1' },
@@ -82,7 +85,9 @@ const DOMAINS = [
     tagline: 'Physio, osteo, chiro, OT, podiatry, speech',
     accent: '#0891B2',
     title: 'Outcome measures, tracked episode-over-episode.',
-    desc: 'NCAHP, IAP, RCI, NABH. Validated scales (NPRS, ODI, COPM, AAC) as first-class fields — score at intake, repeat at review, trend on the discharge summary. Framework-aware record generation tuned to your discipline.',
+    desc: isIndia
+      ? 'NCAHP, IAP, RCI, NABH. Validated scales (NPRS, ODI, COPM, AAC) as first-class fields — score at intake, repeat at review, trend on the discharge summary. Framework-aware record generation tuned to your discipline.'
+      : 'HCPC, AHPRA, PBNZ, CORU. Validated scales (NPRS, ODI, COPM, AAC) as first-class fields — score at intake, repeat at review, trend on the discharge summary. Framework-aware record generation tuned to your discipline.',
     metric: '6',
     metricLabel: 'DISCIPLINES, ONE PRODUCT',
     ui: (
@@ -147,7 +152,7 @@ const DOMAINS = [
           border: '1px solid rgba(8,145,178,0.15)', borderRadius: '14px',
           fontSize: '0.82rem', color: '#0E7490', fontWeight: 600, lineHeight: 1.45,
         }}>
-          Framework: NCAHP Physiotherapy Professional Council · Episode summary auto-drafted for discharge.
+          Framework: {isIndia ? 'NCAHP Physiotherapy Professional Council' : 'HCPC / AHPRA physiotherapy standards'} · Episode summary auto-drafted for discharge.
         </div>
       </div>
     ),
@@ -194,6 +199,8 @@ const DOMAINS = [
 ];
 
 export const DomainSection = () => {
+  const isIndia = useIsIndia();
+  const DOMAINS = domainsFor(isIndia);
   const [active, setActive] = useState(0);
   const d = DOMAINS[active];
 

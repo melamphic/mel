@@ -1,4 +1,5 @@
 import React from 'react';
+import { useIsIndia } from '../lib/market';
 
 const STOPS = [
   {
@@ -67,7 +68,15 @@ const STOPS = [
   },
 ];
 
-export const DayWithSalvia: React.FC = () => (
+export const DayWithSalvia: React.FC = () => {
+  const isIndia = useIsIndia();
+  const stops = STOPS.map((s) => {
+    if (isIndia) return s;
+    if (s.n === '2') return { ...s, body: 'Voice note, any length — in any language. Post-consult or ambient at the bedside. Keep it natural; talk it out in your own words.' };
+    if (s.n === '5') return { ...s, body: 'Record goes onto the patient’s timeline, hashed and audit-locked, ready to sync to your EHR. Edit history, policy trace, audio, transcript — all bundled into a one-click Audit Pack for the assessor.' };
+    return s;
+  });
+  return (
   <section id="how-it-works" style={{
     padding: '6rem 0',
     position: 'relative',
@@ -120,7 +129,7 @@ export const DayWithSalvia: React.FC = () => (
           position: 'relative',
         }}
       >
-        {STOPS.map((s, i) => (
+        {stops.map((s, i) => (
           <div key={s.n} style={{ position: 'relative' }}>
 
             {/* Connector line */}
@@ -205,4 +214,5 @@ export const DayWithSalvia: React.FC = () => (
       </div>
     </div>
   </section>
-);
+  );
+};

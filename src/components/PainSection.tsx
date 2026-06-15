@@ -1,34 +1,45 @@
-const PAINS = [
+import { useIsIndia } from '../lib/market';
+
+const painsFor = (isIndia: boolean) => [
   {
     num: '01',
     tag: 'After-hours charting',
     title: 'Notes that follow you home.',
-    body: 'Doctors lose a third to half of every day to records. With Salvia, you speak a short note in any Indian language — Hindi, Malayalam, Tamil — pick your forms, and the draft is already filled in before you sit down to review.',
+    body: isIndia
+      ? 'Doctors lose a third to half of every day to records. With Salvia, you speak a short note in any Indian language — Hindi, Malayalam, Tamil — pick your forms, and the draft is already filled in before you sit down to review.'
+      : 'Clinicians lose a third to half of every day to records. With Salvia, you speak a short note in any language, pick your forms, and the draft is already filled in before you sit down to review.',
     stat: '½ day',
-    statSub: 'lost to paperwork by the average Indian doctor',
+    statSub: isIndia ? 'lost to paperwork by the average Indian doctor' : 'lost to paperwork by the average clinician',
     accent: 'var(--salvia-accent)',
   },
   {
     num: '02',
     tag: 'Policy drift',
     title: 'Policies live in a PDF nobody reads.',
-    body: 'NABH, Clinical Establishments Act, DPDP, ABDM — your team can\'t memorise every clause. Salvia links your rulebook directly to each form field and flags gaps before a note is ever signed.',
+    body: isIndia
+      ? 'NABH, Clinical Establishments Act, DPDP, ABDM — your team can\'t memorise every clause. Salvia links your rulebook directly to each form field and flags gaps before a note is ever signed.'
+      : 'CQC, GDC, RCVS, AHPRA, your privacy law — your team can\'t memorise every clause. Salvia links your rulebook directly to each form field and flags gaps before a note is ever signed.',
     stat: '~95%',
-    statSub: 'of India\'s ~6 lakh facilities are not NABH-accredited',
+    statSub: isIndia ? 'of India\'s ~6 lakh facilities are not NABH-accredited' : 'of practices still run compliance on paper, not in the record',
     accent: '#0F172A',
   },
   {
     num: '03',
     tag: 'Undefendable records',
     title: "If it wasn't documented, it didn't happen.",
-    body: "A NABH assessor or CGHS audit can mean weeks of scrambling — drug register, consent and incidents still live in paper books. Salvia keeps a hashed, timestamped trail: every field traceable back to the original audio.",
+    body: isIndia
+      ? "A NABH assessor or CGHS audit can mean weeks of scrambling — drug register, consent and incidents still live in paper books. Salvia keeps a hashed, timestamped trail: every field traceable back to the original audio."
+      : "A CQC inspection or board audit can mean weeks of scrambling — drug register, consent and incidents still live in paper books. Salvia keeps a hashed, timestamped trail: every field traceable back to the original audio.",
     stat: '100%',
     statSub: 'of Salvia records are audit-locked with full edit history',
     accent: '#059669',
   },
 ];
 
-export const PainSection = () => (
+export const PainSection = () => {
+  const isIndia = useIsIndia();
+  const PAINS = painsFor(isIndia);
+  return (
   <section style={{
     padding: '6rem 0',
     position: 'relative',
@@ -146,4 +157,5 @@ export const PainSection = () => (
       </div>
     </div>
   </section>
-);
+  );
+};

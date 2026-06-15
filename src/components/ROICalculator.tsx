@@ -1,6 +1,17 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { INDIA_TIERS, type Vertical } from '../data/pricing';
+import { MARKET_PRICING, marketMetaFor, type Vertical, type Market } from '../data/pricing';
+import { useMarket } from '../lib/market';
+
+// Per-market economic defaults for the ROI model (in each market's currency).
+const MARKET_ECON: Record<Market, { hourly: number; annualRev: number }> = {
+  IN: { hourly: 400, annualRev: 5_000_000 },
+  US: { hourly: 90,  annualRev: 350_000 },
+  UK: { hourly: 55,  annualRev: 220_000 },
+  AU: { hourly: 80,  annualRev: 380_000 },
+  NZ: { hourly: 72,  annualRev: 340_000 },
+  EU: { hourly: 60,  annualRev: 240_000 },
+};
 
 const CFG: Record<Vertical, {
   complianceMonthly: number; complianceLabel: string;
@@ -21,7 +32,6 @@ const VERTICALS: { key: Vertical; label: string }[] = [
 
 const SEG_COLORS = ['#FF4E00', '#0F172A', '#CBD5E1'];
 
-function fmt(n: number) { return '₹' + Math.round(n).toLocaleString('en-IN'); }
 
 /* ── Donut ───────────────────────────────────────────────────── */
 function Donut({ segments, centerLabel }: {
@@ -123,11 +133,18 @@ function Slider({ label, value, min, max, step = 1, display, onChange }: {
 
 /* ── main ────────────────────────────────────────────────────── */
 export const ROICalculator = () => {
+  const market = useMarket();
+  const meta = marketMetaFor(market);
+  const econ = MARKET_ECON[market];
+  const fmt = (n: number) => meta.symbol + Math.round(n).toLocaleString(market === 'IN' ? 'en-IN' : 'en-US');
   const [vertical, setVertical]     = useState<Vertical>('veterinary');
   const [clinicians, setClinicians] = useState(3);
   const [consults, setConsults]     = useState(15);
   const [minNow, setMinNow]         = useState(12);
-  const [hourly, setHourly]         = useState(400);
+  const [hourly, setHourly]         = useState(MARKET_ECON.US.hourly);
+  // Reset the hourly default to the market's typical wage when country changes.
+  // eslint-disable-next-line react-hooks/set-state-in-effect
+  useEffect(() => { setHourly(MARKET_ECON[market].hourly); }, [market]);
 
   const cfg   = CFG[vertical];
   const seats = clinicians;
@@ -136,16 +153,16 @@ export const ROICalculator = () => {
 
   const timeValue       = (saved * consults * days * seats / 60) * hourly;
   const complianceValue = cfg.complianceMonthly;
-  const billingValue    = (cfg.annualRevPerSeat * seats * cfg.billingPct) / 12;
+  const billingValue    = (econ.annualRev * seats * cfg.billingPct) / 12;
   const totalValue      = timeValue + complianceValue + billingValue;
 
   // India is note-based, not seat-based: the plan follows from monthly AI-note volume.
   const notesPerMonth = consults * seats * days;
-  const tierKey: 'base' | 'growth' | 'unlimited' =
-    notesPerMonth <= 100 ? 'base' : notesPerMonth <= 600 ? 'growth' : 'unlimited';
-  const indiaTier   = INDIA_TIERS.find(t => t.key === tierKey)!;
-  const isCustom    = notesPerMonth > 1500;
-  const monthlyCost = indiaTier.monthlyINR;
+  const tiers       = MARKET_PRICING[market];
+  const topTier     = tiers[tiers.length - 1];
+  const tier        = tiers.find(t => notesPerMonth <= t.notesPerMonth) ?? topTier;
+  const isCustom    = notesPerMonth > topTier.notesPerMonth;
+  const monthlyCost = tier.monthly;
   const roi         = totalValue / monthlyCost;
 
   const rows = [
@@ -200,11 +217,11 @@ export const ROICalculator = () => {
             <Slider label="Clinicians" value={clinicians} min={1} max={15} onChange={setClinicians} display={`${clinicians} clinician${clinicians > 1 ? 's' : ''}`} />
             <Slider label="Consults per day, per clinician" value={consults} min={1} max={40} onChange={setConsults} display={`${consults} ${cfg.noteUnit}`} />
             <Slider label="Minutes on documentation per note today" value={minNow} min={3} max={45} onChange={setMinNow} display={`${minNow} min`} />
-            <Slider label="Hourly staff cost" value={hourly} min={100} max={2000} step={50} onChange={setHourly} display={`₹${hourly}/hr`} />
+            <Slider label="Hourly staff cost" value={hourly} min={20} max={2000} step={5} onChange={setHourly} display={`${meta.symbol}${hourly}/hr`} />
             <p style={{ fontSize: '0.67rem', color: 'var(--salvia-text-muted)', fontFamily: 'monospace', lineHeight: 1.7, borderTop: '1px solid rgba(15,23,42,0.06)', paddingTop: '1rem', margin: 0 }}>
               Salvia reduces documentation to ~3 min (review + sign). Saving {saved} min/note.
-              {` ~${notesPerMonth.toLocaleString('en-IN')} AI notes/mo → ${isCustom ? 'Custom plan (1,500+ notes)' : indiaTier.name + ' plan'}.`}
-              {` Billing: ${(cfg.billingPct * 100).toFixed(0)}% leakage on ₹${(cfg.annualRevPerSeat / 100000).toFixed(0)}L rev/clinician/yr.`}
+              {` ~${notesPerMonth.toLocaleString(market === 'IN' ? 'en-IN' : 'en-US')} AI notes/mo → ${isCustom ? `Custom plan (${topTier.notesPerMonth.toLocaleString()}+ notes)` : tier.name + ' plan'}.`}
+              {` Billing: ${(cfg.billingPct * 100).toFixed(0)}% leakage on ${fmt(econ.annualRev)} rev/clinician/yr.`}
             </p>
           </div>
 
@@ -242,7 +259,7 @@ export const ROICalculator = () => {
               <div>
                 <div style={{ fontSize: '0.6rem', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--salvia-text-muted)', marginBottom: '0.3rem' }}>Salvia costs</div>
                 <div className="roi-summary-num" style={{ fontWeight: 900, color: 'var(--salvia-primary)', letterSpacing: '-0.05em', lineHeight: 1 }}>{fmt(monthlyCost)}</div>
-                <div style={{ fontSize: '0.62rem', color: 'var(--salvia-text-muted)', marginTop: '0.2rem', fontFamily: 'monospace' }}>{isCustom ? 'Custom · 1,500+ notes/mo' : `${indiaTier.name} · ${indiaTier.draftCap} AI notes/mo`}</div>
+                <div style={{ fontSize: '0.62rem', color: 'var(--salvia-text-muted)', marginTop: '0.2rem', fontFamily: 'monospace' }}>{isCustom ? `Custom · ${topTier.notesPerMonth.toLocaleString()}+ notes/mo` : `${tier.name} · ${tier.notesPerMonth} AI notes/mo`}</div>
                 <div style={{ fontSize: '0.72rem', color: 'var(--salvia-text-muted)', marginTop: '0.25rem' }}>
                   <strong style={{ color: 'var(--salvia-accent)' }}>{fmt(totalValue - monthlyCost)}</strong> monthly surplus
                 </div>

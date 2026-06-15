@@ -1,4 +1,5 @@
 import React from 'react';
+import { useIsIndia } from '../lib/market';
 
 // "The outputs" — what Salvia produces. Balanced bento of real, filled product
 // surfaces (form, policy check, outcome trend, register). Brand: navy + orange,
@@ -46,7 +47,9 @@ const Status: React.FC<{ ok?: boolean; warn?: boolean; label: string }> = ({ ok,
   );
 };
 
-export const BentoReinvented: React.FC = () => (
+export const BentoReinvented: React.FC = () => {
+  const isIndia = useIsIndia();
+  return (
   <section id="outputs" style={{ padding: 'clamp(5.5rem, 9vw, 8rem) 0', backgroundColor: 'transparent', position: 'relative', zIndex: 10 }}>
     <style>{`
       .bento3 { display: grid; grid-template-columns: repeat(12, 1fr); gap: 1.35rem; align-items: stretch; }
@@ -74,10 +77,12 @@ export const BentoReinvented: React.FC = () => (
               <Tag t="WITNESSED" c="#0EA5E9" />
             </div>
             <p style={{ fontSize: '0.82rem', color: MUTED, lineHeight: 1.5, margin: '0 0 0.4rem' }}>
-              "…procedure, anaesthesia and ₹18,000 explained in Malayalam, understood by the patient."
+              {isIndia
+                ? '"…procedure, anaesthesia and ₹18,000 explained in Malayalam, understood by the patient."'
+                : '"…procedure, anaesthesia and $1,200 explained in plain English, understood by the patient."'}
             </p>
-            <FieldRow label="Witness" value="Dr Nair · NMC 4421" />
-            <FieldRow label={<>Tramadol 50&thinsp;mg <Tag t="SCH H1" c="#DC2626" /></>} value={<span style={{ fontFamily: 'monospace', color: '#16A34A', fontWeight: 700 }}>bal 18 → 16</span>} />
+            <FieldRow label="Witness" value={isIndia ? 'Dr Nair · NMC 4421' : 'Dr Adams · Reg. 4421'} />
+            <FieldRow label={<>Tramadol 50&thinsp;mg <Tag t={isIndia ? 'SCH H1' : 'CD'} c="#DC2626" /></>} value={<span style={{ fontFamily: 'monospace', color: '#16A34A', fontWeight: 700 }}>bal 18 → 16</span>} />
             <FieldRow label="Pain · NPRS" value={<span style={{ fontFamily: 'monospace' }}>6 / 10</span>} last />
           </div>
         </Card>
@@ -150,4 +155,5 @@ export const BentoReinvented: React.FC = () => (
       </div>
     </div>
   </section>
-);
+  );
+};

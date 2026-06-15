@@ -1,57 +1,89 @@
 import React from 'react';
+import { useIsIndia } from '../lib/market';
 
-const VERTICALS = [
+const verticalsFor = (isIndia: boolean) => [
   {
     name: 'Clinics',
     accent: '#FF4E00',
-    frameworks: [
+    frameworks: isIndia ? [
       { code: 'NABH', region: 'India' },
       { code: 'NABH Entry-Level', region: 'India' },
       { code: 'Clinical Establishments Act 2010', region: 'India' },
       { code: 'ABDM', region: 'India' },
       { code: 'ABHA', region: 'India' },
       { code: 'CGHS', region: 'India' },
+    ] : [
+      { code: 'CQC', region: 'UK' },
+      { code: 'GMC', region: 'UK' },
+      { code: 'AHPRA', region: 'Australia' },
+      { code: 'MCNZ', region: 'New Zealand' },
+      { code: 'HIPC 2020', region: 'New Zealand' },
+      { code: 'UK GDPR', region: 'UK / EU' },
     ],
   },
   {
     name: 'Vets',
     accent: '#0EA5E9',
-    frameworks: [
+    frameworks: isIndia ? [
       { code: 'VCI', region: 'India' },
       { code: 'IVC Standards', region: 'India' },
       { code: 'CDSCO', region: 'India' },
       { code: 'Schedule H1', region: 'India' },
       { code: 'Drugs & Cosmetics Act', region: 'India' },
       { code: 'DPDP Act 2023', region: 'India' },
+    ] : [
+      { code: 'RCVS', region: 'UK' },
+      { code: 'CMA', region: 'UK' },
+      { code: 'VCNZ', region: 'New Zealand' },
+      { code: 'AVBC', region: 'Australia' },
+      { code: 'Controlled Drugs', region: 'Global' },
+      { code: 'UK GDPR', region: 'UK / EU' },
     ],
   },
   {
     name: 'Dental',
     accent: '#7C3AED',
-    frameworks: [
+    frameworks: isIndia ? [
       { code: 'DCI', region: 'India' },
       { code: 'DCI Standards', region: 'India' },
       { code: 'NABH Dental', region: 'India' },
       { code: 'Clinical Establishments Act 2010', region: 'India' },
       { code: 'ABDM', region: 'India' },
       { code: 'DPDP Act 2023', region: 'India' },
+    ] : [
+      { code: 'GDC', region: 'UK' },
+      { code: 'CQC', region: 'UK' },
+      { code: 'AHPRA Dental Board', region: 'Australia' },
+      { code: 'DCNZ', region: 'New Zealand' },
+      { code: 'Radiography standards', region: 'Global' },
+      { code: 'UK GDPR', region: 'UK / EU' },
     ],
   },
   {
     name: 'Allied Health',
     accent: '#0891B2',
-    frameworks: [
+    frameworks: isIndia ? [
       { code: 'NMC Guidelines', region: 'India' },
       { code: 'IMC Guidelines', region: 'India' },
       { code: 'NABL', region: 'India' },
       { code: 'PM-JAY / AB-PMJAY', region: 'India' },
       { code: 'CGHS', region: 'India' },
       { code: 'DPDP Act 2023', region: 'India' },
+    ] : [
+      { code: 'HCPC', region: 'UK' },
+      { code: 'CORU', region: 'Ireland' },
+      { code: 'AHPRA', region: 'Australia' },
+      { code: 'PBNZ / OTBNZ', region: 'New Zealand' },
+      { code: 'ASHA', region: 'US' },
+      { code: 'UK GDPR', region: 'UK / EU' },
     ],
   },
 ];
 
-export const FrameworksRail: React.FC = () => (
+export const FrameworksRail: React.FC = () => {
+  const isIndia = useIsIndia();
+  const VERTICALS = verticalsFor(isIndia);
+  return (
   <section style={{
     padding: '6rem 0',
     position: 'relative',
@@ -176,4 +208,5 @@ export const FrameworksRail: React.FC = () => (
       </p>
     </div>
   </section>
-);
+  );
+};

@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useIsIndia } from '../lib/market';
 
-const products = [
+const productsFor = (isIndia: boolean) => [
   {
     id: 'form',
     label: 'FORM ENGINE',
@@ -20,7 +21,7 @@ const products = [
     title: 'Your rulebook, turned into enforceable clauses.',
     subtitle: 'Block-based policy editor (think Notion, but for compliance). Upload your existing PDFs and Salvia imports them. Mark clauses as must-follow, maybe-follow, or try-to-follow — then link them to the forms they govern.',
     bullets: [
-      'Built-in frameworks: DPDP, NABH, ABDM, Clinical Establishments Act',
+      isIndia ? 'Built-in frameworks: DPDP, NABH, ABDM, Clinical Establishments Act' : 'Built-in frameworks: CQC, GDC, RCVS, AHPRA — and your own SOPs',
       'Upload your own policy docs — Salvia converts them into editable blocks',
       'Clause parity tagging: High / Medium / Low enforceability',
     ],
@@ -30,7 +31,9 @@ const products = [
     id: 'audio',
     label: 'AUDIO → FORMS',
     title: 'Go home when the patient does.',
-    subtitle: 'Record the visit in any Indian language. Deepgram Nova Medical transcribes the audio. Our AI maps the transcript into your forms — with evidence scoring so every field traces back to the exact words that generated it.',
+    subtitle: isIndia
+      ? 'Record the visit in any Indian language. Deepgram Nova Medical transcribes the audio. Our AI maps the transcript into your forms — with evidence scoring so every field traces back to the exact words that generated it.'
+      : 'Record the visit in any language. Deepgram Nova Medical transcribes the audio. Our AI maps the transcript into your forms — with evidence scoring so every field traces back to the exact words that generated it.',
     bullets: [
       'Deterministic confidence scoring per field',
       'Every value tagged with source line + transformation type',
@@ -81,6 +84,7 @@ const MockWindow: React.FC<{ title: string; subtitle?: string; accent?: string; 
 
 // ── FORM ENGINE mock — a form editor ─────────────────────────────────────
 const FormEngineMock: React.FC = () => {
+  const isIndia = useIsIndia();
   const fields = [
     { label: 'Patient ID (ABHA)', type: 'Text', required: true, hint: 'Auto-linked' },
     { label: 'Vitals · BP/HR', type: 'Number', required: true, hint: 'auto-validated' },
@@ -89,7 +93,7 @@ const FormEngineMock: React.FC = () => {
     { label: 'Treatment plan', type: 'Button group', required: true, hint: 'AI: multi-select ok' },
   ];
   return (
-    <MockWindow title="OPD consult form" subtitle="v4.2 · draft · linked to NABH §4.1–§4.3">
+    <MockWindow title="OPD consult form" subtitle={`v4.2 · draft · linked to ${isIndia ? 'NABH §4.1–§4.3' : 'policy §4.1–§4.3'}`}>
       {/* Field list */}
       <div style={{ display: 'flex', flexDirection: 'column', gap: '0.55rem', marginBottom: '1rem' }}>
         {fields.map((f, i) => (
@@ -168,6 +172,7 @@ const FormEngineMock: React.FC = () => {
 
 // ── POLICY ENGINE mock — a block-based policy doc ────────────────────────
 const PolicyEngineMock: React.FC = () => {
+  const isIndia = useIsIndia();
   const clauses = [
     { parity: 'MUST', text: 'Record patient ID, vitals, and presenting complaint on every visit.', forms: 4 },
     { parity: 'MUST', text: 'Patient consent is required for any Schedule H1 medication prescribed.', forms: 2 },
@@ -178,7 +183,7 @@ const PolicyEngineMock: React.FC = () => {
   const parityBg = (p: string) => p === 'MUST' ? '#FEF2F2' : p === 'MAYBE' ? '#FFFBEB' : '#ECFDF5';
 
   return (
-    <MockWindow title="NABH Clinical Records" subtitle="v12.2 · linked to 4 forms · imported from PDF" accent="#0EA5E9">
+    <MockWindow title={isIndia ? 'NABH Clinical Records' : 'Clinical Records'} subtitle="v12.2 · linked to 4 forms · imported from PDF" accent="#0EA5E9">
       {/* Section heading */}
       <div style={{ textAlign: 'left', marginBottom: '0.75rem' }}>
         <div style={{ fontSize: '0.62rem', fontWeight: 700, color: '#94A3B8', letterSpacing: '0.08em', textTransform: 'uppercase' }}>
@@ -348,6 +353,8 @@ const AudioFormsMock: React.FC = () => {
 
 
 export const ProductSection: React.FC = () => {
+  const isIndia = useIsIndia();
+  const products = productsFor(isIndia);
   const [activeTab, setActiveTab] = useState(0);
 
   const renderDiagram = () => {

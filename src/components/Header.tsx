@@ -4,12 +4,13 @@ import { Link } from 'react-router-dom';
 import salviaLogo from '../assets/salvia.png';
 import { APP_URL } from '../config';
 import { CountrySwitcher } from './CountrySwitcher';
+import { useIsIndia } from '../lib/market';
 
-const PRIMARY_VERTICALS = [
-  { to: '/veterinary',        label: 'Veterinary',       sub: 'VCI · NABH · CCSEA' },
-  { to: '/dental',            label: 'Dental',           sub: 'DCI · NABH · CGHS' },
-  { to: '/general-practice',  label: 'General Practice', sub: 'NMC · NABH · ABDM' },
-  { to: '/allied-health',     label: 'Allied Health',    sub: 'NCAHP · NABH · ABDM' },
+const primaryVerticalsFor = (isIndia: boolean) => [
+  { to: '/veterinary',        label: 'Veterinary',       sub: isIndia ? 'VCI · NABH · CCSEA'  : 'RCVS · VCNZ · AVBC' },
+  { to: '/dental',            label: 'Dental',           sub: isIndia ? 'DCI · NABH · CGHS'   : 'GDC · CQC · AHPRA' },
+  { to: '/general-practice',  label: 'General Practice', sub: isIndia ? 'NMC · NABH · ABDM'   : 'CQC · GMC · AHPRA' },
+  { to: '/allied-health',     label: 'Allied Health',    sub: isIndia ? 'NCAHP · NABH · ABDM' : 'HCPC · AHPRA · CORU' },
 ];
 
 const ALLIED_DISCIPLINES = [
@@ -22,6 +23,8 @@ const ALLIED_DISCIPLINES = [
 ];
 
 export const Header: React.FC = () => {
+  const isIndia = useIsIndia();
+  const PRIMARY_VERTICALS = primaryVerticalsFor(isIndia);
   return (
     <header style={{
       padding: '2rem 0',
