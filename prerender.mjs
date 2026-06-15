@@ -75,7 +75,7 @@ const META = {
     desc: 'Salvia is an AI compliance suite for vet, dental and clinical practices. Voice note in — audit-ready records, controlled-drug logs and incident trails out.',
   },
   '/pricing': {
-    title: 'Pricing | Salvia',
+    title: 'AI Clinical Documentation & Compliance Pricing | Salvia',
     desc: 'Salvia pricing for vet, dental, GP and allied health — Practice plan from $229/mo. Compliance-grade documentation, controlled-drug logs and audit trails.',
   },
   '/blog': {
@@ -145,27 +145,32 @@ const META = {
 };
 
 function injectMeta(html, title, desc, path, author = 'Salvia') {
-  const canonical = `https://hellosalvia.com${path}`;
+  // Cloudflare serves directory URLs with a trailing slash (/pricing -> /pricing/),
+  // so canonical + og:url must match to avoid "canonical points to a redirect".
+  const canonical = `https://hellosalvia.com${path}${path === '/' ? '' : '/'}`;
   const ogImage = 'https://hellosalvia.com/og-image.png';
   // Strip the template's default <title>/<meta description> so each page emits
   // exactly one of each (no duplicate tags for crawlers to disagree over).
   html = html
     .replace(/\s*<title>[\s\S]*?<\/title>/i, '')
     .replace(/\s*<meta\s+name="description"[^>]*>/i, '');
+  // escape for safe embedding in HTML attributes/elements (excerpts contain quotes)
+  const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  const t = esc(title), d = esc(desc), a = esc(author);
   const metaTags = `
-    <title>${title}</title>
-    <meta name="description" content="${desc}" />
-    <meta name="author" content="${author}" />
+    <title>${t}</title>
+    <meta name="description" content="${d}" />
+    <meta name="author" content="${a}" />
     <link rel="canonical" href="${canonical}" />
-    <meta property="og:title" content="${title}" />
-    <meta property="og:description" content="${desc}" />
+    <meta property="og:title" content="${t}" />
+    <meta property="og:description" content="${d}" />
     <meta property="og:url" content="${canonical}" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Salvia" />
     <meta property="og:image" content="${ogImage}" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="${title}" />
-    <meta name="twitter:description" content="${desc}" />
+    <meta name="twitter:title" content="${t}" />
+    <meta name="twitter:description" content="${d}" />
     <meta name="twitter:image" content="${ogImage}" />`;
 
   return html.replace('</head>', `${metaTags}\n  </head>`);
@@ -188,23 +193,23 @@ const BLOG_META = {
   },
   'consumer-court-records': {
     title: 'Thin Records & Consumer Court Cases in India | Salvia',
-    desc: 'Under the Consumer Protection Act 2019, a thin file loses cases good care should win — how the burden of proof shifts onto the doctor, and what a defensible record holds.',
+    desc: 'Under the Consumer Protection Act 2019, a thin file loses winnable cases. How the burden of proof shifts to the doctor, and what a defensible record needs.',
   },
   'patient-records-access-india': {
     title: 'Can Patients Demand Their Hospital File in India? | Salvia',
-    desc: 'Yes — and the law gives you 72 hours. The NMC rule, the RTI route for government hospitals, why stalling reads as concealment, and what a complete file includes.',
+    desc: 'Yes — and the law gives you 72 hours. The NMC rule, the RTI route for government hospitals, and what a complete patient file must include.',
   },
   'nabh-small-clinic-worth-it': {
     title: 'Is NABH Entry-Level Worth It for a Small Clinic? | Salvia',
-    desc: 'An honest 2026 take: the 10% PM-JAY incentive that decides it, the real total cost, the SHCO and Entry-Level routes, and where software helps and where it cannot.',
+    desc: 'An honest take: the 10% PM-JAY incentive that decides it, the real cost, the SHCO and Entry-Level routes, and where software helps — and where it cannot.',
   },
   'abdm-mandatory-clinic': {
     title: 'Is ABDM / ABHA Mandatory for My Clinic in 2026? | Salvia',
-    desc: 'Voluntary for patients, mandatory in practice for PM-JAY and insurance. HFR/HPR registration, what "ABDM compliant" really means, and why a QR code is not a record.',
+    desc: 'Voluntary for patients, mandatory in practice for PM-JAY and insurance. HFR/HPR registration, what ABDM-compliant means, and why a QR code is not a record.',
   },
   'ai-scribe-indian-languages': {
     title: 'Do AI Scribes Really Work in Hindi or Malayalam? | Salvia',
-    desc: 'Most demos are filmed in clean English; a real Indian OPD is code-mixed and noisy. Where English-first scribes break, and why a perfect transcript still is not a record.',
+    desc: 'Most demos are filmed in clean English; a real Indian OPD is code-mixed and noisy. Where English-first scribes break, and why a transcript still is not a record.',
   },
 };
 
@@ -248,6 +253,8 @@ const BLOG_DATES = {
 const ld = (obj) => `<script type="application/ld+json">${JSON.stringify(obj)}</script>`;
 
 function injectSchema(html, route, title, desc) {
+  // trailing-slash URL to match what Cloudflare serves + the canonical
+  const u = route === '/' ? `${SITE}/` : `${SITE}${route}/`;
   const scripts = [ld(ORG_SCHEMA)];
   if (route === '/') scripts.push(ld(SOFTWARE_SCHEMA));
   if (route.startsWith('/blog/')) {
@@ -255,23 +262,35 @@ function injectSchema(html, route, title, desc) {
     scripts.push(ld({
       '@context': 'https://schema.org', '@type': 'Article',
       headline: (title || '').replace(/ \| Salvia$/, ''), description: desc,
-      url: `${SITE}${route}`,
+      url: u,
       author: { '@type': 'Organization', name: 'Salvia Editorial', url: SITE },
       publisher: { '@type': 'Organization', name: 'Salvia', url: SITE, logo: { '@type': 'ImageObject', url: `${SITE}/favicon.png` } },
       ...(BLOG_DATES[slug] ? { datePublished: BLOG_DATES[slug], dateModified: BLOG_DATES[slug] } : {}),
-      mainEntityOfPage: { '@type': 'WebPage', '@id': `${SITE}${route}` },
+      mainEntityOfPage: { '@type': 'WebPage', '@id': u },
     }));
     scripts.push(ld({
       '@context': 'https://schema.org', '@type': 'BreadcrumbList',
       itemListElement: [
-        { '@type': 'ListItem', position: 1, name: 'Home', item: SITE },
-        { '@type': 'ListItem', position: 2, name: 'Blog', item: `${SITE}/blog` },
-        { '@type': 'ListItem', position: 3, name: (title || '').replace(/ \| Salvia$/, ''), item: `${SITE}${route}` },
+        { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE}/` },
+        { '@type': 'ListItem', position: 2, name: 'Blog', item: `${SITE}/blog/` },
+        { '@type': 'ListItem', position: 3, name: (title || '').replace(/ \| Salvia$/, ''), item: u },
       ],
     }));
   }
   return html.replace('</head>', `${scripts.join('\n    ')}\n  </head>`);
 }
+
+// Pull each post's real excerpt from the blog registry so EVERY post gets a
+// unique, properly-sized meta description (not a repeated generic stub).
+const BLOG_DATA = {};
+try {
+  const blogSrc = readFileSync(resolve(distDir, '../src/data/blogContent.tsx'), 'utf-8');
+  const re = /'([a-z0-9-]+)':\s*\{[\s\S]*?excerpt:\s*"((?:[^"\\]|\\.)*)"/g;
+  let m;
+  while ((m = re.exec(blogSrc))) BLOG_DATA[m[1]] = m[2].replace(/\\"/g, '"');
+} catch { /* fall back to generic description */ }
+const titleCase = (slug) => slug.split('-').map((w) => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+const clip = (s, n = 158) => (s.length <= n ? s : s.slice(0, s.lastIndexOf(' ', n - 1)).replace(/[\s,;:.]+$/, '') + '…');
 
 let count = 0;
 for (const route of ALL_ROUTES) {
@@ -285,8 +304,10 @@ for (const route of ALL_ROUTES) {
   } else if (route.startsWith('/blog/')) {
     const slug = route.replace('/blog/', '');
     const bm = BLOG_META[slug];
-    title = bm ? bm.title : `${slug.replace(/-/g, ' ')} | Salvia`;
-    desc = bm ? bm.desc : 'Clinical documentation, compliance and governance insights from the Salvia team.';
+    title = bm ? bm.title : `${titleCase(slug)} | Salvia`;
+    desc = bm ? bm.desc
+      : BLOG_DATA[slug] ? clip(BLOG_DATA[slug])
+      : 'Clinical documentation, compliance and governance insights from the Salvia team.';
     html = injectMeta(template, title, desc, route, 'Salvia Editorial');
   }
 

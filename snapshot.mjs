@@ -48,7 +48,14 @@ const run = async () => {
   let done = 0;
   for (const route of routes) {
     try {
-      const inner = render(route);
+      // react-helmet-async renders <title>/<meta>/<link> inline in the SSR
+      // output — strip them so they don't end up duplicated inside the <body>
+      // (the real head tags are injected by prerender.mjs). Keep <style> (used
+      // by components like BackgroundField).
+      const inner = render(route)
+        .replace(/<title\b[^>]*>[\s\S]*?<\/title>/gi, '')
+        .replace(/<meta\b[^>]*>/gi, '')
+        .replace(/<link\b[^>]*>/gi, '');
       if (!inner || inner.length < 200) continue; // skip empty/redirect routes
       const file = route === '/' ? resolve(distDir, 'index.html') : resolve(distDir, route.slice(1), 'index.html');
       const html = readFileSync(file, 'utf-8');
