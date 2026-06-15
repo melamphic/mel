@@ -25,6 +25,7 @@ import { GeneralClinicPage } from './pages/GeneralClinicPage';
 import { AlliedHealthPage } from './pages/AlliedHealthPage';
 import { AlliedDisciplineTemplate } from './pages/AlliedDisciplineTemplate';
 import { FrameworksPage } from './pages/FrameworksPage';
+import { LegalPage } from './pages/LegalPage';
 
 function ServerApp({ url }: { url: string }) {
   return (
@@ -53,6 +54,14 @@ function ServerApp({ url }: { url: string }) {
             <Route path="/podiatry" element={<AlliedDisciplineTemplate slug="podiatry" />} />
             <Route path="/speech-therapy" element={<AlliedDisciplineTemplate slug="speech-therapy" />} />
             <Route path="/frameworks" element={<FrameworksPage />} />
+            <Route path="/privacy" element={<LegalPage slug="privacy" />} />
+            <Route path="/terms" element={<LegalPage slug="terms" />} />
+            <Route path="/cookies" element={<LegalPage slug="cookies" />} />
+            <Route path="/dpa" element={<LegalPage slug="dpa" />} />
+            <Route path="/subprocessors" element={<LegalPage slug="subprocessors" />} />
+            <Route path="/refund-policy" element={<LegalPage slug="refund-policy" />} />
+            <Route path="/acceptable-use" element={<LegalPage slug="acceptable-use" />} />
+            <Route path="/security" element={<LegalPage slug="security" />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </div>

@@ -34,6 +34,8 @@ const STATIC_ROUTES = [
   '/products/point-of-care-evidence',
   '/products/statutory-form-infrastructure',
   '/products/institutional-compliance-hub',
+  '/privacy', '/terms', '/cookies', '/dpa', '/subprocessors',
+  '/refund-policy', '/acceptable-use', '/security',
 ];
 
 const BLOG_SLUGS = [
@@ -141,6 +143,38 @@ const META = {
   '/products/institutional-compliance-hub': {
     title: 'Institutional Compliance Hub | Salvia',
     desc: 'Turn static policy PDFs into active clinical governance. Salvia maps your internal rules to CQC, VMR, and GDC frameworks.',
+  },
+  '/privacy': {
+    title: 'Privacy Policy | Salvia',
+    desc: 'How Salvia collects, uses, stores and protects personal and health data under India\'s DPDP Act 2023 and equivalent laws in AU, NZ, UK and the EU.',
+  },
+  '/terms': {
+    title: 'Terms of Service | Salvia',
+    desc: 'The terms governing use of Salvia\'s clinical documentation and compliance services — your responsibilities, plans, and clinical-safety disclaimers.',
+  },
+  '/cookies': {
+    title: 'Cookie Policy | Salvia',
+    desc: 'The cookies and similar technologies Salvia uses for essential functionality and analytics (PostHog, Cloudflare), and how to control them.',
+  },
+  '/dpa': {
+    title: 'Data Processing Agreement (DPA) | Salvia',
+    desc: 'Salvia\'s DPA for clinics: roles, instructions, sub-processors, security, transfers and breach handling under DPDP, GDPR, AU and NZ law.',
+  },
+  '/subprocessors': {
+    title: 'Sub-processors | Salvia',
+    desc: 'The third-party sub-processors Salvia uses to deliver its services (Deepgram, Google Gemini, Cloudflare, PostHog), what they do, and where they process data.',
+  },
+  '/refund-policy': {
+    title: 'Refund & Cancellation Policy | Salvia',
+    desc: 'How cancellations and refunds work for Salvia subscriptions.',
+  },
+  '/acceptable-use': {
+    title: 'Acceptable Use Policy | Salvia',
+    desc: 'The rules for using Salvia responsibly and lawfully — consents, security, and clinician review of AI output.',
+  },
+  '/security': {
+    title: 'Security Overview | Salvia',
+    desc: 'How Salvia protects clinical data: encryption (TLS 1.2+, AES-256), least-privilege access, tamper-evident audit trails and 72-hour breach response.',
   },
 };
 

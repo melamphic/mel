@@ -92,6 +92,18 @@ export const Footer = () => (
           <Link to="/start" style={linkStyle}>Contact sales</Link>
         </div>
       </div>
+
+      <div>
+        <div style={colHeadingStyle}>Legal</div>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.65rem' }}>
+          <Link to="/privacy" style={linkStyle}>Privacy Policy</Link>
+          <Link to="/terms" style={linkStyle}>Terms of Service</Link>
+          <Link to="/dpa" style={linkStyle}>Data Processing (DPA)</Link>
+          <Link to="/subprocessors" style={linkStyle}>Sub-processors</Link>
+          <Link to="/security" style={linkStyle}>Security</Link>
+          <Link to="/cookies" style={linkStyle}>Cookie Policy</Link>
+        </div>
+      </div>
     </div>
 
     {/* Big wordmark — responsive SVG art, full-bleed */}

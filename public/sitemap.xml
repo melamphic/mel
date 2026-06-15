@@ -267,4 +267,14 @@
     <priority>0.8</priority>
   </url>
 
+  <!-- Legal -->
+  <url><loc>https://hellosalvia.com/privacy/</loc><changefreq>yearly</changefreq><priority>0.4</priority></url>
+  <url><loc>https://hellosalvia.com/terms/</loc><changefreq>yearly</changefreq><priority>0.4</priority></url>
+  <url><loc>https://hellosalvia.com/cookies/</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://hellosalvia.com/dpa/</loc><changefreq>yearly</changefreq><priority>0.4</priority></url>
+  <url><loc>https://hellosalvia.com/subprocessors/</loc><changefreq>monthly</changefreq><priority>0.4</priority></url>
+  <url><loc>https://hellosalvia.com/refund-policy/</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://hellosalvia.com/acceptable-use/</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://hellosalvia.com/security/</loc><changefreq>yearly</changefreq><priority>0.5</priority></url>
+
 </urlset>
