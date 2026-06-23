@@ -141,9 +141,8 @@ export const ROICalculator = () => {
   const [clinicians, setClinicians] = useState(3);
   const [consults, setConsults]     = useState(15);
   const [minNow, setMinNow]         = useState(12);
-  const [hourly, setHourly]         = useState(MARKET_ECON.US.hourly);
+  const [hourly, setHourly]         = useState(() => MARKET_ECON[market].hourly);
   // Reset the hourly default to the market's typical wage when country changes.
-  // eslint-disable-next-line react-hooks/set-state-in-effect
   useEffect(() => { setHourly(MARKET_ECON[market].hourly); }, [market]);
 
   const cfg   = CFG[vertical];

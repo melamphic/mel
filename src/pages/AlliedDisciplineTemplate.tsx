@@ -355,7 +355,7 @@ function DisciplinePage({ discipline }: DisciplinePageProps) {
       <PricingTeaser
         accent={accent}
         vertical="allied_health"
-        fromPriceCopy={`${name} compliance, from ₹2,500/mo.`}
+        fromPriceCopy={`${name} compliance, from ₹1,000/mo.`}
       />
 
       {/* Blog links */}

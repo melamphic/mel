@@ -5,6 +5,7 @@ import { Header } from '../components/Header';
 import { Footer } from '../components/Footer';
 import { track } from '../lib/posthog';
 import { getStoredMarket, setStoredMarket, MARKET_EVENT } from '../lib/market';
+import { INDIA_ONLY } from '../config';
 import {
   INDIA_TIERS,
   MARKETS,
@@ -46,7 +47,7 @@ export const PricingPage = () => {
   // Market drives the displayed currency. Pre-select from a persisted
   // choice when present, otherwise from the browser's locale and
   // time-zone signals.
-  const [market, setMarket] = useState<Market>('US');
+  const [market, setMarket] = useState<Market>(INDIA_ONLY ? 'IN' : 'US');
 
   useEffect(() => {
     // Shared market preference (also set by the header CountrySwitcher).
@@ -120,7 +121,7 @@ export const PricingPage = () => {
             No credit card required. Unlimited nurses, hygienists, and admin staff on every plan.
             Prices shown in {marketMeta.currency}, {marketMeta.taxNote.toLowerCase()}.
           </p>
-          <MarketSelector market={market} onChange={onMarketChange} />
+          {!INDIA_ONLY && <MarketSelector market={market} onChange={onMarketChange} />}
         </div>
       </section>
 
@@ -908,7 +909,7 @@ function IndiaFeatureGrid() {
         { label: 'AI voice → clinical note', cells: [true, true, true] },
         { label: 'AI form generation',       cells: [false, true, true] },
         { label: 'AI policy generation',     cells: [false, true, true] },
-        { label: 'Monthly AI-note cap',      cells: ['100', '600', '1,500'] },
+        { label: 'Monthly AI-note cap',      cells: ['400', '1,500', '3,000'] },
         { label: 'AI queue priority',        cells: ['—', 'Standard', 'Priority'] },
       ],
     },
@@ -950,7 +951,7 @@ function IndiaFeatureGrid() {
         }}
       >
         <FeatureGrid
-          columns={['Base · ₹2,500', 'Growth · ₹6,000', 'Clinic+ · ₹14,000']}
+          columns={['Starter · ₹1,000', 'Clinic · ₹3,000', 'Group · ₹6,000']}
           sections={sections}
           highlightCol={1}
         />

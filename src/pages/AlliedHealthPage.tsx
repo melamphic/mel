@@ -411,7 +411,7 @@ export const AlliedHealthPage = () => {
       <PricingTeaser
         accent={ACCENT}
         vertical="allied_health"
-        fromPriceCopy="Allied health documentation, from ₹2,500/mo."
+        fromPriceCopy="Allied health documentation, from ₹1,000/mo."
       />
 
       {/* FAQ */}

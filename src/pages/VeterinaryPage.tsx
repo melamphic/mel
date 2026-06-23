@@ -325,7 +325,7 @@ export const VeterinaryPage = () => {
       <PricingTeaser
         accent={ACCENT}
         vertical="veterinary"
-        fromPriceCopy="Veterinary compliance, from ₹2,500/mo."
+        fromPriceCopy="Veterinary compliance, from ₹1,000/mo."
       />
 
       {/* FAQ section */}

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { MARKETS, detectMarket, type Market } from '../data/pricing';
+import { INDIA_ONLY } from '../config';
 
 // Shared market/country preference — used by the header CountrySwitcher AND the
 // pricing page, so changing country anywhere updates everywhere. Persisted in
@@ -8,6 +9,7 @@ export const MARKET_STORAGE_KEY = 'salvia.pricing.market';
 export const MARKET_EVENT = 'salvia:market';
 
 export function getStoredMarket(): Market {
+  if (INDIA_ONLY) return 'IN'; // India-only launch — every market resolves to IN
   try {
     const s = localStorage.getItem(MARKET_STORAGE_KEY) as Market | null;
     if (s && MARKETS.some((m) => m.key === s)) return s;
@@ -28,8 +30,10 @@ export function setStoredMarket(m: Market): void {
  * global variant and India visitors switch to India copy on the client.
  */
 export function useMarket(): Market {
-  const [market, setMarket] = useState<Market>('US');
+  const [market, setMarket] = useState<Market>(INDIA_ONLY ? 'IN' : 'US');
   useEffect(() => {
+    if (INDIA_ONLY) return; // pinned to IN — no switcher, no live updates
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setMarket(getStoredMarket());
     const on = (e: Event) => setMarket(((e as CustomEvent).detail as Market) ?? getStoredMarket());
     window.addEventListener(MARKET_EVENT, on);

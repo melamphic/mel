@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { MARKETS, type Market } from '../data/pricing';
 import { getStoredMarket, setStoredMarket, MARKET_EVENT } from '../lib/market';
+import { INDIA_ONLY } from '../config';
 
 // Compact flag-based country switcher for the header. Shares state with the
 // pricing page via the market lib, so changing country updates pricing too.
@@ -14,6 +15,7 @@ export const CountrySwitcher = () => {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setMarket(getStoredMarket());
     const onChange = (e: Event) => setMarket(((e as CustomEvent).detail as Market) ?? getStoredMarket());
     const onDoc = (e: MouseEvent) => { if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false); };
@@ -23,6 +25,9 @@ export const CountrySwitcher = () => {
   }, []);
 
   const choose = (m: Market) => { setStoredMarket(m); setMarket(m); setOpen(false); };
+
+  // India-only launch: no country choice to make — hide the switcher entirely.
+  if (INDIA_ONLY) return null;
 
   return (
     <div ref={ref} style={{ position: 'relative' }}>

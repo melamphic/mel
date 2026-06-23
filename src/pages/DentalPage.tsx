@@ -322,7 +322,7 @@ export const DentalPage = () => {
       <PricingTeaser
         accent={ACCENT}
         vertical="dental"
-        fromPriceCopy="Dental compliance, from ₹2,500/mo."
+        fromPriceCopy="Dental compliance, from ₹1,000/mo."
       />
 
       {/* FAQ section */}

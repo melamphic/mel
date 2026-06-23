@@ -188,7 +188,7 @@ export const GeneralClinicPage = () => {
       <PricingTeaser
         accent={ACCENT}
         vertical="general_clinic"
-        fromPriceCopy="General practice compliance, from ₹2,500/mo."
+        fromPriceCopy="General practice compliance, from ₹1,000/mo."
       />
 
       <section style={{ padding: '7rem 0', backgroundColor: 'var(--salvia-bg)', borderTop: '1px solid #F1F5F9' }}>

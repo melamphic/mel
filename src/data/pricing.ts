@@ -236,9 +236,11 @@ export function detectMarket(): Market {
 }
 
 // ---------------------------------------------------------------------------
-// India market — separate 3-tier model (Base / Growth / Clinic+), plus Custom.
+// India market — separate 3-tier model (Starter / Clinic / Group), plus Custom.
 // Not per-seat; differentiated by monthly AI-note cap. AI is included on every
-// tier (Base bundles a small allowance); above Clinic+ is a Custom quote.
+// tier (Starter bundles a small allowance); above Group (hospitals / high
+// volume) is a Custom quote. Tier keys stay base/growth/unlimited for stable
+// in_* plan codes.
 // ---------------------------------------------------------------------------
 
 export type IndiaTierKey = 'base' | 'growth' | 'unlimited';
@@ -257,13 +259,13 @@ export interface IndiaTier {
 export const INDIA_TIERS: IndiaTier[] = [
   {
     key: 'base',
-    name: 'Base',
-    monthlyINR: 2500,
-    annualINR: 25000,
-    draftCap: 100,
+    name: 'Starter',
+    monthlyINR: 1000,
+    annualINR: 10000,
+    draftCap: 400,
     aiIncluded: true,
     features: [
-      '100 AI notes / month (~3 a day)',
+      '400 AI notes / month',
       'Full compliance suite — drug register, incidents, consent',
       'Forms, policies & branded PDF export',
       'Unlimited staff',
@@ -272,15 +274,15 @@ export const INDIA_TIERS: IndiaTier[] = [
   },
   {
     key: 'growth',
-    name: 'Growth',
-    monthlyINR: 6000,
-    annualINR: 60000,
-    draftCap: 600,
+    name: 'Clinic',
+    monthlyINR: 3000,
+    annualINR: 30000,
+    draftCap: 1500,
     aiIncluded: true,
     highlight: 'Most popular',
     features: [
-      'Everything in Base',
-      '600 AI notes / month',
+      'Everything in Starter',
+      '1,500 AI notes / month',
       'AI form & policy generation',
       'Unlimited staff',
       'Email support — 24hr',
@@ -288,17 +290,17 @@ export const INDIA_TIERS: IndiaTier[] = [
   },
   {
     key: 'unlimited',
-    name: 'Clinic+',
-    monthlyINR: 14000,
-    annualINR: 140000,
-    draftCap: 1500,
+    name: 'Group',
+    monthlyINR: 6000,
+    annualINR: 60000,
+    draftCap: 3000,
     aiIncluded: true,
     features: [
-      'Everything in Growth',
-      '1,500 AI notes / month',
+      'Everything in Clinic',
+      '3,000 AI notes / month',
       'Priority AI queue',
       'Multi-location support',
-      'Custom plans above 1,500 — talk to us',
+      'Hospital & high-volume plans — talk to us',
     ],
   },
 ];
@@ -340,9 +342,9 @@ export interface PoolTier {
 /// top pool in every market (handled as a Contact-Sales CTA, not a row here).
 export const MARKET_PRICING: Record<Market, PoolTier[]> = {
   IN: [
-    { key: 'base',        name: 'Base',    notesPerMonth: 100,  monthly: 2500 },
-    { key: 'growth',      name: 'Growth',  notesPerMonth: 600,  monthly: 6000, highlight: 'Most popular' },
-    { key: 'clinic_plus', name: 'Clinic+', notesPerMonth: 1500, monthly: 14000 },
+    { key: 'base',        name: 'Starter', notesPerMonth: 400,  monthly: 1000 },
+    { key: 'growth',      name: 'Clinic',  notesPerMonth: 1500, monthly: 3000, highlight: 'Most popular' },
+    { key: 'clinic_plus', name: 'Group',   notesPerMonth: 3000, monthly: 6000 },
   ],
   US: [
     { key: 'base',        name: 'Base',    notesPerMonth: 250,  monthly: 69 },
