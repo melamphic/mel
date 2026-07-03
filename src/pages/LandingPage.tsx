@@ -6,7 +6,8 @@ import { WhatSalviaIs } from '../components/WhatSalviaIs';
 import { DayWithSalvia } from '../components/DayWithSalvia';
 import { ProductSection } from '../components/ProductSection';
 import { BentoReinvented } from '../components/BentoReinvented';
-import { ScribeVsSalvia } from '../components/ScribeVsSalvia';
+import { SixYearTest } from '../components/SixYearTest';
+import { CaptureModes } from '../components/CaptureModes';
 import { DomainSection } from '../components/DomainSection';
 import { FrameworksRail } from '../components/FrameworksRail';
 import { ROICalculator } from '../components/ROICalculator';
@@ -17,10 +18,10 @@ export const LandingPage = () => {
   return (
     <>
       <SEO
-        title="AI Clinical Documentation & Compliance Software for India"
-        description="Salvia is an AI documentation and compliance suite for Indian clinics, nursing homes and hospitals. Doctors speak in any Indian language; out comes a structured clinical note, drug register, consent and incident records — audit-ready by default."
+        title="The Evidence Layer for Indian Healthcare — AI Clinical Records"
+        description="Salvia turns what your clinicians say — ambient or dictated, in any Indian language — into verified, sealed clinical records. Complete files you can produce when a complaint arrives, and full last-visit context at every consult."
         path="/"
-        keywords={['NABH compliance software', 'AI medical scribe India', 'clinical documentation software India', 'ABDM compliant software', 'drug register software', 'CGHS empanelment software', 'audit-ready clinical notes']}
+        keywords={['medical records software India', 'NABH compliance software', 'AI medical scribe India', 'clinical documentation software India', 'medical negligence records', 'ABDM compliant software', 'audit-ready clinical notes', 'hospital evidence platform']}
       />
       <Header />
       <main style={{ flex: 1, zIndex: 10 }}>
@@ -30,14 +31,16 @@ export const LandingPage = () => {
         <PainSection />
         {/* What it is — a compliance suite, not a scribe */}
         <WhatSalviaIs />
+        {/* Capture is flexible, evidence is constant */}
+        <CaptureModes />
         {/* How it works — voice note in, locked record out */}
         <DayWithSalvia />
         {/* The product — three engines */}
         <ProductSection />
         {/* The output — records an assessor can read */}
         <BentoReinvented />
-        {/* Why it beats a generic scribe */}
-        <ScribeVsSalvia />
+        {/* The worst-day closer — sourced */}
+        <SixYearTest />
         {/* Who it's for — verticals */}
         <DomainSection />
         {/* Your rulebook — frameworks */}
