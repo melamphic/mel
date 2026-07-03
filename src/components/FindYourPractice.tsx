@@ -52,7 +52,7 @@ export const FindYourPractice = () => {
       <div className="container" style={{ maxWidth: '1100px' }}>
         <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
           <div style={{
-            fontSize: '0.72rem', fontWeight: 800, color: 'var(--salvia-accent)',
+            fontSize: 'var(--text-2xs)', fontWeight: 800, color: 'var(--salvia-accent)',
             letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: '0.75rem',
           }}>
             Find your practice
@@ -64,7 +64,7 @@ export const FindYourPractice = () => {
             Built for your discipline.
           </h2>
           <p style={{
-            color: 'var(--salvia-text-muted)', fontSize: '1rem',
+            color: 'var(--salvia-text-muted)', fontSize: 'var(--text-base)',
             maxWidth: '600px', margin: '0.75rem auto 0', lineHeight: 1.65,
           }}>
             Pick the practice page closest to what you do. Each page covers the regulator pack, record format, and FAQ specific to you.
@@ -77,7 +77,7 @@ export const FindYourPractice = () => {
             position: 'relative',
             backgroundColor: '#fff',
             border: '1.5px solid #EEF2F6',
-            borderRadius: '14px',
+            borderRadius: 'var(--radius-md)',
             padding: '0.85rem 1rem 0.85rem 2.75rem',
             display: 'flex', alignItems: 'center',
           }}>
@@ -96,7 +96,7 @@ export const FindYourPractice = () => {
               placeholder="Try 'physio', 'NABH', 'GP', 'ABDM'…"
               style={{
                 flex: 1, border: 'none', outline: 'none',
-                fontSize: '0.95rem', color: 'var(--salvia-text)',
+                fontSize: 'var(--text-base)', color: 'var(--salvia-text)',
                 background: 'transparent',
               }}
             />
@@ -133,7 +133,7 @@ export const FindYourPractice = () => {
             >
               <div style={{
                 padding: '1.5rem',
-                borderRadius: '16px',
+                borderRadius: 'var(--radius-lg)',
                 backgroundColor: '#FAFBFC',
                 border: '1px solid #EEF2F6',
                 height: '100%',
@@ -147,23 +147,23 @@ export const FindYourPractice = () => {
                     boxShadow: `0 0 0 3px ${c.accent}15`,
                   }} />
                   <span style={{
-                    fontSize: '0.6rem', fontWeight: 800,
+                    fontSize: 'var(--text-2xs)', fontWeight: 800,
                     color: 'var(--salvia-text-muted)',
                     letterSpacing: '0.12em', textTransform: 'uppercase',
                   }}>{c.tag}</span>
                 </div>
                 <h3 style={{
-                  fontSize: '1.05rem', fontWeight: 800,
+                  fontSize: 'var(--text-md)', fontWeight: 800,
                   color: 'var(--salvia-primary)', letterSpacing: '-0.02em',
                   margin: 0,
                 }}>{c.label}</h3>
                 <div style={{
-                  fontSize: '0.75rem', color: 'var(--salvia-text-muted)',
+                  fontSize: 'var(--text-xs)', color: 'var(--salvia-text-muted)',
                   lineHeight: 1.4, fontWeight: 600,
                 }}>{c.sub}</div>
                 <div style={{
                   marginTop: 'auto', paddingTop: '0.5rem',
-                  fontSize: '0.78rem', fontWeight: 700,
+                  fontSize: 'var(--text-xs)', fontWeight: 700,
                   color: c.accent,
                   display: 'inline-flex', alignItems: 'center', gap: '0.3rem',
                 }}>
@@ -183,14 +183,14 @@ export const FindYourPractice = () => {
             textAlign: 'center', padding: '3rem 1rem',
             color: 'var(--salvia-text-muted)',
           }}>
-            <p style={{ fontSize: '0.95rem', marginBottom: '1rem' }}>
+            <p style={{ fontSize: 'var(--text-base)', marginBottom: '1rem' }}>
               No matches. Don't see your discipline?
             </p>
             <Link to="/start" style={{
               display: 'inline-flex', alignItems: 'center', gap: '0.4rem',
               backgroundColor: 'var(--salvia-primary)', color: '#fff',
-              padding: '0.7rem 1.4rem', borderRadius: '10px',
-              fontWeight: 700, fontSize: '0.85rem', textDecoration: 'none',
+              padding: '0.7rem 1.4rem', borderRadius: 'var(--radius-md)',
+              fontWeight: 700, fontSize: 'var(--text-sm)', textDecoration: 'none',
             }}>
               Talk to us — we'll build the regulator pack
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
@@ -205,7 +205,7 @@ export const FindYourPractice = () => {
         {filtered.length > 0 && (
           <div style={{
             marginTop: '2.5rem', textAlign: 'center',
-            fontSize: '0.88rem', color: 'var(--salvia-text-muted)',
+            fontSize: 'var(--text-sm)', color: 'var(--salvia-text-muted)',
           }}>
             Don't see your discipline?{' '}
             <Link to="/start" style={{
