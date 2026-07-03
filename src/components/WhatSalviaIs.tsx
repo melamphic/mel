@@ -12,7 +12,7 @@ const AudioTile: React.FC = () => {
           className={i < 8 ? 'salvia-audio-bar' : undefined}
           style={{
             flex: 1, height: `${h}px`,
-            backgroundColor: i < 8 ? '#FF4E00' : '#CBD5E1',
+            backgroundColor: i < 8 ? 'var(--salvia-accent)' : '#CBD5E1',
             opacity: i < 8 ? 1 : 0.55,
             borderRadius: '1.5px',
             transformOrigin: 'center',
@@ -27,10 +27,10 @@ const AudioTile: React.FC = () => {
 const FormTile: React.FC = () => (
   <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', padding: '0.25rem 0.1rem' }}>
     {[
-      { w: '70%', c: '#0F172A' },
-      { w: '55%', c: '#475569' },
-      { w: '80%', c: '#FF4E00' },
-      { w: '40%', c: '#475569' },
+      { w: '70%', c: 'var(--salvia-primary)' },
+      { w: '55%', c: 'var(--salvia-text-muted)' },
+      { w: '80%', c: 'var(--salvia-accent)' },
+      { w: '40%', c: 'var(--salvia-text-muted)' },
     ].map((r, i) => (
       <div
         key={i}
@@ -66,10 +66,10 @@ const FormTile: React.FC = () => (
 const PolicyTile: React.FC = () => (
   <div style={{ display: 'flex', flexDirection: 'column', gap: '5px', padding: '0.25rem 0.1rem' }}>
     {[
-      { tag: 'MUST', color: '#DC2626', bg: '#FEF2F2', w: '70%' },
-      { tag: 'MUST', color: '#DC2626', bg: '#FEF2F2', w: '55%' },
-      { tag: 'MAYBE', color: '#D97706', bg: '#FFFBEB', w: '65%' },
-      { tag: 'TRY', color: '#059669', bg: '#ECFDF5', w: '45%' },
+      { tag: 'MUST', color: 'var(--salvia-error)', bg: '#FEF2F2', w: '70%' },
+      { tag: 'MUST', color: 'var(--salvia-error)', bg: '#FEF2F2', w: '55%' },
+      { tag: 'MAYBE', color: 'var(--salvia-warning)', bg: '#FFFBEB', w: '65%' },
+      { tag: 'TRY', color: 'var(--accent-dental)', bg: '#ECFDF5', w: '45%' },
     ].map((r, i) => (
       <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
         <div
@@ -107,10 +107,10 @@ const AuditTile: React.FC = () => (
       style={{
         width: 46, height: 56,
         backgroundColor: '#fff',
-        border: '1.5px solid #0F172A',
+        border: '1.5px solid var(--salvia-primary)',
         borderRadius: '4px',
         position: 'relative',
-        boxShadow: '2px 2px 0 #0F172A',
+        boxShadow: '2px 2px 0 var(--salvia-primary)',
         overflow: 'hidden',
       }}>
       <div
@@ -132,7 +132,7 @@ const AuditTile: React.FC = () => (
         style={{
           position: 'absolute', bottom: -8, right: -6,
           width: 22, height: 22, borderRadius: '50%',
-          backgroundColor: '#FF4E00',
+          backgroundColor: 'var(--salvia-accent)',
           display: 'flex', alignItems: 'center', justifyContent: 'center',
           color: '#fff', fontSize: '0.55rem', fontWeight: 800,
           boxShadow: '0 2px 6px rgba(255,78,0,0.35)',
@@ -156,7 +156,7 @@ const Arrow: React.FC<{ index: number }> = ({ index }) => (
     className="salvia-arrow"
     style={{ flexShrink: 0, animationDelay: `${index * 200}ms` }}
   >
-    <path d="M1 8 H22 M17 3 L22 8 L17 13" stroke="#FF4E00" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+    <path d="M1 8 H22 M17 3 L22 8 L17 13" stroke="var(--salvia-accent)" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
   </svg>
 );
 
@@ -171,29 +171,23 @@ export const WhatSalviaIs: React.FC = () => {
   ];
 
   return (
-    <section style={{
-      padding: '5rem 0 6rem',
+    <section className="section" style={{
       position: 'relative',
       zIndex: 10,
     }}>
-      <div className="container" style={{ maxWidth: '1060px' }}>
+      <div className="container container--content">
 
         {/* Eyebrow */}
-        <div style={{
+        <div className="eyebrow" style={{
           display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem',
-          fontSize: '0.7rem', fontWeight: 700,
-          letterSpacing: '0.12em', textTransform: 'uppercase',
-          color: 'var(--salvia-accent)',
           marginBottom: '1.5rem',
         }}>
-          <div style={{ width: 18, height: 2, backgroundColor: 'var(--salvia-accent)', borderRadius: '1px' }} />
           What Salvia is
-          <div style={{ width: 18, height: 2, backgroundColor: 'var(--salvia-accent)', borderRadius: '1px' }} />
         </div>
 
         {/* Hero statement */}
         <h2 style={{
-          fontSize: 'clamp(1.8rem, 4vw, 2.8rem)',
+          fontSize: 'var(--text-3xl)',
           fontWeight: 800,
           letterSpacing: '-0.035em',
           lineHeight: 1.1,
@@ -231,19 +225,19 @@ export const WhatSalviaIs: React.FC = () => {
         {/* The equation — 4 tiles with arrows */}
         <div style={{
           backgroundColor: '#fff',
-          border: '1px solid rgba(0,0,0,0.06)',
-          borderRadius: '20px',
+          border: '1px solid var(--border-subtle)',
+          borderRadius: 'var(--radius-lg)',
           padding: '2.25rem 2rem',
-          boxShadow: '0 8px 32px rgba(25,56,46,0.05)',
+          boxShadow: 'var(--shadow-2)',
           position: 'relative',
         }}>
           <div style={{
             position: 'absolute', top: '-11px', left: '50%', transform: 'translateX(-50%)',
             backgroundColor: 'var(--salvia-primary)',
             color: '#fff',
-            fontSize: '0.62rem', fontWeight: 800,
+            fontSize: 'var(--text-2xs)', fontWeight: 800,
             letterSpacing: '0.14em', textTransform: 'uppercase',
-            padding: '0.4rem 0.9rem', borderRadius: '999px',
+            padding: '0.4rem 0.9rem', borderRadius: 'var(--salvia-radius-full)',
             whiteSpace: 'nowrap',
           }}>
             The Salvia stack
@@ -273,8 +267,8 @@ export const WhatSalviaIs: React.FC = () => {
                   {/* mock UI */}
                   <div style={{
                     backgroundColor: '#FAFBFC',
-                    border: '1px solid #F1F5F9',
-                    borderRadius: '10px',
+                    border: '1px solid var(--border-subtle)',
+                    borderRadius: 'var(--radius-md)',
                     padding: '0.75rem 0.6rem',
                     minHeight: '96px',
                     display: 'flex', flexDirection: 'column', justifyContent: 'center',
@@ -285,14 +279,14 @@ export const WhatSalviaIs: React.FC = () => {
 
                   <div style={{ textAlign: 'center', marginTop: 'auto' }}>
                     <div style={{
-                      fontSize: '0.95rem', fontWeight: 800,
+                      fontSize: 'var(--text-base)', fontWeight: 800,
                       color: 'var(--salvia-primary)',
                       letterSpacing: '-0.02em',
                     }}>
                       {t.label}
                     </div>
                     <div style={{
-                      fontSize: '0.75rem',
+                      fontSize: 'var(--text-xs)',
                       color: 'var(--salvia-text-muted)',
                       marginTop: '0.15rem',
                     }}>
@@ -318,7 +312,7 @@ export const WhatSalviaIs: React.FC = () => {
           display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem',
           marginTop: '2.25rem',
           flexWrap: 'wrap',
-          fontSize: '0.85rem',
+          fontSize: 'var(--text-sm)',
           color: 'var(--salvia-text-muted)',
           textAlign: 'center',
         }}>
