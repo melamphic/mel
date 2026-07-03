@@ -15,8 +15,8 @@ export const DashboardPreview: React.FC = () => {
       maxWidth: '920px',
       margin: '0 auto',
       backgroundColor: '#ffffff',
-      borderRadius: '24px',
-      boxShadow: '0 32px 80px rgba(20, 45, 36, 0.12), 0 0 0 1px rgba(20, 45, 36, 0.05), inset 0 2px 2px rgba(255, 255, 255, 0.8)',
+      borderRadius: 'var(--radius-xl)',
+      boxShadow: 'var(--shadow-3)',
       overflow: 'hidden',
       display: 'flex',
       height: '520px',
@@ -33,9 +33,9 @@ export const DashboardPreview: React.FC = () => {
           style={{ width: '64px', height: '64px', objectFit: 'contain' }}
         />
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', width: '100%', alignItems: 'center' }}>
-          <div style={{ width: '28px', height: '28px', borderRadius: '8px', backgroundColor: '#DFE2E6' }}></div>
-          <div style={{ width: '28px', height: '28px', borderRadius: '8px', backgroundColor: '#DFE2E6' }}></div>
-          <div style={{ width: '28px', height: '28px', borderRadius: '8px', backgroundColor: '#DFE2E6' }}></div>
+          <div style={{ width: '28px', height: '28px', borderRadius: 'var(--radius-sm)', backgroundColor: '#DFE2E6' }}></div>
+          <div style={{ width: '28px', height: '28px', borderRadius: 'var(--radius-sm)', backgroundColor: '#DFE2E6' }}></div>
+          <div style={{ width: '28px', height: '28px', borderRadius: 'var(--radius-sm)', backgroundColor: '#DFE2E6' }}></div>
         </div>
       </div>
 
@@ -47,52 +47,52 @@ export const DashboardPreview: React.FC = () => {
 
           {/* KPI Row */}
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '1.5rem' }}>
-            <div style={{ padding: '1.5rem', backgroundColor: '#fff', borderRadius: '16px', border: '1px solid #EBECEF', boxShadow: '0 4px 12px rgba(0,0,0,0.02)' }}>
-              <div style={{ fontSize: '0.85rem', color: 'var(--salvia-text-muted)', marginBottom: '0.5rem', fontWeight: 600 }}>Total Notes Processed</div>
+            <div style={{ padding: '1.5rem', backgroundColor: '#fff', borderRadius: 'var(--radius-lg)', border: '1px solid #EBECEF', boxShadow: 'var(--shadow-2)' }}>
+              <div style={{ fontSize: 'var(--text-sm)', color: 'var(--salvia-text-muted)', marginBottom: '0.5rem', fontWeight: 600 }}>Total Notes Processed</div>
               <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between' }}>
-                <span style={{ fontSize: '2rem', fontWeight: 700, color: 'var(--salvia-primary)', lineHeight: 1 }}>1,284</span>
-                <span style={{ backgroundColor: '#ECFCCB', color: '#3F6212', padding: '4px 8px', borderRadius: '8px', fontSize: '0.75rem', fontWeight: 700 }}>+12%</span>
+                <span style={{ fontSize: 'var(--text-2xl)', fontWeight: 700, color: 'var(--salvia-primary)', lineHeight: 1 }}>1,284</span>
+                <span style={{ backgroundColor: '#ECFCCB', color: '#3F6212', padding: '4px 8px', borderRadius: 'var(--radius-sm)', fontSize: 'var(--text-xs)', fontWeight: 700 }}>+12%</span>
               </div>
             </div>
 
-            <div style={{ padding: '1.5rem', backgroundColor: '#fff', borderRadius: '16px', border: '1px solid #EBECEF', boxShadow: '0 4px 12px rgba(0,0,0,0.02)' }}>
-              <div style={{ fontSize: '0.85rem', color: 'var(--salvia-text-muted)', marginBottom: '0.5rem', fontWeight: 600 }}>Average Confidence</div>
+            <div style={{ padding: '1.5rem', backgroundColor: '#fff', borderRadius: 'var(--radius-lg)', border: '1px solid #EBECEF', boxShadow: 'var(--shadow-2)' }}>
+              <div style={{ fontSize: 'var(--text-sm)', color: 'var(--salvia-text-muted)', marginBottom: '0.5rem', fontWeight: 600 }}>Average Confidence</div>
               <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between' }}>
-                <span style={{ fontSize: '2rem', fontWeight: 700, color: 'var(--salvia-primary)', lineHeight: 1 }}>87.2%</span>
-                <span style={{ backgroundColor: '#ECFCCB', color: '#3F6212', padding: '4px 8px', borderRadius: '8px', fontSize: '0.75rem', fontWeight: 700 }}>+2.1%</span>
+                <span style={{ fontSize: 'var(--text-2xl)', fontWeight: 700, color: 'var(--salvia-primary)', lineHeight: 1 }}>87.2%</span>
+                <span style={{ backgroundColor: '#ECFCCB', color: '#3F6212', padding: '4px 8px', borderRadius: 'var(--radius-sm)', fontSize: 'var(--text-xs)', fontWeight: 700 }}>+2.1%</span>
               </div>
             </div>
 
-            <div style={{ padding: '1.5rem', backgroundColor: '#fff', borderRadius: '16px', border: '1px solid #EBECEF', boxShadow: '0 4px 12px rgba(0,0,0,0.02)' }}>
-              <div style={{ fontSize: '0.85rem', color: 'var(--salvia-text-muted)', marginBottom: '0.5rem', fontWeight: 600 }}>Review Queue</div>
+            <div style={{ padding: '1.5rem', backgroundColor: '#fff', borderRadius: 'var(--radius-lg)', border: '1px solid #EBECEF', boxShadow: 'var(--shadow-2)' }}>
+              <div style={{ fontSize: 'var(--text-sm)', color: 'var(--salvia-text-muted)', marginBottom: '0.5rem', fontWeight: 600 }}>Review Queue</div>
               <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between' }}>
-                <span style={{ fontSize: '2rem', fontWeight: 700, color: 'var(--salvia-primary)', lineHeight: 1 }}>189</span>
-                <span style={{ backgroundColor: '#FEE2E2', color: '#991B1B', padding: '4px 8px', borderRadius: '8px', fontSize: '0.75rem', fontWeight: 700 }}>−24</span>
+                <span style={{ fontSize: 'var(--text-2xl)', fontWeight: 700, color: 'var(--salvia-primary)', lineHeight: 1 }}>189</span>
+                <span style={{ backgroundColor: '#FEE2E2', color: '#991B1B', padding: '4px 8px', borderRadius: 'var(--radius-sm)', fontSize: 'var(--text-xs)', fontWeight: 700 }}>−24</span>
               </div>
             </div>
           </div>
 
           {/* Timeline Table */}
-          <div style={{ backgroundColor: '#fff', borderRadius: '16px', border: '1px solid #EBECEF', padding: '1.5rem', flex: 1, boxShadow: '0 4px 12px rgba(0,0,0,0.02)' }}>
-            <div style={{ fontSize: '1rem', fontWeight: 600, color: 'var(--salvia-primary)', marginBottom: '1.25rem' }}>Recent Submissions</div>
+          <div style={{ backgroundColor: '#fff', borderRadius: 'var(--radius-lg)', border: '1px solid #EBECEF', padding: '1.5rem', flex: 1, boxShadow: 'var(--shadow-2)' }}>
+            <div style={{ fontSize: 'var(--text-base)', fontWeight: 600, color: 'var(--salvia-primary)', marginBottom: '1.25rem' }}>Recent Submissions</div>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
               {mockData.map((row) => (
-                <div key={row.id} style={{ display: 'flex', alignItems: 'center', padding: '0.85rem 1rem', borderRadius: '12px', border: '1px solid #F3F4F6', transition: 'background-color 0.2s', cursor: 'pointer' }} className="hover-bg-gray">
+                <div key={row.id} style={{ display: 'flex', alignItems: 'center', padding: '0.85rem 1rem', borderRadius: 'var(--radius-md)', border: '1px solid #F3F4F6', transition: 'background-color 0.2s', cursor: 'pointer' }} className="hover-bg-gray">
 
                   {/* Status Pip */}
-                  <div style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: row.status === 'Processed' ? '#10B981' : row.status === 'Pending' ? '#9CA3AF' : '#F59E0B', marginRight: '1rem' }}></div>
+                  <div style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: row.status === 'Processed' ? 'var(--accent-dental)' : row.status === 'Pending' ? '#9CA3AF' : 'var(--salvia-warning)', marginRight: '1rem' }}></div>
 
                   {/* Patient Info */}
                   <div style={{ width: '180px' }}>
-                    <div style={{ fontWeight: 600, fontSize: '0.9rem', color: '#111827' }}>{row.patient}</div>
-                    <div style={{ fontSize: '0.75rem', color: '#6B7280' }}>Owner: {row.owner}</div>
+                    <div style={{ fontWeight: 600, fontSize: 'var(--text-sm)', color: '#111827' }}>{row.patient}</div>
+                    <div style={{ fontSize: 'var(--text-xs)', color: '#6B7280' }}>Owner: {row.owner}</div>
                   </div>
 
                   {/* Form Info */}
                   <div style={{ flex: 1 }}>
-                    <div style={{ fontWeight: 500, fontSize: '0.85rem', color: '#374151' }}>{row.form}</div>
-                    <div style={{ fontSize: '0.75rem', color: '#9CA3AF' }}>{row.ver}</div>
+                    <div style={{ fontWeight: 500, fontSize: 'var(--text-sm)', color: '#374151' }}>{row.form}</div>
+                    <div style={{ fontSize: 'var(--text-xs)', color: '#9CA3AF' }}>{row.ver}</div>
                   </div>
 
                   {/* Accuracy Badge */}
@@ -100,7 +100,7 @@ export const DashboardPreview: React.FC = () => {
                     <span style={{
                       backgroundColor: row.asr > 80 ? 'var(--salvia-accent)' : '#FEF08A',
                       color: row.asr > 80 ? '#19382E' : '#854D0E',
-                      padding: '4px 8px', borderRadius: '6px', fontWeight: 700, fontSize: '0.75rem'
+                      padding: '4px 8px', borderRadius: 'var(--radius-sm)', fontWeight: 700, fontSize: 'var(--text-xs)'
                     }}>
                       ASR {row.asr}%
                     </span>
@@ -108,7 +108,7 @@ export const DashboardPreview: React.FC = () => {
 
                   {/* Status Tag */}
                   <div style={{ width: '120px', textAlign: 'right' }}>
-                    <span style={{ backgroundColor: row.color, color: row.text, padding: '4px 10px', borderRadius: '24px', fontSize: '0.75rem', fontWeight: 600 }}>
+                    <span style={{ backgroundColor: row.color, color: row.text, padding: '4px 10px', borderRadius: 'var(--radius-xl)', fontSize: 'var(--text-xs)', fontWeight: 600 }}>
                       {row.status}
                     </span>
                   </div>
