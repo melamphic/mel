@@ -14,6 +14,7 @@ const ArticlePage = lazy(() => import('./pages/ArticlePage').then(m => ({ defaul
 const PricingPage = lazy(() => import('./pages/PricingPage').then(m => ({ default: m.PricingPage })));
 const SignupPage = lazy(() => import('./pages/SignupPage').then(m => ({ default: m.SignupPage })));
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage').then(m => ({ default: m.NotFoundPage })));
+const HospitalsPage = lazy(() => import('./pages/HospitalsPage').then(m => ({ default: m.HospitalsPage })));
 const VeterinaryPage = lazy(() => import('./pages/VeterinaryPage').then(m => ({ default: m.VeterinaryPage })));
 const DentalPage = lazy(() => import('./pages/DentalPage').then(m => ({ default: m.DentalPage })));
 const GeneralClinicPage = lazy(() => import('./pages/GeneralClinicPage').then(m => ({ default: m.GeneralClinicPage })));
@@ -76,6 +77,7 @@ function App() {
             <Route path="/pricing" element={<PricingPage />} />
             <Route path="/start" element={<SignupPage />} />
             <Route path="/contact-sales" element={<Navigate to="/start" replace />} />
+            <Route path="/hospitals" element={<HospitalsPage />} />
             <Route path="/veterinary" element={<VeterinaryPage />} />
             <Route path="/dental" element={<DentalPage />} />
             <Route path="/general-practice" element={<GeneralClinicPage />} />
