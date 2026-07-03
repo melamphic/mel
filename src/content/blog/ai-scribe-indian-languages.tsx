@@ -14,24 +14,25 @@ export const content = (
       The global scribe boom was built on American and British English. Those models are genuinely good
       — on the speech they were trained on. Point them at a code-mixed consult and the cracks show:
       they drop the vernacular portions, mangle Indian drug brand names, or quietly "translate" what
-      they did not understand into something plausible and wrong. Independent evaluations of clinical
-      speech recognition across Indian languages have found exactly this pattern — systems that score
-      well on Indian English and then fall apart on code-switched or fully vernacular speech.
+      they did not understand into something plausible and wrong. This is a well-documented failure
+      mode in speech recognition: a model can score well on clean Indian English and still fall apart
+      the moment the speaker switches languages inside a sentence, which is the norm in an Indian OPD.
     </p>
     <p>
-      And code-switching is not an edge case here. Something like 250 million Indians routinely mix
-      English with Hindi or a regional language in ordinary conversation. For a clinic, the
-      "edge case" is the normal case.
+      And code-switching is not an edge case here. Researchers building Hindi-English code-switched
+      speech datasets estimate that <strong>over 250 million people</strong> in India communicate this
+      way, blending English with Hindi in ordinary speech. For a clinic, the "edge case" is the normal
+      case.
     </p>
 
     <h3>What the Indian players are doing</h3>
     <p>
       This is why the serious Indian tools are built differently. Eka Care's scribe advertises support
-      for fifteen-plus Indian and international languages and even an offline mode for low-connectivity
-      clinics; Augnito, out of Mumbai, came up through medical transcription and voice recognition
-      tuned for clinical vocabulary. The fact that India-first companies are putting this much into the
-      language problem tells you it is real, and that a generic foreign scribe is not a safe default for
-      an Indian practice.
+      for twenty-plus languages including Hindi, Bengali, Telugu, Tamil, Marathi, Gujarati, Kannada and
+      Malayalam; Augnito, out of Mumbai, grew out of the clinical-transcription business Scribetech and
+      tuned its voice recognition on medical vocabulary. The fact that India-first companies are putting
+      this much into the language problem tells you it is real, and that a generic foreign scribe is not
+      a safe default for an Indian practice.
     </p>
 
     <h3>How to actually test one</h3>
@@ -60,12 +61,14 @@ export const content = (
       still have to do something with.
     </p>
 
-    <h3>The deeper point</h3>
+    <h3>Judge it on your messiest consult</h3>
     <p>
       The right way to judge an AI scribe in India is to assume your messiest consult, not your
       cleanest. If it only works when you speak slow, formal English, it does not work — because that is
       not how medicine is practised here. Pick the tool that survives the code-mixing, and then judge it
-      on whether it gives you a record, not a paragraph.
+      on whether it gives you a record, not a paragraph. Once you know what you need, the next question
+      is what it costs — which we broke down in{' '}
+      <a href="/blog/ai-scribe-pricing-india">what an AI scribe actually costs in India</a>.
     </p>
   </>
 );
