@@ -45,26 +45,23 @@ export function WorkflowSection({
 
   return (
     <section style={{
-      padding: '7rem 0',
+      padding: 'var(--section-pad) 0',
       backgroundColor: '#fff',
-      borderTop: '1px solid #F1F5F9',
+      borderTop: '1px solid var(--border-subtle)',
     }}>
-      <div className="container" style={{ maxWidth: '1100px' }}>
+      <div className="container" style={{ maxWidth: '1200px' }}>
         <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
-          <div style={{
-            fontSize: '0.72rem', fontWeight: 800, color: accent,
-            letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: '0.75rem',
-          }}>
+          <div className="eyebrow" style={{ color: accent, marginBottom: '0.75rem' }}>
             How it works
           </div>
           <h2 style={{
-            fontSize: 'clamp(1.8rem, 4vw, 2.6rem)', fontWeight: 800,
+            fontSize: 'var(--text-3xl)', fontWeight: 800,
             color: 'var(--salvia-primary)', letterSpacing: '-0.03em', margin: 0,
           }}>
             From voice note to audit-ready record.
           </h2>
           <p style={{
-            color: 'var(--salvia-text-muted)', fontSize: '1rem',
+            color: 'var(--salvia-text-muted)', fontSize: 'var(--text-base)',
             maxWidth: '600px', margin: '0.75rem auto 0', lineHeight: 1.65,
           }}>
             Same loop, every {verticalLabel.toLowerCase()} encounter. Under two minutes from the end of the consult to a signed record.
@@ -85,9 +82,9 @@ export function WorkflowSection({
               key={i}
               style={{
                 padding: '2.25rem 2rem',
-                borderRadius: '20px',
+                borderRadius: 'var(--radius-lg)',
                 backgroundColor: '#FAFBFC',
-                border: '1px solid #EEF2F6',
+                border: '1px solid var(--border-subtle)',
                 position: 'relative',
               }}
             >
@@ -96,16 +93,16 @@ export function WorkflowSection({
                 width: '36px', height: '36px', borderRadius: '50%',
                 backgroundColor: accent, color: '#fff',
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
-                fontWeight: 900, fontSize: '0.95rem',
+                fontWeight: 800, fontSize: 'var(--text-base)',
                 boxShadow: `0 8px 16px ${accent}30`,
               }}>{s.n}</div>
               <h3 style={{
-                fontSize: '1.05rem', fontWeight: 800,
+                fontSize: 'var(--text-md)', fontWeight: 800,
                 color: 'var(--salvia-primary)',
                 marginTop: '0.5rem', marginBottom: '0.65rem',
               }}>{s.title}</h3>
               <p style={{
-                fontSize: '0.88rem', color: 'var(--salvia-text-muted)',
+                fontSize: 'var(--text-sm)', color: 'var(--salvia-text-muted)',
                 lineHeight: 1.65, margin: 0,
               }}>{s.desc}</p>
             </div>
@@ -131,12 +128,12 @@ const DEFAULT_STATS = [
 export function StatsBar({ accent, stats = DEFAULT_STATS }: StatsBarProps) {
   return (
     <section style={{
-      padding: '4rem 0',
+      padding: 'var(--section-pad) 0',
       backgroundColor: 'var(--salvia-bg)',
-      borderTop: '1px solid #F1F5F9',
-      borderBottom: '1px solid #F1F5F9',
+      borderTop: '1px solid var(--border-subtle)',
+      borderBottom: '1px solid var(--border-subtle)',
     }}>
-      <div className="container" style={{ maxWidth: '1100px' }}>
+      <div className="container" style={{ maxWidth: '1200px' }}>
         <div
           className="stats-grid mobile-stack"
           style={{
@@ -150,18 +147,18 @@ export function StatsBar({ accent, stats = DEFAULT_STATS }: StatsBarProps) {
             <div key={i} style={{
               textAlign: 'center',
               padding: '0 1rem',
-              borderLeft: i === 0 ? 'none' : '1px solid rgba(15,23,42,0.08)',
+              borderLeft: i === 0 ? 'none' : '1px solid var(--border-subtle)',
             }}>
               <div style={{
-                fontSize: 'clamp(1.4rem, 2.5vw, 1.85rem)',
-                fontWeight: 900, color: accent,
+                fontSize: 'var(--text-2xl)',
+                fontWeight: 800, color: accent,
                 letterSpacing: '-0.03em', lineHeight: 1.1,
                 marginBottom: '0.4rem',
               }}>
                 {s.value}
               </div>
               <div style={{
-                fontSize: '0.78rem', fontWeight: 600,
+                fontSize: 'var(--text-xs)', fontWeight: 600,
                 color: 'var(--salvia-text-muted)',
                 lineHeight: 1.4,
               }}>
@@ -192,20 +189,17 @@ export function BeforeAfter({
 }: BeforeAfterProps) {
   return (
     <section style={{
-      padding: '7rem 0',
+      padding: 'var(--section-pad) 0',
       backgroundColor: 'var(--salvia-bg)',
-      borderTop: '1px solid #F1F5F9',
+      borderTop: '1px solid var(--border-subtle)',
     }}>
-      <div className="container" style={{ maxWidth: '1100px' }}>
+      <div className="container" style={{ maxWidth: '1200px' }}>
         <div style={{ textAlign: 'center', marginBottom: '3.5rem' }}>
-          <div style={{
-            fontSize: '0.72rem', fontWeight: 800, color: accent,
-            letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: '0.75rem',
-          }}>
+          <div className="eyebrow" style={{ color: accent, marginBottom: '0.75rem' }}>
             What changes
           </div>
           <h2 style={{
-            fontSize: 'clamp(1.8rem, 4vw, 2.6rem)', fontWeight: 800,
+            fontSize: 'var(--text-3xl)', fontWeight: 800,
             color: 'var(--salvia-primary)', letterSpacing: '-0.03em', margin: 0,
           }}>
             Same workflow. Better records.
@@ -223,16 +217,11 @@ export function BeforeAfter({
           {/* Before */}
           <div style={{
             padding: '2.25rem 2rem',
-            borderRadius: '20px',
+            borderRadius: 'var(--radius-lg)',
             backgroundColor: '#fff',
-            border: '1px solid #EEF2F6',
+            border: '1px solid var(--border-subtle)',
           }}>
-            <div style={{
-              fontSize: '0.7rem', fontWeight: 800,
-              color: 'var(--salvia-text-muted)',
-              letterSpacing: '0.1em', textTransform: 'uppercase',
-              marginBottom: '1rem',
-            }}>
+            <div className="eyebrow" style={{ color: 'var(--salvia-text-muted)', marginBottom: '1rem' }}>
               {beforeHeading}
             </div>
             <ul style={{
@@ -242,11 +231,11 @@ export function BeforeAfter({
               {beforeLines.map((line, i) => (
                 <li key={i} style={{
                   display: 'flex', gap: '0.65rem', alignItems: 'flex-start',
-                  fontSize: '0.9rem', color: 'var(--salvia-text)', lineHeight: 1.55,
+                  fontSize: 'var(--text-sm)', color: 'var(--salvia-text)', lineHeight: 1.55,
                 }}>
                   <span style={{
                     flexShrink: 0, color: 'rgba(15,23,42,0.35)',
-                    fontWeight: 900, marginTop: '1px',
+                    fontWeight: 800, marginTop: '1px',
                   }}>×</span>
                   <span>{line}</span>
                 </li>
@@ -257,17 +246,12 @@ export function BeforeAfter({
           {/* After */}
           <div style={{
             padding: '2.25rem 2rem',
-            borderRadius: '20px',
+            borderRadius: 'var(--radius-lg)',
             backgroundColor: '#fff',
             border: `1.5px solid ${accentBorderFor(accent)}`,
             boxShadow: `0 8px 24px ${accent}10`,
           }}>
-            <div style={{
-              fontSize: '0.7rem', fontWeight: 800,
-              color: accent,
-              letterSpacing: '0.1em', textTransform: 'uppercase',
-              marginBottom: '1rem',
-            }}>
+            <div className="eyebrow" style={{ color: accent, marginBottom: '1rem' }}>
               {afterHeading}
             </div>
             <ul style={{
@@ -277,12 +261,12 @@ export function BeforeAfter({
               {afterLines.map((line, i) => (
                 <li key={i} style={{
                   display: 'flex', gap: '0.65rem', alignItems: 'flex-start',
-                  fontSize: '0.9rem', color: 'var(--salvia-text)', lineHeight: 1.55,
+                  fontSize: 'var(--text-sm)', color: 'var(--salvia-text)', lineHeight: 1.55,
                   fontWeight: 500,
                 }}>
                   <span style={{
                     flexShrink: 0, color: accent,
-                    fontWeight: 900, marginTop: '1px',
+                    fontWeight: 800, marginTop: '1px',
                   }}>✓</span>
                   <span>{line}</span>
                 </li>
@@ -304,26 +288,23 @@ interface HonestScopeProps extends AccentProps {
 export function HonestScope({ accent, doLines, dontLines }: HonestScopeProps) {
   return (
     <section style={{
-      padding: '7rem 0',
+      padding: 'var(--section-pad) 0',
       backgroundColor: '#fff',
-      borderTop: '1px solid #F1F5F9',
+      borderTop: '1px solid var(--border-subtle)',
     }}>
-      <div className="container" style={{ maxWidth: '1000px' }}>
+      <div className="container" style={{ maxWidth: '960px' }}>
         <div style={{ textAlign: 'center', marginBottom: '3.5rem' }}>
-          <div style={{
-            fontSize: '0.72rem', fontWeight: 800, color: accent,
-            letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: '0.75rem',
-          }}>
+          <div className="eyebrow" style={{ color: accent, marginBottom: '0.75rem' }}>
             Honest scope
           </div>
           <h2 style={{
-            fontSize: 'clamp(1.7rem, 3.5vw, 2.3rem)', fontWeight: 800,
+            fontSize: 'var(--text-2xl)', fontWeight: 800,
             color: 'var(--salvia-primary)', letterSpacing: '-0.03em', margin: 0,
           }}>
             What Salvia does — and what it doesn't.
           </h2>
           <p style={{
-            color: 'var(--salvia-text-muted)', fontSize: '0.95rem',
+            color: 'var(--salvia-text-muted)', fontSize: 'var(--text-base)',
             maxWidth: '600px', margin: '0.75rem auto 0', lineHeight: 1.65,
           }}>
             We do one thing well. We say so up front so you don't buy us expecting something we're not.
@@ -340,15 +321,11 @@ export function HonestScope({ accent, doLines, dontLines }: HonestScopeProps) {
         >
           <div style={{
             padding: '2rem 2.25rem',
-            borderRadius: '20px',
+            borderRadius: 'var(--radius-lg)',
             backgroundColor: accentSoftFor(accent),
             border: `1px solid ${accentBorderFor(accent)}`,
           }}>
-            <div style={{
-              fontSize: '0.7rem', fontWeight: 800, color: accent,
-              letterSpacing: '0.1em', textTransform: 'uppercase',
-              marginBottom: '1rem',
-            }}>
+            <div className="eyebrow" style={{ color: accent, marginBottom: '1rem' }}>
               We do
             </div>
             <ul style={{
@@ -357,10 +334,10 @@ export function HonestScope({ accent, doLines, dontLines }: HonestScopeProps) {
             }}>
               {doLines.map((line, i) => (
                 <li key={i} style={{
-                  fontSize: '0.9rem', color: 'var(--salvia-text)', lineHeight: 1.55,
+                  fontSize: 'var(--text-sm)', color: 'var(--salvia-text)', lineHeight: 1.55,
                   display: 'flex', gap: '0.5rem', alignItems: 'flex-start',
                 }}>
-                  <span style={{ color: accent, fontWeight: 900 }}>✓</span>
+                  <span style={{ color: accent, fontWeight: 800 }}>✓</span>
                   <span>{line}</span>
                 </li>
               ))}
@@ -369,16 +346,11 @@ export function HonestScope({ accent, doLines, dontLines }: HonestScopeProps) {
 
           <div style={{
             padding: '2rem 2.25rem',
-            borderRadius: '20px',
+            borderRadius: 'var(--radius-lg)',
             backgroundColor: '#FAFBFC',
-            border: '1px solid #EEF2F6',
+            border: '1px solid var(--border-subtle)',
           }}>
-            <div style={{
-              fontSize: '0.7rem', fontWeight: 800,
-              color: 'var(--salvia-text-muted)',
-              letterSpacing: '0.1em', textTransform: 'uppercase',
-              marginBottom: '1rem',
-            }}>
+            <div className="eyebrow" style={{ color: 'var(--salvia-text-muted)', marginBottom: '1rem' }}>
               We don't
             </div>
             <ul style={{
@@ -387,10 +359,10 @@ export function HonestScope({ accent, doLines, dontLines }: HonestScopeProps) {
             }}>
               {dontLines.map((line, i) => (
                 <li key={i} style={{
-                  fontSize: '0.9rem', color: 'var(--salvia-text-muted)', lineHeight: 1.55,
+                  fontSize: 'var(--text-sm)', color: 'var(--salvia-text-muted)', lineHeight: 1.55,
                   display: 'flex', gap: '0.5rem', alignItems: 'flex-start',
                 }}>
-                  <span style={{ color: 'rgba(15,23,42,0.3)', fontWeight: 900 }}>—</span>
+                  <span style={{ color: 'rgba(15,23,42,0.3)', fontWeight: 800 }}>—</span>
                   <span>{line}</span>
                 </li>
               ))}
@@ -411,41 +383,38 @@ interface PricingTeaserProps extends AccentProps {
 export function PricingTeaser({ accent, fromPriceCopy, vertical }: PricingTeaserProps) {
   return (
     <section style={{
-      padding: '5rem 0',
+      padding: 'var(--section-pad) 0',
       backgroundColor: 'var(--salvia-bg)',
-      borderTop: '1px solid #F1F5F9',
+      borderTop: '1px solid var(--border-subtle)',
     }}>
-      <div className="container" style={{ maxWidth: '880px' }}>
+      <div className="container" style={{ maxWidth: '960px' }}>
         <div style={{
           padding: '2.5rem',
-          borderRadius: '24px',
+          borderRadius: 'var(--radius-xl)',
           background: `linear-gradient(135deg, #fff 0%, ${accentSoftFor(accent)} 100%)`,
           border: `1px solid ${accentBorderFor(accent)}`,
           display: 'flex', alignItems: 'center', justifyContent: 'space-between',
           gap: '2rem', flexWrap: 'wrap',
         }} className="pricing-teaser-card">
           <div style={{ flex: 1, minWidth: '260px' }}>
-            <div style={{
-              fontSize: '0.72rem', fontWeight: 800, color: accent,
-              letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: '0.5rem',
-            }}>
+            <div className="eyebrow" style={{ color: accent, marginBottom: '0.5rem' }}>
               Practice plan
             </div>
             <h3 style={{
-              fontSize: 'clamp(1.4rem, 2.5vw, 1.8rem)', fontWeight: 800,
+              fontSize: 'var(--text-2xl)', fontWeight: 800,
               color: 'var(--salvia-primary)', letterSpacing: '-0.02em', margin: '0 0 0.5rem',
             }}>
               {fromPriceCopy ?? 'Compliance-grade documentation, from ₹1,000/mo.'}
             </h3>
-            <p style={{ color: 'var(--salvia-text-muted)', fontSize: '0.9rem', lineHeight: 1.55, margin: 0 }}>
+            <p style={{ color: 'var(--salvia-text-muted)', fontSize: 'var(--text-sm)', lineHeight: 1.55, margin: 0 }}>
               Up to 3 AI recording seats. Unlimited free seats for admin and reception. No credit card required to start.
             </p>
           </div>
           <Link to={vertical ? `/pricing?vertical=${vertical}` : '/pricing'} style={{
             display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
             backgroundColor: 'var(--salvia-primary)', color: '#fff',
-            padding: '0.85rem 1.75rem', borderRadius: '12px',
-            fontWeight: 700, fontSize: '0.95rem', textDecoration: 'none',
+            padding: '0.85rem 1.75rem', borderRadius: 'var(--radius-md)',
+            fontWeight: 700, fontSize: 'var(--text-base)', textDecoration: 'none',
             whiteSpace: 'nowrap',
           }}>
             See full pricing
