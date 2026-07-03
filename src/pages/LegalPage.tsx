@@ -26,16 +26,16 @@ type Doc = {
 };
 
 const H = ({ children }: { children: React.ReactNode }) => (
-  <h2 style={{ fontSize: '1.4rem', fontWeight: 800, color: 'var(--salvia-primary)', margin: '2.2rem 0 0.8rem', letterSpacing: '-0.02em' }}>{children}</h2>
+  <h2 style={{ fontSize: 'var(--text-xl)', fontWeight: 800, color: 'var(--salvia-primary)', margin: '2.2rem 0 0.8rem', letterSpacing: '-0.02em' }}>{children}</h2>
 );
 const P = ({ children }: { children: React.ReactNode }) => (
-  <p style={{ fontSize: '1rem', lineHeight: 1.7, color: 'var(--salvia-text-muted)', margin: '0 0 1rem' }}>{children}</p>
+  <p style={{ fontSize: 'var(--text-base)', lineHeight: 1.7, color: 'var(--salvia-text-muted)', margin: '0 0 1rem' }}>{children}</p>
 );
 const UL = ({ children }: { children: React.ReactNode }) => (
   <ul style={{ margin: '0 0 1rem', paddingLeft: '1.2rem', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>{children}</ul>
 );
 const LI = ({ children }: { children: React.ReactNode }) => (
-  <li style={{ fontSize: '1rem', lineHeight: 1.65, color: 'var(--salvia-text-muted)', listStyle: 'disc' }}>{children}</li>
+  <li style={{ fontSize: 'var(--text-base)', lineHeight: 1.65, color: 'var(--salvia-text-muted)', listStyle: 'disc' }}>{children}</li>
 );
 
 const SUBPROCESSORS = [
@@ -163,9 +163,9 @@ const DOCS: Doc[] = [
       <>
         <P>Salvia uses the sub-processors below to deliver the Services. Each is bound by a data-processing agreement and may process personal data only to provide its service to Salvia. We notify customers before adding a new sub-processor.</P>
         <div style={{ overflowX: 'auto', margin: '1.5rem 0' }}>
-          <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.95rem' }}>
+          <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 'var(--text-base)' }}>
             <thead>
-              <tr style={{ textAlign: 'left', borderBottom: '2px solid rgba(15,23,42,0.1)' }}>
+              <tr style={{ textAlign: 'left', borderBottom: '2px solid var(--border-strong)' }}>
                 <th style={{ padding: '0.6rem 0.5rem', color: 'var(--salvia-primary)' }}>Sub-processor</th>
                 <th style={{ padding: '0.6rem 0.5rem', color: 'var(--salvia-primary)' }}>Purpose</th>
                 <th style={{ padding: '0.6rem 0.5rem', color: 'var(--salvia-primary)' }}>Region</th>
@@ -173,7 +173,7 @@ const DOCS: Doc[] = [
             </thead>
             <tbody>
               {SUBPROCESSORS.map((row) => (
-                <tr key={row[0]} style={{ borderBottom: '1px solid rgba(15,23,42,0.06)' }}>
+                <tr key={row[0]} style={{ borderBottom: '1px solid var(--border-subtle)' }}>
                   <td style={{ padding: '0.6rem 0.5rem', color: 'var(--salvia-primary)', fontWeight: 600 }}>{row[0]}</td>
                   <td style={{ padding: '0.6rem 0.5rem', color: 'var(--salvia-text-muted)' }}>{row[1]}</td>
                   <td style={{ padding: '0.6rem 0.5rem', color: 'var(--salvia-text-muted)' }}>{row[2]}</td>
@@ -252,13 +252,13 @@ export const LegalPage: React.FC<{ slug: string }> = ({ slug }) => {
       <main style={{ flex: 1, zIndex: 10, position: 'relative' }}>
         <section style={{ padding: 'clamp(7rem, 12vw, 9rem) 0 5rem' }}>
           <div className="container" style={{ maxWidth: '780px' }}>
-            <h1 style={{ fontSize: 'clamp(2rem, 5vw, 3rem)', fontWeight: 800, letterSpacing: '-0.03em', color: 'var(--salvia-primary)', margin: '0 0 0.5rem' }}>{doc.title}</h1>
-            <p style={{ fontSize: '0.9rem', color: 'var(--salvia-text-muted)', margin: '0 0 1.5rem' }}>Last updated: {UPDATED}</p>
-            <div style={{ background: 'rgba(255,78,0,0.06)', border: '1px solid rgba(255,78,0,0.2)', borderRadius: 12, padding: '0.9rem 1.1rem', margin: '0 0 2rem', fontSize: '0.88rem', color: 'var(--salvia-text-muted)' }}>
+            <h1 style={{ fontSize: 'var(--text-3xl)', fontWeight: 800, letterSpacing: '-0.03em', color: 'var(--salvia-primary)', margin: '0 0 0.5rem' }}>{doc.title}</h1>
+            <p style={{ fontSize: 'var(--text-sm)', color: 'var(--salvia-text-muted)', margin: '0 0 1.5rem' }}>Last updated: {UPDATED}</p>
+            <div style={{ background: 'rgba(255,78,0,0.06)', border: '1px solid rgba(255,78,0,0.2)', borderRadius: 'var(--radius-md)', padding: '0.9rem 1.1rem', margin: '0 0 2rem', fontSize: 'var(--text-sm)', color: 'var(--salvia-text-muted)' }}>
               <strong style={{ color: 'var(--salvia-accent)' }}>Draft — pending legal review.</strong> This document is a working draft and not yet legal advice. It will be finalised with counsel before it takes effect.
             </div>
             {doc.body}
-            <p style={{ marginTop: '3rem', fontSize: '0.95rem' }}>
+            <p style={{ marginTop: '3rem', fontSize: 'var(--text-base)' }}>
               <Link to="/privacy/" style={{ color: 'var(--salvia-accent)', fontWeight: 600 }}>Privacy</Link>{' · '}
               <Link to="/terms/" style={{ color: 'var(--salvia-accent)', fontWeight: 600 }}>Terms</Link>{' · '}
               <Link to="/dpa/" style={{ color: 'var(--salvia-accent)', fontWeight: 600 }}>DPA</Link>{' · '}
