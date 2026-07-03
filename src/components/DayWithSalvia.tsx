@@ -94,7 +94,7 @@ export const DayWithSalvia: React.FC = () => {
       {/* Header */}
       <div style={{ marginBottom: '3.5rem', maxWidth: '720px' }}>
         <span style={{
-          fontSize: '0.7rem', fontWeight: 700, letterSpacing: '0.14em',
+          fontSize: 'var(--text-2xs)', fontWeight: 700, letterSpacing: '0.14em',
           textTransform: 'uppercase', color: 'var(--salvia-accent)',
         }}>
           How a note gets made
@@ -107,7 +107,7 @@ export const DayWithSalvia: React.FC = () => {
           Five steps. Voice note in, audit-locked record out.
         </h2>
         <p style={{
-          fontSize: '1.05rem',
+          fontSize: 'var(--text-md)',
           color: 'var(--salvia-text-muted)',
           lineHeight: 1.65,
           marginTop: '1rem',
@@ -149,9 +149,9 @@ export const DayWithSalvia: React.FC = () => {
             <div style={{
               backgroundColor: '#fff',
               border: '1px solid rgba(0,0,0,0.06)',
-              borderRadius: '16px',
+              borderRadius: 'var(--radius-lg)',
               padding: '1.5rem 1.35rem',
-              boxShadow: '0 4px 12px rgba(25,56,46,0.03)',
+              boxShadow: 'var(--shadow-2)',
               height: '100%',
               display: 'flex', flexDirection: 'column', gap: '0.8rem',
               position: 'relative',
@@ -159,7 +159,7 @@ export const DayWithSalvia: React.FC = () => {
               {/* Icon + num */}
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <div style={{
-                  width: 44, height: 44, borderRadius: '10px',
+                  width: 44, height: 44, borderRadius: 'var(--radius-md)',
                   backgroundColor: i === 2 ? 'rgba(255,78,0,0.08)' : 'rgba(15,23,42,0.04)',
                   color: i === 2 ? 'var(--salvia-accent)' : 'var(--salvia-primary)',
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
@@ -167,11 +167,11 @@ export const DayWithSalvia: React.FC = () => {
                   {s.icon}
                 </div>
                 <span style={{
-                  fontSize: '0.62rem', fontWeight: 700,
+                  fontSize: 'var(--text-2xs)', fontWeight: 700,
                   color: i === 2 ? 'var(--salvia-accent)' : 'var(--salvia-text-muted)',
                   backgroundColor: i === 2 ? 'rgba(255,78,0,0.08)' : '#F8FAFC',
                   padding: '0.25rem 0.6rem',
-                  borderRadius: '999px',
+                  borderRadius: 'var(--salvia-radius-full)',
                   letterSpacing: '0.08em',
                   textTransform: 'uppercase',
                 }}>
@@ -182,7 +182,7 @@ export const DayWithSalvia: React.FC = () => {
               {/* Step number + title */}
               <div>
                 <div style={{
-                  fontSize: '0.66rem', fontWeight: 700,
+                  fontSize: 'var(--text-2xs)', fontWeight: 700,
                   letterSpacing: '0.08em', textTransform: 'uppercase',
                   color: 'var(--salvia-text-muted)',
                   marginBottom: '0.35rem',
@@ -190,7 +190,7 @@ export const DayWithSalvia: React.FC = () => {
                   Step {s.n}
                 </div>
                 <h3 style={{
-                  fontSize: '1.05rem', fontWeight: 700,
+                  fontSize: 'var(--text-md)', fontWeight: 700,
                   color: 'var(--salvia-primary)',
                   letterSpacing: '-0.02em',
                   lineHeight: 1.2,
@@ -201,7 +201,7 @@ export const DayWithSalvia: React.FC = () => {
               </div>
 
               <p style={{
-                fontSize: '0.84rem',
+                fontSize: 'var(--text-xs)',
                 color: 'var(--salvia-text-muted)',
                 lineHeight: 1.55,
                 margin: 0,
