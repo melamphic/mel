@@ -7,7 +7,7 @@
 // drafts reviewed quarterly. currency_date marks when the entry was
 // last verified against the regulator's published standards.
 
-export type FrameworkCountry = 'IE' | 'GB' | 'AU' | 'NZ' | 'US' | 'EU' | 'Global';
+export type FrameworkCountry = 'IN' | 'IE' | 'GB' | 'AU' | 'NZ' | 'US' | 'EU' | 'Global';
 export type FrameworkVertical = 'vet' | 'dental' | 'gp' | 'allied';
 export type FrameworkDiscipline =
   | 'physio'
@@ -39,6 +39,7 @@ export interface Framework {
 }
 
 export const COUNTRY_META: Record<FrameworkCountry, { label: string; accent: string; flag: string }> = {
+  IN:     { label: 'India',            accent: '#138808', flag: '🇮🇳' },
   IE:     { label: 'Ireland',          accent: '#0891B2', flag: '🇮🇪' },
   GB:     { label: 'United Kingdom',   accent: '#FF4E00', flag: '🇬🇧' },
   AU:     { label: 'Australia',        accent: '#F59E0B', flag: '🇦🇺' },
@@ -65,6 +66,110 @@ export const DISCIPLINE_META: Record<FrameworkDiscipline, { label: string; slug:
 };
 
 export const FRAMEWORKS: Framework[] = [
+  // ── India ──────────────────────────────────────────────────────
+  {
+    code: 'IMC Ethics 2002',
+    fullName: 'Indian Medical Council (Professional Conduct, Etiquette and Ethics) Regulations 2002',
+    country: 'IN', verticals: ['gp'],
+    category: 'records',
+    summary: 'The operative record-keeping standard for registered medical practitioners — indoor records maintained for 3 years; copies supplied to the patient or authorised attendant within 72 hours of a request.',
+    sourceUrl: 'https://www.nmc.org.in/',
+    currencyDate: '2026-07-02',
+  },
+  {
+    code: 'NABH',
+    fullName: 'NABH Hospital Accreditation Standards',
+    country: 'IN', verticals: ['gp'],
+    category: 'inspection',
+    summary: 'National Accreditation Board for Hospitals & Healthcare Providers. Information-management chapters demand complete, contemporaneous, retrievable clinical records — with evidence on the table at assessment.',
+    sourceUrl: 'https://nabh.co/',
+    currencyDate: '2026-07-02',
+  },
+  {
+    code: 'NABH Entry-Level',
+    fullName: 'NABH Entry-Level Certification (SHCO) for Small Healthcare Organisations',
+    country: 'IN', verticals: ['gp', 'dental'],
+    category: 'inspection',
+    summary: 'The certification route sized for clinics and small hospitals, and a pre-requisite for several government empanelments. Documentation, consent and record standards scaled to small facilities.',
+    sourceUrl: 'https://nabh.co/',
+    currencyDate: '2026-07-02',
+  },
+  {
+    code: 'ABDM',
+    fullName: 'Ayushman Bharat Digital Mission',
+    country: 'IN', verticals: ['gp', 'dental'],
+    category: 'records',
+    summary: 'ABHA-linked, interoperable digital health records with Health Facility Registry and Healthcare Professionals Registry participation. Structured, shareable records are the admission ticket.',
+    sourceUrl: 'https://abdm.gov.in/',
+    currencyDate: '2026-07-02',
+  },
+  {
+    code: 'DPDP Act 2023',
+    fullName: 'Digital Personal Data Protection Act 2023',
+    country: 'IN', verticals: ['gp', 'dental', 'vet', 'allied'],
+    category: 'data-protection',
+    summary: 'Consent, purpose limitation and reasonable security safeguards for digital personal data — patient data included. Clinics processing health records are data fiduciaries under the Act.',
+    sourceUrl: 'https://www.meity.gov.in/',
+    currencyDate: '2026-07-02',
+  },
+  {
+    code: 'CEA 2010',
+    fullName: 'Clinical Establishments (Registration and Regulation) Act 2010',
+    country: 'IN', verticals: ['gp', 'dental'],
+    category: 'inspection',
+    summary: 'Registration and minimum standards for clinical establishments in adopting states — including maintenance and reporting of medical records per prescribed standards.',
+    currencyDate: '2026-07-02',
+  },
+  {
+    code: 'CPA 2019',
+    fullName: 'Consumer Protection Act 2019 — medical services',
+    country: 'IN', verticals: ['gp', 'dental', 'vet'],
+    category: 'records',
+    summary: 'Deficiency-of-service claims against clinics run on documentary evidence. The clinical record is the primary defence; a thin file shifts the balance of probabilities against the practitioner.',
+    currencyDate: '2026-07-02',
+  },
+  {
+    code: 'Schedule H1',
+    fullName: 'Drugs and Cosmetics Rules — Schedule H1 register',
+    country: 'IN', verticals: ['gp', 'dental', 'vet'],
+    category: 'safety',
+    summary: 'A separate register for Schedule H1 drugs — prescriber, patient, drug and quantity — retained for three years. Covers habit-forming drugs and the antimicrobial stewardship list.',
+    currencyDate: '2026-07-02',
+  },
+  {
+    code: 'PC-PNDT',
+    fullName: 'Pre-Conception and Pre-Natal Diagnostic Techniques Act 1994',
+    country: 'IN', verticals: ['gp'],
+    category: 'records',
+    summary: 'Form F and register obligations for any facility running ultrasound. Records preserved for two years; documentation deficiencies carry criminal exposure.',
+    currencyDate: '2026-07-02',
+  },
+  {
+    code: 'Telemedicine 2020',
+    fullName: 'Telemedicine Practice Guidelines 2020 (Appendix 5, IMC Regulations)',
+    country: 'IN', verticals: ['gp'],
+    category: 'professional-conduct',
+    summary: 'Documentation duties for teleconsultations — patient identification, consent, mode of consult, and prescription records maintained to the same standard as in-person care.',
+    sourceUrl: 'https://www.nmc.org.in/',
+    currencyDate: '2026-07-02',
+  },
+  {
+    code: 'VCI India',
+    fullName: 'Veterinary Council of India — practice standards under the Indian Veterinary Council Act 1984',
+    country: 'IN', verticals: ['vet'],
+    category: 'professional-conduct',
+    summary: 'Registration and professional-conduct standards for veterinary practitioners, including case-record expectations for clinical practice.',
+    currencyDate: '2026-07-02',
+  },
+  {
+    code: 'DCI Ethics',
+    fullName: 'Dental Council of India — Dentists (Code of Ethics) Regulations 2014',
+    country: 'IN', verticals: ['dental'],
+    category: 'professional-conduct',
+    summary: 'Ethics and record obligations for registered dentists under the Dentists Act 1948. State dental council complaints turn on the chart — the record is the primary evidence.',
+    currencyDate: '2026-07-02',
+  },
+
   // ── Veterinary ─────────────────────────────────────────────────
   {
     code: 'RCVS PSS',
