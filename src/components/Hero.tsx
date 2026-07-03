@@ -33,7 +33,7 @@ export const Hero: React.FC = () => {
           padding: 0 1.5rem;
         }
         .hv1-headline {
-          font-size: clamp(2.7rem, 4.6vw, 4.2rem);
+          font-size: var(--text-display);
           font-weight: 800;
           line-height: 1.05;
           letter-spacing: -0.03em;
@@ -48,26 +48,13 @@ export const Hero: React.FC = () => {
           inset: -18% -12%;
           z-index: 0;
           pointer-events: none;
-          background: radial-gradient(closest-side, rgba(255, 78, 0, 0.14), transparent 72%);
+          background: radial-gradient(closest-side, rgba(255, 78, 0, 0.10), transparent 72%);
         }
-        .hv1-orbit {
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          width: 126%;
-          height: 126%;
-          transform: translate(-50%, -50%);
-          z-index: 0;
-          pointer-events: none;
-          animation: hv1spin 90s linear infinite;
-        }
-        @keyframes hv1spin { to { transform: translate(-50%, -50%) rotate(360deg); } }
-        @media (prefers-reduced-motion: reduce) { .hv1-orbit { animation: none; } }
         .hv1-card {
           position: absolute;
           background: var(--salvia-surface);
-          border-radius: 16px;
-          box-shadow: 0 18px 44px rgba(15, 23, 42, 0.14), 0 0 0 1px rgba(15, 23, 42, 0.04);
+          border-radius: var(--radius-lg);
+          box-shadow: var(--shadow-3), 0 0 0 1px var(--border-subtle);
           padding: 0.95rem 1.15rem;
           display: flex;
           align-items: center;
@@ -86,7 +73,7 @@ export const Hero: React.FC = () => {
           .hv1-left { text-align: left; }
           .hv1-headline { font-size: clamp(2.2rem, 9vw, 2.9rem); }
           .hv1-card { display: none; }
-          .hv1-orbit, .hv1-glow { display: none; }
+          .hv1-glow { display: none; }
           .hv1-rail-row { gap: 1rem 1.4rem !important; }
           /* scale the wide dashboard down into a clean mini-preview that fits */
           .hv1-preview-wrap { overflow: hidden; height: 248px; border-radius: 24px; }
@@ -125,7 +112,7 @@ export const Hero: React.FC = () => {
           <p
             style={{
               color: 'var(--salvia-text-muted)',
-              fontSize: '1.1rem',
+              fontSize: 'var(--text-md)',
               lineHeight: 1.6,
               maxWidth: '460px',
               margin: '0 0 2.25rem',
@@ -144,11 +131,11 @@ export const Hero: React.FC = () => {
                 backgroundColor: 'var(--salvia-primary)',
                 color: '#ffffff',
                 fontWeight: 700,
-                fontSize: '1.02rem',
+                fontSize: 'var(--text-base)',
                 padding: '0.95rem 2rem',
-                borderRadius: '999px',
+                borderRadius: 'var(--salvia-radius-full)',
                 textDecoration: 'none',
-                boxShadow: '0 10px 24px rgba(15, 23, 42, 0.18)',
+                boxShadow: 'var(--shadow-2)',
               }}
             >
               Book a demo
@@ -159,11 +146,11 @@ export const Hero: React.FC = () => {
                 backgroundColor: 'var(--salvia-surface)',
                 color: 'var(--salvia-primary)',
                 fontWeight: 700,
-                fontSize: '1.02rem',
+                fontSize: 'var(--text-base)',
                 padding: '0.95rem 2rem',
-                borderRadius: '999px',
+                borderRadius: 'var(--salvia-radius-full)',
                 textDecoration: 'none',
-                border: '1px solid rgba(15, 23, 42, 0.18)',
+                border: '1px solid var(--border-strong)',
               }}
             >
               See how it works
@@ -174,13 +161,6 @@ export const Hero: React.FC = () => {
         {/* RIGHT */}
         <div className="hv1-preview-wrap">
           <div className="hv1-glow" />
-          <svg className="hv1-orbit" viewBox="0 0 600 600" fill="none" aria-hidden="true">
-            <circle cx="300" cy="300" r="150" stroke="rgba(15, 23, 42, 0.10)" strokeWidth="1.5" strokeDasharray="2 9" />
-            <circle cx="300" cy="300" r="222" stroke="rgba(15, 23, 42, 0.08)" strokeWidth="1.5" strokeDasharray="2 9" />
-            <circle cx="300" cy="300" r="295" stroke="rgba(255, 78, 0, 0.16)" strokeWidth="1.5" strokeDasharray="2 9" />
-            <circle cx="300" cy="5" r="5" fill="#FF4E00" />
-            <circle cx="595" cy="300" r="4" fill="#0F172A" />
-          </svg>
           <div className="hv1-preview-inner">
             <DashboardPreview />
           </div>
@@ -190,9 +170,9 @@ export const Hero: React.FC = () => {
               style={{
                 width: '34px',
                 height: '34px',
-                borderRadius: '10px',
+                borderRadius: 'var(--radius-md)',
                 backgroundColor: 'rgba(22, 163, 74, 0.12)',
-                color: '#16A34A',
+                color: 'var(--salvia-success)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
@@ -203,10 +183,10 @@ export const Hero: React.FC = () => {
               ↑
             </span>
             <div>
-              <div style={{ fontSize: '0.72rem', color: 'var(--salvia-text-muted)', fontWeight: 600 }}>
+              <div style={{ fontSize: 'var(--text-2xs)', color: 'var(--salvia-text-muted)', fontWeight: 600 }}>
                 Avg confidence
               </div>
-              <div style={{ fontSize: '1.05rem', fontWeight: 800, color: '#16A34A', lineHeight: 1.1 }}>
+              <div style={{ fontSize: 'var(--text-md)', fontWeight: 800, color: 'var(--salvia-success)', lineHeight: 1.1 }}>
                 95.4%
               </div>
             </div>
@@ -217,9 +197,9 @@ export const Hero: React.FC = () => {
               style={{
                 width: '34px',
                 height: '34px',
-                borderRadius: '10px',
+                borderRadius: 'var(--radius-md)',
                 backgroundColor: 'rgba(22, 163, 74, 0.12)',
-                color: '#16A34A',
+                color: 'var(--salvia-success)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
@@ -230,10 +210,10 @@ export const Hero: React.FC = () => {
               ✓
             </span>
             <div>
-              <div style={{ fontSize: '0.72rem', color: 'var(--salvia-text-muted)', fontWeight: 600 }}>
+              <div style={{ fontSize: 'var(--text-2xs)', color: 'var(--salvia-text-muted)', fontWeight: 600 }}>
                 Policy check
               </div>
-              <div style={{ fontSize: '1.05rem', fontWeight: 800, color: '#16A34A', lineHeight: 1.1 }}>
+              <div style={{ fontSize: 'var(--text-md)', fontWeight: 800, color: 'var(--salvia-success)', lineHeight: 1.1 }}>
                 Satisfied
               </div>
             </div>
@@ -253,16 +233,7 @@ export const Hero: React.FC = () => {
           gap: '1.25rem',
         }}
       >
-        <div
-          style={{
-            fontSize: '0.72rem',
-            letterSpacing: '0.18em',
-            textTransform: 'uppercase',
-            fontWeight: 700,
-            color: 'var(--salvia-text-muted)',
-            opacity: 0.7,
-          }}
-        >
+        <div className="eyebrow" style={{ color: 'var(--salvia-text-muted)', opacity: 0.7 }}>
           Trusted against
         </div>
         <div
