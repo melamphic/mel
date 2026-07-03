@@ -7,6 +7,7 @@ import { CountrySwitcher } from './CountrySwitcher';
 import { useIsIndia } from '../lib/market';
 
 const primaryVerticalsFor = (isIndia: boolean) => [
+  { to: '/hospitals',         label: 'Hospitals',        sub: isIndia ? 'NABH · PM-JAY · HMIS' : 'Evidence layer on your HMIS' },
   { to: '/veterinary',        label: 'Veterinary',       sub: isIndia ? 'VCI · NABH · CCSEA'  : 'RCVS · VCNZ · AVBC' },
   { to: '/dental',            label: 'Dental',           sub: isIndia ? 'DCI · NABH · CGHS'   : 'GDC · CQC · AHPRA' },
   { to: '/general-practice',  label: 'General Practice', sub: isIndia ? 'NMC · NABH · ABDM'   : 'CQC · GMC · AHPRA' },
