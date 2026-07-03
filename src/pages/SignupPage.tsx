@@ -1,10 +1,60 @@
-import { useMemo, useState, type CSSProperties, type FormEvent, type ReactNode } from 'react';
+import { useEffect, useMemo, useRef, useState, type CSSProperties, type FormEvent, type ReactNode } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
 import { Header } from '../components/Header';
 import { Footer } from '../components/Footer';
-import { SAL_API_BASE } from '../config';
+import { SEO } from '../components/SEO';
+import { SAL_API_BASE, INDIA_ONLY } from '../config';
 import type { Vertical } from '../data/pricing';
 import { identify, track } from '../lib/posthog';
+
+// ── Abuse protection ─────────────────────────────────────────────────────────
+// Optional Cloudflare Turnstile. When VITE_TURNSTILE_SITE_KEY is set, the
+// widget renders above the submit button and its token ships in the payload
+// as `turnstile_token` for the backend to verify. Absent key → no widget,
+// no behaviour change (honeypot + speed-trap still apply).
+const TURNSTILE_SITE_KEY = import.meta.env.VITE_TURNSTILE_SITE_KEY as string | undefined;
+
+type TurnstileAPI = {
+  render: (
+    el: HTMLElement,
+    opts: { sitekey: string; callback: (token: string) => void; 'error-callback'?: () => void },
+  ) => void;
+};
+declare global {
+  interface Window {
+    turnstile?: TurnstileAPI;
+    __salviaTurnstileReady?: () => void;
+  }
+}
+
+function TurnstileWidget({ onToken }: { onToken: (t: string) => void }) {
+  const ref = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (!TURNSTILE_SITE_KEY) return;
+    const el = ref.current;
+    if (!el) return;
+    const render = () => {
+      if (window.turnstile && el.childNodes.length === 0) {
+        window.turnstile.render(el, {
+          sitekey: TURNSTILE_SITE_KEY,
+          callback: onToken,
+          'error-callback': () => onToken(''),
+        });
+      }
+    };
+    if (window.turnstile) { render(); return; }
+    window.__salviaTurnstileReady = render;
+    if (!document.querySelector('script[data-turnstile]')) {
+      const s = document.createElement('script');
+      s.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?onload=__salviaTurnstileReady';
+      s.async = true;
+      s.setAttribute('data-turnstile', '');
+      document.head.appendChild(s);
+    }
+  }, [onToken]);
+  if (!TURNSTILE_SITE_KEY) return null;
+  return <div ref={ref} style={{ marginBottom: '0.5rem' }} />;
+}
 
 // ── Static option data ───────────────────────────────────────────────────────
 
@@ -91,11 +141,17 @@ export const SignupPage = () => {
   }, [params]);
 
   const [vertical, setVertical] = useState<Vertical>(initialVertical);
-  const [country, setCountry] = useState('NZ');
+  const [country, setCountry] = useState(INDIA_ONLY ? 'IN' : 'NZ');
+
+  // Abuse protection: honeypot field (bots autofill it), form-mount
+  // timestamp (bots submit in <3s), optional Turnstile token.
+  const [website, setWebsite] = useState('');
+  const mountedAt = useRef(Date.now());
+  const [turnstileToken, setTurnstileToken] = useState('');
   const [clinicName, setClinicName] = useState('');
   const [contactName, setContactName] = useState('');
   const [contactEmail, setContactEmail] = useState('');
-  const [dialCode, setDialCode] = useState('+64');
+  const [dialCode, setDialCode] = useState(INDIA_ONLY ? '+91' : '+64');
   const [phoneLocal, setPhoneLocal] = useState('');
   const [callWindow, setCallWindow] = useState('weekday_morning');
   const [numStaff, setNumStaff] = useState('');
@@ -117,6 +173,12 @@ export const SignupPage = () => {
   async function onSubmit(e: FormEvent) {
     e.preventDefault();
     if (submitting) return;
+    // Honeypot / speed-trap tripped → fake success. No API call, no
+    // analytics, nothing for the bot to learn from.
+    if (website.trim() !== '' || Date.now() - mountedAt.current < 3000) {
+      setSubmitted(true);
+      return;
+    }
     setError(null);
     setSubmitting(true);
     try {
@@ -133,6 +195,7 @@ export const SignupPage = () => {
         country,
         ...(numStaff.trim() ? { num_staff: Number(numStaff.trim()) } : {}),
         ...(pain.trim() ? { current_workflow_pain: pain.trim() } : {}),
+        ...(turnstileToken ? { turnstile_token: turnstileToken } : {}),
       };
 
       const res = await fetch(`${SAL_API_BASE}/api/v1/access-requests`, {
@@ -175,6 +238,12 @@ export const SignupPage = () => {
 
   return (
     <>
+      <SEO
+        title="Start your free Salvia trial"
+        description="Request early access to Salvia — AI clinical documentation and compliance for Indian clinics, hospitals, dental and veterinary practices. 21 days free, no card, cancel anytime."
+        path="/start"
+        keywords={['Salvia free trial', 'AI clinical documentation India', 'clinic compliance software trial', 'AI medical scribe India signup']}
+      />
       <Header />
       <main style={{ flex: 1, zIndex: 10 }}>
       <ResponsiveStyles />
@@ -231,6 +300,19 @@ export const SignupPage = () => {
                 </div>
 
                 <form onSubmit={onSubmit} style={formStyle}>
+                  {/* Honeypot — visually hidden and untabbable; humans never
+                      see it, autofill bots complete it and get fake-success */}
+                  <input
+                    type="text"
+                    name="website"
+                    value={website}
+                    onChange={(e) => setWebsite(e.target.value)}
+                    tabIndex={-1}
+                    autoComplete="off"
+                    aria-hidden="true"
+                    style={{ position: 'absolute', left: '-9999px', width: 1, height: 1, opacity: 0 }}
+                  />
+
                   <Field label="Clinic name" htmlFor="clinicName" required>
                     <input
                       id="clinicName"
@@ -306,7 +388,7 @@ export const SignupPage = () => {
 
                   {country === 'IN' && (
                     <div style={indiaLangNoteStyle}>
-                      <span style={{ fontSize: '1rem', lineHeight: 1 }}>🇮🇳</span>
+                      <span style={{ fontSize: 'var(--text-base)', lineHeight: 1 }}>🇮🇳</span>
                       <span>
                         Salvia supports recording in <strong>English, Hindi, Malayalam, Tamil</strong>, or any mix — notes are extracted to English automatically. No extra setup needed.
                       </span>
@@ -399,6 +481,8 @@ export const SignupPage = () => {
                       {error}
                     </div>
                   )}
+
+                  <TurnstileWidget onToken={setTurnstileToken} />
 
                   <button
                     type="submit"
@@ -605,14 +689,14 @@ const bgGradientStyle: CSSProperties = {
 const eyebrowStyle: CSSProperties = {
   display: 'inline-flex',
   alignItems: 'center',
-  fontSize: '0.72rem',
+  fontSize: 'var(--text-2xs)',
   fontWeight: 800,
   letterSpacing: '0.18em',
   textTransform: 'uppercase',
   color: 'var(--salvia-accent)',
   backgroundColor: 'rgba(16, 185, 129, 0.08)',
   padding: '0.4rem 0.8rem',
-  borderRadius: '999px',
+  borderRadius: 'var(--salvia-radius-full)',
   marginBottom: '1.25rem',
 };
 
@@ -627,7 +711,7 @@ const h1Style: CSSProperties = {
 
 const leadStyle: CSSProperties = {
   color: 'var(--salvia-text-muted)',
-  fontSize: '1.05rem',
+  fontSize: 'var(--text-md)',
   lineHeight: 1.6,
   marginBottom: '2.5rem',
   maxWidth: '480px',
@@ -653,10 +737,10 @@ const stepNumberStyle: CSSProperties = {
   flexShrink: 0,
   width: '2.2rem',
   height: '2.2rem',
-  borderRadius: '999px',
+  borderRadius: 'var(--salvia-radius-full)',
   background: 'linear-gradient(135deg, var(--salvia-primary), var(--salvia-accent))',
   color: '#fff',
-  fontSize: '0.9rem',
+  fontSize: 'var(--text-sm)',
   fontWeight: 700,
   display: 'flex',
   alignItems: 'center',
@@ -677,13 +761,13 @@ const stepConnectorStyle: CSSProperties = {
 const stepTitleStyle: CSSProperties = {
   fontWeight: 700,
   color: 'var(--salvia-primary)',
-  fontSize: '1rem',
+  fontSize: 'var(--text-base)',
   marginBottom: '0.25rem',
 };
 
 const stepBodyStyle: CSSProperties = {
   color: 'var(--salvia-text-muted)',
-  fontSize: '0.92rem',
+  fontSize: 'var(--text-sm)',
   lineHeight: 1.55,
 };
 
@@ -703,7 +787,7 @@ const trustItemStyle: CSSProperties = {
   display: 'flex',
   alignItems: 'center',
   gap: '0.65rem',
-  fontSize: '0.88rem',
+  fontSize: 'var(--text-sm)',
   color: 'var(--salvia-text)',
 };
 
@@ -722,7 +806,7 @@ const formHeaderStyle: CSSProperties = {
 };
 
 const formTitleStyle: CSSProperties = {
-  fontSize: '1.35rem',
+  fontSize: 'var(--text-lg)',
   fontWeight: 700,
   color: 'var(--salvia-primary)',
   margin: '0 0 0.4rem',
@@ -730,7 +814,7 @@ const formTitleStyle: CSSProperties = {
 };
 
 const formSubStyle: CSSProperties = {
-  fontSize: '0.85rem',
+  fontSize: 'var(--text-sm)',
   color: 'var(--salvia-text-muted)',
   margin: 0,
 };
@@ -763,14 +847,14 @@ const fieldLabelTextStyle: CSSProperties = {
   display: 'flex',
   justifyContent: 'space-between',
   alignItems: 'baseline',
-  fontSize: '0.82rem',
+  fontSize: 'var(--text-xs)',
   fontWeight: 600,
   color: 'var(--salvia-primary)',
   letterSpacing: '-0.005em',
 };
 
 const fieldHintStyle: CSSProperties = {
-  fontSize: '0.75rem',
+  fontSize: 'var(--text-xs)',
   fontWeight: 500,
   color: 'var(--salvia-text-muted)',
   textTransform: 'lowercase',
@@ -779,7 +863,7 @@ const fieldHintStyle: CSSProperties = {
 const inputStyle: CSSProperties = {
   width: '100%',
   padding: '0.75rem 0.95rem',
-  fontSize: '0.95rem',
+  fontSize: 'var(--text-base)',
   fontFamily: 'inherit',
   border: '1px solid rgba(15, 23, 42, 0.14)',
   borderRadius: 'var(--salvia-radius-base)',
@@ -792,7 +876,7 @@ const inputStyle: CSSProperties = {
 
 const errorBoxStyle: CSSProperties = {
   color: '#B91C1C',
-  fontSize: '0.88rem',
+  fontSize: 'var(--text-sm)',
   padding: '0.85rem 1rem',
   borderRadius: 'var(--salvia-radius-base)',
   backgroundColor: 'rgba(185, 28, 28, 0.06)',
@@ -802,7 +886,7 @@ const errorBoxStyle: CSSProperties = {
 
 const primaryButtonStyle: CSSProperties = {
   padding: '0.95rem 1.5rem',
-  fontSize: '0.95rem',
+  fontSize: 'var(--text-base)',
   fontWeight: 700,
   borderRadius: 'var(--salvia-radius-full)',
   border: 'none',
@@ -815,7 +899,7 @@ const primaryButtonStyle: CSSProperties = {
 };
 
 const fineprintStyle: CSSProperties = {
-  fontSize: '0.78rem',
+  fontSize: 'var(--text-xs)',
   color: 'var(--salvia-text-muted)',
   textAlign: 'center',
   margin: 0,
@@ -830,7 +914,7 @@ const indiaLangNoteStyle: CSSProperties = {
   borderRadius: 'var(--salvia-radius-base)',
   backgroundColor: 'rgba(99, 102, 241, 0.06)',
   border: '1px solid rgba(99, 102, 241, 0.15)',
-  fontSize: '0.82rem',
+  fontSize: 'var(--text-xs)',
   color: 'var(--salvia-text)',
   lineHeight: 1.5,
 };
