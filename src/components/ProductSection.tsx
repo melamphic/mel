@@ -47,8 +47,8 @@ const productsFor = (isIndia: boolean) => [
 const MockWindow: React.FC<{ title: string; subtitle?: string; accent?: string; children: React.ReactNode }> = ({ title, subtitle, accent = '#FF4E00', children }) => (
   <div style={{
     backgroundColor: '#fff',
-    borderRadius: '12px',
-    boxShadow: '0 24px 60px -12px rgba(15,23,42,0.18), 0 0 0 1px rgba(15,23,42,0.06)',
+    borderRadius: 'var(--radius-md)',
+    boxShadow: 'var(--shadow-3)',
     overflow: 'hidden',
     width: '100%',
     maxWidth: '640px',
@@ -56,7 +56,7 @@ const MockWindow: React.FC<{ title: string; subtitle?: string; accent?: string; 
   }}>
     <div style={{
       padding: '0.7rem 1rem',
-      borderBottom: '1px solid #F1F5F9',
+      borderBottom: '1px solid var(--border-subtle)',
       display: 'flex', alignItems: 'center', gap: '0.75rem',
       backgroundColor: '#FAFBFC',
     }}>
@@ -66,13 +66,13 @@ const MockWindow: React.FC<{ title: string; subtitle?: string; accent?: string; 
         <div style={{ width: 10, height: 10, borderRadius: '50%', backgroundColor: '#28C840' }} />
       </div>
       <div style={{ flex: 1, textAlign: 'left', marginLeft: '0.5rem' }}>
-        <div style={{ fontSize: '0.78rem', fontWeight: 700, color: '#0F172A', letterSpacing: '-0.01em' }}>{title}</div>
-        {subtitle && <div style={{ fontSize: '0.65rem', color: '#94A3B8', marginTop: '1px' }}>{subtitle}</div>}
+        <div style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--salvia-primary)', letterSpacing: '-0.01em' }}>{title}</div>
+        {subtitle && <div style={{ fontSize: 'var(--text-2xs)', color: '#94A3B8', marginTop: '1px' }}>{subtitle}</div>}
       </div>
       <div style={{
-        fontSize: '0.6rem', fontWeight: 700,
+        fontSize: 'var(--text-2xs)', fontWeight: 700,
         color: accent, backgroundColor: `${accent}12`,
-        padding: '0.22rem 0.55rem', borderRadius: '999px',
+        padding: '0.22rem 0.55rem', borderRadius: 'var(--salvia-radius-full)',
         letterSpacing: '0.05em',
       }}>
         LIVE
@@ -100,7 +100,7 @@ const FormEngineMock: React.FC = () => {
           <div key={f.label} style={{
             display: 'grid', gridTemplateColumns: '14px 1fr 90px 70px', gap: '0.75rem',
             alignItems: 'center', padding: '0.65rem 0.75rem',
-            border: '1px solid #F1F5F9', borderRadius: '8px',
+            border: '1px solid var(--border-subtle)', borderRadius: 'var(--radius-sm)',
             backgroundColor: i === 2 ? '#FFF7F2' : '#fff',
             boxShadow: i === 2 ? 'inset 0 0 0 1px rgba(255,78,0,0.25)' : 'none',
           }}>
@@ -113,24 +113,24 @@ const FormEngineMock: React.FC = () => {
               <div style={{ width: 10, height: 1.5, backgroundColor: 'currentColor', borderRadius: 1 }} />
             </div>
             <div style={{ textAlign: 'left' }}>
-              <div style={{ fontSize: '0.78rem', fontWeight: 600, color: '#0F172A', letterSpacing: '-0.01em' }}>
-                {f.label} {f.required && <span style={{ color: '#FF4E00' }}>*</span>}
+              <div style={{ fontSize: 'var(--text-xs)', fontWeight: 600, color: 'var(--salvia-primary)', letterSpacing: '-0.01em' }}>
+                {f.label} {f.required && <span style={{ color: 'var(--salvia-accent)' }}>*</span>}
               </div>
-              <div style={{ fontSize: '0.65rem', color: '#94A3B8', marginTop: '1px' }}>
+              <div style={{ fontSize: 'var(--text-2xs)', color: '#94A3B8', marginTop: '1px' }}>
                 {f.hint}
               </div>
             </div>
             <div style={{
-              fontSize: '0.6rem', fontWeight: 700,
-              color: '#475569', backgroundColor: '#F8FAFC',
-              padding: '0.2rem 0.5rem', borderRadius: '4px',
+              fontSize: 'var(--text-2xs)', fontWeight: 700,
+              color: 'var(--salvia-text-muted)', backgroundColor: '#F8FAFC',
+              padding: '0.2rem 0.5rem', borderRadius: 'var(--radius-sm)',
               textAlign: 'center', letterSpacing: '0.02em',
             }}>
               {f.type}
             </div>
             <div style={{
-              fontSize: '0.6rem', fontWeight: 600,
-              color: i === 2 ? '#FF4E00' : '#94A3B8',
+              fontSize: 'var(--text-2xs)', fontWeight: 600,
+              color: i === 2 ? 'var(--salvia-accent)' : '#94A3B8',
               textAlign: 'right', letterSpacing: '0.02em',
             }}>
               {i === 2 ? 'AI PROMPT' : `field·${i + 1}`}
@@ -142,25 +142,25 @@ const FormEngineMock: React.FC = () => {
       {/* Version bar */}
       <div style={{
         display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-        padding: '0.65rem 0.75rem', borderTop: '1px dashed #E2E8F0',
+        padding: '0.65rem 0.75rem', borderTop: '1px dashed var(--border-strong)',
       }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.68rem', color: '#64748B' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: 'var(--text-2xs)', color: 'var(--salvia-text-muted)' }}>
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <polyline points="1 4 1 10 7 10" />
             <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10" />
           </svg>
-          <span><strong style={{ color: '#0F172A' }}>v4.2</strong> · 17 revisions · last: 2h ago</span>
+          <span><strong style={{ color: 'var(--salvia-primary)' }}>v4.2</strong> · 17 revisions · last: 2h ago</span>
         </div>
         <div style={{ display: 'flex', gap: '0.4rem' }}>
           <div style={{
-            fontSize: '0.65rem', fontWeight: 700, color: '#475569',
-            padding: '0.3rem 0.6rem', border: '1px solid #E2E8F0', borderRadius: '6px',
+            fontSize: 'var(--text-2xs)', fontWeight: 700, color: 'var(--salvia-text-muted)',
+            padding: '0.3rem 0.6rem', border: '1px solid var(--border-strong)', borderRadius: 'var(--radius-sm)',
           }}>
             Preview PDF
           </div>
           <div style={{
-            fontSize: '0.65rem', fontWeight: 700, color: '#fff',
-            padding: '0.3rem 0.65rem', backgroundColor: '#FF4E00', borderRadius: '6px',
+            fontSize: 'var(--text-2xs)', fontWeight: 700, color: '#fff',
+            padding: '0.3rem 0.65rem', backgroundColor: 'var(--salvia-accent)', borderRadius: 'var(--radius-sm)',
           }}>
             Publish v4.3
           </div>
@@ -179,14 +179,14 @@ const PolicyEngineMock: React.FC = () => {
     { parity: 'MAYBE', text: 'Pain score should be documented using a validated 0–10 scale.', forms: 3 },
     { parity: 'TRY', text: 'Photographs of visible conditions are preferred when practical.', forms: 1 },
   ];
-  const parityColor = (p: string) => p === 'MUST' ? '#DC2626' : p === 'MAYBE' ? '#D97706' : '#059669';
+  const parityColor = (p: string) => p === 'MUST' ? 'var(--salvia-error)' : p === 'MAYBE' ? 'var(--salvia-warning)' : 'var(--accent-dental)';
   const parityBg = (p: string) => p === 'MUST' ? '#FEF2F2' : p === 'MAYBE' ? '#FFFBEB' : '#ECFDF5';
 
   return (
     <MockWindow title={isIndia ? 'NABH Clinical Records' : 'Clinical Records'} subtitle="v12.2 · linked to 4 forms · imported from PDF" accent="#0EA5E9">
       {/* Section heading */}
       <div style={{ textAlign: 'left', marginBottom: '0.75rem' }}>
-        <div style={{ fontSize: '0.62rem', fontWeight: 700, color: '#94A3B8', letterSpacing: '0.08em', textTransform: 'uppercase' }}>
+        <div className="eyebrow" style={{ color: '#94A3B8' }}>
           § 4. Record-keeping requirements
         </div>
       </div>
@@ -198,27 +198,27 @@ const PolicyEngineMock: React.FC = () => {
             display: 'grid', gridTemplateColumns: '70px 1fr auto', gap: '0.75rem',
             alignItems: 'center',
             padding: '0.75rem 0.85rem',
-            border: '1px solid #F1F5F9',
-            borderRadius: '8px',
+            border: '1px solid var(--border-subtle)',
+            borderRadius: 'var(--radius-sm)',
             backgroundColor: '#fff',
           }}>
             <div style={{
-              fontSize: '0.58rem', fontWeight: 800,
+              fontSize: 'var(--text-2xs)', fontWeight: 800,
               color: parityColor(c.parity),
               backgroundColor: parityBg(c.parity),
               padding: '0.28rem 0.45rem',
-              borderRadius: '5px',
+              borderRadius: 'var(--radius-sm)',
               textAlign: 'center', letterSpacing: '0.06em',
             }}>
               {c.parity}<br />FOLLOW
             </div>
-            <div style={{ fontSize: '0.78rem', color: '#0F172A', lineHeight: 1.45, textAlign: 'left' }}>
+            <div style={{ fontSize: 'var(--text-xs)', color: 'var(--salvia-primary)', lineHeight: 1.45, textAlign: 'left' }}>
               {c.text}
             </div>
             <div style={{
-              fontSize: '0.6rem', fontWeight: 700, color: '#64748B',
+              fontSize: 'var(--text-2xs)', fontWeight: 700, color: 'var(--salvia-text-muted)',
               backgroundColor: '#F8FAFC', padding: '0.25rem 0.5rem',
-              borderRadius: '999px', whiteSpace: 'nowrap',
+              borderRadius: 'var(--salvia-radius-full)', whiteSpace: 'nowrap',
               letterSpacing: '0.02em',
             }}>
               {c.forms} form{c.forms > 1 ? 's' : ''}
@@ -231,14 +231,14 @@ const PolicyEngineMock: React.FC = () => {
       <div style={{
         display: 'flex', justifyContent: 'space-between', alignItems: 'center',
         padding: '0.65rem 0.25rem 0', marginTop: '0.75rem',
-        borderTop: '1px dashed #E2E8F0', paddingTop: '0.75rem',
+        borderTop: '1px dashed var(--border-strong)', paddingTop: '0.75rem',
       }}>
-        <div style={{ fontSize: '0.68rem', color: '#64748B' }}>
-          <strong style={{ color: '#0F172A' }}>12 clauses</strong> · 4 must-follow · 6 maybe · 2 try
+        <div style={{ fontSize: 'var(--text-2xs)', color: 'var(--salvia-text-muted)' }}>
+          <strong style={{ color: 'var(--salvia-primary)' }}>12 clauses</strong> · 4 must-follow · 6 maybe · 2 try
         </div>
         <div style={{
-          fontSize: '0.65rem', fontWeight: 700, color: '#fff',
-          padding: '0.3rem 0.65rem', backgroundColor: '#0EA5E9', borderRadius: '6px',
+          fontSize: 'var(--text-2xs)', fontWeight: 700, color: '#fff',
+          padding: '0.3rem 0.65rem', backgroundColor: 'var(--accent-vet)', borderRadius: 'var(--radius-sm)',
         }}>
           Link to forms
         </div>
@@ -256,14 +256,14 @@ const AudioFormsMock: React.FC = () => {
       <div style={{
         display: 'flex', alignItems: 'center', gap: '3px',
         padding: '0.6rem 0.75rem', backgroundColor: '#F8FAFC',
-        borderRadius: '8px', marginBottom: '0.75rem',
+        borderRadius: 'var(--radius-sm)', marginBottom: '0.75rem',
         height: '56px',
       }}>
         {waveform.map((h, i) => (
           <div key={i} style={{
             flex: 1,
             height: `${h}px`,
-            backgroundColor: i < 22 ? '#FF4E00' : '#CBD5E1',
+            backgroundColor: i < 22 ? 'var(--salvia-accent)' : '#CBD5E1',
             borderRadius: '2px',
             opacity: i < 22 ? 1 : 0.6,
           }} />
@@ -274,9 +274,9 @@ const AudioFormsMock: React.FC = () => {
       <div style={{
         padding: '0.75rem 0.9rem',
         backgroundColor: '#FFFBF7',
-        borderLeft: '3px solid #FF4E00',
-        borderRadius: '4px',
-        fontSize: '0.8rem',
+        borderLeft: '3px solid var(--salvia-accent)',
+        borderRadius: 'var(--radius-sm)',
+        fontSize: 'var(--text-xs)',
         lineHeight: 1.6,
         color: '#334155',
         textAlign: 'left',
@@ -284,9 +284,9 @@ const AudioFormsMock: React.FC = () => {
         fontStyle: 'italic',
       }}>
         "Mr. Rakesh Nair, 54-year-old male, reports vomiting{' '}
-        <mark style={{ backgroundColor: 'rgba(255,78,0,0.18)', color: '#0F172A', padding: '0 3px', borderRadius: '3px', fontStyle: 'normal', fontWeight: 600 }}>once daily for three days</mark>,
-        partially digested food. Weight <mark style={{ backgroundColor: 'rgba(255,78,0,0.18)', color: '#0F172A', padding: '0 3px', borderRadius: '3px', fontStyle: 'normal', fontWeight: 600 }}>72 kilograms</mark>,
-        temp <mark style={{ backgroundColor: 'rgba(255,78,0,0.18)', color: '#0F172A', padding: '0 3px', borderRadius: '3px', fontStyle: 'normal', fontWeight: 600 }}>38.6°C</mark>..."
+        <mark style={{ backgroundColor: 'rgba(255,78,0,0.18)', color: 'var(--salvia-primary)', padding: '0 3px', borderRadius: 'var(--radius-sm)', fontStyle: 'normal', fontWeight: 600 }}>once daily for three days</mark>,
+        partially digested food. Weight <mark style={{ backgroundColor: 'rgba(255,78,0,0.18)', color: 'var(--salvia-primary)', padding: '0 3px', borderRadius: 'var(--radius-sm)', fontStyle: 'normal', fontWeight: 600 }}>72 kilograms</mark>,
+        temp <mark style={{ backgroundColor: 'rgba(255,78,0,0.18)', color: 'var(--salvia-primary)', padding: '0 3px', borderRadius: 'var(--radius-sm)', fontStyle: 'normal', fontWeight: 600 }}>38.6°C</mark>..."
       </div>
 
       {/* Filled form fields with confidence + source */}
@@ -301,28 +301,28 @@ const AudioFormsMock: React.FC = () => {
             display: 'grid', gridTemplateColumns: '80px 1fr 68px 40px', gap: '0.5rem',
             alignItems: 'center',
             padding: '0.55rem 0.7rem',
-            border: '1px solid #F1F5F9',
-            borderRadius: '6px',
+            border: '1px solid var(--border-subtle)',
+            borderRadius: 'var(--radius-sm)',
           }}>
-            <div style={{ fontSize: '0.6rem', fontWeight: 700, color: '#94A3B8', letterSpacing: '0.05em', textTransform: 'uppercase', textAlign: 'left' }}>
+            <div style={{ fontSize: 'var(--text-2xs)', fontWeight: 700, color: '#94A3B8', letterSpacing: '0.05em', textTransform: 'uppercase', textAlign: 'left' }}>
               {r.field}
             </div>
-            <div style={{ fontSize: '0.8rem', fontWeight: 600, color: '#0F172A', textAlign: 'left', letterSpacing: '-0.01em' }}>
+            <div style={{ fontSize: 'var(--text-xs)', fontWeight: 600, color: 'var(--salvia-primary)', textAlign: 'left', letterSpacing: '-0.01em' }}>
               {r.value}
             </div>
             <div style={{
-              fontSize: '0.6rem', fontWeight: 700,
-              color: r.conf >= 90 ? '#059669' : '#D97706',
+              fontSize: 'var(--text-2xs)', fontWeight: 700,
+              color: r.conf >= 90 ? 'var(--accent-dental)' : 'var(--salvia-warning)',
               backgroundColor: r.conf >= 90 ? '#ECFDF5' : '#FFFBEB',
-              padding: '0.2rem 0.45rem', borderRadius: '999px',
+              padding: '0.2rem 0.45rem', borderRadius: 'var(--salvia-radius-full)',
               textAlign: 'center', letterSpacing: '0.02em',
             }}>
               {r.conf}%
             </div>
             <div style={{
               fontFamily: 'monospace',
-              fontSize: '0.6rem', fontWeight: 700,
-              color: r.inferred ? '#D97706' : '#64748B',
+              fontSize: 'var(--text-2xs)', fontWeight: 700,
+              color: r.inferred ? 'var(--salvia-warning)' : 'var(--salvia-text-muted)',
               textAlign: 'right',
             }}>
               {r.line}
@@ -335,14 +335,14 @@ const AudioFormsMock: React.FC = () => {
       <div style={{
         display: 'flex', justifyContent: 'space-between', alignItems: 'center',
         marginTop: '0.9rem', paddingTop: '0.7rem',
-        borderTop: '1px dashed #E2E8F0',
+        borderTop: '1px dashed var(--border-strong)',
       }}>
-        <div style={{ fontSize: '0.68rem', color: '#64748B' }}>
+        <div style={{ fontSize: 'var(--text-2xs)', color: 'var(--salvia-text-muted)' }}>
           1 field flagged for review · human-in-the-loop
         </div>
         <div style={{
-          fontSize: '0.65rem', fontWeight: 700, color: '#fff',
-          padding: '0.3rem 0.65rem', backgroundColor: '#FF4E00', borderRadius: '6px',
+          fontSize: 'var(--text-2xs)', fontWeight: 700, color: '#fff',
+          padding: '0.3rem 0.65rem', backgroundColor: 'var(--salvia-accent)', borderRadius: 'var(--radius-sm)',
         }}>
           Review &amp; approve
         </div>
@@ -364,29 +364,26 @@ export const ProductSection: React.FC = () => {
   };
 
   return (
-    <section id="products" className="mobile-pad-reduce" style={{ padding: '6rem 0', position: 'relative', zIndex: 10 }}>
+    <section id="products" className="mobile-pad-reduce" style={{ padding: 'var(--section-pad) 0', position: 'relative', zIndex: 10 }}>
       {/* NO WHITE BOX WRAPPER. It breathes openly on the background. */}
       <div className="container" style={{ maxWidth: '1400px' }}>
 
         {/* Streamlined Header - Just the title and the pill */}
         <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-          <div style={{
-            fontSize: '0.7rem', fontWeight: 700, letterSpacing: '0.14em',
-            textTransform: 'uppercase', color: 'var(--salvia-accent)',
-          }}>
+          <div className="eyebrow">
             The modules
           </div>
-          <h2 style={{ fontSize: 'clamp(2rem, 4vw, 3rem)', fontWeight: 700, color: 'var(--salvia-primary)', marginTop: '0.6rem', letterSpacing: '-0.03em' }}>
+          <h2 style={{ fontSize: 'var(--text-3xl)', fontWeight: 700, color: 'var(--salvia-primary)', marginTop: '0.6rem', letterSpacing: '-0.03em' }}>
             Three engines. One platform.
           </h2>
-          <p style={{ color: 'var(--salvia-text-muted)', fontSize: '1.05rem', lineHeight: 1.6, marginTop: '1rem', maxWidth: '620px', marginInline: 'auto' }}>
+          <p style={{ color: 'var(--salvia-text-muted)', fontSize: 'var(--text-md)', lineHeight: 1.6, marginTop: '1rem', maxWidth: '620px', marginInline: 'auto' }}>
             Build the forms, upload the policies, feed in the audio. Salvia stitches them together into a
             single compliance-grade record.
           </p>
 
           {/* Segmented Control Pill — scrolls horizontally on mobile */}
           <div style={{ marginTop: '1.5rem', width: '100%', overflow: 'auto' }}>
-            <div style={{ display: 'inline-flex', margin: '0 auto', backgroundColor: '#ffffff', borderRadius: '999px', padding: '0.5rem', boxShadow: '0 4px 20px rgba(0,0,0,0.03)', border: '1px solid rgba(0,0,0,0.04)' }}>
+            <div style={{ display: 'inline-flex', margin: '0 auto', backgroundColor: '#ffffff', borderRadius: 'var(--salvia-radius-full)', padding: '0.5rem', boxShadow: 'var(--shadow-2)', border: '1px solid var(--border-subtle)' }}>
               {products.map((p, idx) => (
                 <button
                   key={p.id}
@@ -397,11 +394,11 @@ export const ProductSection: React.FC = () => {
                     boxShadow: activeTab === idx ? 'inset 0 0 0 1px rgba(0,0,0,0.05)' : 'none',
                     color: activeTab === idx ? 'var(--salvia-text)' : '#94A3B8',
                     fontWeight: 700,
-                    fontSize: '0.8rem',
+                    fontSize: 'var(--text-xs)',
                     letterSpacing: '0.04em',
                     border: 'none',
                     padding: '0.85rem 2rem',
-                    borderRadius: '999px',
+                    borderRadius: 'var(--salvia-radius-full)',
                     cursor: 'pointer',
                     transition: 'all 0.2s ease',
                     minWidth: '160px',
@@ -421,28 +418,28 @@ export const ProductSection: React.FC = () => {
               display: 'grid',
               gridTemplateColumns: 'minmax(0, 1.4fr) minmax(0, 1fr)',
               gap: '0',
-              borderRadius: '24px',
+              borderRadius: 'var(--radius-xl)',
               overflow: 'hidden',
               backgroundColor: '#ffffff',
-              boxShadow: '0 24px 60px rgba(0,0,0,0.04)',
-              border: '1px solid #EBECEF',
+              boxShadow: 'var(--shadow-3)',
+              border: '1px solid var(--border-subtle)',
               marginTop: '3rem',
             }}
           >
             {/* Left Diagram Column */}
-            <div className="product-diagram-cell" style={{ background: 'radial-gradient(75% 60% at 22% 12%, rgba(255,78,0,0.20), transparent 60%), linear-gradient(150deg, #0F172A 0%, #1E293B 100%)', position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden', padding: '3rem' }}>
+            <div className="product-diagram-cell" style={{ background: 'radial-gradient(75% 60% at 22% 12%, rgba(255,78,0,0.20), transparent 60%), linear-gradient(150deg, var(--salvia-primary) 0%, #1E293B 100%)', position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden', padding: '3rem' }}>
               {renderDiagram()}
             </div>
 
             {/* Right Details Column */}
             <div className="product-details-cell" style={{ padding: '3.5rem 3.25rem', display: 'flex', flexDirection: 'column', justifyContent: 'center', textAlign: 'left' }}>
-              <div style={{ color: 'var(--salvia-accent)', fontSize: '0.7rem', fontWeight: 800, letterSpacing: '0.1em', marginBottom: '0.75rem', textTransform: 'uppercase' }}>
+              <div className="eyebrow" style={{ marginBottom: '0.75rem' }}>
                 {products[activeTab].label}
               </div>
-              <h3 style={{ fontSize: 'clamp(1.6rem, 3.2vw, 2.4rem)', fontWeight: 700, color: 'var(--salvia-primary)', marginBottom: '1rem', letterSpacing: '-0.02em', lineHeight: 1.1 }}>
+              <h3 style={{ fontSize: 'var(--text-2xl)', fontWeight: 700, color: 'var(--salvia-primary)', marginBottom: '1rem', letterSpacing: '-0.02em', lineHeight: 1.1 }}>
                 {products[activeTab].title}
               </h3>
-              <p style={{ color: 'var(--salvia-text-muted)', fontSize: '1rem', lineHeight: 1.6, marginBottom: '2.5rem' }}>
+              <p style={{ color: 'var(--salvia-text-muted)', fontSize: 'var(--text-base)', lineHeight: 1.6, marginBottom: '2.5rem' }}>
                 {products[activeTab].subtitle}
               </p>
 
@@ -454,7 +451,7 @@ export const ProductSection: React.FC = () => {
                         <polyline points="20 6 9 17 4 12"></polyline>
                       </svg>
                     </div>
-                    <span style={{ color: 'var(--salvia-primary)', fontWeight: 500, fontSize: '0.95rem' }}>{bullet}</span>
+                    <span style={{ color: 'var(--salvia-primary)', fontWeight: 500, fontSize: 'var(--text-base)' }}>{bullet}</span>
                   </li>
                 ))}
               </ul>
@@ -467,10 +464,10 @@ export const ProductSection: React.FC = () => {
                   backgroundColor: 'var(--salvia-accent)',
                   color: '#fff',
                   fontWeight: 700,
-                  fontSize: '0.9rem',
+                  fontSize: 'var(--text-sm)',
                   padding: '1rem 2rem',
                   border: 'none',
-                  borderRadius: '8px',
+                  borderRadius: 'var(--radius-sm)',
                   cursor: 'pointer',
                   letterSpacing: '0.02em',
                 }}>
@@ -483,7 +480,7 @@ export const ProductSection: React.FC = () => {
 
         <style>{`
           @media (max-width: 768px) {
-            .product-grid { border-radius: 16px !important; margin-top: 2rem !important; }
+            .product-grid { border-radius: var(--radius-lg) !important; margin-top: 2rem !important; }
             .product-diagram-cell { padding: 1.75rem !important; }
             .product-details-cell { padding: 2.5rem 1.75rem !important; }
           }
