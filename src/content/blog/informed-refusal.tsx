@@ -14,10 +14,10 @@ export const content = (
       pneumonia-risk wasn't on the page they signed.
     </p>
 
-    <h3>What juries actually look for</h3>
+    <h3>What courts actually look for</h3>
     <p>
-      After reviewing a stack of refusal-related malpractice cases, there's a fairly consistent
-      pattern. Defending clinicians win when their chart shows four things, in this order:
+      The case law on refusal-related negligence is remarkably consistent across jurisdictions.
+      Defending clinicians win when their chart shows four things, in this order:
     </p>
     <ol>
       <li><strong>The specific recommendation.</strong> Not "discussed imaging" — "recommended non-contrast chest CT to rule out pulmonary embolism given the sudden-onset pleuritic pain."</li>
@@ -27,10 +27,19 @@ export const content = (
     </ol>
 
     <p>
-      In <em>Smith v. Northside Medical</em> (2023), a physician was found liable despite a
-      signed refusal because the documented discussion didn't include the specific word "stroke"
-      — the outcome the patient ultimately suffered. The form said "risk of serious harm." The
-      jury said that wasn't informed.
+      The canonical case here is{' '}
+      <a href="https://biotech.law.lsu.edu/cases/consent/Truman_v_Thomas.htm" target="_blank" rel="noopener noreferrer">
+        <em>Truman v. Thomas</em>, 611 P.2d 902 (Cal. 1980)
+      </a>: a physician was held liable after a patient who had declined a pap smear died of
+      cervical cancer — because the chart couldn't show she was ever told what refusing the test
+      could cost her. The duty isn't discharged by offering the test; it's discharged by
+      documenting that the patient understood the specific risk of saying no. Indian courts draw
+      the same line from the other direction:{' '}
+      <a href="https://indiankanoon.org/doc/438423/" target="_blank" rel="noopener noreferrer">
+        <em>Samira Kohli v. Dr. Prabha Manchanda</em> (2008) 2 SCC 1
+      </a>{' '}
+      held that consent given for one procedure doesn't stretch to another — consent, and by
+      extension refusal, is only meaningful when it's specific and provably informed.
     </p>
 
     <h3>Why this is so hard to do manually</h3>
@@ -68,7 +77,7 @@ export const content = (
       more defensible than a blank one.
     </p>
 
-    <h3>The deeper point</h3>
+    <h3>Refusal is a clinical decision</h3>
     <p>
       "Patient refused" is not a clinical note — it's a shrug. A good refusal note treats the
       refusal as its own clinical decision, one that deserves the same rigour as a diagnosis.
