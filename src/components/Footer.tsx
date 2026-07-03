@@ -50,6 +50,7 @@ export const Footer = () => (
       <div>
         <div className="eyebrow" style={colHeadingStyle}>By Practice</div>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.65rem' }}>
+          <Link to="/hospitals" style={linkStyle}>Hospitals</Link>
           <Link to="/veterinary" style={linkStyle}>Veterinary</Link>
           <Link to="/dental" style={linkStyle}>Dental</Link>
           <Link to="/general-practice" style={linkStyle}>General Practice</Link>
