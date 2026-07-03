@@ -24,23 +24,20 @@ export const ScribeVsSalvia: React.FC = () => {
     i === 0 && !isIndia ? 'A note in any language — every field traced to its source line' : x);
   return (
   <section style={{
-    padding: '6rem 0',
+    padding: 'var(--section-pad) 0',
     backgroundColor: 'transparent',
     position: 'relative',
     zIndex: 10,
   }}>
-    <div className="container" style={{ maxWidth: '1100px' }}>
+    <div className="container" style={{ maxWidth: '1200px' }}>
 
       {/* Eyebrow + headline */}
       <div style={{ marginBottom: '4rem', maxWidth: '760px' }}>
-        <span style={{
-          fontSize: '0.7rem', fontWeight: 700, letterSpacing: '0.14em',
-          textTransform: 'uppercase', color: 'var(--salvia-accent)',
-        }}>
+        <span className="eyebrow">
           Scribe vs. Salvia
         </span>
         <h2 style={{
-          fontSize: 'clamp(2.25rem, 4.5vw, 3.25rem)',
+          fontSize: 'var(--text-3xl)',
           fontWeight: 700, letterSpacing: '-0.04em', lineHeight: 1.08,
           color: 'var(--salvia-primary)', marginTop: '0.7rem',
         }}>
@@ -55,28 +52,26 @@ export const ScribeVsSalvia: React.FC = () => {
         gridTemplateColumns: '1fr 1fr',
         gap: '0',
         backgroundColor: '#fff',
-        border: '1px solid rgba(0,0,0,0.06)',
-        borderRadius: '20px',
+        border: '1px solid var(--border-subtle)',
+        borderRadius: 'var(--radius-lg)',
         overflow: 'hidden',
-        boxShadow: '0 8px 24px rgba(25,56,46,0.04)',
+        boxShadow: 'var(--shadow-2)',
       }}>
 
         {/* Left: what a scribe gives you */}
         <div className="scribe-vs-cell-left" style={{
           padding: '2.5rem 2.25rem',
-          borderRight: '1px solid rgba(0,0,0,0.06)',
+          borderRight: '1px solid var(--border-subtle)',
           backgroundColor: '#F8FAFC',
         }}>
-          <div style={{
-            fontSize: '0.65rem', fontWeight: 700,
-            letterSpacing: '0.1em', textTransform: 'uppercase',
+          <div className="eyebrow" style={{
             color: 'var(--salvia-text-muted)',
             marginBottom: '0.75rem',
           }}>
             A typical AI scribe
           </div>
           <h3 style={{
-            fontSize: '1.35rem', fontWeight: 700,
+            fontSize: 'var(--text-lg)', fontWeight: 700,
             color: 'var(--salvia-primary)',
             letterSpacing: '-0.02em',
             lineHeight: 1.25,
@@ -88,7 +83,7 @@ export const ScribeVsSalvia: React.FC = () => {
             {SCRIBE_GIVES.map((item) => (
               <li key={item} style={{
                 display: 'flex', alignItems: 'flex-start', gap: '0.6rem',
-                fontSize: '0.92rem',
+                fontSize: 'var(--text-sm)',
                 color: 'var(--salvia-text-muted)',
                 lineHeight: 1.5,
               }}>
@@ -113,16 +108,13 @@ export const ScribeVsSalvia: React.FC = () => {
             width: 4, height: '100%',
             backgroundColor: 'var(--salvia-accent)',
           }} />
-          <div style={{
-            fontSize: '0.65rem', fontWeight: 700,
-            letterSpacing: '0.1em', textTransform: 'uppercase',
-            color: 'var(--salvia-accent)',
+          <div className="eyebrow" style={{
             marginBottom: '0.75rem',
           }}>
             Salvia — compliance suite
           </div>
           <h3 style={{
-            fontSize: '1.35rem', fontWeight: 700,
+            fontSize: 'var(--text-lg)', fontWeight: 700,
             color: 'var(--salvia-primary)',
             letterSpacing: '-0.02em',
             lineHeight: 1.25,
@@ -134,7 +126,7 @@ export const ScribeVsSalvia: React.FC = () => {
             {salviaGives.map((item) => (
               <li key={item} style={{
                 display: 'flex', alignItems: 'flex-start', gap: '0.6rem',
-                fontSize: '0.92rem',
+                fontSize: 'var(--text-sm)',
                 color: 'var(--salvia-primary)',
                 lineHeight: 1.5,
                 fontWeight: 500,
@@ -153,7 +145,7 @@ export const ScribeVsSalvia: React.FC = () => {
         @media (max-width: 768px) {
           .scribe-vs-cell-left {
             border-right: none !important;
-            border-bottom: 1px solid rgba(0,0,0,0.06) !important;
+            border-bottom: 1px solid var(--border-subtle) !important;
           }
         }
       `}</style>
@@ -161,7 +153,7 @@ export const ScribeVsSalvia: React.FC = () => {
       {/* Closing line */}
       <p style={{
         textAlign: 'center',
-        fontSize: 'clamp(1.05rem, 1.8vw, 1.2rem)',
+        fontSize: 'var(--text-md)',
         color: 'var(--salvia-text-muted)',
         lineHeight: 1.55,
         marginTop: '3rem',
@@ -174,7 +166,7 @@ export const ScribeVsSalvia: React.FC = () => {
       </p>
 
       <div style={{ display: 'flex', justifyContent: 'center', marginTop: '2.5rem' }}>
-        <Link to="/start" className="btn-primary" style={{ padding: '1.1rem 2.75rem', fontSize: '1rem', fontWeight: 700, textDecoration: 'none' }}>
+        <Link to="/start" className="btn-primary" style={{ padding: '1.1rem 2.75rem', fontSize: 'var(--text-base)', fontWeight: 700, textDecoration: 'none' }}>
           <div className="shimmer" />
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
           Book a demo
