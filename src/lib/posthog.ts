@@ -15,6 +15,11 @@ const queue: Array<(p: PostHog) => void> = [];
 
 function enqueue(run: (p: PostHog) => void): void {
   if (!ENABLED) return;
+  // Consent-first: events fired before the user grants analytics consent are
+  // DROPPED, not buffered — otherwise the pre-consent pageviews would be
+  // flushed (and sent) the moment consent arrives, which violates the
+  // consent-before-collection principle (GDPR / DPDP).
+  if (!hasAnalyticsConsent()) return;
   if (ph) run(ph);
   else queue.push(run);
 }
@@ -69,8 +74,11 @@ export function hasAnalyticsConsent(): boolean {
 export function setAnalyticsConsent(granted: boolean): void {
   try { localStorage.setItem(CONSENT_KEY, granted ? 'granted' : 'denied'); } catch { /* ignore */ }
   if (granted) {
+    // Re-granting after an earlier opt-out must re-enable capture.
+    if (ph && ph.has_opted_out_capturing()) ph.opt_in_capturing();
     void initPostHog();
-  } else if (ph) {
-    ph.opt_out_capturing();
+  } else {
+    queue.length = 0; // drop anything buffered while the SDK was loading
+    if (ph) ph.opt_out_capturing();
   }
 }
