@@ -54,33 +54,33 @@ export const FormEnginePage = () => {
       <main style={{ flex: 1, zIndex: 10 }}>
 
       {/* Hero */}
-      <section style={{ padding: '11rem 0 7rem', backgroundColor: 'var(--salvia-bg)', borderBottom: '1px solid #F1F5F9' }}>
-        <div className="container" style={{ maxWidth: '1000px' }}>
+      <section style={{ padding: '11rem 0 7rem', backgroundColor: 'var(--salvia-bg)', borderBottom: '1px solid var(--border-subtle)' }}>
+        <div className="container" style={{ maxWidth: '960px' }}>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '5rem', alignItems: 'center' }} className="mobile-stack">
             <div>
               <div style={{
                 display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
                 backgroundColor: 'rgba(255,78,0,0.07)', border: '1.5px solid rgba(255,78,0,0.18)',
-                borderRadius: '10px', padding: '0.35rem 0.85rem', marginBottom: '1.75rem',
+                borderRadius: 'var(--radius-md)', padding: '0.35rem 0.85rem', marginBottom: '1.75rem',
               }}>
-                <span style={{ fontSize: '0.75rem', fontWeight: 800, color: '#FF4E00', letterSpacing: '0.1em', textTransform: 'uppercase' }}>Statutory Form Infrastructure</span>
+                <span style={{ fontSize: 'var(--text-xs)', fontWeight: 800, color: 'var(--salvia-accent)', letterSpacing: '0.1em', textTransform: 'uppercase' }}>Statutory Form Infrastructure</span>
               </div>
               <h1 style={{
-                fontSize: 'clamp(2.4rem, 5vw, 3.75rem)', fontWeight: 900,
+                fontSize: 'var(--text-display)', fontWeight: 800,
                 letterSpacing: '-0.04em', lineHeight: 1.05,
                 color: 'var(--salvia-primary)', marginBottom: '1.5rem',
               }}>
                 Records that can't be argued with.
               </h1>
-              <p style={{ fontSize: '1.1rem', color: 'var(--salvia-text-muted)', lineHeight: 1.65, marginBottom: '2.5rem' }}>
+              <p style={{ fontSize: 'var(--text-md)', color: 'var(--salvia-text-muted)', lineHeight: 1.65, marginBottom: '2.5rem' }}>
                 Immutable from the moment you sign. Every field enforced before submission. Every correction an addendum. Built to the exact structure regulators look for — not a general form tool adapted for clinics.
               </p>
               <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
                 <Link to="/start" style={{
                   display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
                   backgroundColor: 'var(--salvia-accent)', color: '#fff',
-                  padding: '0.85rem 1.75rem', borderRadius: '12px',
-                  fontWeight: 700, fontSize: '0.95rem', textDecoration: 'none',
+                  padding: '0.85rem 1.75rem', borderRadius: 'var(--radius-md)',
+                  fontWeight: 700, fontSize: 'var(--text-base)', textDecoration: 'none',
                 }}>
                   Book a demo
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
@@ -90,9 +90,9 @@ export const FormEnginePage = () => {
                 <Link to="/pricing" style={{
                   display: 'inline-flex', alignItems: 'center',
                   backgroundColor: 'transparent', color: 'var(--salvia-primary)',
-                  padding: '0.85rem 1.75rem', borderRadius: '12px',
-                  fontWeight: 700, fontSize: '0.95rem', textDecoration: 'none',
-                  border: '1.5px solid rgba(15,23,42,0.15)',
+                  padding: '0.85rem 1.75rem', borderRadius: 'var(--radius-md)',
+                  fontWeight: 700, fontSize: 'var(--text-base)', textDecoration: 'none',
+                  border: '1.5px solid var(--border-strong)',
                 }}>
                   See pricing
                 </Link>
@@ -101,14 +101,14 @@ export const FormEnginePage = () => {
 
             {/* Visual — version history */}
             <div style={{
-              backgroundColor: '#fff', borderRadius: '24px',
-              border: '1px solid #EEF2F6',
-              boxShadow: '0 20px 60px rgba(15,23,42,0.07)',
+              backgroundColor: '#fff', borderRadius: 'var(--radius-xl)',
+              border: '1px solid var(--border-subtle)',
+              boxShadow: 'var(--shadow-3)',
               overflow: 'hidden',
             }}>
-              <div style={{ padding: '1.25rem 1.5rem', borderBottom: '1px solid #F1F5F9', display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                <div style={{ width: '10px', height: '10px', borderRadius: '50%', backgroundColor: '#FF4E00' }} />
-                <span style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--salvia-text-muted)' }}>Record — Consultation 14 May 2026</span>
+              <div style={{ padding: '1.25rem 1.5rem', borderBottom: '1px solid var(--border-subtle)', display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                <div style={{ width: '10px', height: '10px', borderRadius: '50%', backgroundColor: 'var(--salvia-accent)' }} />
+                <span style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--salvia-text-muted)' }}>Record — Consultation 14 May 2026</span>
               </div>
               <div style={{ padding: '1.5rem', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
                 {[
@@ -118,23 +118,23 @@ export const FormEnginePage = () => {
                 ].map((v, i) => (
                   <div key={i} style={{
                     display: 'flex', alignItems: 'center', gap: '1rem',
-                    padding: '0.75rem 1rem', borderRadius: '10px',
+                    padding: '0.75rem 1rem', borderRadius: 'var(--radius-md)',
                     backgroundColor: i === 2 ? 'rgba(255,78,0,0.04)' : '#F8FAFC',
                     border: i === 2 ? '1px solid rgba(255,78,0,0.12)' : '1px solid transparent',
                   }}>
-                    <span style={{ fontSize: '0.65rem', fontWeight: 900, color: '#FF4E00', minWidth: '28px' }}>{v.ver}</span>
+                    <span style={{ fontSize: 'var(--text-2xs)', fontWeight: 800, color: 'var(--salvia-accent)', minWidth: '28px' }}>{v.ver}</span>
                     <div style={{ flex: 1 }}>
-                      <div style={{ fontSize: '0.8rem', fontWeight: 600, color: 'var(--salvia-primary)' }}>{v.label}</div>
-                      <div style={{ fontSize: '0.7rem', color: 'var(--salvia-text-muted)' }}>{v.time}</div>
+                      <div style={{ fontSize: 'var(--text-xs)', fontWeight: 600, color: 'var(--salvia-primary)' }}>{v.label}</div>
+                      <div style={{ fontSize: 'var(--text-2xs)', color: 'var(--salvia-text-muted)' }}>{v.time}</div>
                     </div>
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#CBD5E1" strokeWidth="2">
                       <rect x="3" y="11" width="18" height="11" rx="2" ry="2" /><path d="M7 11V7a5 5 0 0 1 10 0v4" />
                     </svg>
                   </div>
                 ))}
-                <div style={{ padding: '0.65rem 1rem', backgroundColor: 'rgba(255,78,0,0.06)', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '0.5rem', marginTop: '0.25rem' }}>
+                <div style={{ padding: '0.65rem 1rem', backgroundColor: 'rgba(255,78,0,0.06)', borderRadius: 'var(--radius-sm)', display: 'flex', alignItems: 'center', gap: '0.5rem', marginTop: '0.25rem' }}>
                   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#FF4E00" strokeWidth="2.5"><polyline points="20 6 9 17 4 12" /></svg>
-                  <span style={{ fontSize: '0.72rem', fontWeight: 700, color: '#FF4E00' }}>Original always preserved · edits never overwrite</span>
+                  <span style={{ fontSize: 'var(--text-2xs)', fontWeight: 700, color: 'var(--salvia-accent)' }}>Original always preserved · edits never overwrite</span>
                 </div>
               </div>
             </div>
@@ -143,11 +143,11 @@ export const FormEnginePage = () => {
       </section>
 
       {/* Record types */}
-      <section style={{ padding: '6rem 0', backgroundColor: '#fff', borderBottom: '1px solid #F1F5F9' }}>
-        <div className="container" style={{ maxWidth: '1000px' }}>
+      <section style={{ padding: 'var(--section-pad) 0', backgroundColor: '#fff', borderBottom: '1px solid var(--border-subtle)' }}>
+        <div className="container" style={{ maxWidth: '960px' }}>
           <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
-            <div style={{ fontSize: '0.72rem', fontWeight: 800, color: 'var(--salvia-accent)', letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>Record types</div>
-            <h2 style={{ fontSize: 'clamp(1.8rem, 4vw, 2.5rem)', fontWeight: 800, color: 'var(--salvia-primary)', letterSpacing: '-0.03em' }}>
+            <div className="eyebrow" style={{ marginBottom: '0.75rem' }}>Record types</div>
+            <h2 style={{ fontSize: 'var(--text-3xl)', fontWeight: 800, color: 'var(--salvia-primary)', letterSpacing: '-0.03em' }}>
               Built for every clinical encounter type.
             </h2>
           </div>
@@ -155,12 +155,12 @@ export const FormEnginePage = () => {
             {RECORD_TYPES.map((r, i) => (
               <div key={i} style={{
                 display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-                padding: '1rem 1.25rem', borderRadius: '12px',
-                border: '1px solid #EEF2F6', backgroundColor: '#FAFBFC',
+                padding: '1rem 1.25rem', borderRadius: 'var(--radius-md)',
+                border: '1px solid var(--border-subtle)', backgroundColor: '#FAFBFC',
                 gap: '1rem',
               }}>
-                <span style={{ fontSize: '0.9rem', fontWeight: 600, color: 'var(--salvia-primary)' }}>{r.label}</span>
-                <span style={{ fontSize: '0.7rem', fontWeight: 600, color: 'var(--salvia-text-muted)', whiteSpace: 'nowrap' }}>{r.frameworks}</span>
+                <span style={{ fontSize: 'var(--text-sm)', fontWeight: 600, color: 'var(--salvia-primary)' }}>{r.label}</span>
+                <span style={{ fontSize: 'var(--text-2xs)', fontWeight: 600, color: 'var(--salvia-text-muted)', whiteSpace: 'nowrap' }}>{r.frameworks}</span>
               </div>
             ))}
           </div>
@@ -168,19 +168,19 @@ export const FormEnginePage = () => {
       </section>
 
       {/* Features */}
-      <section style={{ padding: '7rem 0', backgroundColor: 'var(--salvia-bg)' }}>
-        <div className="container" style={{ maxWidth: '1100px' }}>
+      <section style={{ padding: 'var(--section-pad) 0', backgroundColor: 'var(--salvia-bg)' }}>
+        <div className="container" style={{ maxWidth: '1200px' }}>
           <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
-            <div style={{ fontSize: '0.72rem', fontWeight: 800, color: 'var(--salvia-accent)', letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>How it works</div>
-            <h2 style={{ fontSize: 'clamp(1.8rem, 4vw, 2.75rem)', fontWeight: 800, color: 'var(--salvia-primary)', letterSpacing: '-0.03em' }}>
+            <div className="eyebrow" style={{ marginBottom: '0.75rem' }}>How it works</div>
+            <h2 style={{ fontSize: 'var(--text-3xl)', fontWeight: 800, color: 'var(--salvia-primary)', letterSpacing: '-0.03em' }}>
               The structure regulators actually look for.
             </h2>
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.5rem' }} className="mobile-stack">
             {FEATURES.map((f, i) => (
-              <div key={i} style={{ padding: '2rem', borderRadius: '16px', border: '1px solid #EEF2F6', backgroundColor: '#fff' }}>
-                <h3 style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--salvia-primary)', marginBottom: '0.5rem' }}>{f.title}</h3>
-                <p style={{ fontSize: '0.875rem', color: 'var(--salvia-text-muted)', lineHeight: 1.6 }}>{f.desc}</p>
+              <div key={i} style={{ padding: '2rem', borderRadius: 'var(--radius-lg)', border: '1px solid var(--border-subtle)', backgroundColor: '#fff' }}>
+                <h3 style={{ fontSize: 'var(--text-base)', fontWeight: 700, color: 'var(--salvia-primary)', marginBottom: '0.5rem' }}>{f.title}</h3>
+                <p style={{ fontSize: 'var(--text-sm)', color: 'var(--salvia-text-muted)', lineHeight: 1.6 }}>{f.desc}</p>
               </div>
             ))}
           </div>
@@ -188,10 +188,10 @@ export const FormEnginePage = () => {
       </section>
 
       {/* CTA */}
-      <section style={{ padding: '7rem 0', backgroundColor: '#fff', borderTop: '1px solid #F1F5F9', textAlign: 'center' }}>
+      <section style={{ padding: 'var(--section-pad) 0', backgroundColor: '#fff', borderTop: '1px solid var(--border-subtle)', textAlign: 'center' }}>
         <div className="container" style={{ maxWidth: '580px' }}>
-          <div style={{ fontSize: '0.72rem', fontWeight: 800, color: 'var(--salvia-accent)', letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: '1rem' }}>Get started</div>
-          <h2 style={{ fontSize: 'clamp(2rem, 5vw, 3rem)', fontWeight: 800, color: 'var(--salvia-primary)', letterSpacing: '-0.03em', marginBottom: '1rem' }}>
+          <div className="eyebrow" style={{ marginBottom: '1rem' }}>Get started</div>
+          <h2 style={{ fontSize: 'var(--text-3xl)', fontWeight: 800, color: 'var(--salvia-primary)', letterSpacing: '-0.03em', marginBottom: '1rem' }}>
             Records that hold up in any inspection.
           </h2>
           <p style={{ color: 'var(--salvia-text-muted)', lineHeight: 1.65, marginBottom: '2.5rem' }}>
@@ -201,8 +201,8 @@ export const FormEnginePage = () => {
             <Link to="/start" style={{
               display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
               backgroundColor: 'var(--salvia-accent)', color: '#fff',
-              padding: '0.85rem 1.75rem', borderRadius: '12px',
-              fontWeight: 700, fontSize: '0.95rem', textDecoration: 'none',
+              padding: '0.85rem 1.75rem', borderRadius: 'var(--radius-md)',
+              fontWeight: 700, fontSize: 'var(--text-base)', textDecoration: 'none',
             }}>
               Book a demo
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
@@ -212,9 +212,9 @@ export const FormEnginePage = () => {
             <Link to="/pricing" style={{
               display: 'inline-flex', alignItems: 'center',
               backgroundColor: 'transparent', color: 'var(--salvia-primary)',
-              padding: '0.85rem 1.75rem', borderRadius: '12px',
-              fontWeight: 700, fontSize: '0.95rem', textDecoration: 'none',
-              border: '1.5px solid rgba(15,23,42,0.15)',
+              padding: '0.85rem 1.75rem', borderRadius: 'var(--radius-md)',
+              fontWeight: 700, fontSize: 'var(--text-base)', textDecoration: 'none',
+              border: '1.5px solid var(--border-strong)',
             }}>
               See pricing
             </Link>
