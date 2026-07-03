@@ -17,7 +17,7 @@ export const BridgeSection = () => (
         <div>
           <div style={{
             display: 'inline-flex', alignItems: 'center', gap: '0.4rem',
-            fontSize: '0.72rem', fontWeight: 600,
+            fontSize: 'var(--text-2xs)', fontWeight: 600,
             letterSpacing: '0.1em', textTransform: 'uppercase',
             color: 'var(--salvia-accent)',
             marginBottom: '1rem',
@@ -36,7 +36,7 @@ export const BridgeSection = () => (
             What you actually get.
           </h2>
           <p style={{
-            fontSize: '1rem',
+            fontSize: 'var(--text-base)',
             color: 'var(--salvia-text-muted)',
             lineHeight: 1.65,
             maxWidth: '380px',
@@ -57,19 +57,19 @@ export const BridgeSection = () => (
               display: 'flex', alignItems: 'center', gap: '1.25rem',
               backgroundColor: '#fff',
               border: '1px solid rgba(0,0,0,0.06)',
-              borderRadius: '12px',
+              borderRadius: 'var(--radius-md)',
               padding: '1rem 1.25rem',
-              boxShadow: '0 4px 12px rgba(25,56,46,0.04)',
+              boxShadow: 'var(--shadow-2)',
             }}>
               <span style={{
-                fontSize: '1.4rem', fontWeight: 700,
+                fontSize: 'var(--text-xl)', fontWeight: 700,
                 color: 'var(--salvia-primary)',
                 letterSpacing: '-0.03em',
                 minWidth: '72px', flexShrink: 0,
               }}>
                 {value}
               </span>
-              <span style={{ fontSize: '0.88rem', color: 'var(--salvia-text-muted)', lineHeight: 1.4 }}>
+              <span style={{ fontSize: 'var(--text-sm)', color: 'var(--salvia-text-muted)', lineHeight: 1.4 }}>
                 {label}
               </span>
             </div>
