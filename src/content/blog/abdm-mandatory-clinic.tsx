@@ -34,17 +34,20 @@ export const content = (
 
     <h3>What "ABDM compliant" actually requires</h3>
     <p>
-      Being on the registries is the easy step. The harder one is the records. ABDM is built on
-      <strong> ABHA-linked, FHIR-structured</strong> health records — data shaped so it can be shared,
-      with patient consent, across the ecosystem. The uncomfortable reality, noted even in NABH's own
-      digital-health material, is that almost no clinic today actually generates ABHA-linked,
-      FHIR-ready records. Most "ABDM-ready" claims stop at letting a patient scan a QR code, not at
-      producing an interoperable record.
+      Being on the registries is the easy step. The harder one is the records. Real interoperability
+      means records exchanged as <strong>HL7 FHIR R4 bundles</strong> built to India's NRCeS FHIR
+      implementation guide — data shaped so it can be shared, with patient consent, across the
+      ecosystem. That FHIR requirement only bites at the higher certification milestones (M2 and M3);
+      basic ABHA verification (M1) needs none of it. But most clinics stop at M1: they let a patient
+      scan a QR code and call it "ABDM-ready", which is not the same thing as producing an
+      interoperable record.
     </p>
     <p>
-      The milestones are staged for a reason — ABHA verification first, then health-record linkage,
-      then full interoperability. A clinic can be early on that path and still be losing empanelment
-      points to a competitor who is further along.
+      There is now money attached to going further. Under the Digital Health Incentive Scheme, the
+      NHCX insurance-claims route pays a hospital <strong>₹200 per claim or 10% of the claim value,
+      whichever is lower</strong>, for PM-JAY claims filed in FHIR format — and from July 2026 those
+      incentives require ABDM v3 (M1–M3) API compliance. A clinic that is early on the path can be
+      losing both empanelment points and claim incentives to a competitor who is further along.
     </p>
 
     <h3>The practical move</h3>
@@ -58,13 +61,14 @@ export const content = (
       where it has to start.
     </p>
 
-    <h3>The deeper point</h3>
+    <h3>Voluntary is the expensive reading</h3>
     <p>
       Treating ABDM as "voluntary, so ignore it" is the expensive reading. The mandate is arriving
       through the back door of empanelment and insurance, not the front door of a law. The clinics
       that register early and start producing real structured records will keep their scheme revenue.
       The ones waiting for a formal order will be retrofitting under deadline pressure, which is always
-      the costliest way to comply.
+      the costliest way to comply. If accreditation is also on your horizon,{' '}
+      <a href="/blog/nabh-small-clinic-worth-it">the NABH decision runs on the same PM-JAY maths</a>.
     </p>
   </>
 );
