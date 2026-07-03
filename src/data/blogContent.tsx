@@ -1,4 +1,6 @@
 import React from 'react';
+import { INDIA_ONLY } from '../config';
+import { BLOG_MARKETS } from './blogMarkets.mjs';
 
 // Specialized Domain Content Imports
 import { content as pajamaTime } from '../content/blog/pajama-time';
@@ -47,6 +49,9 @@ export interface BlogPost {
   date: string;
   keywords: string[];
   content: React.ReactNode;
+  /** Primary sources cited in the post — rendered as a Sources block by
+      ArticlePage. Prefer regulators / gazettes / case law over news. */
+  sources?: { label: string; url: string }[];
 }
 
 export const BLOG_CONTENT: Record<string, BlogPost> = {
@@ -55,12 +60,17 @@ export const BLOG_CONTENT: Record<string, BlogPost> = {
     tag: 'Pricing',
     domain: 'GENERAL',
     q: "What does an AI medical scribe cost in India?",
-    excerpt: "From free trial tiers to ~₹1,500 per doctor per month for pure dictation — and why per-clinic compliance suites start around ₹2,500. The real 2026 pricing math for Indian clinics, including the compliance line item nobody quotes.",
+    excerpt: "From free trial tiers to ~₹1,500 per doctor per month for an ambient scribe — and why per-clinic compliance suites start around ₹1,000 for the whole practice. The real 2026 pricing math for Indian clinics, including the compliance line item nobody quotes.",
     readTime: '6 min read',
     author: 'Salvia Editorial',
     date: 'June 14, 2026',
     keywords: ['AI medical scribe pricing India', 'AI scribe cost India', 'medical scribe price India', 'clinical documentation software pricing India', 'AI scribe cost per month'],
     content: aiScribePricingIndia,
+    sources: [
+      { label: 'Eka Care — EkaScribe (pricing and features)', url: 'https://ekascribe.ai/' },
+      { label: 'Augnito Medical Dictation — App Store (India) in-app pricing', url: 'https://apps.apple.com/in/app/augnito-medical-dictation-app/id1526630374' },
+      { label: 'NABH — AB-PMJAY quality-certification incentive framework', url: 'https://nabh.co/programmes/ab-pmjay-empanelment-programme/' },
+    ],
   },
   'consumer-court-records': {
     tag: 'Medico-Legal',
@@ -72,6 +82,11 @@ export const BLOG_CONTENT: Record<string, BlogPost> = {
     date: 'June 13, 2026',
     keywords: ['Consumer Protection Act', 'medical negligence India', 'medical records'],
     content: consumerCourtRecords,
+    sources: [
+      { label: 'Medicos Legal Action Group v. Union of India (Bombay HC, 2021) — healthcare is a "service" under CPA 2019', url: 'https://indiankanoon.org/doc/93468691/' },
+      { label: 'Savita Garg v. National Heart Institute (2004) 8 SCC 56 — burden shift and adverse inference for missing records', url: 'https://indiankanoon.org/doc/150881/' },
+      { label: 'Supreme Court declines to reconsider doctors under the Consumer Protection Act (LiveLaw, Nov 2024)', url: 'https://www.livelaw.in/top-stories/supreme-court-doctors-consumer-protection-act-review-petition-against-order-refusing-reconsideration-of-vp-shantha-judgment-dismissed-284299' },
+    ],
   },
   'patient-records-access-india': {
     tag: 'Medico-Legal',
@@ -83,6 +98,11 @@ export const BLOG_CONTENT: Record<string, BlogPost> = {
     date: 'June 13, 2026',
     keywords: ['patient records access', 'NMC regulations', 'medical records India'],
     content: patientRecordsAccessIndia,
+    sources: [
+      { label: 'IMC (Professional Conduct, Etiquette and Ethics) Regulations 2002 — Reg 1.3.1 / 1.3.2 (NMC)', url: 'https://www.nmc.org.in/rules-regulations/code-of-medical-ethics-regulations-2002/' },
+      { label: 'Full text of the 2002 Regulations (Indian Kanoon)', url: 'https://indiankanoon.org/doc/100527417/' },
+      { label: 'NMC — Registered Medical Practitioner (Professional Conduct) Regulations 2023 (kept in abeyance)', url: 'https://www.nmc.org.in/rules-regulations/national-medical-commission-registered-medical-practitioner-professional-conduct-regulations-2023-reg/' },
+    ],
   },
   'nabh-small-clinic-worth-it': {
     tag: 'NABH',
@@ -94,6 +114,11 @@ export const BLOG_CONTENT: Record<string, BlogPost> = {
     date: 'June 13, 2026',
     keywords: ['NABH Entry-Level', 'NABH small clinic', 'PM-JAY incentive'],
     content: nabhSmallClinicWorthIt,
+    sources: [
+      { label: 'NABH — AB-PMJAY empanelment and quality-incentive tiers (Bronze/Silver/Gold)', url: 'https://nabh.co/programmes/ab-pmjay-empanelment-programme/' },
+      { label: 'NABH — Entry-Level (SHCO) certification programme', url: 'https://nabh.co/programmes/entry-level-small-healthcare-organisation-shco-certification-programme/' },
+      { label: 'NABH — revised fee structure (PDF)', url: 'https://portal.nabh.co/Images/PDF/RevisedFeeStructure_NABH.pdf' },
+    ],
   },
   'abdm-mandatory-clinic': {
     tag: 'ABDM',
@@ -105,6 +130,11 @@ export const BLOG_CONTENT: Record<string, BlogPost> = {
     date: 'June 13, 2026',
     keywords: ['ABDM compliance', 'ABHA', 'HFR HPR registration'],
     content: abdmMandatoryClinic,
+    sources: [
+      { label: 'ABDM — Digital Health Incentive Scheme, Corrigendum 7 (incentive window Apr–Sep 2026)', url: 'https://abdm.gov.in/strapicms/uploads/Corrigendum_7_f456cb207a.pdf' },
+      { label: 'National Health Claims Exchange (NHCX) — ABDM', url: 'https://abdm.gov.in/nhcx' },
+      { label: 'NRCeS — India FHIR implementation guide (NDHM)', url: 'https://nrces.in/ndhm' },
+    ],
   },
   'ai-scribe-indian-languages': {
     tag: 'AI & Scribes',
@@ -116,6 +146,11 @@ export const BLOG_CONTENT: Record<string, BlogPost> = {
     date: 'June 13, 2026',
     keywords: ['AI medical scribe India', 'multilingual clinical documentation', 'code-mixed speech'],
     content: aiScribeIndianLanguages,
+    sources: [
+      { label: 'HiACC: a Hindi–English code-switched clinical speech corpus (Data in Brief, 2025) — 250M+ code-switching estimate', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC12329218/' },
+      { label: 'Eka Care — EkaScribe language support', url: 'https://ekascribe.ai/' },
+      { label: 'How Augnito grew out of Scribetech medical transcription (IndiaAI)', url: 'https://indiaai.gov.in/article/from-a-bpo-to-an-ai-company-how-augnito-is-revamping-the-medical-transcription-industry' },
+    ],
   },
 
   // --- GENERAL CLINIC ---
@@ -140,6 +175,10 @@ export const BLOG_CONTENT: Record<string, BlogPost> = {
     date: 'April 18, 2026',
     keywords: ['refusal', 'liability', 'defence'],
     content: informedRefusal,
+    sources: [
+      { label: 'Truman v. Thomas, 611 P.2d 902 (Cal. 1980) — the canonical informed-refusal case', url: 'https://biotech.law.lsu.edu/cases/consent/Truman_v_Thomas.htm' },
+      { label: 'Samira Kohli v. Dr. Prabha Manchanda (2008) 2 SCC 1 — consent must be specific and informed', url: 'https://indiankanoon.org/doc/438423/' },
+    ],
   },
   'ai-legal': {
     tag: 'AI & Scribes',
@@ -420,3 +459,13 @@ export const BLOG_CONTENT: Record<string, BlogPost> = {
     content: vcnzRecordsNz,
   },
 };
+
+// Market-gated view of the registry. While INDIA_ONLY, rest-of-world
+// regulator posts (HIPAA / RCVS / CQC / AHPRA / VCNZ / CMA / AVMA / CDT)
+// disappear from the blog index, article routes, related-post rails and
+// the prerender pipeline (prerender.mjs reads the same blogMarkets map).
+export const VISIBLE_BLOG_CONTENT: Record<string, BlogPost> = INDIA_ONLY
+  ? Object.fromEntries(
+      Object.entries(BLOG_CONTENT).filter(([slug]) => BLOG_MARKETS[slug] !== 'ROW')
+    )
+  : BLOG_CONTENT;
