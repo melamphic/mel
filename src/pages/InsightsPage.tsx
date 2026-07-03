@@ -2,15 +2,15 @@ import React, { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { Header } from '../components/Header';
 import { Footer } from '../components/Footer';
-import { BLOG_CONTENT } from '../data/blogContent';
+import { VISIBLE_BLOG_CONTENT } from '../data/blogContent';
 import { SEO } from '../components/SEO';
 
 type BlogDomain = 'GENERAL' | 'VETERINARY' | 'DENTAL';
 
 const DOMAIN_META: Record<BlogDomain, { label: string; color: string; bg: string }> = {
-  GENERAL: { label: 'Clinic', color: '#FF4E00', bg: 'rgba(255,78,0,0.08)' },
-  VETERINARY: { label: 'Vet', color: '#0EA5E9', bg: 'rgba(14,165,233,0.08)' },
-  DENTAL: { label: 'Dental', color: '#059669', bg: 'rgba(5,150,105,0.08)' },
+  GENERAL: { label: 'Clinic', color: 'var(--salvia-accent)', bg: 'rgba(255,78,0,0.08)' },
+  VETERINARY: { label: 'Vet', color: 'var(--accent-vet)', bg: 'rgba(14,165,233,0.08)' },
+  DENTAL: { label: 'Dental', color: 'var(--accent-dental)', bg: 'rgba(5,150,105,0.08)' },
 };
 
 export const InsightsPage: React.FC = () => {
@@ -18,7 +18,7 @@ export const InsightsPage: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
 
   const allArticles = useMemo(
-    () => Object.entries(BLOG_CONTENT).map(([id, data]) => ({ id, ...data })),
+    () => Object.entries(VISIBLE_BLOG_CONTENT).map(([id, data]) => ({ id, ...data })),
     []
   );
 
@@ -61,7 +61,7 @@ export const InsightsPage: React.FC = () => {
           {/* Header */}
           <div style={{ marginBottom: '3rem' }}>
             <span style={{
-              fontSize: '0.72rem', fontWeight: 700,
+              fontSize: 'var(--text-2xs)', fontWeight: 700,
               letterSpacing: '0.14em', textTransform: 'uppercase',
               color: 'var(--salvia-accent)',
               display: 'block', marginBottom: '1rem',
@@ -79,7 +79,7 @@ export const InsightsPage: React.FC = () => {
               documentation — with straight answers.
             </h1>
             <p style={{
-              fontSize: '1.1rem', color: 'var(--salvia-text-muted)',
+              fontSize: 'var(--text-md)', color: 'var(--salvia-text-muted)',
               lineHeight: 1.65, marginTop: '1.25rem', maxWidth: '680px',
             }}>
               No corporate fluff. No SEO filler. We trawl forums, boards, and subreddits for the
@@ -100,7 +100,7 @@ export const InsightsPage: React.FC = () => {
               display: 'flex', alignItems: 'center', gap: '0.6rem',
               backgroundColor: '#F8FAFC',
               border: '1px solid #EEF2F6',
-              borderRadius: '10px',
+              borderRadius: 'var(--radius-md)',
               padding: '0.65rem 0.9rem',
               flex: '1 1 280px',
               minWidth: 0,
@@ -117,7 +117,7 @@ export const InsightsPage: React.FC = () => {
                   flex: 1, minWidth: 0,
                   border: 'none', outline: 'none',
                   background: 'transparent',
-                  fontSize: '0.92rem',
+                  fontSize: 'var(--text-sm)',
                   color: 'var(--salvia-primary)',
                   fontWeight: 500,
                 }}
@@ -135,8 +135,8 @@ export const InsightsPage: React.FC = () => {
                   onClick={() => setActiveDomain(d.value)}
                   style={{
                     padding: '0.6rem 1.1rem',
-                    borderRadius: '8px',
-                    fontSize: '0.82rem',
+                    borderRadius: 'var(--radius-sm)',
+                    fontSize: 'var(--text-xs)',
                     fontWeight: 700,
                     border: '1px solid',
                     borderColor: activeDomain === d.value ? 'var(--salvia-primary)' : '#E2E8F0',
@@ -150,10 +150,10 @@ export const InsightsPage: React.FC = () => {
                 >
                   {d.label}
                   <span style={{
-                    fontSize: '0.68rem', fontWeight: 700,
+                    fontSize: 'var(--text-2xs)', fontWeight: 700,
                     opacity: 0.7,
                     padding: '0.1rem 0.35rem',
-                    borderRadius: '4px',
+                    borderRadius: 'var(--radius-sm)',
                     backgroundColor: activeDomain === d.value ? 'rgba(255,255,255,0.15)' : '#F1F5F9',
                   }}>
                     {d.count}
@@ -170,7 +170,7 @@ export const InsightsPage: React.FC = () => {
                 display: 'grid', gridTemplateColumns: '1.3fr 1fr',
                 gap: '0',
                 border: '1px solid #EEF2F6',
-                borderRadius: '20px',
+                borderRadius: 'var(--radius-lg)',
                 overflow: 'hidden',
                 backgroundColor: '#fff',
                 transition: 'all 0.3s ease',
@@ -179,23 +179,23 @@ export const InsightsPage: React.FC = () => {
                   <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '1.5rem', flexWrap: 'wrap' }}>
                     <span style={{
                       display: 'inline-flex', alignItems: 'center', gap: '0.4rem',
-                      fontSize: '0.65rem', fontWeight: 800,
+                      fontSize: 'var(--text-2xs)', fontWeight: 800,
                       color: DOMAIN_META[featured.domain].color,
                       backgroundColor: DOMAIN_META[featured.domain].bg,
                       padding: '0.32rem 0.65rem',
-                      borderRadius: '6px',
+                      borderRadius: 'var(--radius-sm)',
                       letterSpacing: '0.08em',
                       textTransform: 'uppercase',
                     }}>
                       {DOMAIN_META[featured.domain].label}
                     </span>
                     <span style={{
-                      fontSize: '0.65rem', fontWeight: 700,
+                      fontSize: 'var(--text-2xs)', fontWeight: 700,
                       color: 'var(--salvia-primary)',
                       backgroundColor: '#FFF7F2',
                       border: '1px solid rgba(255,78,0,0.2)',
                       padding: '0.32rem 0.65rem',
-                      borderRadius: '6px',
+                      borderRadius: 'var(--radius-sm)',
                       letterSpacing: '0.08em',
                       textTransform: 'uppercase',
                     }}>
@@ -211,7 +211,7 @@ export const InsightsPage: React.FC = () => {
                     {featured.q}
                   </h2>
                   <p style={{
-                    fontSize: '1rem',
+                    fontSize: 'var(--text-base)',
                     color: 'var(--salvia-text-muted)',
                     lineHeight: 1.6,
                     margin: '0 0 2rem',
@@ -220,7 +220,7 @@ export const InsightsPage: React.FC = () => {
                   </p>
                   <div style={{
                     display: 'flex', alignItems: 'center', gap: '0.75rem',
-                    fontSize: '0.8rem', color: 'var(--salvia-text-muted)',
+                    fontSize: 'var(--text-xs)', color: 'var(--salvia-text-muted)',
                   }}>
                     <span style={{ fontWeight: 600, color: 'var(--salvia-primary)' }}>{featured.author}</span>
                     <span style={{ opacity: 0.3 }}>·</span>
@@ -238,7 +238,7 @@ export const InsightsPage: React.FC = () => {
                   {/* abstract question-mark-quote visual */}
                   <div style={{
                     fontSize: 'clamp(5rem, 12vw, 10rem)',
-                    fontWeight: 900,
+                    fontWeight: 800,
                     color: 'var(--salvia-accent)',
                     opacity: 0.12,
                     lineHeight: 0.8,
@@ -250,11 +250,11 @@ export const InsightsPage: React.FC = () => {
                   <div style={{
                     position: 'absolute', bottom: '1.5rem', right: '1.5rem',
                     display: 'flex', alignItems: 'center', gap: '0.4rem',
-                    fontSize: '0.75rem', fontWeight: 700,
+                    fontSize: 'var(--text-xs)', fontWeight: 700,
                     color: 'var(--salvia-accent)',
                     backgroundColor: '#fff',
                     padding: '0.5rem 0.85rem',
-                    borderRadius: '8px',
+                    borderRadius: 'var(--radius-sm)',
                     boxShadow: '0 2px 8px rgba(15,23,42,0.05)',
                     border: '1px solid rgba(0,0,0,0.04)',
                   }}>
@@ -282,7 +282,7 @@ export const InsightsPage: React.FC = () => {
                   <Link to={`/blog/${art.id}`} key={art.id} style={{ textDecoration: 'none' }} className="blog-card-link">
                     <article className="blog-card" style={{
                       backgroundColor: '#fff',
-                      borderRadius: '14px',
+                      borderRadius: 'var(--radius-md)',
                       border: '1px solid #EEF2F6',
                       height: '100%',
                       display: 'flex', flexDirection: 'column',
@@ -291,18 +291,18 @@ export const InsightsPage: React.FC = () => {
                     }}>
                       <div style={{ display: 'flex', gap: '0.4rem', marginBottom: '1rem', flexWrap: 'wrap' }}>
                         <span style={{
-                          fontSize: '0.62rem', fontWeight: 800,
+                          fontSize: 'var(--text-2xs)', fontWeight: 800,
                           color: meta.color,
                           backgroundColor: meta.bg,
                           padding: '0.25rem 0.55rem',
-                          borderRadius: '5px',
+                          borderRadius: 'var(--radius-sm)',
                           letterSpacing: '0.08em',
                           textTransform: 'uppercase',
                         }}>
                           {meta.label}
                         </span>
                         <span style={{
-                          fontSize: '0.62rem', fontWeight: 700,
+                          fontSize: 'var(--text-2xs)', fontWeight: 700,
                           color: 'var(--salvia-text-muted)',
                           letterSpacing: '0.04em',
                           textTransform: 'uppercase',
@@ -313,7 +313,7 @@ export const InsightsPage: React.FC = () => {
                       </div>
 
                       <h3 style={{
-                        fontSize: '1.08rem', fontWeight: 700,
+                        fontSize: 'var(--text-md)', fontWeight: 700,
                         color: 'var(--salvia-primary)',
                         lineHeight: 1.35, letterSpacing: '-0.015em',
                         margin: '0 0 0.85rem',
@@ -322,7 +322,7 @@ export const InsightsPage: React.FC = () => {
                       </h3>
 
                       <p style={{
-                        fontSize: '0.88rem',
+                        fontSize: 'var(--text-sm)',
                         color: 'var(--salvia-text-muted)',
                         lineHeight: 1.55,
                         margin: '0 0 1.25rem',
@@ -340,7 +340,7 @@ export const InsightsPage: React.FC = () => {
                         paddingTop: '1rem',
                         borderTop: '1px solid #F1F5F9',
                         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-                        fontSize: '0.72rem',
+                        fontSize: 'var(--text-2xs)',
                         color: 'var(--salvia-text-muted)',
                       }}>
                         <span>{art.readTime}</span>
@@ -355,7 +355,7 @@ export const InsightsPage: React.FC = () => {
 
           {filteredArticles.length === 0 && (
             <div style={{ padding: '6rem 0', textAlign: 'center' }}>
-              <p style={{ color: 'var(--salvia-text-muted)', fontSize: '1.1rem' }}>
+              <p style={{ color: 'var(--salvia-text-muted)', fontSize: 'var(--text-md)' }}>
                 No posts match that — try a different search or domain.
               </p>
             </div>
