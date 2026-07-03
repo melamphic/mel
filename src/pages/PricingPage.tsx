@@ -85,21 +85,12 @@ export const PricingPage = () => {
       {/* Hero */}
       <section style={{ padding: '9rem 0 2rem', backgroundColor: 'var(--salvia-bg)' }}>
         <div className="container" style={{ maxWidth: '960px', textAlign: 'center' }}>
-          <div
-            style={{
-              color: 'var(--salvia-accent)',
-              fontSize: '0.8rem',
-              fontWeight: 800,
-              letterSpacing: '0.15em',
-              textTransform: 'uppercase',
-              marginBottom: '1.25rem',
-            }}
-          >
+          <div className="eyebrow" style={{ marginBottom: '1.25rem' }}>
             Pricing
           </div>
           <h1
             style={{
-              fontSize: 'clamp(2.5rem, 5vw, 3.75rem)',
+              fontSize: 'var(--text-display)',
               fontWeight: 800,
               letterSpacing: '-0.04em',
               lineHeight: 1.05,
@@ -111,7 +102,7 @@ export const PricingPage = () => {
           </h1>
           <p
             style={{
-              fontSize: '1.1rem',
+              fontSize: 'var(--text-md)',
               color: 'var(--salvia-text-muted)',
               maxWidth: '620px',
               margin: '0 auto',
@@ -162,11 +153,11 @@ export const PricingPage = () => {
 
           {/* Tier cards for the active product */}
           <section style={{ padding: '2.5rem 0 0' }}>
-            <div className="container" style={{ maxWidth: product.tiers.length >= 3 ? '1080px' : '960px' }}>
+            <div className="container" style={{ maxWidth: product.tiers.length >= 3 ? '1200px' : '960px' }}>
               <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
                 <h2
                   style={{
-                    fontSize: '1.75rem',
+                    fontSize: 'var(--text-2xl)',
                     fontWeight: 800,
                     letterSpacing: '-0.03em',
                     color: 'var(--salvia-primary)',
@@ -175,7 +166,7 @@ export const PricingPage = () => {
                 >
                   {product.brand}
                 </h2>
-                <p style={{ color: 'var(--salvia-text-muted)', fontSize: '1rem' }}>{product.tagline}</p>
+                <p style={{ color: 'var(--salvia-text-muted)', fontSize: 'var(--text-base)' }}>{product.tagline}</p>
               </div>
 
               <div
@@ -202,7 +193,7 @@ export const PricingPage = () => {
           </section>
 
           {/* Feature comparison grid — global tiers */}
-          <section style={{ padding: '4rem 0 6rem' }}>
+          <section style={{ padding: 'var(--section-pad) 0' }}>
             <div className="container" style={{ maxWidth: '960px' }}>
               <GlobalFeatureGrid />
             </div>
@@ -253,7 +244,7 @@ function DomainTab({ product, active, onSelect }: DomainTabProps) {
     >
       <span
         style={{
-          fontSize: '0.65rem',
+          fontSize: 'var(--text-2xs)',
           fontWeight: 700,
           letterSpacing: '0.1em',
           textTransform: 'uppercase',
@@ -267,7 +258,7 @@ function DomainTab({ product, active, onSelect }: DomainTabProps) {
       </span>
       <span
         style={{
-          fontSize: '0.75rem',
+          fontSize: 'var(--text-xs)',
           color: 'var(--salvia-text-muted)',
           whiteSpace: 'nowrap',
           overflow: 'hidden',
@@ -314,7 +305,7 @@ function AnnualSwitch({ checked, onChange }: AnnualSwitchProps) {
           height: '20px',
           borderRadius: '50%',
           backgroundColor: '#fff',
-          boxShadow: '0 2px 4px rgba(0,0,0,0.2)',
+          boxShadow: 'var(--shadow-1)',
           transition: 'left 0.2s',
         }}
       />
@@ -331,7 +322,7 @@ function AnnualToggle({ annual, onChange }: { annual: boolean; onChange: (v: boo
         alignItems: 'center',
         gap: '0.75rem',
         marginTop: '2rem',
-        fontSize: '0.9rem',
+        fontSize: 'var(--text-sm)',
         color: 'var(--salvia-text-muted)',
       }}
     >
@@ -346,7 +337,7 @@ function AnnualToggle({ annual, onChange }: { annual: boolean; onChange: (v: boo
         style={{
           backgroundColor: annual ? 'var(--salvia-accent)' : 'rgba(15, 23, 42, 0.06)',
           color: annual ? '#fff' : 'var(--salvia-text-muted)',
-          fontSize: '0.7rem',
+          fontSize: 'var(--text-2xs)',
           fontWeight: 700,
           padding: '0.2rem 0.55rem',
           borderRadius: 'var(--salvia-radius-full)',
@@ -380,7 +371,7 @@ function TierCard({ product, tier, cycle, market }: TierCardProps) {
         color: highlighted ? '#fff' : 'var(--salvia-text)',
         borderRadius: 'var(--salvia-radius-large)',
         padding: '2rem',
-        boxShadow: highlighted ? '0 20px 50px rgba(15, 23, 42, 0.25)' : 'var(--salvia-shadow-card)',
+        boxShadow: highlighted ? 'var(--shadow-3)' : 'var(--salvia-shadow-card)',
         display: 'flex',
         flexDirection: 'column',
         gap: '1.25rem',
@@ -394,7 +385,7 @@ function TierCard({ product, tier, cycle, market }: TierCardProps) {
             right: '1.5rem',
             backgroundColor: 'var(--salvia-accent)',
             color: '#fff',
-            fontSize: '0.7rem',
+            fontSize: 'var(--text-2xs)',
             fontWeight: 800,
             letterSpacing: '0.1em',
             textTransform: 'uppercase',
@@ -408,11 +399,8 @@ function TierCard({ product, tier, cycle, market }: TierCardProps) {
 
       <div>
         <div
+          className="eyebrow"
           style={{
-            fontSize: '0.75rem',
-            fontWeight: 700,
-            letterSpacing: '0.12em',
-            textTransform: 'uppercase',
             color: highlighted ? 'rgba(255,255,255,0.6)' : 'var(--salvia-text-muted)',
             marginBottom: '0.4rem',
           }}
@@ -422,7 +410,7 @@ function TierCard({ product, tier, cycle, market }: TierCardProps) {
         <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.3rem' }}>
           <span
             style={{
-              fontSize: '2.75rem',
+              fontSize: 'var(--text-3xl)',
               fontWeight: 800,
               letterSpacing: '-0.03em',
               color: highlighted ? '#fff' : 'var(--salvia-primary)',
@@ -430,13 +418,13 @@ function TierCard({ product, tier, cycle, market }: TierCardProps) {
           >
             {meta.symbol}{amount.toLocaleString()}
           </span>
-          <span style={{ fontSize: '0.95rem', color: highlighted ? 'rgba(255,255,255,0.7)' : 'var(--salvia-text-muted)' }}>
+          <span style={{ fontSize: 'var(--text-base)', color: highlighted ? 'rgba(255,255,255,0.7)' : 'var(--salvia-text-muted)' }}>
             /mo {meta.currency}
           </span>
         </div>
         <div
           style={{
-            fontSize: '0.8rem',
+            fontSize: 'var(--text-xs)',
             color: highlighted ? 'rgba(255,255,255,0.6)' : 'var(--salvia-text-muted)',
             marginTop: '0.2rem',
           }}
@@ -453,8 +441,8 @@ function TierCard({ product, tier, cycle, market }: TierCardProps) {
           display: 'flex',
           flexDirection: 'column',
           gap: '0.6rem',
-          fontSize: '0.9rem',
-          borderTop: `1px solid ${highlighted ? 'rgba(255,255,255,0.12)' : 'rgba(15,23,42,0.08)'}`,
+          fontSize: 'var(--text-sm)',
+          borderTop: `1px solid ${highlighted ? 'rgba(255,255,255,0.12)' : 'var(--border-subtle)'}`,
           paddingTop: '1.25rem',
         }}
       >
@@ -484,7 +472,7 @@ function TierCard({ product, tier, cycle, market }: TierCardProps) {
           padding: '0.85rem 1.5rem',
           borderRadius: 'var(--salvia-radius-full)',
           fontWeight: 600,
-          fontSize: '0.95rem',
+          fontSize: 'var(--text-base)',
           backgroundColor: highlighted ? 'var(--salvia-accent)' : 'var(--salvia-primary)',
           color: '#fff',
           transition: 'opacity 0.2s',
@@ -529,7 +517,7 @@ function EnterpriseBanner() {
         marginTop: '3rem',
         padding: '1.75rem 2rem',
         borderRadius: 'var(--salvia-radius-large)',
-        border: '1px dashed rgba(15, 23, 42, 0.18)',
+        border: '1px dashed var(--border-strong)',
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'center',
@@ -539,18 +527,12 @@ function EnterpriseBanner() {
     >
       <div>
         <div
-          style={{
-            fontSize: '0.75rem',
-            fontWeight: 800,
-            letterSpacing: '0.15em',
-            textTransform: 'uppercase',
-            color: 'var(--salvia-accent)',
-            marginBottom: '0.35rem',
-          }}
+          className="eyebrow"
+          style={{ marginBottom: '0.35rem' }}
         >
           Enterprise · 8+ clinicians
         </div>
-        <div style={{ fontSize: '1.1rem', fontWeight: 700, color: 'var(--salvia-primary)', letterSpacing: '-0.01em' }}>
+        <div style={{ fontSize: 'var(--text-md)', fontWeight: 700, color: 'var(--salvia-primary)', letterSpacing: '-0.01em' }}>
           Custom pricing, SSO, volume commits, dedicated onboarding.
         </div>
       </div>
@@ -564,7 +546,7 @@ function EnterpriseBanner() {
           backgroundColor: 'var(--salvia-primary)',
           color: '#fff',
           fontWeight: 600,
-          fontSize: '0.9rem',
+          fontSize: 'var(--text-sm)',
         }}
       >
         Contact sales
@@ -585,19 +567,12 @@ function IndiaPricingSection({ annual, onAnnualChange }: { annual: boolean; onAn
         <div className="container" style={{ maxWidth: '960px' }}>
           <div style={{ textAlign: 'center', marginBottom: '0.5rem' }}>
             <span
-              style={{
-                display: 'inline-block',
-                fontSize: '0.72rem',
-                fontWeight: 800,
-                letterSpacing: '0.15em',
-                textTransform: 'uppercase',
-                color: 'var(--salvia-accent)',
-                marginBottom: '0.6rem',
-              }}
+              className="eyebrow"
+              style={{ display: 'inline-block', marginBottom: '0.6rem' }}
             >
               India pricing · ₹ INR · Excl. GST 18%
             </span>
-            <p style={{ color: 'var(--salvia-text-muted)', fontSize: '0.95rem', maxWidth: '540px', margin: '0 auto' }}>
+            <p style={{ color: 'var(--salvia-text-muted)', fontSize: 'var(--text-base)', maxWidth: '540px', margin: '0 auto' }}>
               All plans include unlimited staff accounts, the full clinical software stack, and GST-compliant invoicing.
               AI is included on every plan.
             </p>
@@ -619,7 +594,7 @@ function IndiaPricingSection({ annual, onAnnualChange }: { annual: boolean; onAn
         </div>
       </section>
 
-      <section style={{ padding: '4rem 0 6rem' }}>
+      <section style={{ padding: 'var(--section-pad) 0' }}>
         <div className="container" style={{ maxWidth: '960px' }}>
           <IndiaFeatureGrid />
         </div>
@@ -640,7 +615,7 @@ function IndiaTierCard({ tier, cycle }: { tier: IndiaTier; cycle: Cycle }) {
         color: highlighted ? '#fff' : 'var(--salvia-text)',
         borderRadius: 'var(--salvia-radius-large)',
         padding: '2rem',
-        boxShadow: highlighted ? '0 20px 50px rgba(15, 23, 42, 0.25)' : 'var(--salvia-shadow-card)',
+        boxShadow: highlighted ? 'var(--shadow-3)' : 'var(--salvia-shadow-card)',
         display: 'flex',
         flexDirection: 'column',
         gap: '1.25rem',
@@ -654,7 +629,7 @@ function IndiaTierCard({ tier, cycle }: { tier: IndiaTier; cycle: Cycle }) {
             right: '1.5rem',
             backgroundColor: 'var(--salvia-accent)',
             color: '#fff',
-            fontSize: '0.7rem',
+            fontSize: 'var(--text-2xs)',
             fontWeight: 800,
             letterSpacing: '0.1em',
             textTransform: 'uppercase',
@@ -668,11 +643,8 @@ function IndiaTierCard({ tier, cycle }: { tier: IndiaTier; cycle: Cycle }) {
 
       <div>
         <div
+          className="eyebrow"
           style={{
-            fontSize: '0.75rem',
-            fontWeight: 700,
-            letterSpacing: '0.12em',
-            textTransform: 'uppercase',
             color: highlighted ? 'rgba(255,255,255,0.6)' : 'var(--salvia-text-muted)',
             marginBottom: '0.4rem',
           }}
@@ -687,7 +659,7 @@ function IndiaTierCard({ tier, cycle }: { tier: IndiaTier; cycle: Cycle }) {
         <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.3rem' }}>
           <span
             style={{
-              fontSize: '2.75rem',
+              fontSize: 'var(--text-3xl)',
               fontWeight: 800,
               letterSpacing: '-0.03em',
               color: highlighted ? '#fff' : 'var(--salvia-primary)',
@@ -695,11 +667,11 @@ function IndiaTierCard({ tier, cycle }: { tier: IndiaTier; cycle: Cycle }) {
           >
             ₹{amount.toLocaleString('en-IN')}
           </span>
-          <span style={{ fontSize: '0.95rem', color: highlighted ? 'rgba(255,255,255,0.7)' : 'var(--salvia-text-muted)' }}>
+          <span style={{ fontSize: 'var(--text-base)', color: highlighted ? 'rgba(255,255,255,0.7)' : 'var(--salvia-text-muted)' }}>
             /mo
           </span>
         </div>
-        <div style={{ fontSize: '0.8rem', color: highlighted ? 'rgba(255,255,255,0.6)' : 'var(--salvia-text-muted)', marginTop: '0.2rem' }}>
+        <div style={{ fontSize: 'var(--text-xs)', color: highlighted ? 'rgba(255,255,255,0.6)' : 'var(--salvia-text-muted)', marginTop: '0.2rem' }}>
           {cycle === 'annual'
             ? `Billed ₹${(tier.annualINR).toLocaleString('en-IN')}/yr · 2 months free`
             : 'Billed monthly · cancel anytime'}
@@ -712,8 +684,8 @@ function IndiaTierCard({ tier, cycle }: { tier: IndiaTier; cycle: Cycle }) {
           display: 'flex',
           flexDirection: 'column',
           gap: '0.6rem',
-          fontSize: '0.9rem',
-          borderTop: `1px solid ${highlighted ? 'rgba(255,255,255,0.12)' : 'rgba(15,23,42,0.08)'}`,
+          fontSize: 'var(--text-sm)',
+          borderTop: `1px solid ${highlighted ? 'rgba(255,255,255,0.12)' : 'var(--border-subtle)'}`,
           paddingTop: '1.25rem',
         }}
       >
@@ -732,7 +704,7 @@ function IndiaTierCard({ tier, cycle }: { tier: IndiaTier; cycle: Cycle }) {
           padding: '0.85rem 1.5rem',
           borderRadius: 'var(--salvia-radius-full)',
           fontWeight: 600,
-          fontSize: '0.95rem',
+          fontSize: 'var(--text-base)',
           backgroundColor: highlighted ? 'var(--salvia-accent)' : 'var(--salvia-primary)',
           color: '#fff',
           transition: 'opacity 0.2s',
@@ -767,7 +739,7 @@ function renderCell(val: GridCell, highlighted: boolean) {
           width: 22,
           height: 22,
           borderRadius: '50%',
-          backgroundColor: highlighted ? 'var(--salvia-accent)' : '#16a34a',
+          backgroundColor: highlighted ? 'var(--salvia-accent)' : 'var(--salvia-success)',
           color: '#fff',
           fontSize: 12,
           fontWeight: 800,
@@ -799,7 +771,7 @@ function renderCell(val: GridCell, highlighted: boolean) {
       </span>
     );
   }
-  return <span style={{ fontSize: '0.875rem', fontWeight: 600, color: 'var(--salvia-text)' }}>{val}</span>;
+  return <span style={{ fontSize: 'var(--text-sm)', fontWeight: 600, color: 'var(--salvia-text)' }}>{val}</span>;
 }
 
 function FeatureGrid({ columns, sections, highlightCol }: {
@@ -811,10 +783,10 @@ function FeatureGrid({ columns, sections, highlightCol }: {
   return (
     <div>
       <div style={{ overflowX: 'auto' }}>
-        <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.875rem' }}>
+        <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 'var(--text-sm)' }}>
           <thead>
             <tr style={{ backgroundColor: 'rgba(15,23,42,0.03)' }}>
-              <th style={{ width: '40%', padding: '1rem 1.25rem', textAlign: 'left', fontWeight: 700, color: 'var(--salvia-text-muted)', fontSize: '0.75rem', letterSpacing: '0.08em', textTransform: 'uppercase', borderBottom: '2px solid rgba(15,23,42,0.12)' }} />
+              <th style={{ width: '40%', padding: '1rem 1.25rem', textAlign: 'left', fontWeight: 700, color: 'var(--salvia-text-muted)', fontSize: 'var(--text-xs)', letterSpacing: '0.08em', textTransform: 'uppercase', borderBottom: '2px solid var(--border-strong)' }} />
               {columns.map((col, i) => (
                 <th
                   key={col}
@@ -823,9 +795,9 @@ function FeatureGrid({ columns, sections, highlightCol }: {
                     padding: '1rem 1.25rem',
                     textAlign: 'center',
                     fontWeight: 800,
-                    fontSize: '0.9rem',
+                    fontSize: 'var(--text-sm)',
                     color: i === highlightCol ? 'var(--salvia-accent)' : 'var(--salvia-primary)',
-                    borderBottom: '2px solid rgba(15,23,42,0.12)',
+                    borderBottom: '2px solid var(--border-strong)',
                     letterSpacing: '-0.01em',
                   }}
                 >
@@ -842,14 +814,14 @@ function FeatureGrid({ columns, sections, highlightCol }: {
                     colSpan={colCount}
                     style={{
                       padding: '0.85rem 1.25rem 0.5rem',
-                      fontSize: '0.7rem',
-                      fontWeight: 900,
+                      fontSize: 'var(--text-2xs)',
+                      fontWeight: 800,
                       letterSpacing: '0.14em',
                       textTransform: 'uppercase',
                       color: 'var(--salvia-primary)',
                       backgroundColor: 'rgba(15,23,42,0.04)',
-                      borderTop: '1px solid rgba(15,23,42,0.08)',
-                      borderBottom: '1px solid rgba(15,23,42,0.08)',
+                      borderTop: '1px solid var(--border-subtle)',
+                      borderBottom: '1px solid var(--border-subtle)',
                     }}
                   >
                     {section.heading}
@@ -858,9 +830,9 @@ function FeatureGrid({ columns, sections, highlightCol }: {
                 {section.rows.map((row) => (
                   <tr
                     key={`${section.heading}-${row.label}`}
-                    style={{ borderBottom: '1px solid rgba(15,23,42,0.06)' }}
+                    style={{ borderBottom: '1px solid var(--border-subtle)' }}
                   >
-                    <td style={{ padding: '0.85rem 1.25rem', color: 'var(--salvia-text)', fontWeight: 500, fontSize: '0.9rem' }}>
+                    <td style={{ padding: '0.85rem 1.25rem', color: 'var(--salvia-text)', fontWeight: 500, fontSize: 'var(--text-sm)' }}>
                       {row.label}
                     </td>
                     {row.cells.map((cell, ci) => (
@@ -933,7 +905,7 @@ function IndiaFeatureGrid() {
     <div>
       <h2
         style={{
-          fontSize: '1.2rem',
+          fontSize: 'var(--text-lg)',
           fontWeight: 800,
           letterSpacing: '-0.02em',
           color: 'var(--salvia-primary)',
@@ -946,7 +918,7 @@ function IndiaFeatureGrid() {
       <div
         style={{
           borderRadius: 'var(--salvia-radius-large)',
-          border: '1px solid rgba(15,23,42,0.1)',
+          border: '1px solid var(--border-strong)',
           overflow: 'hidden',
         }}
       >
@@ -998,7 +970,7 @@ function GlobalFeatureGrid() {
     <div>
       <h2
         style={{
-          fontSize: '1.2rem',
+          fontSize: 'var(--text-lg)',
           fontWeight: 800,
           letterSpacing: '-0.02em',
           color: 'var(--salvia-primary)',
@@ -1011,7 +983,7 @@ function GlobalFeatureGrid() {
       <div
         style={{
           borderRadius: 'var(--salvia-radius-large)',
-          border: '1px solid rgba(15,23,42,0.1)',
+          border: '1px solid var(--border-strong)',
           overflow: 'hidden',
         }}
       >
@@ -1035,7 +1007,7 @@ interface MarketSelectorProps {
 /// visitors never touch this — it's just an escape hatch to change currency.
 function MarketSelector({ market, onChange }: MarketSelectorProps) {
   return (
-    <div style={{ marginTop: '1.25rem', display: 'inline-flex', alignItems: 'center', gap: '0.45rem', fontSize: '0.82rem', color: 'var(--salvia-text-muted)' }}>
+    <div style={{ marginTop: '1.25rem', display: 'inline-flex', alignItems: 'center', gap: '0.45rem', fontSize: 'var(--text-xs)', color: 'var(--salvia-text-muted)' }}>
       <span>Prices in</span>
       <select
         aria-label="Pricing currency"
@@ -1044,10 +1016,10 @@ function MarketSelector({ market, onChange }: MarketSelectorProps) {
         style={{
           padding: '0.35rem 0.6rem',
           borderRadius: 'var(--salvia-radius-base)',
-          border: '1px solid rgba(15, 23, 42, 0.15)',
+          border: '1px solid var(--border-strong)',
           backgroundColor: 'var(--salvia-surface)',
           color: 'var(--salvia-primary)',
-          fontSize: '0.82rem',
+          fontSize: 'var(--text-xs)',
           fontWeight: 700,
           cursor: 'pointer',
         }}
