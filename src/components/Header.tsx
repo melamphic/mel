@@ -41,12 +41,12 @@ export const Header: React.FC = () => {
             alt="Salvia Logo"
             style={{ width: '56px', height: '56px', objectFit: 'contain' }}
           />
-          <span style={{ fontSize: '1.4rem', fontWeight: 800, letterSpacing: '-0.04em', color: 'var(--salvia-text)' }}>Salvia</span>
+          <span style={{ fontSize: 'var(--text-xl)', fontWeight: 800, letterSpacing: '-0.04em', color: 'var(--salvia-text)' }}>Salvia</span>
         </Link>
 
         <nav className="hide-mobile" style={{ display: 'flex', gap: '2.5rem', alignItems: 'center' }}>
-          <Link to="/#products" style={{ color: 'var(--salvia-text)', fontSize: '0.9rem', fontWeight: 600, textDecoration: 'none' }}>Product</Link>
-          <Link to="/#how-it-works" style={{ color: 'var(--salvia-text)', fontSize: '0.9rem', fontWeight: 600, textDecoration: 'none' }}>How it works</Link>
+          <Link to="/#products" style={{ color: 'var(--salvia-text)', fontSize: 'var(--text-sm)', fontWeight: 600, textDecoration: 'none' }}>Product</Link>
+          <Link to="/#how-it-works" style={{ color: 'var(--salvia-text)', fontSize: 'var(--text-sm)', fontWeight: 600, textDecoration: 'none' }}>How it works</Link>
 
           {/* Verticals — hover dropdown */}
           <div className="vertical-dropdown" style={{ position: 'relative' }}>
@@ -54,7 +54,7 @@ export const Header: React.FC = () => {
               to="/#domains"
               style={{
                 color: 'var(--salvia-text)',
-                fontSize: '0.9rem',
+                fontSize: 'var(--text-sm)',
                 fontWeight: 600,
                 textDecoration: 'none',
                 display: 'inline-flex',
@@ -78,9 +78,9 @@ export const Header: React.FC = () => {
               pointerEvents: 'none',
               minWidth: '560px',
               backgroundColor: '#fff',
-              borderRadius: '20px',
-              boxShadow: '0 24px 60px rgba(15,23,42,0.15)',
-              border: '1px solid #EEF2F6',
+              borderRadius: 'var(--radius-lg)',
+              boxShadow: 'var(--shadow-3)',
+              border: '1px solid var(--border-subtle)',
               padding: '1.5rem',
               transition: 'opacity 0.18s ease, transform 0.18s ease',
               zIndex: 200,
@@ -94,9 +94,8 @@ export const Header: React.FC = () => {
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
                 {/* Primary verticals */}
                 <div>
-                  <div style={{
-                    fontSize: '0.6rem', fontWeight: 800, color: 'var(--salvia-text-muted)',
-                    letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: '0.85rem',
+                  <div className="eyebrow" style={{
+                    color: 'var(--salvia-text-muted)', marginBottom: '0.85rem',
                   }}>
                     By Practice
                   </div>
@@ -105,11 +104,11 @@ export const Header: React.FC = () => {
                       <Link key={v.to} to={v.to} style={{ textDecoration: 'none' }} className="dropdown-item">
                         <div style={{
                           padding: '0.65rem 0.75rem',
-                          borderRadius: '10px',
+                          borderRadius: 'var(--radius-md)',
                           transition: 'background-color 0.15s ease',
                         }}>
-                          <div style={{ fontSize: '0.92rem', fontWeight: 700, color: 'var(--salvia-primary)', marginBottom: '0.15rem' }}>{v.label}</div>
-                          <div style={{ fontSize: '0.72rem', color: 'var(--salvia-text-muted)' }}>{v.sub}</div>
+                          <div style={{ fontSize: 'var(--text-sm)', fontWeight: 700, color: 'var(--salvia-primary)', marginBottom: '0.15rem' }}>{v.label}</div>
+                          <div style={{ fontSize: 'var(--text-2xs)', color: 'var(--salvia-text-muted)' }}>{v.sub}</div>
                         </div>
                       </Link>
                     ))}
@@ -118,9 +117,8 @@ export const Header: React.FC = () => {
 
                 {/* Allied disciplines */}
                 <div>
-                  <div style={{
-                    fontSize: '0.6rem', fontWeight: 800, color: 'var(--salvia-text-muted)',
-                    letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: '0.85rem',
+                  <div className="eyebrow" style={{
+                    color: 'var(--salvia-text-muted)', marginBottom: '0.85rem',
                   }}>
                     Allied Disciplines
                   </div>
@@ -129,7 +127,7 @@ export const Header: React.FC = () => {
                       <Link key={d.to} to={d.to} style={{ textDecoration: 'none' }} className="dropdown-item">
                         <div style={{
                           padding: '0.55rem 0.75rem',
-                          borderRadius: '10px',
+                          borderRadius: 'var(--radius-md)',
                           display: 'flex', alignItems: 'center', gap: '0.65rem',
                           transition: 'background-color 0.15s ease',
                         }}>
@@ -137,7 +135,7 @@ export const Header: React.FC = () => {
                             width: '6px', height: '6px', borderRadius: '50%',
                             backgroundColor: d.accent, flexShrink: 0,
                           }} />
-                          <span style={{ fontSize: '0.88rem', fontWeight: 600, color: 'var(--salvia-primary)' }}>{d.label}</span>
+                          <span style={{ fontSize: 'var(--text-sm)', fontWeight: 600, color: 'var(--salvia-primary)' }}>{d.label}</span>
                         </div>
                       </Link>
                     ))}
@@ -149,14 +147,14 @@ export const Header: React.FC = () => {
               <div style={{
                 marginTop: '1.25rem',
                 paddingTop: '1rem',
-                borderTop: '1px solid #EEF2F6',
+                borderTop: '1px solid var(--border-subtle)',
                 display: 'flex', justifyContent: 'space-between', alignItems: 'center',
               }}>
-                <span style={{ fontSize: '0.78rem', color: 'var(--salvia-text-muted)' }}>
+                <span style={{ fontSize: 'var(--text-xs)', color: 'var(--salvia-text-muted)' }}>
                   40+ regulatory frameworks across India
                 </span>
                 <Link to="/frameworks" style={{
-                  fontSize: '0.82rem', fontWeight: 700,
+                  fontSize: 'var(--text-xs)', fontWeight: 700,
                   color: 'var(--salvia-accent)', textDecoration: 'none',
                   display: 'inline-flex', alignItems: 'center', gap: '0.25rem',
                 }}>
@@ -170,17 +168,17 @@ export const Header: React.FC = () => {
             </div>
           </div>
 
-          <Link to="/frameworks" style={{ color: 'var(--salvia-text)', fontSize: '0.9rem', fontWeight: 600, textDecoration: 'none' }}>Frameworks</Link>
-          <Link to="/pricing" style={{ color: 'var(--salvia-text)', fontSize: '0.9rem', fontWeight: 600, textDecoration: 'none' }}>Pricing</Link>
-          <Link to="/blog" style={{ color: 'var(--salvia-text)', fontSize: '0.9rem', fontWeight: 600, textDecoration: 'none' }}>Blog</Link>
+          <Link to="/frameworks" style={{ color: 'var(--salvia-text)', fontSize: 'var(--text-sm)', fontWeight: 600, textDecoration: 'none' }}>Frameworks</Link>
+          <Link to="/pricing" style={{ color: 'var(--salvia-text)', fontSize: 'var(--text-sm)', fontWeight: 600, textDecoration: 'none' }}>Pricing</Link>
+          <Link to="/blog" style={{ color: 'var(--salvia-text)', fontSize: 'var(--text-sm)', fontWeight: 600, textDecoration: 'none' }}>Blog</Link>
         </nav>
 
         <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
           <CountrySwitcher />
-          <a href={APP_URL} className="pill-button-light hide-mobile" style={{ fontSize: '0.85rem', padding: '0.6rem 1.2rem', textDecoration: 'none' }}>
+          <a href={APP_URL} className="pill-button-light hide-mobile" style={{ fontSize: 'var(--text-sm)', padding: '0.6rem 1.2rem', textDecoration: 'none' }}>
             Sign In
           </a>
-          <Link to="/start" className="pill-button" style={{ fontSize: '0.85rem', padding: '0.6rem 1.4rem', textDecoration: 'none' }}>
+          <Link to="/start" className="pill-button" style={{ fontSize: 'var(--text-sm)', padding: '0.6rem 1.4rem', textDecoration: 'none' }}>
             Book a demo
           </Link>
         </div>
