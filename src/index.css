@@ -1,6 +1,9 @@
 
 :root {
-  /* Warm Sand & Fire Orange Palette */
+  /* ── Color ────────────────────────────────────────────────────────
+     Warm Sand & Fire Orange palette. Navy carries structure, orange is
+     the single voice of emphasis; semantic + vertical accents below are
+     the ONLY other hues allowed. */
   --salvia-bg: #FCFAF8;
   /* Warm Sand Beige */
   --salvia-surface: #FFFFFF;
@@ -12,12 +15,56 @@
   --salvia-accent: #FF4E00;
   /* Blazing Fire Orange */
 
-  --salvia-radius-full: 9999px;
-  --salvia-radius-large: 24px;
-  --salvia-radius-base: 12px;
+  /* Semantic status */
+  --salvia-success: #16A34A;
+  --salvia-error: #DC2626;
+  --salvia-warning: #D97706;
+  --salvia-info: #0EA5E9;
 
-  --salvia-shadow-soft: 0 12px 40px rgba(25, 56, 46, 0.08);
-  --salvia-shadow-card: 0 8px 24px rgba(25, 56, 46, 0.04);
+  /* Vertical accents (domain tabs, UI mockups) */
+  --accent-clinic: #FF4E00;
+  --accent-vet: #0EA5E9;
+  --accent-dental: #10B981;
+  --accent-allied: #0891B2;
+  --accent-outcomes: #7C3AED;
+
+  /* Border tints — the only two border colors */
+  --border-subtle: rgba(15, 23, 42, 0.06);
+  --border-strong: rgba(15, 23, 42, 0.12);
+
+  /* ── Type scale ──────────────────────────────────────────────────
+     Every font-size on the site maps to one of these steps. */
+  --text-2xs: 0.72rem;   /* eyebrows, micro-labels */
+  --text-xs: 0.8rem;     /* meta text, chips */
+  --text-sm: 0.88rem;    /* small body, nav links */
+  --text-base: 1rem;     /* body */
+  --text-md: 1.1rem;     /* lede, large body */
+  --text-lg: 1.25rem;    /* h4 / card titles */
+  --text-xl: 1.5rem;     /* h3 */
+  --text-2xl: clamp(1.7rem, 3vw, 2.2rem);   /* compact h2 */
+  --text-3xl: clamp(2rem, 4vw, 2.9rem);     /* section h2 */
+  --text-display: clamp(2.6rem, 4.6vw, 4rem); /* h1 */
+
+  /* ── Radii — four steps, nothing in between ──────────────────────── */
+  --radius-sm: 8px;      /* chips, badges, tiny elements */
+  --radius-md: 12px;     /* buttons, inputs, small cards */
+  --radius-lg: 20px;     /* cards, panels */
+  --radius-xl: 28px;     /* marquee bento cards */
+  --salvia-radius-full: 9999px;
+  /* Legacy aliases — keep resolving, map to the new scale */
+  --salvia-radius-large: var(--radius-xl);
+  --salvia-radius-base: var(--radius-md);
+
+  /* ── Elevation — three tiers on the navy shadow color ─────────────── */
+  --shadow-1: 0 1px 3px rgba(15, 23, 42, 0.04);
+  --shadow-2: 0 8px 24px rgba(15, 23, 42, 0.06);
+  --shadow-3: 0 20px 48px -12px rgba(15, 23, 42, 0.16);
+  /* Legacy aliases */
+  --salvia-shadow-soft: var(--shadow-3);
+  --salvia-shadow-card: var(--shadow-2);
+
+  /* ── Section rhythm ────────────────────────────────────────────── */
+  --section-pad: clamp(4.5rem, 8vw, 7rem);
 }
 
 * {
@@ -136,6 +183,33 @@ nav a:hover {
   padding: 0 2rem;
   position: relative;
   z-index: 10;
+}
+
+/* Narrower content widths — the ONLY other two. Applied on top of
+   .container so gutters stay identical across sections. */
+.container--content {
+  max-width: 960px;
+}
+
+.container--prose {
+  max-width: 760px;
+}
+
+/* Standard section rhythm — one vertical cadence across the site. */
+.section {
+  padding: var(--section-pad) 0;
+}
+
+/* Eyebrow — THE section preamble. One size, one weight, one tracking.
+   Color defaults to accent; override with a vertical accent when the
+   section is domain-scoped. */
+.eyebrow {
+  display: block;
+  font-size: var(--text-2xs);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--salvia-accent);
 }
 
 /* Base button styles matching the image */
