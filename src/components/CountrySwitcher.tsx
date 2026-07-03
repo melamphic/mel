@@ -37,8 +37,8 @@ export const CountrySwitcher = () => {
         aria-label="Select country / region"
         style={{
           display: 'flex', alignItems: 'center', gap: '0.35rem',
-          background: 'transparent', border: '1px solid rgba(15,23,42,0.12)', borderRadius: 999,
-          padding: '0.35rem 0.6rem', cursor: 'pointer', fontSize: '1.05rem', lineHeight: 1,
+          background: 'transparent', border: '1px solid var(--border-strong)', borderRadius: 'var(--salvia-radius-full)',
+          padding: '0.35rem 0.6rem', cursor: 'pointer', fontSize: 'var(--text-md)', lineHeight: 1,
         }}
       >
         <span>{market ? FLAG[market] : '🌐'}</span>
@@ -47,8 +47,8 @@ export const CountrySwitcher = () => {
       {open && (
         <div style={{
           position: 'absolute', top: 'calc(100% + 8px)', right: 0, zIndex: 300,
-          background: '#fff', border: '1px solid rgba(15,23,42,0.1)', borderRadius: 12,
-          boxShadow: '0 16px 40px -12px rgba(15,23,42,0.25)', padding: '0.4rem', minWidth: 180,
+          background: '#fff', border: '1px solid var(--border-strong)', borderRadius: 'var(--radius-md)',
+          boxShadow: 'var(--shadow-3)', padding: '0.4rem', minWidth: 180,
         }}>
           {MARKETS.map((m) => (
             <button
@@ -58,11 +58,11 @@ export const CountrySwitcher = () => {
               style={{
                 display: 'flex', alignItems: 'center', gap: '0.6rem', width: '100%',
                 background: m.key === market ? 'rgba(255,78,0,0.08)' : 'transparent',
-                border: 'none', borderRadius: 8, padding: '0.5rem 0.6rem', cursor: 'pointer',
-                fontSize: '0.88rem', color: 'var(--salvia-primary)', fontWeight: m.key === market ? 700 : 500, textAlign: 'left',
+                border: 'none', borderRadius: 'var(--radius-sm)', padding: '0.5rem 0.6rem', cursor: 'pointer',
+                fontSize: 'var(--text-sm)', color: 'var(--salvia-primary)', fontWeight: m.key === market ? 700 : 500, textAlign: 'left',
               }}
             >
-              <span style={{ fontSize: '1.05rem' }}>{FLAG[m.key]}</span>
+              <span style={{ fontSize: 'var(--text-md)' }}>{FLAG[m.key]}</span>
               <span style={{ flex: 1 }}>{m.label}</span>
               <span style={{ color: 'var(--salvia-text-muted)' }}>{m.symbol}</span>
             </button>
