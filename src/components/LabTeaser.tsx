@@ -14,7 +14,7 @@ export const LabTeaser: React.FC = () => {
       <div className="container" style={{ maxWidth: '1000px' }}>
         <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
           <span style={{ 
-            fontSize: '0.85rem', fontWeight: 800, color: 'var(--salvia-accent)', 
+            fontSize: 'var(--text-sm)', fontWeight: 800, color: 'var(--salvia-accent)', 
             letterSpacing: '0.12em', textTransform: 'uppercase' 
           }}>
             LATEST FROM THE BLOG
@@ -33,17 +33,17 @@ export const LabTeaser: React.FC = () => {
               <div style={{
                 padding: '2rem',
                 backgroundColor: '#fff',
-                borderRadius: '16px',
+                borderRadius: 'var(--radius-lg)',
                 border: '1px solid rgba(15,23,42,0.06)',
                 height: '100%',
                 transition: 'all 0.3s ease',
                 cursor: 'pointer'
               }} className="lab-teaser-card">
-                <div style={{ fontFamily: 'monospace', fontSize: '0.65rem', color: 'var(--salvia-accent)', fontWeight: 700, marginBottom: '1rem' }}>
+                <div style={{ fontFamily: 'monospace', fontSize: 'var(--text-2xs)', color: 'var(--salvia-accent)', fontWeight: 700, marginBottom: '1rem' }}>
                   {art.tag.toUpperCase().replace(/[\s&]+/g, '_')} // 2026
                 </div>
                 <h4 style={{ 
-                  fontSize: '1.2rem', fontWeight: 700, 
+                  fontSize: 'var(--text-lg)', fontWeight: 700, 
                   color: 'var(--salvia-primary)', lineHeight: 1.3,
                   margin: 0
                 }}>
@@ -57,7 +57,7 @@ export const LabTeaser: React.FC = () => {
         <div style={{ textAlign: 'center', marginTop: '4rem' }}>
           <Link to="/blog" style={{ 
             color: 'var(--salvia-primary)', fontWeight: 700, 
-            fontSize: '0.95rem', textDecoration: 'none',
+            fontSize: 'var(--text-base)', textDecoration: 'none',
             display: 'inline-flex', alignItems: 'center', gap: '0.5rem'
           }}>
             Read the Blog 
