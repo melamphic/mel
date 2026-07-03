@@ -60,7 +60,7 @@ export const content = (
       note in the voice of opposing counsel. If it sounds bad, rewrite it.
     </p>
 
-    <h3>The deeper point</h3>
+    <h3>The note is a gift to your future self</h3>
     <p>
       A well-documented difficult encounter is a gift to your future self. It shows a clinician
       who stayed professional under pressure, documented facts instead of feelings, and gave the
