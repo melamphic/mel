@@ -51,7 +51,7 @@ export const content = (
     <ul>
       <li>Save a structured skeleton during the encounter (vitals, chief complaint, key findings).</li>
       <li>Mark the note as a draft and timestamp the skeleton yourself in the body: <em>"Clinical findings documented at time of visit; narrative finalised [time]."</em></li>
-      <li>Sign once, don't edit-after-sign unless you use the formal addendum workflow (overwriting a signed note is how billing mistakes become insurance-fraud investigations — see <a href="/blog/signed-edits-dental" style={{ color: 'var(--salvia-accent)' }}>this post</a>).</li>
+      <li>Sign once, don't edit-after-sign unless you use the formal addendum workflow — overwriting a signed note is how billing mistakes become fraud investigations.</li>
     </ul>
 
     <p><strong>3. Fix the part of your workflow that's stealing the time.</strong> For most
