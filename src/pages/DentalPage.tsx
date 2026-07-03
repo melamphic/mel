@@ -36,9 +36,9 @@ const FAQS = [
 ];
 
 const REGULATORS = [
-  { label: 'DCI', sub: 'India', color: '#0EA5E9' },
-  { label: 'NABH', sub: 'India', color: '#FF4E00' },
-  { label: 'AERB', sub: 'India', color: '#10B981' },
+  { label: 'DCI', sub: 'India', color: 'var(--accent-vet)' },
+  { label: 'NABH', sub: 'India', color: 'var(--salvia-accent)' },
+  { label: 'AERB', sub: 'India', color: 'var(--accent-dental)' },
   { label: 'CEA 2010', sub: 'India', color: '#F59E0B' },
   { label: 'DPDP Act', sub: 'India', color: '#8B5CF6' },
 ];
@@ -145,14 +145,14 @@ export const DentalPage = () => {
           <div style={{
             display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
             backgroundColor: 'rgba(5,150,105,0.07)', border: '1.5px solid rgba(5,150,105,0.2)',
-            borderRadius: '10px', padding: '0.35rem 0.85rem', marginBottom: '2rem',
+            borderRadius: 'var(--radius-md)', padding: '0.35rem 0.85rem', marginBottom: '2rem',
           }}>
-            <span style={{ fontSize: '0.75rem', fontWeight: 800, color: '#059669', letterSpacing: '0.1em', textTransform: 'uppercase' }}>
+            <span style={{ fontSize: 'var(--text-xs)', fontWeight: 800, color: 'var(--accent-dental)', letterSpacing: '0.1em', textTransform: 'uppercase' }}>
               Dental Practices
             </span>
           </div>
           <h1 style={{
-            fontSize: 'clamp(2.8rem, 7vw, 5rem)', fontWeight: 900,
+            fontSize: 'clamp(2.8rem, 7vw, 5rem)', fontWeight: 800,
             letterSpacing: '-0.04em', lineHeight: 1,
             color: 'var(--salvia-primary)', marginBottom: '1.75rem',
           }}>
@@ -168,9 +168,9 @@ export const DentalPage = () => {
           <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'center', flexWrap: 'wrap' }}>
             <Link to="/start" style={{
               display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
-              backgroundColor: '#059669', color: '#fff',
-              padding: '0.85rem 1.75rem', borderRadius: '12px',
-              fontWeight: 700, fontSize: '0.95rem', textDecoration: 'none',
+              backgroundColor: 'var(--accent-dental)', color: '#fff',
+              padding: '0.85rem 1.75rem', borderRadius: 'var(--radius-md)',
+              fontWeight: 700, fontSize: 'var(--text-base)', textDecoration: 'none',
             }}>
               Book a demo
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
@@ -180,8 +180,8 @@ export const DentalPage = () => {
             <Link to="/pricing" style={{
               display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
               backgroundColor: 'transparent', color: 'var(--salvia-primary)',
-              padding: '0.85rem 1.75rem', borderRadius: '12px',
-              fontWeight: 700, fontSize: '0.95rem', textDecoration: 'none',
+              padding: '0.85rem 1.75rem', borderRadius: 'var(--radius-md)',
+              fontWeight: 700, fontSize: 'var(--text-base)', textDecoration: 'none',
               border: '1.5px solid rgba(15,23,42,0.15)',
             }}>
               See pricing
@@ -194,13 +194,13 @@ export const DentalPage = () => {
       <section style={{ borderTop: '1px solid #F1F5F9', borderBottom: '1px solid #F1F5F9', padding: '2rem 0', backgroundColor: '#fff' }}>
         <div className="container" style={{ maxWidth: '900px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '2rem', flexWrap: 'wrap', justifyContent: 'center' }}>
-            <span style={{ fontSize: '0.72rem', fontWeight: 700, color: 'var(--salvia-text-muted)', letterSpacing: '0.1em', textTransform: 'uppercase', whiteSpace: 'nowrap' }}>
+            <span style={{ fontSize: 'var(--text-2xs)', fontWeight: 700, color: 'var(--salvia-text-muted)', letterSpacing: '0.1em', textTransform: 'uppercase', whiteSpace: 'nowrap' }}>
               Designed for
             </span>
             {REGULATORS.map(r => (
               <div key={r.label} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.1rem' }}>
-                <span style={{ fontSize: '1rem', fontWeight: 900, color: r.color, letterSpacing: '-0.02em' }}>{r.label}</span>
-                <span style={{ fontSize: '0.62rem', fontWeight: 600, color: 'var(--salvia-text-muted)', letterSpacing: '0.04em' }}>{r.sub}</span>
+                <span style={{ fontSize: 'var(--text-base)', fontWeight: 800, color: r.color, letterSpacing: '-0.02em' }}>{r.label}</span>
+                <span style={{ fontSize: 'var(--text-2xs)', fontWeight: 600, color: 'var(--salvia-text-muted)', letterSpacing: '0.04em' }}>{r.sub}</span>
               </div>
             ))}
           </div>
@@ -212,22 +212,22 @@ export const DentalPage = () => {
         <div className="container" style={{ maxWidth: '880px' }}>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: '3rem', alignItems: 'center' }} className="mobile-stack">
             <div style={{ textAlign: 'center' }}>
-              <div style={{ fontSize: '0.7rem', fontWeight: 800, color: '#059669', letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: '0.5rem' }}>Audit Finding</div>
-              <div style={{ fontSize: '3.5rem', fontWeight: 900, color: 'var(--salvia-primary)', letterSpacing: '-0.04em', lineHeight: 1 }}>9/20</div>
-              <div style={{ fontSize: '0.9rem', fontWeight: 600, color: 'var(--salvia-text-muted)', marginTop: '0.25rem' }}>records missing BPE</div>
+              <div style={{ fontSize: 'var(--text-2xs)', fontWeight: 800, color: 'var(--accent-dental)', letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: '0.5rem' }}>Audit Finding</div>
+              <div style={{ fontSize: '3.5rem', fontWeight: 800, color: 'var(--salvia-primary)', letterSpacing: '-0.04em', lineHeight: 1 }}>9/20</div>
+              <div style={{ fontSize: 'var(--text-sm)', fontWeight: 600, color: 'var(--salvia-text-muted)', marginTop: '0.25rem' }}>records missing BPE</div>
             </div>
             <div>
-              <h2 style={{ fontSize: '1.5rem', fontWeight: 800, color: 'var(--salvia-primary)', marginBottom: '0.75rem', letterSpacing: '-0.02em' }}>
+              <h2 style={{ fontSize: 'var(--text-xl)', fontWeight: 800, color: 'var(--salvia-primary)', marginBottom: '0.75rem', letterSpacing: '-0.02em' }}>
                 Audits find BPE missing in nearly half of sampled records.
               </h2>
               <p style={{ color: 'var(--salvia-text-muted)', lineHeight: 1.65, marginBottom: '1.25rem' }}>
                 In a typical underprepared clinic audit, 9 of 20 records are missing BPE scores, 11 lack written treatment plans, and 7 have no radiograph reporting. These aren't complex clinical failures — they're missing fields. Salvia makes them required.
               </p>
-              <Link to="/blog/cqc-dental-2026" style={{
-                fontSize: '0.85rem', fontWeight: 700, color: '#059669',
+              <Link to="/blog/malpractice-dental" style={{
+                fontSize: 'var(--text-sm)', fontWeight: 700, color: 'var(--accent-dental)',
                 display: 'inline-flex', alignItems: 'center', gap: '0.35rem', textDecoration: 'none',
               }}>
-                Read the dental audit breakdown
+                Read the dental charting breakdown
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                   <line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" />
                 </svg>
@@ -251,7 +251,7 @@ export const DentalPage = () => {
       <section style={{ padding: '7rem 0', backgroundColor: '#fff' }}>
         <div className="container" style={{ maxWidth: '1100px' }}>
           <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
-            <div style={{ fontSize: '0.72rem', fontWeight: 800, color: '#059669', letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>
+            <div style={{ fontSize: 'var(--text-2xs)', fontWeight: 800, color: 'var(--accent-dental)', letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>
               What Salvia does
             </div>
             <h2 style={{ fontSize: 'clamp(1.8rem, 4vw, 2.75rem)', fontWeight: 800, color: 'var(--salvia-primary)', letterSpacing: '-0.03em' }}>
@@ -261,19 +261,19 @@ export const DentalPage = () => {
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.5rem' }} className="mobile-stack">
             {FEATURES.map((f, i) => (
               <div key={i} style={{
-                padding: '2rem', borderRadius: '16px',
+                padding: '2rem', borderRadius: 'var(--radius-lg)',
                 border: '1px solid #EEF2F6', backgroundColor: '#FAFBFC',
               }}>
                 <div style={{
-                  width: '44px', height: '44px', borderRadius: '12px',
+                  width: '44px', height: '44px', borderRadius: 'var(--radius-md)',
                   backgroundColor: 'rgba(5,150,105,0.07)',
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  color: '#059669', marginBottom: '1.25rem',
+                  color: 'var(--accent-dental)', marginBottom: '1.25rem',
                 }}>
                   {f.icon}
                 </div>
-                <h3 style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--salvia-primary)', marginBottom: '0.5rem' }}>{f.title}</h3>
-                <p style={{ fontSize: '0.875rem', color: 'var(--salvia-text-muted)', lineHeight: 1.6 }}>{f.desc}</p>
+                <h3 style={{ fontSize: 'var(--text-base)', fontWeight: 700, color: 'var(--salvia-primary)', marginBottom: '0.5rem' }}>{f.title}</h3>
+                <p style={{ fontSize: 'var(--text-sm)', color: 'var(--salvia-text-muted)', lineHeight: 1.6 }}>{f.desc}</p>
               </div>
             ))}
           </div>
@@ -329,7 +329,7 @@ export const DentalPage = () => {
       <section style={{ padding: '7rem 0', backgroundColor: 'var(--salvia-bg)', borderTop: '1px solid #F1F5F9' }}>
         <div className="container" style={{ maxWidth: '760px' }}>
           <div style={{ textAlign: 'center', marginBottom: '3.5rem' }}>
-            <div style={{ fontSize: '0.72rem', fontWeight: 800, color: '#059669', letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>
+            <div style={{ fontSize: 'var(--text-2xs)', fontWeight: 800, color: 'var(--accent-dental)', letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>
               Common questions
             </div>
             <h2 style={{ fontSize: 'clamp(1.8rem, 4vw, 2.4rem)', fontWeight: 800, color: 'var(--salvia-primary)', letterSpacing: '-0.03em' }}>
@@ -339,11 +339,11 @@ export const DentalPage = () => {
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
             {FAQS.map((faq, i) => (
               <div key={i} style={{
-                padding: '1.75rem 2rem', borderRadius: '14px',
+                padding: '1.75rem 2rem', borderRadius: 'var(--radius-md)',
                 border: '1px solid #EEF2F6', backgroundColor: '#fff',
               }}>
-                <h3 style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--salvia-primary)', marginBottom: '0.65rem' }}>{faq.q}</h3>
-                <p style={{ fontSize: '0.9rem', color: 'var(--salvia-text-muted)', lineHeight: 1.65, margin: 0 }}>{faq.a}</p>
+                <h3 style={{ fontSize: 'var(--text-base)', fontWeight: 700, color: 'var(--salvia-primary)', marginBottom: '0.65rem' }}>{faq.q}</h3>
+                <p style={{ fontSize: 'var(--text-sm)', color: 'var(--salvia-text-muted)', lineHeight: 1.65, margin: 0 }}>{faq.a}</p>
               </div>
             ))}
           </div>
@@ -354,26 +354,26 @@ export const DentalPage = () => {
       <section style={{ padding: '6rem 0', backgroundColor: '#fff', borderTop: '1px solid #F1F5F9' }}>
         <div className="container" style={{ maxWidth: '1000px' }}>
           <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', marginBottom: '2rem', flexWrap: 'wrap', gap: '1rem' }}>
-            <div style={{ fontSize: '0.72rem', fontWeight: 800, color: '#059669', letterSpacing: '0.12em', textTransform: 'uppercase' }}>From the compliance desk</div>
-            <Link to="/blog" style={{ fontSize: '0.85rem', fontWeight: 700, color: 'var(--salvia-text-muted)', textDecoration: 'none' }}>All posts →</Link>
+            <div style={{ fontSize: 'var(--text-2xs)', fontWeight: 800, color: 'var(--accent-dental)', letterSpacing: '0.12em', textTransform: 'uppercase' }}>From the compliance desk</div>
+            <Link to="/blog" style={{ fontSize: 'var(--text-sm)', fontWeight: 700, color: 'var(--salvia-text-muted)', textDecoration: 'none' }}>All posts →</Link>
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '1rem' }} className="mobile-stack">
             {RECENT_POSTS.map(p => (
               <Link key={p.slug} to={`/blog/${p.slug}`} style={{ textDecoration: 'none' }} className="dental-blog-card">
                 <div style={{
-                  padding: '1.5rem', borderRadius: '14px',
+                  padding: '1.5rem', borderRadius: 'var(--radius-md)',
                   border: '1px solid #EEF2F6', backgroundColor: '#FAFBFC',
                   height: '100%', transition: 'all 0.2s ease',
                 }}>
                   <div style={{
-                    fontSize: '0.65rem', fontWeight: 800, color: '#059669',
+                    fontSize: 'var(--text-2xs)', fontWeight: 800, color: 'var(--accent-dental)',
                     backgroundColor: 'rgba(5,150,105,0.07)', padding: '0.2rem 0.55rem',
-                    borderRadius: '5px', display: 'inline-block',
+                    borderRadius: 'var(--radius-sm)', display: 'inline-block',
                     letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '0.75rem',
                   }}>
                     {p.tag}
                   </div>
-                  <h4 style={{ fontSize: '0.95rem', fontWeight: 700, color: 'var(--salvia-primary)', lineHeight: 1.4, margin: 0 }}>
+                  <h4 style={{ fontSize: 'var(--text-base)', fontWeight: 700, color: 'var(--salvia-primary)', lineHeight: 1.4, margin: 0 }}>
                     {p.title}
                   </h4>
                 </div>
@@ -386,7 +386,7 @@ export const DentalPage = () => {
       {/* CTA */}
       <section style={{ padding: '7rem 0', backgroundColor: 'var(--salvia-bg)', borderTop: '1px solid #F1F5F9', textAlign: 'center' }}>
         <div className="container" style={{ maxWidth: '600px' }}>
-          <div style={{ fontSize: '0.72rem', fontWeight: 800, color: '#059669', letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: '1rem' }}>
+          <div style={{ fontSize: 'var(--text-2xs)', fontWeight: 800, color: 'var(--accent-dental)', letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: '1rem' }}>
             Get started
           </div>
           <h2 style={{ fontSize: 'clamp(2rem, 5vw, 3rem)', fontWeight: 800, color: 'var(--salvia-primary)', letterSpacing: '-0.03em', marginBottom: '1rem' }}>
@@ -397,9 +397,9 @@ export const DentalPage = () => {
           </p>
           <Link to="/start" style={{
             display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
-            backgroundColor: '#059669', color: '#fff',
-            padding: '0.9rem 2rem', borderRadius: '12px',
-            fontWeight: 700, fontSize: '1rem', textDecoration: 'none',
+            backgroundColor: 'var(--accent-dental)', color: '#fff',
+            padding: '0.9rem 2rem', borderRadius: 'var(--radius-md)',
+            fontWeight: 700, fontSize: 'var(--text-base)', textDecoration: 'none',
           }}>
             Book a demo
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
