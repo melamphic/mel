@@ -94,7 +94,7 @@ export const FrameworksRail: React.FC = () => {
       {/* Header */}
       <div style={{ marginBottom: '3.5rem', textAlign: 'center' }}>
         <span style={{
-          fontSize: '0.7rem', fontWeight: 700, letterSpacing: '0.14em',
+          fontSize: 'var(--text-2xs)', fontWeight: 700, letterSpacing: '0.14em',
           textTransform: 'uppercase', color: 'var(--salvia-accent)',
         }}>
           Meet the frameworks
@@ -110,7 +110,7 @@ export const FrameworksRail: React.FC = () => {
           Your rulebook. Our policy engine.
         </h2>
         <p style={{
-          fontSize: '1.05rem',
+          fontSize: 'var(--text-md)',
           color: 'var(--salvia-text-muted)',
           lineHeight: 1.65,
           marginTop: '1rem',
@@ -132,16 +132,16 @@ export const FrameworksRail: React.FC = () => {
           <div key={v.name} style={{
             backgroundColor: '#fff',
             border: '1px solid rgba(0,0,0,0.06)',
-            borderRadius: '16px',
+            borderRadius: 'var(--radius-lg)',
             padding: '1.75rem 1.5rem',
-            boxShadow: '0 4px 12px rgba(25,56,46,0.03)',
+            boxShadow: 'var(--shadow-2)',
             display: 'flex', flexDirection: 'column', gap: '1rem',
           }}>
             {/* Header row */}
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.55rem' }}>
-              <div style={{ width: 10, height: 10, backgroundColor: v.accent, borderRadius: '3px', flexShrink: 0 }} />
+              <div style={{ width: 10, height: 10, backgroundColor: v.accent, borderRadius: 'var(--radius-sm)', flexShrink: 0 }} />
               <h3 style={{
-                fontSize: '1.15rem', fontWeight: 800,
+                fontSize: 'var(--text-md)', fontWeight: 800,
                 color: 'var(--salvia-primary)',
                 letterSpacing: '-0.02em',
                 margin: 0,
@@ -159,7 +159,7 @@ export const FrameworksRail: React.FC = () => {
                   borderBottom: '1px solid #F1F5F9',
                 }}>
                   <span style={{
-                    fontSize: '0.85rem',
+                    fontSize: 'var(--text-sm)',
                     fontWeight: 600,
                     color: 'var(--salvia-primary)',
                     letterSpacing: '-0.01em',
@@ -168,12 +168,12 @@ export const FrameworksRail: React.FC = () => {
                   </span>
                   <span style={{
                     fontFamily: 'monospace',
-                    fontSize: '0.62rem',
+                    fontSize: 'var(--text-2xs)',
                     fontWeight: 600,
                     color: 'var(--salvia-text-muted)',
                     backgroundColor: '#F8FAFC',
                     padding: '0.15rem 0.4rem',
-                    borderRadius: '4px',
+                    borderRadius: 'var(--radius-sm)',
                     letterSpacing: '0.02em',
                   }}>
                     {f.region}
@@ -183,7 +183,7 @@ export const FrameworksRail: React.FC = () => {
             </div>
 
             <div style={{
-              fontSize: '0.72rem',
+              fontSize: 'var(--text-2xs)',
               color: 'var(--salvia-text-muted)',
               marginTop: 'auto',
               paddingTop: '0.5rem',
@@ -197,7 +197,7 @@ export const FrameworksRail: React.FC = () => {
       {/* Footer line */}
       <p style={{
         textAlign: 'center',
-        fontSize: '0.9rem',
+        fontSize: 'var(--text-sm)',
         color: 'var(--salvia-text-muted)',
         marginTop: '2.5rem',
         maxWidth: '640px',
