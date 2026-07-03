@@ -61,7 +61,7 @@ export const PainSection = () => {
       {/* Section label */}
       <div style={{ marginBottom: '3.5rem' }}>
         <span style={{
-          fontSize: '0.68rem', fontWeight: 700, letterSpacing: '0.14em',
+          fontSize: 'var(--text-2xs)', fontWeight: 700, letterSpacing: '0.14em',
           textTransform: 'uppercase', color: 'var(--salvia-accent)',
         }}>
           The Problem
@@ -94,7 +94,7 @@ export const PainSection = () => {
           >
             {/* Number */}
             <div style={{
-              fontSize: '0.7rem', fontWeight: 700, letterSpacing: '0.08em',
+              fontSize: 'var(--text-2xs)', fontWeight: 700, letterSpacing: '0.08em',
               color: 'rgba(0,0,0,0.25)', paddingTop: '0.15rem',
               fontVariantNumeric: 'tabular-nums',
             }}>
@@ -105,7 +105,7 @@ export const PainSection = () => {
             <div style={{ paddingRight: '3rem' }}>
               <div style={{
                 display: 'inline-block',
-                fontSize: '0.65rem', fontWeight: 700, letterSpacing: '0.1em',
+                fontSize: 'var(--text-2xs)', fontWeight: 700, letterSpacing: '0.1em',
                 textTransform: 'uppercase', color: p.accent,
                 marginBottom: '0.7rem',
                 borderBottom: `2px solid ${p.accent}`,
@@ -114,14 +114,14 @@ export const PainSection = () => {
                 {p.tag}
               </div>
               <h3 style={{
-                fontSize: '1.25rem', fontWeight: 600,
+                fontSize: 'var(--text-lg)', fontWeight: 600,
                 letterSpacing: '-0.03em', lineHeight: 1.2,
                 color: 'var(--salvia-primary)', marginBottom: '0.85rem',
               }}>
                 {p.title}
               </h3>
               <p style={{
-                fontSize: '0.88rem', color: 'var(--salvia-text-muted)',
+                fontSize: 'var(--text-sm)', color: 'var(--salvia-text-muted)',
                 lineHeight: 1.7, maxWidth: '420px',
               }}>
                 {p.body}
@@ -144,7 +144,7 @@ export const PainSection = () => {
                 {p.stat}
               </div>
               <div style={{
-                fontSize: '0.75rem', color: 'var(--salvia-text-muted)',
+                fontSize: 'var(--text-xs)', color: 'var(--salvia-text-muted)',
                 lineHeight: 1.45, maxWidth: '200px', marginTop: '0.5rem',
               }}>
                 {p.statSub}
