@@ -30,7 +30,7 @@ const VERTICALS: { key: Vertical; label: string }[] = [
   { key: 'allied_health',  label: 'Allied'    },
 ];
 
-const SEG_COLORS = ['#FF4E00', '#0F172A', '#CBD5E1'];
+const SEG_COLORS = ['var(--salvia-accent)', 'var(--salvia-primary)', '#CBD5E1'];
 
 
 /* ── Donut ───────────────────────────────────────────────────── */
@@ -67,10 +67,10 @@ function Donut({ segments, centerLabel }: {
         ))}
       </svg>
       <div style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '2px' }}>
-        <span style={{ fontSize: '1.45rem', fontWeight: 900, color: 'var(--salvia-accent)', letterSpacing: '-0.04em', lineHeight: 1 }}>
+        <span style={{ fontSize: 'var(--text-xl)', fontWeight: 800, color: 'var(--salvia-accent)', letterSpacing: '-0.04em', lineHeight: 1 }}>
           {centerLabel}
         </span>
-        <span style={{ fontSize: '0.62rem', color: 'var(--salvia-text-muted)', fontWeight: 700, letterSpacing: '0.06em', textTransform: 'uppercase', marginTop: '3px' }}>per month</span>
+        <span style={{ fontSize: 'var(--text-2xs)', color: 'var(--salvia-text-muted)', fontWeight: 700, letterSpacing: '0.06em', textTransform: 'uppercase', marginTop: '3px' }}>per month</span>
       </div>
     </div>
   );
@@ -83,21 +83,21 @@ function ChipGroup<T extends string>({ label, options, value, onChange }: {
 }) {
   return (
     <div>
-      <div style={{ fontSize: '0.7rem', fontWeight: 700, color: 'var(--salvia-text-muted)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '0.6rem' }}>
+      <div className="eyebrow" style={{ color: 'var(--salvia-text-muted)', marginBottom: '0.6rem' }}>
         {label}
       </div>
       <div style={{ display: 'flex', gap: '0.45rem', flexWrap: 'wrap' }}>
         {options.map(o => (
           <button key={o.key} onClick={() => onChange(o.key)} style={{
-            padding: '0.5rem 1rem', borderRadius: '10px', border: '1.5px solid',
-            borderColor: value === o.key ? 'var(--salvia-accent)' : 'rgba(15,23,42,0.1)',
+            padding: '0.5rem 1rem', borderRadius: 'var(--radius-md)', border: '1.5px solid',
+            borderColor: value === o.key ? 'var(--salvia-accent)' : 'var(--border-strong)',
             backgroundColor: value === o.key ? 'rgba(255,78,0,0.06)' : 'transparent',
             color: value === o.key ? 'var(--salvia-accent)' : 'var(--salvia-text-muted)',
-            fontSize: '0.83rem', fontWeight: 700, cursor: 'pointer', transition: 'all 0.15s',
+            fontSize: 'var(--text-xs)', fontWeight: 700, cursor: 'pointer', transition: 'all 0.15s',
             display: 'flex', flexDirection: 'column', alignItems: 'center',
           }}>
             <span>{o.label}</span>
-            {o.sub && <span style={{ fontSize: '0.58rem', fontWeight: 500, opacity: 0.7 }}>{o.sub}</span>}
+            {o.sub && <span style={{ fontSize: 'var(--text-2xs)', fontWeight: 500, opacity: 0.7 }}>{o.sub}</span>}
           </button>
         ))}
       </div>
@@ -114,8 +114,8 @@ function Slider({ label, value, min, max, step = 1, display, onChange }: {
   return (
     <div>
       <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.45rem' }}>
-        <span style={{ fontSize: '0.78rem', fontWeight: 600, color: 'var(--salvia-primary)' }}>{label}</span>
-        <span style={{ fontSize: '0.82rem', fontWeight: 800, color: 'var(--salvia-accent)' }}>{display}</span>
+        <span style={{ fontSize: 'var(--text-xs)', fontWeight: 600, color: 'var(--salvia-primary)' }}>{label}</span>
+        <span style={{ fontSize: 'var(--text-xs)', fontWeight: 800, color: 'var(--salvia-accent)' }}>{display}</span>
       </div>
       <input type="range" min={min} max={max} step={step} value={value}
         onChange={e => onChange(Number(e.target.value))}
@@ -124,8 +124,8 @@ function Slider({ label, value, min, max, step = 1, display, onChange }: {
         style={{ '--fill': `${pct}%` } as React.CSSProperties}
       />
       <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '0.25rem' }}>
-        <span style={{ fontSize: '0.6rem', color: 'rgba(15,23,42,0.3)', fontFamily: 'monospace' }}>{min}</span>
-        <span style={{ fontSize: '0.6rem', color: 'rgba(15,23,42,0.3)', fontFamily: 'monospace' }}>{max}</span>
+        <span style={{ fontSize: 'var(--text-2xs)', color: 'rgba(15,23,42,0.3)', fontFamily: 'monospace' }}>{min}</span>
+        <span style={{ fontSize: 'var(--text-2xs)', color: 'rgba(15,23,42,0.3)', fontFamily: 'monospace' }}>{max}</span>
       </div>
     </div>
   );
@@ -173,16 +173,16 @@ export const ROICalculator = () => {
   const segments = rows.map((r, i) => ({ value: r.value, color: SEG_COLORS[i] }));
 
   return (
-    <section style={{ padding: '6rem 0', backgroundColor: 'transparent', position: 'relative', zIndex: 10 }}>
+    <section style={{ padding: 'var(--section-pad) 0', backgroundColor: 'transparent', position: 'relative', zIndex: 10 }}>
       <style>{`
-        .roi-range { -webkit-appearance: none; appearance: none; width: 100%; height: 3px; border-radius: 2px; outline: none; cursor: pointer; background: linear-gradient(to right, #FF4E00 var(--fill), rgba(15,23,42,0.1) var(--fill)); margin: 0; display: block; }
-        .roi-range::-webkit-slider-thumb { -webkit-appearance: none; width: 18px; height: 18px; border-radius: 50%; background: #fff; border: 2.5px solid #FF4E00; box-shadow: 0 1px 6px rgba(255,78,0,0.3); cursor: pointer; }
-        .roi-range::-moz-range-thumb { width: 14px; height: 14px; border-radius: 50%; background: #fff; border: 2.5px solid #FF4E00; cursor: pointer; }
+        .roi-range { -webkit-appearance: none; appearance: none; width: 100%; height: 3px; border-radius: 2px; outline: none; cursor: pointer; background: linear-gradient(to right, var(--salvia-accent) var(--fill), rgba(15,23,42,0.1) var(--fill)); margin: 0; display: block; }
+        .roi-range::-webkit-slider-thumb { -webkit-appearance: none; width: 18px; height: 18px; border-radius: 50%; background: #fff; border: 2.5px solid var(--salvia-accent); box-shadow: 0 1px 6px rgba(255,78,0,0.3); cursor: pointer; }
+        .roi-range::-moz-range-thumb { width: 14px; height: 14px; border-radius: 50%; background: #fff; border: 2.5px solid var(--salvia-accent); cursor: pointer; }
         .roi-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: start; }
         .roi-card { padding: 2rem; }
         .roi-donut-row { display: flex; gap: 1.5rem; align-items: center; }
         .roi-summary { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-        .roi-summary-num { font-size: 2.75rem; }
+        .roi-summary-num { font-size: var(--text-3xl); }
         @media (max-width: 768px) {
           .roi-wrap { grid-template-columns: 1fr !important; gap: 1.25rem !important; }
           .roi-card { padding: 1.25rem !important; }
@@ -194,15 +194,15 @@ export const ROICalculator = () => {
         }
       `}</style>
 
-      <div className="container" style={{ maxWidth: '1020px' }}>
+      <div className="container" style={{ maxWidth: '960px' }}>
 
         {/* header */}
         <div style={{ marginBottom: '2.75rem' }}>
-          <span style={{ fontSize: '0.7rem', fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: 'var(--salvia-accent)' }}>ROI Calculator</span>
-          <h2 style={{ fontSize: 'clamp(2.25rem, 4.5vw, 3rem)', fontWeight: 800, letterSpacing: '-0.04em', lineHeight: 1.08, color: 'var(--salvia-primary)', marginTop: '0.6rem' }}>
+          <span className="eyebrow">ROI Calculator</span>
+          <h2 style={{ fontSize: 'var(--text-3xl)', fontWeight: 800, letterSpacing: '-0.04em', lineHeight: 1.08, color: 'var(--salvia-primary)', marginTop: '0.6rem' }}>
             What does Salvia return?
           </h2>
-          <p style={{ fontSize: '0.95rem', color: 'var(--salvia-text-muted)', marginTop: '0.6rem', lineHeight: 1.6 }}>
+          <p style={{ fontSize: 'var(--text-base)', color: 'var(--salvia-text-muted)', marginTop: '0.6rem', lineHeight: 1.6 }}>
             Doctors lose a third to half their day to records and paperwork. Move the sliders. Every number updates live.
           </p>
         </div>
@@ -210,14 +210,14 @@ export const ROICalculator = () => {
         <div className="roi-wrap">
 
           {/* LEFT — inputs */}
-          <div className="roi-card" style={{ backgroundColor: '#fff', border: '1px solid rgba(15,23,42,0.07)', borderRadius: '20px', boxShadow: 'var(--salvia-shadow-card)', display: 'flex', flexDirection: 'column', gap: '1.6rem' }}>
+          <div className="roi-card" style={{ backgroundColor: '#fff', border: '1px solid var(--border-subtle)', borderRadius: 'var(--radius-lg)', boxShadow: 'var(--salvia-shadow-card)', display: 'flex', flexDirection: 'column', gap: '1.6rem' }}>
             <ChipGroup label="Specialty" options={VERTICALS.map(v => ({ key: v.key, label: v.label }))} value={vertical} onChange={setVertical} />
-            <div style={{ height: '1px', backgroundColor: 'rgba(15,23,42,0.06)' }} />
+            <div style={{ height: '1px', backgroundColor: 'var(--border-subtle)' }} />
             <Slider label="Clinicians" value={clinicians} min={1} max={15} onChange={setClinicians} display={`${clinicians} clinician${clinicians > 1 ? 's' : ''}`} />
             <Slider label="Consults per day, per clinician" value={consults} min={1} max={40} onChange={setConsults} display={`${consults} ${cfg.noteUnit}`} />
             <Slider label="Minutes on documentation per note today" value={minNow} min={3} max={45} onChange={setMinNow} display={`${minNow} min`} />
             <Slider label="Hourly staff cost" value={hourly} min={20} max={2000} step={5} onChange={setHourly} display={`${meta.symbol}${hourly}/hr`} />
-            <p style={{ fontSize: '0.67rem', color: 'var(--salvia-text-muted)', fontFamily: 'monospace', lineHeight: 1.7, borderTop: '1px solid rgba(15,23,42,0.06)', paddingTop: '1rem', margin: 0 }}>
+            <p style={{ fontSize: 'var(--text-2xs)', color: 'var(--salvia-text-muted)', fontFamily: 'monospace', lineHeight: 1.7, borderTop: '1px solid var(--border-subtle)', paddingTop: '1rem', margin: 0 }}>
               Salvia reduces documentation to ~3 min (review + sign). Saving {saved} min/note.
               {` ~${notesPerMonth.toLocaleString(market === 'IN' ? 'en-IN' : 'en-US')} AI notes/mo → ${isCustom ? `Custom plan (${topTier.notesPerMonth.toLocaleString()}+ notes)` : tier.name + ' plan'}.`}
               {` Billing: ${(cfg.billingPct * 100).toFixed(0)}% leakage on ${fmt(econ.annualRev)} rev/clinician/yr.`}
@@ -225,7 +225,7 @@ export const ROICalculator = () => {
           </div>
 
           {/* RIGHT — unified output */}
-          <div className="roi-card" style={{ backgroundColor: '#fff', border: '1px solid rgba(15,23,42,0.07)', borderRadius: '20px', boxShadow: 'var(--salvia-shadow-card)', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+          <div className="roi-card" style={{ backgroundColor: '#fff', border: '1px solid var(--border-subtle)', borderRadius: 'var(--radius-lg)', boxShadow: 'var(--salvia-shadow-card)', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
 
             {/* donut + legend side by side on desktop, stacked on mobile */}
             <div className="roi-donut-row">
@@ -235,11 +235,11 @@ export const ROICalculator = () => {
                   <div key={i}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.2rem' }}>
                       <div style={{ width: 10, height: 10, borderRadius: '3px', backgroundColor: SEG_COLORS[i], flexShrink: 0 }} />
-                      <span style={{ fontSize: '0.78rem', fontWeight: 700, color: 'var(--salvia-primary)', lineHeight: 1.3 }}>{row.label}</span>
+                      <span style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--salvia-primary)', lineHeight: 1.3 }}>{row.label}</span>
                     </div>
                     <div style={{ paddingLeft: '18px' }}>
-                      <div style={{ fontSize: '1.05rem', fontWeight: 900, color: 'var(--salvia-primary)', letterSpacing: '-0.02em' }}>{fmt(row.value)}<span style={{ fontSize: '0.65rem', fontWeight: 500, color: 'var(--salvia-text-muted)', marginLeft: '2px' }}>/mo</span></div>
-                      <div style={{ fontSize: '0.67rem', color: 'var(--salvia-text-muted)', fontFamily: 'monospace', marginTop: '1px' }}>{row.hint}</div>
+                      <div style={{ fontSize: 'var(--text-md)', fontWeight: 800, color: 'var(--salvia-primary)', letterSpacing: '-0.02em' }}>{fmt(row.value)}<span style={{ fontSize: 'var(--text-2xs)', fontWeight: 500, color: 'var(--salvia-text-muted)', marginLeft: '2px' }}>/mo</span></div>
+                      <div style={{ fontSize: 'var(--text-2xs)', color: 'var(--salvia-text-muted)', fontFamily: 'monospace', marginTop: '1px' }}>{row.hint}</div>
                     </div>
                   </div>
                 ))}
@@ -247,35 +247,35 @@ export const ROICalculator = () => {
             </div>
 
             {/* divider */}
-            <div style={{ height: '1px', backgroundColor: 'rgba(15,23,42,0.06)' }} />
+            <div style={{ height: '1px', backgroundColor: 'var(--border-subtle)' }} />
 
             {/* ROI summary row */}
             <div className="roi-summary">
               <div>
-                <div style={{ fontSize: '0.6rem', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--salvia-text-muted)', marginBottom: '0.3rem' }}>Return on spend</div>
-                <div className="roi-summary-num" style={{ fontWeight: 900, color: 'var(--salvia-accent)', letterSpacing: '-0.05em', lineHeight: 1 }}>{roi.toFixed(1)}×</div>
+                <div style={{ fontSize: 'var(--text-2xs)', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--salvia-text-muted)', marginBottom: '0.3rem' }}>Return on spend</div>
+                <div className="roi-summary-num" style={{ fontWeight: 800, color: 'var(--salvia-accent)', letterSpacing: '-0.05em', lineHeight: 1 }}>{roi.toFixed(1)}×</div>
               </div>
               <div>
-                <div style={{ fontSize: '0.6rem', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--salvia-text-muted)', marginBottom: '0.3rem' }}>Salvia costs</div>
-                <div className="roi-summary-num" style={{ fontWeight: 900, color: 'var(--salvia-primary)', letterSpacing: '-0.05em', lineHeight: 1 }}>{fmt(monthlyCost)}</div>
-                <div style={{ fontSize: '0.62rem', color: 'var(--salvia-text-muted)', marginTop: '0.2rem', fontFamily: 'monospace' }}>{isCustom ? `Custom · ${topTier.notesPerMonth.toLocaleString()}+ notes/mo` : `${tier.name} · ${tier.notesPerMonth} AI notes/mo`}</div>
-                <div style={{ fontSize: '0.72rem', color: 'var(--salvia-text-muted)', marginTop: '0.25rem' }}>
+                <div style={{ fontSize: 'var(--text-2xs)', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--salvia-text-muted)', marginBottom: '0.3rem' }}>Salvia costs</div>
+                <div className="roi-summary-num" style={{ fontWeight: 800, color: 'var(--salvia-primary)', letterSpacing: '-0.05em', lineHeight: 1 }}>{fmt(monthlyCost)}</div>
+                <div style={{ fontSize: 'var(--text-2xs)', color: 'var(--salvia-text-muted)', marginTop: '0.2rem', fontFamily: 'monospace' }}>{isCustom ? `Custom · ${topTier.notesPerMonth.toLocaleString()}+ notes/mo` : `${tier.name} · ${tier.notesPerMonth} AI notes/mo`}</div>
+                <div style={{ fontSize: 'var(--text-2xs)', color: 'var(--salvia-text-muted)', marginTop: '0.25rem' }}>
                   <strong style={{ color: 'var(--salvia-accent)' }}>{fmt(totalValue - monthlyCost)}</strong> monthly surplus
                 </div>
               </div>
             </div>
 
             {/* divider */}
-            <div style={{ height: '1px', backgroundColor: 'rgba(15,23,42,0.06)' }} />
+            <div style={{ height: '1px', backgroundColor: 'var(--border-subtle)' }} />
 
             <Link to="/start" style={{ textDecoration: 'none' }}>
-              <button className="btn-primary" style={{ width: '100%', justifyContent: 'center', padding: '0.9rem', fontSize: '0.92rem', fontWeight: 700 }}>
+              <button className="btn-primary" style={{ width: '100%', justifyContent: 'center', padding: '0.9rem', fontSize: 'var(--text-sm)', fontWeight: 700 }}>
                 <div className="shimmer" />
                 Book a demo
               </button>
             </Link>
 
-            <p style={{ fontSize: '0.65rem', color: 'var(--salvia-text-muted)', fontStyle: 'italic', lineHeight: 1.6, margin: 0 }}>
+            <p style={{ fontSize: 'var(--text-2xs)', color: 'var(--salvia-text-muted)', fontStyle: 'italic', lineHeight: 1.6, margin: 0 }}>
               Time valued at blended staff cost. Compliance is annualised expected value from cleaner records and fewer audit claw-backs. Not a guarantee.
             </p>
           </div>
