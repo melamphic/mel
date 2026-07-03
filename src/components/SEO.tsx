@@ -11,10 +11,19 @@ interface SEOProps {
   path: string;
   keywords?: string[];
   type?: 'website' | 'article';
+  /** Set true on conversion/utility pages that shouldn't rank (e.g. 404). */
+  noindex?: boolean;
   article?: {
     author: string;
     date: string;
   };
+}
+
+/** Normalise a human date ("June 14, 2026") to ISO 8601 (2026-06-14) for
+ *  schema.org datePublished. Falls back to the raw string if unparseable. */
+function toISODate(d: string): string {
+  const parsed = new Date(d);
+  return Number.isNaN(parsed.getTime()) ? d : parsed.toISOString().slice(0, 10);
 }
 
 const ORG_SCHEMA = {
@@ -26,7 +35,7 @@ const ORG_SCHEMA = {
   sameAs: [],
 };
 
-export const SEO = ({ title, description = DEFAULT_DESC, path, keywords, type = 'website', article }: SEOProps) => {
+export const SEO = ({ title, description = DEFAULT_DESC, path, keywords, type = 'website', noindex, article }: SEOProps) => {
   // trailing slash to match Cloudflare's served URLs (avoids canonical→redirect)
   const url = `${SITE}${path}${path === '/' ? '' : '/'}`;
   const fullTitle = `${title} | ${SITE_NAME}`;
@@ -41,22 +50,28 @@ export const SEO = ({ title, description = DEFAULT_DESC, path, keywords, type = 
     ],
   }) : null;
 
+  const isoDate = article ? toISODate(article.date) : '';
   const articleSchema = article ? JSON.stringify({
     '@context': 'https://schema.org',
     '@type': 'Article',
     headline: title,
     description,
     url,
+    image: DEFAULT_OG_IMAGE,
     author: {
       '@type': 'Organization',
       name: article.author,
+      url: SITE,
     },
     publisher: {
       '@type': 'Organization',
       name: SITE_NAME,
       url: SITE,
+      logo: { '@type': 'ImageObject', url: `${SITE}/favicon.png` },
     },
-    datePublished: article.date,
+    datePublished: isoDate,
+    dateModified: isoDate,
+    inLanguage: 'en-IN',
     mainEntityOfPage: { '@type': 'WebPage', '@id': url },
   }) : null;
 
@@ -64,6 +79,7 @@ export const SEO = ({ title, description = DEFAULT_DESC, path, keywords, type = 
     <Helmet>
       <title>{fullTitle}</title>
       <meta name="description" content={description} />
+      {noindex && <meta name="robots" content="noindex, follow" />}
       {keywords && keywords.length > 0 && (
         <meta name="keywords" content={keywords.join(', ')} />
       )}
