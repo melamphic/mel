@@ -46,7 +46,7 @@ export const GovernanceLoop: React.FC = () => {
             {/* Context Heading */}
             <div style={{ marginBottom: '6rem', textAlign: 'center' }}>
                 <span style={{
-                    fontSize: '0.75rem', fontWeight: 800, color: 'var(--salvia-accent)',
+                    fontSize: 'var(--text-xs)', fontWeight: 800, color: 'var(--salvia-accent)',
                     letterSpacing: '0.15em', textTransform: 'uppercase'
                 }}>
                     The full loop
@@ -77,7 +77,7 @@ export const GovernanceLoop: React.FC = () => {
                             <div style={{ 
                                 width: '40px', height: '40px', borderRadius: '50%', 
                                 backgroundColor: i === 2 ? 'var(--salvia-accent)' : 'var(--salvia-primary)',
-                                color: '#fff', fontSize: '0.75rem', fontWeight: 800,
+                                color: '#fff', fontSize: 'var(--text-xs)', fontWeight: 800,
                                 display: 'flex', alignItems: 'center', justifyContent: 'center',
                                 margin: '0 auto 2.5rem', position: 'relative', zIndex: 10,
                                 boxShadow: i === 2 ? '0 0 20px rgba(255,78,0,0.3)' : 'none',
@@ -88,26 +88,26 @@ export const GovernanceLoop: React.FC = () => {
 
                             {/* Elite Feature Card */}
                             <div style={{ 
-                                backgroundColor: '#fff', padding: '1.75rem', borderRadius: '24px',
+                                backgroundColor: '#fff', padding: '1.75rem', borderRadius: 'var(--radius-xl)',
                                 border: '1px solid rgba(0,0,0,0.05)', boxShadow: 'var(--salvia-shadow-card)',
                                 textAlign: 'left', height: '100%', position: 'relative',
                                 display: 'flex', flexDirection: 'column'
                             }}>
                                 <div style={{ 
-                                    fontFamily: 'monospace', fontSize: '0.6rem', 
+                                    fontFamily: 'monospace', fontSize: 'var(--text-2xs)', 
                                     color: 'var(--salvia-accent)', fontWeight: 700, 
                                     marginBottom: '1rem', opacity: 0.8
                                 }}>
                                     {step.metadata}
                                 </div>
-                                <h4 style={{ fontSize: '1.05rem', fontWeight: 800, marginBottom: '0.75rem', color: 'var(--salvia-primary)' }}>
+                                <h4 style={{ fontSize: 'var(--text-md)', fontWeight: 800, marginBottom: '0.75rem', color: 'var(--salvia-primary)' }}>
                                     {step.title}
                                 </h4>
-                                <p style={{ fontSize: '0.82rem', color: 'var(--salvia-text-muted)', lineHeight: 1.6, marginBottom: '1.25rem' }}>
+                                <p style={{ fontSize: 'var(--text-xs)', color: 'var(--salvia-text-muted)', lineHeight: 1.6, marginBottom: '1.25rem' }}>
                                     {step.desc}
                                 </p>
                                 <div style={{ 
-                                    marginTop: 'auto', fontSize: '0.65rem', fontWeight: 700, 
+                                    marginTop: 'auto', fontSize: 'var(--text-2xs)', fontWeight: 700, 
                                     color: 'var(--salvia-primary)', opacity: 0.4, borderTop: '1px solid #F1F5F9',
                                     paddingTop: '0.75rem'
                                 }}>
