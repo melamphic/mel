@@ -9,16 +9,22 @@
 import { readFileSync, writeFileSync, mkdirSync } from 'fs';
 import { resolve, dirname } from 'path';
 import { fileURLToPath } from 'url';
+import { visibleBlogSlugs } from './src/data/blogMarkets.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const distDir = resolve(__dirname, 'dist');
 const template = readFileSync(resolve(distDir, 'index.html'), 'utf-8');
+
+// Mirrors src/config.ts INDIA_ONLY — same env var, same default, so the
+// prerendered surface (pages, sitemap) matches what the app actually shows.
+const INDIA_ONLY = (process.env.VITE_INDIA_ONLY ?? 'true') !== 'false';
 
 // All routes that should be pre-rendered
 const STATIC_ROUTES = [
   '/',
   '/pricing',
   '/blog',
+  '/start',
   '/contact-sales',
   '/frameworks',
   '/veterinary',
@@ -38,30 +44,10 @@ const STATIC_ROUTES = [
   '/refund-policy', '/acceptable-use', '/security',
 ];
 
-const BLOG_SLUGS = [
-  // India
-  'ai-scribe-pricing-india', 'consumer-court-records', 'patient-records-access-india',
-  'nabh-small-clinic-worth-it', 'abdm-mandatory-clinic', 'ai-scribe-indian-languages',
-  // General clinic
-  'pajama-time', 'informed-refusal', 'ai-legal', 'stranger-rule',
-  'audit-trail', 'difficult-patients', 'pediatric-records',
-  // Veterinary — AU/NZ
-  'vet-tpr', 'copy-paste-vet', 'emr-crash-vet', 'ai-vet-legal',
-  'vet-audit-prep', 'retention-vet', 'logic-vet',
-  // Veterinary — UK
-  'cma-vet-deadline', 'rcvs-record-inspection',
-  // Veterinary — AU
-  'au-vet-board-records',
-  // Veterinary — NZ
-  'vcnz-records-standard',
-  // Dental — AU/NZ/US
-  'malpractice-dental', 'oral-photography', 'signed-edits-dental',
-  'teledentistry-standards', 'manual-dental-risk', 'surgical-prep-dental',
-  // Dental — UK
-  'cqc-dental-2026',
-  // Dental — AU
-  'ahpra-dental-records',
-];
+// Derived from src/data/blogMarkets.mjs — the same map the app filters on.
+// While INDIA_ONLY, rest-of-world regulator posts are neither prerendered
+// nor listed in the sitemap, so crawlers never see content users can't reach.
+const BLOG_SLUGS = visibleBlogSlugs(INDIA_ONLY);
 
 const ALL_ROUTES = [
   ...STATIC_ROUTES,
@@ -83,6 +69,10 @@ const META = {
   '/blog': {
     title: 'From the compliance desk | Salvia',
     desc: 'Clinical documentation, compliance law, and audit readiness — written for vets, dentists, and clinicians who\'ve been burned by bad records.',
+  },
+  '/start': {
+    title: 'Start your free Salvia trial | Salvia',
+    desc: 'Request early access to Salvia — AI clinical documentation and compliance for Indian clinics, hospitals, dental and veterinary practices. 21 days free, no card.',
   },
   '/contact-sales': {
     title: 'Book a demo | Salvia',
@@ -178,6 +168,47 @@ const META = {
   },
 };
 
+// India-launch overrides — the client pages already render India copy via
+// useIsIndia(); these keep the CRAWLER view (static META) in sync so Google
+// India isn't served RCVS/CQC/"$229 per month" copy on an India-only site.
+const INDIA_META = {
+  '/pricing': {
+    title: 'AI Clinical Documentation & Compliance Pricing | Salvia',
+    desc: 'Salvia pricing for Indian clinics — Starter ₹1,000/mo, Clinic ₹3,000/mo, Group ₹6,000/mo. Per-clinic, not per-seat; AI notes, drug register and audit trails on every tier.',
+  },
+  '/veterinary': {
+    title: 'Veterinary Compliance Software | Salvia',
+    desc: 'Salvia keeps vet records audit-ready for VCI, the IVC Act 1984, Schedule H1 and state veterinary councils — records, drug logs, consent and audit trail from one voice note.',
+  },
+  '/dental': {
+    title: 'Dental Compliance Software | Salvia',
+    desc: 'Salvia keeps dental clinic records audit-ready for DCI, NABH and AERB. BPE, radiograph justification and treatment plans captured at every visit.',
+  },
+  '/general-practice': {
+    title: 'General Practice Compliance Software | Salvia',
+    desc: 'Salvia keeps clinic and GP records audit-ready for NMC, NABH and ABDM — structured records, prescribing logs, referral trails and consent from a voice note.',
+  },
+  '/allied-health': {
+    title: 'Allied Health Compliance Software | Salvia',
+    desc: 'Salvia keeps allied-health records structured and defensible — voice note to SOAP record, outcome measures, treatment log and discharge, built for Indian practices.',
+  },
+  '/frameworks': {
+    title: 'Regulatory Frameworks We Support | Salvia',
+    desc: 'Audit-ready records against 50+ frameworks — NABH, ABDM, NMC record rules, DPDP Act, Schedule H1, PC-PNDT and Consumer Protection Act 2019, plus international regulators.',
+  },
+  '/products/statutory-form-infrastructure': {
+    title: 'Statutory Form Infrastructure | Salvia',
+    desc: 'Salvia\'s form infrastructure turns clinical notes into immutable, versioned records — audit-ready for NABH assessments, NMC record rules and consumer-court scrutiny.',
+  },
+  '/products/institutional-compliance-hub': {
+    title: 'Institutional Compliance Hub | Salvia',
+    desc: 'Turn static policy PDFs into active clinical governance. Salvia maps your internal rules to NABH, ABDM and NMC frameworks — every record checked before sign-off.',
+  },
+};
+if (INDIA_ONLY) {
+  for (const [route, m] of Object.entries(INDIA_META)) META[route] = { ...META[route], ...m };
+}
+
 function injectMeta(html, title, desc, path, author = 'Salvia') {
   // Cloudflare serves directory URLs with a trailing slash (/pricing -> /pricing/),
   // so canonical + og:url must match to avoid "canonical points to a redirect".
@@ -223,7 +254,7 @@ function writePage(route, html) {
 const BLOG_META = {
   'ai-scribe-pricing-india': {
     title: 'AI Medical Scribe Pricing in India (2026) | Salvia',
-    desc: 'AI medical scribes in India cost from free trials to ~₹1,500 per doctor/month; per-clinic compliance suites start around ₹2,500. The real 2026 pricing math.',
+    desc: 'AI medical scribes in India cost from free trials to ~₹1,500 per doctor/month; per-clinic compliance suites start around ₹1,000. The real 2026 pricing math.',
   },
   'consumer-court-records': {
     title: 'Thin Records & Consumer Court Cases in India | Salvia',
@@ -302,7 +333,9 @@ function injectSchema(html, route, title, desc) {
       url: u,
       author: { '@type': 'Organization', name: 'Salvia Editorial', url: SITE },
       publisher: { '@type': 'Organization', name: 'Salvia', url: SITE, logo: { '@type': 'ImageObject', url: `${SITE}/favicon.png` } },
-      ...(BLOG_DATES[slug] ? { datePublished: BLOG_DATES[slug], dateModified: BLOG_DATES[slug] } : {}),
+      ...((BLOG_DATES[slug] ?? BLOG_REGISTRY_DATES[slug])
+        ? { datePublished: BLOG_DATES[slug] ?? BLOG_REGISTRY_DATES[slug], dateModified: BLOG_DATES[slug] ?? BLOG_REGISTRY_DATES[slug] }
+        : {}),
       mainEntityOfPage: { '@type': 'WebPage', '@id': u },
     }));
     scripts.push(ld({
@@ -317,14 +350,20 @@ function injectSchema(html, route, title, desc) {
   return html.replace('</head>', `${scripts.join('\n    ')}\n  </head>`);
 }
 
-// Pull each post's real excerpt from the blog registry so EVERY post gets a
-// unique, properly-sized meta description (not a repeated generic stub).
+// Pull each post's real excerpt + date from the blog registry so EVERY post
+// gets a unique, properly-sized meta description (not a repeated generic stub)
+// and a real lastmod in the sitemap.
 const BLOG_DATA = {};
+const BLOG_REGISTRY_DATES = {};
 try {
   const blogSrc = readFileSync(resolve(distDir, '../src/data/blogContent.tsx'), 'utf-8');
-  const re = /'([a-z0-9-]+)':\s*\{[\s\S]*?excerpt:\s*"((?:[^"\\]|\\.)*)"/g;
+  const re = /'([a-z0-9-]+)':\s*\{[\s\S]*?excerpt:\s*"((?:[^"\\]|\\.)*)"[\s\S]*?date:\s*'([^']*)'/g;
   let m;
-  while ((m = re.exec(blogSrc))) BLOG_DATA[m[1]] = m[2].replace(/\\"/g, '"');
+  while ((m = re.exec(blogSrc))) {
+    BLOG_DATA[m[1]] = m[2].replace(/\\"/g, '"');
+    const d = new Date(m[3]);
+    if (!Number.isNaN(d.getTime())) BLOG_REGISTRY_DATES[m[1]] = d.toISOString().slice(0, 10);
+  }
 } catch { /* fall back to generic description */ }
 const titleCase = (slug) => slug.split('-').map((w) => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
 const clip = (s, n = 158) => (s.length <= n ? s : s.slice(0, s.lastIndexOf(' ', n - 1)).replace(/[\s,;:.]+$/, '') + '…');
@@ -354,3 +393,48 @@ for (const route of ALL_ROUTES) {
 }
 
 console.log(`✓ Pre-rendered ${count} pages`);
+
+// --- sitemap.xml — generated from the SAME route list we just prerendered,
+// so the sitemap can never advertise a page that doesn't exist (or, under
+// INDIA_ONLY, a rest-of-world post the app hides). ---------------------------
+const LEGAL_PRIORITY = { '/security': '0.5', '/dpa': '0.4', '/subprocessors': '0.4' };
+const LEGAL_ROUTES = ['/privacy', '/terms', '/cookies', '/dpa', '/subprocessors', '/refund-policy', '/acceptable-use', '/security'];
+const ALLIED_ROUTES = ['/physiotherapy', '/osteopathy', '/chiropractic', '/occupational-therapy', '/podiatry', '/speech-therapy'];
+
+function sitemapEntry(route) {
+  const loc = `${SITE}${route === '/' ? '/' : `${route}/`}`;
+  let changefreq = 'monthly';
+  let priority = '0.7';
+  let lastmod;
+
+  if (route === '/') { changefreq = 'weekly'; priority = '1.0'; }
+  else if (route === '/blog') { changefreq = 'weekly'; priority = '0.8'; }
+  else if (LEGAL_ROUTES.includes(route)) { changefreq = 'yearly'; priority = LEGAL_PRIORITY[route] ?? '0.3'; }
+  else if (ALLIED_ROUTES.includes(route)) { priority = '0.85'; }
+  else if (route.startsWith('/blog/')) {
+    const slug = route.replace('/blog/', '');
+    priority = BLOG_DATES[slug] ? '0.85' : '0.7'; // India cluster ranks first
+    lastmod = BLOG_DATES[slug] ?? BLOG_REGISTRY_DATES[slug];
+  }
+  else { priority = '0.9'; } // pricing, verticals, products, frameworks
+
+  return [
+    '  <url>',
+    `    <loc>${loc}</loc>`,
+    ...(lastmod ? [`    <lastmod>${lastmod}</lastmod>`] : []),
+    `    <changefreq>${changefreq}</changefreq>`,
+    `    <priority>${priority}</priority>`,
+    '  </url>',
+  ].join('\n');
+}
+
+const SITEMAP_ROUTES = ALL_ROUTES.filter((r) => r !== '/contact-sales'); // redirect — not a page
+const sitemap = [
+  '<?xml version="1.0" encoding="UTF-8"?>',
+  '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
+  ...SITEMAP_ROUTES.map(sitemapEntry),
+  '</urlset>',
+  '',
+].join('\n');
+writeFileSync(resolve(distDir, 'sitemap.xml'), sitemap, 'utf-8');
+console.log(`✓ Sitemap written — ${SITEMAP_ROUTES.length} URLs${INDIA_ONLY ? ' (India-only surface)' : ''}`);
