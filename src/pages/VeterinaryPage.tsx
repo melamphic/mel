@@ -36,10 +36,10 @@ const FAQS = [
 ];
 
 const REGULATORS = [
-  { label: 'VCI', sub: 'India', color: '#0EA5E9' },
-  { label: 'IVC Act 1984', sub: 'India', color: '#FF4E00' },
+  { label: 'VCI', sub: 'India', color: 'var(--accent-vet)' },
+  { label: 'IVC Act 1984', sub: 'India', color: 'var(--salvia-accent)' },
   { label: 'Schedule H1', sub: 'India', color: '#8B5CF6' },
-  { label: 'CCSEA', sub: 'India', color: '#10B981' },
+  { label: 'CCSEA', sub: 'India', color: 'var(--accent-dental)' },
   { label: 'State Councils', sub: 'India', color: '#F59E0B' },
   { label: 'DPDP Act', sub: 'India', color: '#6366F1' },
 ];
@@ -145,14 +145,14 @@ export const VeterinaryPage = () => {
           <div style={{
             display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
             backgroundColor: 'rgba(255,78,0,0.07)', border: '1.5px solid rgba(255,78,0,0.18)',
-            borderRadius: '10px', padding: '0.35rem 0.85rem', marginBottom: '2rem',
+            borderRadius: 'var(--radius-md)', padding: '0.35rem 0.85rem', marginBottom: '2rem',
           }}>
-            <span style={{ fontSize: '0.75rem', fontWeight: 800, color: '#FF4E00', letterSpacing: '0.1em', textTransform: 'uppercase' }}>
+            <span style={{ fontSize: 'var(--text-xs)', fontWeight: 800, color: 'var(--salvia-accent)', letterSpacing: '0.1em', textTransform: 'uppercase' }}>
               Veterinary Practices
             </span>
           </div>
           <h1 style={{
-            fontSize: 'clamp(2.8rem, 7vw, 5rem)', fontWeight: 900,
+            fontSize: 'clamp(2.8rem, 7vw, 5rem)', fontWeight: 800,
             letterSpacing: '-0.04em', lineHeight: 1,
             color: 'var(--salvia-primary)', marginBottom: '1.75rem',
           }}>
@@ -169,8 +169,8 @@ export const VeterinaryPage = () => {
             <Link to="/start" style={{
               display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
               backgroundColor: 'var(--salvia-accent)', color: '#fff',
-              padding: '0.85rem 1.75rem', borderRadius: '12px',
-              fontWeight: 700, fontSize: '0.95rem', textDecoration: 'none',
+              padding: '0.85rem 1.75rem', borderRadius: 'var(--radius-md)',
+              fontWeight: 700, fontSize: 'var(--text-base)', textDecoration: 'none',
             }}>
               Book a demo
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
@@ -180,8 +180,8 @@ export const VeterinaryPage = () => {
             <Link to="/pricing" style={{
               display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
               backgroundColor: 'transparent', color: 'var(--salvia-primary)',
-              padding: '0.85rem 1.75rem', borderRadius: '12px',
-              fontWeight: 700, fontSize: '0.95rem', textDecoration: 'none',
+              padding: '0.85rem 1.75rem', borderRadius: 'var(--radius-md)',
+              fontWeight: 700, fontSize: 'var(--text-base)', textDecoration: 'none',
               border: '1.5px solid rgba(15,23,42,0.15)',
             }}>
               See pricing
@@ -194,13 +194,13 @@ export const VeterinaryPage = () => {
       <section style={{ borderTop: '1px solid #F1F5F9', borderBottom: '1px solid #F1F5F9', padding: '2rem 0', backgroundColor: '#fff' }}>
         <div className="container" style={{ maxWidth: '900px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '2rem', flexWrap: 'wrap', justifyContent: 'center' }}>
-            <span style={{ fontSize: '0.72rem', fontWeight: 700, color: 'var(--salvia-text-muted)', letterSpacing: '0.1em', textTransform: 'uppercase', whiteSpace: 'nowrap' }}>
+            <span style={{ fontSize: 'var(--text-2xs)', fontWeight: 700, color: 'var(--salvia-text-muted)', letterSpacing: '0.1em', textTransform: 'uppercase', whiteSpace: 'nowrap' }}>
               Designed for
             </span>
             {REGULATORS.map(r => (
               <div key={r.label} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.1rem' }}>
-                <span style={{ fontSize: '1rem', fontWeight: 900, color: r.color, letterSpacing: '-0.02em' }}>{r.label}</span>
-                <span style={{ fontSize: '0.62rem', fontWeight: 600, color: 'var(--salvia-text-muted)', letterSpacing: '0.04em' }}>{r.sub}</span>
+                <span style={{ fontSize: 'var(--text-base)', fontWeight: 800, color: r.color, letterSpacing: '-0.02em' }}>{r.label}</span>
+                <span style={{ fontSize: 'var(--text-2xs)', fontWeight: 600, color: 'var(--salvia-text-muted)', letterSpacing: '0.04em' }}>{r.sub}</span>
               </div>
             ))}
           </div>
@@ -214,19 +214,19 @@ export const VeterinaryPage = () => {
             display: 'grid', gridTemplateColumns: '1fr 2fr', gap: '3rem', alignItems: 'center',
           }} className="mobile-stack">
             <div style={{ textAlign: 'center' }}>
-              <div style={{ fontSize: '0.7rem', fontWeight: 800, color: '#FF4E00', letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: '0.5rem' }}>Daily Records</div>
-              <div style={{ fontSize: '3.5rem', fontWeight: 900, color: 'var(--salvia-primary)', letterSpacing: '-0.04em', lineHeight: 1 }}>365</div>
-              <div style={{ fontSize: '1.5rem', fontWeight: 700, color: 'var(--salvia-primary)' }}>days/yr</div>
+              <div style={{ fontSize: 'var(--text-2xs)', fontWeight: 800, color: 'var(--salvia-accent)', letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: '0.5rem' }}>Daily Records</div>
+              <div style={{ fontSize: '3.5rem', fontWeight: 800, color: 'var(--salvia-primary)', letterSpacing: '-0.04em', lineHeight: 1 }}>365</div>
+              <div style={{ fontSize: 'var(--text-xl)', fontWeight: 700, color: 'var(--salvia-primary)' }}>days/yr</div>
             </div>
             <div>
-              <h2 style={{ fontSize: '1.5rem', fontWeight: 800, color: 'var(--salvia-primary)', marginBottom: '0.75rem', letterSpacing: '-0.02em' }}>
+              <h2 style={{ fontSize: 'var(--text-xl)', fontWeight: 800, color: 'var(--salvia-primary)', marginBottom: '0.75rem', letterSpacing: '-0.02em' }}>
                 Audit-readiness isn&apos;t a one-day event — it&apos;s your daily records.
               </h2>
               <p style={{ color: 'var(--salvia-text-muted)', lineHeight: 1.65, marginBottom: '1.25rem' }}>
                 Most practices keep good case notes but lose hours when the assessor asks. The four records that get scrutinised — itemised billing, written estimates, Schedule H1 drug logs, and complaint trail — are where time disappears. Salvia keeps all four ready every day.
               </p>
-              <Link to="/blog/cma-vet-deadline" style={{
-                fontSize: '0.85rem', fontWeight: 700, color: 'var(--salvia-accent)',
+              <Link to="/blog/vet-audit-prep" style={{
+                fontSize: 'var(--text-sm)', fontWeight: 700, color: 'var(--salvia-accent)',
                 display: 'inline-flex', alignItems: 'center', gap: '0.35rem', textDecoration: 'none',
               }}>
                 Read the full breakdown
@@ -253,7 +253,7 @@ export const VeterinaryPage = () => {
       <section style={{ padding: '7rem 0', backgroundColor: '#fff' }}>
         <div className="container" style={{ maxWidth: '1100px' }}>
           <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
-            <div style={{ fontSize: '0.72rem', fontWeight: 800, color: 'var(--salvia-accent)', letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>
+            <div style={{ fontSize: 'var(--text-2xs)', fontWeight: 800, color: 'var(--salvia-accent)', letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>
               What Salvia does
             </div>
             <h2 style={{ fontSize: 'clamp(1.8rem, 4vw, 2.75rem)', fontWeight: 800, color: 'var(--salvia-primary)', letterSpacing: '-0.03em' }}>
@@ -263,19 +263,19 @@ export const VeterinaryPage = () => {
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.5rem' }} className="mobile-stack">
             {FEATURES.map((f, i) => (
               <div key={i} style={{
-                padding: '2rem', borderRadius: '16px',
+                padding: '2rem', borderRadius: 'var(--radius-lg)',
                 border: '1px solid #EEF2F6', backgroundColor: '#FAFBFC',
               }}>
                 <div style={{
-                  width: '44px', height: '44px', borderRadius: '12px',
+                  width: '44px', height: '44px', borderRadius: 'var(--radius-md)',
                   backgroundColor: 'rgba(255,78,0,0.07)',
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
                   color: 'var(--salvia-accent)', marginBottom: '1.25rem',
                 }}>
                   {f.icon}
                 </div>
-                <h3 style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--salvia-primary)', marginBottom: '0.5rem' }}>{f.title}</h3>
-                <p style={{ fontSize: '0.875rem', color: 'var(--salvia-text-muted)', lineHeight: 1.6 }}>{f.desc}</p>
+                <h3 style={{ fontSize: 'var(--text-base)', fontWeight: 700, color: 'var(--salvia-primary)', marginBottom: '0.5rem' }}>{f.title}</h3>
+                <p style={{ fontSize: 'var(--text-sm)', color: 'var(--salvia-text-muted)', lineHeight: 1.6 }}>{f.desc}</p>
               </div>
             ))}
           </div>
@@ -332,7 +332,7 @@ export const VeterinaryPage = () => {
       <section style={{ padding: '7rem 0', backgroundColor: 'var(--salvia-bg)', borderTop: '1px solid #F1F5F9' }}>
         <div className="container" style={{ maxWidth: '760px' }}>
           <div style={{ textAlign: 'center', marginBottom: '3.5rem' }}>
-            <div style={{ fontSize: '0.72rem', fontWeight: 800, color: 'var(--salvia-accent)', letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>
+            <div style={{ fontSize: 'var(--text-2xs)', fontWeight: 800, color: 'var(--salvia-accent)', letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>
               Common questions
             </div>
             <h2 style={{ fontSize: 'clamp(1.8rem, 4vw, 2.4rem)', fontWeight: 800, color: 'var(--salvia-primary)', letterSpacing: '-0.03em' }}>
@@ -342,11 +342,11 @@ export const VeterinaryPage = () => {
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
             {FAQS.map((faq, i) => (
               <div key={i} style={{
-                padding: '1.75rem 2rem', borderRadius: '14px',
+                padding: '1.75rem 2rem', borderRadius: 'var(--radius-md)',
                 border: '1px solid #EEF2F6', backgroundColor: '#fff',
               }}>
-                <h3 style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--salvia-primary)', marginBottom: '0.65rem' }}>{faq.q}</h3>
-                <p style={{ fontSize: '0.9rem', color: 'var(--salvia-text-muted)', lineHeight: 1.65, margin: 0 }}>{faq.a}</p>
+                <h3 style={{ fontSize: 'var(--text-base)', fontWeight: 700, color: 'var(--salvia-primary)', marginBottom: '0.65rem' }}>{faq.q}</h3>
+                <p style={{ fontSize: 'var(--text-sm)', color: 'var(--salvia-text-muted)', lineHeight: 1.65, margin: 0 }}>{faq.a}</p>
               </div>
             ))}
           </div>
@@ -357,26 +357,26 @@ export const VeterinaryPage = () => {
       <section style={{ padding: '6rem 0', backgroundColor: '#fff', borderTop: '1px solid #F1F5F9' }}>
         <div className="container" style={{ maxWidth: '1000px' }}>
           <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', marginBottom: '2rem', flexWrap: 'wrap', gap: '1rem' }}>
-            <div style={{ fontSize: '0.72rem', fontWeight: 800, color: 'var(--salvia-accent)', letterSpacing: '0.12em', textTransform: 'uppercase' }}>From the compliance desk</div>
-            <Link to="/blog" style={{ fontSize: '0.85rem', fontWeight: 700, color: 'var(--salvia-text-muted)', textDecoration: 'none' }}>All posts →</Link>
+            <div style={{ fontSize: 'var(--text-2xs)', fontWeight: 800, color: 'var(--salvia-accent)', letterSpacing: '0.12em', textTransform: 'uppercase' }}>From the compliance desk</div>
+            <Link to="/blog" style={{ fontSize: 'var(--text-sm)', fontWeight: 700, color: 'var(--salvia-text-muted)', textDecoration: 'none' }}>All posts →</Link>
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '1rem' }} className="mobile-stack">
             {RECENT_POSTS.map(p => (
               <Link key={p.slug} to={`/blog/${p.slug}`} style={{ textDecoration: 'none' }} className="vet-blog-card">
                 <div style={{
-                  padding: '1.5rem', borderRadius: '14px',
+                  padding: '1.5rem', borderRadius: 'var(--radius-md)',
                   border: '1px solid #EEF2F6', backgroundColor: '#FAFBFC',
                   height: '100%', transition: 'all 0.2s ease',
                 }}>
                   <div style={{
-                    fontSize: '0.65rem', fontWeight: 800, color: 'var(--salvia-accent)',
+                    fontSize: 'var(--text-2xs)', fontWeight: 800, color: 'var(--salvia-accent)',
                     backgroundColor: 'rgba(255,78,0,0.07)', padding: '0.2rem 0.55rem',
-                    borderRadius: '5px', display: 'inline-block',
+                    borderRadius: 'var(--radius-sm)', display: 'inline-block',
                     letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '0.75rem',
                   }}>
                     {p.tag}
                   </div>
-                  <h4 style={{ fontSize: '0.95rem', fontWeight: 700, color: 'var(--salvia-primary)', lineHeight: 1.4, margin: 0 }}>
+                  <h4 style={{ fontSize: 'var(--text-base)', fontWeight: 700, color: 'var(--salvia-primary)', lineHeight: 1.4, margin: 0 }}>
                     {p.title}
                   </h4>
                 </div>
@@ -389,7 +389,7 @@ export const VeterinaryPage = () => {
       {/* CTA */}
       <section style={{ padding: '7rem 0', backgroundColor: 'var(--salvia-bg)', borderTop: '1px solid #F1F5F9', textAlign: 'center' }}>
         <div className="container" style={{ maxWidth: '600px' }}>
-          <div style={{ fontSize: '0.72rem', fontWeight: 800, color: 'var(--salvia-accent)', letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: '1rem' }}>
+          <div style={{ fontSize: 'var(--text-2xs)', fontWeight: 800, color: 'var(--salvia-accent)', letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: '1rem' }}>
             Get started
           </div>
           <h2 style={{ fontSize: 'clamp(2rem, 5vw, 3rem)', fontWeight: 800, color: 'var(--salvia-primary)', letterSpacing: '-0.03em', marginBottom: '1rem' }}>
@@ -401,8 +401,8 @@ export const VeterinaryPage = () => {
           <Link to="/start" style={{
             display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
             backgroundColor: 'var(--salvia-accent)', color: '#fff',
-            padding: '0.9rem 2rem', borderRadius: '12px',
-            fontWeight: 700, fontSize: '1rem', textDecoration: 'none',
+            padding: '0.9rem 2rem', borderRadius: 'var(--radius-md)',
+            fontWeight: 700, fontSize: 'var(--text-base)', textDecoration: 'none',
           }}>
             Book a demo
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
