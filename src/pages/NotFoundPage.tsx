@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Header } from '../components/Header';
 import { Footer } from '../components/Footer';
+import { SEO } from '../components/SEO';
 
 const QUICK_LINKS = [
   {
@@ -58,6 +59,12 @@ const QUICK_LINKS = [
 export const NotFoundPage = () => {
   return (
     <div style={{ backgroundColor: '#fff', minHeight: '100vh' }}>
+      <SEO
+        title="Page not found"
+        description="This page doesn't exist. Return to Salvia — AI clinical documentation and compliance for clinics, hospitals, dental and veterinary practices."
+        path="/404"
+        noindex
+      />
       <Header />
 
       <main style={{ paddingTop: '10rem', paddingBottom: '8rem' }}>
@@ -71,27 +78,27 @@ export const NotFoundPage = () => {
               gap: '0.5rem',
               backgroundColor: 'rgba(255,78,0,0.07)',
               border: '1.5px solid rgba(255,78,0,0.18)',
-              borderRadius: '10px',
+              borderRadius: 'var(--radius-md)',
               padding: '0.4rem 0.9rem',
               marginBottom: '1.75rem',
             }}>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FF4E00" strokeWidth="2.5">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--salvia-accent)" strokeWidth="2.5">
                 <circle cx="11" cy="11" r="8" />
                 <line x1="21" y1="21" x2="16.65" y2="16.65" />
                 <line x1="11" y1="8" x2="11" y2="12" />
                 <line x1="11" y1="16" x2="11.01" y2="16" />
               </svg>
-              <span style={{ fontSize: '0.78rem', fontWeight: 700, color: '#FF4E00', letterSpacing: '0.06em' }}>
+              <span style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--salvia-accent)', letterSpacing: '0.06em' }}>
                 PAGE NOT FOUND
               </span>
             </div>
 
             <div style={{
-              fontSize: 'clamp(5.5rem, 20vw, 10rem)',
-              fontWeight: 900,
+              fontSize: 'var(--text-display)',
+              fontWeight: 800,
               letterSpacing: '-0.06em',
               lineHeight: 0.9,
-              background: 'linear-gradient(135deg, #0F172A 0%, #475569 100%)',
+              background: 'linear-gradient(135deg, var(--salvia-primary) 0%, var(--salvia-text-muted) 100%)',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
               backgroundClip: 'text',
@@ -103,7 +110,7 @@ export const NotFoundPage = () => {
           </div>
 
           <h1 style={{
-            fontSize: 'clamp(1.6rem, 4vw, 2.4rem)',
+            fontSize: 'var(--text-2xl)',
             fontWeight: 800,
             color: 'var(--salvia-primary)',
             letterSpacing: '-0.03em',
@@ -112,7 +119,7 @@ export const NotFoundPage = () => {
             That page doesn't exist
           </h1>
           <p style={{
-            fontSize: '1.05rem',
+            fontSize: 'var(--text-md)',
             color: 'var(--salvia-text-muted)',
             lineHeight: 1.65,
             marginBottom: '2.5rem',
@@ -128,9 +135,9 @@ export const NotFoundPage = () => {
               backgroundColor: 'var(--salvia-primary)',
               color: '#fff',
               padding: '0.7rem 1.5rem',
-              borderRadius: '10px',
+              borderRadius: 'var(--radius-md)',
               fontWeight: 700,
-              fontSize: '0.9rem',
+              fontSize: 'var(--text-sm)',
               textDecoration: 'none',
               transition: 'opacity 0.2s',
             }}>
@@ -145,9 +152,9 @@ export const NotFoundPage = () => {
               backgroundColor: 'transparent',
               color: 'var(--salvia-accent)',
               padding: '0.7rem 1.5rem',
-              borderRadius: '10px',
+              borderRadius: 'var(--radius-md)',
               fontWeight: 700,
-              fontSize: '0.9rem',
+              fontSize: 'var(--text-sm)',
               border: '1.5px solid rgba(255,78,0,0.25)',
               textDecoration: 'none',
             }}>
@@ -158,13 +165,10 @@ export const NotFoundPage = () => {
           {/* Quick links */}
           <div style={{
             textAlign: 'left',
-            borderTop: '1px solid #F1F5F9',
+            borderTop: '1px solid var(--border-subtle)',
             paddingTop: '2.5rem',
           }}>
-            <p style={{
-              fontSize: '0.72rem', fontWeight: 700,
-              letterSpacing: '0.12em', textTransform: 'uppercase',
-              color: 'var(--salvia-accent)',
+            <p className="eyebrow" style={{
               marginBottom: '1.25rem',
             }}>
               Quick links
@@ -174,15 +178,15 @@ export const NotFoundPage = () => {
                 <Link key={link.href} to={link.href} style={{
                   display: 'flex', alignItems: 'center', gap: '1rem',
                   padding: '1rem 1.25rem',
-                  border: '1px solid #EEF2F6',
-                  borderRadius: '12px',
+                  border: '1px solid var(--border-subtle)',
+                  borderRadius: 'var(--radius-md)',
                   backgroundColor: '#FAFBFC',
                   textDecoration: 'none',
                   transition: 'all 0.2s ease',
                 }} className="nf-link-card">
                   <div style={{
                     width: '40px', height: '40px', flexShrink: 0,
-                    borderRadius: '10px',
+                    borderRadius: 'var(--radius-md)',
                     backgroundColor: 'rgba(255,78,0,0.06)',
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
                     color: 'var(--salvia-accent)',
@@ -190,10 +194,10 @@ export const NotFoundPage = () => {
                     {link.icon}
                   </div>
                   <div style={{ flex: 1, minWidth: 0 }}>
-                    <div style={{ fontWeight: 700, fontSize: '0.9rem', color: 'var(--salvia-primary)' }}>
+                    <div style={{ fontWeight: 700, fontSize: 'var(--text-sm)', color: 'var(--salvia-primary)' }}>
                       {link.label}
                     </div>
-                    <div style={{ fontSize: '0.8rem', color: 'var(--salvia-text-muted)', marginTop: '0.15rem' }}>
+                    <div style={{ fontSize: 'var(--text-xs)', color: 'var(--salvia-text-muted)', marginTop: '0.15rem' }}>
                       {link.desc}
                     </div>
                   </div>
