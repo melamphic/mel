@@ -5,22 +5,18 @@ import wordmarkMobile from '../assets/salvia-wordmark-mobile.jpg';
 
 const linkStyle = {
   color: 'var(--salvia-text-muted)',
-  fontSize: '0.88rem',
+  fontSize: 'var(--text-sm)',
   textDecoration: 'none',
 };
 const colHeadingStyle = {
-  fontSize: '0.72rem',
-  fontWeight: 800,
   color: 'var(--salvia-primary)',
-  letterSpacing: '0.08em',
-  textTransform: 'uppercase' as const,
   marginBottom: '1.25rem',
 };
 
 export const Footer = () => (
   <footer style={{
     backgroundColor: 'transparent',
-    borderTop: '1px solid rgba(0,0,0,0.07)',
+    borderTop: '1px solid var(--border-subtle)',
     position: 'relative',
     zIndex: 10,
     paddingTop: '4rem'
@@ -44,15 +40,15 @@ export const Footer = () => (
             alt="Salvia Logo"
             style={{ width: '40px', height: '40px', objectFit: 'contain' }}
           />
-          <span style={{ fontSize: '1.1rem', fontWeight: 800, letterSpacing: '-0.03em', color: 'var(--salvia-text)' }}>Salvia</span>
+          <span style={{ fontSize: 'var(--text-md)', fontWeight: 800, letterSpacing: '-0.03em', color: 'var(--salvia-text)' }}>Salvia</span>
         </div>
-        <p style={{ color: 'var(--salvia-text-muted)', fontSize: '0.9rem', lineHeight: 1.6, maxWidth: '300px' }}>
+        <p style={{ color: 'var(--salvia-text-muted)', fontSize: 'var(--text-sm)', lineHeight: 1.6, maxWidth: '300px' }}>
           Compliance-grade clinical documentation — built as a compliance suite, not a scribe. Audio in, audit-ready records out.
         </p>
       </div>
 
       <div>
-        <div style={colHeadingStyle}>By Practice</div>
+        <div className="eyebrow" style={colHeadingStyle}>By Practice</div>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.65rem' }}>
           <Link to="/veterinary" style={linkStyle}>Veterinary</Link>
           <Link to="/dental" style={linkStyle}>Dental</Link>
@@ -62,7 +58,7 @@ export const Footer = () => (
       </div>
 
       <div>
-        <div style={colHeadingStyle}>Allied Disciplines</div>
+        <div className="eyebrow" style={colHeadingStyle}>Allied Disciplines</div>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.65rem' }}>
           <Link to="/physiotherapy" style={linkStyle}>Physiotherapy</Link>
           <Link to="/osteopathy" style={linkStyle}>Osteopathy</Link>
@@ -74,7 +70,7 @@ export const Footer = () => (
       </div>
 
       <div>
-        <div style={colHeadingStyle}>Modules</div>
+        <div className="eyebrow" style={colHeadingStyle}>Modules</div>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.65rem' }}>
           <Link to="/products/point-of-care-evidence" style={linkStyle}>Audio → Forms</Link>
           <Link to="/products/statutory-form-infrastructure" style={linkStyle}>Form Engine</Link>
@@ -85,7 +81,7 @@ export const Footer = () => (
       </div>
 
       <div>
-        <div style={colHeadingStyle}>Company</div>
+        <div className="eyebrow" style={colHeadingStyle}>Company</div>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.65rem' }}>
           <Link to="/frameworks" style={linkStyle}>Frameworks we support</Link>
           <Link to="/start" style={linkStyle}>Book a demo</Link>
@@ -94,7 +90,7 @@ export const Footer = () => (
       </div>
 
       <div>
-        <div style={colHeadingStyle}>Legal</div>
+        <div className="eyebrow" style={colHeadingStyle}>Legal</div>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.65rem' }}>
           <Link to="/privacy" style={linkStyle}>Privacy Policy</Link>
           <Link to="/terms" style={linkStyle}>Terms of Service</Link>
@@ -142,7 +138,7 @@ export const Footer = () => (
 
     {/* Bottom bar */}
     <div style={{
-      borderTop: '1px solid rgba(0,0,0,0.06)',
+      borderTop: '1px solid var(--border-subtle)',
       padding: '1.5rem 2rem',
       maxWidth: '1200px',
       margin: '0 auto',
@@ -159,7 +155,7 @@ export const Footer = () => (
           flexShrink: 0,
         }} />
         <span style={{
-          fontSize: '0.82rem',
+          fontSize: 'var(--text-xs)',
           fontWeight: 500,
           letterSpacing: '-0.01em',
           color: 'var(--salvia-text-muted)',
@@ -174,7 +170,7 @@ export const Footer = () => (
             key={item}
             href="#"
             style={{
-              fontSize: '0.8rem',
+              fontSize: 'var(--text-xs)',
               fontWeight: 500,
               color: 'var(--salvia-text-muted)',
               textDecoration: 'none',
@@ -189,7 +185,7 @@ export const Footer = () => (
       </nav>
 
       <span style={{
-        fontSize: '0.72rem',
+        fontSize: 'var(--text-2xs)',
         fontWeight: 400,
         color: 'var(--salvia-text-muted)',
         opacity: 0.6,
