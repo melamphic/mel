@@ -10,7 +10,7 @@ const LAYERS = [
     items: ['Audio → transcript', 'Transcript → structured form', 'Per-field confidence + source line'],
     accent: 'rgba(15,23,42,0.04)',
     border: 'rgba(15,23,42,0.08)',
-    tagColor: '#475569',
+    tagColor: 'var(--salvia-text-muted)',
   },
   {
     tier: '02',
@@ -33,7 +33,7 @@ const LAYERS = [
     items: ['Immutable timeline per subject', 'Full edit history (never deleted)', 'Versioned forms + policies', 'One-click Audit Pack export'],
     accent: 'rgba(15,23,42,0.04)',
     border: 'rgba(15,23,42,0.08)',
-    tagColor: '#475569',
+    tagColor: 'var(--salvia-text-muted)',
   },
 ];
 
@@ -48,7 +48,7 @@ export const ThreeLayers: React.FC = () => (
       {/* Header */}
       <div style={{ marginBottom: '3.5rem', maxWidth: '680px' }}>
         <span style={{
-          fontSize: '0.7rem', fontWeight: 700, letterSpacing: '0.14em',
+          fontSize: 'var(--text-2xs)', fontWeight: 700, letterSpacing: '0.14em',
           textTransform: 'uppercase', color: 'var(--salvia-accent)',
         }}>
           How we're different
@@ -61,7 +61,7 @@ export const ThreeLayers: React.FC = () => (
           Three layers. Most scribes ship the first.
         </h2>
         <p style={{
-          fontSize: '1.05rem', color: 'var(--salvia-text-muted)',
+          fontSize: 'var(--text-md)', color: 'var(--salvia-text-muted)',
           lineHeight: 1.65, marginTop: '1rem', maxWidth: '620px',
         }}>
           Salvia contains what the AI scribe category sells — and keeps building until the record is
@@ -77,11 +77,11 @@ export const ThreeLayers: React.FC = () => (
             style={{
               backgroundColor: '#fff',
               border: `${L.highlight ? '2px' : '1px'} solid ${L.border}`,
-              borderRadius: '20px',
+              borderRadius: 'var(--radius-lg)',
               padding: '2.25rem 2.5rem',
               boxShadow: L.highlight
                 ? '0 16px 40px rgba(255,78,0,0.08)'
-                : '0 4px 12px rgba(25,56,46,0.03)',
+                : 'var(--shadow-2)',
               display: 'grid',
               gridTemplateColumns: '140px 1fr 1fr',
               gap: '2rem',
@@ -94,14 +94,14 @@ export const ThreeLayers: React.FC = () => (
             {/* Left: tier + label */}
             <div>
               <div style={{
-                fontFamily: 'monospace', fontSize: '0.72rem', fontWeight: 700,
+                fontFamily: 'monospace', fontSize: 'var(--text-2xs)', fontWeight: 700,
                 color: 'var(--salvia-text-muted)', letterSpacing: '0.08em',
                 marginBottom: '0.5rem',
               }}>
                 {L.tier}
               </div>
               <div style={{
-                fontSize: '1.8rem', fontWeight: 800,
+                fontSize: 'var(--text-2xl)', fontWeight: 800,
                 color: 'var(--salvia-primary)',
                 letterSpacing: '-0.03em',
                 lineHeight: 1,
@@ -111,12 +111,12 @@ export const ThreeLayers: React.FC = () => (
               </div>
               <div style={{
                 display: 'inline-block',
-                fontSize: '0.65rem', fontWeight: 700,
+                fontSize: 'var(--text-2xs)', fontWeight: 700,
                 letterSpacing: '0.08em', textTransform: 'uppercase',
                 color: L.tagColor,
                 backgroundColor: L.accent,
                 padding: '0.28rem 0.6rem',
-                borderRadius: '999px',
+                borderRadius: 'var(--salvia-radius-full)',
               }}>
                 {L.tag}
               </div>
@@ -125,7 +125,7 @@ export const ThreeLayers: React.FC = () => (
             {/* Middle: headline + body */}
             <div>
               <h3 style={{
-                fontSize: '1.15rem', fontWeight: 700,
+                fontSize: 'var(--text-md)', fontWeight: 700,
                 color: 'var(--salvia-primary)',
                 letterSpacing: '-0.02em',
                 lineHeight: 1.3,
@@ -134,7 +134,7 @@ export const ThreeLayers: React.FC = () => (
                 {L.headline}
               </h3>
               <p style={{
-                fontSize: '0.92rem',
+                fontSize: 'var(--text-sm)',
                 color: 'var(--salvia-text-muted)',
                 lineHeight: 1.65,
                 margin: 0,
@@ -151,7 +151,7 @@ export const ThreeLayers: React.FC = () => (
               {L.items.map((item) => (
                 <li key={item} style={{
                   display: 'flex', alignItems: 'flex-start', gap: '0.5rem',
-                  fontSize: '0.85rem',
+                  fontSize: 'var(--text-sm)',
                   color: 'var(--salvia-primary)',
                 }}>
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={L.highlight ? 'var(--salvia-accent)' : 'var(--salvia-primary)'} strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" style={{ marginTop: '3px', flexShrink: 0 }}>
