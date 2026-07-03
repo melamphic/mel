@@ -23,12 +23,14 @@ export const content = (
 
     <h3>The number that decides it</h3>
     <p>
-      For most small hospitals, the case for accreditation is not prestige. It is the
-      <strong> 10% higher package rate on PM-JAY (Ayushman Bharat)</strong> that NABH Entry-Level
-      unlocks, plus eligibility for CGHS empanelment. If you run real PM-JAY volume, the maths is
-      blunt: a few hundred PMJAY cases a year at a 10% uplift can clear the certification cost several
-      times over. If you do almost no PM-JAY work, that argument disappears and you are paying for a
-      sticker.
+      For most small hospitals, the case for accreditation is not prestige. It is the higher package
+      rate on PM-JAY (Ayushman Bharat). Under the scheme's quality-incentive tiers, a
+      certified hospital earns a higher rate on HBP packages —{' '}
+      <strong>Bronze +5%, Silver +10%, Gold +15%</strong> — and{' '}
+      <strong>NABH Entry-Level qualifies you for the Silver tier, a 10% uplift</strong> (full NABH or
+      NQAS reaches Gold at 15%). If you run real PM-JAY volume, the maths is blunt: a few hundred
+      PM-JAY cases a year at a 10% uplift can clear the certification cost several times over. If you
+      do almost no PM-JAY work, that argument disappears and you are paying for a sticker.
     </p>
     <p>
       So the first question is not "is NABH good?" It is "do I do enough government-scheme volume for
@@ -38,12 +40,14 @@ export const content = (
 
     <h3>What it really costs</h3>
     <p>
-      Be clear-eyed about the total. The NABH fees themselves are the small part — Entry-Level costs
-      roughly half of full accreditation. The expensive part is everything around it: the consultant
-      for gap analysis, the staff training, building the SOPs, and three or more months of running the
-      facility to those standards to generate quality data before the assessment. Direct and indirect
-      costs together can run from a few lakhs to much more, depending on how far your current practice
-      is from the standard.
+      Be clear-eyed about the total, because this is where the "expensive sticker" myth comes from.
+      The NABH fees themselves are small: Entry-Level certification for a small healthcare
+      organisation (under 50 beds) is around <strong>₹21,000 for two years</strong> plus a ₹3,000
+      assessment fee and GST — assessor travel extra. The money goes elsewhere: the consultant for
+      gap analysis, the staff training, building the SOPs, and the three-to-six months of running the
+      facility to those standards to generate quality data before the assessment. Add it up and a
+      realistic all-in figure is <strong>₹1–3 lakh</strong>, depending on how far your current
+      practice sits from the standard. The fee is not the cost; the readiness is.
     </p>
 
     <h3>Where software helps — and where it does not</h3>
@@ -62,13 +66,14 @@ export const content = (
       do.
     </p>
 
-    <h3>The deeper point</h3>
+    <h3>When it's worth it</h3>
     <p>
       NABH is worth it when two things are true: you do enough scheme volume for the incentive to pay,
       and you are willing to do the organisational work it actually requires. If both hold, get the
       records side automated so the project is about quality and not about scrambling for paper. If
       neither holds, an honest "not yet" is a perfectly good answer — and a better one than a sticker
-      you resent.
+      you resent. If the digital side is next on your list,{' '}
+      <a href="/blog/abdm-mandatory-clinic">ABDM and ABHA are the related question</a>.
     </p>
   </>
 );
