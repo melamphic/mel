@@ -4,10 +4,15 @@ export const content = (
     <p>
       Every Indian doctor who has sat across from a notice from a District Consumer Commission learns
       the same thing in the first ten minutes: the case is not really about what you did in the room.
-      It is about what your record can prove you did. Under the Consumer Protection Act, 2019, medical
-      treatment is a "service", and an unhappy patient can allege "deficiency in service" without
-      hiring a criminal lawyer, without an FIR, and for a nominal fee. The forum is fast, cheap for the
-      complainant, and unforgiving of a thin file.
+      It is about what your record can prove you did. Under the Consumer Protection Act, 2019, paid
+      medical treatment is a "service", and an unhappy patient can allege "deficiency in service"
+      without hiring a criminal lawyer, without an FIR, and for a nominal fee. That coverage was tested
+      when the 2019 Act dropped healthcare from its illustrative list; the Bombay High Court settled it
+      in{' '}
+      <a href="https://indiankanoon.org/doc/93468691/">Medicos Legal Action Group v. Union of India</a>{' '}
+      (2021), and in November 2024 the Supreme Court declined to reconsider the point — doctors remain
+      squarely within the Act. The forum is fast, cheap for the complainant, and unforgiving of a thin
+      file.
     </p>
     <p>
       So the honest answer to "will I lose if the record isn't there?" is: usually, yes. Not because
@@ -28,6 +33,14 @@ export const content = (
       burden onto the doctor. A swab left inside the abdomen, surgery on the wrong limb, a transfusion
       of the wrong blood group: here the court presumes negligence and asks <em>you</em> to explain.
       The only way to explain is the record.
+    </p>
+    <p>
+      There is a third erosion, and it is the one that catches ordinary cases. The Supreme Court in{' '}
+      <a href="https://indiankanoon.org/doc/150881/">Savita Garg v. National Heart Institute</a>{' '}
+      (2004) held that once a patient makes out an initial case, the burden shifts to the hospital,
+      and that non-production of the relevant records lets the court draw an adverse inference against
+      it. The 2020 ruling in <em>Maharaja Agrasen Hospital v. Master Rishabh Sharma</em> said the same.
+      In plain terms: a missing record is not neutral. It is read against you.
     </p>
 
     <h3>What the file is actually doing</h3>
@@ -73,12 +86,15 @@ export const content = (
       been, not when it was too late.
     </p>
 
-    <h3>The deeper point</h3>
+    <h3>The case is won on the day of the consult</h3>
     <p>
       A consumer case is won or lost long before the hearing. It is won on the afternoon of the
       consult, in the few lines you did or did not write. Treat the record as the defence it is, and
       most "deficiency in service" notices quietly go nowhere. Treat it as paperwork, and a routine
-      consult becomes a case you cannot win.
+      consult becomes a case you cannot win. When the notice does arrive, the patient is often also
+      exercising their right to{' '}
+      <a href="/blog/patient-records-access-india">demand the full file within 72 hours</a> — and
+      what you hand over is the case.
     </p>
   </>
 );
