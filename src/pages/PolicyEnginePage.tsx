@@ -50,33 +50,33 @@ export const PolicyEnginePage = () => {
       <main style={{ flex: 1, zIndex: 10 }}>
 
       {/* Hero */}
-      <section style={{ padding: '11rem 0 7rem', backgroundColor: 'var(--salvia-bg)', borderBottom: '1px solid #F1F5F9' }}>
-        <div className="container" style={{ maxWidth: '1000px' }}>
+      <section style={{ padding: '11rem 0 7rem', backgroundColor: 'var(--salvia-bg)', borderBottom: '1px solid var(--border-subtle)' }}>
+        <div className="container" style={{ maxWidth: '960px' }}>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '5rem', alignItems: 'center' }} className="mobile-stack">
             <div>
               <div style={{
                 display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
                 backgroundColor: 'rgba(99,102,241,0.07)', border: '1.5px solid rgba(99,102,241,0.2)',
-                borderRadius: '10px', padding: '0.35rem 0.85rem', marginBottom: '1.75rem',
+                borderRadius: 'var(--radius-md)', padding: '0.35rem 0.85rem', marginBottom: '1.75rem',
               }}>
-                <span style={{ fontSize: '0.75rem', fontWeight: 800, color: '#6366F1', letterSpacing: '0.1em', textTransform: 'uppercase' }}>Institutional Compliance Hub</span>
+                <span style={{ fontSize: 'var(--text-xs)', fontWeight: 800, color: '#6366F1', letterSpacing: '0.1em', textTransform: 'uppercase' }}>Institutional Compliance Hub</span>
               </div>
               <h1 style={{
-                fontSize: 'clamp(2.4rem, 5vw, 3.75rem)', fontWeight: 900,
+                fontSize: 'var(--text-display)', fontWeight: 800,
                 letterSpacing: '-0.04em', lineHeight: 1.05,
                 color: 'var(--salvia-primary)', marginBottom: '1.5rem',
               }}>
                 A policy no one reads is a liability.
               </h1>
-              <p style={{ fontSize: '1.1rem', color: 'var(--salvia-text-muted)', lineHeight: 1.65, marginBottom: '2.5rem' }}>
+              <p style={{ fontSize: 'var(--text-md)', color: 'var(--salvia-text-muted)', lineHeight: 1.65, marginBottom: '2.5rem' }}>
                 Most practices have policies. Almost none can prove their staff have read them, understand them, or follow them. Salvia turns your static PDF manuals into active governance — mapped to regulatory codes, attested by staff, and auditable on demand.
               </p>
               <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
                 <Link to="/start" style={{
                   display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
                   backgroundColor: '#6366F1', color: '#fff',
-                  padding: '0.85rem 1.75rem', borderRadius: '12px',
-                  fontWeight: 700, fontSize: '0.95rem', textDecoration: 'none',
+                  padding: '0.85rem 1.75rem', borderRadius: 'var(--radius-md)',
+                  fontWeight: 700, fontSize: 'var(--text-base)', textDecoration: 'none',
                 }}>
                   Book a demo
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
@@ -86,9 +86,9 @@ export const PolicyEnginePage = () => {
                 <Link to="/pricing" style={{
                   display: 'inline-flex', alignItems: 'center',
                   backgroundColor: 'transparent', color: 'var(--salvia-primary)',
-                  padding: '0.85rem 1.75rem', borderRadius: '12px',
-                  fontWeight: 700, fontSize: '0.95rem', textDecoration: 'none',
-                  border: '1.5px solid rgba(15,23,42,0.15)',
+                  padding: '0.85rem 1.75rem', borderRadius: 'var(--radius-md)',
+                  fontWeight: 700, fontSize: 'var(--text-base)', textDecoration: 'none',
+                  border: '1.5px solid var(--border-strong)',
                 }}>
                   See pricing
                 </Link>
@@ -97,14 +97,14 @@ export const PolicyEnginePage = () => {
 
             {/* Visual — policy coverage */}
             <div style={{
-              backgroundColor: '#fff', borderRadius: '24px',
-              border: '1px solid #EEF2F6',
-              boxShadow: '0 20px 60px rgba(15,23,42,0.07)',
+              backgroundColor: '#fff', borderRadius: 'var(--radius-xl)',
+              border: '1px solid var(--border-subtle)',
+              boxShadow: 'var(--shadow-3)',
               overflow: 'hidden',
             }}>
-              <div style={{ padding: '1.25rem 1.5rem', borderBottom: '1px solid #F1F5F9', display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+              <div style={{ padding: '1.25rem 1.5rem', borderBottom: '1px solid var(--border-subtle)', display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
                 <div style={{ width: '10px', height: '10px', borderRadius: '50%', backgroundColor: '#6366F1' }} />
-                <span style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--salvia-text-muted)' }}>Policy coverage — CQC Regulation 17</span>
+                <span style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--salvia-text-muted)' }}>Policy coverage — CQC Regulation 17</span>
               </div>
               <div style={{ padding: '1.5rem', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
                 {[
@@ -114,15 +114,15 @@ export const PolicyEnginePage = () => {
                   { policy: 'Incident Reporting Procedure', status: 'No policy', attested: '—', color: '#EF4444' },
                 ].map((p, i) => (
                   <div key={i} style={{
-                    padding: '0.85rem 1rem', borderRadius: '10px',
+                    padding: '0.85rem 1rem', borderRadius: 'var(--radius-md)',
                     border: `1px solid ${p.color}22`,
                     backgroundColor: `${p.color}08`,
                   }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '0.5rem' }}>
-                      <span style={{ fontSize: '0.8rem', fontWeight: 600, color: 'var(--salvia-primary)', flex: 1 }}>{p.policy}</span>
-                      <span style={{ fontSize: '0.65rem', fontWeight: 800, color: p.color, whiteSpace: 'nowrap' }}>{p.status}</span>
+                      <span style={{ fontSize: 'var(--text-xs)', fontWeight: 600, color: 'var(--salvia-primary)', flex: 1 }}>{p.policy}</span>
+                      <span style={{ fontSize: 'var(--text-2xs)', fontWeight: 800, color: p.color, whiteSpace: 'nowrap' }}>{p.status}</span>
                     </div>
-                    <div style={{ fontSize: '0.68rem', color: 'var(--salvia-text-muted)', marginTop: '0.25rem' }}>Attested: {p.attested}</div>
+                    <div style={{ fontSize: 'var(--text-2xs)', color: 'var(--salvia-text-muted)', marginTop: '0.25rem' }}>Attested: {p.attested}</div>
                   </div>
                 ))}
               </div>
@@ -132,19 +132,19 @@ export const PolicyEnginePage = () => {
       </section>
 
       {/* Features */}
-      <section style={{ padding: '7rem 0', backgroundColor: '#fff' }}>
-        <div className="container" style={{ maxWidth: '1100px' }}>
+      <section style={{ padding: 'var(--section-pad) 0', backgroundColor: '#fff' }}>
+        <div className="container" style={{ maxWidth: '1200px' }}>
           <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
-            <div style={{ fontSize: '0.72rem', fontWeight: 800, color: '#6366F1', letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>What it does</div>
-            <h2 style={{ fontSize: 'clamp(1.8rem, 4vw, 2.75rem)', fontWeight: 800, color: 'var(--salvia-primary)', letterSpacing: '-0.03em' }}>
+            <div className="eyebrow" style={{ color: '#6366F1', marginBottom: '0.75rem' }}>What it does</div>
+            <h2 style={{ fontSize: 'var(--text-3xl)', fontWeight: 800, color: 'var(--salvia-primary)', letterSpacing: '-0.03em' }}>
               Active governance, not a filing cabinet.
             </h2>
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.5rem' }} className="mobile-stack">
             {FEATURES.map((f, i) => (
-              <div key={i} style={{ padding: '2rem', borderRadius: '16px', border: '1px solid #EEF2F6', backgroundColor: '#FAFBFC' }}>
-                <h3 style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--salvia-primary)', marginBottom: '0.5rem' }}>{f.title}</h3>
-                <p style={{ fontSize: '0.875rem', color: 'var(--salvia-text-muted)', lineHeight: 1.6 }}>{f.desc}</p>
+              <div key={i} style={{ padding: '2rem', borderRadius: 'var(--radius-lg)', border: '1px solid var(--border-subtle)', backgroundColor: '#FAFBFC' }}>
+                <h3 style={{ fontSize: 'var(--text-base)', fontWeight: 700, color: 'var(--salvia-primary)', marginBottom: '0.5rem' }}>{f.title}</h3>
+                <p style={{ fontSize: 'var(--text-sm)', color: 'var(--salvia-text-muted)', lineHeight: 1.6 }}>{f.desc}</p>
               </div>
             ))}
           </div>
@@ -152,22 +152,22 @@ export const PolicyEnginePage = () => {
       </section>
 
       {/* Use cases */}
-      <section style={{ padding: '6rem 0', backgroundColor: 'var(--salvia-bg)', borderTop: '1px solid #F1F5F9' }}>
-        <div className="container" style={{ maxWidth: '1000px' }}>
+      <section style={{ padding: 'var(--section-pad) 0', backgroundColor: 'var(--salvia-bg)', borderTop: '1px solid var(--border-subtle)' }}>
+        <div className="container" style={{ maxWidth: '960px' }}>
           <div style={{ textAlign: 'center', marginBottom: '3.5rem' }}>
-            <div style={{ fontSize: '0.72rem', fontWeight: 800, color: '#6366F1', letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>Where it pays off</div>
-            <h2 style={{ fontSize: 'clamp(1.8rem, 4vw, 2.5rem)', fontWeight: 800, color: 'var(--salvia-primary)', letterSpacing: '-0.03em' }}>
+            <div className="eyebrow" style={{ color: '#6366F1', marginBottom: '0.75rem' }}>Where it pays off</div>
+            <h2 style={{ fontSize: 'var(--text-3xl)', fontWeight: 800, color: 'var(--salvia-primary)', letterSpacing: '-0.03em' }}>
               The four moments it matters most.
             </h2>
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '1.25rem' }} className="mobile-stack">
             {USE_CASES.map((u, i) => (
-              <div key={i} style={{ padding: '2rem', borderRadius: '16px', border: '1px solid #EEF2F6', backgroundColor: '#fff' }}>
-                <div style={{ fontSize: '0.65rem', fontWeight: 800, color: '#6366F1', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>
+              <div key={i} style={{ padding: '2rem', borderRadius: 'var(--radius-lg)', border: '1px solid var(--border-subtle)', backgroundColor: '#fff' }}>
+                <div className="eyebrow" style={{ color: '#6366F1', marginBottom: '0.75rem' }}>
                   {String(i + 1).padStart(2, '0')}
                 </div>
-                <h3 style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--salvia-primary)', marginBottom: '0.5rem' }}>{u.label}</h3>
-                <p style={{ fontSize: '0.875rem', color: 'var(--salvia-text-muted)', lineHeight: 1.6 }}>{u.desc}</p>
+                <h3 style={{ fontSize: 'var(--text-base)', fontWeight: 700, color: 'var(--salvia-primary)', marginBottom: '0.5rem' }}>{u.label}</h3>
+                <p style={{ fontSize: 'var(--text-sm)', color: 'var(--salvia-text-muted)', lineHeight: 1.6 }}>{u.desc}</p>
               </div>
             ))}
           </div>
@@ -175,10 +175,10 @@ export const PolicyEnginePage = () => {
       </section>
 
       {/* CTA */}
-      <section style={{ padding: '7rem 0', backgroundColor: '#fff', borderTop: '1px solid #F1F5F9', textAlign: 'center' }}>
+      <section style={{ padding: 'var(--section-pad) 0', backgroundColor: '#fff', borderTop: '1px solid var(--border-subtle)', textAlign: 'center' }}>
         <div className="container" style={{ maxWidth: '580px' }}>
-          <div style={{ fontSize: '0.72rem', fontWeight: 800, color: '#6366F1', letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: '1rem' }}>Get started</div>
-          <h2 style={{ fontSize: 'clamp(2rem, 5vw, 3rem)', fontWeight: 800, color: 'var(--salvia-primary)', letterSpacing: '-0.03em', marginBottom: '1rem' }}>
+          <div className="eyebrow" style={{ color: '#6366F1', marginBottom: '1rem' }}>Get started</div>
+          <h2 style={{ fontSize: 'var(--text-3xl)', fontWeight: 800, color: 'var(--salvia-primary)', letterSpacing: '-0.03em', marginBottom: '1rem' }}>
             Governance you can prove.
           </h2>
           <p style={{ color: 'var(--salvia-text-muted)', lineHeight: 1.65, marginBottom: '2.5rem' }}>
@@ -188,8 +188,8 @@ export const PolicyEnginePage = () => {
             <Link to="/start" style={{
               display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
               backgroundColor: '#6366F1', color: '#fff',
-              padding: '0.85rem 1.75rem', borderRadius: '12px',
-              fontWeight: 700, fontSize: '0.95rem', textDecoration: 'none',
+              padding: '0.85rem 1.75rem', borderRadius: 'var(--radius-md)',
+              fontWeight: 700, fontSize: 'var(--text-base)', textDecoration: 'none',
             }}>
               Book a demo
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
@@ -199,9 +199,9 @@ export const PolicyEnginePage = () => {
             <Link to="/pricing" style={{
               display: 'inline-flex', alignItems: 'center',
               backgroundColor: 'transparent', color: 'var(--salvia-primary)',
-              padding: '0.85rem 1.75rem', borderRadius: '12px',
-              fontWeight: 700, fontSize: '0.95rem', textDecoration: 'none',
-              border: '1.5px solid rgba(15,23,42,0.15)',
+              padding: '0.85rem 1.75rem', borderRadius: 'var(--radius-md)',
+              fontWeight: 700, fontSize: 'var(--text-base)', textDecoration: 'none',
+              border: '1.5px solid var(--border-strong)',
             }}>
               See pricing
             </Link>
