@@ -24,7 +24,7 @@ const ICONS: Record<string, React.ReactNode> = {
 
 export const AuditPack: React.FC = () => (
   <section style={{
-    padding: '6rem 0',
+    padding: 'var(--section-pad) 0',
     backgroundColor: 'var(--salvia-bg)',
     position: 'relative',
     zIndex: 10,
@@ -40,14 +40,11 @@ export const AuditPack: React.FC = () => (
 
         {/* Left: copy */}
         <div>
-          <span style={{
-            fontSize: '0.7rem', fontWeight: 700, letterSpacing: '0.14em',
-            textTransform: 'uppercase', color: 'var(--salvia-accent)',
-          }}>
+          <span className="eyebrow">
             Named artifact
           </span>
           <h2 style={{
-            fontSize: 'clamp(2.25rem, 4.5vw, 3.25rem)',
+            fontSize: 'var(--text-3xl)',
             fontWeight: 700, letterSpacing: '-0.04em', lineHeight: 1.1,
             color: 'var(--salvia-primary)',
             marginTop: '0.7rem',
@@ -56,7 +53,7 @@ export const AuditPack: React.FC = () => (
             The Audit Pack.
           </h2>
           <p style={{
-            fontSize: '1.1rem',
+            fontSize: 'var(--text-md)',
             color: 'var(--salvia-text-muted)',
             lineHeight: 1.65,
             marginBottom: '1.5rem',
@@ -65,7 +62,7 @@ export const AuditPack: React.FC = () => (
             Everything they need to verify the note is inside, already tied together, already hashed.
           </p>
           <p style={{
-            fontSize: '1rem',
+            fontSize: 'var(--text-base)',
             color: 'var(--salvia-text-muted)',
             lineHeight: 1.65,
             marginBottom: '2rem',
@@ -78,12 +75,12 @@ export const AuditPack: React.FC = () => (
             display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
             padding: '0.75rem 1.25rem',
             backgroundColor: '#fff',
-            border: '1px solid rgba(0,0,0,0.06)',
-            borderRadius: '10px',
-            fontSize: '0.85rem',
+            border: '1px solid var(--border-subtle)',
+            borderRadius: 'var(--radius-md)',
+            fontSize: 'var(--text-sm)',
             color: 'var(--salvia-primary)',
             fontWeight: 600,
-            boxShadow: '0 2px 8px rgba(25,56,46,0.04)',
+            boxShadow: 'var(--shadow-2)',
           }}>
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--salvia-accent)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
               <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
@@ -97,21 +94,21 @@ export const AuditPack: React.FC = () => (
         {/* Right: visual Audit Pack mockup */}
         <div style={{
           backgroundColor: '#fff',
-          borderRadius: '20px',
-          border: '1px solid rgba(0,0,0,0.06)',
-          boxShadow: '0 24px 60px -12px rgba(15,23,42,0.12)',
+          borderRadius: 'var(--radius-lg)',
+          border: '1px solid var(--border-subtle)',
+          boxShadow: 'var(--shadow-3)',
           overflow: 'hidden',
         }}>
           {/* Header bar */}
           <div style={{
             padding: '1.25rem 1.5rem',
-            borderBottom: '1px solid #F1F5F9',
+            borderBottom: '1px solid var(--border-subtle)',
             display: 'flex', alignItems: 'center', justifyContent: 'space-between',
             backgroundColor: '#F8FAFC',
           }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
               <div style={{
-                width: 36, height: 36, borderRadius: '8px',
+                width: 36, height: 36, borderRadius: 'var(--radius-sm)',
                 backgroundColor: 'var(--salvia-accent)',
                 color: '#fff',
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
@@ -122,18 +119,18 @@ export const AuditPack: React.FC = () => (
                 </svg>
               </div>
               <div>
-                <div style={{ fontSize: '0.92rem', fontWeight: 700, color: 'var(--salvia-primary)', letterSpacing: '-0.01em' }}>
+                <div style={{ fontSize: 'var(--text-sm)', fontWeight: 700, color: 'var(--salvia-primary)', letterSpacing: '-0.01em' }}>
                   audit-pack-record-8821.zip
                 </div>
-                <div style={{ fontSize: '0.7rem', color: 'var(--salvia-text-muted)', fontFamily: 'monospace', marginTop: '2px' }}>
+                <div style={{ fontSize: 'var(--text-2xs)', color: 'var(--salvia-text-muted)', fontFamily: 'monospace', marginTop: '2px' }}>
                   SHA256 · 4e7a…b9c3
                 </div>
               </div>
             </div>
             <div style={{
-              fontSize: '0.62rem', fontWeight: 700,
-              color: '#059669', backgroundColor: '#ECFDF5',
-              padding: '0.28rem 0.6rem', borderRadius: '999px',
+              fontSize: 'var(--text-2xs)', fontWeight: 700,
+              color: 'var(--accent-dental)', backgroundColor: '#ECFDF5',
+              padding: '0.28rem 0.6rem', borderRadius: 'var(--salvia-radius-full)',
               letterSpacing: '0.04em',
             }}>
               VERIFIED
@@ -152,10 +149,10 @@ export const AuditPack: React.FC = () => (
                 display: 'flex', alignItems: 'center', gap: '0.65rem',
                 padding: '0.75rem 0.85rem',
                 border: '1px solid #F1F5F9',
-                borderRadius: '8px',
+                borderRadius: 'var(--radius-sm)',
               }}>
                 <div style={{
-                  width: 30, height: 30, borderRadius: '6px',
+                  width: 30, height: 30, borderRadius: 'var(--radius-sm)',
                   backgroundColor: '#F8FAFC',
                   color: 'var(--salvia-primary)',
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
@@ -166,10 +163,10 @@ export const AuditPack: React.FC = () => (
                   </svg>
                 </div>
                 <div style={{ minWidth: 0 }}>
-                  <div style={{ fontSize: '0.78rem', fontWeight: 600, color: 'var(--salvia-primary)', letterSpacing: '-0.01em' }}>
+                  <div style={{ fontSize: 'var(--text-xs)', fontWeight: 600, color: 'var(--salvia-primary)', letterSpacing: '-0.01em' }}>
                     {c.label}
                   </div>
-                  <div style={{ fontSize: '0.68rem', color: 'var(--salvia-text-muted)', marginTop: '1px' }}>
+                  <div style={{ fontSize: 'var(--text-2xs)', color: 'var(--salvia-text-muted)', marginTop: '1px' }}>
                     {c.sub}
                   </div>
                 </div>
@@ -182,7 +179,7 @@ export const AuditPack: React.FC = () => (
             padding: '0.85rem 1.5rem',
             borderTop: '1px solid #F1F5F9',
             display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-            fontSize: '0.72rem',
+            fontSize: 'var(--text-2xs)',
             color: 'var(--salvia-text-muted)',
           }}>
             <span>Generated 2026-06-12 · 09:14</span>
