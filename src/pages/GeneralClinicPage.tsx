@@ -68,18 +68,18 @@ export const GeneralClinicPage = () => {
       <main style={{ flex: 1, zIndex: 10 }}>
 
       <section style={{ padding: '11rem 0 7rem', backgroundColor: 'var(--salvia-bg)' }}>
-        <div className="container" style={{ maxWidth: '1000px', textAlign: 'center' }}>
+        <div className="container" style={{ maxWidth: '960px', textAlign: 'center' }}>
           <div style={{
             display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
             backgroundColor: 'rgba(245,158,11,0.07)', border: '1.5px solid rgba(245,158,11,0.2)',
-            borderRadius: '10px', padding: '0.35rem 0.85rem', marginBottom: '2rem',
+            borderRadius: 'var(--radius-md)', padding: '0.35rem 0.85rem', marginBottom: '2rem',
           }}>
-            <span style={{ fontSize: '0.75rem', fontWeight: 800, color: '#D97706', letterSpacing: '0.1em', textTransform: 'uppercase' }}>
+            <span style={{ fontSize: 'var(--text-xs)', fontWeight: 800, color: 'var(--salvia-warning)', letterSpacing: '0.1em', textTransform: 'uppercase' }}>
               General Practice &amp; Clinics
             </span>
           </div>
           <h1 style={{
-            fontSize: 'clamp(2.8rem, 7vw, 5rem)', fontWeight: 900,
+            fontSize: 'var(--text-display)', fontWeight: 800,
             letterSpacing: '-0.04em', lineHeight: 1,
             color: 'var(--salvia-primary)', marginBottom: '1.75rem',
           }}>
@@ -95,9 +95,9 @@ export const GeneralClinicPage = () => {
           <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'center', flexWrap: 'wrap' }}>
             <Link to="/start" style={{
               display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
-              backgroundColor: '#D97706', color: '#fff',
-              padding: '0.85rem 1.75rem', borderRadius: '12px',
-              fontWeight: 700, fontSize: '0.95rem', textDecoration: 'none',
+              backgroundColor: 'var(--salvia-warning)', color: '#fff',
+              padding: '0.85rem 1.75rem', borderRadius: 'var(--radius-md)',
+              fontWeight: 700, fontSize: 'var(--text-base)', textDecoration: 'none',
             }}>
               Book a demo
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
@@ -107,9 +107,9 @@ export const GeneralClinicPage = () => {
             <Link to="/pricing" style={{
               display: 'inline-flex', alignItems: 'center',
               backgroundColor: 'transparent', color: 'var(--salvia-primary)',
-              padding: '0.85rem 1.75rem', borderRadius: '12px',
-              fontWeight: 700, fontSize: '0.95rem', textDecoration: 'none',
-              border: '1.5px solid rgba(15,23,42,0.15)',
+              padding: '0.85rem 1.75rem', borderRadius: 'var(--radius-md)',
+              fontWeight: 700, fontSize: 'var(--text-base)', textDecoration: 'none',
+              border: '1.5px solid var(--border-strong)',
             }}>
               See pricing
             </Link>
@@ -127,19 +127,19 @@ export const GeneralClinicPage = () => {
         audioStepCopy="After each consult, leave a brief voice note. 30 seconds to a few minutes — natural language, no template-bashing."
       />
 
-      <section style={{ padding: '7rem 0', backgroundColor: '#fff' }}>
-        <div className="container" style={{ maxWidth: '1100px' }}>
+      <section style={{ padding: 'var(--section-pad) 0', backgroundColor: '#fff' }}>
+        <div className="container" style={{ maxWidth: '1200px' }}>
           <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
-            <div style={{ fontSize: '0.72rem', fontWeight: 800, color: '#D97706', letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>What Salvia does</div>
-            <h2 style={{ fontSize: 'clamp(1.8rem, 4vw, 2.75rem)', fontWeight: 800, color: 'var(--salvia-primary)', letterSpacing: '-0.03em' }}>
+            <div className="eyebrow" style={{ color: 'var(--salvia-warning)', marginBottom: '0.75rem' }}>What Salvia does</div>
+            <h2 style={{ fontSize: 'var(--text-3xl)', fontWeight: 800, color: 'var(--salvia-primary)', letterSpacing: '-0.03em' }}>
               Every record a regulator expects to see.
             </h2>
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.5rem' }} className="mobile-stack">
             {FEATURES.map((f, i) => (
-              <div key={i} style={{ padding: '2rem', borderRadius: '16px', border: '1px solid #EEF2F6', backgroundColor: '#FAFBFC' }}>
-                <h3 style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--salvia-primary)', marginBottom: '0.5rem' }}>{f.title}</h3>
-                <p style={{ fontSize: '0.875rem', color: 'var(--salvia-text-muted)', lineHeight: 1.6 }}>{f.desc}</p>
+              <div key={i} style={{ padding: '2rem', borderRadius: 'var(--radius-lg)', border: '1px solid var(--border-subtle)', backgroundColor: '#FAFBFC' }}>
+                <h3 style={{ fontSize: 'var(--text-base)', fontWeight: 700, color: 'var(--salvia-primary)', marginBottom: '0.5rem' }}>{f.title}</h3>
+                <p style={{ fontSize: 'var(--text-sm)', color: 'var(--salvia-text-muted)', lineHeight: 1.6 }}>{f.desc}</p>
               </div>
             ))}
           </div>
@@ -191,26 +191,26 @@ export const GeneralClinicPage = () => {
         fromPriceCopy="General practice compliance, from ₹1,000/mo."
       />
 
-      <section style={{ padding: '7rem 0', backgroundColor: 'var(--salvia-bg)', borderTop: '1px solid #F1F5F9' }}>
+      <section style={{ padding: 'var(--section-pad) 0', backgroundColor: 'var(--salvia-bg)', borderTop: '1px solid var(--border-subtle)' }}>
         <div className="container" style={{ maxWidth: '760px' }}>
           <div style={{ textAlign: 'center', marginBottom: '3.5rem' }}>
-            <div style={{ fontSize: '0.72rem', fontWeight: 800, color: '#D97706', letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>Common questions</div>
-            <h2 style={{ fontSize: 'clamp(1.8rem, 4vw, 2.4rem)', fontWeight: 800, color: 'var(--salvia-primary)', letterSpacing: '-0.03em' }}>What general practices ask us</h2>
+            <div className="eyebrow" style={{ color: 'var(--salvia-warning)', marginBottom: '0.75rem' }}>Common questions</div>
+            <h2 style={{ fontSize: 'var(--text-2xl)', fontWeight: 800, color: 'var(--salvia-primary)', letterSpacing: '-0.03em' }}>What general practices ask us</h2>
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
             {FAQS.map((faq, i) => (
-              <div key={i} style={{ padding: '1.75rem 2rem', borderRadius: '14px', border: '1px solid #EEF2F6', backgroundColor: '#fff' }}>
-                <h3 style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--salvia-primary)', marginBottom: '0.65rem' }}>{faq.q}</h3>
-                <p style={{ fontSize: '0.9rem', color: 'var(--salvia-text-muted)', lineHeight: 1.65, margin: 0 }}>{faq.a}</p>
+              <div key={i} style={{ padding: '1.75rem 2rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-subtle)', backgroundColor: '#fff' }}>
+                <h3 style={{ fontSize: 'var(--text-base)', fontWeight: 700, color: 'var(--salvia-primary)', marginBottom: '0.65rem' }}>{faq.q}</h3>
+                <p style={{ fontSize: 'var(--text-sm)', color: 'var(--salvia-text-muted)', lineHeight: 1.65, margin: 0 }}>{faq.a}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section style={{ padding: '7rem 0', backgroundColor: '#fff', borderTop: '1px solid #F1F5F9', textAlign: 'center' }}>
+      <section style={{ padding: 'var(--section-pad) 0', backgroundColor: '#fff', borderTop: '1px solid var(--border-subtle)', textAlign: 'center' }}>
         <div className="container" style={{ maxWidth: '600px' }}>
-          <h2 style={{ fontSize: 'clamp(2rem, 5vw, 3rem)', fontWeight: 800, color: 'var(--salvia-primary)', letterSpacing: '-0.03em', marginBottom: '1rem' }}>
+          <h2 style={{ fontSize: 'var(--text-3xl)', fontWeight: 800, color: 'var(--salvia-primary)', letterSpacing: '-0.03em', marginBottom: '1rem' }}>
             Defensible records, every consult.
           </h2>
           <p style={{ color: 'var(--salvia-text-muted)', lineHeight: 1.65, marginBottom: '2.5rem' }}>
@@ -218,9 +218,9 @@ export const GeneralClinicPage = () => {
           </p>
           <Link to="/start" style={{
             display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
-            backgroundColor: '#D97706', color: '#fff',
-            padding: '0.9rem 2rem', borderRadius: '12px',
-            fontWeight: 700, fontSize: '1rem', textDecoration: 'none',
+            backgroundColor: 'var(--salvia-warning)', color: '#fff',
+            padding: '0.9rem 2rem', borderRadius: 'var(--radius-md)',
+            fontWeight: 700, fontSize: 'var(--text-base)', textDecoration: 'none',
           }}>
             Book a demo
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
