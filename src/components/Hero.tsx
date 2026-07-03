@@ -90,9 +90,9 @@ export const Hero: React.FC = () => {
         {/* LEFT */}
         <div className="hv1-left" style={{ textAlign: 'left' }}>
           <h1 className="hv1-headline">
-            Clinical compliance, built into{' '}
+            Every consult,{' '}
             <span style={{ position: 'relative', whiteSpace: 'nowrap', color: 'var(--salvia-accent)' }}>
-              every note
+              on the record
               <span
                 style={{
                   position: 'absolute',
@@ -118,9 +118,9 @@ export const Hero: React.FC = () => {
               margin: '0 0 2.25rem',
             }}
           >
-            Salvia&apos;s AI turns a post-consult audio note — spoken in {isIndia ? 'any Indian language' : 'any language'} — into a
-            policy-checked, audit-ready clinical record before anyone signs off. Not a scribe — a
-            compliance suite.
+            Ambient during the consult or dictated after — in {isIndia ? 'any Indian language' : 'any language'} —
+            Salvia turns what your clinicians say into clinician-verified, policy-checked, sealed
+            clinical records. The kind you can produce when it matters.
           </p>
 
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.9rem' }}>
