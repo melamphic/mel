@@ -12,13 +12,21 @@ import {
   type FrameworkCountry,
   type FrameworkVertical,
 } from '../data/frameworks';
+import { INDIA_ONLY } from '../config';
 
 const ACCENT = '#0F172A';
 
 type CountryFilter = FrameworkCountry | 'all';
 type VerticalFilter = FrameworkVertical | 'all';
 
-const COUNTRIES_ORDER: CountryFilter[] = ['all', 'IE', 'GB', 'AU', 'NZ', 'US'];
+// India-first while INDIA_ONLY — India chip leads and the grouped list
+// opens on Indian regulators; the global catalog stays one click away.
+const COUNTRIES_ORDER: CountryFilter[] = INDIA_ONLY
+  ? ['all', 'IN', 'GB', 'AU', 'NZ', 'US', 'IE']
+  : ['all', 'IE', 'GB', 'AU', 'NZ', 'US', 'IN'];
+const GROUP_ORDER: FrameworkCountry[] = INDIA_ONLY
+  ? ['IN', 'GB', 'AU', 'NZ', 'US', 'IE', 'EU', 'Global']
+  : ['IE', 'GB', 'AU', 'NZ', 'US', 'IN', 'EU', 'Global'];
 const VERTICALS_ORDER: VerticalFilter[] = ['all', 'vet', 'dental', 'gp', 'allied'];
 
 export const FrameworksPage = () => {
@@ -43,14 +51,14 @@ export const FrameworksPage = () => {
   const grouped = useMemo(() => {
     if (country !== 'all') return null;
     const buckets: Record<FrameworkCountry, typeof FRAMEWORKS> = {
-      IE: [], GB: [], AU: [], NZ: [], US: [], EU: [], Global: [],
+      IN: [], IE: [], GB: [], AU: [], NZ: [], US: [], EU: [], Global: [],
     };
     filtered.forEach((f) => buckets[f.country].push(f));
     return buckets;
   }, [filtered, country]);
 
   const totalsByCountry = useMemo(() => {
-    const t: Record<FrameworkCountry, number> = { IE: 0, GB: 0, AU: 0, NZ: 0, US: 0, EU: 0, Global: 0 };
+    const t: Record<FrameworkCountry, number> = { IN: 0, IE: 0, GB: 0, AU: 0, NZ: 0, US: 0, EU: 0, Global: 0 };
     FRAMEWORKS.forEach((f) => { t[f.country]++; });
     return t;
   }, []);
@@ -77,9 +85,16 @@ export const FrameworksPage = () => {
     <div style={{ backgroundColor: '#fff', minHeight: '100vh' }}>
       <SEO
         title="Regulatory Frameworks We Support"
-        description={`Salvia generates audit-ready clinical records against ${FRAMEWORKS.length}+ regulatory frameworks across veterinary, dental, general practice and allied health — CORU, HCPC, AHPRA, RCVS, CQC, GDC, GOsC, GCC, AVA, VCNZ, MCNZ and more. Five countries, every clinical vertical.`}
+        description={INDIA_ONLY
+          ? `Salvia generates audit-ready clinical records against ${FRAMEWORKS.length}+ regulatory frameworks — NABH, ABDM, NMC/IMC record rules, DPDP Act, Schedule H1, PC-PNDT and Consumer Protection Act 2019 for India, plus international regulators for every clinical vertical.`
+          : `Salvia generates audit-ready clinical records against ${FRAMEWORKS.length}+ regulatory frameworks across veterinary, dental, general practice and allied health — CORU, HCPC, AHPRA, RCVS, CQC, GDC, GOsC, GCC, AVA, VCNZ, MCNZ and more. Six countries, every clinical vertical.`}
         path="/frameworks"
-        keywords={[
+        keywords={INDIA_ONLY ? [
+          'NABH compliance software', 'ABDM compliant EMR', 'NMC medical records rules',
+          'DPDP Act clinics', 'Schedule H1 register software', 'PC-PNDT documentation',
+          'Consumer Protection Act medical records', 'NABH entry level certification software',
+          'clinical documentation India', 'healthcare compliance software India', 'audit-ready records',
+        ] : [
           'compliance software frameworks', 'CORU compliance software', 'HCPC software',
           'AHPRA compliance', 'RCVS compliance', 'CQC dental software', 'GDC standards',
           'AVA records', 'VCNZ records', 'MCNZ records', 'GOsC compliance',
@@ -102,14 +117,14 @@ export const FrameworksPage = () => {
           <div style={{
             display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
             backgroundColor: 'rgba(15,23,42,0.04)', border: '1.5px solid rgba(15,23,42,0.08)',
-            borderRadius: '10px', padding: '0.35rem 0.85rem', marginBottom: '2rem',
+            borderRadius: 'var(--radius-md)', padding: '0.35rem 0.85rem', marginBottom: '2rem',
           }}>
-            <span style={{ fontSize: '0.75rem', fontWeight: 800, color: ACCENT, letterSpacing: '0.1em', textTransform: 'uppercase' }}>
-              {FRAMEWORKS.length} frameworks · 5 countries
+            <span style={{ fontSize: 'var(--text-xs)', fontWeight: 800, color: ACCENT, letterSpacing: '0.1em', textTransform: 'uppercase' }}>
+              {FRAMEWORKS.length} frameworks · {new Set(FRAMEWORKS.map((f) => f.country)).size} countries
             </span>
           </div>
           <h1 style={{
-            fontSize: 'clamp(2.4rem, 5.5vw, 4rem)', fontWeight: 900,
+            fontSize: 'clamp(2.4rem, 5.5vw, 4rem)', fontWeight: 800,
             letterSpacing: '-0.04em', lineHeight: 1.05,
             color: 'var(--salvia-primary)', marginBottom: '1.5rem',
           }}>
@@ -128,26 +143,29 @@ export const FrameworksPage = () => {
             display: 'flex', gap: '0.75rem', flexWrap: 'wrap', justifyContent: 'center',
             marginTop: '1.5rem',
           }}>
-            {(['IE','GB','AU','NZ','US'] as FrameworkCountry[]).map((c) => (
+            {(INDIA_ONLY
+              ? (['IN','GB','AU','NZ','US','IE'] as FrameworkCountry[])
+              : (['IE','GB','AU','NZ','US','IN'] as FrameworkCountry[])
+            ).map((c) => (
               <button
                 key={c}
                 onClick={() => setCountry(c)}
                 style={{
                   padding: '0.5rem 0.85rem',
-                  borderRadius: '10px',
+                  borderRadius: 'var(--radius-md)',
                   border: '1px solid #EEF2F6',
                   backgroundColor: '#fff',
                   cursor: 'pointer',
                   display: 'inline-flex', alignItems: 'center', gap: '0.45rem',
-                  fontSize: '0.85rem', fontWeight: 700,
+                  fontSize: 'var(--text-sm)', fontWeight: 700,
                   color: 'var(--salvia-primary)',
                 }}
               >
-                <span style={{ fontSize: '1rem' }}>{COUNTRY_META[c].flag}</span>
+                <span style={{ fontSize: 'var(--text-base)' }}>{COUNTRY_META[c].flag}</span>
                 <span>{COUNTRY_META[c].label}</span>
                 <span style={{
-                  fontSize: '0.7rem', fontWeight: 800,
-                  padding: '0.1rem 0.45rem', borderRadius: '5px',
+                  fontSize: 'var(--text-2xs)', fontWeight: 800,
+                  padding: '0.1rem 0.45rem', borderRadius: 'var(--radius-sm)',
                   backgroundColor: 'rgba(15,23,42,0.06)',
                   color: 'var(--salvia-text-muted)',
                 }}>{totalsByCountry[c]}</span>
@@ -174,7 +192,7 @@ export const FrameworksPage = () => {
           }}>
             {/* Country chips */}
             <div style={{ display: 'flex', gap: '0.35rem', flexWrap: 'wrap', alignItems: 'center' }}>
-              <span style={{ fontSize: '0.68rem', fontWeight: 800, color: 'var(--salvia-text-muted)', letterSpacing: '0.1em', textTransform: 'uppercase', marginRight: '0.25rem' }}>Country</span>
+              <span style={{ fontSize: 'var(--text-2xs)', fontWeight: 800, color: 'var(--salvia-text-muted)', letterSpacing: '0.1em', textTransform: 'uppercase', marginRight: '0.25rem' }}>Country</span>
               {COUNTRIES_ORDER.map((c) => (
                 <FilterChip
                   key={c}
@@ -188,7 +206,7 @@ export const FrameworksPage = () => {
 
             {/* Vertical chips */}
             <div style={{ display: 'flex', gap: '0.35rem', flexWrap: 'wrap', alignItems: 'center' }}>
-              <span style={{ fontSize: '0.68rem', fontWeight: 800, color: 'var(--salvia-text-muted)', letterSpacing: '0.1em', textTransform: 'uppercase', marginRight: '0.25rem' }}>Vertical</span>
+              <span style={{ fontSize: 'var(--text-2xs)', fontWeight: 800, color: 'var(--salvia-text-muted)', letterSpacing: '0.1em', textTransform: 'uppercase', marginRight: '0.25rem' }}>Vertical</span>
               {VERTICALS_ORDER.map((v) => (
                 <FilterChip
                   key={v}
@@ -206,7 +224,7 @@ export const FrameworksPage = () => {
             position: 'relative', marginTop: 'clamp(0.45rem, 1.5vw, 0.85rem)',
             backgroundColor: '#fff',
             border: '1.5px solid #EEF2F6',
-            borderRadius: '12px',
+            borderRadius: 'var(--radius-md)',
             padding: '0.5rem 0.85rem 0.5rem 2.25rem',
             display: 'flex', alignItems: 'center',
           }}>
@@ -225,7 +243,7 @@ export const FrameworksPage = () => {
               placeholder="Search by code, body, country, or summary…"
               style={{
                 flex: 1, border: 'none', outline: 'none',
-                fontSize: '0.92rem', color: 'var(--salvia-text)',
+                fontSize: 'var(--text-sm)', color: 'var(--salvia-text)',
                 background: 'transparent',
               }}
             />
@@ -243,7 +261,7 @@ export const FrameworksPage = () => {
               </button>
             )}
             <span style={{
-              fontSize: '0.72rem', fontWeight: 700,
+              fontSize: 'var(--text-2xs)', fontWeight: 700,
               color: 'var(--salvia-text-muted)', marginLeft: '0.5rem',
             }}>
               {filtered.length} of {FRAMEWORKS.length}
@@ -262,7 +280,7 @@ export const FrameworksPage = () => {
             <EmptyState />
           ) : grouped ? (
             <>
-              {(['IE','GB','AU','NZ','US','EU','Global'] as FrameworkCountry[]).map((c) => {
+              {GROUP_ORDER.map((c) => {
                 const list = grouped[c];
                 if (list.length === 0) return null;
                 return (
@@ -291,7 +309,7 @@ export const FrameworksPage = () => {
       }}>
         <div className="container" style={{ maxWidth: '760px', textAlign: 'center' }}>
           <div style={{
-            fontSize: '0.72rem', fontWeight: 800, color: 'var(--salvia-accent)',
+            fontSize: 'var(--text-2xs)', fontWeight: 800, color: 'var(--salvia-accent)',
             letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: '0.75rem',
           }}>
             Don't see yours?
@@ -304,7 +322,7 @@ export const FrameworksPage = () => {
             Request a custom framework pack.
           </h2>
           <p style={{
-            color: 'var(--salvia-text-muted)', fontSize: '1rem',
+            color: 'var(--salvia-text-muted)', fontSize: 'var(--text-base)',
             lineHeight: 1.65, marginBottom: '2rem', maxWidth: '600px',
             margin: '0 auto 2rem',
           }}>
@@ -313,8 +331,8 @@ export const FrameworksPage = () => {
           <Link to="/start" style={{
             display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
             backgroundColor: 'var(--salvia-accent)', color: '#fff',
-            padding: '0.9rem 1.9rem', borderRadius: '12px',
-            fontWeight: 700, fontSize: '0.95rem', textDecoration: 'none',
+            padding: '0.9rem 1.9rem', borderRadius: 'var(--radius-md)',
+            fontWeight: 700, fontSize: 'var(--text-base)', textDecoration: 'none',
           }}>
             Request a framework
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
@@ -353,11 +371,11 @@ function FilterChip({
       onClick={onClick}
       style={{
         padding: '0.4rem 0.85rem',
-        borderRadius: '999px',
+        borderRadius: 'var(--salvia-radius-full)',
         border: active ? '1.5px solid var(--salvia-primary)' : '1.5px solid transparent',
         backgroundColor: active ? 'var(--salvia-primary)' : 'rgba(15,23,42,0.04)',
         color: active ? '#fff' : 'var(--salvia-text-muted)',
-        fontSize: '0.78rem', fontWeight: 700,
+        fontSize: 'var(--text-xs)', fontWeight: 700,
         cursor: 'pointer',
         transition: 'all 0.15s',
         letterSpacing: '0.01em',
@@ -377,18 +395,18 @@ function CountryGroup({ country, frameworks }: { country: FrameworkCountry; fram
         marginBottom: '1.25rem', paddingBottom: '0.75rem',
         borderBottom: '1px solid #EEF2F6',
       }}>
-        <span style={{ fontSize: '1.5rem' }}>{meta.flag}</span>
+        <span style={{ fontSize: 'var(--text-xl)' }}>{meta.flag}</span>
         <h2 style={{
-          fontSize: '1.4rem', fontWeight: 800,
+          fontSize: 'var(--text-xl)', fontWeight: 800,
           color: 'var(--salvia-primary)', letterSpacing: '-0.02em',
           margin: 0, flex: 1,
         }}>
           {meta.label}
         </h2>
         <span style={{
-          fontSize: '0.72rem', fontWeight: 700,
+          fontSize: 'var(--text-2xs)', fontWeight: 700,
           color: 'var(--salvia-text-muted)',
-          padding: '0.25rem 0.65rem', borderRadius: '6px',
+          padding: '0.25rem 0.65rem', borderRadius: 'var(--radius-sm)',
           backgroundColor: 'rgba(15,23,42,0.04)',
         }}>
           {frameworks.length} framework{frameworks.length === 1 ? '' : 's'}
@@ -410,7 +428,7 @@ function FrameworkCard({ f }: { f: typeof FRAMEWORKS[number] }) {
   return (
     <article style={{
       padding: '1.5rem',
-      borderRadius: '14px',
+      borderRadius: 'var(--radius-md)',
       backgroundColor: '#fff',
       border: '1px solid #EEF2F6',
       display: 'flex', flexDirection: 'column', gap: '0.85rem',
@@ -419,35 +437,35 @@ function FrameworkCard({ f }: { f: typeof FRAMEWORKS[number] }) {
       <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: '0.65rem' }}>
         <div style={{ flex: 1, minWidth: 0 }}>
           <div style={{
-            fontSize: '1.15rem', fontWeight: 800,
+            fontSize: 'var(--text-md)', fontWeight: 800,
             color: 'var(--salvia-primary)', letterSpacing: '-0.02em',
             marginBottom: '0.25rem',
           }}>
             {f.code}
           </div>
           <div style={{
-            fontSize: '0.8rem', color: 'var(--salvia-text-muted)',
+            fontSize: 'var(--text-xs)', color: 'var(--salvia-text-muted)',
             fontWeight: 600, lineHeight: 1.4,
           }}>
             {f.fullName}
           </div>
         </div>
         <span style={{
-          fontSize: '0.65rem', fontWeight: 800,
-          padding: '0.25rem 0.5rem', borderRadius: '6px',
+          fontSize: 'var(--text-2xs)', fontWeight: 800,
+          padding: '0.25rem 0.5rem', borderRadius: 'var(--radius-sm)',
           backgroundColor: 'rgba(15,23,42,0.04)',
           color: 'var(--salvia-text-muted)',
           letterSpacing: '0.06em', textTransform: 'uppercase',
           flexShrink: 0, whiteSpace: 'nowrap',
           display: 'inline-flex', alignItems: 'center', gap: '0.3rem',
         }}>
-          <span style={{ fontSize: '0.8rem' }}>{countryMeta.flag}</span>
+          <span style={{ fontSize: 'var(--text-xs)' }}>{countryMeta.flag}</span>
           {f.country}
         </span>
       </div>
 
       <p style={{
-        fontSize: '0.82rem', color: 'var(--salvia-text)',
+        fontSize: 'var(--text-xs)', color: 'var(--salvia-text)',
         lineHeight: 1.55, margin: 0,
       }}>
         {f.summary}
@@ -470,7 +488,7 @@ function FrameworkCard({ f }: { f: typeof FRAMEWORKS[number] }) {
       <div style={{
         marginTop: 'auto', paddingTop: '0.75rem',
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-        fontSize: '0.7rem', color: 'var(--salvia-text-muted)',
+        fontSize: 'var(--text-2xs)', color: 'var(--salvia-text-muted)',
         borderTop: '1px solid #F1F5F9',
       }}>
         <span>Reviewed {new Date(f.currencyDate).toLocaleDateString('en-GB', { year: 'numeric', month: 'short', day: 'numeric' })}</span>
@@ -495,8 +513,8 @@ function FrameworkCard({ f }: { f: typeof FRAMEWORKS[number] }) {
 function Tag({ label, interactive }: { label: string; interactive?: boolean }) {
   return (
     <span style={{
-      fontSize: '0.65rem', fontWeight: 700,
-      padding: '0.2rem 0.55rem', borderRadius: '5px',
+      fontSize: 'var(--text-2xs)', fontWeight: 700,
+      padding: '0.2rem 0.55rem', borderRadius: 'var(--radius-sm)',
       backgroundColor: 'rgba(15,23,42,0.05)',
       color: 'var(--salvia-text)',
       letterSpacing: '0.02em',
@@ -514,14 +532,14 @@ function EmptyState() {
       padding: '4rem 1rem', textAlign: 'center',
       color: 'var(--salvia-text-muted)',
     }}>
-      <p style={{ fontSize: '1rem', marginBottom: '1.25rem' }}>
+      <p style={{ fontSize: 'var(--text-base)', marginBottom: '1.25rem' }}>
         No frameworks match those filters. Try widening the country or vertical, or request a custom pack below.
       </p>
       <Link to="/start" style={{
         display: 'inline-flex', alignItems: 'center', gap: '0.4rem',
         backgroundColor: 'var(--salvia-primary)', color: '#fff',
-        padding: '0.75rem 1.4rem', borderRadius: '10px',
-        fontWeight: 700, fontSize: '0.88rem', textDecoration: 'none',
+        padding: '0.75rem 1.4rem', borderRadius: 'var(--radius-md)',
+        fontWeight: 700, fontSize: 'var(--text-sm)', textDecoration: 'none',
       }}>
         Request a custom framework
       </Link>
