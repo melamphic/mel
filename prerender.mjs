@@ -26,6 +26,7 @@ const STATIC_ROUTES = [
   '/blog',
   '/start',
   '/contact-sales',
+  '/hospitals',
   '/frameworks',
   '/veterinary',
   '/dental',
@@ -77,6 +78,10 @@ const META = {
   '/contact-sales': {
     title: 'Book a demo | Salvia',
     desc: 'See Salvia in action — compliance and governance automation for vet, dental, and clinical practices.',
+  },
+  '/hospitals': {
+    title: 'Evidence & Compliance Platform for Indian Hospitals | Salvia',
+    desc: 'Your HMIS bills and schedules — it was never built to defend you. Salvia sits on top: every consult becomes a clinician-verified, sealed record you can produce when a complaint arrives.',
   },
   '/veterinary': {
     title: 'Veterinary Compliance Software | Salvia',
@@ -172,6 +177,10 @@ const META = {
 // useIsIndia(); these keep the CRAWLER view (static META) in sync so Google
 // India isn't served RCVS/CQC/"$229 per month" copy on an India-only site.
 const INDIA_META = {
+  '/': {
+    title: 'The Evidence Layer for Indian Healthcare | Salvia',
+    desc: 'Salvia turns what clinicians say — ambient or dictated, any Indian language — into verified, sealed clinical records. Files you can produce when a complaint arrives, context at every visit.',
+  },
   '/pricing': {
     title: 'AI Clinical Documentation & Compliance Pricing | Salvia',
     desc: 'Salvia pricing for Indian clinics — Starter ₹1,000/mo, Clinic ₹3,000/mo, Group ₹6,000/mo. Per-clinic, not per-seat; AI notes, drug register and audit trails on every tier.',
