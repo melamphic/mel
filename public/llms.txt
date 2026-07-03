@@ -4,83 +4,60 @@
 
 Salvia is a clinical governance automation platform. Clinicians dictate a post-encounter voice note; Salvia transcribes, extracts structured fields into the right statutory form, runs it against the clinic's linked regulatory framework pack, and locks the record with an audit trail. Every note checks itself. Every record defends itself.
 
-Salvia is domain-agnostic. The first beachhead market is veterinary clinics in New Zealand, with parallel pilots in UK dental and allied health (physio).
+Salvia is a global, domain-agnostic product. The current launch market is India — clinics, small hospitals, dental and veterinary practices — with records mapped to Indian frameworks (NMC/IMC record rules, NABH, ABDM, DPDP Act, Schedule H1, Consumer Protection Act 2019). International frameworks (UK, AU, NZ, US, IE) ship in the same catalog.
 
 ## Product pillars
 
-- [Point-of-Care Evidence](https://hellosalvia.com/products/point-of-care-evidence): Audio capture → transcription → structured field extraction → typed clinical record.
+- [Point-of-Care Evidence](https://hellosalvia.com/products/point-of-care-evidence): Audio capture → transcription → structured field extraction → typed clinical record. Works with code-mixed Indian-language dictation (Hindi/Malayalam/English).
 - [Statutory Form Infrastructure](https://hellosalvia.com/products/statutory-form-infrastructure): Jurisdiction- and vertical-specific forms with typed widgets (consent, drug register, incident, pain scale) — never free text where structure is required.
 - [Institutional Compliance Hub](https://hellosalvia.com/products/institutional-compliance-hub): Policy framework linked to forms; every submission is policy-checked pre sign-off, with full audit trail and PDF export themed per clinic.
 
 ## Verticals
 
-- [Veterinary](https://hellosalvia.com/veterinary): RCVS PSS (UK), VCNZ (NZ), AVA Code (AU), CMA September 2026 remedies (UK). Lead beachhead market.
-- [Dental](https://hellosalvia.com/dental): CQC Regulation 17 (UK), GDC Standards, AHPRA Dental Board (AU), ARPANSA radiograph (AU).
-- [General practice](https://hellosalvia.com/general-practice): CQC, AHPRA Medical Board, MCNZ, RACGP, BESTPRACTICE.
-- [Allied health](https://hellosalvia.com/allied-health): CORU (IE), HCPC (UK), AHPRA boards (AU), PBNZ/OTBNZ/OCNZ/CBNZ (NZ), GOsC, GCC. Six disciplines as dedicated pages.
-
-## Allied health disciplines
-
-- [Physiotherapy](https://hellosalvia.com/physiotherapy): CORU (IE), HCPC (UK), AHPRA Physiotherapy Board (AU), PBNZ (NZ), FSBPT (US). Outcome measures (NPRS, ODI, NDI, LEFS).
-- [Osteopathy](https://hellosalvia.com/osteopathy): GOsC (UK), AHPRA Osteopathy Board (AU), OCNZ (NZ). OPS Standard D6 record format.
-- [Chiropractic](https://hellosalvia.com/chiropractic): GCC (UK), AHPRA Chiropractic Board (AU), CBNZ (NZ). GCC Code C3 alignment.
-- [Occupational therapy](https://hellosalvia.com/occupational-therapy): CORU (IE), HCPC (UK), AHPRA OT Board (AU), OTBNZ (NZ), NBCOT (US). Goal-setting + ADL tracking.
-- [Podiatry](https://hellosalvia.com/podiatry): CORU (IE), HCPC (UK), AHPRA Podiatry Board (AU), Podiatrists Board NZ. Wound register + sharps log.
-- [Speech & language therapy](https://hellosalvia.com/speech-therapy): CORU (IE), HCPC (UK), Speech Pathology Australia, NZSTA, ASHA (US).
+- [General practice & clinics](https://hellosalvia.com/general-practice): IMC Ethics 2002 record rules (3-year retention, 72-hour patient copies), NABH / NABH Entry-Level, ABDM/ABHA, Clinical Establishments Act, PC-PNDT, Telemedicine Practice Guidelines 2020.
+- [Dental](https://hellosalvia.com/dental): Dentists Act 1948 / DCI Code of Ethics 2014 records, NABH Entry-Level for dental clinics, consumer-court-defensible charting.
+- [Veterinary](https://hellosalvia.com/veterinary): VCI practice standards, Schedule H1 drug register, structured SOAP records.
+- [Allied health](https://hellosalvia.com/allied-health): Physiotherapy, osteopathy, chiropractic, occupational therapy, podiatry, speech therapy — structured outcome measures and session records. Six disciplines as dedicated pages.
 
 ## Core pages
 
 - [Home](https://hellosalvia.com/)
-- [Pricing](https://hellosalvia.com/pricing): Two tiers — Practice (1-3 clinicians) and Pro (4-7). Five markets: US, NZ, AU, UK, Europe. No solo tier. Group/Enterprise above Pro.
-- [Frameworks](https://hellosalvia.com/frameworks): Public catalog of every regulatory framework Salvia generates records against. Filter by country, vertical, discipline. Currently 40+ frameworks across 5 countries.
-- [Contact sales](https://hellosalvia.com/contact-sales)
+- [Pricing](https://hellosalvia.com/pricing): India pricing in INR, per-clinic (not per-seat), AI included on every tier. Starter ₹1,000/mo (400 AI notes), Clinic ₹3,000/mo (1,500 notes), Group ₹6,000/mo (3,000 notes, multi-location); annual = 2 months free; hospitals and high-volume on custom quotes. Excl. GST 18%.
+- [Frameworks](https://hellosalvia.com/frameworks): Public catalog of every regulatory framework Salvia generates records against — Indian frameworks first, filterable by country and vertical.
 - [Early access signup](https://hellosalvia.com/start)
 
 ## Regulatory frameworks supported
 
 Salvia ships a hand-curated regulatory framework pack per clinic context (country + vertical + discipline). The pack splices into every AI form-gen prompt automatically.
 
-- Ireland: CORU (Physiotherapists, OT, Podiatry, SLT registration boards).
-- UK: RCVS PSS, CMA Remedies, VMR, CQC Reg 17, GDC, HCPC, GOsC, GCC.
-- Australia: AHPRA Boards (Vet, Medical, Dental, Physiotherapy, OT, Osteopathy, Chiropractic, Podiatry), ARPANSA, AVA, SPA.
-- New Zealand: VCNZ, NZDA, MCNZ, BESTPRACTICE, PBNZ, OTBNZ, OCNZ, CBNZ, Podiatrists Board, NZSTA.
-- United States: AVMA, AAHA, ADA CDT, FSBPT, NBCOT, NBCE, APMA, ASHA, HIPAA.
-- Cross-cutting: GDPR (EU/UK), ISO 27001.
+- India: IMC/NMC Ethics Regulations 2002 (records + 72-hour access), NABH, NABH Entry-Level (SHCO), ABDM/ABHA, DPDP Act 2023, Clinical Establishments Act 2010, Consumer Protection Act 2019, Schedule H1 register, PC-PNDT, Telemedicine Practice Guidelines 2020, VCI, DCI Code of Ethics.
+- International catalog: UK (RCVS PSS, CMA Remedies, VMR, CQC Reg 17, GDC, HCPC, GOsC, GCC), Australia (AHPRA boards, ARPANSA, AVA), New Zealand (VCNZ, NZDA, MCNZ, PBNZ, OTBNZ, OCNZ, CBNZ, NZSTA), United States (AVMA, AAHA, ADA CDT, FSBPT, NBCOT, ASHA, HIPAA), Ireland (CORU boards), cross-cutting GDPR and ISO 27001.
+
+## Blog — India compliance
+
+- [AI medical scribe pricing in India](https://hellosalvia.com/blog/ai-scribe-pricing-india): What AI documentation actually costs in 2026, in rupees.
+- [Consumer court cases and thin records](https://hellosalvia.com/blog/consumer-court-records): Consumer Protection Act 2019, burden of proof, defensible records.
+- [Patient access to hospital files](https://hellosalvia.com/blog/patient-records-access-india): The 72-hour rule, RTI route, complete-file contents.
+- [NABH Entry-Level for small clinics](https://hellosalvia.com/blog/nabh-small-clinic-worth-it): Costs, incentives, and whether it's worth it.
+- [Is ABDM/ABHA mandatory?](https://hellosalvia.com/blog/abdm-mandatory-clinic): Voluntary on paper, mandatory in practice.
+- [AI scribes in Hindi and Malayalam](https://hellosalvia.com/blog/ai-scribe-indian-languages): Code-mixed dictation and where English-first tools break.
 
 ## Blog — practice operations
 
 - [Pajama time](https://hellosalvia.com/blog/pajama-time): After-hours documentation burden.
 - [Informed refusal](https://hellosalvia.com/blog/informed-refusal): Documenting declined treatment.
-- [AI and clinical-legal risk](https://hellosalvia.com/blog/ai-legal): Human-in-loop documentation safety.
 - [The stranger rule](https://hellosalvia.com/blog/stranger-rule): Records readable by clinicians who weren't there.
-- [Audit trail](https://hellosalvia.com/blog/audit-trail): What an inspector actually checks.
 - [Difficult patients](https://hellosalvia.com/blog/difficult-patients): Defensible documentation under conflict.
-- [Pediatric records](https://hellosalvia.com/blog/pediatric-records).
-
-## Blog — veterinary
-
-- [Vet TPR capture](https://hellosalvia.com/blog/vet-tpr)
-- [Copy-paste in vet records](https://hellosalvia.com/blog/copy-paste-vet)
-- [EMR crash recovery](https://hellosalvia.com/blog/emr-crash-vet)
-- [AI in vet legal context](https://hellosalvia.com/blog/ai-vet-legal)
-- [Vet audit prep](https://hellosalvia.com/blog/vet-audit-prep)
-- [Record retention](https://hellosalvia.com/blog/retention-vet)
-- [Clinical logic in vet records](https://hellosalvia.com/blog/logic-vet)
-- [CMA vet deadline (UK)](https://hellosalvia.com/blog/cma-vet-deadline)
-- [RCVS record inspection (UK)](https://hellosalvia.com/blog/rcvs-record-inspection)
-- [AU vet board records](https://hellosalvia.com/blog/au-vet-board-records)
-- [VCNZ records standard (NZ)](https://hellosalvia.com/blog/vcnz-records-standard)
+- [Pediatric records](https://hellosalvia.com/blog/pediatric-records): Minors, confidentiality, and the chart.
+- [EMR crash recovery](https://hellosalvia.com/blog/emr-crash-vet): Charting through downtime.
+- [Audit prep](https://hellosalvia.com/blog/vet-audit-prep): What an inspector actually checks.
 
 ## Blog — dental
 
-- [Dental malpractice](https://hellosalvia.com/blog/malpractice-dental)
+- [Dental malpractice charting](https://hellosalvia.com/blog/malpractice-dental)
 - [Oral photography](https://hellosalvia.com/blog/oral-photography)
-- [Signed edits in dental records](https://hellosalvia.com/blog/signed-edits-dental)
-- [Teledentistry standards](https://hellosalvia.com/blog/teledentistry-standards)
 - [Manual dental record risk](https://hellosalvia.com/blog/manual-dental-risk)
 - [Surgical prep documentation](https://hellosalvia.com/blog/surgical-prep-dental)
-- [CQC dental 2026 (UK)](https://hellosalvia.com/blog/cqc-dental-2026)
-- [AHPRA dental records (AU)](https://hellosalvia.com/blog/ahpra-dental-records)
 
 ## Optional
 
