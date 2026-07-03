@@ -14,16 +14,29 @@ export const content = (
 
     <h3>What the patient is entitled to</h3>
     <p>
-      Under the Indian Medical Council (Professional Conduct) Regulations, 2002 — now carried forward
-      under the National Medical Commission — a doctor must maintain the indoor record and provide a
-      copy of the case record to the patient or an authorised attendant <strong>within 72 hours</strong>
-      of a request. This is not a courtesy. Failing to hand over records is itself treated as a
-      deficiency in service and, in front of a consumer commission, it reads as concealment.
+      The operative rule is <strong>Regulation 1.3.2</strong> of the Indian Medical Council
+      (Professional Conduct, Etiquette and Ethics) Regulations, 2002. It says that if a request is
+      made for medical records by the patient, an authorised attendant, or legal authorities, the
+      documents "shall be issued within the period of 72 hours." A companion rule,{' '}
+      <strong>Regulation 1.3.1</strong>, requires the physician to keep indoor-patient records for
+      three years from the start of treatment in the standard proforma. Withholding the file is not a
+      neutral delay — under Regulation 7.2 it is professional misconduct, and in front of a consumer
+      commission it reads as concealment.
+    </p>
+    <p>
+      One caveat worth being precise about: these regulations bind the registered medical
+      practitioner, not the hospital as an institution. Institution-level duties come from the{' '}
+      Clinical Establishments Act (in states that have adopted it) and from consumer case law. And
+      although the NMC notified new Registered Medical Practitioner regulations in 2023, they were
+      kept in abeyance days later, so the 2002 code — and its 72-hour rule — is still what applies in
+      2026.
     </p>
     <p>
       For a government facility, the Right to Information Act adds a second route: records held by a
       public hospital are information a citizen can formally demand. Between the NMC regulation and the
-      RTI Act, "we don't give files" is not a position a clinic can defend.
+      RTI Act, "we don't give files" is not a position a clinic can defend. If the file is thin, that
+      is a separate and larger problem — one we covered in{' '}
+      <a href="/blog/consumer-court-records">what happens when your records aren't there</a>.
     </p>
 
     <h3>What "the full file" means</h3>
@@ -57,7 +70,7 @@ export const content = (
       assembled in real time. A records request becomes a download, not a crisis.
     </p>
 
-    <h3>The deeper point</h3>
+    <h3>A records request is not an attack</h3>
     <p>
       A patient asking for their own file is not an attack. It becomes one only when the clinic treats
       a legal right as a negotiation. Give people their records cleanly and quickly, and most disputes
