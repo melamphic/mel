@@ -103,18 +103,18 @@ export const AlliedHealthPage = () => {
 
       {/* Hero */}
       <section style={{ padding: '11rem 0 7rem', backgroundColor: 'var(--salvia-bg)' }}>
-        <div className="container" style={{ maxWidth: '1000px', textAlign: 'center' }}>
+        <div className="container" style={{ maxWidth: '960px', textAlign: 'center' }}>
           <div style={{
             display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
             backgroundColor: ACCENT_SOFT, border: `1.5px solid ${ACCENT}33`,
-            borderRadius: '10px', padding: '0.35rem 0.85rem', marginBottom: '2rem',
+            borderRadius: 'var(--radius-md)', padding: '0.35rem 0.85rem', marginBottom: '2rem',
           }}>
-            <span style={{ fontSize: '0.75rem', fontWeight: 800, color: ACCENT, letterSpacing: '0.1em', textTransform: 'uppercase' }}>
+            <span style={{ fontSize: 'var(--text-xs)', fontWeight: 800, color: ACCENT, letterSpacing: '0.1em', textTransform: 'uppercase' }}>
               Allied Health
             </span>
           </div>
           <h1 style={{
-            fontSize: 'clamp(2.8rem, 7vw, 5rem)', fontWeight: 900,
+            fontSize: 'var(--text-display)', fontWeight: 800,
             letterSpacing: '-0.04em', lineHeight: 1,
             color: 'var(--salvia-primary)', marginBottom: '1.75rem',
           }}>
@@ -131,8 +131,8 @@ export const AlliedHealthPage = () => {
             <Link to="/start" style={{
               display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
               backgroundColor: 'var(--salvia-accent)', color: '#fff',
-              padding: '0.85rem 1.75rem', borderRadius: '12px',
-              fontWeight: 700, fontSize: '0.95rem', textDecoration: 'none',
+              padding: '0.85rem 1.75rem', borderRadius: 'var(--radius-md)',
+              fontWeight: 700, fontSize: 'var(--text-base)', textDecoration: 'none',
             }}>
               Book a demo
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
@@ -143,9 +143,9 @@ export const AlliedHealthPage = () => {
             <Link to="/pricing" style={{
               display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
               backgroundColor: 'transparent', color: 'var(--salvia-primary)',
-              padding: '0.85rem 1.75rem', borderRadius: '12px',
-              fontWeight: 700, fontSize: '0.95rem', textDecoration: 'none',
-              border: '1.5px solid rgba(15,23,42,0.15)',
+              padding: '0.85rem 1.75rem', borderRadius: 'var(--radius-md)',
+              fontWeight: 700, fontSize: 'var(--text-base)', textDecoration: 'none',
+              border: '1.5px solid var(--border-strong)',
             }}>
               See pricing
             </Link>
@@ -154,23 +154,20 @@ export const AlliedHealthPage = () => {
       </section>
 
       {/* Discipline grid */}
-      <section style={{ borderTop: '1px solid #F1F5F9', padding: '6rem 0', backgroundColor: '#fff' }}>
-        <div className="container" style={{ maxWidth: '1100px' }}>
+      <section style={{ borderTop: '1px solid var(--border-subtle)', padding: 'var(--section-pad) 0', backgroundColor: '#fff' }}>
+        <div className="container" style={{ maxWidth: '1200px' }}>
           <div style={{ textAlign: 'center', marginBottom: '3.5rem' }}>
-            <div style={{
-              fontSize: '0.72rem', fontWeight: 800, color: ACCENT,
-              letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: '0.75rem',
-            }}>
+            <div className="eyebrow" style={{ color: ACCENT, marginBottom: '0.75rem' }}>
               Six disciplines, one product
             </div>
             <h2 style={{
-              fontSize: 'clamp(1.8rem, 4vw, 2.6rem)', fontWeight: 800,
+              fontSize: 'var(--text-3xl)', fontWeight: 800,
               color: 'var(--salvia-primary)', letterSpacing: '-0.03em', margin: 0,
             }}>
               Find your discipline.
             </h2>
             <p style={{
-              color: 'var(--salvia-text-muted)', fontSize: '1rem',
+              color: 'var(--salvia-text-muted)', fontSize: 'var(--text-base)',
               maxWidth: '620px', margin: '0.75rem auto 0', lineHeight: 1.65,
             }}>
               Each page covers the regulator pack, record format, and FAQ specific to your work.
@@ -191,33 +188,29 @@ export const AlliedHealthPage = () => {
               >
                 <div style={{
                   padding: '2rem',
-                  borderRadius: '20px',
-                  border: '1px solid #EEF2F6',
+                  borderRadius: 'var(--radius-lg)',
+                  border: '1px solid var(--border-subtle)',
                   backgroundColor: '#FAFBFC',
                   height: '100%',
                   display: 'flex', flexDirection: 'column', gap: '1rem',
                   transition: 'all 0.2s ease',
                 }}>
                   <div style={{
-                    width: '46px', height: '46px', borderRadius: '14px',
+                    width: '46px', height: '46px', borderRadius: 'var(--radius-md)',
                     backgroundColor: d.accentSoft,
                     color: d.accent,
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    fontWeight: 900, fontSize: '1.05rem',
+                    fontWeight: 800, fontSize: 'var(--text-md)',
                     letterSpacing: '-0.02em',
                   }}>
                     {d.shortName.slice(0, 2).toUpperCase()}
                   </div>
                   <div>
-                    <div style={{
-                      fontSize: '0.65rem', fontWeight: 800, color: d.accent,
-                      letterSpacing: '0.1em', textTransform: 'uppercase',
-                      marginBottom: '0.35rem',
-                    }}>
+                    <div className="eyebrow" style={{ color: d.accent, marginBottom: '0.35rem' }}>
                       Salvia for
                     </div>
                     <h3 style={{
-                      fontSize: '1.15rem', fontWeight: 800,
+                      fontSize: 'var(--text-md)', fontWeight: 800,
                       color: 'var(--salvia-primary)', letterSpacing: '-0.02em',
                       margin: '0 0 0.5rem',
                     }}>
@@ -229,11 +222,11 @@ export const AlliedHealthPage = () => {
                     }}>
                       {d.regulators.slice(0, 4).map((r) => (
                         <span key={`${d.slug}-${r.body}`} style={{
-                          fontSize: '0.62rem', fontWeight: 800,
-                          padding: '0.15rem 0.5rem', borderRadius: '5px',
+                          fontSize: 'var(--text-2xs)', fontWeight: 800,
+                          padding: '0.15rem 0.5rem', borderRadius: 'var(--radius-sm)',
                           backgroundColor: '#fff',
                           color: r.color,
-                          border: '1px solid #EEF2F6',
+                          border: '1px solid var(--border-subtle)',
                           letterSpacing: '0.04em',
                         }}>{r.body}</span>
                       ))}
@@ -241,7 +234,7 @@ export const AlliedHealthPage = () => {
                   </div>
                   <div style={{
                     marginTop: 'auto',
-                    fontSize: '0.82rem', fontWeight: 700, color: d.accent,
+                    fontSize: 'var(--text-xs)', fontWeight: 700, color: d.accent,
                     display: 'inline-flex', alignItems: 'center', gap: '0.35rem',
                   }}>
                     {d.name.replace(' & Language Therapy', '')} page
@@ -267,23 +260,20 @@ export const AlliedHealthPage = () => {
       />
 
       {/* Country frameworks grid */}
-      <section style={{ padding: '7rem 0', backgroundColor: 'var(--salvia-bg)', borderTop: '1px solid #F1F5F9' }}>
-        <div className="container" style={{ maxWidth: '1100px' }}>
+      <section style={{ padding: 'var(--section-pad) 0', backgroundColor: 'var(--salvia-bg)', borderTop: '1px solid var(--border-subtle)' }}>
+        <div className="container" style={{ maxWidth: '1200px' }}>
           <div style={{ textAlign: 'center', marginBottom: '3.5rem' }}>
-            <div style={{
-              fontSize: '0.72rem', fontWeight: 800, color: ACCENT,
-              letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: '0.75rem',
-            }}>
+            <div className="eyebrow" style={{ color: ACCENT, marginBottom: '0.75rem' }}>
               Built for your country's frameworks
             </div>
             <h2 style={{
-              fontSize: 'clamp(1.8rem, 4vw, 2.6rem)', fontWeight: 800,
+              fontSize: 'var(--text-3xl)', fontWeight: 800,
               color: 'var(--salvia-primary)', letterSpacing: '-0.03em', margin: 0,
             }}>
               One product, every framework that governs you.
             </h2>
             <p style={{
-              color: 'var(--salvia-text-muted)', fontSize: '1rem',
+              color: 'var(--salvia-text-muted)', fontSize: 'var(--text-base)',
               maxWidth: '600px', margin: '0.75rem auto 0', lineHeight: 1.65,
             }}>
               The AI loads your regulator's record-keeping pack into every generation. You see which framework is active, and you can adjust the set in settings.
@@ -298,25 +288,20 @@ export const AlliedHealthPage = () => {
             {COUNTRY_GROUPS.map((c) => (
               <div key={c.code} style={{
                 padding: '1.75rem',
-                borderRadius: '18px',
+                borderRadius: 'var(--radius-lg)',
                 backgroundColor: '#fff',
-                border: '1px solid #EEF2F6',
+                border: '1px solid var(--border-subtle)',
               }}>
                 <div style={{
                   display: 'flex', alignItems: 'center',
                   justifyContent: 'space-between', marginBottom: '1rem',
                 }}>
                   <div>
-                    <div style={{
-                      fontSize: '0.62rem', fontWeight: 800,
-                      color: 'var(--salvia-text-muted)',
-                      letterSpacing: '0.1em', textTransform: 'uppercase',
-                      marginBottom: '0.2rem',
-                    }}>
+                    <div className="eyebrow" style={{ color: 'var(--salvia-text-muted)', marginBottom: '0.2rem' }}>
                       {c.code}
                     </div>
                     <div style={{
-                      fontSize: '1.05rem', fontWeight: 800,
+                      fontSize: 'var(--text-md)', fontWeight: 800,
                       color: 'var(--salvia-primary)',
                       letterSpacing: '-0.02em',
                     }}>
@@ -327,14 +312,14 @@ export const AlliedHealthPage = () => {
                     width: '32px', height: '32px', borderRadius: '50%',
                     backgroundColor: `${c.accent}15`,
                     color: c.accent,
-                    fontSize: '0.85rem', fontWeight: 900,
+                    fontSize: 'var(--text-sm)', fontWeight: 800,
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
                   }}>
                     {c.code}
                   </div>
                 </div>
                 <p style={{
-                  fontSize: '0.82rem', color: 'var(--salvia-text)',
+                  fontSize: 'var(--text-xs)', color: 'var(--salvia-text)',
                   lineHeight: 1.55, marginBottom: '1rem', margin: '0 0 1rem',
                 }}>
                   {c.note}
@@ -350,11 +335,11 @@ export const AlliedHealthPage = () => {
                       .map((r) => r.body)
                   )].map((body) => (
                     <span key={`${c.code}-${body}`} style={{
-                      fontSize: '0.7rem', fontWeight: 800,
-                      padding: '0.25rem 0.55rem', borderRadius: '6px',
+                      fontSize: 'var(--text-2xs)', fontWeight: 800,
+                      padding: '0.25rem 0.55rem', borderRadius: 'var(--radius-sm)',
                       backgroundColor: '#FAFBFC',
                       color: c.accent,
-                      border: '1px solid #EEF2F6',
+                      border: '1px solid var(--border-subtle)',
                       letterSpacing: '0.03em',
                     }}>{body}</span>
                   ))}
@@ -415,24 +400,24 @@ export const AlliedHealthPage = () => {
       />
 
       {/* FAQ */}
-      <section style={{ padding: '7rem 0', backgroundColor: 'var(--salvia-bg)', borderTop: '1px solid #F1F5F9' }}>
+      <section style={{ padding: 'var(--section-pad) 0', backgroundColor: 'var(--salvia-bg)', borderTop: '1px solid var(--border-subtle)' }}>
         <div className="container" style={{ maxWidth: '760px' }}>
           <div style={{ textAlign: 'center', marginBottom: '3.5rem' }}>
-            <div style={{ fontSize: '0.72rem', fontWeight: 800, color: ACCENT, letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>
+            <div className="eyebrow" style={{ color: ACCENT, marginBottom: '0.75rem' }}>
               Common questions
             </div>
-            <h2 style={{ fontSize: 'clamp(1.8rem, 4vw, 2.4rem)', fontWeight: 800, color: 'var(--salvia-primary)', letterSpacing: '-0.03em' }}>
+            <h2 style={{ fontSize: 'var(--text-2xl)', fontWeight: 800, color: 'var(--salvia-primary)', letterSpacing: '-0.03em' }}>
               What allied health practices ask us
             </h2>
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
             {FAQS.map((faq, i) => (
               <div key={i} style={{
-                padding: '1.75rem 2rem', borderRadius: '14px',
-                border: '1px solid #EEF2F6', backgroundColor: '#fff',
+                padding: '1.75rem 2rem', borderRadius: 'var(--radius-md)',
+                border: '1px solid var(--border-subtle)', backgroundColor: '#fff',
               }}>
-                <h3 style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--salvia-primary)', marginBottom: '0.65rem' }}>{faq.q}</h3>
-                <p style={{ fontSize: '0.9rem', color: 'var(--salvia-text-muted)', lineHeight: 1.65, margin: 0 }}>{faq.a}</p>
+                <h3 style={{ fontSize: 'var(--text-base)', fontWeight: 700, color: 'var(--salvia-primary)', marginBottom: '0.65rem' }}>{faq.q}</h3>
+                <p style={{ fontSize: 'var(--text-sm)', color: 'var(--salvia-text-muted)', lineHeight: 1.65, margin: 0 }}>{faq.a}</p>
               </div>
             ))}
           </div>
@@ -440,12 +425,12 @@ export const AlliedHealthPage = () => {
       </section>
 
       {/* CTA */}
-      <section style={{ padding: '7rem 0', backgroundColor: '#fff', borderTop: '1px solid #F1F5F9', textAlign: 'center' }}>
+      <section style={{ padding: 'var(--section-pad) 0', backgroundColor: '#fff', borderTop: '1px solid var(--border-subtle)', textAlign: 'center' }}>
         <div className="container" style={{ maxWidth: '600px' }}>
-          <div style={{ fontSize: '0.72rem', fontWeight: 800, color: ACCENT, letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: '1rem' }}>
+          <div className="eyebrow" style={{ color: ACCENT, marginBottom: '1rem' }}>
             Get started
           </div>
-          <h2 style={{ fontSize: 'clamp(2rem, 5vw, 3rem)', fontWeight: 800, color: 'var(--salvia-primary)', letterSpacing: '-0.03em', marginBottom: '1rem' }}>
+          <h2 style={{ fontSize: 'var(--text-3xl)', fontWeight: 800, color: 'var(--salvia-primary)', letterSpacing: '-0.03em', marginBottom: '1rem' }}>
             Audit-ready records, from day one.
           </h2>
           <p style={{ color: 'var(--salvia-text-muted)', lineHeight: 1.65, marginBottom: '2.5rem' }}>
@@ -454,8 +439,8 @@ export const AlliedHealthPage = () => {
           <Link to="/start" style={{
             display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
             backgroundColor: 'var(--salvia-accent)', color: '#fff',
-            padding: '0.9rem 2rem', borderRadius: '12px',
-            fontWeight: 700, fontSize: '1rem', textDecoration: 'none',
+            padding: '0.9rem 2rem', borderRadius: 'var(--radius-md)',
+            fontWeight: 700, fontSize: 'var(--text-base)', textDecoration: 'none',
           }}>
             Book a demo
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
@@ -475,7 +460,7 @@ export const AlliedHealthPage = () => {
             border-color: ${d.accent}33;
             background-color: ${d.accentSoft};
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(15,23,42,0.05);
+            box-shadow: var(--shadow-2);
           }
         `).join('\n')}
       `}</style>
