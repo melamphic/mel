@@ -10,7 +10,6 @@ import { SixYearTest } from '../components/SixYearTest';
 import { CaptureModes } from '../components/CaptureModes';
 import { DomainSection } from '../components/DomainSection';
 import { FrameworksRail } from '../components/FrameworksRail';
-import { ROICalculator } from '../components/ROICalculator';
 import { LabTeaser } from '../components/LabTeaser';
 import { Footer } from '../components/Footer';
 
@@ -45,8 +44,6 @@ export const LandingPage = () => {
         <DomainSection />
         {/* Your rulebook — frameworks */}
         <FrameworksRail />
-        {/* The payoff — ROI */}
-        <ROICalculator />
         {/* Learn more */}
         <LabTeaser />
       </main>
