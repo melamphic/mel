@@ -21,28 +21,29 @@ const SOURCES: { label: string; url: string }[] = [
 ];
 
 export const SixYearTest: React.FC = () => (
-  <section className="section" style={{ position: 'relative', zIndex: 10 }}>
+  <section id="six-year-test" className="section" style={{ position: 'relative', zIndex: 10 }}>
     <div className="container" style={{ maxWidth: '1000px' }}>
       <div style={{
-        backgroundColor: 'var(--salvia-primary)',
+        backgroundColor: '#fff',
+        border: '1px solid var(--border-subtle)',
         borderRadius: 'var(--radius-xl)',
         padding: 'clamp(2.5rem, 5vw, 4rem)',
-        color: '#fff',
+        boxShadow: 'var(--shadow-2)',
       }}>
-        <span className="eyebrow" style={{ color: 'rgba(255,255,255,0.55)', marginBottom: '1.25rem' }}>
+        <span className="eyebrow" style={{ marginBottom: '1.25rem' }}>
           The 6-year test
         </span>
         <h2 style={{
           fontSize: 'var(--text-3xl)', fontWeight: 800,
           letterSpacing: '-0.03em', lineHeight: 1.12,
-          margin: '0 0 1.25rem', color: '#fff',
+          margin: '0 0 1.25rem', color: 'var(--salvia-primary)',
         }}>
           A complaint from 2020 just arrived.<br />
           The treating doctor left last year.
         </h2>
         <p style={{
           fontSize: 'var(--text-md)', lineHeight: 1.65,
-          color: 'rgba(255,255,255,0.75)', maxWidth: '640px',
+          color: 'var(--salvia-text-muted)', maxWidth: '640px',
           margin: '0 0 2.5rem',
         }}>
           The consumer commission wants the complete file — notes, consents, drug charts, vitals.
@@ -54,14 +55,14 @@ export const SixYearTest: React.FC = () => (
         <div className="syt-grid" style={{
           display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '1.5rem',
           paddingBottom: '2.25rem', marginBottom: '2.25rem',
-          borderBottom: '1px solid rgba(255,255,255,0.12)',
+          borderBottom: '1px solid var(--border-subtle)',
         }}>
           {STATS.map((s) => (
             <div key={s.value}>
-              <div style={{ fontSize: 'var(--text-2xl)', fontWeight: 800, letterSpacing: '-0.03em', color: 'var(--salvia-accent)', lineHeight: 1.1 }}>
+              <div style={{ fontSize: 'var(--text-2xl)', fontWeight: 800, letterSpacing: '-0.03em', color: 'var(--salvia-primary)', lineHeight: 1.1 }}>
                 {s.value}
               </div>
-              <div style={{ fontSize: 'var(--text-xs)', lineHeight: 1.5, color: 'rgba(255,255,255,0.65)', marginTop: '0.5rem' }}>
+              <div style={{ fontSize: 'var(--text-xs)', lineHeight: 1.5, color: 'var(--salvia-text-muted)', marginTop: '0.5rem' }}>
                 {s.label}
               </div>
             </div>
@@ -69,12 +70,13 @@ export const SixYearTest: React.FC = () => (
         </div>
 
         <blockquote style={{
-          margin: '0 0 2rem', padding: 0, border: 'none',
+          margin: '0 0 2rem', padding: '0.25rem 0 0.25rem 1.25rem',
+          borderLeft: '3px solid var(--salvia-accent)',
           fontSize: 'var(--text-lg)', fontWeight: 600, lineHeight: 1.45,
-          color: '#fff', letterSpacing: '-0.01em',
+          color: 'var(--salvia-primary)', letterSpacing: '-0.01em',
         }}>
           "Poor records mean poor defense. No records mean no defense."
-          <cite style={{ display: 'block', fontSize: 'var(--text-xs)', fontWeight: 500, fontStyle: 'normal', color: 'rgba(255,255,255,0.5)', marginTop: '0.6rem' }}>
+          <cite style={{ display: 'block', fontSize: 'var(--text-xs)', fontWeight: 500, fontStyle: 'normal', color: 'var(--salvia-text-muted)', marginTop: '0.6rem' }}>
             — Indian Journal of Urology, on NCDRC medical-negligence case law
           </cite>
         </blockquote>
@@ -93,8 +95,9 @@ export const SixYearTest: React.FC = () => (
           <div style={{ display: 'flex', gap: '0.85rem', flexWrap: 'wrap' }}>
             {SOURCES.map((s) => (
               <a key={s.url} href={s.url} target="_blank" rel="noopener noreferrer" style={{
-                fontSize: 'var(--text-2xs)', color: 'rgba(255,255,255,0.45)',
-                textDecoration: 'underline', textUnderlineOffset: '2px',
+                fontSize: 'var(--text-2xs)', color: 'var(--salvia-text-muted)',
+                textDecoration: 'underline', textDecorationColor: 'rgba(15,23,42,0.2)',
+                textUnderlineOffset: '2px',
               }}>
                 {s.label}
               </a>
