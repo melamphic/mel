@@ -22,6 +22,7 @@ const AlliedHealthPage = lazy(() => import('./pages/AlliedHealthPage').then(m =>
 const AlliedDisciplineTemplate = lazy(() => import('./pages/AlliedDisciplineTemplate').then(m => ({ default: m.AlliedDisciplineTemplate })));
 const FrameworksPage = lazy(() => import('./pages/FrameworksPage').then(m => ({ default: m.FrameworksPage })));
 const LegalPage = lazy(() => import('./pages/LegalPage').then(m => ({ default: m.LegalPage })));
+const MelamphicPage = lazy(() => import('./pages/MelamphicPage').then(m => ({ default: m.MelamphicPage })));
 
 function PageviewTracker() {
   const { pathname, search } = useLocation();
@@ -89,6 +90,7 @@ function App() {
             <Route path="/podiatry" element={<AlliedDisciplineTemplate slug="podiatry" />} />
             <Route path="/speech-therapy" element={<AlliedDisciplineTemplate slug="speech-therapy" />} />
             <Route path="/frameworks" element={<FrameworksPage />} />
+            <Route path="/melamphic" element={<MelamphicPage />} />
             <Route path="/privacy" element={<LegalPage slug="privacy" />} />
             <Route path="/terms" element={<LegalPage slug="terms" />} />
             <Route path="/cookies" element={<LegalPage slug="cookies" />} />

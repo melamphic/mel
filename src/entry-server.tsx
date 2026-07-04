@@ -26,6 +26,7 @@ import { AlliedHealthPage } from './pages/AlliedHealthPage';
 import { AlliedDisciplineTemplate } from './pages/AlliedDisciplineTemplate';
 import { FrameworksPage } from './pages/FrameworksPage';
 import { LegalPage } from './pages/LegalPage';
+import { MelamphicPage } from './pages/MelamphicPage';
 
 function ServerApp({ url }: { url: string }) {
   return (
@@ -54,6 +55,7 @@ function ServerApp({ url }: { url: string }) {
             <Route path="/podiatry" element={<AlliedDisciplineTemplate slug="podiatry" />} />
             <Route path="/speech-therapy" element={<AlliedDisciplineTemplate slug="speech-therapy" />} />
             <Route path="/frameworks" element={<FrameworksPage />} />
+            <Route path="/melamphic" element={<MelamphicPage />} />
             <Route path="/privacy" element={<LegalPage slug="privacy" />} />
             <Route path="/terms" element={<LegalPage slug="terms" />} />
             <Route path="/cookies" element={<LegalPage slug="cookies" />} />

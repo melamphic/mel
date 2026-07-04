@@ -28,6 +28,7 @@ const STATIC_ROUTES = [
   '/contact-sales',
   '/hospitals',
   '/frameworks',
+  '/melamphic',
   '/veterinary',
   '/dental',
   '/general-practice',
@@ -82,6 +83,10 @@ const META = {
   '/hospitals': {
     title: 'Evidence & Compliance Platform for Indian Hospitals | Salvia',
     desc: 'Your HMIS bills and schedules — it was never built to defend you. Salvia sits on top: every consult becomes a clinician-verified, sealed record you can produce when a complaint arrives.',
+  },
+  '/melamphic': {
+    title: 'Melamphic AI Private Limited',
+    desc: 'Melamphic is an applied-AI company for high-stakes, regulated work. Our mission: make trustworthy documentation effortless. Our first product is Salvia.',
   },
   '/veterinary': {
     title: 'Veterinary Compliance Software | Salvia',
