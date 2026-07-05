@@ -456,6 +456,7 @@ html.js .g-rv.g-d4 { transition-delay: .24s; }
 }
 .g-toast small { display: block; font-size: 10.5px; font-weight: 600; color: var(--g-ink-faint); }
 .g-toast .g-toast-ic { width: 30px; height: 30px; border-radius: 9px; background: #ECFDF5; color: #047857; display: flex; align-items: center; justify-content: center; font-size: 14px; flex: none; }
+.g-toast--r .g-toast-ic { background: #FFFBEB; color: #92400E; }
 .g-toast--l { left: 7%; bottom: 18%; transform: rotate(-3deg); }
 .g-toast--r { right: 6%; bottom: 34%; transform: rotate(2.5deg); animation-delay: 1.6s; }
 @keyframes g-toast-bob { 0%,100% { margin-top: 0; } 50% { margin-top: -10px; } }
@@ -513,6 +514,10 @@ html.js .g-rv.g-d4 { transition-delay: .24s; }
 .g-tpl-meta { display: flex; gap: 6px; margin-top: 9px; flex-wrap: wrap; }
 .g-tpl-meta span { font-size: 9.5px; font-weight: 700; border-radius: 999px; padding: 2px 8px; background: #F1F5F9; color: #64748B; }
 .g-tpl-meta .g-tpl-vert { background: #E6F1EE; color: var(--g-green); }
+.g-tpl-vert--vet { background: #EFF6FF; color: #1D4ED8; }
+.g-tpl-vert--dental { background: #FFF1EC; color: #C2410C; }
+.g-tpl-vert--aged { background: #F5F3FF; color: #6D28D9; }
+.g-tpl-vert--allied { background: #FFFBEB; color: #92400E; }
 .g-tpl-count { text-align: center; margin-top: 26px; font-family: var(--g-font); font-size: 13.5px; color: var(--g-ink-faint); font-weight: 600; }
 @media (max-width: 1000px) { .g-tpl-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 560px) { .g-tpl-grid { grid-template-columns: 1fr; } }
@@ -614,7 +619,15 @@ html.js .g-rv.g-d4 { transition-delay: .24s; }
 .g-organic .g-section--muted { background: transparent; }
 .g-organic .g-section--muted::before {
   content: ""; position: absolute; inset: 6% 4%; z-index: 0; border-radius: 50%;
-  background: radial-gradient(55% 55% at 50% 45%, #F0F6F4 0%, rgba(240,246,244,0) 70%);
+  background: radial-gradient(55% 55% at 50% 45%, #FDF3E3 0%, rgba(253,243,227,0) 70%);
+}
+.g-organic #templates::before {
+  content: ""; position: absolute; inset: 8% 6%; z-index: 0; border-radius: 50%;
+  background: radial-gradient(50% 50% at 50% 40%, #EFF4FB 0%, rgba(239,244,251,0) 70%);
+}
+.g-organic #the-document::before {
+  content: ""; position: absolute; inset: 8% 6%; z-index: 0; border-radius: 50%;
+  background: radial-gradient(50% 50% at 50% 45%, #FDF0EC 0%, rgba(253,240,236,0) 70%);
 }
 
 /* film slot overlaps the hero band */

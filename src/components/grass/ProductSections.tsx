@@ -129,6 +129,8 @@ export const PolicyEngineSection: React.FC = () => (
 
 /* ── Template library ─────────────────────────────────────────── */
 
+const VERT_CLASS: Record<string, string> = { Veterinary: 'g-tpl-vert--vet', Dental: 'g-tpl-vert--dental', 'Aged care': 'g-tpl-vert--aged', 'Allied health': 'g-tpl-vert--allied' };
+
 const TEMPLATES: { name: string; vert: string; extra: string }[] = [
   { name: 'Standard SOAP Consultation Record', vert: 'All clinics', extra: '7 fields' },
   { name: 'Controlled Drug Register Entry', vert: 'Veterinary', extra: 'system.drug_op' },
@@ -144,7 +146,7 @@ const TEMPLATES: { name: string; vert: string; extra: string }[] = [
   { name: 'Resident Fall Incident Report', vert: 'Aged care', extra: 'system.incident' },
 ];
 
-const TPL_ICONS = ['/illustrations/form.webp', '/illustrations/policy.webp', '/illustrations/stetho.webp', '/illustrations/mic.webp', '/illustrations/vault.webp', '/illustrations/shield.webp'];
+const TPL_ICONS = ['tpl_soap', 'tpl_cd_register', 'tpl_dental_chart', 'tpl_vaccination', 'tpl_anaesthesia', 'tpl_sharps', 'tpl_work_cert', 'tpl_mar', 'tpl_painad', 'tpl_allied', 'tpl_referral', 'tpl_fall'];
 
 export const TemplateLibrary: React.FC = () => (
   <section className="g-section g-center" id="templates">
@@ -160,10 +162,10 @@ export const TemplateLibrary: React.FC = () => (
       <div className="g-tpl-grid" style={{ textAlign: 'left' }}>
         {TEMPLATES.map((t, i) => (
           <Rv className="g-tpl" key={t.name} delay={(Math.min((i % 4) + 1, 4)) as 1 | 2 | 3 | 4}>
-            <img className="g-tpl-ic" src={TPL_ICONS[i % TPL_ICONS.length]} alt="" loading="lazy" />
+            <img className="g-tpl-ic" src={`/illustrations/${TPL_ICONS[i]}.webp`} alt="" loading="lazy" onError={(e) => (((e.target as HTMLImageElement).style.display = 'none'))} />
             <div className="g-tpl-name">{t.name}</div>
             <div className="g-tpl-meta">
-              <span className="g-tpl-vert">{t.vert}</span>
+              <span className={`g-tpl-vert ${VERT_CLASS[t.vert] ?? ''}`}>{t.vert}</span>
               <span>{t.extra}</span>
             </div>
           </Rv>
