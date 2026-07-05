@@ -36,8 +36,9 @@ export const HospitalsBand: React.FC = () => (
             muted
             loop
             playsInline
-            preload="metadata"
+            preload="auto"
             poster="/illustrations/ill_hospital.webp"
+            onLoadedData={(e) => (e.target as HTMLVideoElement).play().catch(() => {})}
             aria-label="A living miniature hospital campus protected under a glass dome"
             style={{
               width: '88%',

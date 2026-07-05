@@ -61,6 +61,7 @@ export const HeroGrass: React.FC = () => {
               playsInline
               preload="auto"
               poster="/illustrations/hero_world.webp"
+              onLoadedData={(e) => (e.target as HTMLVideoElement).play().catch(() => {})}
               style={{
                 width: '100%',
                 maxWidth: 760,
