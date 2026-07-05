@@ -28,7 +28,6 @@ export const FormBuilderSection: React.FC = () => (
           </Rv>
         </div>
         <Rv className="g-panel-scene" delay={1}>
-          <img className="g-scene-img g-scene-img--bl" src="/illustrations/story_form.webp" alt="" aria-hidden="true" />
           <div className="g-ui g-ui--panel" aria-hidden="true">
           <div className="g-ui-bar">
             <span className="g-ui-bar-title">Form builder — Vaccination Encounter</span>
@@ -86,7 +85,6 @@ export const PolicyEngineSection: React.FC = () => (
     <div className="g-container">
       <div className="g-split">
         <Rv className="g-panel-scene" delay={1} style={{ order: 0 }}>
-          <img className="g-scene-img g-scene-img--br" src="/illustrations/story_policy.webp" alt="" aria-hidden="true" />
           <div className="g-ui g-ui--panel" aria-hidden="true">
           <div className="g-ui-bar">
             <span className="g-ui-bar-title">Policy check — OPD consult</span>
