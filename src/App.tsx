@@ -2,7 +2,6 @@ import { BrowserRouter, Routes, Route, useLocation, Navigate } from 'react-route
 import { useEffect, lazy, Suspense } from 'react';
 import './index.css';
 import { capturePageview } from './lib/posthog';
-import { BackgroundField } from './components/BackgroundField';
 import { CookieConsent } from './components/CookieConsent';
 
 const LandingPage = lazy(() => import('./pages/LandingPage').then(m => ({ default: m.LandingPage })));
@@ -63,7 +62,6 @@ function App() {
       <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', position: 'relative' }}>
 
         {/* Ambient living background: tonal glow mesh + Conway's Game of Life */}
-        <BackgroundField />
 
         <ScrollToTop />
         <PageviewTracker />
