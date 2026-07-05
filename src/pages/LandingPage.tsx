@@ -1,9 +1,9 @@
 import { SEO } from '../components/SEO';
 import { GrassHeader } from '../components/grass/GrassHeader';
 import { HeroGrass } from '../components/grass/HeroGrass';
-import { ScrollStory } from '../components/grass/ScrollStory';
 import { RegisterShowcase } from '../components/grass/RegisterShowcase';
-import { SixYearGrass, ProveIt } from '../components/grass/EvidenceGrass';
+import { FormBuilderSection, PolicyEngineSection, TemplateLibrary, PdfSection } from '../components/grass/ProductSections';
+import { SixYearGrass } from '../components/grass/EvidenceGrass';
 import { HospitalsBand, PricingTeaserGrass, FinalCTAGrass } from '../components/grass/CommercialGrass';
 import { Footer } from '../components/Footer';
 
@@ -20,14 +20,18 @@ export const LandingPage = () => {
       <main style={{ flex: 1, zIndex: 10, background: '#fff' }}>
         {/* Hook + hero illustration + demo film slot */}
         <HeroGrass />
-        {/* The whole system in one scroll: form → policies → speak → sealed */}
-        <ScrollStory />
+        {/* The real form builder */}
+        <FormBuilderSection />
+        {/* The real policy engine */}
+        <PolicyEngineSection />
+        {/* 107 real templates */}
+        <TemplateLibrary />
         {/* Every register, shown as the real product */}
         <RegisterShowcase />
+        {/* The themed PDF with the SHA-256 footer */}
+        <PdfSection />
         {/* The worst-day closer — sourced */}
         <SixYearGrass />
-        {/* Why the record holds up */}
-        <ProveIt />
         {/* Hospitals — HMIS layer */}
         <HospitalsBand />
         {/* Pricing teaser — India note tiers */}

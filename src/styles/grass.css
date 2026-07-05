@@ -461,3 +461,85 @@ html.js .g-rv.g-d4 { transition-delay: .24s; }
 @keyframes g-toast-bob { 0%,100% { margin-top: 0; } 50% { margin-top: -10px; } }
 @media (max-width: 900px) { .g-toast { display: none; } }
 @media (prefers-reduced-motion: reduce) { .g-toast { animation: none; } }
+
+/* ============================================================
+   Real-product sections — builder, policy, templates, PDF
+   ============================================================ */
+/* form builder */
+.g-ui-palette { width: 168px; border-right: 1px solid var(--g-line-soft); background: #fff; padding: 10px; }
+.g-ui-pal-group { font-size: 9px; font-weight: 800; letter-spacing: .08em; color: var(--g-ink-faint); margin: 10px 4px 5px; }
+.g-ui-pal-item { display: flex; align-items: center; gap: 7px; font-size: 11.5px; font-weight: 600; color: var(--g-ink-soft); padding: 5px 7px; border-radius: 7px; }
+.g-ui-pal-item:hover { background: #F8FAFC; }
+.g-ui-pal-item i { width: 6px; height: 6px; border-radius: 2px; background: #CBD5E1; flex: none; }
+.g-ui-pal-item--sys i { background: var(--g-green); }
+.g-ui-canvas { flex: 1; padding: 12px 14px; background: #F8FAFC; }
+.g-ui-canvas-hint { font-size: 10.5px; color: var(--g-ink-faint); font-weight: 600; margin-bottom: 9px; }
+.g-ui-fieldcard { background: #fff; border: 1px solid var(--g-line-soft); border-radius: 9px; padding: 9px 12px; margin-bottom: 7px; display: flex; align-items: center; gap: 9px; }
+.g-ui-fieldcard .g-drag { color: #CBD5E1; font-size: 12px; letter-spacing: 1px; }
+.g-ui-fieldcard .g-fc-label { font-size: 12px; font-weight: 700; }
+.g-ui-fieldcard .g-fc-type { margin-left: auto; font-size: 9.5px; font-weight: 700; color: var(--g-ink-faint); background: #F1F5F9; border-radius: 5px; padding: 2px 7px; }
+.g-ui-fieldcard--sys { border-color: rgba(14,90,79,.35); }
+.g-ui-fieldcard--sys .g-fc-type { background: #E6F1EE; color: var(--g-green); }
+.g-ui-steps { display: flex; align-items: center; gap: 6px; font-size: 10.5px; font-weight: 700; color: var(--g-ink-faint); }
+.g-ui-steps b { color: var(--g-green); }
+.g-ui-steps i { width: 14px; height: 1px; background: var(--g-line); }
+
+/* policy clauses */
+.g-clause { background: #fff; border: 1px solid var(--g-line-soft); border-radius: 10px; padding: 11px 13px; margin-bottom: 8px; }
+.g-clause-head { display: flex; align-items: center; gap: 9px; }
+.g-clause-title { font-size: 12.5px; font-weight: 700; }
+.g-parity { margin-left: auto; font-size: 9.5px; font-weight: 800; border-radius: 999px; padding: 2px 9px; flex: none; }
+.g-parity--high { background: #FEF2F2; color: #B91C1C; }
+.g-parity--med { background: #FFFBEB; color: #92400E; }
+.g-parity--low { background: #EFF6FF; color: #1D4ED8; }
+.g-clause-body { font-size: 11px; color: var(--g-ink-soft); margin-top: 5px; line-height: 1.5; }
+.g-check-row { display: flex; align-items: flex-start; gap: 9px; padding: 8px 10px; border-radius: 8px; font-size: 11.5px; }
+.g-check-row .g-ck-ic { flex: none; width: 15px; height: 15px; border-radius: 50%; margin-top: 1px; }
+.g-check-row--pass .g-ck-ic { background: #047857; }
+.g-check-row--pass .g-ck-ic::after { content: "✓"; color: #fff; font-size: 9px; font-weight: 800; display: flex; justify-content: center; }
+.g-check-row--fail { background: #FEF2F2; }
+.g-check-row--fail .g-ck-ic { background: #B91C1C; }
+.g-check-row--fail .g-ck-ic::after { content: "!"; color: #fff; font-size: 9px; font-weight: 800; display: flex; justify-content: center; }
+.g-check-row b { font-weight: 700; }
+.g-check-row .g-ck-note { color: var(--g-ink-faint); font-size: 10.5px; display: block; margin-top: 1px; }
+.g-override-bar { display: flex; align-items: center; gap: 9px; background: #FEF2F2; color: #B91C1C; font-size: 11px; font-weight: 700; border-radius: 8px; padding: 9px 12px; margin-top: 8px; }
+.g-override-bar span { margin-left: auto; background: #B91C1C; color: #fff; border-radius: 7px; padding: 5px 10px; font-size: 10.5px; }
+
+/* template library */
+.g-tpl-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 40px; }
+.g-tpl { background: #fff; border: 1px solid var(--g-line); border-radius: 12px; padding: 14px 15px; transition: box-shadow .25s ease, transform .25s ease; }
+.g-tpl:hover { box-shadow: var(--g-shadow); transform: translateY(-2px); }
+.g-tpl-name { font-family: var(--g-font); font-size: 13px; font-weight: 700; line-height: 1.35; min-height: 35px; }
+.g-tpl-meta { display: flex; gap: 6px; margin-top: 9px; flex-wrap: wrap; }
+.g-tpl-meta span { font-size: 9.5px; font-weight: 700; border-radius: 999px; padding: 2px 8px; background: #F1F5F9; color: #64748B; }
+.g-tpl-meta .g-tpl-vert { background: #E6F1EE; color: var(--g-green); }
+.g-tpl-count { text-align: center; margin-top: 26px; font-family: var(--g-font); font-size: 13.5px; color: var(--g-ink-faint); font-weight: 600; }
+@media (max-width: 1000px) { .g-tpl-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .g-tpl-grid { grid-template-columns: 1fr; } }
+
+/* PDF page mock */
+.g-pdf { width: min(430px, 100%); margin: 0 auto; background: #fff; border: 1px solid var(--g-line); border-radius: 6px; box-shadow: 0 30px 70px -30px rgba(15,23,42,.35); overflow: hidden; font-family: var(--g-font); }
+.g-pdf-head { background: linear-gradient(135deg, #0E5A4F, #0A4A40); color: #fff; padding: 16px 20px 14px; border-radius: 0 0 40% 0 / 0 0 28px 0; display: flex; align-items: center; gap: 10px; }
+.g-pdf-logo { width: 30px; height: 30px; border-radius: 8px; background: rgba(255,255,255,.16); display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 12px; }
+.g-pdf-clinic { font-size: 12.5px; font-weight: 800; }
+.g-pdf-contact { font-size: 8.5px; opacity: .75; }
+.g-pdf-eyebrow { margin-left: auto; text-align: right; }
+.g-pdf-eyebrow small { display: block; font-size: 7.5px; letter-spacing: .1em; text-transform: uppercase; opacity: .7; font-weight: 800; }
+.g-pdf-eyebrow b { font-size: 10px; font-weight: 800; }
+.g-pdf-body { padding: 14px 20px 12px; }
+.g-pdf-idcard { display: flex; align-items: center; gap: 9px; border: 1px solid var(--g-line-soft); border-radius: 8px; padding: 8px 11px; margin-bottom: 11px; }
+.g-pdf-idcard .g-ui-avatar { width: 26px; height: 26px; font-size: 10px; }
+.g-pdf-id-name { font-size: 11px; font-weight: 800; }
+.g-pdf-id-meta { font-size: 8.5px; color: var(--g-ink-faint); }
+.g-pdf-row { display: flex; justify-content: space-between; font-size: 9.5px; padding: 5px 0; border-bottom: 1px dotted var(--g-line-soft); }
+.g-pdf-row span { color: var(--g-ink-faint); font-weight: 600; }
+.g-pdf-row b { font-weight: 700; }
+.g-pdf-syscard { border: 1px solid rgba(14,90,79,.3); border-radius: 8px; padding: 8px 11px; margin: 10px 0; }
+.g-pdf-syscard small { display: block; font-size: 7.5px; letter-spacing: .09em; text-transform: uppercase; color: var(--g-green); font-weight: 800; margin-bottom: 3px; }
+.g-pdf-syscard .g-pdf-sys-line { font-size: 10px; font-weight: 700; display: flex; align-items: center; gap: 7px; }
+.g-pdf-syscard .g-ui-tag { margin-left: auto; }
+.g-pdf-sig { display: flex; justify-content: space-between; align-items: flex-end; margin-top: 12px; padding-top: 9px; border-top: 1px solid var(--g-line-soft); }
+.g-pdf-sig-line { font-size: 8.5px; color: var(--g-ink-faint); font-weight: 600; }
+.g-pdf-sig-line b { display: block; font-size: 10.5px; color: var(--g-ink); }
+.g-pdf-foot { display: flex; justify-content: space-between; gap: 8px; background: #F8FAFC; border-top: 1px solid var(--g-line-soft); padding: 7px 20px; font-size: 7.5px; color: var(--g-ink-faint); font-weight: 600; }
+.g-pdf-foot code { font-family: ui-monospace, monospace; font-size: 7.5px; color: var(--g-ink-soft); }

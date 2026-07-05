@@ -9,7 +9,8 @@ const Workspace: React.FC = () => (
     <div className="g-ui-bar">
       <i className="g-ui-dot" /><i className="g-ui-dot" /><i className="g-ui-dot" />
       <span className="g-ui-bar-title">Salvia — Note review</span>
-      <span className="g-ui-bar-pill">Draft</span>
+      <span className="g-ui-tag" style={{ marginLeft: "auto" }}>87% aligned</span>
+      <span className="g-ui-bar-pill" style={{ marginLeft: 8 }}>Draft</span>
     </div>
     <div className="g-ui-body">
       <div className="g-ui-side">
@@ -68,7 +69,7 @@ const Workspace: React.FC = () => (
             </svg>
             Policy check passed · NABH consult record
           </span>
-          <span className="g-ui-sign">Sign &amp; seal</span>
+          <span className="g-ui-sign">Submit</span>
         </div>
       </div>
     </div>
