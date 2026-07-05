@@ -644,3 +644,22 @@ html.js .g-rv.g-d4 { transition-delay: .24s; }
 .g-organic .g-sprite--amb2 { top: 52%; left: 5%; animation-delay: 5s; animation-duration: 17s; }
 .g-organic .g-sprite--amb3 { top: 78%; right: 9%; animation-delay: 9s; }
 @media (prefers-reduced-motion: reduce) { .g-thread path { stroke-dashoffset: 0; } .g-organic .g-sprite--amb { animation: none; opacity: .5; } }
+
+/* ============================================================
+   super.money-style color-block trio — product inside color
+   ============================================================ */
+.g-trio { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 54px; }
+.g-block { border-radius: 26px; padding: 34px 30px 0; overflow: hidden; display: flex; flex-direction: column; min-height: 480px; }
+.g-block h3 { font-family: var(--g-font); font-weight: 800; font-size: 25px; letter-spacing: -0.02em; margin-bottom: 8px; }
+.g-block > p { font-family: var(--g-font); font-size: 14.5px; line-height: 1.55; margin-bottom: 22px; }
+.g-block--teal { background: #0E5A4F; }
+.g-block--teal h3 { color: #fff; }
+.g-block--teal > p { color: rgba(255,255,255,.78); }
+.g-block--lime { background: #C9F27D; }
+.g-block--lime h3 { color: #14351F; }
+.g-block--lime > p { color: #2C5237; }
+.g-block--gold { background: #F7C45E; }
+.g-block--gold h3 { color: #4A3308; }
+.g-block--gold > p { color: #6B4E14; }
+.g-block-app { margin-top: auto; background: #fff; border-radius: 18px 18px 0 0; box-shadow: 0 -14px 40px -18px rgba(15,23,42,.35); padding: 16px 16px 20px; width: 86%; align-self: center; }
+@media (max-width: 940px) { .g-trio { grid-template-columns: 1fr; } .g-block { min-height: 420px; } }
