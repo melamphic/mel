@@ -678,7 +678,7 @@ html.js .g-rv.g-d4 { transition-delay: .24s; }
 .g-stage .g-stage-copy .g-h1 { font-size: clamp(46px, 6.6vw, 96px); }
 
 /* six-year test — deep teal act block (trio-approved language) */
-#six-year-test { margin: 0 16px; border-radius: 26px; background: #48CD5F; }
+#six-year-test { margin: 0 16px; border-radius: 26px; background: linear-gradient(160deg, #EAF9EE 0%, #F3FBEE 55%, #FDF6E6 100%); }
 #six-year-test .g-h2, #six-year-test .g-quote p, #six-year-test .g-giant .g-n, #six-year-test .g-giant .g-c { color: #083D1B; }
 #six-year-test .g-sub { color: #14652E; }
 #six-year-test .g-sub b, #six-year-test .g-sub em { color: #083D1B; }
