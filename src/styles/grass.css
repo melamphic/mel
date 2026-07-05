@@ -690,3 +690,23 @@ html.js .g-rv.g-d4 { transition-delay: .24s; }
 #six-year-test .g-giant .g-s, #six-year-test .g-quote span { color: rgba(255,255,255,.55); }
 #six-year-test .g-srcs a { color: rgba(255,255,255,.6); text-decoration-color: rgba(255,255,255,.3); }
 #six-year-test .g-srcs a:first-child { color: #C9F27D; }
+
+/* realness pass on drawn UI */
+.g-ui-evidence { font-size: 10.5px; color: var(--g-ink-faint); font-style: italic; padding: 2px 0 6px 114px; }
+.g-ui-conf--med { background: #FDF0E7; color: #B45309; }
+.g-ui-glyph { font-size: 10px; font-weight: 800; margin-right: 4px; }
+.g-ui-badge-edited { font-size: 9px; font-weight: 800; background: #EFF6FF; color: #1D4ED8; border-radius: 5px; padding: 2px 6px; margin-left: 6px; }
+#products .g-showcase { position: relative; }
+#products .g-scene-corner { position: absolute; width: 150px; bottom: -50px; right: -40px; z-index: 3; transform: rotate(3deg); filter: drop-shadow(0 14px 26px rgba(15,23,42,.18)); }
+@media (max-width: 900px) { #products .g-scene-corner { display: none; } }
+
+/* six-year test fits one viewport */
+#six-year-test { padding: 56px 0 48px; }
+#six-year-test .g-h2 { font-size: clamp(26px, 3vw, 40px); }
+#six-year-test .g-stats { margin-top: 30px; }
+#six-year-test .g-stat { padding-top: 18px; }
+#six-year-test .g-giant { margin-top: 36px; }
+#six-year-test .g-giant .g-n { font-size: clamp(72px, 9vw, 130px); }
+#six-year-test .g-quote { margin-top: 32px; }
+#six-year-test .g-quote p { font-size: clamp(17px, 1.8vw, 24px); }
+#six-year-test .g-srcs { margin-top: 20px; }

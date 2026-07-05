@@ -23,12 +23,13 @@ const OPDNote: React.FC = () => (
       <div className="g-ui-field">
         <span className="g-ui-f-label">Vitals</span>
         <span className="g-ui-f-value">BP 130/85 · Temp 99.8°F · PR 88</span>
-        <span className="g-ui-conf">AI · 97%</span>
+        <span className="g-ui-conf"><span className="g-ui-glyph">=</span>AI · 97%</span>
       </div>
+      <div className="g-ui-evidence">"…BP ek sau tees by pichaasi… bukhaar 99.8…"</div>
       <div className="g-ui-field">
         <span className="g-ui-f-label">Examination</span>
-        <span className="g-ui-f-value">Throat congestion, no organomegaly</span>
-        <span className="g-ui-conf">AI · 95%</span>
+        <span className="g-ui-f-value">Throat congestion, no organomegaly<span className="g-ui-badge-edited">EDITED</span></span>
+        <span className="g-ui-conf g-ui-conf--med"><span className="g-ui-glyph">≈</span>AI · 71%</span>
       </div>
       <div className="g-ui-field">
         <span className="g-ui-f-label">Rx</span>
@@ -204,6 +205,7 @@ export const RegisterShowcase: React.FC = () => {
             ))}
           </div>
           <div className="g-showcase">
+            <img className="g-scene-corner" src="/illustrations/ill_verify.webp" alt="" aria-hidden="true" />
             <div className="g-showcase-inner" key={active.key}>
               {active.el}
             </div>
