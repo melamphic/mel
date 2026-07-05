@@ -7,7 +7,7 @@ import { SixYearGrass } from '../components/grass/EvidenceGrass';
 import { HospitalsBand, PricingTeaserGrass, FinalCTAGrass } from '../components/grass/CommercialGrass';
 import { ColorTrio } from '../components/grass/ColorTrio';
 import { OrganicWrap } from '../components/grass/OrganicWrap';
-import { Footer } from '../components/Footer';
+import { GrassFooter } from '../components/grass/GrassFooter';
 
 export const LandingPage = () => {
   return (
@@ -45,7 +45,7 @@ export const LandingPage = () => {
         {/* Final CTA */}
         <FinalCTAGrass />
       </main>
-      <Footer />
+      <GrassFooter />
     </>
   );
 };
