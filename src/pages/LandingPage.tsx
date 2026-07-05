@@ -1,8 +1,8 @@
 import { SEO } from '../components/SEO';
 import { GrassHeader } from '../components/grass/GrassHeader';
 import { HeroGrass } from '../components/grass/HeroGrass';
-import { RegistersGrid } from '../components/grass/HowRegisters';
 import { ScrollStory } from '../components/grass/ScrollStory';
+import { RegisterShowcase } from '../components/grass/RegisterShowcase';
 import { SixYearGrass, ProveIt } from '../components/grass/EvidenceGrass';
 import { HospitalsBand, PricingTeaserGrass, FinalCTAGrass } from '../components/grass/CommercialGrass';
 import { Footer } from '../components/Footer';
@@ -22,8 +22,8 @@ export const LandingPage = () => {
         <HeroGrass />
         {/* The whole system in one scroll: form → policies → speak → sealed */}
         <ScrollStory />
-        {/* Every register the clinic answers for */}
-        <RegistersGrid />
+        {/* Every register, shown as the real product */}
+        <RegisterShowcase />
         {/* The worst-day closer — sourced */}
         <SixYearGrass />
         {/* Why the record holds up */}
