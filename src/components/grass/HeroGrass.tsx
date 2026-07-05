@@ -9,7 +9,7 @@ export const HeroGrass: React.FC = () => (
       <h1 className="g-h1">
         Every consult,
         <br />
-        on the record.
+        <span className="g-hl">on the record.</span>
       </h1>
       <p className="g-sub">
         Salvia listens — <b>ambient in the OPD</b> or a short <b>voice note</b> after the

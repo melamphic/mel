@@ -10,7 +10,7 @@ export const HospitalsBand: React.FC = () => (
       <div className="g-split">
         <div>
           <Rv as="h2" className="g-h2">
-            Your HMIS runs the hospital. Salvia defends it.
+            Your HMIS runs the hospital. <span className="g-hl">Salvia defends it.</span>
           </Rv>
           <Rv as="p" className="g-sub" delay={1}>
             Not another system to migrate to. Salvia sits on top of what you have and captures
@@ -53,7 +53,7 @@ export const PricingTeaserGrass: React.FC = () => (
   <section className="g-section g-center" id="pricing-teaser">
     <div className="g-container">
       <Rv as="h2" className="g-h2">
-        Priced per note. Not per doctor.
+        Priced per note. <span className="g-hl">Not per doctor.</span>
       </Rv>
       <Rv as="p" className="g-sub" delay={1}>
         The AI is on every plan. Unlimited staff, always — you pay only for the notes you

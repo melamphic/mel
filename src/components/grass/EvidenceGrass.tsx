@@ -80,7 +80,7 @@ export const ProveIt: React.FC = () => (
       <div className="g-split">
         <div>
           <Rv as="h2" className="g-h2">
-            Built for the day someone asks: "prove it."
+            Built for the day someone asks: <span className="g-hl">"prove it."</span>
           </Rv>
           <Rv as="p" className="g-sub" delay={1}>
             A regulator, an insurer, a consumer court, an NABH assessor. A Salvia record

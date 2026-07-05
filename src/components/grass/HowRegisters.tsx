@@ -9,7 +9,7 @@ export const HowItWorksGrass: React.FC = () => (
   <section className="g-section g-center" id="how-it-works">
     <div className="g-container">
       <Rv as="h2" className="g-h2">
-        You talk. It becomes the record.
+        You talk. It becomes <span className="g-hl">the record.</span>
       </Rv>
       <Rv as="p" className="g-sub" delay={1}>
         No new habits, no typing after hours. Salvia fits the way Indian clinics and wards
@@ -58,7 +58,7 @@ export const RegistersGrid: React.FC = () => (
   <section className="g-section" id="products">
     <div className="g-container">
       <Rv as="h2" className="g-h2">
-        The paperwork that can sink you. Handled.
+        The paperwork that can sink you. <span className="g-hl">Handled.</span>
       </Rv>
       <Rv as="p" className="g-sub" delay={1}>
         Every register your clinic answers for, filled from the consult itself.

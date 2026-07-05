@@ -26,6 +26,7 @@
 @media (max-width: 720px) { .g-section { padding: 72px 0; } }
 
 /* ---------- type (one family, weight does the work) ---------- */
+.g-hl { color: var(--g-green); }
 .g-h1, .g-h2, .g-h3 {
   font-family: var(--g-font);
   font-weight: 800;
@@ -33,20 +34,21 @@
   line-height: 1.04;
   color: var(--g-ink);
 }
-.g-h1 { font-size: clamp(42px, 6vw, 84px); }
-.g-h2 { font-size: clamp(30px, 3.8vw, 52px); margin-bottom: 16px; }
+.g-h1 { font-size: clamp(42px, 6vw, 84px); letter-spacing: -0.035em; line-height: 1.03; }
+.g-h2 { font-size: clamp(30px, 3.8vw, 50px); margin-bottom: 18px; line-height: 1.08; max-width: 21ch; }
 .g-h3 { font-size: 20px; letter-spacing: -0.015em; }
 .g-sub {
   font-family: var(--g-font);
   font-size: clamp(16.5px, 1.4vw, 19px);
-  color: var(--g-ink-soft);
+  color: #494C55;
   max-width: 620px;
   font-weight: 400;
-  line-height: 1.65;
+  line-height: 1.7;
 }
 .g-sub b, .g-sub strong { color: var(--g-ink); font-weight: 600; }
 .g-center { text-align: center; }
 .g-center .g-sub { margin-left: auto; margin-right: auto; }
+.g-center .g-h2 { margin-left: auto; margin-right: auto; }
 .g-small { font-family: var(--g-font); font-size: 13px; color: var(--g-ink-faint); line-height: 1.6; }
 
 /* ---------- buttons ---------- */
@@ -157,7 +159,7 @@ html.js .g-rv.g-d4 { transition-delay: .24s; }
 .g-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; margin-top: 56px; border-top: 1px solid var(--g-line); }
 .g-stat { padding: 28px 26px 6px 0; border-right: 1px solid var(--g-line-soft); margin-right: 26px; }
 .g-stat:last-child { border-right: none; margin-right: 0; }
-.g-stat .g-num { font-family: var(--g-font); font-weight: 800; font-size: clamp(32px, 3vw, 44px); letter-spacing: -0.03em; line-height: 1; color: var(--g-ink); }
+.g-stat .g-num { font-family: var(--g-font); font-weight: 800; font-size: clamp(32px, 3vw, 44px); letter-spacing: -0.03em; line-height: 1; color: var(--g-ink); font-variant-numeric: tabular-nums; }
 .g-stat .g-lbl { font-family: var(--g-font); font-size: 13.5px; color: var(--g-ink-soft); margin-top: 10px; line-height: 1.55; }
 .g-giant { margin: 84px auto 0; text-align: center; }
 .g-giant .g-n { font-family: var(--g-font); font-weight: 800; font-size: clamp(96px, 15vw, 210px); letter-spacing: -0.05em; line-height: .9; color: var(--g-ink); }
@@ -173,6 +175,8 @@ html.js .g-rv.g-d4 { transition-delay: .24s; }
 
 /* ---------- split (text + illustration) ---------- */
 .g-split { display: grid; grid-template-columns: 1.05fr .95fr; gap: 64px; align-items: center; }
+.g-split .g-h2 { max-width: none; }
+.g-hl { white-space: pre-line; }
 .g-split-art { display: flex; align-items: center; justify-content: center; }
 .g-split-art img { width: 88%; max-width: 460px; height: auto; }
 .g-check { display: flex; gap: 13px; align-items: flex-start; margin-top: 22px; font-family: var(--g-font); }
