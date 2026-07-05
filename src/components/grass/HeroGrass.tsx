@@ -54,7 +54,27 @@ export const HeroGrass: React.FC = () => {
         {/* the world of the product, in 3D */}
         <div className="g-h3d-stage" ref={stageRef} aria-hidden="true">
           <div className="g-h3d-world">
-            <img src="/illustrations/hero_world.webp" alt="" loading="eager" />
+            <video
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="auto"
+              poster="/illustrations/hero_world.webp"
+              style={{
+                width: '100%',
+                maxWidth: 760,
+                height: 'auto',
+                display: 'block',
+                margin: '0 auto',
+                mixBlendMode: 'multiply',
+                WebkitMaskImage: 'radial-gradient(70% 70% at 50% 50%, #000 60%, transparent 97%)',
+                maskImage: 'radial-gradient(70% 70% at 50% 50%, #000 60%, transparent 97%)',
+              }}
+            >
+              <source src="/illustrations/hero_world.mp4" type="video/mp4" />
+              <img src="/illustrations/hero_world.webp" alt="" />
+            </video>
           </div>
           <div className="g-h3d-obj g-h3d-obj--1"><img src="/illustrations/mic.webp" alt="" /></div>
           <div className="g-h3d-obj g-h3d-obj--2"><img src="/illustrations/form.webp" alt="" /></div>
