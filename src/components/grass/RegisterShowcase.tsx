@@ -180,7 +180,7 @@ export const RegisterShowcase: React.FC = () => {
   const [tab, setTab] = useState('opd');
   const active = TABS.find((t) => t.key === tab) ?? TABS[0];
   return (
-    <section className="g-section" id="products">
+    <section className="g-section g-section--muted" id="products">
       <div className="g-container">
         <Rv as="h2" className="g-h2">
           The paperwork that can sink you. <span className="g-hl">Handled.</span>

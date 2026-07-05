@@ -543,3 +543,53 @@ html.js .g-rv.g-d4 { transition-delay: .24s; }
 .g-pdf-sig-line b { display: block; font-size: 10.5px; color: var(--g-ink); }
 .g-pdf-foot { display: flex; justify-content: space-between; gap: 8px; background: #F8FAFC; border-top: 1px solid var(--g-line-soft); padding: 7px 20px; font-size: 7.5px; color: var(--g-ink-faint); font-weight: 600; }
 .g-pdf-foot code { font-family: ui-monospace, monospace; font-size: 7.5px; color: var(--g-ink-soft); }
+
+/* ============================================================
+   Synthesis pass — illustrations + motion woven into product truth
+   ============================================================ */
+.g-section--muted { background: #F8FAFC; }
+.g-section--muted .g-ui, .g-section--muted .g-tpl, .g-section--muted .g-price { background: #fff; }
+
+/* scene illustration overlapping a product panel corner */
+.g-panel-scene { position: relative; }
+.g-panel-scene .g-scene-img { position: absolute; width: 168px; z-index: 3; filter: drop-shadow(0 16px 30px rgba(15,23,42,.18)); pointer-events: none; }
+.g-panel-scene .g-scene-img--bl { bottom: -56px; left: -58px; transform: rotate(-4deg); }
+.g-panel-scene .g-scene-img--br { bottom: -52px; right: -46px; transform: rotate(3deg); }
+@media (max-width: 900px) { .g-panel-scene .g-scene-img { display: none; } }
+
+/* the living world interlude */
+.g-worldband { position: relative; padding: 96px 0 40px; background: #fff; overflow: hidden; text-align: center; }
+.g-worldband .g-h2 { margin: 0 auto 10px; }
+.g-worldband-art { position: relative; max-width: 940px; margin: 26px auto 0; }
+.g-worldband-art > img { width: 100%; height: auto; }
+.g-worldband .g-sprite { position: absolute; pointer-events: none; }
+.g-worldband .g-sprite--wb-bird { width: 44px; top: 6%; left: -6%; animation: g-fly 24s linear infinite; }
+.g-worldband .g-sprite--wb-bird2 { width: 30px; top: 13%; left: -6%; animation: g-fly 33s linear 9s infinite; }
+.g-worldband .g-sprite--wb-doc1 { width: 40px; top: 40%; left: 47%; animation: g-drift 8s ease-in-out infinite; }
+.g-worldband .g-sprite--wb-doc2 { width: 32px; top: 45%; left: 58%; animation: g-drift 11s ease-in-out 3.5s infinite; }
+.g-worldband .g-sprite--wb-wave { width: 84px; top: 44%; left: 27%; animation: g-breathe 4s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) { .g-worldband .g-sprite { animation: none; } }
+
+/* hero sky birds */
+.g-stage .g-sprite--sky1 { width: 44px; top: 13%; left: -5%; z-index: 1; animation: g-fly 34s linear infinite; }
+.g-stage .g-sprite--sky2 { width: 28px; top: 20%; left: -5%; z-index: 1; animation: g-fly 46s linear 12s infinite; }
+
+/* template card icon */
+.g-tpl { position: relative; }
+.g-tpl-ic { position: absolute; top: 10px; right: 10px; width: 40px; height: 40px; object-fit: contain; }
+.g-tpl-name { padding-right: 40px; }
+
+/* final CTA split with globe */
+.g-final-grid { display: grid; grid-template-columns: 1.15fr .85fr; gap: 48px; align-items: center; text-align: left; }
+.g-final-grid .g-hero-ctas { justify-content: flex-start; }
+.g-final-art img { width: 78%; max-width: 360px; margin: 0 auto; display: block; filter: drop-shadow(0 24px 44px rgba(15,23,42,.18)); animation: g-bob 7s ease-in-out infinite; }
+@media (max-width: 860px) { .g-final-grid { grid-template-columns: 1fr; text-align: center; } .g-final-grid .g-hero-ctas { justify-content: center; } }
+
+/* builder canvas enrichment */
+.g-ui-fieldcard--open { display: block; }
+.g-ui-fieldcard--open .g-fc-head { display: flex; align-items: center; gap: 9px; }
+.g-fc-config { border-top: 1px dashed var(--g-line-soft); margin-top: 8px; padding-top: 8px; }
+.g-fc-config small { display: block; font-size: 8.5px; font-weight: 800; letter-spacing: .08em; color: var(--g-ink-faint); margin-bottom: 3px; }
+.g-fc-config .g-fc-prompt { font-size: 10.5px; color: var(--g-ink-soft); font-style: italic; }
+.g-fc-config .g-fc-toggles { display: flex; gap: 10px; margin-top: 7px; font-size: 9.5px; font-weight: 700; color: var(--g-ink-faint); }
+.g-fc-config .g-fc-toggles b { color: var(--g-green); }

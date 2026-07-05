@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Rv } from './Rv';
+import { Rv, CountUp } from './Rv';
 
 // Sections drawn from the REAL product — labels, widget names, clause parities,
 // template names and PDF anatomy all come from the actual Salvia codebase.
@@ -27,7 +27,9 @@ export const FormBuilderSection: React.FC = () => (
             Anaesthesia record.
           </Rv>
         </div>
-        <Rv className="g-ui g-ui--panel" delay={1} aria-hidden="true">
+        <Rv className="g-panel-scene" delay={1}>
+          <img className="g-scene-img g-scene-img--bl" src="/illustrations/story_form.webp" alt="" aria-hidden="true" />
+          <div className="g-ui g-ui--panel" aria-hidden="true">
           <div className="g-ui-bar">
             <span className="g-ui-bar-title">Form builder — Vaccination Encounter</span>
             <div className="g-ui-steps" style={{ marginLeft: 'auto' }}>
@@ -53,7 +55,14 @@ export const FormBuilderSection: React.FC = () => (
             <div className="g-ui-canvas">
               <div className="g-ui-canvas-hint">Click a type to add. Drag to reorder.</div>
               <div className="g-ui-fieldcard"><span className="g-drag">⋮⋮</span><span className="g-fc-label">Presenting complaint</span><span className="g-fc-type">Paragraph</span></div>
-              <div className="g-ui-fieldcard g-ui-fieldcard--sys"><span className="g-drag">⋮⋮</span><span className="g-fc-label">Vaccine administered</span><span className="g-fc-type">system.vaccination</span></div>
+              <div className="g-ui-fieldcard g-ui-fieldcard--sys g-ui-fieldcard--open">
+                <div className="g-fc-head"><span className="g-drag">⋮⋮</span><span className="g-fc-label">Vaccine administered</span><span className="g-fc-type">system.vaccination</span></div>
+                <div className="g-fc-config">
+                  <small>AUTO-CAPTURE</small>
+                  <div className="g-fc-prompt">"Which vaccine, batch and site were administered?"</div>
+                  <div className="g-fc-toggles"><span><b>●</b> Required</span><span>○ Skippable</span><span>○ Allow inference</span></div>
+                </div>
+              </div>
               <div className="g-ui-fieldcard g-ui-fieldcard--sys"><span className="g-drag">⋮⋮</span><span className="g-fc-label">Informed consent</span><span className="g-fc-type">system.consent</span></div>
               <div className="g-ui-fieldcard"><span className="g-drag">⋮⋮</span><span className="g-fc-label">Next dose due</span><span className="g-fc-type">Date picker</span></div>
               <div style={{ display: 'flex', gap: 8, marginTop: 10 }}>
@@ -62,6 +71,7 @@ export const FormBuilderSection: React.FC = () => (
                 <span className="g-ui-tag" style={{ marginLeft: 'auto' }}>Publish Form</span>
               </div>
             </div>
+          </div>
           </div>
         </Rv>
       </div>
@@ -72,10 +82,12 @@ export const FormBuilderSection: React.FC = () => (
 /* ── Policy engine ────────────────────────────────────────────── */
 
 export const PolicyEngineSection: React.FC = () => (
-  <section className="g-section" id="policy-engine">
+  <section className="g-section g-section--muted" id="policy-engine">
     <div className="g-container">
       <div className="g-split">
-        <Rv className="g-ui g-ui--panel" delay={1} aria-hidden="true" style={{ order: 0 }}>
+        <Rv className="g-panel-scene" delay={1} style={{ order: 0 }}>
+          <img className="g-scene-img g-scene-img--br" src="/illustrations/story_policy.webp" alt="" aria-hidden="true" />
+          <div className="g-ui g-ui--panel" aria-hidden="true">
           <div className="g-ui-bar">
             <span className="g-ui-bar-title">Policy check — OPD consult</span>
             <span className="g-ui-tag" style={{ marginLeft: 'auto' }}>3 of 4 clauses pass</span>
@@ -92,6 +104,7 @@ export const PolicyEngineSection: React.FC = () => (
             <div className="g-check-row g-check-row--pass"><span className="g-ck-ic" /><span><b>Follow-up documented</b><span className="g-ck-note">Monday review recorded.</span></span></div>
             <div className="g-check-row g-check-row--fail"><span className="g-ck-ic" /><span><b>Verify allergies before NSAIDs</b><span className="g-ck-note">No allergy status found in this note.</span></span></div>
             <div className="g-override-bar">1 clause blocks submit — provide a justification to override<span>Override and submit</span></div>
+          </div>
           </div>
         </Rv>
         <div style={{ order: 1 }}>
@@ -131,11 +144,13 @@ const TEMPLATES: { name: string; vert: string; extra: string }[] = [
   { name: 'Resident Fall Incident Report', vert: 'Aged care', extra: 'system.incident' },
 ];
 
+const TPL_ICONS = ['/illustrations/form.webp', '/illustrations/policy.webp', '/illustrations/stetho.webp', '/illustrations/mic.webp', '/illustrations/vault.webp', '/illustrations/shield.webp'];
+
 export const TemplateLibrary: React.FC = () => (
   <section className="g-section g-center" id="templates">
     <div className="g-container">
       <Rv as="h2" className="g-h2">
-        Don't start from a blank page. <span className="g-hl">107 templates ship inside.</span>
+        Don't start from a blank page. <span className="g-hl"><CountUp value={107} /> templates ship inside.</span>
       </Rv>
       <Rv as="p" className="g-sub" delay={1}>
         49 forms and 58 policies, written for real clinical work and badged{' '}
@@ -145,6 +160,7 @@ export const TemplateLibrary: React.FC = () => (
       <div className="g-tpl-grid" style={{ textAlign: 'left' }}>
         {TEMPLATES.map((t, i) => (
           <Rv className="g-tpl" key={t.name} delay={(Math.min((i % 4) + 1, 4)) as 1 | 2 | 3 | 4}>
+            <img className="g-tpl-ic" src={TPL_ICONS[i % TPL_ICONS.length]} alt="" loading="lazy" />
             <div className="g-tpl-name">{t.name}</div>
             <div className="g-tpl-meta">
               <span className="g-tpl-vert">{t.vert}</span>

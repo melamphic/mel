@@ -104,20 +104,27 @@ export const PricingTeaserGrass: React.FC = () => (
 export const FinalCTAGrass: React.FC = () => (
   <section className="g-final">
     <div className="g-container">
-      <Rv as="h2" className="g-h2">
-        The record you'll be glad exists.
-      </Rv>
-      <Rv as="p" className="g-sub" delay={1} style={{ margin: '14px auto 0' }}>
-        Your first 50 notes are free. Set-up takes less time than one late-night note.
-      </Rv>
-      <Rv className="g-hero-ctas" delay={2}>
-        <Link className="g-btn g-btn--green" to="/start">
-          Start free
-        </Link>
-        <a className="g-btn g-btn--ghost" href="#demo">
-          Watch the demo
-        </a>
-      </Rv>
+      <div className="g-final-grid">
+        <div>
+          <Rv as="h2" className="g-h2">
+            The record you'll be <span className="g-hl">glad exists.</span>
+          </Rv>
+          <Rv as="p" className="g-sub" delay={1} style={{ marginTop: 14 }}>
+            Your first 50 notes are free. Set-up takes less time than one late-night note.
+          </Rv>
+          <Rv className="g-hero-ctas" delay={2} style={{ marginTop: 30 }}>
+            <Link className="g-btn g-btn--green" to="/start">
+              Start free
+            </Link>
+            <a className="g-btn g-btn--ghost" href="#demo">
+              Watch the demo
+            </a>
+          </Rv>
+        </div>
+        <Rv className="g-final-art" delay={1}>
+          <img src="/illustrations/ill_globe_india.webp" alt="A globe with a location pin on India" loading="lazy" />
+        </Rv>
+      </div>
     </div>
   </section>
 );
