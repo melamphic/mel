@@ -96,9 +96,6 @@ export const HeroGrass: React.FC = () => (
   <>
     <header className="g-stage">
       {/* graphic teal checker band behind the product (mojek-style) */}
-      <div className="g-stage-env" aria-hidden="true">
-        <img src="/illustrations/env_plate.webp" alt="" loading="eager" />
-      </div>
       <div className="g-toast g-toast--l" aria-hidden="true">
         <span className="g-toast-ic">✓</span>
         <span>
