@@ -742,7 +742,7 @@ html.js .g-rv.g-d4 { transition-delay: .24s; }
   transform: rotateX(calc(var(--ty, 0) * -6deg)) rotateY(calc(var(--tx, 0) * 8deg));
   transition: transform .25s ease-out; transform-style: preserve-3d; will-change: transform;
 }
-.g-h3d-world > img { width: 100%; max-width: 620px; height: auto; margin: 0 auto; display: block; }
+.g-h3d-world > img { width: 100%; max-width: 760px; height: auto; margin: 0 auto; display: block; }
 .g-h3d-obj {
   position: absolute; pointer-events: none;
   transform:
