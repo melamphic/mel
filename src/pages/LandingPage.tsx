@@ -1,8 +1,7 @@
 import { SEO } from '../components/SEO';
 import { GrassHeader } from '../components/grass/GrassHeader';
 import { HeroGrass } from '../components/grass/HeroGrass';
-import { StoryScene } from '../components/grass/StoryScene';
-import { RegistersCarousel } from '../components/grass/HowRegisters';
+import { HowItWorksGrass, RegistersGrid } from '../components/grass/HowRegisters';
 import { SixYearGrass, ProveIt } from '../components/grass/EvidenceGrass';
 import { HospitalsBand, PricingTeaserGrass, FinalCTAGrass } from '../components/grass/CommercialGrass';
 import { Footer } from '../components/Footer';
@@ -18,13 +17,13 @@ export const LandingPage = () => {
       />
       <GrassHeader />
       <main style={{ flex: 1, zIndex: 10, background: '#fff' }}>
-        {/* Hook + demo film slot + register marquee */}
+        {/* Hook + hero illustration + demo film slot */}
         <HeroGrass />
-        {/* Act 01 — pinned story: one consult becomes evidence */}
-        <StoryScene />
-        {/* Act 02 — pinned horizontal travel through the registers */}
-        <RegistersCarousel />
-        {/* Act 03 — the six-year test, dark, timeline drawn by scroll */}
+        {/* Speak, verify, seal */}
+        <HowItWorksGrass />
+        {/* Every register the clinic answers for */}
+        <RegistersGrid />
+        {/* The worst-day closer — sourced */}
         <SixYearGrass />
         {/* Why the record holds up */}
         <ProveIt />
