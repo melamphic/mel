@@ -729,6 +729,16 @@ html.js .g-rv.g-d4 { transition-delay: .24s; }
   position: relative; max-width: 980px; margin: 34px auto 0;
   perspective: 1200px;
 }
+/* brand aurora behind the world — mint + marigold, no grey */
+.g-h3d-stage::before {
+  content: ""; position: absolute; inset: 6% -4% -2% -4%; z-index: -1;
+  background:
+    radial-gradient(46% 60% at 30% 72%, rgba(47, 169, 110, 0.16), transparent 68%),
+    radial-gradient(40% 54% at 74% 38%, rgba(242, 169, 59, 0.14), transparent 66%),
+    radial-gradient(34% 46% at 56% 86%, rgba(14, 90, 79, 0.10), transparent 70%);
+  filter: blur(6px);
+  border-radius: 50%;
+}
 .g-h3d-world {
   transform: rotateX(calc(var(--ty, 0) * -6deg)) rotateY(calc(var(--tx, 0) * 8deg));
   transition: transform .25s ease-out; transform-style: preserve-3d; will-change: transform;
