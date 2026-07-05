@@ -1,5 +1,4 @@
 import React, { useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
 
 import { Rv } from './Rv';
 
@@ -49,17 +48,6 @@ export const HeroGrass: React.FC = () => {
             consult — and turns the audio into complete clinical documentation, checked
             against your policies. The clinician verifies. The record is sealed.{' '}
             <b>You can prove what happened.</b>
-          </p>
-          <div className="g-hero-ctas">
-            <Link className="g-btn g-btn--green" to="/start">
-              Start free — 50 notes on us
-            </Link>
-            <a className="g-btn g-btn--ghost" href="#demo">
-              Watch the demo
-            </a>
-          </div>
-          <p className="g-hero-note">
-            No card needed · Works alongside your HMIS · Unlimited staff on every plan
           </p>
         </div>
 
