@@ -1,7 +1,5 @@
 import React, { useEffect, useRef } from 'react';
 
-import { Rv } from './Rv';
-
 // Hero: copy first, then the miniature clinic world in a 3D stage that
 // tilts toward the pointer, with icon objects parallaxing at depth.
 export const HeroGrass: React.FC = () => {
@@ -81,15 +79,6 @@ export const HeroGrass: React.FC = () => {
         </div>
       </header>
 
-      {/* Demo film slot — replaced with the real film when it's ready */}
-      <div className="g-film-wrap" id="demo" style={{ marginTop: 26 }}>
-        <Rv className="g-film">
-          <button className="g-play" aria-label="Play the Salvia demo film" />
-          <span className="g-film-caption">
-            From spoken word to sealed, policy-checked record — in one take.
-          </span>
-        </Rv>
-      </div>
     </>
   );
 };
