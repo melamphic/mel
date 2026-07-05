@@ -723,10 +723,7 @@ html.js .g-rv.g-d4 { transition-delay: .24s; }
    ============================================================ */
 .g-h3d-hero {
   position: relative; padding: 140px 24px 30px; text-align: center; overflow: hidden;
-  background:
-    radial-gradient(1100px 560px at 50% 112%, rgba(14,90,79,.10), transparent 62%),
-    radial-gradient(680px 360px at 86% 0%, rgba(242,169,59,.10), transparent 60%),
-    #fff;
+  background: #fff;
 }
 .g-h3d-stage {
   position: relative; max-width: 980px; margin: 34px auto 0;

@@ -60,7 +60,6 @@ export const HeroGrass: React.FC = () => {
           <div className="g-h3d-obj g-h3d-obj--2"><img src="/illustrations/form.webp" alt="" /></div>
           <div className="g-h3d-obj g-h3d-obj--3"><img src="/illustrations/shield.webp" alt="" /></div>
           <div className="g-h3d-obj g-h3d-obj--4"><img src="/illustrations/policy.webp" alt="" /></div>
-          <div className="g-h3d-floor" />
         </div>
       </header>
 

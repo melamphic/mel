@@ -260,8 +260,8 @@ export const INDIA_TIERS: IndiaTier[] = [
   {
     key: 'base',
     name: 'Starter',
-    monthlyINR: 1000,
-    annualINR: 10000,
+    monthlyINR: 999,
+    annualINR: 9990,
     draftCap: 400,
     aiIncluded: true,
     features: [
@@ -275,8 +275,8 @@ export const INDIA_TIERS: IndiaTier[] = [
   {
     key: 'growth',
     name: 'Clinic',
-    monthlyINR: 3000,
-    annualINR: 30000,
+    monthlyINR: 2999,
+    annualINR: 29990,
     draftCap: 1500,
     aiIncluded: true,
     highlight: 'Most popular',
@@ -291,8 +291,8 @@ export const INDIA_TIERS: IndiaTier[] = [
   {
     key: 'unlimited',
     name: 'Group',
-    monthlyINR: 6000,
-    annualINR: 60000,
+    monthlyINR: 5999,
+    annualINR: 59990,
     draftCap: 3000,
     aiIncluded: true,
     features: [
