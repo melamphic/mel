@@ -31,12 +31,19 @@ export const HospitalsBand: React.FC = () => (
           </Rv>
         </div>
         <Rv className="g-split-art" delay={1}>
-          <img
-            src="/illustrations/ill_hospital.webp"
-            alt="A hospital building protected by a shield"
-            loading="lazy"
-            onError={(e) => ((e.target as HTMLImageElement).src = '/illustrations/shield.webp')}
-          />
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            poster="/illustrations/ill_hospital.webp"
+            aria-label="A living miniature hospital campus protected under a glass dome"
+            style={{ width: '88%', maxWidth: 460, height: 'auto', display: 'block' }}
+          >
+            <source src="/illustrations/hospital_dome.mp4" type="video/mp4" />
+            <img src="/illustrations/ill_hospital.webp" alt="A hospital campus protected under a glass dome" />
+          </video>
         </Rv>
       </div>
     </div>
