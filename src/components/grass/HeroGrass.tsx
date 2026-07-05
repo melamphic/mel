@@ -67,9 +67,6 @@ export const HeroGrass: React.FC = () => {
                 height: 'auto',
                 display: 'block',
                 margin: '0 auto',
-                mixBlendMode: 'multiply',
-                WebkitMaskImage: 'radial-gradient(70% 70% at 50% 50%, #000 60%, transparent 97%)',
-                maskImage: 'radial-gradient(70% 70% at 50% 50%, #000 60%, transparent 97%)',
               }}
             >
               <source src="/illustrations/hero_world.mp4" type="video/mp4" />

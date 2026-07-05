@@ -44,9 +44,6 @@ export const HospitalsBand: React.FC = () => (
               maxWidth: 460,
               height: 'auto',
               display: 'block',
-              mixBlendMode: 'multiply',
-              WebkitMaskImage: 'radial-gradient(72% 72% at 50% 50%, #000 62%, transparent 98%)',
-              maskImage: 'radial-gradient(72% 72% at 50% 50%, #000 62%, transparent 98%)',
             }}
           >
             <source src="/illustrations/hospital_dome.mp4" type="video/mp4" />
