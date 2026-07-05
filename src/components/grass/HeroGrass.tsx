@@ -3,9 +3,6 @@ import { Link } from 'react-router-dom';
 
 import { Rv } from './Rv';
 
-const hide = (e: React.SyntheticEvent<HTMLImageElement>) =>
-  ((e.target as HTMLImageElement).style.display = 'none');
-
 // Drawn at screenshot fidelity — the workspace the laptop shows.
 const Workspace: React.FC = () => (
   <div className="g-ui" aria-hidden="true">
@@ -97,14 +94,22 @@ const Capture: React.FC = () => (
 export const HeroGrass: React.FC = () => (
   <>
     <header className="g-stage">
-      {/* environment plate — the world the product lives in */}
-      <div className="g-stage-env" aria-hidden="true">
-        <img src="/illustrations/env_plate.webp" alt="" loading="eager" onError={hide} />
+      {/* graphic teal checker band behind the product (mojek-style) */}
+      <div className="g-checker" aria-hidden="true" />
+      <div className="g-toast g-toast--l" aria-hidden="true">
+        <span className="g-toast-ic">✓</span>
+        <span>
+          Policy check passed
+          <small>OPD consult · Dr. Nair · just now</small>
+        </span>
       </div>
-      <img className="g-sprite g-sprite--bird1" src="/illustrations/sp_bird.webp" alt="" onError={hide} />
-      <img className="g-sprite g-sprite--bird2" src="/illustrations/sp_bird.webp" alt="" onError={hide} />
-      <img className="g-sprite g-sprite--leaf1" src="/illustrations/sp_doc.webp" alt="" onError={hide} />
-      <img className="g-sprite g-sprite--leaf2" src="/illustrations/sp_doc.webp" alt="" onError={hide} />
+      <div className="g-toast g-toast--r" aria-hidden="true">
+        <span className="g-toast-ic">🔒</span>
+        <span>
+          Record sealed
+          <small>Audio + policy v3.2 attached</small>
+        </span>
+      </div>
 
       <div className="g-stage-copy">
         <h1 className="g-h1">

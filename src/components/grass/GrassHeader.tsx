@@ -18,7 +18,7 @@ export const GrassHeader: React.FC = () => (
         <Link to="/pricing">Pricing</Link>
         <Link to="/blog">Blog</Link>
       </nav>
-      <Link className="g-btn g-btn--ink g-nav-cta" to="/start">
+      <Link className="g-btn g-btn--green g-nav-cta" to="/start">
         Get started
       </Link>
     </div>
