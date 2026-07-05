@@ -62,7 +62,7 @@ export const HeroGrass: React.FC = () => {
               onLoadedData={(e) => (e.target as HTMLVideoElement).play().catch(() => {})}
               style={{
                 width: '100%',
-                maxWidth: 760,
+                maxWidth: 980,
                 height: 'auto',
                 display: 'block',
                 margin: '0 auto',
