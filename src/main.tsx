@@ -2,8 +2,13 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { HelmetProvider } from 'react-helmet-async'
 import './index.css'
+import './styles/grass.css'
 import App from './App.tsx'
 import { initPostHog, hasAnalyticsConsent } from './lib/posthog'
+
+// Scroll-reveal styles (.g-rv) only hide content under html.js, so the
+// prerendered snapshot stays fully visible for crawlers and no-JS visitors.
+document.documentElement.classList.add('js')
 
 // Prerendered pages (snapshot.mjs) ship real HTML in #root so crawlers and AI
 // bots see full content with no JS. The client renders over that snapshot —
