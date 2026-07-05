@@ -111,6 +111,21 @@ export const HeroGrass: React.FC = () => (
         </span>
       </div>
 
+      {/* the product itself, in the world */}
+      <div className="g-devices">
+        <div className="g-laptop">
+          <div className="g-laptop-screen">
+            <div className="g-laptop-notch" />
+            <Workspace />
+          </div>
+          <div className="g-laptop-base" />
+        </div>
+        <div className="g-phone">
+          <div className="g-phone-screen">
+            <Capture />
+          </div>
+        </div>
+      </div>
       <div className="g-stage-copy">
         <h1 className="g-h1">
           Every consult,
@@ -136,21 +151,6 @@ export const HeroGrass: React.FC = () => (
         </p>
       </div>
 
-      {/* the product itself, in the world */}
-      <div className="g-devices">
-        <div className="g-laptop">
-          <div className="g-laptop-screen">
-            <div className="g-laptop-notch" />
-            <Workspace />
-          </div>
-          <div className="g-laptop-base" />
-        </div>
-        <div className="g-phone">
-          <div className="g-phone-screen">
-            <Capture />
-          </div>
-        </div>
-      </div>
     </header>
 
     {/* Demo film slot — replaced with the real film when it's ready */}

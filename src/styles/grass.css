@@ -663,3 +663,17 @@ html.js .g-rv.g-d4 { transition-delay: .24s; }
 .g-block--gold > p { color: #6B4E14; }
 .g-block-app { margin-top: auto; background: #fff; border-radius: 18px 18px 0 0; box-shadow: 0 -14px 40px -18px rgba(15,23,42,.35); padding: 16px 16px 20px; width: 86%; align-self: center; }
 @media (max-width: 940px) { .g-trio { grid-template-columns: 1fr; } .g-block { min-height: 420px; } }
+
+/* color wraps for widget panels (trio-approved treatment) */
+#form-builder .g-panel-scene { background: #EFF7DC; border-radius: 26px; padding: 28px; }
+#policy-engine .g-panel-scene { background: #FDEEE0; border-radius: 26px; padding: 28px; }
+#products .g-showcase { background: #E6F1EE; border: none; }
+#the-document .g-split-art { background: #F7E9D2; border-radius: 26px; padding: 34px 22px; }
+#form-builder .g-scene-img--bl { bottom: -30px; left: -34px; }
+#policy-engine .g-scene-img--br { bottom: -44px; right: -40px; }
+
+/* onde-style hero: product first, giant headline below */
+.g-stage { padding-top: 108px; }
+.g-stage .g-devices { margin-top: 0; }
+.g-stage .g-stage-copy { margin-top: 54px; padding-bottom: 72px; }
+.g-stage .g-stage-copy .g-h1 { font-size: clamp(46px, 6.6vw, 96px); }
