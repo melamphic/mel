@@ -13,6 +13,10 @@ const ArticlePage = lazy(() => import('./pages/ArticlePage').then(m => ({ defaul
 const PricingPage = lazy(() => import('./pages/PricingPage').then(m => ({ default: m.PricingPage })));
 const SignupPage = lazy(() => import('./pages/SignupPage').then(m => ({ default: m.SignupPage })));
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage').then(m => ({ default: m.NotFoundPage })));
+const PreviewA = lazy(() => import('./pages/previews/PreviewA'));
+const PreviewB = lazy(() => import('./pages/previews/PreviewB'));
+const PreviewC = lazy(() => import('./pages/previews/PreviewC'));
+const PreviewD = lazy(() => import('./pages/previews/PreviewD'));
 const HospitalsPage = lazy(() => import('./pages/HospitalsPage').then(m => ({ default: m.HospitalsPage })));
 const VeterinaryPage = lazy(() => import('./pages/VeterinaryPage').then(m => ({ default: m.VeterinaryPage })));
 const DentalPage = lazy(() => import('./pages/DentalPage').then(m => ({ default: m.DentalPage })));
@@ -97,6 +101,11 @@ function App() {
             <Route path="/refund-policy" element={<LegalPage slug="refund-policy" />} />
             <Route path="/acceptable-use" element={<LegalPage slug="acceptable-use" />} />
             <Route path="/security" element={<LegalPage slug="security" />} />
+            {/* design-direction previews — internal, not linked or indexed */}
+            <Route path="/preview/a" element={<PreviewA />} />
+            <Route path="/preview/b" element={<PreviewB />} />
+            <Route path="/preview/c" element={<PreviewC />} />
+            <Route path="/preview/d" element={<PreviewD />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </Suspense>
