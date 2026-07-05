@@ -96,20 +96,6 @@ export const HeroGrass: React.FC = () => (
   <>
     <header className="g-stage">
       {/* graphic teal checker band behind the product (mojek-style) */}
-      <div className="g-toast g-toast--l" aria-hidden="true">
-        <span className="g-toast-ic">✓</span>
-        <span>
-          Policy check passed
-          <small>OPD consult · Dr. Nair · just now</small>
-        </span>
-      </div>
-      <div className="g-toast g-toast--r" aria-hidden="true">
-        <span className="g-toast-ic">🔒</span>
-        <span>
-          Record sealed
-          <small>Audio + policy v3.2 attached</small>
-        </span>
-      </div>
 
       {/* the product itself, in the world */}
       <div className="g-devices">

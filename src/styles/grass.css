@@ -677,3 +677,16 @@ html.js .g-rv.g-d4 { transition-delay: .24s; }
 .g-stage .g-devices { margin-top: 0; }
 .g-stage .g-stage-copy { margin-top: 54px; padding-bottom: 72px; }
 .g-stage .g-stage-copy .g-h1 { font-size: clamp(46px, 6.6vw, 96px); }
+
+/* six-year test — deep teal act block (trio-approved language) */
+#six-year-test { margin: 0 16px; border-radius: 26px; background: #0E5A4F; }
+#six-year-test .g-h2, #six-year-test .g-quote p, #six-year-test .g-giant .g-n, #six-year-test .g-giant .g-c { color: #fff; }
+#six-year-test .g-sub { color: rgba(255,255,255,.78); }
+#six-year-test .g-sub b, #six-year-test .g-sub em { color: #fff; }
+#six-year-test .g-stats { border-top-color: rgba(255,255,255,.2); }
+#six-year-test .g-stat { border-right-color: rgba(255,255,255,.12); }
+#six-year-test .g-stat .g-num { color: #F7C45E; }
+#six-year-test .g-stat .g-lbl { color: rgba(255,255,255,.7); }
+#six-year-test .g-giant .g-s, #six-year-test .g-quote span { color: rgba(255,255,255,.55); }
+#six-year-test .g-srcs a { color: rgba(255,255,255,.6); text-decoration-color: rgba(255,255,255,.3); }
+#six-year-test .g-srcs a:first-child { color: #C9F27D; }
