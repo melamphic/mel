@@ -119,16 +119,11 @@ const Incidents: React.FC = () => (
       </div>
       <span className="g-ui-tag">2 open</span>
     </div>
-    <table className="g-ui-table">
-      <thead>
-        <tr><th>When</th><th>Incident</th><th>Severity</th><th>Action taken</th><th>Status</th></tr>
-      </thead>
-      <tbody>
-        <tr><td className="g-dim">4 Jul, 3:10 pm</td><td>Needle-stick — staff nurse</td><td>Moderate</td><td className="g-dim">PEP started, reported</td><td><span className="g-ui-tag">Reviewed</span></td></tr>
-        <tr><td className="g-dim">2 Jul, 9:40 am</td><td>Medication near-miss</td><td>Low</td><td className="g-dim">Double-check added</td><td><span className="g-ui-tag">Reviewed</span></td></tr>
-        <tr><td className="g-dim">28 Jun, 6:05 pm</td><td>Patient fall — waiting area</td><td>Moderate</td><td className="g-dim">Family informed, X-ray</td><td><span className="g-ui-tag g-ui-tag--ink">CAPA open</span></td></tr>
-      </tbody>
-    </table>
+    <div>
+      <div className="g-inc-row"><span className="g-inc-dot g-inc-dot--med" /><span><span className="g-inc-t">Needle-stick — staff nurse</span><span className="g-inc-m"> · 4 Jul, 3:10 pm</span><div className="g-inc-m">PEP started · reported to committee · auto-classified moderate</div></span><span className="g-ui-tag">Reviewed</span></div>
+      <div className="g-inc-row"><span className="g-inc-dot g-inc-dot--low" /><span><span className="g-inc-t">Medication near-miss</span><span className="g-inc-m"> · 2 Jul, 9:40 am</span><div className="g-inc-m">Double-check step added to dispensing</div></span><span className="g-ui-tag">Reviewed</span></div>
+      <div className="g-inc-row"><span className="g-inc-dot g-inc-dot--med" /><span><span className="g-inc-t">Patient fall — waiting area</span><span className="g-inc-m"> · 28 Jun, 6:05 pm</span><div className="g-inc-m">Family informed · X-ray clear</div></span><span className="g-ui-tag g-ui-tag--ink">CAPA open</span></div>
+    </div>
     <div className="g-ui-meta-row" style={{ padding: '12px 16px 14px' }}>
       <span className="g-ui-tag g-ui-tag--ink">NABH incident reporting trail</span>
     </div>
@@ -136,13 +131,14 @@ const Incidents: React.FC = () => (
 );
 
 const Discharge: React.FC = () => (
-  <div className="g-ui g-ui--panel">
-    <div className="g-ui-head">
+  <div className="g-ui g-ui--panel" style={{ maxWidth: 640, margin: '0 auto' }}>
+    <div className="g-pdf-head" style={{ borderRadius: 0 }}>
+      <span className="g-pdf-logo">GC</span>
       <div>
-        <div className="g-ui-head-title">Discharge summary — Joseph K · 58 / M</div>
-        <div className="g-ui-head-sub">IP 2214 · Admitted 28 Jun → Discharged 4 Jul</div>
+        <div className="g-pdf-clinic">Greenfield Clinic</div>
+        <div className="g-pdf-contact">Discharge summary — Joseph K · 58 / M · IP 2214</div>
       </div>
-      <span className="g-ui-tag">Assembled from stay</span>
+      <div className="g-pdf-eyebrow"><small>28 Jun → 4 Jul</small><b>Assembled from stay</b></div>
     </div>
     <div style={{ padding: '10px 16px 14px' }}>
       <div className="g-ui-field">
@@ -205,7 +201,6 @@ export const RegisterShowcase: React.FC = () => {
             ))}
           </div>
           <div className="g-showcase">
-            <img className="g-scene-corner" src="/illustrations/ill_verify.webp" alt="" aria-hidden="true" />
             <div className="g-showcase-inner" key={active.key}>
               {active.el}
             </div>

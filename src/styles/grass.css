@@ -710,3 +710,10 @@ html.js .g-rv.g-d4 { transition-delay: .24s; }
 #six-year-test .g-quote { margin-top: 32px; }
 #six-year-test .g-quote p { font-size: clamp(17px, 1.8vw, 24px); }
 #six-year-test .g-srcs { margin-top: 20px; }
+
+/* differentiated tab surfaces */
+.g-inc-row { display: flex; gap: 12px; padding: 10px 16px; align-items: flex-start; border-bottom: 1px solid var(--g-line-soft); }
+.g-inc-dot { width: 10px; height: 10px; border-radius: 50%; margin-top: 5px; flex: none; }
+.g-inc-dot--med { background: #F2A93B; } .g-inc-dot--low { background: #2FA96E; }
+.g-inc-t { font-size: 12.5px; font-weight: 700; } .g-inc-m { font-size: 11px; color: var(--g-ink-faint); }
+.g-inc-row .g-ui-tag { margin-left: auto; flex: none; }
