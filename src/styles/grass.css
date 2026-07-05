@@ -554,7 +554,7 @@ html.js .g-rv.g-d4 { transition-delay: .24s; }
 .g-panel-scene { position: relative; }
 .g-panel-scene .g-scene-img { position: absolute; width: 168px; z-index: 3; filter: drop-shadow(0 16px 30px rgba(15,23,42,.18)); pointer-events: none; }
 .g-panel-scene .g-scene-img--bl { bottom: -56px; left: -58px; transform: rotate(-4deg); }
-.g-panel-scene .g-scene-img--br { bottom: -52px; right: -46px; transform: rotate(3deg); }
+.g-panel-scene .g-scene-img--br { bottom: -74px; right: -72px; transform: rotate(3deg); width: 150px; }
 @media (max-width: 900px) { .g-panel-scene .g-scene-img { display: none; } }
 
 /* the living world interlude */
@@ -593,3 +593,41 @@ html.js .g-rv.g-d4 { transition-delay: .24s; }
 .g-fc-config .g-fc-prompt { font-size: 10.5px; color: var(--g-ink-soft); font-style: italic; }
 .g-fc-config .g-fc-toggles { display: flex; gap: 10px; margin-top: 7px; font-size: 9.5px; font-weight: 700; color: var(--g-ink-faint); }
 .g-fc-config .g-fc-toggles b { color: var(--g-green); }
+
+/* ============================================================
+   Organic pass — the thread of sound + flowing overlaps
+   ============================================================ */
+.g-organic { position: relative; }
+.g-organic .g-section + .g-section { border-top: none; }
+.g-thread { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+.g-thread svg { width: 100%; height: 100%; }
+.g-thread path {
+  fill: none; stroke: url(#g-thread-grad); stroke-width: 3.5px;
+  vector-effect: non-scaling-stroke; stroke-linecap: round;
+  stroke-dasharray: 1; stroke-dashoffset: calc(1 - var(--g-p, 0));
+  opacity: .5;
+}
+.g-organic .g-section { position: relative; background: transparent; }
+.g-organic .g-container { position: relative; z-index: 2; }
+
+/* soft organic auras behind alternating sections */
+.g-organic .g-section--muted { background: transparent; }
+.g-organic .g-section--muted::before {
+  content: ""; position: absolute; inset: 6% 4%; z-index: 0; border-radius: 50%;
+  background: radial-gradient(55% 55% at 50% 45%, #F0F6F4 0%, rgba(240,246,244,0) 70%);
+}
+
+/* film slot overlaps the hero band */
+.g-film-wrap { margin-top: -46px; position: relative; z-index: 6; }
+
+/* organic card postures */
+.g-tpl:nth-child(3n+1) { transform: rotate(-.8deg); }
+.g-tpl:nth-child(3n+2) { transform: rotate(.6deg); }
+.g-tpl:hover { transform: rotate(0) translateY(-3px); }
+
+/* drifting ambient docs in the organic zone */
+.g-organic .g-sprite--amb { position: absolute; width: 34px; z-index: 1; opacity: 0; animation: g-drift 14s ease-in-out infinite; }
+.g-organic .g-sprite--amb1 { top: 18%; right: 7%; }
+.g-organic .g-sprite--amb2 { top: 52%; left: 5%; animation-delay: 5s; animation-duration: 17s; }
+.g-organic .g-sprite--amb3 { top: 78%; right: 9%; animation-delay: 9s; }
+@media (prefers-reduced-motion: reduce) { .g-thread path { stroke-dashoffset: 0; } .g-organic .g-sprite--amb { animation: none; opacity: .5; } }

@@ -5,6 +5,7 @@ import { RegisterShowcase } from '../components/grass/RegisterShowcase';
 import { FormBuilderSection, PolicyEngineSection, TemplateLibrary, PdfSection } from '../components/grass/ProductSections';
 import { SixYearGrass } from '../components/grass/EvidenceGrass';
 import { HospitalsBand, PricingTeaserGrass, FinalCTAGrass } from '../components/grass/CommercialGrass';
+import { OrganicWrap } from '../components/grass/OrganicWrap';
 import { Footer } from '../components/Footer';
 
 export const LandingPage = () => {
@@ -20,6 +21,7 @@ export const LandingPage = () => {
       <main style={{ flex: 1, zIndex: 10, background: '#fff' }}>
         {/* Hook + hero illustration + demo film slot */}
         <HeroGrass />
+        <OrganicWrap>
         {/* The real form builder */}
         <FormBuilderSection />
         {/* The real policy engine */}
@@ -30,6 +32,7 @@ export const LandingPage = () => {
         <RegisterShowcase />
         {/* The themed PDF with the SHA-256 footer */}
         <PdfSection />
+        </OrganicWrap>
         {/* The worst-day closer — sourced */}
         <SixYearGrass />
         {/* Hospitals — HMIS layer */}
