@@ -1,51 +1,16 @@
 import { Link } from 'react-router-dom';
-import { Header } from '../components/Header';
-import { Footer } from '../components/Footer';
+
 import { SEO } from '../components/SEO';
-import {
-  WorkflowSection,
-  StatsBar,
-  BeforeAfter,
-  HonestScope,
-  PricingTeaser,
-} from '../components/VerticalSections';
+import { GrassFooter } from '../components/grass/GrassFooter';
+import { GrassHeader } from '../components/grass/GrassHeader';
+import { Rv } from '../components/grass/Rv';
 import { ALLIED_DISCIPLINES } from '../data/alliedDisciplines';
 
-const ACCENT = '#0891B2';
-const ACCENT_SOFT = 'rgba(8,145,178,0.07)';
+// /allied-health — umbrella vertical for six disciplines (physio, osteo,
+// chiro, OT, podiatry, speech). One engine, per-discipline framework packs.
+// Grass design language.
 
-const COUNTRY_GROUPS = [
-  {
-    code: 'IN',
-    label: 'India',
-    accent: '#0891B2',
-    note: 'NCAHP statutory register; RCI registration for rehabilitation professionals.',
-  },
-  {
-    code: 'IN',
-    label: 'India',
-    accent: '#FF4E00',
-    note: 'NCAHP profession councils for physio, OT, podiatry; RCI for audiology & speech-language pathology.',
-  },
-  {
-    code: 'IN',
-    label: 'India',
-    accent: '#F59E0B',
-    note: 'State Allied & Healthcare Councils under NCAHP for physio, OT, osteo, chiro, podiatry.',
-  },
-  {
-    code: 'IN',
-    label: 'India',
-    accent: '#10B981',
-    note: 'NCAHP discipline-specific categories plus RCI for rehabilitation and communication disorders.',
-  },
-  {
-    code: 'IN',
-    label: 'India',
-    accent: '#6366F1',
-    note: 'ABDM-aligned record-keeping and DPDP Act data-protection duties across every discipline.',
-  },
-];
+const REGULATORS = ['NCAHP', 'RCI', 'NABH', 'ABDM', 'CEA 2010', 'DPDP Act'];
 
 const FAQS = [
   {
@@ -74,6 +39,78 @@ const FAQS = [
   },
 ];
 
+const EPISODE_CARDS: { img: string; label: string; value: string }[] = [
+  { img: '/illustrations/tpl_painad.webp', label: 'Outcome measures', value: 'NPRS, ROM, functional scores — tracked across the episode, not scattered in prose.' },
+  { img: '/illustrations/tpl_allied.webp', label: 'Treatment & exercise log', value: 'Session-by-session record of what was done, progressed and prescribed.' },
+  { img: '/illustrations/vet_estimate.webp', label: 'Consent documentation', value: 'Discipline-specific consent captured and signed before treatment.' },
+  { img: '/illustrations/tpl_work_cert.webp', label: 'Discharge summary', value: 'Assembled from the episode itself — outcomes in, summary out.' },
+];
+
+const FRAMEWORK_FACTS: { label: string; value: string }[] = [
+  { label: 'NCAHP', value: 'Statutory register and record-keeping norms' },
+  { label: 'Profession councils', value: 'Physio, OT, podiatry, SLP councils under NCAHP' },
+  { label: 'RCI', value: 'Rehabilitation and communication-disorder professionals' },
+  { label: 'ABDM', value: 'ABHA-linked, FHIR-structured record output' },
+  { label: 'DPDP Act', value: 'Data-protection duties across every discipline' },
+];
+
+const SCOPE_DO: { title: string; body: string }[] = [
+  { title: 'Voice → session record', body: 'Audio in any Indian language becomes a structured SOAP record with outcome measures — timestamped per session.' },
+  { title: 'Episode-of-care tracking', body: 'Sessions numbered within the episode; progress visible across the whole course of care.' },
+  { title: 'Consent + treatment log', body: 'Discipline-specific consent and a session-by-session treatment and exercise log.' },
+  { title: 'Discharge summary', body: 'Built from the sealed session records — not retyped at the end.' },
+  { title: 'Framework-aware records', body: 'Your discipline and country load the matching regulator pack into every AI generation.' },
+];
+
+const SCOPE_DONT: string[] = [
+  'Replace your practice management software',
+  'Bill clients or process payments directly',
+  'Make you accredited or claim regulatory sign-off on your behalf',
+  'Auto-publish records without your review',
+  'Provide clinical decision-making — you stay in the loop',
+];
+
+// Drawn product UI: a physio session record with outcome measures.
+const SessionPanel = () => (
+  <div className="g-ui g-ui--panel">
+    <div className="g-ui-head">
+      <div>
+        <div className="g-ui-head-title">Session 6 of 12 — Ramesh P · 54 / M</div>
+        <div className="g-ui-head-sub">Physiotherapy · post-TKR rehab · 6 Jul, 5:20 pm · Anjali R, PT</div>
+      </div>
+      <span className="g-ui-tag">Outcome measures updated</span>
+    </div>
+    <div style={{ padding: '10px 16px 14px' }}>
+      <div className="g-ui-field">
+        <span className="g-ui-f-label">Subjective</span>
+        <span className="g-ui-f-value">Pain settling · stairs improving</span>
+        <span className="g-ui-conf">AI · 97%</span>
+      </div>
+      <div className="g-ui-field">
+        <span className="g-ui-f-label">Objective</span>
+        <span className="g-ui-f-value">Knee flexion 105° · quads 4/5</span>
+        <span className="g-ui-conf">AI · 96%</span>
+      </div>
+      <div className="g-ui-evidence">"…flexion ab ek sau paanch tak… seedhiyon pe kam dard…"</div>
+      <div className="g-ui-field">
+        <span className="g-ui-f-label">NPRS</span>
+        <span className="g-ui-f-value">3/10 — down from 6/10 at intake</span>
+        <span className="g-ui-conf">AI · 98%</span>
+      </div>
+      <div className="g-ui-field">
+        <span className="g-ui-f-label">Plan</span>
+        <span className="g-ui-f-value">Progress closed-chain loading · HEP updated<span className="g-ui-badge-edited">EDITED</span></span>
+        <span className="g-ui-conf g-ui-conf--med"><span className="g-ui-glyph">≈</span>AI · 75%</span>
+      </div>
+      <div className="g-ui-meta-row">
+        <span className="g-ui-audio-play"><i />Original audio · 0:38</span>
+        <span className="g-ui-tag g-ui-tag--ink">hi-IN + en</span>
+        <span className="g-ui-tag g-ui-tag--ink">Signed — Anjali R · NCAHP reg. no.</span>
+      </div>
+    </div>
+  </div>
+);
+
 export const AlliedHealthPage = () => {
   const faqSchema = JSON.stringify({
     '@context': 'https://schema.org',
@@ -86,7 +123,7 @@ export const AlliedHealthPage = () => {
   });
 
   return (
-    <div style={{ backgroundColor: '#fff', minHeight: '100vh' }}>
+    <>
       <SEO
         title="Allied Health Documentation & Records Software"
         description="Salvia keeps allied health records audit-ready for NCAHP, RCI, ABDM and the DPDP Act. Voice note after each session in any Indian language — SOAP record, outcome measures, treatment log, discharge summary, audit trail. Physio, osteo, chiro, OT, podiatry, speech."
@@ -98,372 +135,287 @@ export const AlliedHealthPage = () => {
         ]}
       />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: faqSchema }} />
-      <Header />
-      <main style={{ flex: 1, zIndex: 10 }}>
+      <GrassHeader />
+      <main style={{ flex: 1, zIndex: 10, background: '#fff' }}>
 
-      {/* Hero */}
-      <section style={{ padding: '11rem 0 7rem', backgroundColor: 'var(--salvia-bg)' }}>
-        <div className="container" style={{ maxWidth: '960px', textAlign: 'center' }}>
-          <div style={{
-            display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
-            backgroundColor: ACCENT_SOFT, border: `1.5px solid ${ACCENT}33`,
-            borderRadius: 'var(--radius-md)', padding: '0.35rem 0.85rem', marginBottom: '2rem',
-          }}>
-            <span style={{ fontSize: 'var(--text-xs)', fontWeight: 800, color: ACCENT, letterSpacing: '0.1em', textTransform: 'uppercase' }}>
-              Allied Health
-            </span>
-          </div>
-          <h1 style={{
-            fontSize: 'var(--text-display)', fontWeight: 800,
-            letterSpacing: '-0.04em', lineHeight: 1,
-            color: 'var(--salvia-primary)', marginBottom: '1.75rem',
-          }}>
-            Records that map to<br />your regulator.
-          </h1>
-          <p style={{
-            fontSize: 'clamp(1rem, 2.5vw, 1.25rem)',
-            color: 'var(--salvia-text-muted)', lineHeight: 1.65,
-            maxWidth: '700px', margin: '0 auto 3rem',
-          }}>
-            NCAHP. RCI. ABDM. DPDP Act. One voice note per session, in any Indian language — Salvia generates the structured record, outcome measures, consent, treatment log, and discharge summary against the framework that governs you.
-          </p>
-          <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-            <Link to="/start" style={{
-              display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
-              backgroundColor: 'var(--salvia-accent)', color: '#fff',
-              padding: '0.85rem 1.75rem', borderRadius: 'var(--radius-md)',
-              fontWeight: 700, fontSize: 'var(--text-base)', textDecoration: 'none',
-            }}>
-              Book a demo
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                <line x1="5" y1="12" x2="19" y2="12" />
-                <polyline points="12 5 19 12 12 19" />
-              </svg>
-            </Link>
-            <Link to="/pricing" style={{
-              display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
-              backgroundColor: 'transparent', color: 'var(--salvia-primary)',
-              padding: '0.85rem 1.75rem', borderRadius: 'var(--radius-md)',
-              fontWeight: 700, fontSize: 'var(--text-base)', textDecoration: 'none',
-              border: '1.5px solid var(--border-strong)',
-            }}>
-              See pricing
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* Discipline grid */}
-      <section style={{ borderTop: '1px solid var(--border-subtle)', padding: 'var(--section-pad) 0', backgroundColor: '#fff' }}>
-        <div className="container" style={{ maxWidth: '1200px' }}>
-          <div style={{ textAlign: 'center', marginBottom: '3.5rem' }}>
-            <div className="eyebrow" style={{ color: ACCENT, marginBottom: '0.75rem' }}>
-              Six disciplines, one product
+        {/* Hero */}
+        <section className="g-section" style={{ padding: '148px 0 72px' }}>
+          <div className="g-container">
+            <div className="g-split">
+              <div>
+                <Rv as="h1" className="g-h1" style={{ fontSize: 'clamp(38px, 4.6vw, 66px)', marginBottom: 20 }}>
+                  Records that map to <span className="g-hl">your regulator.</span>
+                </Rv>
+                <Rv as="p" className="g-sub" delay={1}>
+                  NCAHP. RCI. ABDM. DPDP Act. One voice note per session, in any Indian
+                  language — Salvia generates the <b>structured record, outcome measures,
+                  consent, treatment log and discharge summary</b> against the framework that
+                  governs you.
+                </Rv>
+                <Rv className="g-hero-ctas" delay={2} style={{ justifyContent: 'flex-start', marginTop: 30 }}>
+                  <Link className="g-btn g-btn--green" to="/start">
+                    Book a demo
+                  </Link>
+                  <Link className="g-btn g-btn--ghost" to="/pricing">
+                    See pricing
+                  </Link>
+                </Rv>
+              </div>
+              <Rv className="g-split-art" delay={1}>
+                <img
+                  src="/illustrations/allied_world.webp"
+                  alt="A miniature rehabilitation studio where a session becomes documents sealed in a vault"
+                />
+              </Rv>
             </div>
-            <h2 style={{
-              fontSize: 'var(--text-3xl)', fontWeight: 800,
-              color: 'var(--salvia-primary)', letterSpacing: '-0.03em', margin: 0,
-            }}>
-              Find your discipline.
-            </h2>
-            <p style={{
-              color: 'var(--salvia-text-muted)', fontSize: 'var(--text-base)',
-              maxWidth: '620px', margin: '0.75rem auto 0', lineHeight: 1.65,
-            }}>
-              Each page covers the regulator pack, record format, and FAQ specific to your work.
-            </p>
+            <Rv delay={3} style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap', marginTop: 52 }}>
+              <span className="g-small" style={{ fontWeight: 600 }}>Designed for</span>
+              {REGULATORS.map((r) => (
+                <span
+                  key={r}
+                  style={{
+                    fontFamily: 'var(--g-font)', fontSize: 12.5, fontWeight: 700,
+                    color: 'var(--g-ink-soft)', border: '1px solid var(--g-line)',
+                    borderRadius: 999, padding: '5px 13px',
+                  }}
+                >
+                  {r}
+                </span>
+              ))}
+            </Rv>
           </div>
+        </section>
 
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-            gap: '1.25rem',
-          }}>
-            {ALLIED_DISCIPLINES.map((d) => (
-              <Link
-                key={d.slug}
-                to={`/${d.slug}`}
-                style={{ textDecoration: 'none' }}
-                className={`allied-discipline-card-${d.key}`}
-              >
-                <div style={{
-                  padding: '2rem',
-                  borderRadius: 'var(--radius-lg)',
-                  border: '1px solid var(--border-subtle)',
-                  backgroundColor: '#FAFBFC',
-                  height: '100%',
-                  display: 'flex', flexDirection: 'column', gap: '1rem',
-                  transition: 'all 0.2s ease',
-                }}>
-                  <div style={{
-                    width: '46px', height: '46px', borderRadius: 'var(--radius-md)',
-                    backgroundColor: d.accentSoft,
-                    color: d.accent,
-                    display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    fontWeight: 800, fontSize: 'var(--text-md)',
-                    letterSpacing: '-0.02em',
-                  }}>
-                    {d.shortName.slice(0, 2).toUpperCase()}
-                  </div>
-                  <div>
-                    <div className="eyebrow" style={{ color: d.accent, marginBottom: '0.35rem' }}>
-                      Salvia for
-                    </div>
-                    <h3 style={{
-                      fontSize: 'var(--text-md)', fontWeight: 800,
-                      color: 'var(--salvia-primary)', letterSpacing: '-0.02em',
-                      margin: '0 0 0.5rem',
-                    }}>
-                      {d.name}
-                    </h3>
-                    <div style={{
-                      display: 'flex', flexWrap: 'wrap', gap: '0.35rem',
-                      marginBottom: '0.5rem',
-                    }}>
+        {/* Discipline grid */}
+        <section className="g-section">
+          <div className="g-container">
+            <Rv as="h2" className="g-h2">
+              Six disciplines. <span className="g-hl">Find yours.</span>
+            </Rv>
+            <Rv as="p" className="g-sub" delay={1}>
+              Each page covers the regulator pack, record format and FAQ specific to your work.
+            </Rv>
+            <div className="g-grid">
+              {ALLIED_DISCIPLINES.map((d, i) => (
+                <Rv key={d.slug} delay={(Math.min(i + 1, 4)) as 1 | 2 | 3 | 4}>
+                  <Link to={`/${d.slug}`} className="g-card" style={{ display: 'block', textDecoration: 'none', height: '100%' }}>
+                    <h3 className="g-h3">{d.name}</h3>
+                    <div className="g-tpl-meta" style={{ margin: '10px 0 14px' }}>
                       {d.regulators.slice(0, 4).map((r) => (
-                        <span key={`${d.slug}-${r.body}`} style={{
-                          fontSize: 'var(--text-2xs)', fontWeight: 800,
-                          padding: '0.15rem 0.5rem', borderRadius: 'var(--radius-sm)',
-                          backgroundColor: '#fff',
-                          color: r.color,
-                          border: '1px solid var(--border-subtle)',
-                          letterSpacing: '0.04em',
-                        }}>{r.body}</span>
+                        <span key={r.body}>{r.body}</span>
                       ))}
                     </div>
-                  </div>
-                  <div style={{
-                    marginTop: 'auto',
-                    fontSize: 'var(--text-xs)', fontWeight: 700, color: d.accent,
-                    display: 'inline-flex', alignItems: 'center', gap: '0.35rem',
-                  }}>
-                    {d.name.replace(' & Language Therapy', '')} page
-                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                      <line x1="5" y1="12" x2="19" y2="12" />
-                      <polyline points="12 5 19 12 12 19" />
-                    </svg>
-                  </div>
-                </div>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Stats bar */}
-      <StatsBar accent={ACCENT} />
-
-      {/* How it works */}
-      <WorkflowSection
-        accent={ACCENT}
-        verticalLabel="Allied health"
-      />
-
-      {/* Country frameworks grid */}
-      <section style={{ padding: 'var(--section-pad) 0', backgroundColor: 'var(--salvia-bg)', borderTop: '1px solid var(--border-subtle)' }}>
-        <div className="container" style={{ maxWidth: '1200px' }}>
-          <div style={{ textAlign: 'center', marginBottom: '3.5rem' }}>
-            <div className="eyebrow" style={{ color: ACCENT, marginBottom: '0.75rem' }}>
-              Built for your country's frameworks
+                    <p style={{ color: 'var(--g-green)', fontWeight: 600 }}>
+                      Salvia for {d.shortName} →
+                    </p>
+                  </Link>
+                </Rv>
+              ))}
             </div>
-            <h2 style={{
-              fontSize: 'var(--text-3xl)', fontWeight: 800,
-              color: 'var(--salvia-primary)', letterSpacing: '-0.03em', margin: 0,
-            }}>
-              One product, every framework that governs you.
-            </h2>
-            <p style={{
-              color: 'var(--salvia-text-muted)', fontSize: 'var(--text-base)',
-              maxWidth: '600px', margin: '0.75rem auto 0', lineHeight: 1.65,
-            }}>
-              The AI loads your regulator's record-keeping pack into every generation. You see which framework is active, and you can adjust the set in settings.
-            </p>
           </div>
+        </section>
 
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-            gap: '1.25rem',
-          }}>
-            {COUNTRY_GROUPS.map((c) => (
-              <div key={c.code} style={{
-                padding: '1.75rem',
-                borderRadius: 'var(--radius-lg)',
-                backgroundColor: '#fff',
-                border: '1px solid var(--border-subtle)',
-              }}>
-                <div style={{
-                  display: 'flex', alignItems: 'center',
-                  justifyContent: 'space-between', marginBottom: '1rem',
-                }}>
-                  <div>
-                    <div className="eyebrow" style={{ color: 'var(--salvia-text-muted)', marginBottom: '0.2rem' }}>
-                      {c.code}
+        {/* Voice → session record */}
+        <section className="g-section">
+          <div className="g-container">
+            <div className="g-split">
+              <div>
+                <Rv as="h2" className="g-h2">
+                  One voice note per session. <span className="g-hl">The whole episode.</span>
+                </Rv>
+                <Rv as="p" className="g-sub" delay={1}>
+                  Allied caseloads run short, frequent sessions — typing after each one is how
+                  records fall behind. Speak for 30 seconds instead: Salvia structures the{' '}
+                  <b>SOAP record and outcome measures</b>, numbers the session within its
+                  episode, and keeps the original audio attached.
+                </Rv>
+                <Rv className="g-facts" delay={2}>
+                  <div className="g-fact"><span>Outcome measures</span><b>Tracked across the episode of care</b></div>
+                  <div className="g-fact"><span>Sessions</span><b>Numbered within the episode, timestamped</b></div>
+                  <div className="g-fact"><span>Framework pack</span><b>Loaded per discipline and country</b></div>
+                  <div className="g-fact"><span>Attribution</span><b>Each clinician signs with their own registration</b></div>
+                </Rv>
+              </div>
+              <Rv className="g-split-art" delay={1} style={{ display: 'block' }}>
+                <SessionPanel />
+              </Rv>
+            </div>
+          </div>
+        </section>
+
+        {/* The episode file */}
+        <section className="g-section g-center">
+          <div className="g-container">
+            <Rv as="h2" className="g-h2">
+              The episode file, <span className="g-hl">complete.</span>
+            </Rv>
+            <Rv as="p" className="g-sub" delay={1}>
+              The four records that decide complaints, audits and insurer queries — assembled
+              from the sessions themselves.
+            </Rv>
+            <div className="g-tpl-grid" style={{ textAlign: 'left', marginTop: 52 }}>
+              {EPISODE_CARDS.map((f, i) => (
+                <Rv className="g-card" key={f.label} delay={(Math.min(i + 1, 4)) as 1 | 2 | 3 | 4}>
+                  <img src={f.img} alt="" loading="lazy" />
+                  <h3 className="g-h3" style={{ fontSize: 17 }}>{f.label}</h3>
+                  <p>{f.value}</p>
+                </Rv>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Frameworks */}
+        <section className="g-section">
+          <div className="g-container">
+            <div className="g-split" style={{ alignItems: 'start' }}>
+              <div>
+                <Rv as="h2" className="g-h2">
+                  One product, <span className="g-hl">every framework</span> that governs you.
+                </Rv>
+                <Rv as="p" className="g-sub" delay={1}>
+                  The AI loads your regulator's record-keeping pack into every generation. You
+                  see which framework is active, and you can adjust the set in settings —
+                  multi-select what applies to your clinic.
+                </Rv>
+              </div>
+              <Rv delay={2}>
+                <div className="g-facts" style={{ marginTop: 8 }}>
+                  {FRAMEWORK_FACTS.map((f) => (
+                    <div className="g-fact" key={f.label}>
+                      <span>{f.label}</span>
+                      <b>{f.value}</b>
                     </div>
-                    <div style={{
-                      fontSize: 'var(--text-md)', fontWeight: 800,
-                      color: 'var(--salvia-primary)',
-                      letterSpacing: '-0.02em',
-                    }}>
-                      {c.label}
-                    </div>
-                  </div>
-                  <div style={{
-                    width: '32px', height: '32px', borderRadius: '50%',
-                    backgroundColor: `${c.accent}15`,
-                    color: c.accent,
-                    fontSize: 'var(--text-sm)', fontWeight: 800,
-                    display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  }}>
-                    {c.code}
-                  </div>
-                </div>
-                <p style={{
-                  fontSize: 'var(--text-xs)', color: 'var(--salvia-text)',
-                  lineHeight: 1.55, marginBottom: '1rem', margin: '0 0 1rem',
-                }}>
-                  {c.note}
-                </p>
-                <div style={{
-                  display: 'flex', flexWrap: 'wrap', gap: '0.4rem',
-                }}>
-                  {/* All unique framework bodies for this country across disciplines */}
-                  {[...new Set(
-                    ALLIED_DISCIPLINES
-                      .flatMap((d) => d.regulators)
-                      .filter((r) => r.countryCode === c.code)
-                      .map((r) => r.body)
-                  )].map((body) => (
-                    <span key={`${c.code}-${body}`} style={{
-                      fontSize: 'var(--text-2xs)', fontWeight: 800,
-                      padding: '0.25rem 0.55rem', borderRadius: 'var(--radius-sm)',
-                      backgroundColor: '#FAFBFC',
-                      color: c.accent,
-                      border: '1px solid var(--border-subtle)',
-                      letterSpacing: '0.03em',
-                    }}>{body}</span>
                   ))}
                 </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Before vs After */}
-      <BeforeAfter
-        accent={ACCENT}
-        beforeLines={[
-          `End-of-day typing into a generic SOAP template. Hour spent on records that should've been spent with the next patient.`,
-          `Outcome measures captured on paper — sometimes — never compared episode-over-episode.`,
-          `Consent form signed once, filed once, lost twice during the audit.`,
-          `Inspector asks for a complete file. You spend the afternoon searching.`,
-          `Locum signs the same generic note your principal does — no clear attribution.`,
-          `NCAHP norms change every couple of years. You scramble to update your templates.`,
-        ]}
-        afterLines={[
-          `Voice note after each session. AI lays the structured record out. You review and sign in seconds.`,
-          `Validated outcome scales as first-class fields. Trend across the episode shows on the discharge summary automatically.`,
-          `Procedure-specific consent locked to the record at signing. Always there, always attributed.`,
-          `Inspector asks for a complete file. You export it in under a minute.`,
-          `Every signature carries the clinician's registration. Locum and principal records visually distinct.`,
-          `Regulator publishes new standards. We update the framework pack. Your future records use it automatically.`,
-        ]}
-      />
-
-      {/* Honest scope */}
-      <HonestScope
-        accent={ACCENT}
-        doLines={[
-          `Audio → structured allied health record (SOAP, intake, treatment, discharge)`,
-          `Outcome measures + episode tracking`,
-          `Procedure-specific consent templates with e-signature`,
-          `Immutable audit trail with per-clinician attribution`,
-          `Framework-aware generation against your regulator's standards`,
-          `Multi-clinician, multi-discipline MDT practice support`,
-        ]}
-        dontLines={[
-          `Replace your practice management software`,
-          `Bill insurers or process payments directly`,
-          `Claim regulatory sign-off on your behalf`,
-          `Auto-publish records without your review`,
-          `Provide clinical decision-making — you stay in the loop`,
-          `Substitute for your own knowledge of your discipline's standards`,
-        ]}
-      />
-
-      {/* Pricing teaser */}
-      <PricingTeaser
-        accent={ACCENT}
-        vertical="allied_health"
-        fromPriceCopy="Allied health documentation, from ₹1,000/mo."
-      />
-
-      {/* FAQ */}
-      <section style={{ padding: 'var(--section-pad) 0', backgroundColor: 'var(--salvia-bg)', borderTop: '1px solid var(--border-subtle)' }}>
-        <div className="container" style={{ maxWidth: '760px' }}>
-          <div style={{ textAlign: 'center', marginBottom: '3.5rem' }}>
-            <div className="eyebrow" style={{ color: ACCENT, marginBottom: '0.75rem' }}>
-              Common questions
+              </Rv>
             </div>
-            <h2 style={{ fontSize: 'var(--text-2xl)', fontWeight: 800, color: 'var(--salvia-primary)', letterSpacing: '-0.03em' }}>
-              What allied health practices ask us
-            </h2>
           </div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-            {FAQS.map((faq, i) => (
-              <div key={i} style={{
-                padding: '1.75rem 2rem', borderRadius: 'var(--radius-md)',
-                border: '1px solid var(--border-subtle)', backgroundColor: '#fff',
-              }}>
-                <h3 style={{ fontSize: 'var(--text-base)', fontWeight: 700, color: 'var(--salvia-primary)', marginBottom: '0.65rem' }}>{faq.q}</h3>
-                <p style={{ fontSize: 'var(--text-sm)', color: 'var(--salvia-text-muted)', lineHeight: 1.65, margin: 0 }}>{faq.a}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+        </section>
 
-      {/* CTA */}
-      <section style={{ padding: 'var(--section-pad) 0', backgroundColor: '#fff', borderTop: '1px solid var(--border-subtle)', textAlign: 'center' }}>
-        <div className="container" style={{ maxWidth: '600px' }}>
-          <div className="eyebrow" style={{ color: ACCENT, marginBottom: '1rem' }}>
-            Get started
+        {/* Honest scope */}
+        <section className="g-section">
+          <div className="g-container">
+            <Rv as="h2" className="g-h2">
+              What it does — <span className="g-hl">and what it doesn't.</span>
+            </Rv>
+            <Rv as="p" className="g-sub" delay={1}>
+              Salvia is the compliance and records layer that sits alongside your practice
+              software. It never replaces booking or billing, and it never signs for you.
+            </Rv>
+            <div className="g-split" style={{ alignItems: 'start', marginTop: 24 }}>
+              <div>
+                {SCOPE_DO.map((s, i) => (
+                  <Rv className="g-check" key={s.title} delay={(Math.min(i + 1, 4)) as 1 | 2 | 3 | 4}>
+                    <span className="g-ck">✓</span>
+                    <div>
+                      <h4>{s.title}</h4>
+                      <p>{s.body}</p>
+                    </div>
+                  </Rv>
+                ))}
+              </div>
+              <Rv delay={2}>
+                <h3 className="g-h3" style={{ marginTop: 22 }}>Salvia won't</h3>
+                <div className="g-facts" style={{ marginTop: 14 }}>
+                  {SCOPE_DONT.map((line) => (
+                    <div className="g-fact" key={line} style={{ justifyContent: 'flex-start' }}>
+                      <span style={{ flex: 'none' }}>✕</span>
+                      <b style={{ textAlign: 'left', fontWeight: 500, color: 'var(--g-ink-soft)' }}>{line}</b>
+                    </div>
+                  ))}
+                </div>
+              </Rv>
+            </div>
           </div>
-          <h2 style={{ fontSize: 'var(--text-3xl)', fontWeight: 800, color: 'var(--salvia-primary)', letterSpacing: '-0.03em', marginBottom: '1rem' }}>
-            Audit-ready records, from day one.
-          </h2>
-          <p style={{ color: 'var(--salvia-text-muted)', lineHeight: 1.65, marginBottom: '2.5rem' }}>
-            See how Salvia works in a real allied health practice workflow — no slides, no pitch. Book a 20-minute demo.
-          </p>
-          <Link to="/start" style={{
-            display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
-            backgroundColor: 'var(--salvia-accent)', color: '#fff',
-            padding: '0.9rem 2rem', borderRadius: 'var(--radius-md)',
-            fontWeight: 700, fontSize: 'var(--text-base)', textDecoration: 'none',
-          }}>
-            Book a demo
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-              <line x1="5" y1="12" x2="19" y2="12" />
-              <polyline points="12 5 19 12 12 19" />
-            </svg>
-          </Link>
-        </div>
-      </section>
+        </section>
+
+        {/* Pricing teaser */}
+        <section className="g-section g-center">
+          <div className="g-container">
+            <Rv delay={1}>
+              <img
+                src="/illustrations/tpl_allied.webp"
+                alt=""
+                loading="lazy"
+                style={{ width: 120, height: 'auto', margin: '0 auto 18px', display: 'block' }}
+              />
+            </Rv>
+            <Rv as="h2" className="g-h2">
+              From ₹999 a month. <span className="g-hl">Everything included.</span>
+            </Rv>
+            <Rv as="p" className="g-sub" delay={1}>
+              The Starter plan covers 400 AI notes a month with the full compliance suite —
+              outcome measures, consent, incidents, branded PDF export — and <b>unlimited
+              staff</b>. You pay per note, never per clinician.
+            </Rv>
+            <Rv className="g-hero-ctas" delay={2} style={{ marginTop: 30 }}>
+              <Link className="g-btn g-btn--green" to="/start">
+                Start free
+              </Link>
+              <Link className="g-btn g-btn--ghost" to="/pricing">
+                Full pricing
+              </Link>
+            </Rv>
+            <Rv as="p" className="g-hero-note" delay={3}>
+              First 50 notes free · Annual billing = 2 months free · Prices exclude GST
+            </Rv>
+          </div>
+        </section>
+
+        {/* FAQ */}
+        <section className="g-section">
+          <div className="g-container">
+            <Rv as="h2" className="g-h2">
+              What allied clinics <span className="g-hl">ask us.</span>
+            </Rv>
+            <div style={{ maxWidth: 820, marginTop: 40 }}>
+              {FAQS.map((faq, i) => (
+                <Rv key={faq.q} delay={(Math.min(i + 1, 4)) as 1 | 2 | 3 | 4} style={{ borderTop: '1px solid var(--g-line-soft)', padding: '26px 0' }}>
+                  <h3 className="g-h3" style={{ marginBottom: 8 }}>{faq.q}</h3>
+                  <p style={{ fontFamily: 'var(--g-font)', fontSize: 15, color: 'var(--g-ink-soft)', lineHeight: 1.7, margin: 0 }}>
+                    {faq.a}
+                  </p>
+                </Rv>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Final CTA */}
+        <section className="g-final">
+          <div className="g-container">
+            <div className="g-final-grid">
+              <div>
+                <Rv as="h2" className="g-h2">
+                  Six disciplines. <span className="g-hl">One record engine.</span>
+                </Rv>
+                <Rv as="p" className="g-sub" delay={1} style={{ marginTop: 14 }}>
+                  See how Salvia works in a real allied health workflow — no slides, no pitch.
+                  Book a 20-minute demo.
+                </Rv>
+                <Rv className="g-hero-ctas" delay={2} style={{ marginTop: 30 }}>
+                  <Link className="g-btn g-btn--green" to="/start">
+                    Book a demo
+                  </Link>
+                  <Link className="g-btn g-btn--ghost" to="/start">
+                    Start free
+                  </Link>
+                </Rv>
+              </div>
+              <Rv className="g-final-art" delay={1}>
+                <img
+                  src="/illustrations/ill_globe_india.webp"
+                  alt="A globe with a location pin on India"
+                  loading="lazy"
+                />
+              </Rv>
+            </div>
+          </div>
+        </section>
 
       </main>
-      <Footer />
-
-      <style>{`
-        ${ALLIED_DISCIPLINES.map((d) => `
-          .allied-discipline-card-${d.key}:hover > div {
-            border-color: ${d.accent}33;
-            background-color: ${d.accentSoft};
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-2);
-          }
-        `).join('\n')}
-      `}</style>
-    </div>
+      <GrassFooter />
+    </>
   );
 };

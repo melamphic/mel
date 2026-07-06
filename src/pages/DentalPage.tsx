@@ -1,16 +1,15 @@
 import { Link } from 'react-router-dom';
-import { Header } from '../components/Header';
-import { Footer } from '../components/Footer';
-import { SEO } from '../components/SEO';
-import {
-  WorkflowSection,
-  StatsBar,
-  BeforeAfter,
-  HonestScope,
-  PricingTeaser,
-} from '../components/VerticalSections';
 
-const ACCENT = '#10B981';
+import { SEO } from '../components/SEO';
+import { GrassFooter } from '../components/grass/GrassFooter';
+import { GrassHeader } from '../components/grass/GrassHeader';
+import { Rv } from '../components/grass/Rv';
+
+// /dental — the vertical page for Indian dental clinics.
+// Story: audits fail on missing fields (BPE, STE, radiograph justification,
+// treatment plans); Salvia makes them required. Grass design language.
+
+const REGULATORS = ['DCI', 'Dentists Act 1948', 'NABH', 'AERB', 'CEA 2010', 'DPDP Act'];
 
 const FAQS = [
   {
@@ -35,81 +34,125 @@ const FAQS = [
   },
 ];
 
-const REGULATORS = [
-  { label: 'DCI', sub: 'India', color: 'var(--accent-vet)' },
-  { label: 'NABH', sub: 'India', color: 'var(--salvia-accent)' },
-  { label: 'AERB', sub: 'India', color: 'var(--accent-dental)' },
-  { label: 'CEA 2010', sub: 'India', color: '#F59E0B' },
-  { label: 'DPDP Act', sub: 'India', color: '#8B5CF6' },
+const AUDIT_FIELDS: { img: string; label: string; value: string }[] = [
+  { img: '/illustrations/tpl_dental_chart.webp', label: 'BPE & charting', value: 'Required at every exam — the note cannot save without it.' },
+  { img: '/illustrations/dental_xray.webp', label: 'Radiograph justification', value: 'Clinical indication logged per exposure, AERB-aligned.' },
+  { img: '/illustrations/vet_estimate.webp', label: 'Written treatment plans', value: 'Itemised costs, signed before treatment begins.' },
+  { img: '/illustrations/shield_cross.webp', label: 'Medical history review', value: 'Prompted at every visit, review date locked to the record.' },
 ];
 
-const FEATURES = [
-  {
-    icon: (
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-        <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" />
-        <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
-        <line x1="12" y1="19" x2="12" y2="23" /><line x1="8" y1="23" x2="16" y2="23" />
-      </svg>
-    ),
-    title: 'Voice → dental chart',
-    desc: 'Post-consult voice note maps to examination findings, BPE, STE, treatment notes. Contemporaneous timestamp on every record.',
-  },
-  {
-    icon: (
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-        <polyline points="9 11 12 14 22 4" /><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
-      </svg>
-    ),
-    title: 'BPE required at every exam',
-    desc: 'BPE cannot be skipped before saving a check-up record. Missing BPE is among the most common gaps assessors flag in dental record audits.',
-  },
-  {
-    icon: (
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-        <circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" />
-      </svg>
-    ),
-    title: 'Soft tissue exam records',
-    desc: 'STE result is a required field per check-up. Every record shows oral cancer screening was performed — critical in malpractice cases involving late diagnosis.',
-  },
-  {
-    icon: (
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-        <rect x="3" y="3" width="18" height="18" rx="2" /><circle cx="8.5" cy="8.5" r="1.5" />
-        <polyline points="21 15 16 10 5 21" />
-      </svg>
-    ),
-    title: 'Radiograph justification',
-    desc: 'Clinical indication logged per exposure. AERB-aligned justification trail. Produces documentation for any "unnecessary X-ray" complaint.',
-  },
-  {
-    icon: (
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-        <polyline points="14 2 14 8 20 8" /><line x1="16" y1="13" x2="8" y2="13" /><line x1="16" y1="17" x2="8" y2="17" />
-      </svg>
-    ),
-    title: 'Written treatment plans',
-    desc: 'Itemised treatment plan with costs generated before treatment. Patient signs digitally. Documents the informed consent DCI and NABH expect.',
-  },
-  {
-    icon: (
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" /><polyline points="22 4 12 14.01 9 11.01" />
-      </svg>
-    ),
-    title: 'Medical history at every visit',
-    desc: 'System prompts medical history review at appointment start. Review date locked to the record. This is a frequent gap in audited dental charts.',
-  },
+const BEFORE_FACTS: { label: string; value: string }[] = [
+  { label: 'End of day', value: 'Chart updates from memory; BPE skipped on a busy day' },
+  { label: 'Radiographs', value: 'Justification kept "in my head" — an AERB review finds gaps' },
+  { label: 'Treatment plans', value: 'Discussed verbally; the patient disputes the bill afterwards' },
+  { label: 'Visiting dentists', value: 'Different note format, different completeness, different defensibility' },
+  { label: 'The assessor asks', value: 'Fifteen minutes of scrolling for one medical-history entry' },
+];
+
+const AFTER_FACTS: { label: string; value: string }[] = [
+  { label: 'End of appointment', value: 'A voice note in any Indian language; BPE required before the note saves' },
+  { label: 'Radiographs', value: 'Justification captured at the time of exposure — the AERB trail builds itself' },
+  { label: 'Treatment plans', value: 'Itemised costs signed before treatment — consent documented, DCI-ready' },
+  { label: 'Visiting dentists', value: 'Each signs with their own DCI registration number' },
+  { label: 'The assessor asks', value: 'Filter medical-history reviews and export in seconds' },
+];
+
+const SCOPE_DO: { title: string; body: string }[] = [
+  { title: 'Voice → dental chart', body: 'Audio in any Indian language becomes examination findings, BPE, STE and treatment notes — with contemporaneous timestamps.' },
+  { title: 'Radiograph justification', body: 'Clinical indication per exposure with an AERB-aligned audit trail, produced on demand.' },
+  { title: 'Treatment plan + e-signature', body: 'Itemised cost estimate generated and signed before treatment — the informed consent DCI and NABH expect.' },
+  { title: 'Immutable audit trail', body: 'Every edit, addendum and version locked for DCI, NABH and Clinical Establishments Act records.' },
+  { title: 'Multi-dentist clinic', body: 'Role-based access for hygienists, nurses and admin — every clinician signs with their own registration.' },
+];
+
+const SCOPE_DONT: string[] = [
+  'Replace your clinic management software',
+  'Bill insurers or process NHCX claims directly',
+  'Make you NABH-accredited or claim regulatory sign-off on your behalf',
+  'Auto-publish records without your review',
+  'Provide clinical decision-making — you stay in the loop',
 ];
 
 const RECENT_POSTS = [
-  { slug: 'cqc-dental-2026', title: 'NABH dental accreditation 2026 — what assessors actually expect in your clinical notes', tag: 'NABH Assessment' },
-  { slug: 'ahpra-dental-records', title: 'DCI dental complaints are records-first — is your charting defensible?', tag: 'DCI' },
-  { slug: 'malpractice-dental', title: "Missed a perio pocket two years ago — patient now has bone loss. How do I defend my charting?", tag: 'Malpractice' },
-  { slug: 'signed-edits-dental', title: "Billed the wrong NHCX code on a signed note — how do I fix it without looking dodgy?", tag: 'Corrections' },
+  { slug: 'cqc-dental-2026', title: 'NABH dental accreditation 2026 — what assessors actually expect in your clinical notes', tag: 'NABH Assessment', ic: '/illustrations/tpl_work_cert.webp' },
+  { slug: 'ahpra-dental-records', title: 'DCI dental complaints are records-first — is your charting defensible?', tag: 'DCI', ic: '/illustrations/tpl_soap.webp' },
+  { slug: 'malpractice-dental', title: 'Missed a perio pocket two years ago — patient now has bone loss. How do I defend my charting?', tag: 'Malpractice', ic: '/illustrations/shield_cross.webp' },
+  { slug: 'signed-edits-dental', title: 'Billed the wrong NHCX code on a signed note — how do I fix it without looking dodgy?', tag: 'Corrections', ic: '/illustrations/tpl_referral.webp' },
 ];
+
+// Drawn product UI: a dental check-up record with the required fields.
+const DentalExamPanel = () => (
+  <div className="g-ui g-ui--panel">
+    <div className="g-ui-head">
+      <div>
+        <div className="g-ui-head-title">Check-up — Anita Rao · 29 / F</div>
+        <div className="g-ui-head-sub">Dental · 6 Jul, 10:15 am · Dr. Kapoor</div>
+      </div>
+      <span className="g-ui-tag">All required fields captured</span>
+    </div>
+    <div style={{ padding: '10px 16px 14px' }}>
+      <div className="g-ui-field">
+        <span className="g-ui-f-label">Medical history</span>
+        <span className="g-ui-f-value">Reviewed — no changes since January</span>
+        <span className="g-ui-conf">AI · 98%</span>
+      </div>
+      <div className="g-ui-field">
+        <span className="g-ui-f-label">BPE</span>
+        <span className="g-ui-f-value">2 1 2 / 1 1 2</span>
+        <span className="g-ui-conf">AI · 97%</span>
+      </div>
+      <div className="g-ui-field">
+        <span className="g-ui-f-label">Soft tissue exam</span>
+        <span className="g-ui-f-value">NAD — screening documented</span>
+        <span className="g-ui-conf">AI · 96%</span>
+      </div>
+      <div className="g-ui-evidence">"…BPE do-ek-do… soft tissue bilkul normal…"</div>
+      <div className="g-ui-field">
+        <span className="g-ui-f-label">Findings</span>
+        <span className="g-ui-f-value">16 distal caries · 47 fractured cusp<span className="g-ui-badge-edited">EDITED</span></span>
+        <span className="g-ui-conf g-ui-conf--med"><span className="g-ui-glyph">≈</span>AI · 76%</span>
+      </div>
+      <div className="g-ui-field">
+        <span className="g-ui-f-label">Plan</span>
+        <span className="g-ui-f-value">Composite 16 · onlay 47 · fluoride varnish</span>
+        <span className="g-ui-conf">AI · 98%</span>
+      </div>
+      <div className="g-ui-meta-row">
+        <span className="g-ui-audio-play"><i />Original audio · 0:51</span>
+        <span className="g-ui-tag g-ui-tag--ink">hi-IN + en</span>
+        <span className="g-ui-tag g-ui-tag--ink">Signed — Dr. Kapoor · DCI reg. no.</span>
+      </div>
+    </div>
+  </div>
+);
+
+// Drawn product UI: the radiograph justification register.
+const RadiographRegisterPanel = () => (
+  <div className="g-ui g-ui--panel">
+    <div className="g-ui-head">
+      <div>
+        <div className="g-ui-head-title">Radiograph register — justification trail</div>
+        <div className="g-ui-head-sub">AERB-aligned · every exposure indicated</div>
+      </div>
+      <span className="g-ui-tag">Complete</span>
+    </div>
+    <table className="g-ui-table">
+      <thead>
+        <tr><th>Date</th><th>Patient</th><th>View</th><th>Justification</th><th>Dentist</th></tr>
+      </thead>
+      <tbody>
+        <tr><td className="g-dim">6 Jul</td><td>Anita Rao</td><td>IOPA 16</td><td>Suspected proximal caries</td><td className="g-dim">Dr. Kapoor</td></tr>
+        <tr><td className="g-dim">5 Jul</td><td>Vikram S</td><td>Bitewings</td><td>Caries recall — 12 months</td><td className="g-dim">Dr. Kapoor</td></tr>
+        <tr><td className="g-dim">4 Jul</td><td>Meera Pillai</td><td>OPG</td><td>Third molar assessment</td><td className="g-dim">Dr. Shah</td></tr>
+        <tr><td className="g-dim">3 Jul</td><td>Joseph K</td><td>IOPA 47</td><td>Post-endo evaluation</td><td className="g-dim">Dr. Shah</td></tr>
+      </tbody>
+    </table>
+    <div className="g-ui-meta-row" style={{ padding: '12px 16px 14px' }}>
+      <span className="g-ui-tag g-ui-tag--ink">Logged at time of exposure</span>
+      <span className="g-ui-tag g-ui-tag--ink">Produces the AERB trail on demand</span>
+    </div>
+  </div>
+);
 
 export const DentalPage = () => {
   const faqSchema = JSON.stringify({
@@ -123,7 +166,7 @@ export const DentalPage = () => {
   });
 
   return (
-    <div style={{ backgroundColor: '#fff', minHeight: '100vh' }}>
+    <>
       <SEO
         title="Dental Compliance Software"
         description="Salvia keeps dental clinic records audit-ready for DCI, NABH, and AERB. BPE, STE, radiograph justification, and treatment plans captured at every visit — no audit catches you off guard."
@@ -136,290 +179,322 @@ export const DentalPage = () => {
         ]}
       />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: faqSchema }} />
-      <Header />
-      <main style={{ flex: 1, zIndex: 10 }}>
+      <GrassHeader />
+      <main style={{ flex: 1, zIndex: 10, background: '#fff' }}>
 
-      {/* Hero */}
-      <section style={{ padding: '11rem 0 7rem', backgroundColor: 'var(--salvia-bg)' }}>
-        <div className="container" style={{ maxWidth: '1000px', textAlign: 'center' }}>
-          <div style={{
-            display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
-            backgroundColor: 'rgba(5,150,105,0.07)', border: '1.5px solid rgba(5,150,105,0.2)',
-            borderRadius: 'var(--radius-md)', padding: '0.35rem 0.85rem', marginBottom: '2rem',
-          }}>
-            <span style={{ fontSize: 'var(--text-xs)', fontWeight: 800, color: 'var(--accent-dental)', letterSpacing: '0.1em', textTransform: 'uppercase' }}>
-              Dental Practices
-            </span>
-          </div>
-          <h1 style={{
-            fontSize: 'clamp(2.8rem, 7vw, 5rem)', fontWeight: 800,
-            letterSpacing: '-0.04em', lineHeight: 1,
-            color: 'var(--salvia-primary)', marginBottom: '1.75rem',
-          }}>
-            Every field an audit<br />looks for, captured.
-          </h1>
-          <p style={{
-            fontSize: 'clamp(1rem, 2.5vw, 1.25rem)',
-            color: 'var(--salvia-text-muted)', lineHeight: 1.65,
-            maxWidth: '640px', margin: '0 auto 3rem',
-          }}>
-            DCI record-keeping. NABH standards. AERB radiation safety. Voice note after each consult, in any Indian language — BPE, STE, radiograph justification, treatment plan, and audit trail all handled.
-          </p>
-          <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-            <Link to="/start" style={{
-              display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
-              backgroundColor: 'var(--accent-dental)', color: '#fff',
-              padding: '0.85rem 1.75rem', borderRadius: 'var(--radius-md)',
-              fontWeight: 700, fontSize: 'var(--text-base)', textDecoration: 'none',
-            }}>
-              Book a demo
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                <line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" />
-              </svg>
-            </Link>
-            <Link to="/pricing" style={{
-              display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
-              backgroundColor: 'transparent', color: 'var(--salvia-primary)',
-              padding: '0.85rem 1.75rem', borderRadius: 'var(--radius-md)',
-              fontWeight: 700, fontSize: 'var(--text-base)', textDecoration: 'none',
-              border: '1.5px solid rgba(15,23,42,0.15)',
-            }}>
-              See pricing
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* Regulators rail */}
-      <section style={{ borderTop: '1px solid #F1F5F9', borderBottom: '1px solid #F1F5F9', padding: '2rem 0', backgroundColor: '#fff' }}>
-        <div className="container" style={{ maxWidth: '900px' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '2rem', flexWrap: 'wrap', justifyContent: 'center' }}>
-            <span style={{ fontSize: 'var(--text-2xs)', fontWeight: 700, color: 'var(--salvia-text-muted)', letterSpacing: '0.1em', textTransform: 'uppercase', whiteSpace: 'nowrap' }}>
-              Designed for
-            </span>
-            {REGULATORS.map(r => (
-              <div key={r.label} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.1rem' }}>
-                <span style={{ fontSize: 'var(--text-base)', fontWeight: 800, color: r.color, letterSpacing: '-0.02em' }}>{r.label}</span>
-                <span style={{ fontSize: 'var(--text-2xs)', fontWeight: 600, color: 'var(--salvia-text-muted)', letterSpacing: '0.04em' }}>{r.sub}</span>
+        {/* Hero */}
+        <section className="g-section" style={{ padding: '148px 0 72px' }}>
+          <div className="g-container">
+            <div className="g-split">
+              <div>
+                <Rv as="h1" className="g-h1" style={{ fontSize: 'clamp(38px, 4.6vw, 66px)', marginBottom: 20 }}>
+                  Every field an audit looks for. <span className="g-hl">Captured.</span>
+                </Rv>
+                <Rv as="p" className="g-sub" delay={1}>
+                  DCI record-keeping. NABH standards. AERB radiation safety. One voice note after
+                  each appointment, in any Indian language — <b>BPE, STE, radiograph
+                  justification, treatment plan and audit trail</b> all handled. Your clinic
+                  software keeps booking and billing; Salvia keeps you defensible.
+                </Rv>
+                <Rv className="g-hero-ctas" delay={2} style={{ justifyContent: 'flex-start', marginTop: 30 }}>
+                  <Link className="g-btn g-btn--green" to="/start">
+                    Book a demo
+                  </Link>
+                  <Link className="g-btn g-btn--ghost" to="/pricing">
+                    See pricing
+                  </Link>
+                </Rv>
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CQC callout */}
-      <section style={{ padding: '5rem 0', backgroundColor: 'rgba(5,150,105,0.03)', borderBottom: '1px solid rgba(5,150,105,0.08)' }}>
-        <div className="container" style={{ maxWidth: '880px' }}>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: '3rem', alignItems: 'center' }} className="mobile-stack">
-            <div style={{ textAlign: 'center' }}>
-              <div style={{ fontSize: 'var(--text-2xs)', fontWeight: 800, color: 'var(--accent-dental)', letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: '0.5rem' }}>Audit Finding</div>
-              <div style={{ fontSize: '3.5rem', fontWeight: 800, color: 'var(--salvia-primary)', letterSpacing: '-0.04em', lineHeight: 1 }}>9/20</div>
-              <div style={{ fontSize: 'var(--text-sm)', fontWeight: 600, color: 'var(--salvia-text-muted)', marginTop: '0.25rem' }}>records missing BPE</div>
+              <Rv className="g-split-art" delay={1}>
+                <img
+                  src="/illustrations/dental_world.webp"
+                  alt="A miniature dental clinic where a check-up becomes documents sealed in a vault"
+                />
+              </Rv>
             </div>
-            <div>
-              <h2 style={{ fontSize: 'var(--text-xl)', fontWeight: 800, color: 'var(--salvia-primary)', marginBottom: '0.75rem', letterSpacing: '-0.02em' }}>
-                Audits find BPE missing in nearly half of sampled records.
-              </h2>
-              <p style={{ color: 'var(--salvia-text-muted)', lineHeight: 1.65, marginBottom: '1.25rem' }}>
-                In a typical underprepared clinic audit, 9 of 20 records are missing BPE scores, 11 lack written treatment plans, and 7 have no radiograph reporting. These aren't complex clinical failures — they're missing fields. Salvia makes them required.
-              </p>
-              <Link to="/blog/malpractice-dental" style={{
-                fontSize: 'var(--text-sm)', fontWeight: 700, color: 'var(--accent-dental)',
-                display: 'inline-flex', alignItems: 'center', gap: '0.35rem', textDecoration: 'none',
-              }}>
-                Read the dental charting breakdown
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                  <line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" />
-                </svg>
+            <Rv delay={3} style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap', marginTop: 52 }}>
+              <span className="g-small" style={{ fontWeight: 600 }}>Designed for</span>
+              {REGULATORS.map((r) => (
+                <span
+                  key={r}
+                  style={{
+                    fontFamily: 'var(--g-font)', fontSize: 12.5, fontWeight: 700,
+                    color: 'var(--g-ink-soft)', border: '1px solid var(--g-line)',
+                    borderRadius: 999, padding: '5px 13px',
+                  }}
+                >
+                  {r}
+                </span>
+              ))}
+            </Rv>
+          </div>
+        </section>
+
+        {/* Voice → dental chart */}
+        <section className="g-section">
+          <div className="g-container">
+            <div className="g-split">
+              <div>
+                <Rv as="h2" className="g-h2">
+                  One voice note. <span className="g-hl">Every required field.</span>
+                </Rv>
+                <Rv as="p" className="g-sub" delay={1}>
+                  After each appointment, speak for 30 seconds to a few minutes. Salvia maps the
+                  audio to <b>examination findings, BPE, soft tissue exam and treatment
+                  notes</b> — and refuses to save a check-up without the fields assessors flag
+                  most. You review and sign; the original audio stays attached.
+                </Rv>
+                <Rv className="g-facts" delay={2}>
+                  <div className="g-fact"><span>BPE</span><b>Required at every examination</b></div>
+                  <div className="g-fact"><span>Soft tissue exam</span><b>Oral cancer screening documented per visit</b></div>
+                  <div className="g-fact"><span>Timestamps</span><b>Contemporaneous, built in</b></div>
+                  <div className="g-fact"><span>Attribution</span><b>Each dentist signs with their DCI reg. number</b></div>
+                </Rv>
+              </div>
+              <Rv className="g-split-art" delay={1} style={{ display: 'block' }}>
+                <DentalExamPanel />
+              </Rv>
+            </div>
+          </div>
+        </section>
+
+        {/* Radiograph register */}
+        <section className="g-section">
+          <div className="g-container">
+            <Rv as="h2" className="g-h2">
+              Every exposure, justified <span className="g-hl">at the time.</span>
+            </Rv>
+            <Rv as="p" className="g-sub" delay={1}>
+              An "unnecessary X-ray" complaint is answered with the indication you logged when
+              you took it — not a reconstruction. Every radiograph carries its clinical
+              indication, patient history and decision rationale, so the <b>AERB-aligned
+              justification trail</b> is a by-product of daily work.
+            </Rv>
+            <Rv delay={2} style={{ marginTop: 44 }}>
+              <div className="g-showcase">
+                <RadiographRegisterPanel />
+              </div>
+            </Rv>
+          </div>
+        </section>
+
+        {/* The audit gap — 9/20 */}
+        <section className="g-section g-center">
+          <div className="g-container">
+            <Rv as="h2" className="g-h2">
+              Audits fail on missing fields, <span className="g-hl">not bad dentistry.</span>
+            </Rv>
+            <Rv as="p" className="g-sub" delay={1}>
+              The gaps assessors flag aren't complex clinical failures — they're empty fields.
+              Salvia makes them required.
+            </Rv>
+            <Rv className="g-giant" style={{ marginTop: 48 }}>
+              <div className="g-n">9/20</div>
+              <div className="g-c">records in a typical underprepared clinic audit are missing BPE scores.</div>
+              <div className="g-s">11 of 20 lack written treatment plans · 7 have no radiograph reporting</div>
+            </Rv>
+            <div className="g-tpl-grid" style={{ textAlign: 'left', marginTop: 52 }}>
+              {AUDIT_FIELDS.map((f, i) => (
+                <Rv className="g-card" key={f.label} delay={(Math.min(i + 1, 4)) as 1 | 2 | 3 | 4}>
+                  <img src={f.img} alt="" loading="lazy" />
+                  <h3 className="g-h3" style={{ fontSize: 17 }}>{f.label}</h3>
+                  <p>{f.value}</p>
+                </Rv>
+              ))}
+            </div>
+            <Rv as="p" className="g-small" delay={3} style={{ marginTop: 26 }}>
+              <Link to="/blog/malpractice-dental" style={{ color: 'var(--g-green)', fontWeight: 600 }}>
+                Read the dental charting breakdown →
               </Link>
-            </div>
+            </Rv>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Stats bar */}
-      <StatsBar accent={ACCENT} />
-
-      {/* Workflow */}
-      <WorkflowSection
-        accent={ACCENT}
-        verticalLabel="Dental"
-        audioStepCopy="After each appointment, leave a brief voice note. 30 seconds to a few minutes — natural language, no template-bashing."
-      />
-
-      {/* Feature grid */}
-      <section style={{ padding: '7rem 0', backgroundColor: '#fff' }}>
-        <div className="container" style={{ maxWidth: '1100px' }}>
-          <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
-            <div style={{ fontSize: 'var(--text-2xs)', fontWeight: 800, color: 'var(--accent-dental)', letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>
-              What Salvia does
-            </div>
-            <h2 style={{ fontSize: 'clamp(1.8rem, 4vw, 2.75rem)', fontWeight: 800, color: 'var(--salvia-primary)', letterSpacing: '-0.03em' }}>
-              Every required field, every time.
-            </h2>
-          </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.5rem' }} className="mobile-stack">
-            {FEATURES.map((f, i) => (
-              <div key={i} style={{
-                padding: '2rem', borderRadius: 'var(--radius-lg)',
-                border: '1px solid #EEF2F6', backgroundColor: '#FAFBFC',
-              }}>
-                <div style={{
-                  width: '44px', height: '44px', borderRadius: 'var(--radius-md)',
-                  backgroundColor: 'rgba(5,150,105,0.07)',
-                  display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  color: 'var(--accent-dental)', marginBottom: '1.25rem',
-                }}>
-                  {f.icon}
+        {/* Before / after */}
+        <section className="g-section">
+          <div className="g-container">
+            <Rv as="h2" className="g-h2">
+              What changes <span className="g-hl">on day one.</span>
+            </Rv>
+            <div className="g-split" style={{ alignItems: 'start', marginTop: 40 }}>
+              <Rv delay={1}>
+                <h3 className="g-h3">Without Salvia</h3>
+                <div className="g-facts" style={{ marginTop: 16 }}>
+                  {BEFORE_FACTS.map((f) => (
+                    <div className="g-fact" key={f.label}>
+                      <span>{f.label}</span>
+                      <b>{f.value}</b>
+                    </div>
+                  ))}
                 </div>
-                <h3 style={{ fontSize: 'var(--text-base)', fontWeight: 700, color: 'var(--salvia-primary)', marginBottom: '0.5rem' }}>{f.title}</h3>
-                <p style={{ fontSize: 'var(--text-sm)', color: 'var(--salvia-text-muted)', lineHeight: 1.6 }}>{f.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Before vs After */}
-      <BeforeAfter
-        accent={ACCENT}
-        beforeLines={[
-          `End-of-day chart updates. BPE scoring skipped on a busy day.`,
-          `Radiograph justification captured "in my head" — an AERB review finds gaps.`,
-          `Treatment plan discussed verbally. Patient disputes the bill afterwards.`,
-          `Visiting dentist sees a hygiene check. Different note format, different completeness, different defensibility.`,
-          `An assessor asks for evidence of medical history review. You scroll for fifteen minutes.`,
-        ]}
-        afterLines={[
-          `Voice note after each appointment, in any Indian language. BPE field required — note cannot save without it.`,
-          `Radiograph justification captured at time of exposure. AERB-aligned trail produced automatically.`,
-          `Treatment plan with itemised costs, signed before the appointment. Consent documented and DCI-ready.`,
-          `Every visiting dentist signs with their DCI registration number. Records visually attributed.`,
-          `An assessor asks. You filter for medical-history-review entries and export in seconds.`,
-        ]}
-      />
-
-      {/* Honest scope */}
-      <HonestScope
-        accent={ACCENT}
-        doLines={[
-          `Audio in any Indian language → structured dental record with BPE, STE, charting`,
-          `Radiograph justification + AERB-aligned audit trail`,
-          `Treatment plan + itemised cost estimate with e-signature`,
-          `Immutable audit trail for DCI, NABH, and Clinical Establishments Act records`,
-          `Multi-dentist clinic with role-based access for hygienists, nurses, admin`,
-        ]}
-        dontLines={[
-          `Replace your clinic management software`,
-          `Bill insurers or process NHCX claims directly`,
-          `Make you NABH-accredited or claim regulatory sign-off on your behalf`,
-          `Auto-publish records without your review`,
-          `Provide clinical decision-making — you stay in the loop`,
-        ]}
-      />
-
-      {/* Pricing teaser */}
-      <PricingTeaser
-        accent={ACCENT}
-        vertical="dental"
-        fromPriceCopy="Dental compliance, from ₹1,000/mo."
-      />
-
-      {/* FAQ section */}
-      <section style={{ padding: '7rem 0', backgroundColor: 'var(--salvia-bg)', borderTop: '1px solid #F1F5F9' }}>
-        <div className="container" style={{ maxWidth: '760px' }}>
-          <div style={{ textAlign: 'center', marginBottom: '3.5rem' }}>
-            <div style={{ fontSize: 'var(--text-2xs)', fontWeight: 800, color: 'var(--accent-dental)', letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>
-              Common questions
-            </div>
-            <h2 style={{ fontSize: 'clamp(1.8rem, 4vw, 2.4rem)', fontWeight: 800, color: 'var(--salvia-primary)', letterSpacing: '-0.03em' }}>
-              What dental clinics ask us
-            </h2>
-          </div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-            {FAQS.map((faq, i) => (
-              <div key={i} style={{
-                padding: '1.75rem 2rem', borderRadius: 'var(--radius-md)',
-                border: '1px solid #EEF2F6', backgroundColor: '#fff',
-              }}>
-                <h3 style={{ fontSize: 'var(--text-base)', fontWeight: 700, color: 'var(--salvia-primary)', marginBottom: '0.65rem' }}>{faq.q}</h3>
-                <p style={{ fontSize: 'var(--text-sm)', color: 'var(--salvia-text-muted)', lineHeight: 1.65, margin: 0 }}>{faq.a}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Blog links */}
-      <section style={{ padding: '6rem 0', backgroundColor: '#fff', borderTop: '1px solid #F1F5F9' }}>
-        <div className="container" style={{ maxWidth: '1000px' }}>
-          <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', marginBottom: '2rem', flexWrap: 'wrap', gap: '1rem' }}>
-            <div style={{ fontSize: 'var(--text-2xs)', fontWeight: 800, color: 'var(--accent-dental)', letterSpacing: '0.12em', textTransform: 'uppercase' }}>From the compliance desk</div>
-            <Link to="/blog" style={{ fontSize: 'var(--text-sm)', fontWeight: 700, color: 'var(--salvia-text-muted)', textDecoration: 'none' }}>All posts →</Link>
-          </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '1rem' }} className="mobile-stack">
-            {RECENT_POSTS.map(p => (
-              <Link key={p.slug} to={`/blog/${p.slug}`} style={{ textDecoration: 'none' }} className="dental-blog-card">
-                <div style={{
-                  padding: '1.5rem', borderRadius: 'var(--radius-md)',
-                  border: '1px solid #EEF2F6', backgroundColor: '#FAFBFC',
-                  height: '100%', transition: 'all 0.2s ease',
-                }}>
-                  <div style={{
-                    fontSize: 'var(--text-2xs)', fontWeight: 800, color: 'var(--accent-dental)',
-                    backgroundColor: 'rgba(5,150,105,0.07)', padding: '0.2rem 0.55rem',
-                    borderRadius: 'var(--radius-sm)', display: 'inline-block',
-                    letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '0.75rem',
-                  }}>
-                    {p.tag}
-                  </div>
-                  <h4 style={{ fontSize: 'var(--text-base)', fontWeight: 700, color: 'var(--salvia-primary)', lineHeight: 1.4, margin: 0 }}>
-                    {p.title}
-                  </h4>
+              </Rv>
+              <Rv delay={2}>
+                <h3 className="g-h3">
+                  With <span className="g-hl">Salvia</span>
+                </h3>
+                <div className="g-facts" style={{ marginTop: 16 }}>
+                  {AFTER_FACTS.map((f) => (
+                    <div className="g-fact" key={f.label}>
+                      <span>{f.label}</span>
+                      <b>{f.value}</b>
+                    </div>
+                  ))}
                 </div>
+              </Rv>
+            </div>
+          </div>
+        </section>
+
+        {/* Honest scope */}
+        <section className="g-section">
+          <div className="g-container">
+            <Rv as="h2" className="g-h2">
+              What it does — <span className="g-hl">and what it doesn't.</span>
+            </Rv>
+            <Rv as="p" className="g-sub" delay={1}>
+              Salvia is the compliance and records layer that sits alongside your clinic
+              software. It never replaces booking or billing, and it never signs for you.
+            </Rv>
+            <div className="g-split" style={{ alignItems: 'start', marginTop: 24 }}>
+              <div>
+                {SCOPE_DO.map((s, i) => (
+                  <Rv className="g-check" key={s.title} delay={(Math.min(i + 1, 4)) as 1 | 2 | 3 | 4}>
+                    <span className="g-ck">✓</span>
+                    <div>
+                      <h4>{s.title}</h4>
+                      <p>{s.body}</p>
+                    </div>
+                  </Rv>
+                ))}
+              </div>
+              <Rv delay={2}>
+                <h3 className="g-h3" style={{ marginTop: 22 }}>Salvia won't</h3>
+                <div className="g-facts" style={{ marginTop: 14 }}>
+                  {SCOPE_DONT.map((line) => (
+                    <div className="g-fact" key={line} style={{ justifyContent: 'flex-start' }}>
+                      <span style={{ flex: 'none' }}>✕</span>
+                      <b style={{ textAlign: 'left', fontWeight: 500, color: 'var(--g-ink-soft)' }}>{line}</b>
+                    </div>
+                  ))}
+                </div>
+              </Rv>
+            </div>
+          </div>
+        </section>
+
+        {/* Pricing teaser */}
+        <section className="g-section g-center">
+          <div className="g-container">
+            <Rv delay={1}>
+              <img
+                src="/illustrations/tpl_dental_chart.webp"
+                alt=""
+                loading="lazy"
+                style={{ width: 120, height: 'auto', margin: '0 auto 18px', display: 'block' }}
+              />
+            </Rv>
+            <Rv as="h2" className="g-h2">
+              From ₹999 a month. <span className="g-hl">Everything included.</span>
+            </Rv>
+            <Rv as="p" className="g-sub" delay={1}>
+              The Starter plan covers 400 AI notes a month with the full compliance suite —
+              charting, radiograph trail, consent, incidents, branded PDF export — and{' '}
+              <b>unlimited staff</b>. You pay per note, never per dentist.
+            </Rv>
+            <Rv className="g-hero-ctas" delay={2} style={{ marginTop: 30 }}>
+              <Link className="g-btn g-btn--green" to="/start">
+                Start free
               </Link>
-            ))}
+              <Link className="g-btn g-btn--ghost" to="/pricing">
+                Full pricing
+              </Link>
+            </Rv>
+            <Rv as="p" className="g-hero-note" delay={3}>
+              First 50 notes free · Annual billing = 2 months free · Prices exclude GST
+            </Rv>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* CTA */}
-      <section style={{ padding: '7rem 0', backgroundColor: 'var(--salvia-bg)', borderTop: '1px solid #F1F5F9', textAlign: 'center' }}>
-        <div className="container" style={{ maxWidth: '600px' }}>
-          <div style={{ fontSize: 'var(--text-2xs)', fontWeight: 800, color: 'var(--accent-dental)', letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: '1rem' }}>
-            Get started
+        {/* FAQ */}
+        <section className="g-section">
+          <div className="g-container">
+            <Rv as="h2" className="g-h2">
+              What dental clinics <span className="g-hl">ask us.</span>
+            </Rv>
+            <div style={{ maxWidth: 820, marginTop: 40 }}>
+              {FAQS.map((faq, i) => (
+                <Rv key={faq.q} delay={(Math.min(i + 1, 4)) as 1 | 2 | 3 | 4} style={{ borderTop: '1px solid var(--g-line-soft)', padding: '26px 0' }}>
+                  <h3 className="g-h3" style={{ marginBottom: 8 }}>{faq.q}</h3>
+                  <p style={{ fontFamily: 'var(--g-font)', fontSize: 15, color: 'var(--g-ink-soft)', lineHeight: 1.7, margin: 0 }}>
+                    {faq.a}
+                  </p>
+                </Rv>
+              ))}
+            </div>
           </div>
-          <h2 style={{ fontSize: 'clamp(2rem, 5vw, 3rem)', fontWeight: 800, color: 'var(--salvia-primary)', letterSpacing: '-0.03em', marginBottom: '1rem' }}>
-            Pass your next audit, first time.
-          </h2>
-          <p style={{ color: 'var(--salvia-text-muted)', lineHeight: 1.65, marginBottom: '2.5rem' }}>
-            See how Salvia works in a real dental clinic — no slides, no pitch. Book a 20-minute demo.
-          </p>
-          <Link to="/start" style={{
-            display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
-            backgroundColor: 'var(--accent-dental)', color: '#fff',
-            padding: '0.9rem 2rem', borderRadius: 'var(--radius-md)',
-            fontWeight: 700, fontSize: 'var(--text-base)', textDecoration: 'none',
-          }}>
-            Book a demo
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-              <line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" />
-            </svg>
-          </Link>
-        </div>
-      </section>
+        </section>
+
+        {/* From the compliance desk */}
+        <section className="g-section">
+          <div className="g-container">
+            <Rv as="h2" className="g-h2">
+              From the compliance desk.
+            </Rv>
+            <div className="g-tpl-grid">
+              {RECENT_POSTS.map((p, i) => (
+                <Rv key={p.slug} delay={(Math.min(i + 1, 4)) as 1 | 2 | 3 | 4}>
+                  <Link to={`/blog/${p.slug}`} className="g-tpl" style={{ display: 'block', textDecoration: 'none', height: '100%' }}>
+                    <img className="g-tpl-ic" src={p.ic} alt="" loading="lazy" />
+                    <div className="g-tpl-name">{p.title}</div>
+                    <div className="g-tpl-meta">
+                      <span className="g-tpl-vert">{p.tag}</span>
+                    </div>
+                  </Link>
+                </Rv>
+              ))}
+            </div>
+            <Rv as="p" className="g-small" delay={3} style={{ marginTop: 24 }}>
+              <Link to="/blog" style={{ color: 'var(--g-green)', fontWeight: 600 }}>
+                All posts →
+              </Link>
+            </Rv>
+          </div>
+        </section>
+
+        {/* Final CTA */}
+        <section className="g-final">
+          <div className="g-container">
+            <div className="g-final-grid">
+              <div>
+                <Rv as="h2" className="g-h2">
+                  Pass your next audit, <span className="g-hl">first time.</span>
+                </Rv>
+                <Rv as="p" className="g-sub" delay={1} style={{ marginTop: 14 }}>
+                  See how Salvia works in a real dental clinic — no slides, no pitch.
+                  Book a 20-minute demo.
+                </Rv>
+                <Rv className="g-hero-ctas" delay={2} style={{ marginTop: 30 }}>
+                  <Link className="g-btn g-btn--green" to="/start">
+                    Book a demo
+                  </Link>
+                  <Link className="g-btn g-btn--ghost" to="/start">
+                    Start free
+                  </Link>
+                </Rv>
+              </div>
+              <Rv className="g-final-art" delay={1}>
+                <img
+                  src="/illustrations/ill_verify.webp"
+                  alt="A hand holding a verified clinical record under a magnifier"
+                  loading="lazy"
+                />
+              </Rv>
+            </div>
+          </div>
+        </section>
 
       </main>
-      <Footer />
-
-      <style>{`
-        .dental-blog-card:hover > div {
-          border-color: rgba(5,150,105,0.2);
-          background-color: rgba(5,150,105,0.015);
-          transform: translateY(-2px);
-          box-shadow: 0 6px 20px rgba(15,23,42,0.05);
-        }
-      `}</style>
-    </div>
+      <GrassFooter />
+    </>
   );
 };
