@@ -43,14 +43,12 @@ export const GrassFooter: React.FC = () => (
 
     {/* സാൽവിയ — the sign-off band */}
     <div className="g-mega" aria-hidden="false">
-      <img className="g-mega-sp g-mega-sp--1" src="/illustrations/mic.webp" alt="" loading="lazy" />
-      <img className="g-mega-sp g-mega-sp--2" src="/illustrations/vet_mic_dog.webp" alt="" loading="lazy" />
-      <img className="g-mega-sp g-mega-sp--3" src="/illustrations/price_coins.webp" alt="" loading="lazy" />
-      <img className="g-mega-sp g-mega-sp--4" src="/illustrations/shield_cross.webp" alt="" loading="lazy" />
-      <img className="g-mega-sp g-mega-sp--5" src="/illustrations/tpl_dental_chart.webp" alt="" loading="lazy" />
-      <img className="g-mega-sp g-mega-sp--6" src="/illustrations/stetho.webp" alt="" loading="lazy" />
-      <img className="g-mega-sp g-mega-sp--7" src="/illustrations/sp_doc.webp" alt="" loading="lazy" />
-      <img className="g-mega-sp g-mega-sp--8" src="/illustrations/policy.webp" alt="" loading="lazy" />
+      <img className="g-mega-sp g-mega-sp--speak" src="/illustrations/ill_speak.webp" alt="" loading="lazy" />
+      <img className="g-mega-sp g-mega-sp--dog" src="/illustrations/vet_mic_dog.webp" alt="" loading="lazy" />
+      <img className="g-mega-sp g-mega-sp--check" src="/illustrations/shield.webp" alt="" loading="lazy" />
+      <img className="g-mega-sp g-mega-sp--fall" src="/illustrations/tpl_fall.webp" alt="" loading="lazy" />
+      <img className="g-mega-sp g-mega-sp--stetho" src="/illustrations/stetho.webp" alt="" loading="lazy" />
+      <img className="g-mega-sp g-mega-sp--doc" src="/illustrations/sp_doc.webp" alt="" loading="lazy" />
       <div className="g-mega-word">
         <img src="/illustrations/salvia_footer.webp" alt="Salvia" loading="lazy" />
       </div>

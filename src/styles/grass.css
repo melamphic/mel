@@ -885,24 +885,23 @@ html.js .g-rv.g-d4 { transition-delay: .24s; }
 }
 .g-mega-corp:hover { color: var(--g-ink); }
 .g-mega-sp {
-  position: absolute; width: clamp(48px, 7vw, 96px); height: auto;
+  position: absolute; height: auto;
   pointer-events: none;
   filter: drop-shadow(0 10px 18px rgba(15, 23, 42, 0.12));
 }
-/* scattered along the edges only — never across the wordmark */
-.g-mega-sp--1 { left: 4%;  top: 14%;    transform: rotate(-9deg); }
-.g-mega-sp--2 { left: 6%;  bottom: 12%; transform: rotate(7deg); }
-.g-mega-sp--3 { left: 12%; top: 52%;    transform: rotate(5deg);  width: clamp(38px, 5vw, 68px); }
-.g-mega-sp--4 { right: 12%; top: 52%;   transform: rotate(-6deg); width: clamp(38px, 5vw, 68px); }
-.g-mega-sp--5 { right: 6%; bottom: 12%; transform: rotate(8deg); }
-.g-mega-sp--6 { right: 4%; top: 14%;    transform: rotate(-7deg); }
-.g-mega-sp--7 { left: 22%; top: 6%;     transform: rotate(-5deg); width: clamp(34px, 4.5vw, 58px); }
-.g-mega-sp--8 { right: 22%; top: 6%;    transform: rotate(6deg);  width: clamp(34px, 4.5vw, 58px); }
+/* a small deliberate cast, edges only — never across the wordmark.
+   Each has its own size so the group reads as arranged, not tiled. */
+.g-mega-sp--speak { left: 4%;  top: 8%;     width: clamp(110px, 14vw, 215px); transform: rotate(-5deg); }
+.g-mega-sp--check { left: 10%; bottom: 8%;  width: clamp(58px, 7vw, 100px); transform: rotate(8deg); }
+.g-mega-sp--dog   { right: 4%; top: 10%;    width: clamp(92px, 11vw, 168px); transform: rotate(6deg); }
+.g-mega-sp--stetho { right: 4%; bottom: 8%; width: clamp(100px, 12vw, 185px); transform: rotate(-4deg); }
+.g-mega-sp--doc   { right: 21%; top: 6%;    width: clamp(48px, 5.5vw, 80px); transform: rotate(9deg); }
+.g-mega-sp--fall  { left: 24%; top: 7%;     width: clamp(52px, 6vw, 86px); transform: rotate(-8deg); }
 @media (max-width: 900px) {
-  .g-mega-sp--3, .g-mega-sp--4 { display: none; }
+  .g-mega-sp--fall, .g-mega-sp--doc { display: none; }
 }
 @media (max-width: 720px) {
   .g-mega { padding: 72px 18px 56px; }
-  .g-mega-sp--7, .g-mega-sp--8 { display: none; }
+  .g-mega-sp--stetho, .g-mega-sp--check { display: none; }
   .g-mega-corp { position: static; display: block; margin-top: 26px; }
 }
