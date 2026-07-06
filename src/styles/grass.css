@@ -870,12 +870,13 @@ html.js .g-rv.g-d4 { transition-delay: .24s; }
   border-top: 1px solid var(--g-line-soft); margin-top: 48px;
 }
 .g-mega-word img {
-  width: min(760px, 78vw); height: auto; display: block; margin: 0 auto;
+  width: min(480px, 62vw); height: auto; display: block; margin: 0 auto;
 }
 .g-mega-line {
-  font-family: 'Baloo Chettan 2', var(--g-font);
-  font-size: clamp(15px, 1.9vw, 21px); font-weight: 700;
-  color: var(--g-ink-soft); margin-top: 4px;
+  font-family: var(--g-font);
+  font-size: clamp(12px, 1.3vw, 14.5px); font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--g-ink-faint); margin-top: 14px;
 }
 .g-mega-corp {
   position: absolute; right: 22px; bottom: 14px;
