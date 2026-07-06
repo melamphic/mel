@@ -253,16 +253,7 @@ export const VeterinaryPage = () => {
                 </Rv>
               </div>
               <Rv className="g-split-art" delay={1} style={{ display: 'block' }}>
-                <div className="g-panel-scene">
-                  <VetConsultPanel />
-                  <img
-                    className="g-scene-img g-scene-img--br"
-                    src="/illustrations/vet_mic_dog.webp"
-                    alt=""
-                    loading="lazy"
-                    style={{ bottom: -46, right: -34, width: 150 }}
-                  />
-                </div>
+                <VetConsultPanel />
               </Rv>
             </div>
           </div>
@@ -281,17 +272,8 @@ export const VeterinaryPage = () => {
               record</b>, not a separate chore.
             </Rv>
             <Rv delay={2} style={{ marginTop: 44 }}>
-              <div className="g-panel-scene">
-                <div className="g-showcase">
-                  <VetDrugRegisterPanel />
-                </div>
-                <img
-                  className="g-scene-img g-scene-img--bl"
-                  src="/illustrations/tpl_vaccination.webp"
-                  alt=""
-                  loading="lazy"
-                  style={{ bottom: -36, left: -28, width: 118 }}
-                />
+              <div className="g-showcase">
+                <VetDrugRegisterPanel />
               </div>
             </Rv>
           </div>
@@ -406,6 +388,14 @@ export const VeterinaryPage = () => {
         {/* Pricing teaser */}
         <section className="g-section g-center">
           <div className="g-container">
+            <Rv delay={1}>
+              <img
+                src="/illustrations/vet_mic_dog.webp"
+                alt=""
+                loading="lazy"
+                style={{ width: 132, height: 'auto', margin: '0 auto 18px', display: 'block' }}
+              />
+            </Rv>
             <Rv as="h2" className="g-h2">
               From ₹999 a month. <span className="g-hl">Everything included.</span>
             </Rv>
