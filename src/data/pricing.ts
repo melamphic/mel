@@ -342,9 +342,9 @@ export interface PoolTier {
 /// top pool in every market (handled as a Contact-Sales CTA, not a row here).
 export const MARKET_PRICING: Record<Market, PoolTier[]> = {
   IN: [
-    { key: 'base',        name: 'Starter', notesPerMonth: 400,  monthly: 1000 },
-    { key: 'growth',      name: 'Clinic',  notesPerMonth: 1500, monthly: 3000, highlight: 'Most popular' },
-    { key: 'clinic_plus', name: 'Group',   notesPerMonth: 3000, monthly: 6000 },
+    { key: 'base',        name: 'Starter', notesPerMonth: 400,  monthly: 999 },
+    { key: 'growth',      name: 'Clinic',  notesPerMonth: 1500, monthly: 2999, highlight: 'Most popular' },
+    { key: 'clinic_plus', name: 'Group',   notesPerMonth: 3000, monthly: 5999 },
   ],
   US: [
     { key: 'base',        name: 'Base',    notesPerMonth: 250,  monthly: 69 },

@@ -1,216 +1,222 @@
 import { Link } from 'react-router-dom';
-import { Header } from '../components/Header';
-import { Footer } from '../components/Footer';
+
 import { SEO } from '../components/SEO';
+import { GrassFooter } from '../components/grass/GrassFooter';
+import { GrassHeader } from '../components/grass/GrassHeader';
+import { Rv } from '../components/grass/Rv';
 
-const FEATURES = [
-  {
-    title: 'Policy mapped to regulatory codes',
-    desc: 'Tag each policy clause as legally enforceable and link it directly to a CQC regulation, VMR section, or GDC standard. Staff see the mandate behind every protocol — not just the rule.',
-  },
-  {
-    title: 'Active staff attestation',
-    desc: 'Policies aren\'t read once at onboarding. Staff attest to each relevant policy on a schedule. Every attestation is timestamped and auditable — "didn\'t know" is no longer a defence.',
-  },
-  {
-    title: 'Point-of-care policy search',
-    desc: 'Staff query your internal policies from the consult room. "What\'s our protocol for dispensing tramadol without a physical exam?" — answered from your own documents, not Google.',
-  },
-  {
-    title: 'Retirement and version events',
-    desc: 'When a policy is retired, every linked form and protocol is flagged. A Major Version Event requires a principal signature before practice continues on the affected area.',
-  },
-  {
-    title: 'Regulatory framework mirror',
-    desc: 'Salvia maps your policy set against CQC, VMR, RCVS PSS, and GDC requirements and shows you the gaps. Not a checklist — a live coverage map.',
-  },
-  {
-    title: 'Incident-to-policy linking',
-    desc: 'When an incident is logged, Salvia surfaces the relevant policy — was there a protocol for this? Was it followed? The link between incident and governance is visible and auditable.',
-  },
+// /products/institutional-compliance-hub — the policy engine module.
+// Story: static policy PDFs become active, attested, auditable governance.
+// Grass design language.
+
+const FEATURES: { title: string; body: string }[] = [
+  { title: 'Policy mapped to regulation', body: 'Tag each clause as legally enforceable and link it to a NABH standard, CEA 2010 requirement or D&C Rules section. Staff see the mandate behind every protocol.' },
+  { title: 'Active staff attestation', body: 'Policies aren\'t read once at onboarding. Staff attest on a schedule; every attestation is timestamped and auditable — "didn\'t know" is no longer a defence.' },
+  { title: 'Point-of-care policy search', body: '"What\'s our protocol for dispensing tramadol without a physical exam?" — answered from your own documents, in the consult room, not from Google.' },
+  { title: 'Retirement and version events', body: 'Retire a policy and every linked form and protocol is flagged. A major version event requires a principal\'s signature before practice continues.' },
+  { title: 'Regulatory coverage mirror', body: 'Salvia maps your policy set against NABH, CEA and D&C requirements and shows the gaps. Not a checklist — a live coverage map.' },
+  { title: 'Incident-to-policy linking', body: 'When an incident is logged, the relevant policy surfaces — was there a protocol? Was it followed? The governance link is visible and auditable.' },
 ];
 
-const USE_CASES = [
-  { label: 'New staff onboarding', desc: 'Required policies queued for attestation on first login. Done before they see their first patient.' },
-  { label: 'CQC inspection prep', desc: 'Generate a coverage report: which CQC regulations your policies address, and which have no policy mapped.' },
-  { label: 'Policy update rollout', desc: 'Update a policy, trigger re-attestation for all relevant staff. Completion tracked and logged.' },
-  { label: 'Complaint response', desc: 'Pull the full governance picture for an incident — policies in effect at the time, attestation records, any gaps.' },
+const USE_CASES: { img: string; label: string; value: string }[] = [
+  { img: '/illustrations/tpl_work_cert.webp', label: 'New staff onboarding', value: 'Required policies queued for attestation on first login — done before they see their first patient.' },
+  { img: '/illustrations/shield_cross.webp', label: 'NABH assessment prep', value: 'A coverage report: which standards your policies address, and which have no policy mapped.' },
+  { img: '/illustrations/policy.webp', label: 'Policy update rollout', value: 'Update a policy, trigger re-attestation for all relevant staff. Completion tracked and logged.' },
+  { img: '/illustrations/tpl_referral.webp', label: 'Complaint response', value: 'The full governance picture for an incident — policies in effect at the time, attestations, any gaps.' },
 ];
+
+// Drawn product UI: the live coverage map.
+const CoveragePanel = () => (
+  <div className="g-ui g-ui--panel">
+    <div className="g-ui-head">
+      <div>
+        <div className="g-ui-head-title">Policy coverage — NABH documentation standards</div>
+        <div className="g-ui-head-sub">Live map · attestation status per policy</div>
+      </div>
+      <span className="g-ui-tag g-ui-tag--warn">1 gap flagged</span>
+    </div>
+    <div style={{ padding: '12px 14px 14px' }}>
+      <div className="g-check-row g-check-row--pass">
+        <span className="g-ck-ic" />
+        <span><b>Clinical Records Policy v2.1</b><span className="g-ck-note">Mapped · attested 12/12 staff</span></span>
+      </div>
+      <div className="g-check-row g-check-row--pass">
+        <span className="g-ck-ic" />
+        <span><b>Controlled Drug Protocol v1.4</b><span className="g-ck-note">Mapped · attested 11/12 staff — 1 reminder queued</span></span>
+      </div>
+      <div className="g-check-row g-check-row--fail">
+        <span className="g-ck-ic" />
+        <span><b>Consent &amp; Capacity Policy v1.0</b><span className="g-ck-note">Gap flagged · attested 6/12 staff</span></span>
+      </div>
+      <div className="g-check-row g-check-row--fail">
+        <span className="g-ck-ic" />
+        <span><b>Incident Reporting Procedure</b><span className="g-ck-note">No policy mapped to this standard yet</span></span>
+      </div>
+      <div className="g-ui-meta-row" style={{ marginTop: 10 }}>
+        <span className="g-ui-tag g-ui-tag--ink">Every attestation timestamped</span>
+        <span className="g-ui-tag g-ui-tag--ink">Coverage report exportable</span>
+      </div>
+    </div>
+  </div>
+);
 
 export const PolicyEnginePage = () => {
   return (
-    <div style={{ backgroundColor: '#fff', minHeight: '100vh' }}>
+    <>
       <SEO
         title="Institutional Compliance Hub"
-        description="Turn static policy PDFs into active clinical governance. Salvia maps your internal rules to CQC, VMR, and GDC frameworks — every staff action backed by an auditable mandate."
+        description="Turn static policy PDFs into active clinical governance. Salvia maps your internal rules to NABH, CEA 2010 and D&C frameworks — every staff action backed by an auditable mandate."
         path="/products/institutional-compliance-hub"
-        keywords={['clinical governance software', 'CQC compliance', 'VMR compliance', 'policy management veterinary', 'institutional compliance', 'GDC policy management']}
+        keywords={['clinical governance software', 'NABH compliance', 'policy management healthcare', 'institutional compliance India', 'staff attestation software', 'policy engine clinic']}
       />
-      <Header />
-      <main style={{ flex: 1, zIndex: 10 }}>
+      <GrassHeader />
+      <main style={{ flex: 1, zIndex: 10, background: '#fff' }}>
 
-      {/* Hero */}
-      <section style={{ padding: '11rem 0 7rem', backgroundColor: 'var(--salvia-bg)', borderBottom: '1px solid var(--border-subtle)' }}>
-        <div className="container" style={{ maxWidth: '960px' }}>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '5rem', alignItems: 'center' }} className="mobile-stack">
-            <div>
-              <div style={{
-                display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
-                backgroundColor: 'rgba(99,102,241,0.07)', border: '1.5px solid rgba(99,102,241,0.2)',
-                borderRadius: 'var(--radius-md)', padding: '0.35rem 0.85rem', marginBottom: '1.75rem',
-              }}>
-                <span style={{ fontSize: 'var(--text-xs)', fontWeight: 800, color: '#6366F1', letterSpacing: '0.1em', textTransform: 'uppercase' }}>Institutional Compliance Hub</span>
+        {/* Hero */}
+        <section className="g-section" style={{ padding: '148px 0 72px' }}>
+          <div className="g-container">
+            <div className="g-split">
+              <div>
+                <Rv as="h1" className="g-h1" style={{ fontSize: 'clamp(38px, 4.6vw, 66px)', marginBottom: 20 }}>
+                  A policy no one reads <span className="g-hl">is a liability.</span>
+                </Rv>
+                <Rv as="p" className="g-sub" delay={1}>
+                  Most practices have policies. Almost none can prove their staff have read
+                  them, understand them, or follow them. Salvia turns static PDF manuals into{' '}
+                  <b>active governance</b> — mapped to regulatory codes, attested by staff, and
+                  auditable on demand.
+                </Rv>
+                <Rv className="g-hero-ctas" delay={2} style={{ justifyContent: 'flex-start', marginTop: 30 }}>
+                  <Link className="g-btn g-btn--green" to="/start">
+                    Book a demo
+                  </Link>
+                  <Link className="g-btn g-btn--ghost" to="/pricing">
+                    See pricing
+                  </Link>
+                </Rv>
               </div>
-              <h1 style={{
-                fontSize: 'var(--text-display)', fontWeight: 800,
-                letterSpacing: '-0.04em', lineHeight: 1.05,
-                color: 'var(--salvia-primary)', marginBottom: '1.5rem',
-              }}>
-                A policy no one reads is a liability.
-              </h1>
-              <p style={{ fontSize: 'var(--text-md)', color: 'var(--salvia-text-muted)', lineHeight: 1.65, marginBottom: '2.5rem' }}>
-                Most practices have policies. Almost none can prove their staff have read them, understand them, or follow them. Salvia turns your static PDF manuals into active governance — mapped to regulatory codes, attested by staff, and auditable on demand.
-              </p>
-              <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
-                <Link to="/start" style={{
-                  display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
-                  backgroundColor: '#6366F1', color: '#fff',
-                  padding: '0.85rem 1.75rem', borderRadius: 'var(--radius-md)',
-                  fontWeight: 700, fontSize: 'var(--text-base)', textDecoration: 'none',
-                }}>
-                  Book a demo
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                    <line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" />
-                  </svg>
-                </Link>
-                <Link to="/pricing" style={{
-                  display: 'inline-flex', alignItems: 'center',
-                  backgroundColor: 'transparent', color: 'var(--salvia-primary)',
-                  padding: '0.85rem 1.75rem', borderRadius: 'var(--radius-md)',
-                  fontWeight: 700, fontSize: 'var(--text-base)', textDecoration: 'none',
-                  border: '1.5px solid var(--border-strong)',
-                }}>
-                  See pricing
-                </Link>
+              <Rv className="g-split-art" delay={1}>
+                <img
+                  src="/illustrations/story_policy.webp"
+                  alt="A wall of policy binders wired by green cables into a clinical form"
+                />
+              </Rv>
+            </div>
+          </div>
+        </section>
+
+        {/* Coverage map */}
+        <section className="g-section">
+          <div className="g-container">
+            <div className="g-split">
+              <Rv className="g-split-art" delay={1} style={{ display: 'block', order: 0 }}>
+                <CoveragePanel />
+              </Rv>
+              <div style={{ order: 1 }}>
+                <Rv as="h2" className="g-h2">
+                  Governance you can <span className="g-hl">see.</span>
+                </Rv>
+                <Rv as="p" className="g-sub" delay={1}>
+                  Every policy shows where it maps, who has attested and when — and every
+                  standard shows which policies cover it. The gap an assessor would find,{' '}
+                  <b>you find first</b>.
+                </Rv>
+                <Rv className="g-facts" delay={2}>
+                  <div className="g-fact"><span>Mapping</span><b>Clause → NABH / CEA / D&amp;C reference</b></div>
+                  <div className="g-fact"><span>Attestation</span><b>Scheduled, timestamped, per staff member</b></div>
+                  <div className="g-fact"><span>Gaps</span><b>Flagged live, not at the assessment</b></div>
+                  <div className="g-fact"><span>Ships with</span><b>58 ready policies, each clause citing its regulation</b></div>
+                </Rv>
               </div>
             </div>
+          </div>
+        </section>
 
-            {/* Visual — policy coverage */}
-            <div style={{
-              backgroundColor: '#fff', borderRadius: 'var(--radius-xl)',
-              border: '1px solid var(--border-subtle)',
-              boxShadow: 'var(--shadow-3)',
-              overflow: 'hidden',
-            }}>
-              <div style={{ padding: '1.25rem 1.5rem', borderBottom: '1px solid var(--border-subtle)', display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                <div style={{ width: '10px', height: '10px', borderRadius: '50%', backgroundColor: '#6366F1' }} />
-                <span style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--salvia-text-muted)' }}>Policy coverage — CQC Regulation 17</span>
-              </div>
-              <div style={{ padding: '1.5rem', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-                {[
-                  { policy: 'Clinical Records Policy v2.1', status: 'Mapped', attested: '12/12 staff', color: '#10B981' },
-                  { policy: 'Controlled Drug Protocol v1.4', status: 'Mapped', attested: '11/12 staff', color: '#10B981' },
-                  { policy: 'Consent & Capacity Policy v1.0', status: 'Gap flagged', attested: '6/12 staff', color: '#F59E0B' },
-                  { policy: 'Incident Reporting Procedure', status: 'No policy', attested: '—', color: '#EF4444' },
-                ].map((p, i) => (
-                  <div key={i} style={{
-                    padding: '0.85rem 1rem', borderRadius: 'var(--radius-md)',
-                    border: `1px solid ${p.color}22`,
-                    backgroundColor: `${p.color}08`,
-                  }}>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '0.5rem' }}>
-                      <span style={{ fontSize: 'var(--text-xs)', fontWeight: 600, color: 'var(--salvia-primary)', flex: 1 }}>{p.policy}</span>
-                      <span style={{ fontSize: 'var(--text-2xs)', fontWeight: 800, color: p.color, whiteSpace: 'nowrap' }}>{p.status}</span>
+        {/* Features */}
+        <section className="g-section">
+          <div className="g-container">
+            <Rv as="h2" className="g-h2">
+              Active governance, <span className="g-hl">not a filing cabinet.</span>
+            </Rv>
+            <div className="g-split" style={{ alignItems: 'start', marginTop: 16 }}>
+              <div>
+                {FEATURES.slice(0, 3).map((f, i) => (
+                  <Rv className="g-check" key={f.title} delay={(Math.min(i + 1, 4)) as 1 | 2 | 3 | 4}>
+                    <span className="g-ck">✓</span>
+                    <div>
+                      <h4>{f.title}</h4>
+                      <p>{f.body}</p>
                     </div>
-                    <div style={{ fontSize: 'var(--text-2xs)', color: 'var(--salvia-text-muted)', marginTop: '0.25rem' }}>Attested: {p.attested}</div>
-                  </div>
+                  </Rv>
+                ))}
+              </div>
+              <div>
+                {FEATURES.slice(3).map((f, i) => (
+                  <Rv className="g-check" key={f.title} delay={(Math.min(i + 1, 4)) as 1 | 2 | 3 | 4}>
+                    <span className="g-ck">✓</span>
+                    <div>
+                      <h4>{f.title}</h4>
+                      <p>{f.body}</p>
+                    </div>
+                  </Rv>
                 ))}
               </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Features */}
-      <section style={{ padding: 'var(--section-pad) 0', backgroundColor: '#fff' }}>
-        <div className="container" style={{ maxWidth: '1200px' }}>
-          <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
-            <div className="eyebrow" style={{ color: '#6366F1', marginBottom: '0.75rem' }}>What it does</div>
-            <h2 style={{ fontSize: 'var(--text-3xl)', fontWeight: 800, color: 'var(--salvia-primary)', letterSpacing: '-0.03em' }}>
-              Active governance, not a filing cabinet.
-            </h2>
+        {/* Use cases */}
+        <section className="g-section g-center">
+          <div className="g-container">
+            <Rv as="h2" className="g-h2">
+              The four moments <span className="g-hl">it matters most.</span>
+            </Rv>
+            <div className="g-tpl-grid" style={{ textAlign: 'left', marginTop: 52 }}>
+              {USE_CASES.map((u, i) => (
+                <Rv className="g-card" key={u.label} delay={(Math.min(i + 1, 4)) as 1 | 2 | 3 | 4}>
+                  <img src={u.img} alt="" loading="lazy" />
+                  <h3 className="g-h3" style={{ fontSize: 17 }}>{u.label}</h3>
+                  <p>{u.value}</p>
+                </Rv>
+              ))}
+            </div>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.5rem' }} className="mobile-stack">
-            {FEATURES.map((f, i) => (
-              <div key={i} style={{ padding: '2rem', borderRadius: 'var(--radius-lg)', border: '1px solid var(--border-subtle)', backgroundColor: '#FAFBFC' }}>
-                <h3 style={{ fontSize: 'var(--text-base)', fontWeight: 700, color: 'var(--salvia-primary)', marginBottom: '0.5rem' }}>{f.title}</h3>
-                <p style={{ fontSize: 'var(--text-sm)', color: 'var(--salvia-text-muted)', lineHeight: 1.6 }}>{f.desc}</p>
+        </section>
+
+        {/* Final CTA */}
+        <section className="g-final">
+          <div className="g-container">
+            <div className="g-final-grid">
+              <div>
+                <Rv as="h2" className="g-h2">
+                  Governance you can <span className="g-hl">prove.</span>
+                </Rv>
+                <Rv as="p" className="g-sub" delay={1} style={{ marginTop: 14 }}>
+                  Book a 20-minute demo to see how the compliance hub works in a real practice
+                  setting.
+                </Rv>
+                <Rv className="g-hero-ctas" delay={2} style={{ marginTop: 30 }}>
+                  <Link className="g-btn g-btn--green" to="/start">
+                    Book a demo
+                  </Link>
+                  <Link className="g-btn g-btn--ghost" to="/pricing">
+                    See pricing
+                  </Link>
+                </Rv>
               </div>
-            ))}
+              <Rv className="g-final-art" delay={1}>
+                <img
+                  src="/illustrations/shield.webp"
+                  alt="A shield with a checkmark"
+                  loading="lazy"
+                />
+              </Rv>
+            </div>
           </div>
-        </div>
-      </section>
-
-      {/* Use cases */}
-      <section style={{ padding: 'var(--section-pad) 0', backgroundColor: 'var(--salvia-bg)', borderTop: '1px solid var(--border-subtle)' }}>
-        <div className="container" style={{ maxWidth: '960px' }}>
-          <div style={{ textAlign: 'center', marginBottom: '3.5rem' }}>
-            <div className="eyebrow" style={{ color: '#6366F1', marginBottom: '0.75rem' }}>Where it pays off</div>
-            <h2 style={{ fontSize: 'var(--text-3xl)', fontWeight: 800, color: 'var(--salvia-primary)', letterSpacing: '-0.03em' }}>
-              The four moments it matters most.
-            </h2>
-          </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '1.25rem' }} className="mobile-stack">
-            {USE_CASES.map((u, i) => (
-              <div key={i} style={{ padding: '2rem', borderRadius: 'var(--radius-lg)', border: '1px solid var(--border-subtle)', backgroundColor: '#fff' }}>
-                <div className="eyebrow" style={{ color: '#6366F1', marginBottom: '0.75rem' }}>
-                  {String(i + 1).padStart(2, '0')}
-                </div>
-                <h3 style={{ fontSize: 'var(--text-base)', fontWeight: 700, color: 'var(--salvia-primary)', marginBottom: '0.5rem' }}>{u.label}</h3>
-                <p style={{ fontSize: 'var(--text-sm)', color: 'var(--salvia-text-muted)', lineHeight: 1.6 }}>{u.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA */}
-      <section style={{ padding: 'var(--section-pad) 0', backgroundColor: '#fff', borderTop: '1px solid var(--border-subtle)', textAlign: 'center' }}>
-        <div className="container" style={{ maxWidth: '580px' }}>
-          <div className="eyebrow" style={{ color: '#6366F1', marginBottom: '1rem' }}>Get started</div>
-          <h2 style={{ fontSize: 'var(--text-3xl)', fontWeight: 800, color: 'var(--salvia-primary)', letterSpacing: '-0.03em', marginBottom: '1rem' }}>
-            Governance you can prove.
-          </h2>
-          <p style={{ color: 'var(--salvia-text-muted)', lineHeight: 1.65, marginBottom: '2.5rem' }}>
-            Book a 20-minute demo to see how the compliance hub works in a real practice setting.
-          </p>
-          <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-            <Link to="/start" style={{
-              display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
-              backgroundColor: '#6366F1', color: '#fff',
-              padding: '0.85rem 1.75rem', borderRadius: 'var(--radius-md)',
-              fontWeight: 700, fontSize: 'var(--text-base)', textDecoration: 'none',
-            }}>
-              Book a demo
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                <line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" />
-              </svg>
-            </Link>
-            <Link to="/pricing" style={{
-              display: 'inline-flex', alignItems: 'center',
-              backgroundColor: 'transparent', color: 'var(--salvia-primary)',
-              padding: '0.85rem 1.75rem', borderRadius: 'var(--radius-md)',
-              fontWeight: 700, fontSize: 'var(--text-base)', textDecoration: 'none',
-              border: '1.5px solid var(--border-strong)',
-            }}>
-              See pricing
-            </Link>
-          </div>
-        </div>
-      </section>
+        </section>
 
       </main>
-      <Footer />
-    </div>
+      <GrassFooter />
+    </>
   );
 };

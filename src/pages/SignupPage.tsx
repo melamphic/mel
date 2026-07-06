@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState, type CSSProperties, type FormEvent, type ReactNode } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
-import { Header } from '../components/Header';
-import { Footer } from '../components/Footer';
+import { GrassFooter } from '../components/grass/GrassFooter';
+import { GrassHeader } from '../components/grass/GrassHeader';
 import { SEO } from '../components/SEO';
 import { SAL_API_BASE, INDIA_ONLY } from '../config';
 import type { Vertical } from '../data/pricing';
@@ -105,7 +105,7 @@ const CALL_WINDOW_OPTIONS = [
 const STEPS = [
   {
     title: 'Submit this form',
-    body: '2 minutes. Tells us your clinic, vertical, and what you’re currently struggling with.',
+    body: 'Under a minute. Six quick fields — clinic, vertical, and how to reach you.',
   },
   {
     title: 'We call you within 24 hours',
@@ -244,7 +244,7 @@ export const SignupPage = () => {
         path="/start"
         keywords={['Salvia free trial', 'AI clinical documentation India', 'clinic compliance software trial', 'AI medical scribe India signup']}
       />
-      <Header />
+      <GrassHeader />
       <main style={{ flex: 1, zIndex: 10 }}>
       <ResponsiveStyles />
 
@@ -256,10 +256,9 @@ export const SignupPage = () => {
           <div className="signup-grid">
             {/* ── Left column: pitch + steps ── */}
             <div className="signup-left">
-              <div style={eyebrowStyle}>Early access · invite only</div>
               <h1 style={h1Style}>
                 Salvia onboards every clinic
-                <span style={{ color: 'var(--salvia-accent)' }}> personally.</span>
+                <span className="g-hl"> personally.</span>
               </h1>
               <p style={leadStyle}>
                 We’re not letting just anyone in yet. Tell us about your clinic and we’ll get back
@@ -279,6 +278,13 @@ export const SignupPage = () => {
                 ))}
               </ol>
 
+              <img
+                src="/illustrations/signup_scene.webp"
+                alt="A friendly Salvia team member on a welcome call, waving hello"
+                loading="lazy"
+                style={{ width: 300, height: 'auto', display: 'block', margin: '0 0 1.25rem' }}
+              />
+
               <ul style={trustListStyle}>
                 {TRUST_BULLETS.map((b) => (
                   <li key={b} style={trustItemStyle}>
@@ -295,7 +301,7 @@ export const SignupPage = () => {
                 <div style={formHeaderStyle}>
                   <h2 style={formTitleStyle}>Request early access</h2>
                   <p style={formSubStyle}>
-                    We review every clinic. Submission takes 2 minutes.
+                    Six quick fields — under a minute. We review every clinic personally.
                   </p>
                 </div>
 
@@ -313,35 +319,37 @@ export const SignupPage = () => {
                     style={{ position: 'absolute', left: '-9999px', width: 1, height: 1, opacity: 0 }}
                   />
 
-                  <Field label="Clinic name" htmlFor="clinicName" required>
-                    <input
-                      id="clinicName"
-                      type="text"
-                      required
-                      minLength={2}
-                      maxLength={200}
-                      value={clinicName}
-                      onChange={(e) => setClinicName(e.target.value)}
-                      autoComplete="organization"
-                      placeholder="Greenwood Vets"
-                      style={inputStyle}
-                    />
-                  </Field>
+                  <div style={fieldRowStyle} className="signup-field-row">
+                    <Field label="Your full name" htmlFor="contactName" required>
+                      <input
+                        id="contactName"
+                        type="text"
+                        required
+                        minLength={2}
+                        maxLength={200}
+                        value={contactName}
+                        onChange={(e) => setContactName(e.target.value)}
+                        autoComplete="name"
+                        placeholder="Dr. Jane Smith"
+                        style={inputStyle}
+                      />
+                    </Field>
 
-                  <Field label="Your full name" htmlFor="contactName" required>
-                    <input
-                      id="contactName"
-                      type="text"
-                      required
-                      minLength={2}
-                      maxLength={200}
-                      value={contactName}
-                      onChange={(e) => setContactName(e.target.value)}
-                      autoComplete="name"
-                      placeholder="Dr. Jane Smith"
-                      style={inputStyle}
-                    />
-                  </Field>
+                    <Field label="Clinic name" htmlFor="clinicName" required>
+                      <input
+                        id="clinicName"
+                        type="text"
+                        required
+                        minLength={2}
+                        maxLength={200}
+                        value={clinicName}
+                        onChange={(e) => setClinicName(e.target.value)}
+                        autoComplete="organization"
+                        placeholder="Greenwood Clinic"
+                        style={inputStyle}
+                      />
+                    </Field>
+                  </div>
 
                   <Field label="Work email" htmlFor="contactEmail" required>
                     <input
@@ -447,34 +455,39 @@ export const SignupPage = () => {
                     </select>
                   </Field>
 
-                  <Field label="How many clinical staff?" htmlFor="numStaff" hint="Optional">
-                    <input
-                      id="numStaff"
-                      type="number"
-                      min={1}
-                      max={10000}
-                      value={numStaff}
-                      onChange={(e) => setNumStaff(e.target.value)}
-                      placeholder="e.g. 5"
-                      style={inputStyle}
-                    />
-                  </Field>
+                  <details style={detailsStyle}>
+                    <summary style={summaryStyle}>Anything that helps us prepare? (optional)</summary>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '1.1rem', marginTop: '1rem' }}>
+                      <Field label="How many clinical staff?" htmlFor="numStaff" hint="Optional">
+                        <input
+                          id="numStaff"
+                          type="number"
+                          min={1}
+                          max={10000}
+                          value={numStaff}
+                          onChange={(e) => setNumStaff(e.target.value)}
+                          placeholder="e.g. 5"
+                          style={inputStyle}
+                        />
+                      </Field>
 
-                  <Field
-                    label="What’s frustrating about your current note workflow?"
-                    htmlFor="pain"
-                    hint="Optional — but helps us prepare the demo"
-                  >
-                    <textarea
-                      id="pain"
-                      maxLength={4000}
-                      rows={4}
-                      value={pain}
-                      onChange={(e) => setPain(e.target.value)}
-                      placeholder="e.g. 'I spend 2 hours after every appointment writing notes' or 'auditors keep flagging missing consent documentation'"
-                      style={{ ...inputStyle, resize: 'vertical', fontFamily: 'inherit', lineHeight: 1.5 }}
-                    />
-                  </Field>
+                      <Field
+                        label="What’s frustrating about your current note workflow?"
+                        htmlFor="pain"
+                        hint="Optional"
+                      >
+                        <textarea
+                          id="pain"
+                          maxLength={4000}
+                          rows={3}
+                          value={pain}
+                          onChange={(e) => setPain(e.target.value)}
+                          placeholder="e.g. 'I spend 2 hours after every appointment writing notes'"
+                          style={{ ...inputStyle, resize: 'vertical', fontFamily: 'inherit', lineHeight: 1.5 }}
+                        />
+                      </Field>
+                    </div>
+                  </details>
 
                   {error && (
                     <div role="alert" style={errorBoxStyle}>
@@ -498,7 +511,7 @@ export const SignupPage = () => {
 
                   <p style={fineprintStyle}>
                     By submitting you agree to our Terms and Privacy Policy.{' '}
-                    <Link to="/pricing" style={{ color: 'var(--salvia-accent)', fontWeight: 600 }}>
+                    <Link to="/pricing" style={{ color: 'var(--g-green)', fontWeight: 600 }}>
                       See pricing
                     </Link>
                   </p>
@@ -510,7 +523,7 @@ export const SignupPage = () => {
       </section>
 
       </main>
-      <Footer />
+      <GrassFooter />
     </>
   );
 };
@@ -522,7 +535,7 @@ function SuccessPage({ email, clinicName, country }: { email: string; clinicName
     COUNTRY_OPTIONS.find((c) => c.value === country)?.label ?? 'local';
   return (
     <>
-      <Header />
+      <GrassHeader />
       <main style={{ flex: 1, zIndex: 10 }}>
       <ResponsiveStyles />
       <section style={pageSectionStyle} className="signup-section signup-success">
@@ -533,7 +546,7 @@ function SuccessPage({ email, clinicName, country }: { email: string; clinicName
             <span style={{ marginLeft: '0.5rem' }}>Request received</span>
           </div>
           <h1 style={{ ...h1Style, fontSize: 'clamp(2.4rem, 5vw, 3.4rem)', marginTop: '1rem' }}>
-            Thanks {clinicName ? <span style={{ color: 'var(--salvia-accent)' }}>{clinicName}</span> : 'for reaching out'}.
+            Thanks {clinicName ? <span className="g-hl">{clinicName}</span> : 'for reaching out'}.
           </h1>
           <p style={{ ...leadStyle, maxWidth: '480px', margin: '0 auto 3rem' }}>
             We’ll be in touch at{' '}
@@ -541,10 +554,10 @@ function SuccessPage({ email, clinicName, country }: { email: string; clinicName
             within 24 hours — usually faster during {countryLabel} business hours.
           </p>
           <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-            <Link to="/" className="pill-button">Back to home</Link>
+            <Link to="/" className="g-btn g-btn--green">Back to home</Link>
             <Link
               to="/pricing"
-              className="pill-button-light"
+              className="g-btn g-btn--ghost"
               style={{ textDecoration: 'none' }}
             >
               See pricing while you wait →
@@ -553,7 +566,7 @@ function SuccessPage({ email, clinicName, country }: { email: string; clinicName
         </div>
       </section>
       </main>
-      <Footer />
+      <GrassFooter />
     </>
   );
 }
@@ -585,8 +598,8 @@ function Field({ label, htmlFor, children, required, hint }: FieldProps) {
 function CheckIcon() {
   return (
     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-      <circle cx="8" cy="8" r="7" fill="var(--salvia-accent)" opacity="0.12" />
-      <path d="M4.5 8.2 L7 10.7 L11.5 5.5" stroke="var(--salvia-accent)" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+      <circle cx="8" cy="8" r="7" fill="var(--g-green)" opacity="0.15" />
+      <path d="M4.5 8.2 L7 10.7 L11.5 5.5" stroke="var(--g-green)" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
 }
@@ -594,8 +607,8 @@ function CheckIcon() {
 function CheckIconLarge() {
   return (
     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-      <circle cx="10" cy="10" r="9" fill="var(--salvia-accent)" />
-      <path d="M5.5 10.5 L8.5 13.5 L14.5 6.5" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      <circle cx="10" cy="10" r="9" fill="var(--g-green)" />
+      <path d="M5.5 10.5 L8.5 13.5 L14.5 6.5" stroke="#083D1B" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
 }
@@ -632,13 +645,13 @@ function ResponsiveStyles() {
       .signup-form-card input:focus,
       .signup-form-card select:focus,
       .signup-form-card textarea:focus {
-        border-color: var(--salvia-accent);
-        box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15);
+        border-color: var(--g-green);
+        box-shadow: 0 0 0 3px rgba(72, 205, 95, 0.18);
       }
 
       .signup-form-card button[type='submit']:hover:not(:disabled) {
         transform: translateY(-1px);
-        box-shadow: 0 14px 28px -8px rgba(16, 185, 129, 0.4);
+        box-shadow: 0 14px 28px -8px rgba(72, 205, 95, 0.5);
       }
       .signup-form-card button[type='submit']:active:not(:disabled) {
         transform: translateY(0);
@@ -672,7 +685,8 @@ function ResponsiveStyles() {
 
 const pageSectionStyle: CSSProperties = {
   position: 'relative',
-  backgroundColor: 'var(--salvia-bg)',
+  backgroundColor: '#fff',
+  fontFamily: 'var(--g-font)',
   minHeight: '90vh',
   overflow: 'hidden',
 };
@@ -682,35 +696,35 @@ const bgGradientStyle: CSSProperties = {
   inset: 0,
   pointerEvents: 'none',
   backgroundImage:
-    'radial-gradient(circle at 12% 18%, rgba(16, 185, 129, 0.10), transparent 38%), ' +
-    'radial-gradient(circle at 88% 78%, rgba(99, 102, 241, 0.08), transparent 42%)',
+    'radial-gradient(circle at 12% 18%, rgba(72, 205, 95, 0.08), transparent 38%), ' +
+    'radial-gradient(circle at 88% 78%, rgba(242, 169, 59, 0.07), transparent 42%)',
 };
 
 const eyebrowStyle: CSSProperties = {
   display: 'inline-flex',
   alignItems: 'center',
-  fontSize: 'var(--text-2xs)',
-  fontWeight: 800,
-  letterSpacing: '0.18em',
-  textTransform: 'uppercase',
-  color: 'var(--salvia-accent)',
-  backgroundColor: 'rgba(16, 185, 129, 0.08)',
-  padding: '0.4rem 0.8rem',
-  borderRadius: 'var(--salvia-radius-full)',
+  fontSize: 12.5,
+  fontWeight: 700,
+  color: 'var(--g-ink-soft)',
+  backgroundColor: '#fff',
+  border: '1px solid var(--g-line)',
+  padding: '6px 14px',
+  borderRadius: 999,
   marginBottom: '1.25rem',
 };
 
 const h1Style: CSSProperties = {
+  fontFamily: 'var(--g-font)',
   fontSize: 'clamp(2.4rem, 5vw, 3.6rem)',
   fontWeight: 800,
-  color: 'var(--salvia-primary)',
+  color: 'var(--g-ink)',
   letterSpacing: '-0.035em',
   lineHeight: 1.05,
   marginBottom: '1.25rem',
 };
 
 const leadStyle: CSSProperties = {
-  color: 'var(--salvia-text-muted)',
+  color: 'var(--g-ink-soft)',
   fontSize: 'var(--text-md)',
   lineHeight: 1.6,
   marginBottom: '2.5rem',
@@ -737,9 +751,9 @@ const stepNumberStyle: CSSProperties = {
   flexShrink: 0,
   width: '2.2rem',
   height: '2.2rem',
-  borderRadius: 'var(--salvia-radius-full)',
-  background: 'linear-gradient(135deg, var(--salvia-primary), var(--salvia-accent))',
-  color: '#fff',
+  borderRadius: 999,
+  background: 'var(--g-green)',
+  color: '#083D1B',
   fontSize: 'var(--text-sm)',
   fontWeight: 700,
   display: 'flex',
@@ -760,13 +774,13 @@ const stepConnectorStyle: CSSProperties = {
 
 const stepTitleStyle: CSSProperties = {
   fontWeight: 700,
-  color: 'var(--salvia-primary)',
+  color: 'var(--g-ink)',
   fontSize: 'var(--text-base)',
   marginBottom: '0.25rem',
 };
 
 const stepBodyStyle: CSSProperties = {
-  color: 'var(--salvia-text-muted)',
+  color: 'var(--g-ink-soft)',
   fontSize: 'var(--text-sm)',
   lineHeight: 1.55,
 };
@@ -775,9 +789,9 @@ const trustListStyle: CSSProperties = {
   listStyle: 'none',
   padding: '1.25rem 1.5rem',
   margin: 0,
-  borderRadius: 'var(--salvia-radius-base)',
-  background: 'rgba(15, 23, 42, 0.025)',
-  border: '1px solid rgba(15, 23, 42, 0.05)',
+  borderRadius: 14,
+  background: '#fff',
+  border: '1px solid var(--g-line)',
   display: 'flex',
   flexDirection: 'column',
   gap: '0.6rem',
@@ -788,15 +802,15 @@ const trustItemStyle: CSSProperties = {
   alignItems: 'center',
   gap: '0.65rem',
   fontSize: 'var(--text-sm)',
-  color: 'var(--salvia-text)',
+  color: 'var(--g-ink-soft)',
 };
 
 const formCardStyle: CSSProperties = {
-  backgroundColor: 'var(--salvia-surface)',
-  borderRadius: 'var(--salvia-radius-large)',
+  backgroundColor: '#fff',
+  borderRadius: 18,
   padding: '2.25rem',
-  boxShadow: '0 24px 56px -20px rgba(15, 23, 42, 0.18), 0 6px 16px -4px rgba(15, 23, 42, 0.08)',
-  border: '1px solid rgba(15, 23, 42, 0.04)',
+  boxShadow: '0 24px 56px -24px rgba(15, 23, 42, 0.14), 0 6px 16px -6px rgba(15, 23, 42, 0.06)',
+  border: '1px solid var(--g-line)',
 };
 
 const formHeaderStyle: CSSProperties = {
@@ -808,7 +822,7 @@ const formHeaderStyle: CSSProperties = {
 const formTitleStyle: CSSProperties = {
   fontSize: 'var(--text-lg)',
   fontWeight: 700,
-  color: 'var(--salvia-primary)',
+  color: 'var(--g-ink)',
   margin: '0 0 0.4rem',
   letterSpacing: '-0.015em',
 };
@@ -849,7 +863,7 @@ const fieldLabelTextStyle: CSSProperties = {
   alignItems: 'baseline',
   fontSize: 'var(--text-xs)',
   fontWeight: 600,
-  color: 'var(--salvia-primary)',
+  color: 'var(--g-ink)',
   letterSpacing: '-0.005em',
 };
 
@@ -865,10 +879,10 @@ const inputStyle: CSSProperties = {
   padding: '0.75rem 0.95rem',
   fontSize: 'var(--text-base)',
   fontFamily: 'inherit',
-  border: '1px solid rgba(15, 23, 42, 0.14)',
-  borderRadius: 'var(--salvia-radius-base)',
+  border: '1px solid var(--g-line)',
+  borderRadius: 12,
   backgroundColor: '#fff',
-  color: 'var(--salvia-text)',
+  color: 'var(--g-ink)',
   outline: 'none',
   transition: 'border-color 0.15s ease, box-shadow 0.15s ease',
   boxSizing: 'border-box',
@@ -890,12 +904,25 @@ const primaryButtonStyle: CSSProperties = {
   fontWeight: 700,
   borderRadius: 'var(--salvia-radius-full)',
   border: 'none',
-  background: 'linear-gradient(135deg, var(--salvia-primary), var(--salvia-accent))',
-  color: '#fff',
+  background: 'var(--g-green)',
+  color: '#083D1B',
   cursor: 'pointer',
   letterSpacing: '0.005em',
-  boxShadow: '0 10px 24px -8px rgba(16, 185, 129, 0.35)',
+  boxShadow: '0 10px 24px -8px rgba(72, 205, 95, 0.45)',
   transition: 'transform 0.15s ease, box-shadow 0.15s ease',
+};
+
+const detailsStyle: CSSProperties = {
+  border: '1px dashed var(--g-line)',
+  borderRadius: 12,
+  padding: '0.8rem 1rem',
+};
+
+const summaryStyle: CSSProperties = {
+  cursor: 'pointer',
+  fontSize: 'var(--text-xs)',
+  fontWeight: 600,
+  color: 'var(--g-ink-soft)',
 };
 
 const fineprintStyle: CSSProperties = {
@@ -912,8 +939,8 @@ const indiaLangNoteStyle: CSSProperties = {
   gap: '0.6rem',
   padding: '0.75rem 1rem',
   borderRadius: 'var(--salvia-radius-base)',
-  backgroundColor: 'rgba(99, 102, 241, 0.06)',
-  border: '1px solid rgba(99, 102, 241, 0.15)',
+  backgroundColor: 'var(--g-green-soft)',
+  border: '1px solid rgba(72, 205, 95, 0.3)',
   fontSize: 'var(--text-xs)',
   color: 'var(--salvia-text)',
   lineHeight: 1.5,
