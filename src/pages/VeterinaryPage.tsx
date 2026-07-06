@@ -1,16 +1,16 @@
 import { Link } from 'react-router-dom';
-import { Header } from '../components/Header';
-import { Footer } from '../components/Footer';
-import { SEO } from '../components/SEO';
-import {
-  WorkflowSection,
-  StatsBar,
-  BeforeAfter,
-  HonestScope,
-  PricingTeaser,
-} from '../components/VerticalSections';
 
-const ACCENT = '#FF4E00';
+import { SEO } from '../components/SEO';
+import { GrassFooter } from '../components/grass/GrassFooter';
+import { GrassHeader } from '../components/grass/GrassHeader';
+import { CountUp, Rv } from '../components/grass/Rv';
+
+// /veterinary — the vertical page for Indian vet practices.
+// Story: one voice note per consult; VCI / IVC Act 1984 / Schedule H1
+// records stay audit-ready every day. Redesigned in the .g-* (grass)
+// language: white page, Archivo, green accent, drawn product UI.
+
+const REGULATORS = ['VCI', 'IVC Act 1984', 'Schedule H1', 'CCSEA', 'State Councils', 'DPDP Act'];
 
 const FAQS = [
   {
@@ -35,82 +35,125 @@ const FAQS = [
   },
 ];
 
-const REGULATORS = [
-  { label: 'VCI', sub: 'India', color: 'var(--accent-vet)' },
-  { label: 'IVC Act 1984', sub: 'India', color: 'var(--salvia-accent)' },
-  { label: 'Schedule H1', sub: 'India', color: '#8B5CF6' },
-  { label: 'CCSEA', sub: 'India', color: 'var(--accent-dental)' },
-  { label: 'State Councils', sub: 'India', color: '#F59E0B' },
-  { label: 'DPDP Act', sub: 'India', color: '#6366F1' },
+const DAILY_RECORDS: { img: string; label: string; value: string }[] = [
+  { img: '/illustrations/vet_billing.webp', label: 'Itemised billing', value: 'Every line maps to the clinical record behind it.' },
+  { img: '/illustrations/vet_estimate.webp', label: 'Written estimates', value: 'Signed before treatment, locked to the record.' },
+  { img: '/illustrations/tpl_cd_register.webp', label: 'Schedule H1 drug logs', value: 'Running balance always accurate, witness fields filled.' },
+  { img: '/illustrations/vet_shield_paw.webp', label: 'Complaint trail', value: 'The full encounter record, produced in seconds.' },
 ];
 
-const FEATURES = [
-  {
-    icon: (
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-        <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" />
-        <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
-        <line x1="12" y1="19" x2="12" y2="23" /><line x1="8" y1="23" x2="16" y2="23" />
-      </svg>
-    ),
-    title: 'Voice → structured record',
-    desc: 'Post-consult voice note in any Indian language maps to history, exam, assessment, plan, and drug entry. Contemporaneous timestamps built in.',
-  },
-  {
-    icon: (
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-        <rect x="3" y="3" width="18" height="18" rx="2" /><line x1="3" y1="9" x2="21" y2="9" /><line x1="9" y1="21" x2="9" y2="9" />
-      </svg>
-    ),
-    title: 'Controlled drug register',
-    desc: 'Schedule H1 entries auto-populated on drug administration. Running balance, witness fields, reconciliation reports.',
-  },
-  {
-    icon: (
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-        <polyline points="14 2 14 8 20 8" /><line x1="16" y1="13" x2="8" y2="13" /><line x1="16" y1="17" x2="8" y2="17" />
-      </svg>
-    ),
-    title: 'Procedure-specific consent',
-    desc: 'Written consent templates per procedure type — pre-op, dental, euthanasia. Cost estimate captured and signed before treatment.',
-  },
-  {
-    icon: (
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-        <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
-      </svg>
-    ),
-    title: 'Immutable audit trail',
-    desc: 'Every record version, edit, and signature timestamped and locked. Produce a complete file for any complaint or inspection in seconds.',
-  },
-  {
-    icon: (
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-        <circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" />
-      </svg>
-    ),
-    title: 'Audit-ready every day',
-    desc: 'Itemised billing maps to clinical record. Written estimates captured before treatment. Complaint trail with full encounter record.',
-  },
-  {
-    icon: (
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" />
-        <path d="M23 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" />
-      </svg>
-    ),
-    title: 'Multi-vet practice support',
-    desc: 'Role-based access for principals, associates, technicians, and visiting vets. Each clinician signs their own records with their VCI registration number.',
-  },
+const BEFORE_FACTS: { label: string; value: string }[] = [
+  { label: 'End of day', value: 'Typing into a generic SOAP template — or end-of-week catch-up' },
+  { label: 'Drug register', value: 'Kept on paper; the running balance drifts and the inspector finds gaps' },
+  { label: 'Estimates', value: 'Given verbally; the owner disputes the bill and there is no paper trail' },
+  { label: 'Visiting vets', value: 'Different handwriting, different format, no clear attribution' },
+  { label: 'The assessor asks', value: 'A two-hour fire drill for one records file' },
+];
+
+const AFTER_FACTS: { label: string; value: string }[] = [
+  { label: 'End of consult', value: 'A voice note in any Indian language; the structured record is ready in seconds' },
+  { label: 'Drug register', value: 'Auto-populated on every administration; balance always accurate' },
+  { label: 'Estimates', value: 'Signed before treatment and locked to the record' },
+  { label: 'Visiting vets', value: 'Each signs with their own VCI registration number' },
+  { label: 'The assessor asks', value: 'One click exports the complete, timestamped file' },
+];
+
+const SCOPE_DO: { title: string; body: string }[] = [
+  { title: 'Voice → structured record', body: 'Audio in any Indian language becomes history, exam, assessment, plan and drug entries — with contemporaneous timestamps.' },
+  { title: 'Controlled drug register', body: 'Schedule H1 entries with witness fields, running balance and reconciliation reports.' },
+  { title: 'Consent + written estimate', body: 'Procedure-specific consent — pre-op, dental, euthanasia — with the cost estimate signed before treatment.' },
+  { title: 'Immutable audit trail', body: 'Every version, edit and signature timestamped and locked, aligned to the IVC Act 1984 and state council requirements.' },
+  { title: 'Multi-vet practice', body: 'Role-based access for principals, associates, technicians and visiting vets — each signs with their own VCI registration number.' },
+];
+
+const SCOPE_DONT: string[] = [
+  'Replace your practice management software — your PMS sits alongside',
+  'Bill clients or process payments directly',
+  'Make your practice accredited or grant regulatory sign-off',
+  'Auto-publish records without your review',
+  'Provide clinical decision-making — you stay in the loop',
 ];
 
 const RECENT_POSTS = [
-  { slug: 'cma-vet-deadline', title: 'Daily records that hold up: what your state veterinary council actually checks', tag: 'VCI Compliance' },
-  { slug: 'rcvs-record-inspection', title: 'What assessors actually check in your clinical records under the IVC Act 1984', tag: 'VCI Standards' },
-  { slug: 'vcnz-records-standard', title: 'Schedule H1 controlled drugs — keeping a register your inspector can trust', tag: 'Schedule H1' },
-  { slug: 'au-vet-board-records', title: 'Multilingual case notes: capturing consults in any Indian language', tag: 'Documentation' },
+  { slug: 'cma-vet-deadline', title: 'Daily records that hold up: what your state veterinary council actually checks', tag: 'VCI Compliance', ic: '/illustrations/tpl_soap.webp' },
+  { slug: 'rcvs-record-inspection', title: 'What assessors actually check in your clinical records under the IVC Act 1984', tag: 'VCI Standards', ic: '/illustrations/tpl_work_cert.webp' },
+  { slug: 'vcnz-records-standard', title: 'Schedule H1 controlled drugs — keeping a register your inspector can trust', tag: 'Schedule H1', ic: '/illustrations/tpl_cd_register.webp' },
+  { slug: 'au-vet-board-records', title: 'Multilingual case notes: capturing consults in any Indian language', tag: 'Documentation', ic: '/illustrations/tpl_referral.webp' },
 ];
+
+// Drawn product UI: a verified vet consult record (screenshot fidelity).
+const VetConsultPanel = () => (
+  <div className="g-ui g-ui--panel">
+    <div className="g-ui-head">
+      <div>
+        <div className="g-ui-head-title">Consult — Bruno · 4 y · Labrador</div>
+        <div className="g-ui-head-sub">Canine · 5 Jul, 6:40 pm · Dr. Menon</div>
+      </div>
+      <span className="g-ui-tag">Policy check passed</span>
+    </div>
+    <div style={{ padding: '10px 16px 14px' }}>
+      <div className="g-ui-field">
+        <span className="g-ui-f-label">History</span>
+        <span className="g-ui-f-value">Vomiting since last night · ate garbage on walk</span>
+        <span className="g-ui-conf">AI · 97%</span>
+      </div>
+      <div className="g-ui-field">
+        <span className="g-ui-f-label">Exam</span>
+        <span className="g-ui-f-value">Mild dehydration · temp 102.8°F · abdomen soft</span>
+        <span className="g-ui-conf">AI · 96%</span>
+      </div>
+      <div className="g-ui-evidence">"…thoda dehydration hai… temperature ek sau do point aath…"</div>
+      <div className="g-ui-field">
+        <span className="g-ui-f-label">Assessment</span>
+        <span className="g-ui-f-value">Dietary indiscretion — gastritis<span className="g-ui-badge-edited">EDITED</span></span>
+        <span className="g-ui-conf g-ui-conf--med"><span className="g-ui-glyph">≈</span>AI · 74%</span>
+      </div>
+      <div className="g-ui-field">
+        <span className="g-ui-f-label">Plan</span>
+        <span className="g-ui-f-value">Ondansetron 0.2 mg/kg IV · bland diet 48 h · review tomorrow</span>
+        <span className="g-ui-conf">AI · 98%</span>
+      </div>
+      <div className="g-ui-field">
+        <span className="g-ui-f-label">Drugs given</span>
+        <span className="g-ui-f-value">Ondansetron 4 mg IV — entered in register</span>
+        <span className="g-ui-conf">AI · 99%</span>
+      </div>
+      <div className="g-ui-meta-row">
+        <span className="g-ui-audio-play"><i />Original audio · 1:04</span>
+        <span className="g-ui-tag g-ui-tag--ink">hi-IN + en</span>
+        <span className="g-ui-tag g-ui-tag--ink">Signed — Dr. Menon · VCI reg. no.</span>
+      </div>
+    </div>
+  </div>
+);
+
+// Drawn product UI: the Schedule H1 register, vet edition.
+const VetDrugRegisterPanel = () => (
+  <div className="g-ui g-ui--panel">
+    <div className="g-ui-head">
+      <div>
+        <div className="g-ui-head-title">Controlled drug register — Schedule H1</div>
+        <div className="g-ui-head-sub">Running balance · witness fields · 3-year retention</div>
+      </div>
+      <span className="g-ui-tag">Balanced</span>
+    </div>
+    <table className="g-ui-table">
+      <thead>
+        <tr><th>Date</th><th>Patient</th><th>Drug &amp; strength</th><th>Qty</th><th>Vet</th><th>Balance</th></tr>
+      </thead>
+      <tbody>
+        <tr><td className="g-dim">5 Jul</td><td>Bruno · canine</td><td>Tramadol 50 mg</td><td>2</td><td className="g-dim">Dr. Menon</td><td>84</td></tr>
+        <tr><td className="g-dim">5 Jul</td><td>Misty · feline</td><td>Ketamine 100 mg/ml</td><td>0.4 ml</td><td className="g-dim">Dr. Menon</td><td>9.2 ml</td></tr>
+        <tr><td className="g-dim">4 Jul</td><td>Rocky · canine</td><td>Butorphanol 10 mg/ml</td><td>0.6 ml</td><td className="g-dim">Dr. Iyer</td><td>4.8 ml</td></tr>
+        <tr><td className="g-dim">3 Jul</td><td>Sheru · canine</td><td>Diazepam 5 mg</td><td>2</td><td className="g-dim">Dr. Iyer</td><td>56</td></tr>
+      </tbody>
+    </table>
+    <div className="g-ui-meta-row" style={{ padding: '12px 16px 14px' }}>
+      <span className="g-ui-tag g-ui-tag--ink">Auto-filled on administration</span>
+      <span className="g-ui-tag g-ui-tag--ink">Every row traceable to a signed record</span>
+    </div>
+  </div>
+);
 
 export const VeterinaryPage = () => {
   const faqSchema = JSON.stringify({
@@ -124,7 +167,7 @@ export const VeterinaryPage = () => {
   });
 
   return (
-    <div style={{ backgroundColor: '#fff', minHeight: '100vh' }}>
+    <>
       <SEO
         title="Veterinary Compliance Software"
         description="Salvia keeps vet practice records audit-ready for VCI, the IVC Act 1984, Schedule H1 and state veterinary councils. Voice note in any Indian language after each consult — clinical records, controlled drug logs, consent, and audit trail out the other side."
@@ -136,293 +179,326 @@ export const VeterinaryPage = () => {
         ]}
       />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: faqSchema }} />
-      <Header />
-      <main style={{ flex: 1, zIndex: 10 }}>
+      <GrassHeader />
+      <main style={{ flex: 1, zIndex: 10, background: '#fff' }}>
 
-      {/* Hero */}
-      <section style={{ padding: '11rem 0 7rem', backgroundColor: 'var(--salvia-bg)' }}>
-        <div className="container" style={{ maxWidth: '1000px', textAlign: 'center' }}>
-          <div style={{
-            display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
-            backgroundColor: 'rgba(255,78,0,0.07)', border: '1.5px solid rgba(255,78,0,0.18)',
-            borderRadius: 'var(--radius-md)', padding: '0.35rem 0.85rem', marginBottom: '2rem',
-          }}>
-            <span style={{ fontSize: 'var(--text-xs)', fontWeight: 800, color: 'var(--salvia-accent)', letterSpacing: '0.1em', textTransform: 'uppercase' }}>
-              Veterinary Practices
-            </span>
-          </div>
-          <h1 style={{
-            fontSize: 'clamp(2.8rem, 7vw, 5rem)', fontWeight: 800,
-            letterSpacing: '-0.04em', lineHeight: 1,
-            color: 'var(--salvia-primary)', marginBottom: '1.75rem',
-          }}>
-            Records that survive<br />any inspection.
-          </h1>
-          <p style={{
-            fontSize: 'clamp(1rem, 2.5vw, 1.25rem)',
-            color: 'var(--salvia-text-muted)', lineHeight: 1.65,
-            maxWidth: '640px', margin: '0 auto 3rem',
-          }}>
-            VCI standards. IVC Act 1984. Schedule H1 drug register. One voice note in any Indian language after each consult — Salvia handles the structured record, controlled drug log, consent, and audit trail.
-          </p>
-          <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-            <Link to="/start" style={{
-              display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
-              backgroundColor: 'var(--salvia-accent)', color: '#fff',
-              padding: '0.85rem 1.75rem', borderRadius: 'var(--radius-md)',
-              fontWeight: 700, fontSize: 'var(--text-base)', textDecoration: 'none',
-            }}>
-              Book a demo
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                <line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" />
-              </svg>
-            </Link>
-            <Link to="/pricing" style={{
-              display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
-              backgroundColor: 'transparent', color: 'var(--salvia-primary)',
-              padding: '0.85rem 1.75rem', borderRadius: 'var(--radius-md)',
-              fontWeight: 700, fontSize: 'var(--text-base)', textDecoration: 'none',
-              border: '1.5px solid rgba(15,23,42,0.15)',
-            }}>
-              See pricing
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* Regulators rail */}
-      <section style={{ borderTop: '1px solid #F1F5F9', borderBottom: '1px solid #F1F5F9', padding: '2rem 0', backgroundColor: '#fff' }}>
-        <div className="container" style={{ maxWidth: '900px' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '2rem', flexWrap: 'wrap', justifyContent: 'center' }}>
-            <span style={{ fontSize: 'var(--text-2xs)', fontWeight: 700, color: 'var(--salvia-text-muted)', letterSpacing: '0.1em', textTransform: 'uppercase', whiteSpace: 'nowrap' }}>
-              Designed for
-            </span>
-            {REGULATORS.map(r => (
-              <div key={r.label} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.1rem' }}>
-                <span style={{ fontSize: 'var(--text-base)', fontWeight: 800, color: r.color, letterSpacing: '-0.02em' }}>{r.label}</span>
-                <span style={{ fontSize: 'var(--text-2xs)', fontWeight: 600, color: 'var(--salvia-text-muted)', letterSpacing: '0.04em' }}>{r.sub}</span>
+        {/* Hero */}
+        <section className="g-section" style={{ padding: '148px 0 72px' }}>
+          <div className="g-container">
+            <div className="g-split">
+              <div>
+                <Rv as="h1" className="g-h1" style={{ fontSize: 'clamp(38px, 4.6vw, 66px)', marginBottom: 20 }}>
+                  Records that survive <span className="g-hl">any inspection.</span>
+                </Rv>
+                <Rv as="p" className="g-sub" delay={1}>
+                  VCI standards. IVC Act 1984. Schedule H1 drug register. One voice note in any
+                  Indian language after each consult — Salvia handles the <b>structured record,
+                  controlled drug log, consent and audit trail</b>. Your PMS keeps booking and
+                  billing; Salvia keeps you defensible.
+                </Rv>
+                <Rv className="g-hero-ctas" delay={2} style={{ justifyContent: 'flex-start', marginTop: 30 }}>
+                  <Link className="g-btn g-btn--green" to="/start">
+                    Book a demo
+                  </Link>
+                  <Link className="g-btn g-btn--ghost" to="/pricing">
+                    See pricing
+                  </Link>
+                </Rv>
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Daily records callout */}
-      <section style={{ padding: '5rem 0', backgroundColor: 'rgba(255,78,0,0.03)', borderBottom: '1px solid rgba(255,78,0,0.08)' }}>
-        <div className="container" style={{ maxWidth: '880px' }}>
-          <div style={{
-            display: 'grid', gridTemplateColumns: '1fr 2fr', gap: '3rem', alignItems: 'center',
-          }} className="mobile-stack">
-            <div style={{ textAlign: 'center' }}>
-              <div style={{ fontSize: 'var(--text-2xs)', fontWeight: 800, color: 'var(--salvia-accent)', letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: '0.5rem' }}>Daily Records</div>
-              <div style={{ fontSize: '3.5rem', fontWeight: 800, color: 'var(--salvia-primary)', letterSpacing: '-0.04em', lineHeight: 1 }}>365</div>
-              <div style={{ fontSize: 'var(--text-xl)', fontWeight: 700, color: 'var(--salvia-primary)' }}>days/yr</div>
+              <Rv className="g-split-art" delay={1}>
+                <img
+                  src="/illustrations/vet_world.webp"
+                  alt="A miniature veterinary clinic where a vet examines a dog and the consult flows as documents into a sealed vault"
+                />
+              </Rv>
             </div>
-            <div>
-              <h2 style={{ fontSize: 'var(--text-xl)', fontWeight: 800, color: 'var(--salvia-primary)', marginBottom: '0.75rem', letterSpacing: '-0.02em' }}>
-                Audit-readiness isn&apos;t a one-day event — it&apos;s your daily records.
-              </h2>
-              <p style={{ color: 'var(--salvia-text-muted)', lineHeight: 1.65, marginBottom: '1.25rem' }}>
-                Most practices keep good case notes but lose hours when the assessor asks. The four records that get scrutinised — itemised billing, written estimates, Schedule H1 drug logs, and complaint trail — are where time disappears. Salvia keeps all four ready every day.
-              </p>
-              <Link to="/blog/vet-audit-prep" style={{
-                fontSize: 'var(--text-sm)', fontWeight: 700, color: 'var(--salvia-accent)',
-                display: 'inline-flex', alignItems: 'center', gap: '0.35rem', textDecoration: 'none',
-              }}>
-                Read the full breakdown
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                  <line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" />
-                </svg>
+            <Rv delay={3} style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap', marginTop: 52 }}>
+              <span className="g-small" style={{ fontWeight: 600 }}>Designed for</span>
+              {REGULATORS.map((r) => (
+                <span
+                  key={r}
+                  style={{
+                    fontFamily: 'var(--g-font)', fontSize: 12.5, fontWeight: 700,
+                    color: 'var(--g-ink-soft)', border: '1px solid var(--g-line)',
+                    borderRadius: 999, padding: '5px 13px',
+                  }}
+                >
+                  {r}
+                </span>
+              ))}
+            </Rv>
+          </div>
+        </section>
+
+        {/* Voice → structured record */}
+        <section className="g-section">
+          <div className="g-container">
+            <div className="g-split">
+              <div>
+                <Rv as="h2" className="g-h2">
+                  One voice note. <span className="g-hl">The whole record.</span>
+                </Rv>
+                <Rv as="p" className="g-sub" delay={1}>
+                  After each consult, speak for 30 seconds to a few minutes — Malayalam, Hindi,
+                  English or all three in one sentence. Salvia maps the audio to{' '}
+                  <b>history, exam, assessment, plan and drugs administered</b>. You review and
+                  sign. No typing, no template-bashing, and the original audio stays attached
+                  as evidence.
+                </Rv>
+                <Rv className="g-facts" delay={2}>
+                  <div className="g-fact"><span>Timestamps</span><b>Contemporaneous, built in</b></div>
+                  <div className="g-fact"><span>Languages</span><b>Any Indian language, mixed freely</b></div>
+                  <div className="g-fact"><span>Attribution</span><b>Each vet signs with their VCI reg. number</b></div>
+                  <div className="g-fact"><span>Audit trail</span><b>Every edit versioned and locked</b></div>
+                </Rv>
+              </div>
+              <Rv className="g-split-art" delay={1} style={{ display: 'block' }}>
+                <VetConsultPanel />
+              </Rv>
+            </div>
+          </div>
+        </section>
+
+        {/* Schedule H1 register */}
+        <section className="g-section">
+          <div className="g-container">
+            <Rv as="h2" className="g-h2">
+              The register your inspector <span className="g-hl">opens first.</span>
+            </Rv>
+            <Rv as="p" className="g-sub" delay={1}>
+              Every controlled drug administration flows into the Schedule H1 register
+              automatically — date, patient, drug, quantity, dose, route, administering vet.
+              The running balance never drifts, because the register is a <b>by-product of the
+              record</b>, not a separate chore.
+            </Rv>
+            <Rv delay={2} style={{ marginTop: 44 }}>
+              <div className="g-showcase">
+                <VetDrugRegisterPanel />
+              </div>
+            </Rv>
+          </div>
+        </section>
+
+        {/* Daily readiness — 365 */}
+        <section className="g-section g-center">
+          <div className="g-container">
+            <Rv as="h2" className="g-h2">
+              Audit-readiness is a daily habit, <span className="g-hl">not an event.</span>
+            </Rv>
+            <Rv as="p" className="g-sub" delay={1}>
+              Most practices keep good case notes but lose hours when the assessor asks. Four
+              records get scrutinised — and all four fall out of everyday Salvia use.
+            </Rv>
+            <Rv className="g-giant" style={{ marginTop: 48 }}>
+              <div className="g-n">
+                <CountUp value={365} />
+              </div>
+              <div className="g-c">days a year your records stay assessment-ready.</div>
+              <div className="g-s">No pre-inspection scramble — the file already exists</div>
+            </Rv>
+            <div className="g-tpl-grid" style={{ textAlign: 'left', marginTop: 52 }}>
+              {DAILY_RECORDS.map((f, i) => (
+                <Rv className="g-card" key={f.label} delay={(Math.min(i + 1, 4)) as 1 | 2 | 3 | 4}>
+                  <img src={f.img} alt="" loading="lazy" />
+                  <h3 className="g-h3" style={{ fontSize: 17 }}>{f.label}</h3>
+                  <p>{f.value}</p>
+                </Rv>
+              ))}
+            </div>
+            <Rv as="p" className="g-small" delay={3} style={{ marginTop: 26 }}>
+              <Link to="/blog/vet-audit-prep" style={{ color: 'var(--g-green)', fontWeight: 600 }}>
+                Read the full audit-prep breakdown →
               </Link>
-            </div>
+            </Rv>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Stats bar */}
-      <StatsBar accent={ACCENT} />
-
-      {/* Workflow */}
-      <WorkflowSection
-        accent={ACCENT}
-        verticalLabel="Veterinary"
-        audioStepCopy="After each consult, leave a brief voice note. 30 seconds to a few minutes — natural language, no template-bashing."
-      />
-
-      {/* Feature grid */}
-      <section style={{ padding: '7rem 0', backgroundColor: '#fff' }}>
-        <div className="container" style={{ maxWidth: '1100px' }}>
-          <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
-            <div style={{ fontSize: 'var(--text-2xs)', fontWeight: 800, color: 'var(--salvia-accent)', letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>
-              What Salvia does
-            </div>
-            <h2 style={{ fontSize: 'clamp(1.8rem, 4vw, 2.75rem)', fontWeight: 800, color: 'var(--salvia-primary)', letterSpacing: '-0.03em' }}>
-              Every record element an inspector looks for.
-            </h2>
-          </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.5rem' }} className="mobile-stack">
-            {FEATURES.map((f, i) => (
-              <div key={i} style={{
-                padding: '2rem', borderRadius: 'var(--radius-lg)',
-                border: '1px solid #EEF2F6', backgroundColor: '#FAFBFC',
-              }}>
-                <div style={{
-                  width: '44px', height: '44px', borderRadius: 'var(--radius-md)',
-                  backgroundColor: 'rgba(255,78,0,0.07)',
-                  display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  color: 'var(--salvia-accent)', marginBottom: '1.25rem',
-                }}>
-                  {f.icon}
+        {/* Before / after */}
+        <section className="g-section">
+          <div className="g-container">
+            <Rv as="h2" className="g-h2">
+              What changes <span className="g-hl">on day one.</span>
+            </Rv>
+            <div className="g-split" style={{ alignItems: 'start', marginTop: 40 }}>
+              <Rv delay={1}>
+                <h3 className="g-h3">Without Salvia</h3>
+                <div className="g-facts" style={{ marginTop: 16 }}>
+                  {BEFORE_FACTS.map((f) => (
+                    <div className="g-fact" key={f.label}>
+                      <span>{f.label}</span>
+                      <b>{f.value}</b>
+                    </div>
+                  ))}
                 </div>
-                <h3 style={{ fontSize: 'var(--text-base)', fontWeight: 700, color: 'var(--salvia-primary)', marginBottom: '0.5rem' }}>{f.title}</h3>
-                <p style={{ fontSize: 'var(--text-sm)', color: 'var(--salvia-text-muted)', lineHeight: 1.6 }}>{f.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Before vs After */}
-      <BeforeAfter
-        accent={ACCENT}
-        beforeLines={[
-          `End-of-day typing into a generic SOAP template — or worse, end-of-week catch-up.`,
-          `Controlled drug register kept on paper. Running balance drifts. The inspector finds gaps.`,
-          `Written estimate captured verbally. Owner disputes the bill. No paper trail.`,
-          `A visiting vet sees Mrs Sharma's dog. Different handwriting, different format, no clear attribution.`,
-          `The assessor asks for a complete records file. Two-hour fire drill.`,
-        ]}
-        afterLines={[
-          `Voice note in any Indian language after each consult. Structured record — history, exam, assessment, plan, drugs — ready in seconds.`,
-          `Controlled drug register auto-populated on every administration. Running balance always accurate.`,
-          `Written estimate signed before treatment. Locked to the record. Audit-ready.`,
-          `Every visiting vet signs with their own VCI registration number. Records visually attributed.`,
-          `The assessor asks for a file. Exported with one click, fully timestamped.`,
-        ]}
-      />
-
-      {/* Honest scope */}
-      <HonestScope
-        accent={ACCENT}
-        doLines={[
-          `Audio in any Indian language → structured vet consultation record`,
-          `Controlled drug register (Schedule H1) with witness fields`,
-          `Procedure-specific consent + written cost estimate`,
-          `Immutable audit trail aligned to the IVC Act 1984 and state council requirements`,
-          `Daily records ready for assessment — itemised billing, estimates, complaint trail`,
-          `Multi-vet practice with role-based access for principals, associates, visiting vets, technicians`,
-        ]}
-        dontLines={[
-          `Replace your practice management software (PMS sits alongside)`,
-          `Bill clients or process payments directly`,
-          `Make your practice NABH-accredited or grant regulatory sign-off`,
-          `Auto-publish records without your review`,
-          `Provide clinical decision-making — you stay in the loop`,
-        ]}
-      />
-
-      {/* Pricing teaser */}
-      <PricingTeaser
-        accent={ACCENT}
-        vertical="veterinary"
-        fromPriceCopy="Veterinary compliance, from ₹1,000/mo."
-      />
-
-      {/* FAQ section */}
-      <section style={{ padding: '7rem 0', backgroundColor: 'var(--salvia-bg)', borderTop: '1px solid #F1F5F9' }}>
-        <div className="container" style={{ maxWidth: '760px' }}>
-          <div style={{ textAlign: 'center', marginBottom: '3.5rem' }}>
-            <div style={{ fontSize: 'var(--text-2xs)', fontWeight: 800, color: 'var(--salvia-accent)', letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>
-              Common questions
-            </div>
-            <h2 style={{ fontSize: 'clamp(1.8rem, 4vw, 2.4rem)', fontWeight: 800, color: 'var(--salvia-primary)', letterSpacing: '-0.03em' }}>
-              What vet practices ask us
-            </h2>
-          </div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-            {FAQS.map((faq, i) => (
-              <div key={i} style={{
-                padding: '1.75rem 2rem', borderRadius: 'var(--radius-md)',
-                border: '1px solid #EEF2F6', backgroundColor: '#fff',
-              }}>
-                <h3 style={{ fontSize: 'var(--text-base)', fontWeight: 700, color: 'var(--salvia-primary)', marginBottom: '0.65rem' }}>{faq.q}</h3>
-                <p style={{ fontSize: 'var(--text-sm)', color: 'var(--salvia-text-muted)', lineHeight: 1.65, margin: 0 }}>{faq.a}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Blog links */}
-      <section style={{ padding: '6rem 0', backgroundColor: '#fff', borderTop: '1px solid #F1F5F9' }}>
-        <div className="container" style={{ maxWidth: '1000px' }}>
-          <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', marginBottom: '2rem', flexWrap: 'wrap', gap: '1rem' }}>
-            <div style={{ fontSize: 'var(--text-2xs)', fontWeight: 800, color: 'var(--salvia-accent)', letterSpacing: '0.12em', textTransform: 'uppercase' }}>From the compliance desk</div>
-            <Link to="/blog" style={{ fontSize: 'var(--text-sm)', fontWeight: 700, color: 'var(--salvia-text-muted)', textDecoration: 'none' }}>All posts →</Link>
-          </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '1rem' }} className="mobile-stack">
-            {RECENT_POSTS.map(p => (
-              <Link key={p.slug} to={`/blog/${p.slug}`} style={{ textDecoration: 'none' }} className="vet-blog-card">
-                <div style={{
-                  padding: '1.5rem', borderRadius: 'var(--radius-md)',
-                  border: '1px solid #EEF2F6', backgroundColor: '#FAFBFC',
-                  height: '100%', transition: 'all 0.2s ease',
-                }}>
-                  <div style={{
-                    fontSize: 'var(--text-2xs)', fontWeight: 800, color: 'var(--salvia-accent)',
-                    backgroundColor: 'rgba(255,78,0,0.07)', padding: '0.2rem 0.55rem',
-                    borderRadius: 'var(--radius-sm)', display: 'inline-block',
-                    letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '0.75rem',
-                  }}>
-                    {p.tag}
-                  </div>
-                  <h4 style={{ fontSize: 'var(--text-base)', fontWeight: 700, color: 'var(--salvia-primary)', lineHeight: 1.4, margin: 0 }}>
-                    {p.title}
-                  </h4>
+              </Rv>
+              <Rv delay={2}>
+                <h3 className="g-h3">
+                  With <span className="g-hl">Salvia</span>
+                </h3>
+                <div className="g-facts" style={{ marginTop: 16 }}>
+                  {AFTER_FACTS.map((f) => (
+                    <div className="g-fact" key={f.label}>
+                      <span>{f.label}</span>
+                      <b>{f.value}</b>
+                    </div>
+                  ))}
                 </div>
+              </Rv>
+            </div>
+          </div>
+        </section>
+
+        {/* Honest scope */}
+        <section className="g-section">
+          <div className="g-container">
+            <Rv as="h2" className="g-h2">
+              What it does — <span className="g-hl">and what it doesn't.</span>
+            </Rv>
+            <Rv as="p" className="g-sub" delay={1}>
+              Salvia is the compliance and records layer that sits alongside your PMS. It never
+              replaces booking or billing, and it never signs for you.
+            </Rv>
+            <div className="g-split" style={{ alignItems: 'start', marginTop: 24 }}>
+              <div>
+                {SCOPE_DO.map((s, i) => (
+                  <Rv className="g-check" key={s.title} delay={(Math.min(i + 1, 4)) as 1 | 2 | 3 | 4}>
+                    <span className="g-ck">✓</span>
+                    <div>
+                      <h4>{s.title}</h4>
+                      <p>{s.body}</p>
+                    </div>
+                  </Rv>
+                ))}
+              </div>
+              <Rv delay={2}>
+                <h3 className="g-h3" style={{ marginTop: 22 }}>Salvia won't</h3>
+                <div className="g-facts" style={{ marginTop: 14 }}>
+                  {SCOPE_DONT.map((line) => (
+                    <div className="g-fact" key={line} style={{ justifyContent: 'flex-start' }}>
+                      <span style={{ flex: 'none' }}>✕</span>
+                      <b style={{ textAlign: 'left', fontWeight: 500, color: 'var(--g-ink-soft)' }}>{line}</b>
+                    </div>
+                  ))}
+                </div>
+              </Rv>
+            </div>
+          </div>
+        </section>
+
+        {/* Pricing teaser */}
+        <section className="g-section g-center">
+          <div className="g-container">
+            <Rv delay={1}>
+              <img
+                src="/illustrations/vet_mic_dog.webp"
+                alt=""
+                loading="lazy"
+                style={{ width: 132, height: 'auto', margin: '0 auto 18px', display: 'block' }}
+              />
+            </Rv>
+            <Rv as="h2" className="g-h2">
+              From ₹999 a month. <span className="g-hl">Everything included.</span>
+            </Rv>
+            <Rv as="p" className="g-sub" delay={1}>
+              The Starter plan covers 400 AI notes a month with the full compliance suite —
+              drug register, consent, incidents, branded PDF export — and <b>unlimited staff</b>.
+              You pay per note, never per vet.
+            </Rv>
+            <Rv className="g-hero-ctas" delay={2} style={{ marginTop: 30 }}>
+              <Link className="g-btn g-btn--green" to="/start">
+                Start free
               </Link>
-            ))}
+              <Link className="g-btn g-btn--ghost" to="/pricing">
+                Full pricing
+              </Link>
+            </Rv>
+            <Rv as="p" className="g-hero-note" delay={3}>
+              First 50 notes free · Annual billing = 2 months free · Prices exclude GST
+            </Rv>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* CTA */}
-      <section style={{ padding: '7rem 0', backgroundColor: 'var(--salvia-bg)', borderTop: '1px solid #F1F5F9', textAlign: 'center' }}>
-        <div className="container" style={{ maxWidth: '600px' }}>
-          <div style={{ fontSize: 'var(--text-2xs)', fontWeight: 800, color: 'var(--salvia-accent)', letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: '1rem' }}>
-            Get started
+        {/* FAQ */}
+        <section className="g-section">
+          <div className="g-container">
+            <Rv as="h2" className="g-h2">
+              What vet practices <span className="g-hl">ask us.</span>
+            </Rv>
+            <div style={{ maxWidth: 820, marginTop: 40 }}>
+              {FAQS.map((faq, i) => (
+                <Rv key={faq.q} delay={(Math.min(i + 1, 4)) as 1 | 2 | 3 | 4} style={{ borderTop: '1px solid var(--g-line-soft)', padding: '26px 0' }}>
+                  <h3 className="g-h3" style={{ marginBottom: 8 }}>{faq.q}</h3>
+                  <p style={{ fontFamily: 'var(--g-font)', fontSize: 15, color: 'var(--g-ink-soft)', lineHeight: 1.7, margin: 0 }}>
+                    {faq.a}
+                  </p>
+                </Rv>
+              ))}
+            </div>
           </div>
-          <h2 style={{ fontSize: 'clamp(2rem, 5vw, 3rem)', fontWeight: 800, color: 'var(--salvia-primary)', letterSpacing: '-0.03em', marginBottom: '1rem' }}>
-            Audit-ready records, from day one.
-          </h2>
-          <p style={{ color: 'var(--salvia-text-muted)', lineHeight: 1.65, marginBottom: '2.5rem' }}>
-            See how Salvia works in a real vet practice workflow — no slides, no pitch. Book a 20-minute demo.
-          </p>
-          <Link to="/start" style={{
-            display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
-            backgroundColor: 'var(--salvia-accent)', color: '#fff',
-            padding: '0.9rem 2rem', borderRadius: 'var(--radius-md)',
-            fontWeight: 700, fontSize: 'var(--text-base)', textDecoration: 'none',
-          }}>
-            Book a demo
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-              <line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" />
-            </svg>
-          </Link>
-        </div>
-      </section>
+        </section>
+
+        {/* From the compliance desk */}
+        <section className="g-section">
+          <div className="g-container">
+            <Rv as="h2" className="g-h2">
+              From the compliance desk.
+            </Rv>
+            <div className="g-tpl-grid">
+              {RECENT_POSTS.map((p, i) => (
+                <Rv key={p.slug} delay={(Math.min(i + 1, 4)) as 1 | 2 | 3 | 4}>
+                  <Link to={`/blog/${p.slug}`} className="g-tpl" style={{ display: 'block', textDecoration: 'none', height: '100%' }}>
+                    <img className="g-tpl-ic" src={p.ic} alt="" loading="lazy" />
+                    <div className="g-tpl-name">{p.title}</div>
+                    <div className="g-tpl-meta">
+                      <span className="g-tpl-vert">{p.tag}</span>
+                    </div>
+                  </Link>
+                </Rv>
+              ))}
+            </div>
+            <Rv as="p" className="g-small" delay={3} style={{ marginTop: 24 }}>
+              <Link to="/blog" style={{ color: 'var(--g-green)', fontWeight: 600 }}>
+                All posts →
+              </Link>
+            </Rv>
+          </div>
+        </section>
+
+        {/* Final CTA */}
+        <section className="g-final">
+          <div className="g-container">
+            <div className="g-final-grid">
+              <div>
+                <Rv as="h2" className="g-h2">
+                  Audit-ready records, <span className="g-hl">from day one.</span>
+                </Rv>
+                <Rv as="p" className="g-sub" delay={1} style={{ marginTop: 14 }}>
+                  See how Salvia works in a real vet practice workflow — no slides, no pitch.
+                  Book a 20-minute demo.
+                </Rv>
+                <Rv className="g-hero-ctas" delay={2} style={{ marginTop: 30 }}>
+                  <Link className="g-btn g-btn--green" to="/start">
+                    Book a demo
+                  </Link>
+                  <Link className="g-btn g-btn--ghost" to="/start">
+                    Start free
+                  </Link>
+                </Rv>
+              </div>
+              <Rv className="g-final-art" delay={1}>
+                <img
+                  src="/illustrations/ill_seal.webp"
+                  alt="A clinical record sealed inside a vault"
+                  loading="lazy"
+                  onError={(e) => ((e.target as HTMLImageElement).src = '/illustrations/vault.webp')}
+                />
+              </Rv>
+            </div>
+          </div>
+        </section>
 
       </main>
-      <Footer />
-
-      <style>{`
-        .vet-blog-card:hover > div {
-          border-color: rgba(255,78,0,0.2);
-          background-color: rgba(255,78,0,0.015);
-          transform: translateY(-2px);
-          box-shadow: 0 6px 20px rgba(15,23,42,0.05);
-        }
-      `}</style>
-    </div>
+      <GrassFooter />
+    </>
   );
 };

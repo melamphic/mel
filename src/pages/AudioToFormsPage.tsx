@@ -1,251 +1,254 @@
 import { Link } from 'react-router-dom';
-import { Header } from '../components/Header';
-import { Footer } from '../components/Footer';
+
 import { SEO } from '../components/SEO';
+import { GrassFooter } from '../components/grass/GrassFooter';
+import { GrassHeader } from '../components/grass/GrassHeader';
+import { Rv } from '../components/grass/Rv';
 
-const FEATURES = [
-  {
-    title: 'Voice note → structured record',
-    desc: 'Leave a voice note after each consult. Salvia maps the audio to every required field — history, exam findings, assessment, plan, drugs administered — with a contemporaneous timestamp.',
-  },
-  {
-    title: 'Weight-traced drug doses',
-    desc: 'Every drug dose in the record traces back to the patient weight recorded at that visit. If the weight and dose don\'t align, Salvia flags it before you sign.',
-  },
-  {
-    title: 'Controlled drug register auto-populated',
-    desc: 'When a controlled drug is documented in the clinical record, the Schedule 3 register entry is created automatically — date, patient, drug, dose, route, administering clinician, running balance.',
-  },
-  {
-    title: 'Consent captured in the workflow',
-    desc: 'Written consent templates for surgical, anaesthetic, and euthanasia procedures. Cost estimate signed before treatment begins. All locked to the record.',
-  },
-  {
-    title: 'Zero-hallucination extraction',
-    desc: 'Salvia doesn\'t invent fields it didn\'t hear. Missing vitals are flagged, not filled with "WNL". You sign what was captured, not what the AI guessed.',
-  },
-  {
-    title: 'Audit-ready on submission',
-    desc: 'Once signed, the record is immutable. Every edit after signing creates a versioned addendum with reason and timestamp — the way regulators expect corrections to work.',
-  },
+// /products/point-of-care-evidence — the capture module.
+// Story: delayed documentation loses audits; capture at the point of care.
+// Grass design language.
+
+const REGULATORS = ['NMC', 'DCI', 'VCI', 'NABH', 'CEA 2010', 'DPDP Act'];
+
+const HOW_IT_WORKS: { label: string; value: string }[] = [
+  { label: 'Consult ends', value: 'You step away from the patient — 30 to 90 seconds' },
+  { label: 'Voice note', value: 'Speak naturally: what you found, what you gave, what you told them' },
+  { label: 'Fields mapped', value: 'Audio becomes the structured record; drug entries flow to the register; gaps are flagged' },
+  { label: 'Review and sign', value: 'Glance, correct, sign — the record locks, audit-ready' },
 ];
 
-const HOW_IT_WORKS = [
-  { step: '01', title: 'Consult ends', desc: 'You step away from the patient. Takes 30–90 seconds.' },
-  { step: '02', title: 'Voice note', desc: 'Speak naturally — what you found, what you gave, what you told the owner. No template to fill.' },
-  { step: '03', title: 'Salvia maps the fields', desc: 'Audio is transcribed and mapped to the structured record. Drug entries flow to the register. Gaps are flagged.' },
-  { step: '04', title: 'You review and sign', desc: 'Glance over the populated record, correct anything, sign. Done. The record is locked and audit-ready.' },
+const FEATURES: { title: string; body: string }[] = [
+  { title: 'Voice note → structured record', body: 'Every required field — history, exam findings, assessment, plan, drugs administered — with a contemporaneous timestamp.' },
+  { title: 'Weight-traced drug doses', body: 'Every dose traces back to the patient weight recorded at that visit. If weight and dose don\'t align, Salvia flags it before you sign.' },
+  { title: 'Drug register auto-populated', body: 'A controlled drug in the note creates the Schedule H1 register entry automatically — date, patient, drug, dose, route, clinician, running balance.' },
+  { title: 'Consent in the workflow', body: 'Written consent templates for surgical, anaesthetic and euthanasia procedures; the cost estimate signed before treatment. All locked to the record.' },
+  { title: 'Zero-hallucination extraction', body: 'Salvia doesn\'t invent fields it didn\'t hear. Missing vitals are flagged, not filled with "WNL". You sign what was captured, not what the AI guessed.' },
+  { title: 'Audit-ready on submission', body: 'Once signed, the record is immutable. Every later edit is a versioned addendum with reason and timestamp — the way regulators expect corrections to work.' },
 ];
 
-const FRAMEWORKS = ['RCVS PSS', 'VCNZ 2024 Code', 'VMR UK', 'VPB VIC/NSW', 'AVA Code', 'CMA Sep 2026'];
+// Drawn product UI: the record as it lands after a voice note.
+const EvidencePanel = () => (
+  <div className="g-ui g-ui--panel">
+    <div className="g-ui-head">
+      <div>
+        <div className="g-ui-head-title">Consult — Max · Labrador · 6 y M/N</div>
+        <div className="g-ui-head-sub">28.4 kg · 6 Jul, 4:05 pm · Dr. Menon</div>
+      </div>
+      <span className="g-ui-tag">Signed · locked · audit-ready</span>
+    </div>
+    <div style={{ padding: '10px 16px 14px' }}>
+      <div className="g-ui-field">
+        <span className="g-ui-f-label">Complaint</span>
+        <span className="g-ui-f-value">Vomiting × 3 days · reduced appetite</span>
+        <span className="g-ui-conf">AI · 98%</span>
+      </div>
+      <div className="g-ui-field">
+        <span className="g-ui-f-label">Vitals</span>
+        <span className="g-ui-f-value">Temp 38.6 °C · pulse 88 bpm</span>
+        <span className="g-ui-conf">AI · 97%</span>
+      </div>
+      <div className="g-ui-evidence">"…temp is thirty-eight point six… pulse steady at eighty-eight…"</div>
+      <div className="g-ui-field">
+        <span className="g-ui-f-label">Assessment</span>
+        <span className="g-ui-f-value">Dietary gastroenteritis — no haematemesis</span>
+        <span className="g-ui-conf">AI · 95%</span>
+      </div>
+      <div className="g-ui-field">
+        <span className="g-ui-f-label">Treatment</span>
+        <span className="g-ui-f-value">Metronidazole 15 mg/kg PO BID × 5 d</span>
+        <span className="g-ui-conf">AI · 99%</span>
+      </div>
+      <div className="g-ui-field">
+        <span className="g-ui-f-label">Dose check</span>
+        <span className="g-ui-f-value">426 mg vs 28.4 kg — within range</span>
+        <span className="g-ui-conf">Traced</span>
+      </div>
+      <div className="g-ui-meta-row">
+        <span className="g-ui-audio-play"><i />Original audio · 0:58</span>
+        <span className="g-ui-tag g-ui-tag--ink">Contemporaneous timestamp</span>
+      </div>
+    </div>
+  </div>
+);
 
 export const AudioToFormsPage = () => {
   return (
-    <div style={{ backgroundColor: '#fff', minHeight: '100vh' }}>
+    <>
       <SEO
         title="Point-of-Care Evidence Capture"
         description="Voice note after each consult — Salvia maps audio directly to compliance-grade clinical records, controlled drug logs, and audit trails. No manual charting, no memory gaps."
         path="/products/point-of-care-evidence"
-        keywords={['veterinary clinical records', 'voice to clinical notes', 'controlled drug records', 'CMA compliance vets', 'RCVS records', 'VCNZ records']}
+        keywords={['voice to clinical notes', 'clinical records India', 'controlled drug records', 'NABH records', 'contemporaneous clinical notes', 'AI medical scribe India']}
       />
-      <Header />
-      <main style={{ flex: 1, zIndex: 10 }}>
+      <GrassHeader />
+      <main style={{ flex: 1, zIndex: 10, background: '#fff' }}>
 
-      {/* Hero */}
-      <section style={{ padding: '11rem 0 7rem', backgroundColor: 'var(--salvia-bg)', borderBottom: '1px solid var(--border-subtle)' }}>
-        <div className="container" style={{ maxWidth: '960px' }}>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '5rem', alignItems: 'center' }} className="mobile-stack">
-            <div>
-              <div style={{
-                display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
-                backgroundColor: 'rgba(16,185,129,0.07)', border: '1.5px solid rgba(16,185,129,0.2)',
-                borderRadius: 'var(--radius-md)', padding: '0.35rem 0.85rem', marginBottom: '1.75rem',
-              }}>
-                <span style={{ fontSize: 'var(--text-xs)', fontWeight: 800, color: 'var(--accent-dental)', letterSpacing: '0.1em', textTransform: 'uppercase' }}>Point-of-Care Evidence</span>
+        {/* Hero */}
+        <section className="g-section" style={{ padding: '148px 0 72px' }}>
+          <div className="g-container">
+            <div className="g-split">
+              <div>
+                <Rv as="h1" className="g-h1" style={{ fontSize: 'clamp(38px, 4.6vw, 66px)', marginBottom: 20 }}>
+                  Voice note in. <span className="g-hl">Audit-ready record out.</span>
+                </Rv>
+                <Rv as="p" className="g-sub" delay={1}>
+                  The #1 cause of audit failure is delayed documentation. Notes written hours
+                  after the consult lose accuracy and lose cases. Salvia captures at the point
+                  of care — <b>structured, contemporaneous, defensible</b>.
+                </Rv>
+                <Rv className="g-hero-ctas" delay={2} style={{ justifyContent: 'flex-start', marginTop: 30 }}>
+                  <Link className="g-btn g-btn--green" to="/start">
+                    Book a demo
+                  </Link>
+                  <Link className="g-btn g-btn--ghost" to="/pricing">
+                    See pricing
+                  </Link>
+                </Rv>
               </div>
-              <h1 style={{
-                fontSize: 'var(--text-display)', fontWeight: 800,
-                letterSpacing: '-0.04em', lineHeight: 1.05,
-                color: 'var(--salvia-primary)', marginBottom: '1.5rem',
-              }}>
-                Voice note in.<br />Audit-ready record out.
-              </h1>
-              <p style={{ fontSize: 'var(--text-md)', color: 'var(--salvia-text-muted)', lineHeight: 1.65, marginBottom: '2.5rem' }}>
-                The #1 cause of audit failure is delayed documentation. Notes written hours after the consult lose accuracy and lose cases. Salvia captures at the point of care — structured, contemporaneous, defensible.
-              </p>
-              <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
-                <Link to="/start" style={{
-                  display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
-                  backgroundColor: 'var(--accent-dental)', color: '#fff',
-                  padding: '0.85rem 1.75rem', borderRadius: 'var(--radius-md)',
-                  fontWeight: 700, fontSize: 'var(--text-base)', textDecoration: 'none',
-                }}>
-                  Book a demo
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                    <line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" />
-                  </svg>
-                </Link>
-                <Link to="/veterinary" style={{
-                  display: 'inline-flex', alignItems: 'center',
-                  backgroundColor: 'transparent', color: 'var(--salvia-primary)',
-                  padding: '0.85rem 1.75rem', borderRadius: 'var(--radius-md)',
-                  fontWeight: 700, fontSize: 'var(--text-base)', textDecoration: 'none',
-                  border: '1.5px solid var(--border-strong)',
-                }}>
-                  Vet compliance guide
-                </Link>
-              </div>
+              <Rv className="g-split-art" delay={1}>
+                <img
+                  src="/illustrations/audio_world.webp"
+                  alt="A doctor's voice flowing as a golden ribbon into a clinical form whose fields light up"
+                />
+              </Rv>
             </div>
+            <Rv delay={3} style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap', marginTop: 52 }}>
+              <span className="g-small" style={{ fontWeight: 600 }}>Designed for</span>
+              {REGULATORS.map((r) => (
+                <span
+                  key={r}
+                  style={{
+                    fontFamily: 'var(--g-font)', fontSize: 12.5, fontWeight: 700,
+                    color: 'var(--g-ink-soft)', border: '1px solid var(--g-line)',
+                    borderRadius: 999, padding: '5px 13px',
+                  }}
+                >
+                  {r}
+                </span>
+              ))}
+            </Rv>
+          </div>
+        </section>
 
-            {/* Visual */}
-            <div style={{
-              backgroundColor: '#fff', borderRadius: 'var(--radius-xl)',
-              border: '1px solid var(--border-subtle)',
-              boxShadow: 'var(--shadow-3)',
-              overflow: 'hidden',
-            }}>
-              <div style={{ padding: '1.25rem 1.5rem', borderBottom: '1px solid var(--border-subtle)', display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                <div style={{ width: '10px', height: '10px', borderRadius: '50%', backgroundColor: 'var(--accent-dental)' }} />
-                <span style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--salvia-text-muted)' }}>Salvia — Evidence Capture</span>
+        {/* Workflow + drawn record */}
+        <section className="g-section">
+          <div className="g-container">
+            <div className="g-split">
+              <div>
+                <Rv as="h2" className="g-h2">
+                  Consult to signed record <span className="g-hl">in under two minutes.</span>
+                </Rv>
+                <Rv as="p" className="g-sub" delay={1}>
+                  No template-bashing, no end-of-day catch-up. The workflow fits the gap
+                  between patients — and the original audio stays attached as evidence.
+                </Rv>
+                <Rv className="g-facts" delay={2}>
+                  {HOW_IT_WORKS.map((s) => (
+                    <div className="g-fact" key={s.label}>
+                      <span>{s.label}</span>
+                      <b>{s.value}</b>
+                    </div>
+                  ))}
+                </Rv>
               </div>
-              <div style={{ padding: '1.5rem' }}>
-                {[
-                  { label: 'Patient', value: 'Max · Labrador · 6yo M/N · 28.4 kg' },
-                  { label: 'Presenting complaint', value: 'Vomiting × 3 days, reduced appetite' },
-                  { label: 'Temperature', value: '38.6 °C' },
-                  { label: 'Pulse', value: '88 bpm' },
-                  { label: 'Assessment', value: 'Dietary gastroenteritis — no haematemesis' },
-                  { label: 'Treatment', value: 'Metronidazole 15mg/kg PO BID × 5 days' },
-                ].map((row, i) => (
-                  <div key={i} style={{ display: 'flex', gap: '1rem', padding: '0.6rem 0', borderBottom: i < 5 ? '1px solid #F8FAFC' : 'none' }}>
-                    <span style={{ fontSize: 'var(--text-2xs)', fontWeight: 700, color: 'var(--salvia-text-muted)', minWidth: '140px', flexShrink: 0 }}>{row.label}</span>
-                    <span style={{ fontSize: 'var(--text-xs)', color: 'var(--salvia-primary)', fontWeight: 500 }}>{row.value}</span>
-                  </div>
+              <Rv className="g-split-art" delay={1} style={{ display: 'block' }}>
+                <EvidencePanel />
+              </Rv>
+            </div>
+          </div>
+        </section>
+
+        {/* Stats */}
+        <section className="g-section g-center">
+          <div className="g-container">
+            <Rv as="h2" className="g-h2">
+              Captured, <span className="g-hl">not reconstructed.</span>
+            </Rv>
+            <div className="g-grid" style={{ gap: 0, borderTop: '1px solid var(--g-line)' }}>
+              <Rv className="g-stat" delay={1} style={{ textAlign: 'left' }}>
+                <div className="g-num">&lt; 2 min</div>
+                <div className="g-lbl">average time from voice note to signed record</div>
+              </Rv>
+              <Rv className="g-stat" delay={2} style={{ textAlign: 'left' }}>
+                <div className="g-num">100%</div>
+                <div className="g-lbl">required fields captured before a record can be signed</div>
+              </Rv>
+              <Rv className="g-stat" delay={3} style={{ textAlign: 'left' }}>
+                <div className="g-num">0</div>
+                <div className="g-lbl">fields invented by AI — gaps are flagged, never fabricated</div>
+              </Rv>
+            </div>
+          </div>
+        </section>
+
+        {/* Features */}
+        <section className="g-section">
+          <div className="g-container">
+            <Rv as="h2" className="g-h2">
+              Every field an inspector <span className="g-hl">looks for.</span>
+            </Rv>
+            <div className="g-split" style={{ alignItems: 'start', marginTop: 16 }}>
+              <div>
+                {FEATURES.slice(0, 3).map((f, i) => (
+                  <Rv className="g-check" key={f.title} delay={(Math.min(i + 1, 4)) as 1 | 2 | 3 | 4}>
+                    <span className="g-ck">✓</span>
+                    <div>
+                      <h4>{f.title}</h4>
+                      <p>{f.body}</p>
+                    </div>
+                  </Rv>
                 ))}
-                <div style={{ marginTop: '1rem', padding: '0.65rem 1rem', backgroundColor: 'rgba(16,185,129,0.07)', borderRadius: 'var(--radius-sm)', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#10B981" strokeWidth="2.5"><polyline points="20 6 9 17 4 12" /></svg>
-                  <span style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--accent-dental)' }}>Record signed · locked · audit-ready</span>
-                </div>
+              </div>
+              <div>
+                {FEATURES.slice(3).map((f, i) => (
+                  <Rv className="g-check" key={f.title} delay={(Math.min(i + 1, 4)) as 1 | 2 | 3 | 4}>
+                    <span className="g-ck">✓</span>
+                    <div>
+                      <h4>{f.title}</h4>
+                      <p>{f.body}</p>
+                    </div>
+                  </Rv>
+                ))}
               </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Frameworks */}
-      <section style={{ padding: '2rem 0', backgroundColor: '#fff', borderBottom: '1px solid var(--border-subtle)' }}>
-        <div className="container" style={{ maxWidth: '960px' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '2rem', flexWrap: 'wrap', justifyContent: 'center' }}>
-            <span className="eyebrow" style={{ color: 'var(--salvia-text-muted)' }}>Satisfies</span>
-            {FRAMEWORKS.map(f => (
-              <span key={f} style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--salvia-primary)', opacity: 0.6 }}>{f}</span>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* How it works */}
-      <section style={{ padding: 'var(--section-pad) 0', backgroundColor: 'var(--salvia-bg)', borderBottom: '1px solid var(--border-subtle)' }}>
-        <div className="container" style={{ maxWidth: '960px' }}>
-          <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
-            <div className="eyebrow" style={{ color: 'var(--accent-dental)', marginBottom: '0.75rem' }}>The workflow</div>
-            <h2 style={{ fontSize: 'var(--text-3xl)', fontWeight: 800, color: 'var(--salvia-primary)', letterSpacing: '-0.03em' }}>
-              From consult to signed record in under 2 minutes.
-            </h2>
-          </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '1.5rem' }} className="mobile-stack">
-            {HOW_IT_WORKS.map((step, i) => (
-              <div key={i} style={{ position: 'relative' }}>
-                <div style={{ fontSize: 'var(--text-2xs)', fontWeight: 800, color: 'var(--accent-dental)', letterSpacing: '0.1em', marginBottom: '0.75rem' }}>{step.step}</div>
-                <h3 style={{ fontSize: 'var(--text-base)', fontWeight: 800, color: 'var(--salvia-primary)', marginBottom: '0.5rem' }}>{step.title}</h3>
-                <p style={{ fontSize: 'var(--text-sm)', color: 'var(--salvia-text-muted)', lineHeight: 1.6 }}>{step.desc}</p>
-                {i < 3 && (
-                  <div style={{
-                    position: 'absolute', top: '0.5rem', right: '-1rem',
-                    color: '#CBD5E1', fontSize: 'var(--text-lg)', fontWeight: 300,
-                  }} className="hide-mobile">→</div>
-                )}
+        {/* Final CTA */}
+        <section className="g-final">
+          <div className="g-container">
+            <div className="g-final-grid">
+              <div>
+                <Rv as="h2" className="g-h2">
+                  Audit-ready records, <span className="g-hl">from day one.</span>
+                </Rv>
+                <Rv as="p" className="g-sub" delay={1} style={{ marginTop: 14 }}>
+                  Book a 20-minute demo — we'll show you the voice-to-record workflow in a
+                  real clinical setting.
+                </Rv>
+                <Rv className="g-hero-ctas" delay={2} style={{ marginTop: 30 }}>
+                  <Link className="g-btn g-btn--green" to="/start">
+                    Book a demo
+                  </Link>
+                  <Link className="g-btn g-btn--ghost" to="/pricing">
+                    See pricing
+                  </Link>
+                </Rv>
               </div>
-            ))}
+              <Rv className="g-final-art" delay={1}>
+                <img
+                  src="/illustrations/ill_speak.webp"
+                  alt="A doctor speaking with a microphone capturing the consult"
+                  loading="lazy"
+                />
+              </Rv>
+            </div>
           </div>
-        </div>
-      </section>
-
-      {/* Features */}
-      <section style={{ padding: 'var(--section-pad) 0', backgroundColor: '#fff' }}>
-        <div className="container" style={{ maxWidth: '1200px' }}>
-          <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
-            <div className="eyebrow" style={{ color: 'var(--accent-dental)', marginBottom: '0.75rem' }}>What's captured</div>
-            <h2 style={{ fontSize: 'var(--text-3xl)', fontWeight: 800, color: 'var(--salvia-primary)', letterSpacing: '-0.03em' }}>
-              Every field an inspector looks for.
-            </h2>
-          </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.5rem' }} className="mobile-stack">
-            {FEATURES.map((f, i) => (
-              <div key={i} style={{ padding: '2rem', borderRadius: 'var(--radius-lg)', border: '1px solid var(--border-subtle)', backgroundColor: '#FAFBFC' }}>
-                <h3 style={{ fontSize: 'var(--text-base)', fontWeight: 700, color: 'var(--salvia-primary)', marginBottom: '0.5rem' }}>{f.title}</h3>
-                <p style={{ fontSize: 'var(--text-sm)', color: 'var(--salvia-text-muted)', lineHeight: 1.6 }}>{f.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Stat callout */}
-      <section style={{ padding: 'var(--section-pad) 0', backgroundColor: 'rgba(16,185,129,0.04)', borderTop: '1px solid rgba(16,185,129,0.1)', borderBottom: '1px solid rgba(16,185,129,0.1)' }}>
-        <div className="container" style={{ maxWidth: '960px' }}>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '3rem', textAlign: 'center' }} className="mobile-stack">
-            {[
-              { stat: '< 2 min', label: 'Average time from voice note to signed record' },
-              { stat: '100%', label: 'Required fields captured before record can be signed' },
-              { stat: '0', label: 'Fields invented by AI — gaps are flagged, not fabricated' },
-            ].map((s, i) => (
-              <div key={i}>
-                <div style={{ fontSize: 'var(--text-3xl)', fontWeight: 800, color: 'var(--accent-dental)', letterSpacing: '-0.04em', marginBottom: '0.5rem' }}>{s.stat}</div>
-                <div style={{ fontSize: 'var(--text-sm)', color: 'var(--salvia-text-muted)', lineHeight: 1.5 }}>{s.label}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA */}
-      <section style={{ padding: 'var(--section-pad) 0', backgroundColor: '#fff', textAlign: 'center' }}>
-        <div className="container" style={{ maxWidth: '580px' }}>
-          <div className="eyebrow" style={{ color: 'var(--accent-dental)', marginBottom: '1rem' }}>Get started</div>
-          <h2 style={{ fontSize: 'var(--text-3xl)', fontWeight: 800, color: 'var(--salvia-primary)', letterSpacing: '-0.03em', marginBottom: '1rem' }}>
-            Audit-ready records, from day one.
-          </h2>
-          <p style={{ color: 'var(--salvia-text-muted)', lineHeight: 1.65, marginBottom: '2.5rem' }}>
-            Book a 20-minute demo. We'll show you the voice-to-record workflow in a real clinical setting.
-          </p>
-          <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-            <Link to="/start" style={{
-              display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
-              backgroundColor: 'var(--accent-dental)', color: '#fff',
-              padding: '0.85rem 1.75rem', borderRadius: 'var(--radius-md)',
-              fontWeight: 700, fontSize: 'var(--text-base)', textDecoration: 'none',
-            }}>
-              Book a demo
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                <line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" />
-              </svg>
-            </Link>
-            <Link to="/pricing" style={{
-              display: 'inline-flex', alignItems: 'center',
-              backgroundColor: 'transparent', color: 'var(--salvia-primary)',
-              padding: '0.85rem 1.75rem', borderRadius: 'var(--radius-md)',
-              fontWeight: 700, fontSize: 'var(--text-base)', textDecoration: 'none',
-              border: '1.5px solid var(--border-strong)',
-            }}>
-              See pricing
-            </Link>
-          </div>
-        </div>
-      </section>
+        </section>
 
       </main>
-      <Footer />
-    </div>
+      <GrassFooter />
+    </>
   );
 };

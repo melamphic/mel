@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { SEO } from '../components/SEO';
-import { Header } from '../components/Header';
-import { Footer } from '../components/Footer';
+import { GrassFooter } from '../components/grass/GrassFooter';
+import { GrassHeader } from '../components/grass/GrassHeader';
 
 // ⚠️ These are DRAFTS generated to give Salvia a complete starting point. Because
 // Salvia processes health data across India (DPDP Act 2023), Australia (Privacy
@@ -26,17 +26,29 @@ type Doc = {
 };
 
 const H = ({ children }: { children: React.ReactNode }) => (
-  <h2 style={{ fontSize: 'var(--text-xl)', fontWeight: 800, color: 'var(--salvia-primary)', margin: '2.2rem 0 0.8rem', letterSpacing: '-0.02em' }}>{children}</h2>
+  <h2 style={{ fontFamily: 'var(--g-font)', fontSize: 21, fontWeight: 800, color: 'var(--g-ink)', margin: '2.2rem 0 0.8rem', letterSpacing: '-0.02em' }}>{children}</h2>
 );
 const P = ({ children }: { children: React.ReactNode }) => (
-  <p style={{ fontSize: 'var(--text-base)', lineHeight: 1.7, color: 'var(--salvia-text-muted)', margin: '0 0 1rem' }}>{children}</p>
+  <p style={{ fontFamily: 'var(--g-font)', fontSize: 15.5, lineHeight: 1.75, color: 'var(--g-ink-soft)', margin: '0 0 1rem' }}>{children}</p>
 );
 const UL = ({ children }: { children: React.ReactNode }) => (
   <ul style={{ margin: '0 0 1rem', paddingLeft: '1.2rem', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>{children}</ul>
 );
 const LI = ({ children }: { children: React.ReactNode }) => (
-  <li style={{ fontSize: 'var(--text-base)', lineHeight: 1.65, color: 'var(--salvia-text-muted)', listStyle: 'disc' }}>{children}</li>
+  <li style={{ fontFamily: 'var(--g-font)', fontSize: 15.5, lineHeight: 1.7, color: 'var(--g-ink-soft)', listStyle: 'disc' }}>{children}</li>
 );
+
+// Per-document illustration, so even legal pages carry the house style.
+const DOC_ART: Record<string, string> = {
+  privacy: '/illustrations/shield.webp',
+  terms: '/illustrations/vet_estimate.webp',
+  cookies: '/illustrations/ill_globe_india.webp',
+  dpa: '/illustrations/story_policy.webp',
+  subprocessors: '/illustrations/hero_flow.webp',
+  'refund-policy': '/illustrations/price_coins.webp',
+  'acceptable-use': '/illustrations/shield_cross.webp',
+  security: '/illustrations/vault.webp',
+};
 
 const SUBPROCESSORS = [
   ['Deepgram, Inc.', 'Speech-to-text — transcription of consult audio (Nova Medical / nova-3)', 'United States'],
@@ -163,20 +175,20 @@ const DOCS: Doc[] = [
       <>
         <P>Salvia uses the sub-processors below to deliver the Services. Each is bound by a data-processing agreement and may process personal data only to provide its service to Salvia. We notify customers before adding a new sub-processor.</P>
         <div style={{ overflowX: 'auto', margin: '1.5rem 0' }}>
-          <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 'var(--text-base)' }}>
+          <table style={{ width: '100%', borderCollapse: 'collapse', fontFamily: 'var(--g-font)', fontSize: 14.5 }}>
             <thead>
-              <tr style={{ textAlign: 'left', borderBottom: '2px solid var(--border-strong)' }}>
-                <th style={{ padding: '0.6rem 0.5rem', color: 'var(--salvia-primary)' }}>Sub-processor</th>
-                <th style={{ padding: '0.6rem 0.5rem', color: 'var(--salvia-primary)' }}>Purpose</th>
-                <th style={{ padding: '0.6rem 0.5rem', color: 'var(--salvia-primary)' }}>Region</th>
+              <tr style={{ textAlign: 'left', borderBottom: '2px solid var(--g-line)' }}>
+                <th style={{ padding: '0.6rem 0.5rem', color: 'var(--g-ink)' }}>Sub-processor</th>
+                <th style={{ padding: '0.6rem 0.5rem', color: 'var(--g-ink)' }}>Purpose</th>
+                <th style={{ padding: '0.6rem 0.5rem', color: 'var(--g-ink)' }}>Region</th>
               </tr>
             </thead>
             <tbody>
               {SUBPROCESSORS.map((row) => (
-                <tr key={row[0]} style={{ borderBottom: '1px solid var(--border-subtle)' }}>
-                  <td style={{ padding: '0.6rem 0.5rem', color: 'var(--salvia-primary)', fontWeight: 600 }}>{row[0]}</td>
-                  <td style={{ padding: '0.6rem 0.5rem', color: 'var(--salvia-text-muted)' }}>{row[1]}</td>
-                  <td style={{ padding: '0.6rem 0.5rem', color: 'var(--salvia-text-muted)' }}>{row[2]}</td>
+                <tr key={row[0]} style={{ borderBottom: '1px solid var(--g-line-soft)' }}>
+                  <td style={{ padding: '0.6rem 0.5rem', color: 'var(--g-ink)', fontWeight: 600 }}>{row[0]}</td>
+                  <td style={{ padding: '0.6rem 0.5rem', color: 'var(--g-ink-soft)' }}>{row[1]}</td>
+                  <td style={{ padding: '0.6rem 0.5rem', color: 'var(--g-ink-soft)' }}>{row[2]}</td>
                 </tr>
               ))}
             </tbody>
@@ -248,27 +260,37 @@ export const LegalPage: React.FC<{ slug: string }> = ({ slug }) => {
   return (
     <>
       <SEO title={doc.seoTitle.replace(' | Salvia', '')} description={doc.seoDesc} path={`/${doc.slug}`} />
-      <Header />
-      <main style={{ flex: 1, zIndex: 10, position: 'relative' }}>
-        <section style={{ padding: 'clamp(7rem, 12vw, 9rem) 0 5rem' }}>
-          <div className="container" style={{ maxWidth: '780px' }}>
-            <h1 style={{ fontSize: 'var(--text-3xl)', fontWeight: 800, letterSpacing: '-0.03em', color: 'var(--salvia-primary)', margin: '0 0 0.5rem' }}>{doc.title}</h1>
-            <p style={{ fontSize: 'var(--text-sm)', color: 'var(--salvia-text-muted)', margin: '0 0 1.5rem' }}>Last updated: {UPDATED}</p>
-            <div style={{ background: 'rgba(255,78,0,0.06)', border: '1px solid rgba(255,78,0,0.2)', borderRadius: 'var(--radius-md)', padding: '0.9rem 1.1rem', margin: '0 0 2rem', fontSize: 'var(--text-sm)', color: 'var(--salvia-text-muted)' }}>
-              <strong style={{ color: 'var(--salvia-accent)' }}>Draft — pending legal review.</strong> This document is a working draft and not yet legal advice. It will be finalised with counsel before it takes effect.
+      <GrassHeader />
+      <main style={{ flex: 1, zIndex: 10, position: 'relative', background: '#fff' }}>
+        <section style={{ padding: 'clamp(7rem, 12vw, 9.5rem) 0 5.5rem' }}>
+          <div className="g-container" style={{ maxWidth: 860 }}>
+            <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 24, flexWrap: 'wrap' }}>
+              <div style={{ flex: '1 1 420px', minWidth: 0 }}>
+                <h1 className="g-h2" style={{ margin: '0 0 8px' }}>{doc.title}</h1>
+                <p className="g-small" style={{ margin: '0 0 22px' }}>Last updated: {UPDATED}</p>
+              </div>
+              <img
+                src={DOC_ART[doc.slug] ?? '/illustrations/shield.webp'}
+                alt=""
+                loading="lazy"
+                style={{ width: 'clamp(110px, 14vw, 170px)', height: 'auto', flexShrink: 0 }}
+              />
+            </div>
+            <div style={{ background: '#FFFBEB', border: '1px solid #FDE68A', borderRadius: 12, padding: '0.9rem 1.1rem', margin: '0 0 2rem', fontFamily: 'var(--g-font)', fontSize: 14, lineHeight: 1.6, color: '#92400E' }}>
+              <strong>Draft — pending legal review.</strong> This document is a working draft and not yet legal advice. It will be finalised with counsel before it takes effect.
             </div>
             {doc.body}
-            <p style={{ marginTop: '3rem', fontSize: 'var(--text-base)' }}>
-              <Link to="/privacy/" style={{ color: 'var(--salvia-accent)', fontWeight: 600 }}>Privacy</Link>{' · '}
-              <Link to="/terms/" style={{ color: 'var(--salvia-accent)', fontWeight: 600 }}>Terms</Link>{' · '}
-              <Link to="/dpa/" style={{ color: 'var(--salvia-accent)', fontWeight: 600 }}>DPA</Link>{' · '}
-              <Link to="/subprocessors/" style={{ color: 'var(--salvia-accent)', fontWeight: 600 }}>Sub-processors</Link>{' · '}
-              <Link to="/security/" style={{ color: 'var(--salvia-accent)', fontWeight: 600 }}>Security</Link>
+            <p style={{ marginTop: '3rem', fontFamily: 'var(--g-font)', fontSize: 14.5 }}>
+              <Link to="/privacy/" style={{ color: 'var(--g-green)', fontWeight: 600 }}>Privacy</Link>{' · '}
+              <Link to="/terms/" style={{ color: 'var(--g-green)', fontWeight: 600 }}>Terms</Link>{' · '}
+              <Link to="/dpa/" style={{ color: 'var(--g-green)', fontWeight: 600 }}>DPA</Link>{' · '}
+              <Link to="/subprocessors/" style={{ color: 'var(--g-green)', fontWeight: 600 }}>Sub-processors</Link>{' · '}
+              <Link to="/security/" style={{ color: 'var(--g-green)', fontWeight: 600 }}>Security</Link>
             </p>
           </div>
         </section>
       </main>
-      <Footer />
+      <GrassFooter />
     </>
   );
 };

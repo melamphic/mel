@@ -1,8 +1,11 @@
 import { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Header } from '../components/Header';
-import { Footer } from '../components/Footer';
+
 import { SEO } from '../components/SEO';
+import { GrassFooter } from '../components/grass/GrassFooter';
+import { GrassHeader } from '../components/grass/GrassHeader';
+import { Rv } from '../components/grass/Rv';
+import { INDIA_ONLY } from '../config';
 import {
   FRAMEWORKS,
   COUNTRY_META,
@@ -12,12 +15,20 @@ import {
   type FrameworkCountry,
   type FrameworkVertical,
 } from '../data/frameworks';
-import { INDIA_ONLY } from '../config';
-
-const ACCENT = '#0F172A';
 
 type CountryFilter = FrameworkCountry | 'all';
 type VerticalFilter = FrameworkVertical | 'all';
+
+// Category → icon, so every card carries an illustration.
+const CATEGORY_ICON: Record<string, string> = {
+  'professional-conduct': '/illustrations/tpl_work_cert.webp',
+  'records': '/illustrations/tpl_soap.webp',
+  'inspection': '/illustrations/shield_cross.webp',
+  'billing': '/illustrations/vet_billing.webp',
+  'safety': '/illustrations/tpl_sharps.webp',
+  'consent': '/illustrations/vet_estimate.webp',
+  'data-protection': '/illustrations/shield.webp',
+};
 
 // India-first while INDIA_ONLY — India chip leads and the grouped list
 // opens on Indian regulators; the global catalog stays one click away.
@@ -62,7 +73,6 @@ export const FrameworksPage = () => {
     FRAMEWORKS.forEach((f) => { t[f.country]++; });
     return t;
   }, []);
-  void totalsByCountry; // referenced in totals bar below
 
   // Structured data — list of regulatory frameworks (helps Google
   // index each as a discoverable entity).
@@ -82,7 +92,7 @@ export const FrameworksPage = () => {
   });
 
   return (
-    <div style={{ backgroundColor: '#fff', minHeight: '100vh' }}>
+    <>
       <SEO
         title="Regulatory Frameworks We Support"
         description={INDIA_ONLY
@@ -103,282 +113,214 @@ export const FrameworksPage = () => {
         ]}
       />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: itemListLd }} />
-      <Header />
-      <main style={{ flex: 1, zIndex: 10 }}>
+      <GrassHeader />
+      <main style={{ flex: 1, zIndex: 10, background: '#fff' }}>
 
-      {/* Hero — padding clamped so the navbar clears on desktop but
-          mobile doesn't waste a viewport on whitespace before the
-          country totals appear. */}
-      <section style={{
-        padding: 'clamp(5.5rem, 14vw, 11rem) 0 clamp(2rem, 6vw, 5rem)',
-        backgroundColor: 'var(--salvia-bg)',
-      }}>
-        <div className="container" style={{ maxWidth: '900px', textAlign: 'center' }}>
-          <div style={{
-            display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
-            backgroundColor: 'rgba(15,23,42,0.04)', border: '1.5px solid rgba(15,23,42,0.08)',
-            borderRadius: 'var(--radius-md)', padding: '0.35rem 0.85rem', marginBottom: '2rem',
-          }}>
-            <span style={{ fontSize: 'var(--text-xs)', fontWeight: 800, color: ACCENT, letterSpacing: '0.1em', textTransform: 'uppercase' }}>
-              {FRAMEWORKS.length} frameworks · {new Set(FRAMEWORKS.map((f) => f.country)).size} countries
-            </span>
-          </div>
-          <h1 style={{
-            fontSize: 'clamp(2.4rem, 5.5vw, 4rem)', fontWeight: 800,
-            letterSpacing: '-0.04em', lineHeight: 1.05,
-            color: 'var(--salvia-primary)', marginBottom: '1.5rem',
-          }}>
-            Every framework Salvia<br />generates records against.
-          </h1>
-          <p style={{
-            fontSize: 'clamp(1rem, 2.2vw, 1.15rem)',
-            color: 'var(--salvia-text-muted)', lineHeight: 1.65,
-            maxWidth: '700px', margin: '0 auto 2rem',
-          }}>
-            Your clinic registers a country and vertical at onboarding. Every AI form gen call ships the matching regulator pack into the prompt automatically — so records come out aligned to your inspector's checklist, not a generic template.
-          </p>
+        {/* Hero */}
+        <section className="g-section" style={{ padding: '148px 0 56px' }}>
+          <div className="g-container">
+            <div className="g-split">
+              <div>
+                <Rv as="h1" className="g-h1" style={{ fontSize: 'clamp(36px, 4.6vw, 64px)', marginBottom: 20 }}>
+                  Every framework Salvia <span className="g-hl">generates records against.</span>
+                </Rv>
+                <Rv as="p" className="g-sub" delay={1}>
+                  {FRAMEWORKS.length} frameworks across {new Set(FRAMEWORKS.map((f) => f.country)).size} regions.
+                  Your clinic registers a country and vertical at onboarding; every AI
+                  generation ships the matching regulator pack into the prompt — so records
+                  come out aligned to <b>your inspector's checklist</b>, not a generic
+                  template.
+                </Rv>
+              </div>
+              <Rv className="g-split-art" delay={1}>
+                <img
+                  src="/illustrations/ill_globe_india.webp"
+                  alt="A globe with a location pin on India"
+                  loading="lazy"
+                />
+              </Rv>
+            </div>
 
-          {/* Country totals bar */}
-          <div style={{
-            display: 'flex', gap: '0.75rem', flexWrap: 'wrap', justifyContent: 'center',
-            marginTop: '1.5rem',
-          }}>
-            {(INDIA_ONLY
-              ? (['IN','GB','AU','NZ','US','IE'] as FrameworkCountry[])
-              : (['IE','GB','AU','NZ','US','IN'] as FrameworkCountry[])
-            ).map((c) => (
-              <button
-                key={c}
-                onClick={() => setCountry(c)}
-                style={{
-                  padding: '0.5rem 0.85rem',
-                  borderRadius: 'var(--radius-md)',
-                  border: '1px solid #EEF2F6',
-                  backgroundColor: '#fff',
-                  cursor: 'pointer',
-                  display: 'inline-flex', alignItems: 'center', gap: '0.45rem',
-                  fontSize: 'var(--text-sm)', fontWeight: 700,
-                  color: 'var(--salvia-primary)',
-                }}
-              >
-                <span style={{ fontSize: 'var(--text-base)' }}>{COUNTRY_META[c].flag}</span>
-                <span>{COUNTRY_META[c].label}</span>
-                <span style={{
-                  fontSize: 'var(--text-2xs)', fontWeight: 800,
-                  padding: '0.1rem 0.45rem', borderRadius: 'var(--radius-sm)',
-                  backgroundColor: 'rgba(15,23,42,0.06)',
-                  color: 'var(--salvia-text-muted)',
-                }}>{totalsByCountry[c]}</span>
-              </button>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Filters bar — sticky padding clamped so on mobile the chips
-          + search take less vertical space and don't shove the country
-          headings past the fold. */}
-      <section style={{
-        position: 'sticky', top: 0, zIndex: 50,
-        padding: 'clamp(0.65rem, 2.5vw, 1.25rem) 0',
-        backgroundColor: 'rgba(255,255,255,0.92)',
-        backdropFilter: 'blur(12px)',
-        borderBottom: '1px solid #EEF2F6',
-      }}>
-        <div className="container" style={{ maxWidth: '1100px' }}>
-          <div style={{
-            display: 'flex', alignItems: 'center', gap: '1rem',
-            flexWrap: 'wrap', justifyContent: 'space-between',
-          }}>
-            {/* Country chips */}
-            <div style={{ display: 'flex', gap: '0.35rem', flexWrap: 'wrap', alignItems: 'center' }}>
-              <span style={{ fontSize: 'var(--text-2xs)', fontWeight: 800, color: 'var(--salvia-text-muted)', letterSpacing: '0.1em', textTransform: 'uppercase', marginRight: '0.25rem' }}>Country</span>
-              {COUNTRIES_ORDER.map((c) => (
-                <FilterChip
+            {/* Country totals bar */}
+            <Rv delay={2} style={{ display: 'flex', gap: 10, flexWrap: 'wrap', marginTop: 44 }}>
+              {(INDIA_ONLY
+                ? (['IN', 'GB', 'AU', 'NZ', 'US', 'IE'] as FrameworkCountry[])
+                : (['IE', 'GB', 'AU', 'NZ', 'US', 'IN'] as FrameworkCountry[])
+              ).map((c) => (
+                <button
                   key={c}
-                  active={country === c}
-                  label={c === 'all' ? 'All' : `${COUNTRY_META[c as FrameworkCountry].flag} ${c}`}
                   onClick={() => setCountry(c)}
-                  accent={c === 'all' ? ACCENT : COUNTRY_META[c as FrameworkCountry].accent}
-                />
+                  style={{
+                    padding: '9px 15px', borderRadius: 999, border: '1px solid var(--g-line)',
+                    backgroundColor: '#fff', cursor: 'pointer',
+                    display: 'inline-flex', alignItems: 'center', gap: 8,
+                    fontFamily: 'var(--g-font)', fontSize: 13.5, fontWeight: 700, color: 'var(--g-ink)',
+                  }}
+                >
+                  <span>{COUNTRY_META[c].flag}</span>
+                  <span>{COUNTRY_META[c].label}</span>
+                  <span style={{
+                    fontSize: 11, fontWeight: 800, padding: '2px 8px', borderRadius: 999,
+                    backgroundColor: 'var(--g-line-soft)', color: 'var(--g-ink-soft)',
+                  }}>{totalsByCountry[c]}</span>
+                </button>
               ))}
+            </Rv>
+          </div>
+        </section>
+
+        {/* Filters bar — sticky */}
+        <section style={{
+          position: 'sticky', top: 0, zIndex: 50,
+          padding: '12px 0',
+          backgroundColor: 'rgba(255,255,255,0.92)',
+          backdropFilter: 'blur(12px)',
+          borderBottom: '1px solid var(--g-line-soft)',
+        }}>
+          <div className="g-container">
+            <div style={{ display: 'flex', alignItems: 'center', gap: 14, flexWrap: 'wrap', justifyContent: 'space-between', fontFamily: 'var(--g-font)' }}>
+              {/* Country chips */}
+              <div style={{ display: 'flex', gap: 5, flexWrap: 'wrap', alignItems: 'center' }}>
+                <span className="g-small" style={{ fontWeight: 700, marginRight: 4 }}>Country</span>
+                {COUNTRIES_ORDER.map((c) => (
+                  <FilterChip
+                    key={c}
+                    active={country === c}
+                    label={c === 'all' ? 'All' : `${COUNTRY_META[c as FrameworkCountry].flag} ${c}`}
+                    onClick={() => setCountry(c)}
+                  />
+                ))}
+              </div>
+
+              {/* Vertical chips */}
+              <div style={{ display: 'flex', gap: 5, flexWrap: 'wrap', alignItems: 'center' }}>
+                <span className="g-small" style={{ fontWeight: 700, marginRight: 4 }}>Vertical</span>
+                {VERTICALS_ORDER.map((v) => (
+                  <FilterChip
+                    key={v}
+                    active={vertical === v}
+                    label={v === 'all' ? 'All' : VERTICAL_META[v as FrameworkVertical].label}
+                    onClick={() => setVertical(v)}
+                  />
+                ))}
+              </div>
             </div>
 
-            {/* Vertical chips */}
-            <div style={{ display: 'flex', gap: '0.35rem', flexWrap: 'wrap', alignItems: 'center' }}>
-              <span style={{ fontSize: 'var(--text-2xs)', fontWeight: 800, color: 'var(--salvia-text-muted)', letterSpacing: '0.1em', textTransform: 'uppercase', marginRight: '0.25rem' }}>Vertical</span>
-              {VERTICALS_ORDER.map((v) => (
-                <FilterChip
-                  key={v}
-                  active={vertical === v}
-                  label={v === 'all' ? 'All' : VERTICAL_META[v as FrameworkVertical].label}
-                  onClick={() => setVertical(v)}
-                  accent={v === 'all' ? ACCENT : VERTICAL_META[v as FrameworkVertical].accent}
-                />
-              ))}
-            </div>
-          </div>
-
-          {/* Search */}
-          <div style={{
-            position: 'relative', marginTop: 'clamp(0.45rem, 1.5vw, 0.85rem)',
-            backgroundColor: '#fff',
-            border: '1.5px solid #EEF2F6',
-            borderRadius: 'var(--radius-md)',
-            padding: '0.5rem 0.85rem 0.5rem 2.25rem',
-            display: 'flex', alignItems: 'center',
-          }}>
-            <svg
-              width="16" height="16" viewBox="0 0 24 24"
-              fill="none" stroke="currentColor" strokeWidth="2"
-              style={{ position: 'absolute', left: '0.85rem', color: 'var(--salvia-text-muted)' }}
-            >
-              <circle cx="11" cy="11" r="8" />
-              <line x1="21" y1="21" x2="16.65" y2="16.65" />
-            </svg>
-            <input
-              type="search"
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              placeholder="Search by code, body, country, or summary…"
-              style={{
-                flex: 1, border: 'none', outline: 'none',
-                fontSize: 'var(--text-sm)', color: 'var(--salvia-text)',
-                background: 'transparent',
-              }}
-            />
-            {query && (
-              <button
-                type="button"
-                onClick={() => setQuery('')}
-                style={{
-                  background: 'none', border: 'none', cursor: 'pointer',
-                  color: 'var(--salvia-text-muted)', padding: '0.25rem',
-                }}
-                aria-label="Clear search"
-              >
-                ×
-              </button>
-            )}
-            <span style={{
-              fontSize: 'var(--text-2xs)', fontWeight: 700,
-              color: 'var(--salvia-text-muted)', marginLeft: '0.5rem',
-            }}>
-              {filtered.length} of {FRAMEWORKS.length}
-            </span>
-          </div>
-        </div>
-      </section>
-
-      {/* Results */}
-      <section style={{
-        padding: 'clamp(1.5rem, 5vw, 4rem) 0 clamp(3rem, 8vw, 6rem)',
-        backgroundColor: '#fff',
-      }}>
-        <div className="container" style={{ maxWidth: '1100px' }}>
-          {filtered.length === 0 ? (
-            <EmptyState />
-          ) : grouped ? (
-            <>
-              {GROUP_ORDER.map((c) => {
-                const list = grouped[c];
-                if (list.length === 0) return null;
-                return (
-                  <CountryGroup key={c} country={c} frameworks={list} />
-                );
-              })}
-            </>
-          ) : (
+            {/* Search */}
             <div style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-              gap: '1rem',
+              position: 'relative', marginTop: 10,
+              border: '1px solid var(--g-line)', borderRadius: 12,
+              padding: '9px 14px 9px 38px', display: 'flex', alignItems: 'center',
+              backgroundColor: '#fff',
             }}>
-              {filtered.map((f) => (
-                <FrameworkCard key={f.code + '-' + f.country} f={f} />
-              ))}
+              <svg
+                width="16" height="16" viewBox="0 0 24 24"
+                fill="none" stroke="var(--g-ink-faint)" strokeWidth="2"
+                style={{ position: 'absolute', left: 14 }}
+              >
+                <circle cx="11" cy="11" r="8" />
+                <line x1="21" y1="21" x2="16.65" y2="16.65" />
+              </svg>
+              <input
+                type="search"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                placeholder="Search by code, body, country, or summary…"
+                style={{
+                  flex: 1, border: 'none', outline: 'none', background: 'transparent',
+                  fontFamily: 'var(--g-font)', fontSize: 14, fontWeight: 500, color: 'var(--g-ink)',
+                }}
+              />
+              {query && (
+                <button
+                  type="button"
+                  onClick={() => setQuery('')}
+                  style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--g-ink-faint)', padding: 4, fontSize: 15 }}
+                  aria-label="Clear search"
+                >
+                  ×
+                </button>
+              )}
+              <span className="g-small" style={{ fontWeight: 700, marginLeft: 8 }}>
+                {filtered.length} of {FRAMEWORKS.length}
+              </span>
             </div>
-          )}
-        </div>
-      </section>
-
-      {/* Custom framework CTA */}
-      <section style={{
-        padding: '6rem 0', backgroundColor: 'var(--salvia-bg)',
-        borderTop: '1px solid #F1F5F9',
-      }}>
-        <div className="container" style={{ maxWidth: '760px', textAlign: 'center' }}>
-          <div style={{
-            fontSize: 'var(--text-2xs)', fontWeight: 800, color: 'var(--salvia-accent)',
-            letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: '0.75rem',
-          }}>
-            Don't see yours?
           </div>
-          <h2 style={{
-            fontSize: 'clamp(1.7rem, 3.5vw, 2.3rem)', fontWeight: 800,
-            color: 'var(--salvia-primary)', letterSpacing: '-0.03em',
-            margin: '0 0 1rem',
-          }}>
-            Request a custom framework pack.
-          </h2>
-          <p style={{
-            color: 'var(--salvia-text-muted)', fontSize: 'var(--text-base)',
-            lineHeight: 1.65, marginBottom: '2rem', maxWidth: '600px',
-            margin: '0 auto 2rem',
-          }}>
-            Tell us which regulator governs you. We'll author the framework pack — record-keeping clauses, retention rules, consent requirements — and add it to the catalog. Usually live within a week.
-          </p>
-          <Link to="/start" style={{
-            display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
-            backgroundColor: 'var(--salvia-accent)', color: '#fff',
-            padding: '0.9rem 1.9rem', borderRadius: 'var(--radius-md)',
-            fontWeight: 700, fontSize: 'var(--text-base)', textDecoration: 'none',
-          }}>
-            Request a framework
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-              <line x1="5" y1="12" x2="19" y2="12" />
-              <polyline points="12 5 19 12 12 19" />
-            </svg>
-          </Link>
-        </div>
-      </section>
+        </section>
+
+        {/* Results */}
+        <section style={{ padding: '40px 0 88px', backgroundColor: '#fff' }}>
+          <div className="g-container">
+            {filtered.length === 0 ? (
+              <EmptyState />
+            ) : grouped ? (
+              <>
+                {GROUP_ORDER.map((c) => {
+                  const list = grouped[c];
+                  if (list.length === 0) return null;
+                  return (
+                    <CountryGroup key={c} country={c} frameworks={list} />
+                  );
+                })}
+              </>
+            ) : (
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: 16 }}>
+                {filtered.map((f) => (
+                  <FrameworkCard key={f.code + '-' + f.country} f={f} />
+                ))}
+              </div>
+            )}
+          </div>
+        </section>
+
+        {/* Custom framework CTA */}
+        <section className="g-final">
+          <div className="g-container">
+            <div className="g-final-grid">
+              <div>
+                <Rv as="h2" className="g-h2">
+                  Don't see yours? <span className="g-hl">We'll write it.</span>
+                </Rv>
+                <Rv as="p" className="g-sub" delay={1} style={{ marginTop: 14 }}>
+                  Tell us which regulator governs you. We'll author the framework pack —
+                  record-keeping clauses, retention rules, consent requirements — and add it
+                  to the catalog.
+                </Rv>
+                <Rv className="g-hero-ctas" delay={2} style={{ marginTop: 30 }}>
+                  <Link className="g-btn g-btn--green" to="/start">
+                    Request a framework
+                  </Link>
+                </Rv>
+              </div>
+              <Rv className="g-final-art" delay={1}>
+                <img
+                  src="/illustrations/story_policy.webp"
+                  alt="A wall of policy binders wired into a clinical form"
+                  loading="lazy"
+                />
+              </Rv>
+            </div>
+          </div>
+        </section>
 
       </main>
-      <Footer />
-
-      <style>{`
-        .framework-card:hover {
-          border-color: rgba(15,23,42,0.12);
-          box-shadow: 0 6px 18px rgba(15,23,42,0.04);
-          transform: translateY(-1px);
-        }
-        .fw-tag-interactive:hover {
-          background-color: rgba(15,23,42,0.1) !important;
-        }
-      `}</style>
-    </div>
+      <GrassFooter />
+    </>
   );
 };
 
-function FilterChip({
-  active, label, onClick,
-}: {
-  active: boolean; label: string; onClick: () => void; accent?: string;
-}) {
+function FilterChip({ active, label, onClick }: { active: boolean; label: string; onClick: () => void }) {
   return (
     <button
       type="button"
       onClick={onClick}
       style={{
-        padding: '0.4rem 0.85rem',
-        borderRadius: 'var(--salvia-radius-full)',
-        border: active ? '1.5px solid var(--salvia-primary)' : '1.5px solid transparent',
-        backgroundColor: active ? 'var(--salvia-primary)' : 'rgba(15,23,42,0.04)',
-        color: active ? '#fff' : 'var(--salvia-text-muted)',
-        fontSize: 'var(--text-xs)', fontWeight: 700,
-        cursor: 'pointer',
-        transition: 'all 0.15s',
-        letterSpacing: '0.01em',
+        padding: '6px 13px', borderRadius: 999,
+        border: `1px solid ${active ? 'var(--g-green)' : 'var(--g-line)'}`,
+        backgroundColor: active ? 'var(--g-green)' : '#fff',
+        color: active ? '#083D1B' : 'var(--g-ink-soft)',
+        fontFamily: 'var(--g-font)', fontSize: 12.5, fontWeight: 700,
+        cursor: 'pointer', transition: 'all 0.15s',
       }}
     >
       {label}
@@ -389,34 +331,21 @@ function FilterChip({
 function CountryGroup({ country, frameworks }: { country: FrameworkCountry; frameworks: typeof FRAMEWORKS }) {
   const meta = COUNTRY_META[country];
   return (
-    <div style={{ marginBottom: '3.5rem' }}>
+    <div style={{ marginBottom: 52 }}>
       <div style={{
-        display: 'flex', alignItems: 'center', gap: '0.75rem',
-        marginBottom: '1.25rem', paddingBottom: '0.75rem',
-        borderBottom: '1px solid #EEF2F6',
+        display: 'flex', alignItems: 'center', gap: 10,
+        marginBottom: 18, paddingBottom: 12,
+        borderBottom: '1px solid var(--g-line-soft)',
       }}>
-        <span style={{ fontSize: 'var(--text-xl)' }}>{meta.flag}</span>
-        <h2 style={{
-          fontSize: 'var(--text-xl)', fontWeight: 800,
-          color: 'var(--salvia-primary)', letterSpacing: '-0.02em',
-          margin: 0, flex: 1,
-        }}>
+        <span style={{ fontSize: 22 }}>{meta.flag}</span>
+        <h2 className="g-h3" style={{ margin: 0, flex: 1 }}>
           {meta.label}
         </h2>
-        <span style={{
-          fontSize: 'var(--text-2xs)', fontWeight: 700,
-          color: 'var(--salvia-text-muted)',
-          padding: '0.25rem 0.65rem', borderRadius: 'var(--radius-sm)',
-          backgroundColor: 'rgba(15,23,42,0.04)',
-        }}>
+        <span className="g-small" style={{ fontWeight: 700, padding: '3px 10px', borderRadius: 999, backgroundColor: 'var(--g-line-soft)' }}>
           {frameworks.length} framework{frameworks.length === 1 ? '' : 's'}
         </span>
       </div>
-      <div style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-        gap: '1rem',
-      }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: 16 }}>
         {frameworks.map((f) => <FrameworkCard key={f.code + '-' + f.country} f={f} />)}
       </div>
     </div>
@@ -426,83 +355,53 @@ function CountryGroup({ country, frameworks }: { country: FrameworkCountry; fram
 function FrameworkCard({ f }: { f: typeof FRAMEWORKS[number] }) {
   const countryMeta = COUNTRY_META[f.country];
   return (
-    <article style={{
-      padding: '1.5rem',
-      borderRadius: 'var(--radius-md)',
-      backgroundColor: '#fff',
-      border: '1px solid #EEF2F6',
-      display: 'flex', flexDirection: 'column', gap: '0.85rem',
-      transition: 'all 0.18s ease',
-    }} className="framework-card">
-      <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: '0.65rem' }}>
+    <article className="g-card" style={{ display: 'flex', flexDirection: 'column', gap: 12, padding: 22 }}>
+      <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 10 }}>
+        <img
+          src={CATEGORY_ICON[f.category] ?? '/illustrations/tpl_soap.webp'}
+          alt=""
+          loading="lazy"
+          style={{ width: 52, height: 52, objectFit: 'contain', margin: 0, flexShrink: 0 }}
+        />
         <div style={{ flex: 1, minWidth: 0 }}>
-          <div style={{
-            fontSize: 'var(--text-md)', fontWeight: 800,
-            color: 'var(--salvia-primary)', letterSpacing: '-0.02em',
-            marginBottom: '0.25rem',
-          }}>
-            {f.code}
-          </div>
-          <div style={{
-            fontSize: 'var(--text-xs)', color: 'var(--salvia-text-muted)',
-            fontWeight: 600, lineHeight: 1.4,
-          }}>
+          <h3 className="g-h3" style={{ marginBottom: 3 }}>{f.code}</h3>
+          <div className="g-small" style={{ fontWeight: 600, lineHeight: 1.4, color: 'var(--g-ink-soft)' }}>
             {f.fullName}
           </div>
         </div>
-        <span style={{
-          fontSize: 'var(--text-2xs)', fontWeight: 800,
-          padding: '0.25rem 0.5rem', borderRadius: 'var(--radius-sm)',
-          backgroundColor: 'rgba(15,23,42,0.04)',
-          color: 'var(--salvia-text-muted)',
-          letterSpacing: '0.06em', textTransform: 'uppercase',
-          flexShrink: 0, whiteSpace: 'nowrap',
-          display: 'inline-flex', alignItems: 'center', gap: '0.3rem',
-        }}>
-          <span style={{ fontSize: 'var(--text-xs)' }}>{countryMeta.flag}</span>
+        <span className="g-ui-tag g-ui-tag--ink" style={{ flexShrink: 0, whiteSpace: 'nowrap', display: 'inline-flex', alignItems: 'center', gap: 5 }}>
+          <span>{countryMeta.flag}</span>
           {f.country}
         </span>
       </div>
 
-      <p style={{
-        fontSize: 'var(--text-xs)', color: 'var(--salvia-text)',
-        lineHeight: 1.55, margin: 0,
-      }}>
+      <p style={{ fontFamily: 'var(--g-font)', fontSize: 13, color: 'var(--g-ink-soft)', lineHeight: 1.55, margin: 0 }}>
         {f.summary}
       </p>
 
-      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.3rem' }}>
-        <Tag label={FRAMEWORK_CATEGORY_LABEL[f.category]} />
+      <div className="g-tpl-meta" style={{ marginTop: 0 }}>
+        <span>{FRAMEWORK_CATEGORY_LABEL[f.category]}</span>
         {f.verticals.map((v) => (
           <Link key={v} to={VERTICAL_META[v].slug} style={{ textDecoration: 'none' }}>
-            <Tag label={VERTICAL_META[v].label} interactive />
+            <span className="g-tpl-vert">{VERTICAL_META[v].label}</span>
           </Link>
         ))}
         {f.disciplines?.map((d) => (
           <Link key={d} to={DISCIPLINE_META[d].slug} style={{ textDecoration: 'none' }}>
-            <Tag label={DISCIPLINE_META[d].label} interactive />
+            <span>{DISCIPLINE_META[d].label}</span>
           </Link>
         ))}
       </div>
 
-      <div style={{
-        marginTop: 'auto', paddingTop: '0.75rem',
+      <div className="g-small" style={{
+        marginTop: 'auto', paddingTop: 12,
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-        fontSize: 'var(--text-2xs)', color: 'var(--salvia-text-muted)',
-        borderTop: '1px solid #F1F5F9',
+        borderTop: '1px solid var(--g-line-soft)',
       }}>
         <span>Reviewed {new Date(f.currencyDate).toLocaleDateString('en-GB', { year: 'numeric', month: 'short', day: 'numeric' })}</span>
         {f.sourceUrl && (
-          <a href={f.sourceUrl} target="_blank" rel="noreferrer noopener" style={{
-            color: 'var(--salvia-primary)', textDecoration: 'none', fontWeight: 700,
-            display: 'inline-flex', alignItems: 'center', gap: '0.25rem',
-          }}>
-            Source
-            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-              <polyline points="15 3 21 3 21 9" />
-              <line x1="10" y1="14" x2="21" y2="3" />
-            </svg>
+          <a href={f.sourceUrl} target="_blank" rel="noreferrer noopener" style={{ color: 'var(--g-green)', textDecoration: 'none', fontWeight: 700 }}>
+            Source ↗
           </a>
         )}
       </div>
@@ -510,37 +409,14 @@ function FrameworkCard({ f }: { f: typeof FRAMEWORKS[number] }) {
   );
 }
 
-function Tag({ label, interactive }: { label: string; interactive?: boolean }) {
-  return (
-    <span style={{
-      fontSize: 'var(--text-2xs)', fontWeight: 700,
-      padding: '0.2rem 0.55rem', borderRadius: 'var(--radius-sm)',
-      backgroundColor: 'rgba(15,23,42,0.05)',
-      color: 'var(--salvia-text)',
-      letterSpacing: '0.02em',
-      transition: 'background-color 0.15s ease',
-      cursor: interactive ? 'pointer' : 'default',
-    }} className={interactive ? 'fw-tag-interactive' : undefined}>
-      {label}
-    </span>
-  );
-}
-
 function EmptyState() {
   return (
-    <div style={{
-      padding: '4rem 1rem', textAlign: 'center',
-      color: 'var(--salvia-text-muted)',
-    }}>
-      <p style={{ fontSize: 'var(--text-base)', marginBottom: '1.25rem' }}>
-        No frameworks match those filters. Try widening the country or vertical, or request a custom pack below.
+    <div className="g-center" style={{ padding: '64px 16px' }}>
+      <p className="g-sub" style={{ margin: '0 auto 22px' }}>
+        No frameworks match those filters. Try widening the country or vertical, or request a
+        custom pack below.
       </p>
-      <Link to="/start" style={{
-        display: 'inline-flex', alignItems: 'center', gap: '0.4rem',
-        backgroundColor: 'var(--salvia-primary)', color: '#fff',
-        padding: '0.75rem 1.4rem', borderRadius: 'var(--radius-md)',
-        fontWeight: 700, fontSize: 'var(--text-sm)', textDecoration: 'none',
-      }}>
+      <Link className="g-btn g-btn--green" to="/start">
         Request a custom framework
       </Link>
     </div>

@@ -1,229 +1,238 @@
 import { Link } from 'react-router-dom';
-import { Header } from '../components/Header';
-import { Footer } from '../components/Footer';
+
 import { SEO } from '../components/SEO';
+import { GrassFooter } from '../components/grass/GrassFooter';
+import { GrassHeader } from '../components/grass/GrassHeader';
+import { Rv } from '../components/grass/Rv';
 
-const FEATURES = [
-  {
-    title: 'Immutable record versioning',
-    desc: 'Every signed record is locked. Corrections create a versioned addendum with reason, timestamp, and clinician signature — never an overwrite. Exactly how regulators expect edits to work.',
-  },
-  {
-    title: 'Required fields before signing',
-    desc: 'Missing vitals, drug doses, or consent entries block submission. The form cannot be signed incomplete. No more "TPR not recorded" citations.',
-  },
-  {
-    title: 'Statutory PDF export',
-    desc: 'Every record exports to a high-fidelity PDF — preserving all metadata, version history, and signatures. Satisfies paper audit requirements without paper.',
-  },
-  {
-    title: 'Condition-based logic',
-    desc: 'Fields appear or become required based on what\'s been entered. Controlled drug fields appear when a Schedule 3 drug is selected. Consent fields appear for surgical procedures.',
-  },
-  {
-    title: 'Addendum trail',
-    desc: 'Every post-sign edit is an addendum — date, clinician, reason for change. The original record is always preserved. Turns a billing correction into a defensible paper trail.',
-  },
-  {
-    title: 'Multi-jurisdiction form sets',
-    desc: 'Form templates built to the specific field requirements of RCVS, VCNZ, CQC, GDC, and AHPRA. Switch jurisdiction — the required fields update automatically.',
-  },
+// /products/statutory-form-infrastructure — the form engine module.
+// Story: immutable, versioned records with required fields enforced.
+// Grass design language.
+
+const FEATURES: { title: string; body: string }[] = [
+  { title: 'Immutable record versioning', body: 'Every signed record is locked. Corrections create a versioned addendum with reason, timestamp and clinician signature — never an overwrite.' },
+  { title: 'Required fields before signing', body: 'Missing vitals, drug doses or consent entries block submission. The form cannot be signed incomplete — no more "vitals not recorded" citations.' },
+  { title: 'Statutory PDF export', body: 'Every record exports to a high-fidelity PDF preserving all metadata, version history and signatures. Satisfies paper audit requirements without paper.' },
+  { title: 'Condition-based logic', body: 'Fields appear or become required based on what\'s entered — controlled drug fields for a Schedule H1 drug, consent fields for surgical procedures.' },
+  { title: 'Addendum trail', body: 'Every post-sign edit is an addendum — date, clinician, reason for change. The original is always preserved. A billing correction becomes a defensible paper trail.' },
+  { title: 'Framework-aware form sets', body: 'Templates built to the field requirements of your vertical and regulators — NMC, DCI, VCI, NABH, CEA 2010. Pick your discipline; the required fields follow.' },
 ];
 
-const RECORD_TYPES = [
-  { label: 'Clinical consultation', frameworks: 'RCVS · VCNZ · AHPRA' },
-  { label: 'Surgical & anaesthetic', frameworks: 'RCVS · VMR · CQC' },
-  { label: 'Controlled drug administration', frameworks: 'VMR · VCNZ · VPB' },
-  { label: 'Procedure consent', frameworks: 'GDC · CQC · AHPRA' },
-  { label: 'Euthanasia record', frameworks: 'RCVS · VCNZ · AVA' },
-  { label: 'Incident & complaint log', frameworks: 'CQC · CMA · GDC' },
-  { label: 'Discharge & follow-up plan', frameworks: 'RCVS · AHPRA · MCNZ' },
-  { label: 'Periodontal & BPE chart', frameworks: 'GDC · CQC · AHPRA' },
+const RECORD_TYPES: { label: string; value: string }[] = [
+  { label: 'Clinical consultation', value: 'NMC · NABH · CEA 2010' },
+  { label: 'Surgical & anaesthetic', value: 'NABH · CEA 2010' },
+  { label: 'Controlled drug administration', value: 'Schedule H1 · D&C Rules' },
+  { label: 'Procedure consent', value: 'DCI · NABH · CPA 2019' },
+  { label: 'Euthanasia record', value: 'VCI · CCSEA' },
+  { label: 'Incident & complaint log', value: 'NABH · CEA 2010' },
+  { label: 'Discharge & follow-up plan', value: 'NMC · NABH' },
+  { label: 'Periodontal & BPE chart', value: 'DCI · NABH' },
 ];
+
+// Drawn product UI: the version history of a signed record.
+const VersionPanel = () => (
+  <div className="g-ui g-ui--panel">
+    <div className="g-ui-head">
+      <div>
+        <div className="g-ui-head-title">Record — Consultation, 14 May 2026</div>
+        <div className="g-ui-head-sub">Immutable versions · addendum trail</div>
+      </div>
+      <span className="g-ui-tag">Locked</span>
+    </div>
+    <div style={{ padding: '12px 16px 14px' }}>
+      {[
+        { ver: 'v1.0', label: 'Original record signed', time: '14 May · 14:32' },
+        { ver: 'v1.1', label: 'Addendum: corrected drug dose', time: '14 May · 16:05' },
+        { ver: 'v1.2', label: 'Addendum: follow-up plan added', time: '15 May · 09:18' },
+      ].map((v, i) => (
+        <div className="g-ui-field" key={v.ver} style={i === 2 ? { background: 'var(--g-green-soft)', borderRadius: 8, padding: '7px 8px' } : undefined}>
+          <span className="g-ui-f-label" style={{ width: 44, color: 'var(--g-green)', fontWeight: 800 }}>{v.ver}</span>
+          <span className="g-ui-f-value">{v.label}</span>
+          <span className="g-ui-conf g-ui-conf--med" style={{ background: '#F1F5F9', color: '#64748B' }}>{v.time}</span>
+        </div>
+      ))}
+      <div className="g-ui-meta-row">
+        <span className="g-ui-tag">Original always preserved</span>
+        <span className="g-ui-tag g-ui-tag--ink">Edits never overwrite</span>
+        <span className="g-ui-tag g-ui-tag--ink">Reason + signature per addendum</span>
+      </div>
+    </div>
+  </div>
+);
 
 export const FormEnginePage = () => {
   return (
-    <div style={{ backgroundColor: '#fff', minHeight: '100vh' }}>
+    <>
       <SEO
         title="Statutory Form Infrastructure"
-        description="Salvia's form infrastructure turns clinical notes into immutable, versioned records — audit-ready for CQC, VMR, RCVS, and GDC compliance. Required fields enforced. Addendum trail built in."
+        description="Salvia's form infrastructure turns clinical notes into immutable, versioned records — audit-ready for NMC, DCI, VCI and NABH compliance. Required fields enforced. Addendum trail built in."
         path="/products/statutory-form-infrastructure"
-        keywords={['clinical form compliance', 'immutable clinical records', 'dental charting software', 'audit-ready notes', 'CQC records', 'RCVS form requirements']}
+        keywords={['clinical form compliance', 'immutable clinical records', 'audit-ready notes', 'NABH records', 'clinical record versioning', 'form builder healthcare India']}
       />
-      <Header />
-      <main style={{ flex: 1, zIndex: 10 }}>
+      <GrassHeader />
+      <main style={{ flex: 1, zIndex: 10, background: '#fff' }}>
 
-      {/* Hero */}
-      <section style={{ padding: '11rem 0 7rem', backgroundColor: 'var(--salvia-bg)', borderBottom: '1px solid var(--border-subtle)' }}>
-        <div className="container" style={{ maxWidth: '960px' }}>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '5rem', alignItems: 'center' }} className="mobile-stack">
-            <div>
-              <div style={{
-                display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
-                backgroundColor: 'rgba(255,78,0,0.07)', border: '1.5px solid rgba(255,78,0,0.18)',
-                borderRadius: 'var(--radius-md)', padding: '0.35rem 0.85rem', marginBottom: '1.75rem',
-              }}>
-                <span style={{ fontSize: 'var(--text-xs)', fontWeight: 800, color: 'var(--salvia-accent)', letterSpacing: '0.1em', textTransform: 'uppercase' }}>Statutory Form Infrastructure</span>
+        {/* Hero */}
+        <section className="g-section" style={{ padding: '148px 0 72px' }}>
+          <div className="g-container">
+            <div className="g-split">
+              <div>
+                <Rv as="h1" className="g-h1" style={{ fontSize: 'clamp(38px, 4.6vw, 66px)', marginBottom: 20 }}>
+                  Records that can't be <span className="g-hl">argued with.</span>
+                </Rv>
+                <Rv as="p" className="g-sub" delay={1}>
+                  Immutable from the moment you sign. Every field enforced before submission.
+                  Every correction an addendum. Built to the exact structure regulators look
+                  for — <b>not a general form tool adapted for clinics</b>.
+                </Rv>
+                <Rv className="g-hero-ctas" delay={2} style={{ justifyContent: 'flex-start', marginTop: 30 }}>
+                  <Link className="g-btn g-btn--green" to="/start">
+                    Book a demo
+                  </Link>
+                  <Link className="g-btn g-btn--ghost" to="/pricing">
+                    See pricing
+                  </Link>
+                </Rv>
               </div>
-              <h1 style={{
-                fontSize: 'var(--text-display)', fontWeight: 800,
-                letterSpacing: '-0.04em', lineHeight: 1.05,
-                color: 'var(--salvia-primary)', marginBottom: '1.5rem',
-              }}>
-                Records that can't be argued with.
-              </h1>
-              <p style={{ fontSize: 'var(--text-md)', color: 'var(--salvia-text-muted)', lineHeight: 1.65, marginBottom: '2.5rem' }}>
-                Immutable from the moment you sign. Every field enforced before submission. Every correction an addendum. Built to the exact structure regulators look for — not a general form tool adapted for clinics.
-              </p>
-              <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
-                <Link to="/start" style={{
-                  display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
-                  backgroundColor: 'var(--salvia-accent)', color: '#fff',
-                  padding: '0.85rem 1.75rem', borderRadius: 'var(--radius-md)',
-                  fontWeight: 700, fontSize: 'var(--text-base)', textDecoration: 'none',
-                }}>
-                  Book a demo
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                    <line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" />
-                  </svg>
-                </Link>
-                <Link to="/pricing" style={{
-                  display: 'inline-flex', alignItems: 'center',
-                  backgroundColor: 'transparent', color: 'var(--salvia-primary)',
-                  padding: '0.85rem 1.75rem', borderRadius: 'var(--radius-md)',
-                  fontWeight: 700, fontSize: 'var(--text-base)', textDecoration: 'none',
-                  border: '1.5px solid var(--border-strong)',
-                }}>
-                  See pricing
-                </Link>
-              </div>
+              <Rv className="g-split-art" delay={1}>
+                <img
+                  src="/illustrations/story_form.webp"
+                  alt="A clinician assembling a clinical form from field blocks"
+                />
+              </Rv>
             </div>
+          </div>
+        </section>
 
-            {/* Visual — version history */}
-            <div style={{
-              backgroundColor: '#fff', borderRadius: 'var(--radius-xl)',
-              border: '1px solid var(--border-subtle)',
-              boxShadow: 'var(--shadow-3)',
-              overflow: 'hidden',
-            }}>
-              <div style={{ padding: '1.25rem 1.5rem', borderBottom: '1px solid var(--border-subtle)', display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                <div style={{ width: '10px', height: '10px', borderRadius: '50%', backgroundColor: 'var(--salvia-accent)' }} />
-                <span style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--salvia-text-muted)' }}>Record — Consultation 14 May 2026</span>
+        {/* Version history */}
+        <section className="g-section">
+          <div className="g-container">
+            <div className="g-split">
+              <div>
+                <Rv as="h2" className="g-h2">
+                  Signed once. <span className="g-hl">Provable forever.</span>
+                </Rv>
+                <Rv as="p" className="g-sub" delay={1}>
+                  A signed record never changes — it grows. Corrections and additions become{' '}
+                  <b>versioned addenda</b> with the clinician, reason and timestamp attached,
+                  exactly the correction trail regulators expect to see.
+                </Rv>
+                <Rv className="g-facts" delay={2}>
+                  <div className="g-fact"><span>On signing</span><b>Record locks — content hash sealed</b></div>
+                  <div className="g-fact"><span>On correction</span><b>Addendum with reason, never an overwrite</b></div>
+                  <div className="g-fact"><span>On export</span><b>PDF with full version history and signatures</b></div>
+                  <div className="g-fact"><span>On audit</span><b>The original, every version, in one file</b></div>
+                </Rv>
               </div>
-              <div style={{ padding: '1.5rem', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-                {[
-                  { ver: 'v1.0', label: 'Original record signed', time: '14 May · 14:32', locked: true },
-                  { ver: 'v1.1', label: 'Addendum: corrected drug dose', time: '14 May · 16:05', locked: true },
-                  { ver: 'v1.2', label: 'Addendum: follow-up plan added', time: '15 May · 09:18', locked: true },
-                ].map((v, i) => (
-                  <div key={i} style={{
-                    display: 'flex', alignItems: 'center', gap: '1rem',
-                    padding: '0.75rem 1rem', borderRadius: 'var(--radius-md)',
-                    backgroundColor: i === 2 ? 'rgba(255,78,0,0.04)' : '#F8FAFC',
-                    border: i === 2 ? '1px solid rgba(255,78,0,0.12)' : '1px solid transparent',
-                  }}>
-                    <span style={{ fontSize: 'var(--text-2xs)', fontWeight: 800, color: 'var(--salvia-accent)', minWidth: '28px' }}>{v.ver}</span>
-                    <div style={{ flex: 1 }}>
-                      <div style={{ fontSize: 'var(--text-xs)', fontWeight: 600, color: 'var(--salvia-primary)' }}>{v.label}</div>
-                      <div style={{ fontSize: 'var(--text-2xs)', color: 'var(--salvia-text-muted)' }}>{v.time}</div>
+              <Rv className="g-split-art" delay={1} style={{ display: 'block' }}>
+                <VersionPanel />
+              </Rv>
+            </div>
+          </div>
+        </section>
+
+        {/* Record types */}
+        <section className="g-section">
+          <div className="g-container">
+            <Rv as="h2" className="g-h2">
+              Built for every <span className="g-hl">encounter type.</span>
+            </Rv>
+            <Rv as="p" className="g-sub" delay={1}>
+              Each record type carries the field set its framework demands — enforced at
+              submission, not discovered at audit.
+            </Rv>
+            <div className="g-split" style={{ alignItems: 'start', marginTop: 40 }}>
+              <Rv delay={1}>
+                <div className="g-facts">
+                  {RECORD_TYPES.slice(0, 4).map((r) => (
+                    <div className="g-fact" key={r.label}>
+                      <span>{r.label}</span>
+                      <b>{r.value}</b>
                     </div>
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#CBD5E1" strokeWidth="2">
-                      <rect x="3" y="11" width="18" height="11" rx="2" ry="2" /><path d="M7 11V7a5 5 0 0 1 10 0v4" />
-                    </svg>
-                  </div>
-                ))}
-                <div style={{ padding: '0.65rem 1rem', backgroundColor: 'rgba(255,78,0,0.06)', borderRadius: 'var(--radius-sm)', display: 'flex', alignItems: 'center', gap: '0.5rem', marginTop: '0.25rem' }}>
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#FF4E00" strokeWidth="2.5"><polyline points="20 6 9 17 4 12" /></svg>
-                  <span style={{ fontSize: 'var(--text-2xs)', fontWeight: 700, color: 'var(--salvia-accent)' }}>Original always preserved · edits never overwrite</span>
+                  ))}
                 </div>
+              </Rv>
+              <Rv delay={2}>
+                <div className="g-facts">
+                  {RECORD_TYPES.slice(4).map((r) => (
+                    <div className="g-fact" key={r.label}>
+                      <span>{r.label}</span>
+                      <b>{r.value}</b>
+                    </div>
+                  ))}
+                </div>
+              </Rv>
+            </div>
+          </div>
+        </section>
+
+        {/* Features */}
+        <section className="g-section">
+          <div className="g-container">
+            <Rv as="h2" className="g-h2">
+              The structure regulators <span className="g-hl">actually look for.</span>
+            </Rv>
+            <div className="g-split" style={{ alignItems: 'start', marginTop: 16 }}>
+              <div>
+                {FEATURES.slice(0, 3).map((f, i) => (
+                  <Rv className="g-check" key={f.title} delay={(Math.min(i + 1, 4)) as 1 | 2 | 3 | 4}>
+                    <span className="g-ck">✓</span>
+                    <div>
+                      <h4>{f.title}</h4>
+                      <p>{f.body}</p>
+                    </div>
+                  </Rv>
+                ))}
+              </div>
+              <div>
+                {FEATURES.slice(3).map((f, i) => (
+                  <Rv className="g-check" key={f.title} delay={(Math.min(i + 1, 4)) as 1 | 2 | 3 | 4}>
+                    <span className="g-ck">✓</span>
+                    <div>
+                      <h4>{f.title}</h4>
+                      <p>{f.body}</p>
+                    </div>
+                  </Rv>
+                ))}
               </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Record types */}
-      <section style={{ padding: 'var(--section-pad) 0', backgroundColor: '#fff', borderBottom: '1px solid var(--border-subtle)' }}>
-        <div className="container" style={{ maxWidth: '960px' }}>
-          <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
-            <div className="eyebrow" style={{ marginBottom: '0.75rem' }}>Record types</div>
-            <h2 style={{ fontSize: 'var(--text-3xl)', fontWeight: 800, color: 'var(--salvia-primary)', letterSpacing: '-0.03em' }}>
-              Built for every clinical encounter type.
-            </h2>
-          </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '0.75rem' }} className="mobile-stack">
-            {RECORD_TYPES.map((r, i) => (
-              <div key={i} style={{
-                display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-                padding: '1rem 1.25rem', borderRadius: 'var(--radius-md)',
-                border: '1px solid var(--border-subtle)', backgroundColor: '#FAFBFC',
-                gap: '1rem',
-              }}>
-                <span style={{ fontSize: 'var(--text-sm)', fontWeight: 600, color: 'var(--salvia-primary)' }}>{r.label}</span>
-                <span style={{ fontSize: 'var(--text-2xs)', fontWeight: 600, color: 'var(--salvia-text-muted)', whiteSpace: 'nowrap' }}>{r.frameworks}</span>
+        {/* Final CTA */}
+        <section className="g-final">
+          <div className="g-container">
+            <div className="g-final-grid">
+              <div>
+                <Rv as="h2" className="g-h2">
+                  Records that hold up <span className="g-hl">in any inspection.</span>
+                </Rv>
+                <Rv as="p" className="g-sub" delay={1} style={{ marginTop: 14 }}>
+                  Book a 20-minute demo to see how the form engine works in your clinical
+                  setting.
+                </Rv>
+                <Rv className="g-hero-ctas" delay={2} style={{ marginTop: 30 }}>
+                  <Link className="g-btn g-btn--green" to="/start">
+                    Book a demo
+                  </Link>
+                  <Link className="g-btn g-btn--ghost" to="/pricing">
+                    See pricing
+                  </Link>
+                </Rv>
               </div>
-            ))}
+              <Rv className="g-final-art" delay={1}>
+                <img
+                  src="/illustrations/vault.webp"
+                  alt="A records vault with a glowing green dial"
+                  loading="lazy"
+                />
+              </Rv>
+            </div>
           </div>
-        </div>
-      </section>
-
-      {/* Features */}
-      <section style={{ padding: 'var(--section-pad) 0', backgroundColor: 'var(--salvia-bg)' }}>
-        <div className="container" style={{ maxWidth: '1200px' }}>
-          <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
-            <div className="eyebrow" style={{ marginBottom: '0.75rem' }}>How it works</div>
-            <h2 style={{ fontSize: 'var(--text-3xl)', fontWeight: 800, color: 'var(--salvia-primary)', letterSpacing: '-0.03em' }}>
-              The structure regulators actually look for.
-            </h2>
-          </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.5rem' }} className="mobile-stack">
-            {FEATURES.map((f, i) => (
-              <div key={i} style={{ padding: '2rem', borderRadius: 'var(--radius-lg)', border: '1px solid var(--border-subtle)', backgroundColor: '#fff' }}>
-                <h3 style={{ fontSize: 'var(--text-base)', fontWeight: 700, color: 'var(--salvia-primary)', marginBottom: '0.5rem' }}>{f.title}</h3>
-                <p style={{ fontSize: 'var(--text-sm)', color: 'var(--salvia-text-muted)', lineHeight: 1.6 }}>{f.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA */}
-      <section style={{ padding: 'var(--section-pad) 0', backgroundColor: '#fff', borderTop: '1px solid var(--border-subtle)', textAlign: 'center' }}>
-        <div className="container" style={{ maxWidth: '580px' }}>
-          <div className="eyebrow" style={{ marginBottom: '1rem' }}>Get started</div>
-          <h2 style={{ fontSize: 'var(--text-3xl)', fontWeight: 800, color: 'var(--salvia-primary)', letterSpacing: '-0.03em', marginBottom: '1rem' }}>
-            Records that hold up in any inspection.
-          </h2>
-          <p style={{ color: 'var(--salvia-text-muted)', lineHeight: 1.65, marginBottom: '2.5rem' }}>
-            Book a 20-minute demo to see how the form engine works in your clinical setting.
-          </p>
-          <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-            <Link to="/start" style={{
-              display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
-              backgroundColor: 'var(--salvia-accent)', color: '#fff',
-              padding: '0.85rem 1.75rem', borderRadius: 'var(--radius-md)',
-              fontWeight: 700, fontSize: 'var(--text-base)', textDecoration: 'none',
-            }}>
-              Book a demo
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                <line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" />
-              </svg>
-            </Link>
-            <Link to="/pricing" style={{
-              display: 'inline-flex', alignItems: 'center',
-              backgroundColor: 'transparent', color: 'var(--salvia-primary)',
-              padding: '0.85rem 1.75rem', borderRadius: 'var(--radius-md)',
-              fontWeight: 700, fontSize: 'var(--text-base)', textDecoration: 'none',
-              border: '1.5px solid var(--border-strong)',
-            }}>
-              See pricing
-            </Link>
-          </div>
-        </div>
-      </section>
+        </section>
 
       </main>
-      <Footer />
-    </div>
+      <GrassFooter />
+    </>
   );
 };

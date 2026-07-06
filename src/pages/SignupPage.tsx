@@ -1,8 +1,10 @@
 import { useEffect, useMemo, useRef, useState, type CSSProperties, type FormEvent, type ReactNode } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
-import { Header } from '../components/Header';
-import { Footer } from '../components/Footer';
+
 import { SEO } from '../components/SEO';
+import { GrassFooter } from '../components/grass/GrassFooter';
+import { GrassHeader } from '../components/grass/GrassHeader';
+import { Rv } from '../components/grass/Rv';
 import { SAL_API_BASE, INDIA_ONLY } from '../config';
 import type { Vertical } from '../data/pricing';
 import { identify, track } from '../lib/posthog';
@@ -53,7 +55,7 @@ function TurnstileWidget({ onToken }: { onToken: (t: string) => void }) {
     }
   }, [onToken]);
   if (!TURNSTILE_SITE_KEY) return null;
-  return <div ref={ref} style={{ marginBottom: '0.5rem' }} />;
+  return <div ref={ref} style={{ marginBottom: 8 }} />;
 }
 
 // ── Static option data ───────────────────────────────────────────────────────
@@ -102,29 +104,11 @@ const CALL_WINDOW_OPTIONS = [
   { value: 'weekend', label: 'Weekend' },
 ];
 
-const STEPS = [
-  {
-    title: 'Submit this form',
-    body: '2 minutes. Tells us your clinic, vertical, and what you’re currently struggling with.',
-  },
-  {
-    title: 'We call you within 24 hours',
-    body: '20-minute walkthrough in your real workflow — no slides, no pitch deck. We make sure Salvia fits before we let you in.',
-  },
-  {
-    title: '21 days, full access, no card',
-    body: 'If we’re a fit you get a magic-link sign-in. Capture audio, generate notes, run policy checks — everything unlocked.',
-  },
-  {
-    title: 'Pay only if you continue',
-    body: 'On day 22 we email to confirm. Cancel any time before then — we don’t charge a cent until you say yes.',
-  },
-];
-
-const TRUST_BULLETS = [
-  'No credit card during your trial',
-  'Reviewed and approved by a human, not a bot',
-  'Cancel any time before day 22 — no charge',
+const STEPS: { label: string; value: string }[] = [
+  { label: 'Today', value: 'Six quick fields — under a minute' },
+  { label: 'Within 24 hours', value: 'We call you: a 20-minute walkthrough in your real workflow' },
+  { label: 'Next 21 days', value: 'Full access, no card — everything unlocked' },
+  { label: 'Day 22', value: 'Continue only if you say yes — cancel any time, no charge' },
 ];
 
 function isVertical(v: string | null): v is Vertical {
@@ -158,12 +142,10 @@ export const SignupPage = () => {
   const [pain, setPain] = useState('');
 
   // When the user picks a country, seed the dial code with that country's
-  // default. They can still override the dial code afterward (e.g. an NZ
-  // clinic with a UK mobile).
+  // default. They can still override the dial code afterward.
   function onCountryChange(next: string) {
     setCountry(next);
-    const next_dial = DIAL_CODE_BY_COUNTRY[next] ?? '';
-    setDialCode(next_dial);
+    setDialCode(DIAL_CODE_BY_COUNTRY[next] ?? '');
   }
 
   const [submitting, setSubmitting] = useState(false);
@@ -244,273 +226,249 @@ export const SignupPage = () => {
         path="/start"
         keywords={['Salvia free trial', 'AI clinical documentation India', 'clinic compliance software trial', 'AI medical scribe India signup']}
       />
-      <Header />
-      <main style={{ flex: 1, zIndex: 10 }}>
-      <ResponsiveStyles />
+      <GrassHeader />
+      <main style={{ flex: 1, zIndex: 10, background: '#fff' }}>
+        <SignupStyles />
+        <section className="g-section" style={{ padding: '140px 0 96px' }}>
+          <div className="g-container">
+            <div className="su-grid">
 
-      <section style={pageSectionStyle} className="signup-section">
-        {/* Decorative background gradient */}
-        <div style={bgGradientStyle} aria-hidden="true" />
-
-        <div className="container signup-container" style={{ position: 'relative', zIndex: 1 }}>
-          <div className="signup-grid">
-            {/* ── Left column: pitch + steps ── */}
-            <div className="signup-left">
-              <div style={eyebrowStyle}>Early access · invite only</div>
-              <h1 style={h1Style}>
-                Salvia onboards every clinic
-                <span style={{ color: 'var(--salvia-accent)' }}> personally.</span>
-              </h1>
-              <p style={leadStyle}>
-                We’re not letting just anyone in yet. Tell us about your clinic and we’ll get back
-                to you within 24 hours to walk you through Salvia in your actual workflow.
-              </p>
-
-              <ol style={stepsListStyle}>
-                {STEPS.map((step, idx) => (
-                  <li key={idx} style={stepItemStyle}>
-                    <div style={stepNumberStyle}>{idx + 1}</div>
-                    <div>
-                      <div style={stepTitleStyle}>{step.title}</div>
-                      <div style={stepBodyStyle}>{step.body}</div>
-                    </div>
-                    {idx < STEPS.length - 1 && <div style={stepConnectorStyle} aria-hidden="true" />}
-                  </li>
-                ))}
-              </ol>
-
-              <ul style={trustListStyle}>
-                {TRUST_BULLETS.map((b) => (
-                  <li key={b} style={trustItemStyle}>
-                    <CheckIcon />
-                    <span>{b}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* ── Right column: form card ── */}
-            <div className="signup-right">
-              <div style={formCardStyle} className="signup-form-card">
-                <div style={formHeaderStyle}>
-                  <h2 style={formTitleStyle}>Request early access</h2>
-                  <p style={formSubStyle}>
-                    We review every clinic. Submission takes 2 minutes.
-                  </p>
-                </div>
-
-                <form onSubmit={onSubmit} style={formStyle}>
-                  {/* Honeypot — visually hidden and untabbable; humans never
-                      see it, autofill bots complete it and get fake-success */}
-                  <input
-                    type="text"
-                    name="website"
-                    value={website}
-                    onChange={(e) => setWebsite(e.target.value)}
-                    tabIndex={-1}
-                    autoComplete="off"
-                    aria-hidden="true"
-                    style={{ position: 'absolute', left: '-9999px', width: 1, height: 1, opacity: 0 }}
+              {/* ── Left: the pitch ── */}
+              <div>
+                <Rv as="h1" className="g-h1" style={{ fontSize: 'clamp(36px, 4.2vw, 58px)', marginBottom: 18 }}>
+                  We onboard every clinic <span className="g-hl">personally.</span>
+                </Rv>
+                <Rv as="p" className="g-sub" delay={1}>
+                  Tell us about your clinic and we'll call within 24 hours to walk you through
+                  Salvia in your actual workflow — <b>no slides, no pitch deck</b>. Then 21
+                  days of full access, free, no card.
+                </Rv>
+                <Rv delay={2}>
+                  <img
+                    src="/illustrations/signup_scene.webp"
+                    alt="A friendly Salvia team member on a welcome call, waving hello"
+                    style={{ width: 'min(380px, 88%)', height: 'auto', display: 'block', margin: '30px 0 4px' }}
                   />
-
-                  <Field label="Clinic name" htmlFor="clinicName" required>
-                    <input
-                      id="clinicName"
-                      type="text"
-                      required
-                      minLength={2}
-                      maxLength={200}
-                      value={clinicName}
-                      onChange={(e) => setClinicName(e.target.value)}
-                      autoComplete="organization"
-                      placeholder="Greenwood Vets"
-                      style={inputStyle}
-                    />
-                  </Field>
-
-                  <Field label="Your full name" htmlFor="contactName" required>
-                    <input
-                      id="contactName"
-                      type="text"
-                      required
-                      minLength={2}
-                      maxLength={200}
-                      value={contactName}
-                      onChange={(e) => setContactName(e.target.value)}
-                      autoComplete="name"
-                      placeholder="Dr. Jane Smith"
-                      style={inputStyle}
-                    />
-                  </Field>
-
-                  <Field label="Work email" htmlFor="contactEmail" required>
-                    <input
-                      id="contactEmail"
-                      type="email"
-                      required
-                      value={contactEmail}
-                      onChange={(e) => setContactEmail(e.target.value)}
-                      autoComplete="email"
-                      placeholder="you@clinic.com"
-                      style={inputStyle}
-                    />
-                  </Field>
-
-                  <div style={fieldRowStyle} className="signup-field-row">
-                    <Field label="Type of practice" htmlFor="vertical" required>
-                      <select
-                        id="vertical"
-                        value={vertical}
-                        onChange={(e) => setVertical(e.target.value as Vertical)}
-                        required
-                        style={inputStyle}
-                      >
-                        {VERTICAL_OPTIONS.map((o) => (
-                          <option key={o.value} value={o.value}>{o.label}</option>
-                        ))}
-                      </select>
-                    </Field>
-
-                    <Field label="Country" htmlFor="country" required>
-                      <select
-                        id="country"
-                        value={country}
-                        onChange={(e) => onCountryChange(e.target.value)}
-                        required
-                        style={inputStyle}
-                      >
-                        {COUNTRY_OPTIONS.map((o) => (
-                          <option key={o.value} value={o.value}>{o.label}</option>
-                        ))}
-                      </select>
-                    </Field>
-                  </div>
-
-                  {country === 'IN' && (
-                    <div style={indiaLangNoteStyle}>
-                      <span style={{ fontSize: 'var(--text-base)', lineHeight: 1 }}>🇮🇳</span>
-                      <span>
-                        Salvia supports recording in <strong>English, Hindi, Malayalam, Tamil</strong>, or any mix — notes are extracted to English automatically. No extra setup needed.
-                      </span>
+                </Rv>
+                <Rv className="g-facts" delay={3}>
+                  {STEPS.map((s) => (
+                    <div className="g-fact" key={s.label}>
+                      <span>{s.label}</span>
+                      <b>{s.value}</b>
                     </div>
-                  )}
-
-                  <Field
-                    label="Phone"
-                    htmlFor="phoneLocal"
-                    required
-                    hint="So we can call to walk you through Salvia"
-                  >
-                    <div style={phoneRowStyle}>
-                      <input
-                        id="dialCode"
-                        type="text"
-                        required
-                        aria-label="Country dial code"
-                        value={dialCode}
-                        onChange={(e) => setDialCode(e.target.value)}
-                        placeholder="+64"
-                        maxLength={5}
-                        style={{ ...inputStyle, width: 80, textAlign: 'center', fontWeight: 600 }}
-                      />
-                      <input
-                        id="phoneLocal"
-                        type="tel"
-                        required
-                        minLength={4}
-                        maxLength={32}
-                        value={phoneLocal}
-                        onChange={(e) => setPhoneLocal(e.target.value)}
-                        autoComplete="tel-national"
-                        placeholder="21 555 0123"
-                        style={{ ...inputStyle, flex: 1 }}
-                      />
-                    </div>
-                  </Field>
-
-                  <Field
-                    label="When's the best time for us to call?"
-                    htmlFor="callWindow"
-                    required
-                    hint="20-minute walkthrough — pick a slot in your local time"
-                  >
-                    <select
-                      id="callWindow"
-                      value={callWindow}
-                      onChange={(e) => setCallWindow(e.target.value)}
-                      required
-                      style={inputStyle}
-                    >
-                      {CALL_WINDOW_OPTIONS.map((o) => (
-                        <option key={o.value} value={o.value}>{o.label}</option>
-                      ))}
-                    </select>
-                  </Field>
-
-                  <Field label="How many clinical staff?" htmlFor="numStaff" hint="Optional">
-                    <input
-                      id="numStaff"
-                      type="number"
-                      min={1}
-                      max={10000}
-                      value={numStaff}
-                      onChange={(e) => setNumStaff(e.target.value)}
-                      placeholder="e.g. 5"
-                      style={inputStyle}
-                    />
-                  </Field>
-
-                  <Field
-                    label="What’s frustrating about your current note workflow?"
-                    htmlFor="pain"
-                    hint="Optional — but helps us prepare the demo"
-                  >
-                    <textarea
-                      id="pain"
-                      maxLength={4000}
-                      rows={4}
-                      value={pain}
-                      onChange={(e) => setPain(e.target.value)}
-                      placeholder="e.g. 'I spend 2 hours after every appointment writing notes' or 'auditors keep flagging missing consent documentation'"
-                      style={{ ...inputStyle, resize: 'vertical', fontFamily: 'inherit', lineHeight: 1.5 }}
-                    />
-                  </Field>
-
-                  {error && (
-                    <div role="alert" style={errorBoxStyle}>
-                      {error}
-                    </div>
-                  )}
-
-                  <TurnstileWidget onToken={setTurnstileToken} />
-
-                  <button
-                    type="submit"
-                    disabled={submitting}
-                    style={{
-                      ...primaryButtonStyle,
-                      opacity: submitting ? 0.7 : 1,
-                      cursor: submitting ? 'progress' : 'pointer',
-                    }}
-                  >
-                    {submitting ? 'Submitting…' : 'Request early access →'}
-                  </button>
-
-                  <p style={fineprintStyle}>
-                    By submitting you agree to our Terms and Privacy Policy.{' '}
-                    <Link to="/pricing" style={{ color: 'var(--salvia-accent)', fontWeight: 600 }}>
-                      See pricing
-                    </Link>
-                  </p>
-                </form>
+                  ))}
+                </Rv>
+                <Rv as="p" className="g-small" delay={3} style={{ marginTop: 18 }}>
+                  No credit card during the trial · Reviewed by a human, not a bot · Cancel
+                  any time before day 22
+                </Rv>
               </div>
+
+              {/* ── Right: the form ── */}
+              <div className="su-sticky">
+                <Rv className="su-card" delay={1}>
+                  <h2 className="g-h3" style={{ marginBottom: 4 }}>Request early access</h2>
+                  <p className="g-small" style={{ marginBottom: 22 }}>
+                    Six quick fields — under a minute. We review every clinic personally.
+                  </p>
+
+                  <form onSubmit={onSubmit} className="su-form">
+                    {/* Honeypot — visually hidden and untabbable; humans never
+                        see it, autofill bots complete it and get fake-success */}
+                    <input
+                      type="text"
+                      name="website"
+                      value={website}
+                      onChange={(e) => setWebsite(e.target.value)}
+                      tabIndex={-1}
+                      autoComplete="off"
+                      aria-hidden="true"
+                      style={{ position: 'absolute', left: '-9999px', width: 1, height: 1, opacity: 0 }}
+                    />
+
+                    <div className="su-row">
+                      <Field label="Your full name" htmlFor="contactName" required>
+                        <input
+                          id="contactName"
+                          type="text"
+                          required
+                          minLength={2}
+                          maxLength={200}
+                          value={contactName}
+                          onChange={(e) => setContactName(e.target.value)}
+                          autoComplete="name"
+                          placeholder="Dr. Jane Smith"
+                          style={inputStyle}
+                        />
+                      </Field>
+                      <Field label="Clinic name" htmlFor="clinicName" required>
+                        <input
+                          id="clinicName"
+                          type="text"
+                          required
+                          minLength={2}
+                          maxLength={200}
+                          value={clinicName}
+                          onChange={(e) => setClinicName(e.target.value)}
+                          autoComplete="organization"
+                          placeholder="Greenwood Clinic"
+                          style={inputStyle}
+                        />
+                      </Field>
+                    </div>
+
+                    <Field label="Work email" htmlFor="contactEmail" required>
+                      <input
+                        id="contactEmail"
+                        type="email"
+                        required
+                        value={contactEmail}
+                        onChange={(e) => setContactEmail(e.target.value)}
+                        autoComplete="email"
+                        placeholder="you@clinic.com"
+                        style={inputStyle}
+                      />
+                    </Field>
+
+                    <Field label="Phone" htmlFor="phoneLocal" required hint="for the walkthrough call">
+                      <div style={{ display: 'flex', gap: 8 }}>
+                        <input
+                          id="dialCode"
+                          type="text"
+                          required
+                          aria-label="Country dial code"
+                          value={dialCode}
+                          onChange={(e) => setDialCode(e.target.value)}
+                          placeholder="+91"
+                          maxLength={5}
+                          style={{ ...inputStyle, width: 76, textAlign: 'center', fontWeight: 600 }}
+                        />
+                        <input
+                          id="phoneLocal"
+                          type="tel"
+                          required
+                          minLength={4}
+                          maxLength={32}
+                          value={phoneLocal}
+                          onChange={(e) => setPhoneLocal(e.target.value)}
+                          autoComplete="tel-national"
+                          placeholder="98470 12345"
+                          style={{ ...inputStyle, flex: 1 }}
+                        />
+                      </div>
+                    </Field>
+
+                    <div className="su-row">
+                      <Field label="Type of practice" htmlFor="vertical" required>
+                        <select
+                          id="vertical"
+                          value={vertical}
+                          onChange={(e) => setVertical(e.target.value as Vertical)}
+                          required
+                          style={inputStyle}
+                        >
+                          {VERTICAL_OPTIONS.map((o) => (
+                            <option key={o.value} value={o.value}>{o.label}</option>
+                          ))}
+                        </select>
+                      </Field>
+                      <Field label="Country" htmlFor="country" required>
+                        <select
+                          id="country"
+                          value={country}
+                          onChange={(e) => onCountryChange(e.target.value)}
+                          required
+                          style={inputStyle}
+                        >
+                          {COUNTRY_OPTIONS.map((o) => (
+                            <option key={o.value} value={o.value}>{o.label}</option>
+                          ))}
+                        </select>
+                      </Field>
+                    </div>
+
+                    {country === 'IN' && (
+                      <p className="su-note">
+                        Salvia supports recording in <b>English, Hindi, Malayalam, Tamil</b> or
+                        any mix — notes come out in clean English automatically.
+                      </p>
+                    )}
+
+                    <Field label="Best time for the call" htmlFor="callWindow" required>
+                      <select
+                        id="callWindow"
+                        value={callWindow}
+                        onChange={(e) => setCallWindow(e.target.value)}
+                        required
+                        style={inputStyle}
+                      >
+                        {CALL_WINDOW_OPTIONS.map((o) => (
+                          <option key={o.value} value={o.value}>{o.label}</option>
+                        ))}
+                      </select>
+                    </Field>
+
+                    <details className="su-details">
+                      <summary>Anything that helps us prepare? (optional)</summary>
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: 16, marginTop: 14 }}>
+                        <Field label="How many clinical staff?" htmlFor="numStaff">
+                          <input
+                            id="numStaff"
+                            type="number"
+                            min={1}
+                            max={10000}
+                            value={numStaff}
+                            onChange={(e) => setNumStaff(e.target.value)}
+                            placeholder="e.g. 5"
+                            style={inputStyle}
+                          />
+                        </Field>
+                        <Field label="What's frustrating about your current workflow?" htmlFor="pain">
+                          <textarea
+                            id="pain"
+                            maxLength={4000}
+                            rows={3}
+                            value={pain}
+                            onChange={(e) => setPain(e.target.value)}
+                            placeholder="e.g. 'I spend 2 hours after clinic writing notes'"
+                            style={{ ...inputStyle, resize: 'vertical', lineHeight: 1.5 }}
+                          />
+                        </Field>
+                      </div>
+                    </details>
+
+                    {error && (
+                      <div role="alert" className="su-error">
+                        {error}
+                      </div>
+                    )}
+
+                    <TurnstileWidget onToken={setTurnstileToken} />
+
+                    <button
+                      type="submit"
+                      disabled={submitting}
+                      className="g-btn g-btn--green"
+                      style={{ width: '100%', opacity: submitting ? 0.7 : 1, cursor: submitting ? 'progress' : 'pointer' }}
+                    >
+                      {submitting ? 'Submitting…' : 'Request early access →'}
+                    </button>
+
+                    <p className="g-small" style={{ textAlign: 'center', margin: 0 }}>
+                      By submitting you agree to our Terms and Privacy Policy.{' '}
+                      <Link to="/pricing" style={{ color: 'var(--g-green)', fontWeight: 600 }}>
+                        See pricing
+                      </Link>
+                    </p>
+                  </form>
+                </Rv>
+              </div>
+
             </div>
           </div>
-        </div>
-      </section>
-
+        </section>
       </main>
-      <Footer />
+      <GrassFooter />
     </>
   );
 };
@@ -522,38 +480,36 @@ function SuccessPage({ email, clinicName, country }: { email: string; clinicName
     COUNTRY_OPTIONS.find((c) => c.value === country)?.label ?? 'local';
   return (
     <>
-      <Header />
-      <main style={{ flex: 1, zIndex: 10 }}>
-      <ResponsiveStyles />
-      <section style={pageSectionStyle} className="signup-section signup-success">
-        <div style={bgGradientStyle} aria-hidden="true" />
-        <div className="container" style={{ position: 'relative', zIndex: 1, maxWidth: '640px', textAlign: 'center' }}>
-          <div style={{ ...eyebrowStyle, justifyContent: 'center', display: 'inline-flex' }}>
-            <CheckIconLarge />
-            <span style={{ marginLeft: '0.5rem' }}>Request received</span>
+      <GrassHeader />
+      <main style={{ flex: 1, zIndex: 10, background: '#fff' }}>
+        <section className="g-section g-center" style={{ padding: '168px 0 120px' }}>
+          <div className="g-container">
+            <Rv>
+              <img
+                src="/illustrations/signup_scene.webp"
+                alt="A friendly Salvia team member on a welcome call, waving hello"
+                style={{ width: 'min(340px, 80%)', height: 'auto', display: 'block', margin: '0 auto 26px' }}
+              />
+            </Rv>
+            <Rv as="h1" className="g-h2" delay={1} style={{ margin: '0 auto 14px' }}>
+              Thanks{clinicName ? <>, <span className="g-hl">{clinicName}</span></> : ' for reaching out'}. We're on it.
+            </Rv>
+            <Rv as="p" className="g-sub" delay={2}>
+              We'll be in touch at <b>{email || 'your inbox'}</b> within 24 hours — usually
+              faster during {countryLabel} business hours.
+            </Rv>
+            <Rv className="g-hero-ctas" delay={3} style={{ marginTop: 30 }}>
+              <Link className="g-btn g-btn--green" to="/">
+                Back to home
+              </Link>
+              <Link className="g-btn g-btn--ghost" to="/pricing">
+                See pricing while you wait
+              </Link>
+            </Rv>
           </div>
-          <h1 style={{ ...h1Style, fontSize: 'clamp(2.4rem, 5vw, 3.4rem)', marginTop: '1rem' }}>
-            Thanks {clinicName ? <span style={{ color: 'var(--salvia-accent)' }}>{clinicName}</span> : 'for reaching out'}.
-          </h1>
-          <p style={{ ...leadStyle, maxWidth: '480px', margin: '0 auto 3rem' }}>
-            We’ll be in touch at{' '}
-            <strong style={{ color: 'var(--salvia-primary)' }}>{email || 'your inbox'}</strong>{' '}
-            within 24 hours — usually faster during {countryLabel} business hours.
-          </p>
-          <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-            <Link to="/" className="pill-button">Back to home</Link>
-            <Link
-              to="/pricing"
-              className="pill-button-light"
-              style={{ textDecoration: 'none' }}
-            >
-              See pricing while you wait →
-            </Link>
-          </div>
-        </div>
-      </section>
+        </section>
       </main>
-      <Footer />
+      <GrassFooter />
     </>
   );
 }
@@ -568,35 +524,18 @@ interface FieldProps {
   hint?: string;
 }
 
-function Field({ label, htmlFor, children, required, hint }: FieldProps) {
+function Field({ label, htmlFor, children, hint }: FieldProps) {
   return (
-    <label htmlFor={htmlFor} style={fieldLabelStyle}>
-      <span style={fieldLabelTextStyle}>
+    <label htmlFor={htmlFor} style={{ display: 'flex', flexDirection: 'column', gap: 6, minWidth: 0 }}>
+      <span style={{
+        display: 'flex', justifyContent: 'space-between', alignItems: 'baseline',
+        fontFamily: 'var(--g-font)', fontSize: 13, fontWeight: 600, color: 'var(--g-ink)',
+      }}>
         <span>{label}</span>
-        {!required && hint && <span style={fieldHintStyle}>{hint}</span>}
+        {hint && <span style={{ fontWeight: 500, fontSize: 12, color: 'var(--g-ink-faint)' }}>{hint}</span>}
       </span>
       {children}
     </label>
-  );
-}
-
-// ── Icons ────────────────────────────────────────────────────────────────────
-
-function CheckIcon() {
-  return (
-    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-      <circle cx="8" cy="8" r="7" fill="var(--salvia-accent)" opacity="0.12" />
-      <path d="M4.5 8.2 L7 10.7 L11.5 5.5" stroke="var(--salvia-accent)" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  );
-}
-
-function CheckIconLarge() {
-  return (
-    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-      <circle cx="10" cy="10" r="9" fill="var(--salvia-accent)" />
-      <path d="M5.5 10.5 L8.5 13.5 L14.5 6.5" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
   );
 }
 
@@ -610,311 +549,73 @@ async function safeJson(res: Response): Promise<Record<string, unknown> | null> 
   }
 }
 
-// ── Responsive styles ────────────────────────────────────────────────────────
-// Scoped CSS for the signup page — handles desktop two-column / mobile
-// single-column, plus input :focus rings and the submit button hover state
-// (inline styles can't express :focus / :hover / media queries).
-
-function ResponsiveStyles() {
-  return (
-    <style>{`
-      .signup-section { padding: 8rem 0 6rem; }
-      .signup-success { padding: 10rem 0 8rem; min-height: 80vh; display: flex; align-items: center; }
-      .signup-grid {
-        display: grid;
-        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-        gap: 4rem;
-        align-items: start;
-      }
-      .signup-left { padding-right: 1rem; }
-      .signup-right { position: sticky; top: 6rem; }
-
-      .signup-form-card input:focus,
-      .signup-form-card select:focus,
-      .signup-form-card textarea:focus {
-        border-color: var(--salvia-accent);
-        box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15);
-      }
-
-      .signup-form-card button[type='submit']:hover:not(:disabled) {
-        transform: translateY(-1px);
-        box-shadow: 0 14px 28px -8px rgba(16, 185, 129, 0.4);
-      }
-      .signup-form-card button[type='submit']:active:not(:disabled) {
-        transform: translateY(0);
-      }
-
-      /* Tablet: tighten the gap */
-      @media (max-width: 1024px) {
-        .signup-grid { gap: 2.5rem; }
-        .signup-left { padding-right: 0; }
-        .signup-right { position: static; }
-      }
-
-      /* Mobile: stack columns, reduce padding */
-      @media (max-width: 768px) {
-        .signup-section { padding: 6rem 0 4rem; }
-        .signup-success { padding: 7rem 0 5rem; }
-        .signup-grid { grid-template-columns: 1fr; gap: 2.5rem; }
-        .signup-form-card { padding: 1.5rem !important; }
-        .signup-form-card .signup-field-row { grid-template-columns: 1fr !important; }
-      }
-
-      @media (max-width: 480px) {
-        .signup-section { padding: 5rem 0 3rem; }
-        .signup-form-card { padding: 1.25rem !important; }
-      }
-    `}</style>
-  );
-}
-
 // ── Styles ───────────────────────────────────────────────────────────────────
-
-const pageSectionStyle: CSSProperties = {
-  position: 'relative',
-  backgroundColor: 'var(--salvia-bg)',
-  minHeight: '90vh',
-  overflow: 'hidden',
-};
-
-const bgGradientStyle: CSSProperties = {
-  position: 'absolute',
-  inset: 0,
-  pointerEvents: 'none',
-  backgroundImage:
-    'radial-gradient(circle at 12% 18%, rgba(16, 185, 129, 0.10), transparent 38%), ' +
-    'radial-gradient(circle at 88% 78%, rgba(99, 102, 241, 0.08), transparent 42%)',
-};
-
-const eyebrowStyle: CSSProperties = {
-  display: 'inline-flex',
-  alignItems: 'center',
-  fontSize: 'var(--text-2xs)',
-  fontWeight: 800,
-  letterSpacing: '0.18em',
-  textTransform: 'uppercase',
-  color: 'var(--salvia-accent)',
-  backgroundColor: 'rgba(16, 185, 129, 0.08)',
-  padding: '0.4rem 0.8rem',
-  borderRadius: 'var(--salvia-radius-full)',
-  marginBottom: '1.25rem',
-};
-
-const h1Style: CSSProperties = {
-  fontSize: 'clamp(2.4rem, 5vw, 3.6rem)',
-  fontWeight: 800,
-  color: 'var(--salvia-primary)',
-  letterSpacing: '-0.035em',
-  lineHeight: 1.05,
-  marginBottom: '1.25rem',
-};
-
-const leadStyle: CSSProperties = {
-  color: 'var(--salvia-text-muted)',
-  fontSize: 'var(--text-md)',
-  lineHeight: 1.6,
-  marginBottom: '2.5rem',
-  maxWidth: '480px',
-};
-
-const stepsListStyle: CSSProperties = {
-  listStyle: 'none',
-  padding: 0,
-  margin: '0 0 2.5rem',
-  display: 'flex',
-  flexDirection: 'column',
-  gap: '1.25rem',
-};
-
-const stepItemStyle: CSSProperties = {
-  position: 'relative',
-  display: 'flex',
-  gap: '1.1rem',
-  alignItems: 'flex-start',
-};
-
-const stepNumberStyle: CSSProperties = {
-  flexShrink: 0,
-  width: '2.2rem',
-  height: '2.2rem',
-  borderRadius: 'var(--salvia-radius-full)',
-  background: 'linear-gradient(135deg, var(--salvia-primary), var(--salvia-accent))',
-  color: '#fff',
-  fontSize: 'var(--text-sm)',
-  fontWeight: 700,
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  boxShadow: '0 4px 12px rgba(15, 23, 42, 0.15)',
-  zIndex: 1,
-};
-
-const stepConnectorStyle: CSSProperties = {
-  position: 'absolute',
-  left: '1.1rem',
-  top: '2.4rem',
-  bottom: '-1.25rem',
-  width: '1px',
-  backgroundImage: 'linear-gradient(to bottom, rgba(15, 23, 42, 0.18), transparent)',
-};
-
-const stepTitleStyle: CSSProperties = {
-  fontWeight: 700,
-  color: 'var(--salvia-primary)',
-  fontSize: 'var(--text-base)',
-  marginBottom: '0.25rem',
-};
-
-const stepBodyStyle: CSSProperties = {
-  color: 'var(--salvia-text-muted)',
-  fontSize: 'var(--text-sm)',
-  lineHeight: 1.55,
-};
-
-const trustListStyle: CSSProperties = {
-  listStyle: 'none',
-  padding: '1.25rem 1.5rem',
-  margin: 0,
-  borderRadius: 'var(--salvia-radius-base)',
-  background: 'rgba(15, 23, 42, 0.025)',
-  border: '1px solid rgba(15, 23, 42, 0.05)',
-  display: 'flex',
-  flexDirection: 'column',
-  gap: '0.6rem',
-};
-
-const trustItemStyle: CSSProperties = {
-  display: 'flex',
-  alignItems: 'center',
-  gap: '0.65rem',
-  fontSize: 'var(--text-sm)',
-  color: 'var(--salvia-text)',
-};
-
-const formCardStyle: CSSProperties = {
-  backgroundColor: 'var(--salvia-surface)',
-  borderRadius: 'var(--salvia-radius-large)',
-  padding: '2.25rem',
-  boxShadow: '0 24px 56px -20px rgba(15, 23, 42, 0.18), 0 6px 16px -4px rgba(15, 23, 42, 0.08)',
-  border: '1px solid rgba(15, 23, 42, 0.04)',
-};
-
-const formHeaderStyle: CSSProperties = {
-  marginBottom: '1.75rem',
-  paddingBottom: '1.25rem',
-  borderBottom: '1px solid rgba(15, 23, 42, 0.06)',
-};
-
-const formTitleStyle: CSSProperties = {
-  fontSize: 'var(--text-lg)',
-  fontWeight: 700,
-  color: 'var(--salvia-primary)',
-  margin: '0 0 0.4rem',
-  letterSpacing: '-0.015em',
-};
-
-const formSubStyle: CSSProperties = {
-  fontSize: 'var(--text-sm)',
-  color: 'var(--salvia-text-muted)',
-  margin: 0,
-};
-
-const formStyle: CSSProperties = {
-  display: 'flex',
-  flexDirection: 'column',
-  gap: '1.1rem',
-};
-
-const fieldRowStyle: CSSProperties = {
-  display: 'grid',
-  gridTemplateColumns: '1fr 1fr',
-  gap: '0.9rem',
-};
-
-const phoneRowStyle: CSSProperties = {
-  display: 'flex',
-  gap: '0.5rem',
-  alignItems: 'stretch',
-};
-
-const fieldLabelStyle: CSSProperties = {
-  display: 'flex',
-  flexDirection: 'column',
-  gap: '0.4rem',
-};
-
-const fieldLabelTextStyle: CSSProperties = {
-  display: 'flex',
-  justifyContent: 'space-between',
-  alignItems: 'baseline',
-  fontSize: 'var(--text-xs)',
-  fontWeight: 600,
-  color: 'var(--salvia-primary)',
-  letterSpacing: '-0.005em',
-};
-
-const fieldHintStyle: CSSProperties = {
-  fontSize: 'var(--text-xs)',
-  fontWeight: 500,
-  color: 'var(--salvia-text-muted)',
-  textTransform: 'lowercase',
-};
 
 const inputStyle: CSSProperties = {
   width: '100%',
-  padding: '0.75rem 0.95rem',
-  fontSize: 'var(--text-base)',
-  fontFamily: 'inherit',
-  border: '1px solid rgba(15, 23, 42, 0.14)',
-  borderRadius: 'var(--salvia-radius-base)',
+  padding: '11px 14px',
+  fontFamily: 'var(--g-font)',
+  fontSize: 14.5,
+  border: '1px solid var(--g-line)',
+  borderRadius: 12,
   backgroundColor: '#fff',
-  color: 'var(--salvia-text)',
+  color: 'var(--g-ink)',
   outline: 'none',
   transition: 'border-color 0.15s ease, box-shadow 0.15s ease',
   boxSizing: 'border-box',
 };
 
-const errorBoxStyle: CSSProperties = {
-  color: '#B91C1C',
-  fontSize: 'var(--text-sm)',
-  padding: '0.85rem 1rem',
-  borderRadius: 'var(--salvia-radius-base)',
-  backgroundColor: 'rgba(185, 28, 28, 0.06)',
-  border: '1px solid rgba(185, 28, 28, 0.18)',
-  lineHeight: 1.5,
-};
-
-const primaryButtonStyle: CSSProperties = {
-  padding: '0.95rem 1.5rem',
-  fontSize: 'var(--text-base)',
-  fontWeight: 700,
-  borderRadius: 'var(--salvia-radius-full)',
-  border: 'none',
-  background: 'linear-gradient(135deg, var(--salvia-primary), var(--salvia-accent))',
-  color: '#fff',
-  cursor: 'pointer',
-  letterSpacing: '0.005em',
-  boxShadow: '0 10px 24px -8px rgba(16, 185, 129, 0.35)',
-  transition: 'transform 0.15s ease, box-shadow 0.15s ease',
-};
-
-const fineprintStyle: CSSProperties = {
-  fontSize: 'var(--text-xs)',
-  color: 'var(--salvia-text-muted)',
-  textAlign: 'center',
-  margin: 0,
-  lineHeight: 1.55,
-};
-
-const indiaLangNoteStyle: CSSProperties = {
-  display: 'flex',
-  alignItems: 'flex-start',
-  gap: '0.6rem',
-  padding: '0.75rem 1rem',
-  borderRadius: 'var(--salvia-radius-base)',
-  backgroundColor: 'rgba(99, 102, 241, 0.06)',
-  border: '1px solid rgba(99, 102, 241, 0.15)',
-  fontSize: 'var(--text-xs)',
-  color: 'var(--salvia-text)',
-  lineHeight: 1.5,
-};
+function SignupStyles() {
+  return (
+    <style>{`
+      .su-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        gap: 56px;
+        align-items: start;
+      }
+      .su-sticky { position: sticky; top: 84px; }
+      .su-card {
+        background: #fff;
+        border: 1px solid var(--g-line);
+        border-radius: 18px;
+        padding: 30px 30px 26px;
+        box-shadow: var(--g-shadow);
+      }
+      .su-form { display: flex; flex-direction: column; gap: 16px; }
+      .su-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+      .su-form input:focus, .su-form select:focus, .su-form textarea:focus {
+        border-color: var(--g-green);
+        box-shadow: 0 0 0 3px rgba(72, 205, 95, 0.18);
+      }
+      .su-note {
+        font-family: var(--g-font); font-size: 13px; line-height: 1.55;
+        color: var(--g-ink-soft); background: var(--g-green-soft);
+        border: 1px solid rgba(72, 205, 95, 0.3); border-radius: 12px;
+        padding: 10px 14px; margin: 0;
+      }
+      .su-note b { color: var(--g-ink); }
+      .su-details {
+        border: 1px dashed var(--g-line); border-radius: 12px; padding: 12px 14px;
+      }
+      .su-details summary {
+        cursor: pointer; font-family: var(--g-font); font-size: 13px;
+        font-weight: 600; color: var(--g-ink-soft);
+      }
+      .su-error {
+        font-family: var(--g-font); font-size: 13.5px; line-height: 1.5;
+        color: #B91C1C; background: #FEF2F2;
+        border: 1px solid rgba(185, 28, 28, 0.2); border-radius: 12px;
+        padding: 12px 14px;
+      }
+      @media (max-width: 960px) {
+        .su-grid { grid-template-columns: 1fr; gap: 40px; }
+        .su-sticky { position: static; }
+      }
+      @media (max-width: 560px) {
+        .su-card { padding: 22px 18px; }
+        .su-row { grid-template-columns: 1fr; }
+      }
+    `}</style>
+  );
+}

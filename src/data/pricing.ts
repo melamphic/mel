@@ -260,8 +260,8 @@ export const INDIA_TIERS: IndiaTier[] = [
   {
     key: 'base',
     name: 'Starter',
-    monthlyINR: 1000,
-    annualINR: 10000,
+    monthlyINR: 999,
+    annualINR: 9990,
     draftCap: 400,
     aiIncluded: true,
     features: [
@@ -275,8 +275,8 @@ export const INDIA_TIERS: IndiaTier[] = [
   {
     key: 'growth',
     name: 'Clinic',
-    monthlyINR: 3000,
-    annualINR: 30000,
+    monthlyINR: 2999,
+    annualINR: 29990,
     draftCap: 1500,
     aiIncluded: true,
     highlight: 'Most popular',
@@ -291,8 +291,8 @@ export const INDIA_TIERS: IndiaTier[] = [
   {
     key: 'unlimited',
     name: 'Group',
-    monthlyINR: 6000,
-    annualINR: 60000,
+    monthlyINR: 5999,
+    annualINR: 59990,
     draftCap: 3000,
     aiIncluded: true,
     features: [
@@ -342,9 +342,9 @@ export interface PoolTier {
 /// top pool in every market (handled as a Contact-Sales CTA, not a row here).
 export const MARKET_PRICING: Record<Market, PoolTier[]> = {
   IN: [
-    { key: 'base',        name: 'Starter', notesPerMonth: 400,  monthly: 1000 },
-    { key: 'growth',      name: 'Clinic',  notesPerMonth: 1500, monthly: 3000, highlight: 'Most popular' },
-    { key: 'clinic_plus', name: 'Group',   notesPerMonth: 3000, monthly: 6000 },
+    { key: 'base',        name: 'Starter', notesPerMonth: 400,  monthly: 999 },
+    { key: 'growth',      name: 'Clinic',  notesPerMonth: 1500, monthly: 2999, highlight: 'Most popular' },
+    { key: 'clinic_plus', name: 'Group',   notesPerMonth: 3000, monthly: 5999 },
   ],
   US: [
     { key: 'base',        name: 'Base',    notesPerMonth: 250,  monthly: 69 },

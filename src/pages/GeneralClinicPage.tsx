@@ -1,16 +1,15 @@
 import { Link } from 'react-router-dom';
-import { Header } from '../components/Header';
-import { Footer } from '../components/Footer';
-import { SEO } from '../components/SEO';
-import {
-  WorkflowSection,
-  StatsBar,
-  BeforeAfter,
-  HonestScope,
-  PricingTeaser,
-} from '../components/VerticalSections';
 
-const ACCENT = '#D97706';
+import { SEO } from '../components/SEO';
+import { GrassFooter } from '../components/grass/GrassFooter';
+import { GrassHeader } from '../components/grass/GrassHeader';
+import { Rv } from '../components/grass/Rv';
+
+// /general-practice — the vertical page for GPs and general clinics.
+// Story: NMC/NABH/ABDM-ready records from a voice note; prescribing log,
+// referral trail and consent handled. Grass design language.
+
+const REGULATORS = ['NMC', 'NABH', 'ABDM', 'CEA 2010', 'CGHS / PM-JAY', 'DPDP Act'];
 
 const FAQS = [
   {
@@ -31,14 +30,118 @@ const FAQS = [
   },
 ];
 
-const FEATURES = [
-  { title: 'Voice → clinical note', desc: 'Speak in any Indian language after the consult — Salvia maps it to a structured SOAP record: history, examination, assessment, plan. Timestamp on every entry.' },
-  { title: 'Prescribing and drug records', desc: 'Every prescription logged with drug, dose, route, indication. Controlled drug register maintained automatically on administration.' },
-  { title: 'Referral and follow-up trail', desc: "Referral sent, referral received, follow-up due — all tracked in the record. No 'lost in the system' defence at a complaints hearing." },
-  { title: 'Consent documentation', desc: 'Procedure-specific consent with risk discussion captured and signed. Treatment plan in writing before invasive procedures.' },
-  { title: 'Immutable audit trail', desc: 'Every edit, addendum, and version locked with timestamp. Produce a complete encounter record for any complaint or medico-legal request in seconds.' },
-  { title: 'NMC and ABDM ready', desc: 'Record structure satisfies NMC contemporaneous record-keeping norms and Clinical Establishments Act documentation, with ABDM-ready output (ABHA-linked, FHIR-structured).' },
+const RECORD_CARDS: { img: string; label: string; value: string }[] = [
+  { img: '/illustrations/tpl_cd_register.webp', label: 'Prescribing & drug register', value: 'Drug, dose, route, indication on every script; controlled register maintained on administration.' },
+  { img: '/illustrations/tpl_referral.webp', label: 'Referral & follow-up trail', value: 'Sent, received, follow-up due — one trail. No lost-in-the-system defence needed.' },
+  { img: '/illustrations/vet_estimate.webp', label: 'Consent documentation', value: 'Procedure-specific consent with risk discussion, signed before invasive procedures.' },
+  { img: '/illustrations/shield_cross.webp', label: 'Immutable audit trail', value: 'Every edit and addendum locked with a timestamp; the full encounter file in seconds.' },
 ];
+
+const BEFORE_FACTS: { label: string; value: string }[] = [
+  { label: 'End of day', value: 'Catch-up on records — some details remembered, some not' },
+  { label: 'Drug register', value: 'Kept by hand; the register drifts and the inspector finds a gap' },
+  { label: 'Referrals', value: 'Sent, then the patient drops off the radar' },
+  { label: 'Locums', value: 'Different note style, different completeness' },
+  { label: 'The inspector asks', value: 'A long search for one consent record' },
+];
+
+const AFTER_FACTS: { label: string; value: string }[] = [
+  { label: 'End of consult', value: 'Speak in any Indian language; a structured SOAP record before you leave the room' },
+  { label: 'Drug register', value: 'Every prescription logged; controlled register accurate and witnessed' },
+  { label: 'Referrals', value: 'Sent + receipt + follow-up captured in one defensible trail' },
+  { label: 'Locums', value: 'Every clinician signs with their own NMC registration' },
+  { label: 'The inspector asks', value: 'Filter and export in seconds' },
+];
+
+const SCOPE_DO: { title: string; body: string }[] = [
+  { title: 'Voice → clinical note', body: 'Audio in any Indian language becomes a structured SOAP record — history, examination, assessment, plan — with a timestamp on every entry.' },
+  { title: 'Prescribing + drug register', body: 'Every prescription logged with drug, dose, route and indication; the controlled register maintained automatically.' },
+  { title: 'Referral and follow-up trail', body: 'Referral sent, received and follow-up due, tracked in the record.' },
+  { title: 'Immutable audit trail', body: 'Aligned to NMC record-keeping norms, NABH documentation and the Clinical Establishments Act — with ABHA-ready, FHIR-structured output.' },
+  { title: 'Multi-doctor practice', body: 'Role-based access for nurses, reception and admin; each doctor signs and audits independently.' },
+];
+
+const SCOPE_DONT: string[] = [
+  'Replace your practice management software',
+  'Connect to ABDM / national health systems yet (ABHA-ready output, full integration coming)',
+  'Make you NABH-accredited or claim regulatory sign-off on your behalf',
+  'Auto-publish records without your review',
+  'Provide clinical decision-making — you stay in the loop',
+];
+
+// Drawn product UI: a GP consult record.
+const GPConsultPanel = () => (
+  <div className="g-ui g-ui--panel">
+    <div className="g-ui-head">
+      <div>
+        <div className="g-ui-head-title">Consult — Lakshmi Devi · 62 / F</div>
+        <div className="g-ui-head-sub">General Medicine · 6 Jul, 9:40 am · Dr. Varma</div>
+      </div>
+      <span className="g-ui-tag">Policy check passed</span>
+    </div>
+    <div style={{ padding: '10px 16px 14px' }}>
+      <div className="g-ui-field">
+        <span className="g-ui-f-label">History</span>
+        <span className="g-ui-f-value">T2DM follow-up · occasional giddiness</span>
+        <span className="g-ui-conf">AI · 97%</span>
+      </div>
+      <div className="g-ui-field">
+        <span className="g-ui-f-label">Vitals</span>
+        <span className="g-ui-f-value">BP 150/90 · RBS 178 · PR 84</span>
+        <span className="g-ui-conf">AI · 98%</span>
+      </div>
+      <div className="g-ui-evidence">"…BP ek sau pachaas by nabbe… sugar random ek sau athattar…"</div>
+      <div className="g-ui-field">
+        <span className="g-ui-f-label">Assessment</span>
+        <span className="g-ui-f-value">Suboptimal glycaemic control<span className="g-ui-badge-edited">EDITED</span></span>
+        <span className="g-ui-conf g-ui-conf--med"><span className="g-ui-glyph">≈</span>AI · 72%</span>
+      </div>
+      <div className="g-ui-field">
+        <span className="g-ui-f-label">Plan</span>
+        <span className="g-ui-f-value">Metformin revised 1 g BD · HbA1c ordered · review 2 wks</span>
+        <span className="g-ui-conf">AI · 98%</span>
+      </div>
+      <div className="g-ui-field">
+        <span className="g-ui-f-label">Rx logged</span>
+        <span className="g-ui-f-value">Metformin 1 g BD × 14 d — prescribing log</span>
+        <span className="g-ui-conf">AI · 99%</span>
+      </div>
+      <div className="g-ui-meta-row">
+        <span className="g-ui-audio-play"><i />Original audio · 0:47</span>
+        <span className="g-ui-tag g-ui-tag--ink">hi-IN + en</span>
+        <span className="g-ui-tag g-ui-tag--ink">Signed — Dr. Varma · NMC reg. no.</span>
+      </div>
+    </div>
+  </div>
+);
+
+// Drawn product UI: the prescribing log / controlled register.
+const PrescribingLogPanel = () => (
+  <div className="g-ui g-ui--panel">
+    <div className="g-ui-head">
+      <div>
+        <div className="g-ui-head-title">Prescribing log — controlled drug register</div>
+        <div className="g-ui-head-sub">Schedule X witness fields · running balance</div>
+      </div>
+      <span className="g-ui-tag">Balanced</span>
+    </div>
+    <table className="g-ui-table">
+      <thead>
+        <tr><th>Date</th><th>Patient</th><th>Drug &amp; dose</th><th>Indication</th><th>Doctor</th><th>Balance</th></tr>
+      </thead>
+      <tbody>
+        <tr><td className="g-dim">6 Jul</td><td>Suresh M</td><td>Alprazolam 0.25 mg × 10</td><td>Anxiety — short course</td><td className="g-dim">Dr. Varma</td><td>54</td></tr>
+        <tr><td className="g-dim">5 Jul</td><td>Fatima B</td><td>Tramadol 50 mg × 6</td><td>Post-op pain</td><td className="g-dim">Dr. Rao</td><td>112</td></tr>
+        <tr><td className="g-dim">5 Jul</td><td>Lakshmi Devi</td><td>Metformin 1 g × 28</td><td>T2DM</td><td className="g-dim">Dr. Varma</td><td className="g-dim">—</td></tr>
+        <tr><td className="g-dim">4 Jul</td><td>Joseph K</td><td>Codeine syrup 100 ml</td><td>Dry cough</td><td className="g-dim">Dr. Rao</td><td>9</td></tr>
+      </tbody>
+    </table>
+    <div className="g-ui-meta-row" style={{ padding: '12px 16px 14px' }}>
+      <span className="g-ui-tag g-ui-tag--ink">Witnessed entries for controlled drugs</span>
+      <span className="g-ui-tag g-ui-tag--ink">Every row traceable to a signed note</span>
+    </div>
+  </div>
+);
 
 export const GeneralClinicPage = () => {
   const faqSchema = JSON.stringify({
@@ -52,7 +155,7 @@ export const GeneralClinicPage = () => {
   });
 
   return (
-    <div style={{ backgroundColor: '#fff', minHeight: '100vh' }}>
+    <>
       <SEO
         title="General Practice Compliance Software"
         description="Salvia keeps clinic and general practice records audit-ready for NMC, NABH, and ABDM. Voice note in any Indian language after each consult — structured clinical records, prescribing logs, referral trails, and consent documentation."
@@ -64,174 +167,283 @@ export const GeneralClinicPage = () => {
         ]}
       />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: faqSchema }} />
-      <Header />
-      <main style={{ flex: 1, zIndex: 10 }}>
+      <GrassHeader />
+      <main style={{ flex: 1, zIndex: 10, background: '#fff' }}>
 
-      <section style={{ padding: '11rem 0 7rem', backgroundColor: 'var(--salvia-bg)' }}>
-        <div className="container" style={{ maxWidth: '960px', textAlign: 'center' }}>
-          <div style={{
-            display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
-            backgroundColor: 'rgba(245,158,11,0.07)', border: '1.5px solid rgba(245,158,11,0.2)',
-            borderRadius: 'var(--radius-md)', padding: '0.35rem 0.85rem', marginBottom: '2rem',
-          }}>
-            <span style={{ fontSize: 'var(--text-xs)', fontWeight: 800, color: 'var(--salvia-warning)', letterSpacing: '0.1em', textTransform: 'uppercase' }}>
-              General Practice &amp; Clinics
-            </span>
-          </div>
-          <h1 style={{
-            fontSize: 'var(--text-display)', fontWeight: 800,
-            letterSpacing: '-0.04em', lineHeight: 1,
-            color: 'var(--salvia-primary)', marginBottom: '1.75rem',
-          }}>
-            Clinical records that<br />hold up under scrutiny.
-          </h1>
-          <p style={{
-            fontSize: 'clamp(1rem, 2.5vw, 1.25rem)',
-            color: 'var(--salvia-text-muted)', lineHeight: 1.65,
-            maxWidth: '640px', margin: '0 auto 3rem',
-          }}>
-            NMC, NABH, ABDM. Speak in any Indian language after each consult — Salvia structures the clinical record, prescribing log, referral trail, and consent. Audit-ready before you leave the room.
-          </p>
-          <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-            <Link to="/start" style={{
-              display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
-              backgroundColor: 'var(--salvia-warning)', color: '#fff',
-              padding: '0.85rem 1.75rem', borderRadius: 'var(--radius-md)',
-              fontWeight: 700, fontSize: 'var(--text-base)', textDecoration: 'none',
-            }}>
-              Book a demo
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                <line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" />
-              </svg>
-            </Link>
-            <Link to="/pricing" style={{
-              display: 'inline-flex', alignItems: 'center',
-              backgroundColor: 'transparent', color: 'var(--salvia-primary)',
-              padding: '0.85rem 1.75rem', borderRadius: 'var(--radius-md)',
-              fontWeight: 700, fontSize: 'var(--text-base)', textDecoration: 'none',
-              border: '1.5px solid var(--border-strong)',
-            }}>
-              See pricing
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* Stats bar */}
-      <StatsBar accent={ACCENT} />
-
-      {/* Workflow */}
-      <WorkflowSection
-        accent={ACCENT}
-        verticalLabel="General practice"
-        audioStepCopy="After each consult, leave a brief voice note. 30 seconds to a few minutes — natural language, no template-bashing."
-      />
-
-      <section style={{ padding: 'var(--section-pad) 0', backgroundColor: '#fff' }}>
-        <div className="container" style={{ maxWidth: '1200px' }}>
-          <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
-            <div className="eyebrow" style={{ color: 'var(--salvia-warning)', marginBottom: '0.75rem' }}>What Salvia does</div>
-            <h2 style={{ fontSize: 'var(--text-3xl)', fontWeight: 800, color: 'var(--salvia-primary)', letterSpacing: '-0.03em' }}>
-              Every record a regulator expects to see.
-            </h2>
-          </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.5rem' }} className="mobile-stack">
-            {FEATURES.map((f, i) => (
-              <div key={i} style={{ padding: '2rem', borderRadius: 'var(--radius-lg)', border: '1px solid var(--border-subtle)', backgroundColor: '#FAFBFC' }}>
-                <h3 style={{ fontSize: 'var(--text-base)', fontWeight: 700, color: 'var(--salvia-primary)', marginBottom: '0.5rem' }}>{f.title}</h3>
-                <p style={{ fontSize: 'var(--text-sm)', color: 'var(--salvia-text-muted)', lineHeight: 1.6 }}>{f.desc}</p>
+        {/* Hero */}
+        <section className="g-section" style={{ padding: '148px 0 72px' }}>
+          <div className="g-container">
+            <div className="g-split">
+              <div>
+                <Rv as="h1" className="g-h1" style={{ fontSize: 'clamp(38px, 4.6vw, 66px)', marginBottom: 20 }}>
+                  Clinical records that <span className="g-hl">hold up under scrutiny.</span>
+                </Rv>
+                <Rv as="p" className="g-sub" delay={1}>
+                  NMC, NABH, ABDM. Speak in any Indian language after each consult — Salvia
+                  structures the <b>clinical record, prescribing log, referral trail and
+                  consent</b>. Audit-ready before you leave the room.
+                </Rv>
+                <Rv className="g-hero-ctas" delay={2} style={{ justifyContent: 'flex-start', marginTop: 30 }}>
+                  <Link className="g-btn g-btn--green" to="/start">
+                    Book a demo
+                  </Link>
+                  <Link className="g-btn g-btn--ghost" to="/pricing">
+                    See pricing
+                  </Link>
+                </Rv>
               </div>
-            ))}
+              <Rv className="g-split-art" delay={1}>
+                <img
+                  src="/illustrations/clinic_world.webp"
+                  alt="A miniature general practice clinic where a consult becomes documents sealed in a vault"
+                />
+              </Rv>
+            </div>
+            <Rv delay={3} style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap', marginTop: 52 }}>
+              <span className="g-small" style={{ fontWeight: 600 }}>Designed for</span>
+              {REGULATORS.map((r) => (
+                <span
+                  key={r}
+                  style={{
+                    fontFamily: 'var(--g-font)', fontSize: 12.5, fontWeight: 700,
+                    color: 'var(--g-ink-soft)', border: '1px solid var(--g-line)',
+                    borderRadius: 999, padding: '5px 13px',
+                  }}
+                >
+                  {r}
+                </span>
+              ))}
+            </Rv>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Before vs After */}
-      <BeforeAfter
-        accent={ACCENT}
-        beforeLines={[
-          `End-of-day catch-up on records. Some details remembered, some not.`,
-          `Prescribing log kept by hand. Controlled drug register drifts. Inspector finds a gap.`,
-          `Referral sent — patient drops off the radar. Lost-in-the-system defence at complaints.`,
-          `Locum sees the patient. Different note style, different completeness.`,
-          `Clinical Establishments inspector asks for evidence of consent for procedure X. Long search.`,
-        ]}
-        afterLines={[
-          `Speak in any Indian language after each consult. Structured SOAP record ready before you leave the room.`,
-          `Every prescription logged with drug, dose, route, indication. Controlled drug register accurate, witnessed.`,
-          `Referral sent + receipt + follow-up captured in one trail. Defensible.`,
-          `Every clinician signs with their own NMC registration. Records visually attributed.`,
-          `Clinical Establishments inspector asks. You filter and export in seconds.`,
-        ]}
-      />
-
-      {/* Honest scope */}
-      <HonestScope
-        accent={ACCENT}
-        doLines={[
-          `Audio in any Indian language → structured consultation record (history, exam, assessment, plan)`,
-          `Prescribing log + controlled drug register`,
-          `Referral and follow-up trail`,
-          `Immutable audit trail aligned to NMC, NABH documentation, Clinical Establishments Act`,
-          `Multi-doctor practice with role-based access for nurses, reception, admin`,
-        ]}
-        dontLines={[
-          `Replace your practice management software`,
-          `Bill insurers or process CGHS / PM-JAY claims directly`,
-          `Connect to ABDM / national health systems (ABHA-ready output, full integration coming)`,
-          `Make you NABH-accredited or claim regulatory sign-off on your behalf`,
-          `Provide clinical decision-making — you stay in the loop`,
-        ]}
-      />
-
-      {/* Pricing teaser */}
-      <PricingTeaser
-        accent={ACCENT}
-        vertical="general_clinic"
-        fromPriceCopy="General practice compliance, from ₹1,000/mo."
-      />
-
-      <section style={{ padding: 'var(--section-pad) 0', backgroundColor: 'var(--salvia-bg)', borderTop: '1px solid var(--border-subtle)' }}>
-        <div className="container" style={{ maxWidth: '760px' }}>
-          <div style={{ textAlign: 'center', marginBottom: '3.5rem' }}>
-            <div className="eyebrow" style={{ color: 'var(--salvia-warning)', marginBottom: '0.75rem' }}>Common questions</div>
-            <h2 style={{ fontSize: 'var(--text-2xl)', fontWeight: 800, color: 'var(--salvia-primary)', letterSpacing: '-0.03em' }}>What general practices ask us</h2>
-          </div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-            {FAQS.map((faq, i) => (
-              <div key={i} style={{ padding: '1.75rem 2rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-subtle)', backgroundColor: '#fff' }}>
-                <h3 style={{ fontSize: 'var(--text-base)', fontWeight: 700, color: 'var(--salvia-primary)', marginBottom: '0.65rem' }}>{faq.q}</h3>
-                <p style={{ fontSize: 'var(--text-sm)', color: 'var(--salvia-text-muted)', lineHeight: 1.65, margin: 0 }}>{faq.a}</p>
+        {/* Voice → clinical note */}
+        <section className="g-section">
+          <div className="g-container">
+            <div className="g-split">
+              <div>
+                <Rv as="h2" className="g-h2">
+                  Speak the consult. <span className="g-hl">Sign the record.</span>
+                </Rv>
+                <Rv as="p" className="g-sub" delay={1}>
+                  A 30-second voice note after each patient — Malayalam, Hindi, English or all
+                  three in one sentence — becomes a structured SOAP record: <b>history,
+                  examination, assessment, plan</b>, with every prescription logged. You review
+                  and sign; the original audio stays attached as evidence.
+                </Rv>
+                <Rv className="g-facts" delay={2}>
+                  <div className="g-fact"><span>Record norms</span><b>NMC contemporaneous record-keeping</b></div>
+                  <div className="g-fact"><span>Prescriptions</span><b>Drug, dose, route, indication — every script</b></div>
+                  <div className="g-fact"><span>Locums</span><b>Each doctor signs with their own NMC reg.</b></div>
+                  <div className="g-fact"><span>Output</span><b>ABHA-ready, FHIR-structured records</b></div>
+                </Rv>
               </div>
-            ))}
+              <Rv className="g-split-art" delay={1} style={{ display: 'block' }}>
+                <GPConsultPanel />
+              </Rv>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <section style={{ padding: 'var(--section-pad) 0', backgroundColor: '#fff', borderTop: '1px solid var(--border-subtle)', textAlign: 'center' }}>
-        <div className="container" style={{ maxWidth: '600px' }}>
-          <h2 style={{ fontSize: 'var(--text-3xl)', fontWeight: 800, color: 'var(--salvia-primary)', letterSpacing: '-0.03em', marginBottom: '1rem' }}>
-            Defensible records, every consult.
-          </h2>
-          <p style={{ color: 'var(--salvia-text-muted)', lineHeight: 1.65, marginBottom: '2.5rem' }}>
-            Book a 20-minute demo to see how Salvia works in a GP or general clinic workflow.
-          </p>
-          <Link to="/start" style={{
-            display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
-            backgroundColor: 'var(--salvia-warning)', color: '#fff',
-            padding: '0.9rem 2rem', borderRadius: 'var(--radius-md)',
-            fontWeight: 700, fontSize: 'var(--text-base)', textDecoration: 'none',
-          }}>
-            Book a demo
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-              <line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" />
-            </svg>
-          </Link>
-        </div>
-      </section>
+        {/* Prescribing log */}
+        <section className="g-section">
+          <div className="g-container">
+            <Rv as="h2" className="g-h2">
+              Prescribing that <span className="g-hl">defends itself.</span>
+            </Rv>
+            <Rv as="p" className="g-sub" delay={1}>
+              Every prescription carries its indication, and controlled drugs keep a witnessed
+              running register — filled from the consult itself, not reconstructed the night
+              before an inspection.
+            </Rv>
+            <Rv delay={2} style={{ marginTop: 44 }}>
+              <div className="g-showcase">
+                <PrescribingLogPanel />
+              </div>
+            </Rv>
+          </div>
+        </section>
+
+        {/* The records a regulator expects */}
+        <section className="g-section g-center">
+          <div className="g-container">
+            <Rv as="h2" className="g-h2">
+              Every record a regulator <span className="g-hl">expects to see.</span>
+            </Rv>
+            <Rv as="p" className="g-sub" delay={1}>
+              The four trails that decide complaints and inspections — all of them by-products
+              of everyday Salvia use.
+            </Rv>
+            <div className="g-tpl-grid" style={{ textAlign: 'left', marginTop: 52 }}>
+              {RECORD_CARDS.map((f, i) => (
+                <Rv className="g-card" key={f.label} delay={(Math.min(i + 1, 4)) as 1 | 2 | 3 | 4}>
+                  <img src={f.img} alt="" loading="lazy" />
+                  <h3 className="g-h3" style={{ fontSize: 17 }}>{f.label}</h3>
+                  <p>{f.value}</p>
+                </Rv>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Before / after */}
+        <section className="g-section">
+          <div className="g-container">
+            <Rv as="h2" className="g-h2">
+              What changes <span className="g-hl">on day one.</span>
+            </Rv>
+            <div className="g-split" style={{ alignItems: 'start', marginTop: 40 }}>
+              <Rv delay={1}>
+                <h3 className="g-h3">Without Salvia</h3>
+                <div className="g-facts" style={{ marginTop: 16 }}>
+                  {BEFORE_FACTS.map((f) => (
+                    <div className="g-fact" key={f.label}>
+                      <span>{f.label}</span>
+                      <b>{f.value}</b>
+                    </div>
+                  ))}
+                </div>
+              </Rv>
+              <Rv delay={2}>
+                <h3 className="g-h3">
+                  With <span className="g-hl">Salvia</span>
+                </h3>
+                <div className="g-facts" style={{ marginTop: 16 }}>
+                  {AFTER_FACTS.map((f) => (
+                    <div className="g-fact" key={f.label}>
+                      <span>{f.label}</span>
+                      <b>{f.value}</b>
+                    </div>
+                  ))}
+                </div>
+              </Rv>
+            </div>
+          </div>
+        </section>
+
+        {/* Honest scope */}
+        <section className="g-section">
+          <div className="g-container">
+            <Rv as="h2" className="g-h2">
+              What it does — <span className="g-hl">and what it doesn't.</span>
+            </Rv>
+            <Rv as="p" className="g-sub" delay={1}>
+              Salvia is the compliance and records layer that sits alongside your practice
+              software. It never replaces booking or billing, and it never signs for you.
+            </Rv>
+            <div className="g-split" style={{ alignItems: 'start', marginTop: 24 }}>
+              <div>
+                {SCOPE_DO.map((s, i) => (
+                  <Rv className="g-check" key={s.title} delay={(Math.min(i + 1, 4)) as 1 | 2 | 3 | 4}>
+                    <span className="g-ck">✓</span>
+                    <div>
+                      <h4>{s.title}</h4>
+                      <p>{s.body}</p>
+                    </div>
+                  </Rv>
+                ))}
+              </div>
+              <Rv delay={2}>
+                <h3 className="g-h3" style={{ marginTop: 22 }}>Salvia won't</h3>
+                <div className="g-facts" style={{ marginTop: 14 }}>
+                  {SCOPE_DONT.map((line) => (
+                    <div className="g-fact" key={line} style={{ justifyContent: 'flex-start' }}>
+                      <span style={{ flex: 'none' }}>✕</span>
+                      <b style={{ textAlign: 'left', fontWeight: 500, color: 'var(--g-ink-soft)' }}>{line}</b>
+                    </div>
+                  ))}
+                </div>
+              </Rv>
+            </div>
+          </div>
+        </section>
+
+        {/* Pricing teaser */}
+        <section className="g-section g-center">
+          <div className="g-container">
+            <Rv delay={1}>
+              <img
+                src="/illustrations/mic.webp"
+                alt=""
+                loading="lazy"
+                style={{ width: 120, height: 'auto', margin: '0 auto 18px', display: 'block' }}
+              />
+            </Rv>
+            <Rv as="h2" className="g-h2">
+              From ₹999 a month. <span className="g-hl">Everything included.</span>
+            </Rv>
+            <Rv as="p" className="g-sub" delay={1}>
+              The Starter plan covers 400 AI notes a month with the full compliance suite —
+              drug register, consent, incidents, branded PDF export — and <b>unlimited
+              staff</b>. You pay per note, never per doctor.
+            </Rv>
+            <Rv className="g-hero-ctas" delay={2} style={{ marginTop: 30 }}>
+              <Link className="g-btn g-btn--green" to="/start">
+                Start free
+              </Link>
+              <Link className="g-btn g-btn--ghost" to="/pricing">
+                Full pricing
+              </Link>
+            </Rv>
+            <Rv as="p" className="g-hero-note" delay={3}>
+              First 50 notes free · Annual billing = 2 months free · Prices exclude GST
+            </Rv>
+          </div>
+        </section>
+
+        {/* FAQ */}
+        <section className="g-section">
+          <div className="g-container">
+            <Rv as="h2" className="g-h2">
+              What general practices <span className="g-hl">ask us.</span>
+            </Rv>
+            <div style={{ maxWidth: 820, marginTop: 40 }}>
+              {FAQS.map((faq, i) => (
+                <Rv key={faq.q} delay={(Math.min(i + 1, 4)) as 1 | 2 | 3 | 4} style={{ borderTop: '1px solid var(--g-line-soft)', padding: '26px 0' }}>
+                  <h3 className="g-h3" style={{ marginBottom: 8 }}>{faq.q}</h3>
+                  <p style={{ fontFamily: 'var(--g-font)', fontSize: 15, color: 'var(--g-ink-soft)', lineHeight: 1.7, margin: 0 }}>
+                    {faq.a}
+                  </p>
+                </Rv>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Final CTA */}
+        <section className="g-final">
+          <div className="g-container">
+            <div className="g-final-grid">
+              <div>
+                <Rv as="h2" className="g-h2">
+                  Defensible records, <span className="g-hl">every consult.</span>
+                </Rv>
+                <Rv as="p" className="g-sub" delay={1} style={{ marginTop: 14 }}>
+                  Book a 20-minute demo to see how Salvia works in a GP or general clinic
+                  workflow — no slides, no pitch.
+                </Rv>
+                <Rv className="g-hero-ctas" delay={2} style={{ marginTop: 30 }}>
+                  <Link className="g-btn g-btn--green" to="/start">
+                    Book a demo
+                  </Link>
+                  <Link className="g-btn g-btn--ghost" to="/start">
+                    Start free
+                  </Link>
+                </Rv>
+              </div>
+              <Rv className="g-final-art" delay={1}>
+                <img
+                  src="/illustrations/ill_speak.webp"
+                  alt="A doctor speaking with a microphone capturing the consult"
+                  loading="lazy"
+                />
+              </Rv>
+            </div>
+          </div>
+        </section>
 
       </main>
-      <Footer />
-    </div>
+      <GrassFooter />
+    </>
   );
 };

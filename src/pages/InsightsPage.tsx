@@ -1,17 +1,21 @@
 import React, { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
-import { Header } from '../components/Header';
-import { Footer } from '../components/Footer';
-import { VISIBLE_BLOG_CONTENT } from '../data/blogContent';
+
 import { SEO } from '../components/SEO';
+import { GrassFooter } from '../components/grass/GrassFooter';
+import { GrassHeader } from '../components/grass/GrassHeader';
+import { Rv } from '../components/grass/Rv';
+import { VISIBLE_BLOG_CONTENT } from '../data/blogContent';
+import { blogArt } from '../lib/blogArt';
 
 type BlogDomain = 'GENERAL' | 'VETERINARY' | 'DENTAL';
 
-const DOMAIN_META: Record<BlogDomain, { label: string; color: string; bg: string }> = {
-  GENERAL: { label: 'Clinic', color: 'var(--salvia-accent)', bg: 'rgba(255,78,0,0.08)' },
-  VETERINARY: { label: 'Vet', color: 'var(--accent-vet)', bg: 'rgba(14,165,233,0.08)' },
-  DENTAL: { label: 'Dental', color: 'var(--accent-dental)', bg: 'rgba(5,150,105,0.08)' },
+const DOMAIN_META: Record<BlogDomain, { label: string; cls: string }> = {
+  GENERAL: { label: 'Clinic', cls: 'g-tpl-vert' },
+  VETERINARY: { label: 'Vet', cls: 'g-tpl-vert g-tpl-vert--vet' },
+  DENTAL: { label: 'Dental', cls: 'g-tpl-vert g-tpl-vert--dental' },
 };
+
 
 export const InsightsPage: React.FC = () => {
   const [activeDomain, setActiveDomain] = useState<BlogDomain | 'ALL'>('ALL');
@@ -46,347 +50,155 @@ export const InsightsPage: React.FC = () => {
   ];
 
   return (
-    <div style={{ backgroundColor: '#fff', minHeight: '100vh' }}>
+    <>
       <SEO
         title="From the compliance desk"
         description="Clinical documentation, compliance law, and audit readiness — written for vets, dentists, and clinicians who've been burned by bad records."
         path="/blog"
-        keywords={['clinical documentation', 'veterinary compliance', 'dental records', 'CQC audit', 'CMA compliance']}
+        keywords={['clinical documentation', 'veterinary compliance', 'dental records', 'NABH audit', 'medical record keeping India']}
       />
-      <Header />
+      <GrassHeader />
+      <main style={{ flex: 1, zIndex: 10, background: '#fff' }}>
+        <section className="g-section" style={{ padding: '148px 0 104px' }}>
+          <div className="g-container">
 
-      <main style={{ paddingTop: '9rem', paddingBottom: '6rem' }}>
-        <div className="container" style={{ maxWidth: '1200px' }}>
+            {/* Header */}
+            <Rv as="h1" className="g-h1" style={{ fontSize: 'clamp(36px, 4.4vw, 62px)', maxWidth: '20ch' }}>
+              The questions clinicians actually ask. <span className="g-hl">Straight answers.</span>
+            </Rv>
+            <Rv as="p" className="g-sub" delay={1} style={{ marginTop: 18 }}>
+              No corporate fluff, no SEO filler. We trawl forums, boards and subreddits for the
+              documentation questions people actually have — then write the answers we wish had
+              existed when we were figuring it out ourselves.
+            </Rv>
 
-          {/* Header */}
-          <div style={{ marginBottom: '3rem' }}>
-            <span style={{
-              fontSize: 'var(--text-2xs)', fontWeight: 700,
-              letterSpacing: '0.14em', textTransform: 'uppercase',
-              color: 'var(--salvia-accent)',
-              display: 'block', marginBottom: '1rem',
-            }}>
-              Field notes
-            </span>
-            <h1 style={{
-              fontSize: 'clamp(2.2rem, 5vw, 3.8rem)', fontWeight: 800,
-              color: 'var(--salvia-primary)',
-              letterSpacing: '-0.035em', lineHeight: 1.08,
-              margin: 0,
-              maxWidth: '880px',
-            }}>
-              The real questions clinicians, vets, and dentists ask about
-              documentation — with straight answers.
-            </h1>
-            <p style={{
-              fontSize: 'var(--text-md)', color: 'var(--salvia-text-muted)',
-              lineHeight: 1.65, marginTop: '1.25rem', maxWidth: '680px',
-            }}>
-              No corporate fluff. No SEO filler. We trawl forums, boards, and subreddits for the
-              questions people actually have — then write the answers we wish had existed when we
-              were trying to figure it out ourselves.
-            </p>
-          </div>
-
-          {/* Search + Tabs */}
-          <div className="blog-controls" style={{
-            display: 'flex', alignItems: 'center', gap: '1rem',
-            marginBottom: '3.5rem',
-            flexWrap: 'wrap',
-            paddingBottom: '1.5rem',
-            borderBottom: '1px solid #F1F5F9',
-          }}>
-            <div style={{
-              display: 'flex', alignItems: 'center', gap: '0.6rem',
-              backgroundColor: '#F8FAFC',
-              border: '1px solid #EEF2F6',
-              borderRadius: 'var(--radius-md)',
-              padding: '0.65rem 0.9rem',
-              flex: '1 1 280px',
-              minWidth: 0,
-            }}>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#94A3B8" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
-                <circle cx="11" cy="11" r="8" />
-                <line x1="21" y1="21" x2="16.65" y2="16.65" />
-              </svg>
-              <input
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search questions, keywords, situations..."
+            {/* Search + tabs */}
+            <Rv delay={2} style={{ display: 'flex', alignItems: 'center', gap: 14, flexWrap: 'wrap', margin: '40px 0 8px' }}>
+              <div
                 style={{
-                  flex: 1, minWidth: 0,
-                  border: 'none', outline: 'none',
-                  background: 'transparent',
-                  fontSize: 'var(--text-sm)',
-                  color: 'var(--salvia-primary)',
-                  fontWeight: 500,
+                  display: 'flex', alignItems: 'center', gap: 9,
+                  border: '1px solid var(--g-line)', borderRadius: 12,
+                  padding: '11px 14px', flex: '1 1 280px', minWidth: 0, background: '#fff',
                 }}
-              />
-            </div>
-            <div className="blog-domain-tabs" style={{
-              display: 'flex', gap: '0.4rem',
-              overflowX: 'auto',
-              maxWidth: '100%',
-              flexShrink: 0,
-            }}>
-              {domainTabs.map(d => (
-                <button
-                  key={d.value}
-                  onClick={() => setActiveDomain(d.value)}
+              >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--g-ink-faint)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
+                  <circle cx="11" cy="11" r="8" />
+                  <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                </svg>
+                <input
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  placeholder="Search questions, keywords, situations…"
                   style={{
-                    padding: '0.6rem 1.1rem',
-                    borderRadius: 'var(--radius-sm)',
-                    fontSize: 'var(--text-xs)',
-                    fontWeight: 700,
-                    border: '1px solid',
-                    borderColor: activeDomain === d.value ? 'var(--salvia-primary)' : '#E2E8F0',
-                    cursor: 'pointer',
-                    whiteSpace: 'nowrap',
-                    transition: 'all 0.2s ease',
-                    backgroundColor: activeDomain === d.value ? 'var(--salvia-primary)' : '#fff',
-                    color: activeDomain === d.value ? '#fff' : 'var(--salvia-text-muted)',
-                    display: 'flex', alignItems: 'center', gap: '0.4rem',
+                    flex: 1, minWidth: 0, border: 'none', outline: 'none', background: 'transparent',
+                    fontFamily: 'var(--g-font)', fontSize: 14.5, fontWeight: 500, color: 'var(--g-ink)',
+                  }}
+                />
+              </div>
+              <div className="g-tabs" style={{ margin: 0, borderBottom: 'none', flexShrink: 0 }}>
+                {domainTabs.map(d => (
+                  <button
+                    key={d.value}
+                    onClick={() => setActiveDomain(d.value)}
+                    className={`g-tab${activeDomain === d.value ? ' g-tab--on' : ''}`}
+                    style={{ padding: '10px 12px' }}
+                  >
+                    {d.label} <span style={{ color: 'var(--g-ink-faint)', fontWeight: 600 }}>{d.count}</span>
+                  </button>
+                ))}
+              </div>
+            </Rv>
+
+            {/* Featured */}
+            {featured && (
+              <Rv delay={3}>
+                <Link
+                  to={`/blog/${featured.id}`}
+                  className="g-tpl"
+                  style={{
+                    display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+                    gap: 36, alignItems: 'center',
+                    textDecoration: 'none', padding: '38px 40px', marginBottom: 28,
                   }}
                 >
-                  {d.label}
-                  <span style={{
-                    fontSize: 'var(--text-2xs)', fontWeight: 700,
-                    opacity: 0.7,
-                    padding: '0.1rem 0.35rem',
-                    borderRadius: 'var(--radius-sm)',
-                    backgroundColor: activeDomain === d.value ? 'rgba(255,255,255,0.15)' : '#F1F5F9',
-                  }}>
-                    {d.count}
-                  </span>
-                </button>
-              ))}
-            </div>
-          </div>
+                  <div>
+                    <div className="g-tpl-meta" style={{ margin: '0 0 16px' }}>
+                      <span className={DOMAIN_META[featured.domain].cls}>{DOMAIN_META[featured.domain].label}</span>
+                      <span>Featured · {featured.tag}</span>
+                    </div>
+                    <h2 className="g-h2" style={{ fontSize: 'clamp(24px, 2.8vw, 38px)', maxWidth: '28ch' }}>
+                      {featured.q}
+                    </h2>
+                    <p className="g-sub">
+                      {featured.excerpt}
+                    </p>
+                    <p className="g-small" style={{ marginTop: 18 }}>
+                      {featured.author} · {featured.date} · {featured.readTime} ·{' '}
+                      <span style={{ color: 'var(--g-green)', fontWeight: 700 }}>Read the answer →</span>
+                    </p>
+                  </div>
+                  <div style={{ display: 'flex', justifyContent: 'center' }}>
+                    <img
+                      src={blogArt(featured.id, featured.domain)}
+                      alt=""
+                      loading="lazy"
+                      style={{ maxWidth: '90%', maxHeight: 280, objectFit: 'contain' }}
+                    />
+                  </div>
+                </Link>
+              </Rv>
+            )}
 
-          {/* Featured */}
-          {featured && (
-            <Link to={`/blog/${featured.id}`} className="blog-featured-link" style={{ textDecoration: 'none', display: 'block', marginBottom: '4rem' }}>
-              <article className="blog-featured" style={{
-                display: 'grid', gridTemplateColumns: '1.3fr 1fr',
-                gap: '0',
-                border: '1px solid #EEF2F6',
-                borderRadius: 'var(--radius-lg)',
-                overflow: 'hidden',
-                backgroundColor: '#fff',
-                transition: 'all 0.3s ease',
-              }}>
-                <div style={{ padding: '3rem 3rem 2.5rem' }}>
-                  <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '1.5rem', flexWrap: 'wrap' }}>
-                    <span style={{
-                      display: 'inline-flex', alignItems: 'center', gap: '0.4rem',
-                      fontSize: 'var(--text-2xs)', fontWeight: 800,
-                      color: DOMAIN_META[featured.domain].color,
-                      backgroundColor: DOMAIN_META[featured.domain].bg,
-                      padding: '0.32rem 0.65rem',
-                      borderRadius: 'var(--radius-sm)',
-                      letterSpacing: '0.08em',
-                      textTransform: 'uppercase',
-                    }}>
-                      {DOMAIN_META[featured.domain].label}
-                    </span>
-                    <span style={{
-                      fontSize: 'var(--text-2xs)', fontWeight: 700,
-                      color: 'var(--salvia-primary)',
-                      backgroundColor: '#FFF7F2',
-                      border: '1px solid rgba(255,78,0,0.2)',
-                      padding: '0.32rem 0.65rem',
-                      borderRadius: 'var(--radius-sm)',
-                      letterSpacing: '0.08em',
-                      textTransform: 'uppercase',
-                    }}>
-                      Featured · {featured.tag}
-                    </span>
-                  </div>
-                  <h2 style={{
-                    fontSize: 'clamp(1.5rem, 3vw, 2.1rem)', fontWeight: 800,
-                    color: 'var(--salvia-primary)',
-                    letterSpacing: '-0.025em', lineHeight: 1.2,
-                    margin: '0 0 1.25rem',
-                  }}>
-                    {featured.q}
-                  </h2>
-                  <p style={{
-                    fontSize: 'var(--text-base)',
-                    color: 'var(--salvia-text-muted)',
-                    lineHeight: 1.6,
-                    margin: '0 0 2rem',
-                  }}>
-                    {featured.excerpt}
-                  </p>
-                  <div style={{
-                    display: 'flex', alignItems: 'center', gap: '0.75rem',
-                    fontSize: 'var(--text-xs)', color: 'var(--salvia-text-muted)',
-                  }}>
-                    <span style={{ fontWeight: 600, color: 'var(--salvia-primary)' }}>{featured.author}</span>
-                    <span style={{ opacity: 0.3 }}>·</span>
-                    <span>{featured.date}</span>
-                    <span style={{ opacity: 0.3 }}>·</span>
-                    <span>{featured.readTime}</span>
-                  </div>
-                </div>
-                <div style={{
-                  backgroundColor: '#F8FAFC',
-                  padding: '3rem',
-                  display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  position: 'relative',
-                }}>
-                  {/* abstract question-mark-quote visual */}
-                  <div style={{
-                    fontSize: 'clamp(5rem, 12vw, 10rem)',
-                    fontWeight: 800,
-                    color: 'var(--salvia-accent)',
-                    opacity: 0.12,
-                    lineHeight: 0.8,
-                    letterSpacing: '-0.06em',
-                    userSelect: 'none',
-                  }}>
-                    ?
-                  </div>
-                  <div style={{
-                    position: 'absolute', bottom: '1.5rem', right: '1.5rem',
-                    display: 'flex', alignItems: 'center', gap: '0.4rem',
-                    fontSize: 'var(--text-xs)', fontWeight: 700,
-                    color: 'var(--salvia-accent)',
-                    backgroundColor: '#fff',
-                    padding: '0.5rem 0.85rem',
-                    borderRadius: 'var(--radius-sm)',
-                    boxShadow: '0 2px 8px rgba(15,23,42,0.05)',
-                    border: '1px solid rgba(0,0,0,0.04)',
-                  }}>
-                    Read the answer
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
-                      <line x1="5" y1="12" x2="19" y2="12" />
-                      <polyline points="12 5 19 12 12 19" />
-                    </svg>
-                  </div>
-                </div>
-              </article>
-            </Link>
-          )}
-
-          {/* Rest of the grid */}
-          {rest.length > 0 && (
-            <div className="blog-grid" style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fill, minmax(340px, 1fr))',
-              gap: '1.5rem',
-            }}>
-              {rest.map((art) => {
-                const meta = DOMAIN_META[art.domain];
-                return (
-                  <Link to={`/blog/${art.id}`} key={art.id} style={{ textDecoration: 'none' }} className="blog-card-link">
-                    <article className="blog-card" style={{
-                      backgroundColor: '#fff',
-                      borderRadius: 'var(--radius-md)',
-                      border: '1px solid #EEF2F6',
-                      height: '100%',
-                      display: 'flex', flexDirection: 'column',
-                      padding: '1.75rem 1.75rem 1.5rem',
-                      transition: 'all 0.25s ease',
-                    }}>
-                      <div style={{ display: 'flex', gap: '0.4rem', marginBottom: '1rem', flexWrap: 'wrap' }}>
-                        <span style={{
-                          fontSize: 'var(--text-2xs)', fontWeight: 800,
-                          color: meta.color,
-                          backgroundColor: meta.bg,
-                          padding: '0.25rem 0.55rem',
-                          borderRadius: 'var(--radius-sm)',
-                          letterSpacing: '0.08em',
-                          textTransform: 'uppercase',
-                        }}>
-                          {meta.label}
-                        </span>
-                        <span style={{
-                          fontSize: 'var(--text-2xs)', fontWeight: 700,
-                          color: 'var(--salvia-text-muted)',
-                          letterSpacing: '0.04em',
-                          textTransform: 'uppercase',
-                          padding: '0.25rem 0',
-                        }}>
-                          · {art.tag}
-                        </span>
+            {/* Grid */}
+            {rest.length > 0 && (
+              <div className="g-grid" style={{ marginTop: 0 }}>
+                {rest.map((art, i) => (
+                  <Rv key={art.id} delay={(Math.min((i % 3) + 1, 4)) as 1 | 2 | 3 | 4}>
+                    <Link to={`/blog/${art.id}`} className="g-tpl" style={{ display: 'flex', flexDirection: 'column', textDecoration: 'none', height: '100%', padding: '22px 22px 18px' }}>
+                      <div style={{ height: 140, display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 16, borderBottom: '1px solid var(--g-line-soft)', paddingBottom: 14 }}>
+                        <img
+                          src={blogArt(art.id, art.domain)}
+                          alt=""
+                          loading="lazy"
+                          style={{ maxHeight: 118, maxWidth: '80%', objectFit: 'contain' }}
+                        />
                       </div>
-
-                      <h3 style={{
-                        fontSize: 'var(--text-md)', fontWeight: 700,
-                        color: 'var(--salvia-primary)',
-                        lineHeight: 1.35, letterSpacing: '-0.015em',
-                        margin: '0 0 0.85rem',
-                      }}>
+                      <div className="g-tpl-meta" style={{ margin: '0 0 12px' }}>
+                        <span className={DOMAIN_META[art.domain].cls}>{DOMAIN_META[art.domain].label}</span>
+                        <span>{art.tag}</span>
+                      </div>
+                      <h3 style={{ fontFamily: 'var(--g-font)', fontSize: 16.5, fontWeight: 700, letterSpacing: '-0.01em', lineHeight: 1.35, color: 'var(--g-ink)', margin: '0 0 10px' }}>
                         {art.q}
                       </h3>
-
-                      <p style={{
-                        fontSize: 'var(--text-sm)',
-                        color: 'var(--salvia-text-muted)',
-                        lineHeight: 1.55,
-                        margin: '0 0 1.25rem',
-                        flex: 1,
-                        display: '-webkit-box',
-                        WebkitLineClamp: 3,
-                        WebkitBoxOrient: 'vertical',
-                        overflow: 'hidden',
-                      }}>
+                      <p
+                        style={{
+                          fontFamily: 'var(--g-font)', fontSize: 13.5, color: 'var(--g-ink-soft)', lineHeight: 1.55,
+                          margin: '0 0 16px', flex: 1,
+                          display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical', overflow: 'hidden',
+                        }}
+                      >
                         {art.excerpt}
                       </p>
-
-                      <div style={{
-                        marginTop: 'auto',
-                        paddingTop: '1rem',
-                        borderTop: '1px solid #F1F5F9',
-                        display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-                        fontSize: 'var(--text-2xs)',
-                        color: 'var(--salvia-text-muted)',
-                      }}>
+                      <p className="g-small" style={{ marginTop: 'auto', paddingTop: 12, borderTop: '1px solid var(--g-line-soft)', display: 'flex', justifyContent: 'space-between' }}>
                         <span>{art.readTime}</span>
                         <span style={{ fontWeight: 600 }}>{art.date}</span>
-                      </div>
-                    </article>
-                  </Link>
-                );
-              })}
-            </div>
-          )}
+                      </p>
+                    </Link>
+                  </Rv>
+                ))}
+              </div>
+            )}
 
-          {filteredArticles.length === 0 && (
-            <div style={{ padding: '6rem 0', textAlign: 'center' }}>
-              <p style={{ color: 'var(--salvia-text-muted)', fontSize: 'var(--text-md)' }}>
+            {filteredArticles.length === 0 && (
+              <p className="g-sub" style={{ padding: '72px 0', textAlign: 'center', margin: '0 auto' }}>
                 No posts match that — try a different search or domain.
               </p>
-            </div>
-          )}
-        </div>
+            )}
+
+          </div>
+        </section>
       </main>
-
-      <Footer />
-
-      <style>{`
-        .blog-card-link:hover .blog-card {
-          border-color: rgba(15, 23, 42, 0.14);
-          transform: translateY(-3px);
-          box-shadow: 0 12px 32px rgba(15,23,42,0.06);
-        }
-        .blog-featured-link:hover .blog-featured {
-          border-color: rgba(15, 23, 42, 0.14);
-          box-shadow: 0 16px 48px rgba(15,23,42,0.06);
-        }
-        @media (max-width: 768px) {
-          .blog-featured {
-            grid-template-columns: 1fr !important;
-          }
-          .blog-featured > div:first-child {
-            padding: 2rem 1.75rem 1.5rem !important;
-          }
-          .blog-featured > div:last-child {
-            display: none !important;
-          }
-        }
-      `}</style>
-    </div>
+      <GrassFooter />
+    </>
   );
 };

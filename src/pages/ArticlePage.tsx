@@ -1,8 +1,9 @@
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { Header } from '../components/Header';
-import { Footer } from '../components/Footer';
+import { GrassFooter } from '../components/grass/GrassFooter';
+import { GrassHeader } from '../components/grass/GrassHeader';
 import { VISIBLE_BLOG_CONTENT } from '../data/blogContent';
+import { blogArt } from '../lib/blogArt';
 import { SEO } from '../components/SEO';
 import { INDIA_ONLY } from '../config';
 
@@ -19,17 +20,17 @@ export const ArticlePage: React.FC = () => {
   if (!article) {
     return (
       <div style={{ backgroundColor: '#fff', minHeight: '100vh' }}>
-        <Header />
+        <GrassHeader />
         <div style={{ padding: '12rem 2rem 8rem', textAlign: 'center' }}>
           <h1 style={{ color: 'var(--salvia-primary)', fontSize: '2rem' }}>Post not found</h1>
           <p style={{ color: 'var(--salvia-text-muted)', marginBottom: '2rem' }}>
             We couldn't find the post you're looking for.
           </p>
-          <Link to="/blog" className="pill-button" style={{ textDecoration: 'none' }}>
+          <Link to="/blog" className="g-btn g-btn--green" style={{ textDecoration: 'none' }}>
             Back to all posts
           </Link>
         </div>
-        <Footer />
+        <GrassFooter />
       </div>
     );
   }
@@ -52,7 +53,7 @@ export const ArticlePage: React.FC = () => {
         type="article"
         article={{ author: article.author, date: article.date }}
       />
-      <Header />
+      <GrassHeader />
 
       <main style={{ paddingTop: '8rem', paddingBottom: '6rem' }}>
         <article className="container" style={{ maxWidth: '760px' }}>
@@ -125,6 +126,19 @@ export const ArticlePage: React.FC = () => {
             <span>{article.date}</span>
             <span style={{ opacity: 0.3 }}>·</span>
             <span>{article.readTime}</span>
+          </div>
+
+          {/* Header illustration */}
+          <div style={{
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            padding: '10px 0 34px', marginTop: '-1rem',
+          }}>
+            <img
+              src={blogArt(id as string, article.domain)}
+              alt=""
+              loading="lazy"
+              style={{ maxWidth: 'min(480px, 88%)', maxHeight: 320, objectFit: 'contain' }}
+            />
           </div>
 
           {/* Article body */}
@@ -313,7 +327,7 @@ export const ArticlePage: React.FC = () => {
         )}
       </main>
 
-      <Footer />
+      <GrassFooter />
 
       <style>{`
         .article-body h3 {
