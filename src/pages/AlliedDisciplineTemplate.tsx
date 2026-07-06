@@ -18,6 +18,16 @@ const POST_ICONS = [
   '/illustrations/tpl_referral.webp',
 ];
 
+// Each discipline gets its own hero diorama.
+const HERO_IMG: Record<AlliedDiscipline['key'], string> = {
+  physio: '/illustrations/allied_world.webp',
+  osteo: '/illustrations/osteo_world.webp',
+  chiro: '/illustrations/chiro_world.webp',
+  ot: '/illustrations/ot_world.webp',
+  podiatry: '/illustrations/podiatry_world.webp',
+  speech: '/illustrations/speech_world.webp',
+};
+
 const BEFORE_FACTS: { label: string; value: string }[] = [
   { label: 'End of day', value: 'Typing into a generic SOAP template — time that belonged to the next patient' },
   { label: 'Outcome measures', value: 'On paper, sometimes — never compared episode-over-episode' },
@@ -116,8 +126,8 @@ function DisciplinePage({ discipline }: DisciplinePageProps) {
               </div>
               <Rv className="g-split-art" delay={1}>
                 <img
-                  src="/illustrations/allied_world.webp"
-                  alt="A miniature rehabilitation studio where a session becomes documents sealed in a vault"
+                  src={HERO_IMG[discipline.key]}
+                  alt={`A miniature ${name.toLowerCase()} clinic where a session becomes documents sealed in a vault`}
                 />
               </Rv>
             </div>
