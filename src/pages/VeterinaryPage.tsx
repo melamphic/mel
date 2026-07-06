@@ -35,11 +35,11 @@ const FAQS = [
   },
 ];
 
-const DAILY_RECORDS: { label: string; value: string }[] = [
-  { label: 'Itemised billing', value: 'Maps line-by-line to the clinical record' },
-  { label: 'Written estimates', value: 'Signed before treatment, locked to the record' },
-  { label: 'Schedule H1 drug logs', value: 'Running balance always accurate' },
-  { label: 'Complaint trail', value: 'Full encounter record, produced in seconds' },
+const DAILY_RECORDS: { img: string; label: string; value: string }[] = [
+  { img: '/illustrations/vet_billing.webp', label: 'Itemised billing', value: 'Every line maps to the clinical record behind it.' },
+  { img: '/illustrations/vet_estimate.webp', label: 'Written estimates', value: 'Signed before treatment, locked to the record.' },
+  { img: '/illustrations/tpl_cd_register.webp', label: 'Schedule H1 drug logs', value: 'Running balance always accurate, witness fields filled.' },
+  { img: '/illustrations/vet_shield_paw.webp', label: 'Complaint trail', value: 'The full encounter record, produced in seconds.' },
 ];
 
 const BEFORE_FACTS: { label: string; value: string }[] = [
@@ -75,10 +75,10 @@ const SCOPE_DONT: string[] = [
 ];
 
 const RECENT_POSTS = [
-  { slug: 'cma-vet-deadline', title: 'Daily records that hold up: what your state veterinary council actually checks', tag: 'VCI Compliance' },
-  { slug: 'rcvs-record-inspection', title: 'What assessors actually check in your clinical records under the IVC Act 1984', tag: 'VCI Standards' },
-  { slug: 'vcnz-records-standard', title: 'Schedule H1 controlled drugs — keeping a register your inspector can trust', tag: 'Schedule H1' },
-  { slug: 'au-vet-board-records', title: 'Multilingual case notes: capturing consults in any Indian language', tag: 'Documentation' },
+  { slug: 'cma-vet-deadline', title: 'Daily records that hold up: what your state veterinary council actually checks', tag: 'VCI Compliance', ic: '/illustrations/tpl_soap.webp' },
+  { slug: 'rcvs-record-inspection', title: 'What assessors actually check in your clinical records under the IVC Act 1984', tag: 'VCI Standards', ic: '/illustrations/tpl_work_cert.webp' },
+  { slug: 'vcnz-records-standard', title: 'Schedule H1 controlled drugs — keeping a register your inspector can trust', tag: 'Schedule H1', ic: '/illustrations/tpl_cd_register.webp' },
+  { slug: 'au-vet-board-records', title: 'Multilingual case notes: capturing consults in any Indian language', tag: 'Documentation', ic: '/illustrations/tpl_referral.webp' },
 ];
 
 // Drawn product UI: a verified vet consult record (screenshot fidelity).
@@ -253,7 +253,16 @@ export const VeterinaryPage = () => {
                 </Rv>
               </div>
               <Rv className="g-split-art" delay={1} style={{ display: 'block' }}>
-                <VetConsultPanel />
+                <div className="g-panel-scene">
+                  <VetConsultPanel />
+                  <img
+                    className="g-scene-img g-scene-img--br"
+                    src="/illustrations/vet_mic_dog.webp"
+                    alt=""
+                    loading="lazy"
+                    style={{ bottom: -46, right: -34, width: 150 }}
+                  />
+                </div>
               </Rv>
             </div>
           </div>
@@ -272,8 +281,17 @@ export const VeterinaryPage = () => {
               record</b>, not a separate chore.
             </Rv>
             <Rv delay={2} style={{ marginTop: 44 }}>
-              <div className="g-showcase">
-                <VetDrugRegisterPanel />
+              <div className="g-panel-scene">
+                <div className="g-showcase">
+                  <VetDrugRegisterPanel />
+                </div>
+                <img
+                  className="g-scene-img g-scene-img--bl"
+                  src="/illustrations/tpl_vaccination.webp"
+                  alt=""
+                  loading="lazy"
+                  style={{ bottom: -36, left: -28, width: 118 }}
+                />
               </div>
             </Rv>
           </div>
@@ -296,14 +314,15 @@ export const VeterinaryPage = () => {
               <div className="g-c">days a year your records stay assessment-ready.</div>
               <div className="g-s">No pre-inspection scramble — the file already exists</div>
             </Rv>
-            <Rv className="g-facts" delay={2} style={{ maxWidth: 620, margin: '48px auto 0', textAlign: 'left' }}>
-              {DAILY_RECORDS.map((f) => (
-                <div className="g-fact" key={f.label}>
-                  <span>{f.label}</span>
-                  <b>{f.value}</b>
-                </div>
+            <div className="g-tpl-grid" style={{ textAlign: 'left', marginTop: 52 }}>
+              {DAILY_RECORDS.map((f, i) => (
+                <Rv className="g-card" key={f.label} delay={(Math.min(i + 1, 4)) as 1 | 2 | 3 | 4}>
+                  <img src={f.img} alt="" loading="lazy" />
+                  <h3 className="g-h3" style={{ fontSize: 17 }}>{f.label}</h3>
+                  <p>{f.value}</p>
+                </Rv>
               ))}
-            </Rv>
+            </div>
             <Rv as="p" className="g-small" delay={3} style={{ marginTop: 26 }}>
               <Link to="/blog/vet-audit-prep" style={{ color: 'var(--g-green)', fontWeight: 600 }}>
                 Read the full audit-prep breakdown →
@@ -438,7 +457,8 @@ export const VeterinaryPage = () => {
               {RECENT_POSTS.map((p, i) => (
                 <Rv key={p.slug} delay={(Math.min(i + 1, 4)) as 1 | 2 | 3 | 4}>
                   <Link to={`/blog/${p.slug}`} className="g-tpl" style={{ display: 'block', textDecoration: 'none', height: '100%' }}>
-                    <div className="g-tpl-name" style={{ paddingRight: 0, minHeight: 0 }}>{p.title}</div>
+                    <img className="g-tpl-ic" src={p.ic} alt="" loading="lazy" />
+                    <div className="g-tpl-name">{p.title}</div>
                     <div className="g-tpl-meta">
                       <span className="g-tpl-vert">{p.tag}</span>
                     </div>
@@ -455,20 +475,35 @@ export const VeterinaryPage = () => {
         </section>
 
         {/* Final CTA */}
-        <section className="g-final g-center">
+        <section className="g-final">
           <div className="g-container">
-            <Rv as="h2" className="g-h2">
-              Audit-ready records, <span className="g-hl">from day one.</span>
-            </Rv>
-            <Rv as="p" className="g-sub" delay={1} style={{ margin: '14px auto 0' }}>
-              See how Salvia works in a real vet practice workflow — no slides, no pitch.
-              Book a 20-minute demo.
-            </Rv>
-            <Rv className="g-hero-ctas" delay={2} style={{ marginTop: 32 }}>
-              <Link className="g-btn g-btn--green" to="/start">
-                Book a demo
-              </Link>
-            </Rv>
+            <div className="g-final-grid">
+              <div>
+                <Rv as="h2" className="g-h2">
+                  Audit-ready records, <span className="g-hl">from day one.</span>
+                </Rv>
+                <Rv as="p" className="g-sub" delay={1} style={{ marginTop: 14 }}>
+                  See how Salvia works in a real vet practice workflow — no slides, no pitch.
+                  Book a 20-minute demo.
+                </Rv>
+                <Rv className="g-hero-ctas" delay={2} style={{ marginTop: 30 }}>
+                  <Link className="g-btn g-btn--green" to="/start">
+                    Book a demo
+                  </Link>
+                  <Link className="g-btn g-btn--ghost" to="/start">
+                    Start free
+                  </Link>
+                </Rv>
+              </div>
+              <Rv className="g-final-art" delay={1}>
+                <img
+                  src="/illustrations/ill_seal.webp"
+                  alt="A clinical record sealed inside a vault"
+                  loading="lazy"
+                  onError={(e) => ((e.target as HTMLImageElement).src = '/illustrations/vault.webp')}
+                />
+              </Rv>
+            </div>
           </div>
         </section>
 

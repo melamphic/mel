@@ -263,27 +263,38 @@ export const HospitalsPage = () => {
         </section>
 
         {/* Custom pricing CTA */}
-        <section className="g-section g-center">
+        <section className="g-section">
           <div className="g-container">
-            <Rv as="h2" className="g-h2">
-              Hospitals run on <span className="g-hl">custom plans.</span>
-            </Rv>
-            <Rv as="p" className="g-sub" delay={1}>
-              Per-note pricing with committed minimums — never per-seat, so every clinician and
-              nurse can be on the record. Tell us your bed count and monthly OPD volume; we come
-              back with numbers.
-            </Rv>
-            <Rv className="g-facts" delay={2} style={{ maxWidth: 540, margin: '34px auto 0', textAlign: 'left' }}>
-              <div className="g-fact"><span>Pricing model</span><b>Per note, committed minimum</b></div>
-              <div className="g-fact"><span>Per-seat licences</span><b>None, ever</b></div>
-              <div className="g-fact"><span>Invoicing</span><b>Net-30, GST invoice</b></div>
-              <div className="g-fact"><span>Clinical AI model</span><b>Premium tier, every note</b></div>
-            </Rv>
-            <Rv delay={3} style={{ marginTop: 34 }}>
-              <Link className="g-btn g-btn--green" to="/start">
-                Start the conversation
-              </Link>
-            </Rv>
+            <div className="g-split">
+              <div>
+                <Rv as="h2" className="g-h2">
+                  Hospitals run on <span className="g-hl">custom plans.</span>
+                </Rv>
+                <Rv as="p" className="g-sub" delay={1}>
+                  Per-note pricing with committed minimums — never per-seat, so every clinician
+                  and nurse can be on the record. Tell us your bed count and monthly OPD volume;
+                  we come back with numbers.
+                </Rv>
+                <Rv className="g-facts" delay={2}>
+                  <div className="g-fact"><span>Pricing model</span><b>Per note, committed minimum</b></div>
+                  <div className="g-fact"><span>Per-seat licences</span><b>None, ever</b></div>
+                  <div className="g-fact"><span>Invoicing</span><b>Net-30, GST invoice</b></div>
+                  <div className="g-fact"><span>Clinical AI model</span><b>Premium tier, every note</b></div>
+                </Rv>
+                <Rv delay={3} style={{ marginTop: 30 }}>
+                  <Link className="g-btn g-btn--green" to="/start">
+                    Start the conversation
+                  </Link>
+                </Rv>
+              </div>
+              <Rv className="g-split-art" delay={1}>
+                <img
+                  src="/illustrations/vault.webp"
+                  alt="A records vault with a glowing green dial"
+                  loading="lazy"
+                />
+              </Rv>
+            </div>
           </div>
         </section>
 
