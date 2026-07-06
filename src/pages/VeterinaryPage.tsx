@@ -206,25 +206,10 @@ export const VeterinaryPage = () => {
                 </Rv>
               </div>
               <Rv className="g-split-art" delay={1}>
-                <video
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                  preload="auto"
-                  poster="/illustrations/hero_world.webp"
-                  onLoadedData={(e) => (e.target as HTMLVideoElement).play().catch(() => {})}
-                  aria-label="A living miniature clinic world where consults become sealed records"
-                  style={{
-                    width: '92%',
-                    maxWidth: 480,
-                    height: 'auto',
-                    display: 'block',
-                  }}
-                >
-                  <source src="/illustrations/hero_world.mp4" type="video/mp4" />
-                  <img src="/illustrations/hero_world.webp" alt="A miniature clinic world where consults become sealed records" />
-                </video>
+                <img
+                  src="/illustrations/vet_world.webp"
+                  alt="A miniature veterinary clinic where a vet examines a dog and the consult flows as documents into a sealed vault"
+                />
               </Rv>
             </div>
             <Rv delay={3} style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap', marginTop: 52 }}>
@@ -470,7 +455,7 @@ export const VeterinaryPage = () => {
         </section>
 
         {/* Final CTA */}
-        <section className="g-final">
+        <section className="g-final g-center">
           <div className="g-container">
             <Rv as="h2" className="g-h2">
               Audit-ready records, <span className="g-hl">from day one.</span>
