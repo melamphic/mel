@@ -47,7 +47,7 @@ export const GrassFooter: React.FC = () => (
       <img className="g-mega-sp g-mega-sp--dog" src="/illustrations/vet_mic_dog.webp" alt="" loading="lazy" />
       <img className="g-mega-sp g-mega-sp--check" src="/illustrations/shield.webp" alt="" loading="lazy" />
       <img className="g-mega-sp g-mega-sp--fall" src="/illustrations/tpl_fall.webp" alt="" loading="lazy" />
-      <img className="g-mega-sp g-mega-sp--stetho" src="/illustrations/stetho.webp" alt="" loading="lazy" />
+      <img className="g-mega-sp g-mega-sp--globe" src="/illustrations/globe.webp" alt="" loading="lazy" />
       <img className="g-mega-sp g-mega-sp--doc" src="/illustrations/sp_doc.webp" alt="" loading="lazy" />
       <div className="g-mega-word">
         <img src="/illustrations/salvia_footer.webp" alt="Salvia" loading="lazy" />
