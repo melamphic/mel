@@ -232,7 +232,7 @@ function injectMeta(html, title, desc, path, author = 'Salvia') {
   // Cloudflare serves directory URLs with a trailing slash (/pricing -> /pricing/),
   // so canonical + og:url must match to avoid "canonical points to a redirect".
   const canonical = `https://hellosalvia.com${path}${path === '/' ? '' : '/'}`;
-  const ogImage = 'https://hellosalvia.com/og-image.png';
+  const ogImage = 'https://hellosalvia.com/og-image.png?v=2';
   // Strip the template's default <title>/<meta description> so each page emits
   // exactly one of each (no duplicate tags for crawlers to disagree over).
   html = html
