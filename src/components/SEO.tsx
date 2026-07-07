@@ -36,8 +36,8 @@ const ORG_SCHEMA = {
 };
 
 export const SEO = ({ title, description = DEFAULT_DESC, path, keywords, type = 'website', noindex, article }: SEOProps) => {
-  // trailing slash to match Cloudflare's served URLs (avoids canonical→redirect)
-  const url = `${SITE}${path}${path === '/' ? '' : '/'}`;
+  // Use exact route path without appending trailing slashes to match internal links
+  const url = `${SITE}${path === '/' ? '/' : path}`;
   const fullTitle = `${title} | ${SITE_NAME}`;
 
   const breadcrumbSchema = type === 'article' ? JSON.stringify({

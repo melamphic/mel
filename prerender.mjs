@@ -229,9 +229,8 @@ if (INDIA_ONLY) {
 }
 
 function injectMeta(html, title, desc, path, author = 'Salvia') {
-  // Cloudflare serves directory URLs with a trailing slash (/pricing -> /pricing/),
-  // so canonical + og:url must match to avoid "canonical points to a redirect".
-  const canonical = `https://hellosalvia.com${path}${path === '/' ? '' : '/'}`;
+  // Use exact route path without appending trailing slashes to match internal links
+  const canonical = `https://hellosalvia.com${path === '/' ? '/' : path}`;
   const ogImage = 'https://hellosalvia.com/og-image.png?v=2';
   // Strip the template's default <title>/<meta description> so each page emits
   // exactly one of each (no duplicate tags for crawlers to disagree over).
@@ -340,8 +339,8 @@ const BLOG_DATES = {
 const ld = (obj) => `<script type="application/ld+json">${JSON.stringify(obj)}</script>`;
 
 function injectSchema(html, route, title, desc) {
-  // trailing-slash URL to match what Cloudflare serves + the canonical
-  const u = route === '/' ? `${SITE}/` : `${SITE}${route}/`;
+  // Match canonical URL (no trailing slash except for root)
+  const u = route === '/' ? `${SITE}/` : `${SITE}${route}`;
   const scripts = [ld(ORG_SCHEMA)];
   if (route === '/') scripts.push(ld(SOFTWARE_SCHEMA));
   if (route.startsWith('/blog/')) {
@@ -421,7 +420,7 @@ const LEGAL_ROUTES = ['/privacy', '/terms', '/cookies', '/dpa', '/subprocessors'
 const ALLIED_ROUTES = ['/physiotherapy', '/osteopathy', '/chiropractic', '/occupational-therapy', '/podiatry', '/speech-therapy'];
 
 function sitemapEntry(route) {
-  const loc = `${SITE}${route === '/' ? '/' : `${route}/`}`;
+  const loc = `${SITE}${route === '/' ? '/' : route}`;
   let changefreq = 'monthly';
   let priority = '0.7';
   let lastmod;
