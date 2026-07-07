@@ -22,6 +22,7 @@ const AlliedDisciplineTemplate = lazy(() => import('./pages/AlliedDisciplineTemp
 const FrameworksPage = lazy(() => import('./pages/FrameworksPage').then(m => ({ default: m.FrameworksPage })));
 const LegalPage = lazy(() => import('./pages/LegalPage').then(m => ({ default: m.LegalPage })));
 const MelamphicPage = lazy(() => import('./pages/MelamphicPage').then(m => ({ default: m.MelamphicPage })));
+const AssetsPage = lazy(() => import('./pages/AssetsPage').then(m => ({ default: m.AssetsPage })));
 
 function PageviewTracker() {
   const { pathname, search } = useLocation();
@@ -97,6 +98,7 @@ function App() {
             <Route path="/refund-policy" element={<LegalPage slug="refund-policy" />} />
             <Route path="/acceptable-use" element={<LegalPage slug="acceptable-use" />} />
             <Route path="/security" element={<LegalPage slug="security" />} />
+            <Route path="/assets" element={<AssetsPage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </Suspense>

@@ -22,6 +22,7 @@ const INDIA_ONLY = (process.env.VITE_INDIA_ONLY ?? 'true') !== 'false';
 // All routes that should be pre-rendered
 const STATIC_ROUTES = [
   '/',
+  '/assets',
   '/pricing',
   '/blog',
   '/start',
@@ -67,6 +68,10 @@ const META = {
   '/pricing': {
     title: 'AI Clinical Documentation & Compliance Pricing | Salvia',
     desc: 'Salvia pricing for vet, dental, GP and allied health — Practice plan from $229/mo. Compliance-grade documentation, controlled-drug logs and audit trails.',
+  },
+  '/assets': {
+    title: 'Brand Assets | Salvia',
+    desc: 'Official Salvia brand assets, logos, and illustrations available for press and partners.',
   },
   '/blog': {
     title: 'From the compliance desk | Salvia',
