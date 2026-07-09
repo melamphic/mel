@@ -166,33 +166,22 @@ export const Footer = () => (
       </div>
 
       <nav style={{ display: 'flex', gap: '1.5rem' }}>
-        {['Privacy', 'Legal'].map(item => (
-          <a
-            key={item}
-            href="#"
-            style={{
-              fontSize: 'var(--text-xs)',
-              fontWeight: 500,
-              color: 'var(--salvia-text-muted)',
-              textDecoration: 'none',
-              transition: 'color 0.2s ease',
-            }}
-            onMouseEnter={e => (e.currentTarget.style.color = 'var(--salvia-text)')}
-            onMouseLeave={e => (e.currentTarget.style.color = 'var(--salvia-text-muted)')}
-          >
-            {item}
-          </a>
-        ))}
+        <Link to="/privacy" style={{ ...linkStyle, fontSize: 'var(--text-xs)', fontWeight: 500 }}>Privacy</Link>
+        <Link to="/terms" style={{ ...linkStyle, fontSize: 'var(--text-xs)', fontWeight: 500 }}>Terms</Link>
       </nav>
 
-      <span style={{
-        fontSize: 'var(--text-2xs)',
-        fontWeight: 400,
-        color: 'var(--salvia-text-muted)',
-        opacity: 0.6,
-      }}>
+      <Link
+        to="/melamphic"
+        style={{
+          fontSize: 'var(--text-2xs)',
+          fontWeight: 400,
+          color: 'var(--salvia-text-muted)',
+          opacity: 0.6,
+          textDecoration: 'none',
+        }}
+      >
         © {new Date().getFullYear()} Melamphic AI Pvt Ltd.
-      </span>
+      </Link>
     </div>
 
     <style>{`
