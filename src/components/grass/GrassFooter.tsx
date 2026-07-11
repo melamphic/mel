@@ -8,7 +8,7 @@ const COLS: { title: string; links: [string, string][] }[] = [
   { title: 'Allied disciplines', links: [['Physiotherapy', '/physiotherapy'], ['Osteopathy', '/osteopathy'], ['Chiropractic', '/chiropractic'], ['Occupational Therapy', '/occupational-therapy'], ['Podiatry', '/podiatry'], ['Speech Therapy', '/speech-therapy']] },
   { title: 'Modules', links: [['Audio → Forms', '/products/point-of-care-evidence'], ['Form Engine', '/products/statutory-form-infrastructure'], ['Policy Engine', '/products/institutional-compliance-hub'], ['Blog', '/blog'], ['Pricing', '/pricing']] },
   { title: 'Company', links: [['Frameworks we support', '/frameworks'], ['Book a demo', '/start'], ['Contact sales', '/contact-sales'], ['Melamphic', '/melamphic']] },
-  { title: 'Legal', links: [['Privacy Policy', '/privacy'], ['Terms of Service', '/terms'], ['Data Processing (DPA)', '/dpa'], ['Sub-processors', '/subprocessors'], ['Security', '/security'], ['Cookie Policy', '/cookies']] },
+  { title: 'Legal', links: [['Privacy Policy', '/privacy'], ['Terms of Service', '/terms'], ['Data Processing (DPA)', '/dpa'], ['Security', '/security'], ['Cookie Policy', '/cookies']] },
 ];
 
 export const GrassFooter: React.FC = () => (

@@ -96,7 +96,6 @@ export const Footer = () => (
           <Link to="/privacy" style={linkStyle}>Privacy Policy</Link>
           <Link to="/terms" style={linkStyle}>Terms of Service</Link>
           <Link to="/dpa" style={linkStyle}>Data Processing (DPA)</Link>
-          <Link to="/subprocessors" style={linkStyle}>Sub-processors</Link>
           <Link to="/security" style={linkStyle}>Security</Link>
           <Link to="/cookies" style={linkStyle}>Cookie Policy</Link>
           <button
