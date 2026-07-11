@@ -44,19 +44,10 @@ const DOC_ART: Record<string, string> = {
   terms: '/illustrations/vet_estimate.webp',
   cookies: '/illustrations/ill_globe_india.webp',
   dpa: '/illustrations/story_policy.webp',
-  subprocessors: '/illustrations/hero_flow.webp',
   'refund-policy': '/illustrations/price_coins.webp',
   'acceptable-use': '/illustrations/shield_cross.webp',
   security: '/illustrations/vault.webp',
 };
-
-const SUBPROCESSORS = [
-  ['Deepgram, Inc.', 'Speech-to-text — transcription of consult audio (Nova Medical / nova-3)', 'United States'],
-  ['Google LLC (Gemini + Google Cloud Storage)', 'AI structuring of the transcript into clinical fields, and encrypted storage of audio + records', 'In-region: India (Indian customers), Australia (AU + NZ), EU (EU customers)'],
-  ['Cloudflare, Inc.', 'Website + application hosting, CDN, edge security, analytics', 'Global edge'],
-  ['PostHog', 'Product analytics — page views and funnel events (EU Cloud)', 'European Union'],
-  ['Resend', 'Transactional + account email', 'United States'],
-];
 
 const DOCS: Doc[] = [
   {
@@ -72,14 +63,14 @@ const DOCS: Doc[] = [
         <UL>
           <LI><strong>Account &amp; billing data:</strong> name, email, phone, clinic, role, plan.</LI>
           <LI><strong>Clinical data (on behalf of clinics):</strong> consult audio, transcripts, structured clinical records, drug-register entries, consent and incident records.</LI>
-          <LI><strong>Usage data:</strong> device, browser, country, pages and feature events (via PostHog and Cloudflare).</LI>
+          <LI><strong>Usage data:</strong> device, browser, country, pages and feature events (via our analytics and hosting providers).</LI>
         </UL>
         <H>2. How we use it</H>
-        <P>To provide and secure the Services: transcribe audio, generate structured records, run policy/compliance checks, support you, and meet legal obligations. <strong>We do not sell personal data, and we do not use clinical data to train our own AI models.</strong> We require our AI providers (Deepgram, Google) not to train on customer data, and we are in the process of executing data-processing agreements (and BAAs where applicable) with each provider to formalise this.</P>
-        <H>3. AI sub-processing &amp; the data flow</H>
-        <P>Consult audio is transcribed by <strong>Deepgram</strong> and the transcript is structured by <strong>Google Gemini</strong> (India workloads run on Gemini). These providers process the data only to return a result to Salvia and are bound by contract. See the full <Link to="/subprocessors/">list of sub-processors</Link>.</P>
+        <P>To provide and secure the Services: transcribe audio, generate structured records, run policy/compliance checks, support you, and meet legal obligations. <strong>We do not sell personal data, and we do not use clinical data to train our own AI models.</strong> We contractually require our AI sub-processors not to train on customer data, formalised in data-processing agreements (and BAAs where applicable).</P>
+        <H>3. AI &amp; infrastructure sub-processing</H>
+        <P>To deliver the Services we rely on a small number of third-party sub-processors — AI transcription and structuring providers, cloud infrastructure, and analytics. Each processes data only to return a result to Salvia and is bound by a data-processing agreement. The specific list of sub-processors is made available to customers under our <Link to="/dpa/">Data Processing Agreement</Link>.</P>
         <H>4. Where data is stored &amp; transfers</H>
-        <P>We store clinical data <strong>in-region</strong>: Australia (Google Cloud) for Australian and New Zealand customers, the EU for EU customers, and India for Indian customers (the India region is being provisioned; until then, Indian-customer data is hosted in Google Cloud Australia). Where data is transferred across borders (e.g., transcription via a US provider), we rely on appropriate safeguards (standard contractual clauses or equivalent) as required by the DPDP Act 2023, GDPR, the Australian Privacy Act 1988 and NZ HIPC 2020.</P>
+        <P>We store clinical data <strong>in-region</strong>: Australia for Australian and New Zealand customers, the EU for EU customers, and India for Indian customers (the India region is being provisioned; until then, Indian-customer data is hosted in Australia). Where data is processed across borders (for example, AI processing that runs on a provider’s global endpoint), we rely on appropriate safeguards (standard contractual clauses or equivalent) as required by the DPDP Act 2023, GDPR, the Australian Privacy Act 1988 and NZ HIPC 2020.</P>
         <H>5. Retention</H>
         <P>Account data is kept while your account is active. Consult audio and clinical records are retained in line with the clinic’s instructions and the applicable medical-record retention law for the relevant jurisdiction.</P>
         <H>6. Security</H>
@@ -124,14 +115,14 @@ const DOCS: Doc[] = [
     slug: 'cookies',
     title: 'Cookie Policy',
     seoTitle: 'Cookie Policy | Salvia',
-    seoDesc: 'What cookies and similar technologies Salvia uses for essential functionality and analytics (PostHog, Cloudflare), and how to control them.',
+    seoDesc: 'What cookies and similar technologies Salvia uses for essential functionality and analytics, and how to control them.',
     body: (
       <>
         <P>This policy explains the cookies and similar technologies Salvia uses on hellosalvia.com and in the app.</P>
         <H>Types we use</H>
         <UL>
           <LI><strong>Essential:</strong> sign-in, security, and saving your preferences (e.g., pricing market). These cannot be turned off.</LI>
-          <LI><strong>Analytics:</strong> PostHog (EU Cloud) and Cloudflare measure page views, devices and funnel events to improve the product.</LI>
+          <LI><strong>Analytics:</strong> our analytics provider (EU cloud) and edge/CDN provider measure page views, devices and funnel events to improve the product.</LI>
         </UL>
         <H>Your choices &amp; consent</H>
         <P>We are rolling out a cookie-consent banner with a one-click <strong>analytics opt-out</strong>; until it is live, you can disable analytics via your browser settings or “Do Not Track”. Blocking essential cookies may break sign-in.</P>
@@ -153,48 +144,16 @@ const DOCS: Doc[] = [
         <UL>
           <LI>Process only on instructions; keep personnel under confidentiality.</LI>
           <LI>Implement the security measures in our <Link to="/security/">Security overview</Link>.</LI>
-          <LI>Not use clinical data for our own purposes or to train AI models, and require our AI providers (Deepgram, Google) not to train on it — formalised via data-processing agreements / BAAs we are executing.</LI>
+          <LI>Not use clinical data for our own purposes or to train AI models, and require our AI sub-processors not to train on it — formalised via data-processing agreements / BAAs.</LI>
           <LI>Assist with data-subject requests, DPIAs and breach notification (within 72 hours of becoming aware).</LI>
           <LI>Delete or return data on termination.</LI>
         </UL>
         <H>3. Sub-processors</H>
-        <P>The customer authorises the sub-processors listed at <Link to="/subprocessors/">/subprocessors</Link>. We give notice before adding a new one so the customer can object.</P>
+        <P>The customer authorises the sub-processors set out in Schedule 1, provided to the customer with this DPA. We give notice before adding a new one so the customer can object.</P>
         <H>4. International transfers</H>
-        <P>We store data in-region: Australia (Google Cloud) for AU/NZ customers, the EU for EU customers, and India for Indian customers (India region being provisioned). Where processing occurs outside the customer’s country (e.g., US-based transcription), we apply appropriate safeguards (SCCs or equivalent) consistent with the DPDP Act 2023, GDPR, AU APPs and NZ HIPC 2020.</P>
+        <P>We store data in-region: Australia for AU/NZ customers, the EU for EU customers, and India for Indian customers (India region being provisioned). Where processing occurs outside the customer’s country (for example, AI processing on a provider’s global endpoint), we apply appropriate safeguards (SCCs or equivalent) consistent with the DPDP Act 2023, GDPR, AU APPs and NZ HIPC 2020.</P>
         <H>5. Audit &amp; term</H>
         <P>We make available information needed to demonstrate compliance and allow audits on reasonable notice. This DPA runs for the duration of processing. To request a signed copy: {PRIVACY_EMAIL}.</P>
-      </>
-    ),
-  },
-  {
-    slug: 'subprocessors',
-    title: 'Sub-processors',
-    seoTitle: 'Sub-processors | Salvia',
-    seoDesc: 'The third-party sub-processors Salvia uses to deliver its clinical documentation and compliance Services, what they do, and where they process data.',
-    body: (
-      <>
-        <P>Salvia uses the sub-processors below to deliver the Services. Each is bound by a data-processing agreement and may process personal data only to provide its service to Salvia. We notify customers before adding a new sub-processor.</P>
-        <div style={{ overflowX: 'auto', margin: '1.5rem 0' }}>
-          <table style={{ width: '100%', borderCollapse: 'collapse', fontFamily: 'var(--g-font)', fontSize: 14.5 }}>
-            <thead>
-              <tr style={{ textAlign: 'left', borderBottom: '2px solid var(--g-line)' }}>
-                <th style={{ padding: '0.6rem 0.5rem', color: 'var(--g-ink)' }}>Sub-processor</th>
-                <th style={{ padding: '0.6rem 0.5rem', color: 'var(--g-ink)' }}>Purpose</th>
-                <th style={{ padding: '0.6rem 0.5rem', color: 'var(--g-ink)' }}>Region</th>
-              </tr>
-            </thead>
-            <tbody>
-              {SUBPROCESSORS.map((row) => (
-                <tr key={row[0]} style={{ borderBottom: '1px solid var(--g-line-soft)' }}>
-                  <td style={{ padding: '0.6rem 0.5rem', color: 'var(--g-ink)', fontWeight: 600 }}>{row[0]}</td>
-                  <td style={{ padding: '0.6rem 0.5rem', color: 'var(--g-ink-soft)' }}>{row[1]}</td>
-                  <td style={{ padding: '0.6rem 0.5rem', color: 'var(--g-ink-soft)' }}>{row[2]}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-        <P>We notify customers before adding a new sub-processor. Payment providers will be added here when paid plans launch. Questions: {PRIVACY_EMAIL}.</P>
       </>
     ),
   },
@@ -243,7 +202,7 @@ const DOCS: Doc[] = [
         <H>Access control</H>
         <P>Least-privilege, role-based access; access to clinical data is logged.</P>
         <H>Hosting &amp; isolation</H>
-        <P>The web layer runs on Cloudflare; the Sal backend and clinical data are hosted in Google Cloud, stored in-region (Australia for AU/NZ, the EU for EU, and India for Indian customers — India region being provisioned).</P>
+        <P>The web layer runs on our edge/CDN provider; the backend and clinical data are hosted with our cloud infrastructure provider, stored in-region (Australia for AU/NZ, the EU for EU, and India for Indian customers — India region being provisioned).</P>
         <H>Audit trail</H>
         <P>Records are versioned and hash-stamped so changes are tamper-evident.</P>
         <H>Breach response</H>
@@ -276,15 +235,11 @@ export const LegalPage: React.FC<{ slug: string }> = ({ slug }) => {
                 style={{ width: 'clamp(110px, 14vw, 170px)', height: 'auto', flexShrink: 0 }}
               />
             </div>
-            <div style={{ background: '#FFFBEB', border: '1px solid #FDE68A', borderRadius: 12, padding: '0.9rem 1.1rem', margin: '0 0 2rem', fontFamily: 'var(--g-font)', fontSize: 14, lineHeight: 1.6, color: '#92400E' }}>
-              <strong>Draft — pending legal review.</strong> This document is a working draft and not yet legal advice. It will be finalised with counsel before it takes effect.
-            </div>
             {doc.body}
             <p style={{ marginTop: '3rem', fontFamily: 'var(--g-font)', fontSize: 14.5 }}>
               <Link to="/privacy/" style={{ color: 'var(--g-green)', fontWeight: 600 }}>Privacy</Link>{' · '}
               <Link to="/terms/" style={{ color: 'var(--g-green)', fontWeight: 600 }}>Terms</Link>{' · '}
               <Link to="/dpa/" style={{ color: 'var(--g-green)', fontWeight: 600 }}>DPA</Link>{' · '}
-              <Link to="/subprocessors/" style={{ color: 'var(--g-green)', fontWeight: 600 }}>Sub-processors</Link>{' · '}
               <Link to="/security/" style={{ color: 'var(--g-green)', fontWeight: 600 }}>Security</Link>
             </p>
           </div>

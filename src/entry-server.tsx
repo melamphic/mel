@@ -60,7 +60,6 @@ function ServerApp({ url }: { url: string }) {
             <Route path="/terms" element={<LegalPage slug="terms" />} />
             <Route path="/cookies" element={<LegalPage slug="cookies" />} />
             <Route path="/dpa" element={<LegalPage slug="dpa" />} />
-            <Route path="/subprocessors" element={<LegalPage slug="subprocessors" />} />
             <Route path="/refund-policy" element={<LegalPage slug="refund-policy" />} />
             <Route path="/acceptable-use" element={<LegalPage slug="acceptable-use" />} />
             <Route path="/security" element={<LegalPage slug="security" />} />
