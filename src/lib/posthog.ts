@@ -6,7 +6,10 @@
 type PostHog = typeof import('posthog-js')['default'];
 
 const KEY = import.meta.env.VITE_POSTHOG_KEY as string | undefined;
-const HOST = (import.meta.env.VITE_POSTHOG_HOST as string | undefined) ?? 'https://us.i.posthog.com';
+// Salvia's PostHog org is on EU Cloud. Treat a blank env var as unset (Vite
+// injects "" for a defined-but-empty var, which `??` would keep) so a missing
+// value can't send every event to a dead US project.
+const HOST = ((import.meta.env.VITE_POSTHOG_HOST as string | undefined) ?? '').trim() || 'https://eu.i.posthog.com';
 const ENABLED = !!KEY;
 
 let ph: PostHog | null = null;
