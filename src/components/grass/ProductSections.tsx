@@ -204,44 +204,12 @@ export const PdfSection: React.FC = () => (
           </Rv>
         </div>
         <Rv className="g-split-art" delay={1}>
-          <div className="g-pdf" aria-hidden="true">
-            <div className="g-pdf-head">
-              <span className="g-pdf-logo">GC</span>
-              <div>
-                <div className="g-pdf-clinic">Greenfield Clinic</div>
-                <div className="g-pdf-contact">12 MG Road, Kochi · +91 484 220 1140</div>
-              </div>
-              <div className="g-pdf-eyebrow">
-                <small>Signed Clinical Note</small>
-                <b>OPD Consult · v1.2</b>
-              </div>
-            </div>
-            <div className="g-pdf-body">
-              <div className="g-pdf-idcard">
-                <span className="g-ui-avatar">RS</span>
-                <div>
-                  <div className="g-pdf-id-name">Ravi Sharma</div>
-                  <div className="g-pdf-id-meta">46 / M · Patient ID 0412 · No known allergies</div>
-                </div>
-              </div>
-              <div className="g-pdf-row"><span>Chief complaint</span><b>Fever × 3 days</b></div>
-              <div className="g-pdf-row"><span>Vitals</span><b>BP 130/85 · Temp 99.8°F</b></div>
-              <div className="g-pdf-row"><span>Plan</span><b>Paracetamol 650 mg · review Monday</b></div>
-              <div className="g-pdf-syscard">
-                <small>Controlled drug ledger</small>
-                <div className="g-pdf-sys-line">℞ Paracetamol 650 mg · administered <span className="g-ui-tag">Witness signed</span></div>
-              </div>
-              <div className="g-pdf-sig">
-                <div className="g-pdf-sig-line">Submitted by<b>Dr. Nair</b></div>
-                <div className="g-pdf-sig-line" style={{ textAlign: 'right' }}>Note 7e3b1c4a<b>4 Jul 2026 · 6:42 pm</b></div>
-              </div>
-            </div>
-            <div className="g-pdf-foot">
-              <span>Greenfield Clinic · OPD Consult</span>
-              <code>SHA-256 · 7e3b1c4a9d22f0e8…</code>
-              <span>Page 1 of 2</span>
-            </div>
-          </div>
+          <img
+            src="/product/sal-note.png"
+            alt="A signed Salvia clinical note rendered as a themed PDF — patient header, vitals, prescription and register cards, with a SHA-256 content hash in the footer"
+            loading="lazy"
+            style={{ width: '100%', maxWidth: 430, borderRadius: 14, border: '1px solid #e6ece6', boxShadow: '0 18px 50px rgba(20,40,25,0.14)' }}
+          />
         </Rv>
       </div>
     </div>

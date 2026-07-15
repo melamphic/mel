@@ -4,6 +4,23 @@ import { SEO } from '../components/SEO';
 import { GrassFooter } from '../components/grass/GrassFooter';
 import { GrassHeader } from '../components/grass/GrassHeader';
 import { Rv } from '../components/grass/Rv';
+import { ProductNoteSection } from '../components/grass/ProductNoteSection';
+
+type Founder = { name: string; role: string; initials: string; photo: string; linkedin: string };
+
+// Founder info from the pitch deck. Drop headshots into public/team/ (abhay.jpg,
+// navaneeth.jpg) and fill each linkedin URL — Google's Startups compliance filter
+// requires authentic team info verifiable via active third-party public links.
+const FOUNDERS: Founder[] = [
+  {
+    name: 'Abhay K V', role: 'Co-founder', initials: 'AK', photo: '/team/abhay.jpg',
+    linkedin: 'https://www.linkedin.com/in/abhay-k-v/',
+  },
+  {
+    name: 'Navaneeth M V', role: 'Co-founder', initials: 'NV', photo: '/team/navaneeth.jpg',
+    linkedin: 'https://www.linkedin.com/in/m-v-navaneeth/',
+  },
+];
 
 // /melamphic — Melamphic AI Private Limited, the parent-company page.
 // Grass design language: white, Archivo, one green accent. The substance
@@ -105,6 +122,46 @@ export function MelamphicPage() {
                 />
               </Rv>
             </div>
+          </div>
+        </section>
+
+        {/* Product proof — real generated note + workspace screenshot */}
+        <ProductNoteSection />
+
+        {/* Team */}
+        <section className="g-section">
+          <div className="g-container">
+            <Rv as="h2" className="g-h2">
+              The <span className="g-hl">team.</span>
+            </Rv>
+            <Rv as="p" className="g-sub" delay={1} style={{ maxWidth: '54ch' }}>
+              Two builders who ship — with compliance in their bones. College batchmates and
+              first colleagues who built a healthcare-compliance product together, then built
+              Salvia end to end, bootstrapped.
+            </Rv>
+            <Rv delay={2}>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 24, marginTop: 36 }}>
+                {FOUNDERS.map((f) => (
+                  <div key={f.name} style={{ border: '1px solid #e6ece6', borderRadius: 16, padding: 26, background: '#fff' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+                      <div style={{ position: 'relative', width: 76, height: 76, borderRadius: '50%', overflow: 'hidden', background: 'var(--g-ink)', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'var(--g-font)', fontWeight: 800, fontSize: 26, flexShrink: 0 }}>
+                        {f.initials}
+                        <img src={f.photo} alt="" loading="lazy" onError={(e) => e.currentTarget.remove()} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
+                      </div>
+                      <div>
+                        <div style={{ fontFamily: 'var(--g-font)', fontWeight: 800, fontSize: 21, letterSpacing: '-0.02em', color: 'var(--g-ink)' }}>{f.name}</div>
+                        <div style={{ color: '#1f8f43', fontWeight: 700, fontSize: 12.5, textTransform: 'uppercase', letterSpacing: '0.07em', marginTop: 3 }}>{f.role}</div>
+                      </div>
+                    </div>
+                    {f.linkedin && (
+                      <a href={f.linkedin} target="_blank" rel="noreferrer" style={{ display: 'inline-block', marginTop: 18, fontWeight: 700, color: 'var(--g-ink)', textDecoration: 'underline', textUnderlineOffset: 3 }}>
+                        LinkedIn ↗
+                      </a>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </Rv>
           </div>
         </section>
 

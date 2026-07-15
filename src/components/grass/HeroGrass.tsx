@@ -20,12 +20,12 @@ export const HeroGrass: React.FC = () => {
         </p>
       </div>
 
-      {/* the scenario: voice → checked documents → sealed vault */}
+      {/* the real product: the clinician workspace, a patient profile */}
       <div className="g-h3d-stage">
         <img
-          src="/illustrations/hero_scene.webp"
-          alt="A doctor speaks with a patient; her voice becomes verified documents that file into a sealed vault"
-          style={{ width: '100%', maxWidth: 880, height: 'auto', display: 'block', margin: '0 auto' }}
+          src="/product/patient-profile.png"
+          alt="The Salvia clinician workspace — a patient profile with notes, pain scores, consents and a compliance queue"
+          style={{ width: '100%', maxWidth: 1040, height: 'auto', display: 'block', margin: '0 auto', borderRadius: 16, border: '1px solid #e6ece6', boxShadow: '0 24px 60px rgba(20,40,25,0.16)' }}
         />
       </div>
     </header>
