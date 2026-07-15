@@ -105,8 +105,8 @@ const CALL_WINDOW_OPTIONS = [
 ];
 
 const STEPS: { label: string; value: string }[] = [
-  { label: 'Today', value: 'Six quick fields — under a minute' },
-  { label: 'Within 24 hours', value: 'We call you: a 20-minute walkthrough in your real workflow' },
+  { label: 'Today', value: 'Sign up — six quick fields, under a minute' },
+  { label: 'Within a day', value: 'Your Salvia workspace is set up with your clinic’s forms' },
   { label: 'Next 21 days', value: 'Full access, no card — everything unlocked' },
   { label: 'Day 22', value: 'Continue only if you say yes — cancel any time, no charge' },
 ];
@@ -222,7 +222,7 @@ export const SignupPage = () => {
     <>
       <SEO
         title="Start your free Salvia trial"
-        description="Request early access to Salvia — AI clinical documentation and compliance for Indian clinics, hospitals, dental and veterinary practices. 21 days free, no card, cancel anytime."
+        description="Get started with Salvia — AI clinical documentation and compliance for Indian clinics, hospitals, dental and veterinary practices. 21 days free, no card, cancel anytime."
         path="/start"
         keywords={['Salvia free trial', 'AI clinical documentation India', 'clinic compliance software trial', 'AI medical scribe India signup']}
       />
@@ -236,17 +236,17 @@ export const SignupPage = () => {
               {/* ── Left: the pitch ── */}
               <div>
                 <Rv as="h1" className="g-h1" style={{ fontSize: 'clamp(36px, 4.2vw, 58px)', marginBottom: 18 }}>
-                  We onboard every clinic <span className="g-hl">personally.</span>
+                  Get started with <span className="g-hl">Salvia.</span>
                 </Rv>
                 <Rv as="p" className="g-sub" delay={1}>
-                  Tell us about your clinic and we'll call within 24 hours to walk you through
-                  Salvia in your actual workflow — <b>no slides, no pitch deck</b>. Then 21
-                  days of full access, free, no card.
+                  Tell us about your clinic and we'll set you up in Salvia — your actual forms,
+                  your workflow, <b>no slides, no pitch deck</b>. 21 days of full access, free,
+                  no card.
                 </Rv>
                 <Rv delay={2}>
                   <img
                     src="/illustrations/signup_scene.webp"
-                    alt="A friendly Salvia team member on a welcome call, waving hello"
+                    alt="A friendly Salvia team member welcoming you, waving hello"
                     style={{ width: 'min(380px, 88%)', height: 'auto', display: 'block', margin: '30px 0 4px' }}
                   />
                 </Rv>
@@ -259,17 +259,17 @@ export const SignupPage = () => {
                   ))}
                 </Rv>
                 <Rv as="p" className="g-small" delay={3} style={{ marginTop: 18 }}>
-                  No credit card during the trial · Reviewed by a human, not a bot · Cancel
-                  any time before day 22
+                  No credit card during the trial · 21 days of full access · Cancel any time
+                  before day 22
                 </Rv>
               </div>
 
               {/* ── Right: the form ── */}
               <div className="su-sticky">
                 <Rv className="su-card" delay={1}>
-                  <h2 className="g-h3" style={{ marginBottom: 4 }}>Request early access</h2>
+                  <h2 className="g-h3" style={{ marginBottom: 4 }}>Get started</h2>
                   <p className="g-small" style={{ marginBottom: 22 }}>
-                    Six quick fields — under a minute. We review every clinic personally.
+                    Six quick fields — under a minute, and your clinic is set up.
                   </p>
 
                   <form onSubmit={onSubmit} className="su-form">
@@ -330,7 +330,7 @@ export const SignupPage = () => {
                       />
                     </Field>
 
-                    <Field label="Phone" htmlFor="phoneLocal" required hint="for the walkthrough call">
+                    <Field label="Phone" htmlFor="phoneLocal" required hint="so we can reach you">
                       <div style={{ display: 'flex', gap: 8 }}>
                         <input
                           id="dialCode"
@@ -394,7 +394,7 @@ export const SignupPage = () => {
                       </p>
                     )}
 
-                    <Field label="Best time for the call" htmlFor="callWindow" required>
+                    <Field label="Best time to reach you" htmlFor="callWindow" required>
                       <select
                         id="callWindow"
                         value={callWindow}
@@ -451,7 +451,7 @@ export const SignupPage = () => {
                       className="g-btn g-btn--green"
                       style={{ width: '100%', opacity: submitting ? 0.7 : 1, cursor: submitting ? 'progress' : 'pointer' }}
                     >
-                      {submitting ? 'Submitting…' : 'Request early access →'}
+                      {submitting ? 'Submitting…' : 'Get started →'}
                     </button>
 
                     <p className="g-small" style={{ textAlign: 'center', margin: 0 }}>
@@ -487,23 +487,23 @@ function SuccessPage({ email, clinicName, country }: { email: string; clinicName
             <Rv>
               <img
                 src="/illustrations/signup_scene.webp"
-                alt="A friendly Salvia team member on a welcome call, waving hello"
+                alt="A friendly Salvia team member welcoming you, waving hello"
                 style={{ width: 'min(340px, 80%)', height: 'auto', display: 'block', margin: '0 auto 26px' }}
               />
             </Rv>
             <Rv as="h1" className="g-h2" delay={1} style={{ margin: '0 auto 14px' }}>
-              Thanks{clinicName ? <>, <span className="g-hl">{clinicName}</span></> : ' for reaching out'}. We're on it.
+              Thanks{clinicName ? <>, <span className="g-hl">{clinicName}</span></> : ''}. You're all set.
             </Rv>
             <Rv as="p" className="g-sub" delay={2}>
-              We'll be in touch at <b>{email || 'your inbox'}</b> within 24 hours — usually
-              faster during {countryLabel} business hours.
+              We're setting up your workspace now — watch <b>{email || 'your inbox'}</b> for
+              your login, usually within {countryLabel} business hours.
             </Rv>
             <Rv className="g-hero-ctas" delay={3} style={{ marginTop: 30 }}>
               <Link className="g-btn g-btn--green" to="/">
                 Back to home
               </Link>
               <Link className="g-btn g-btn--ghost" to="/pricing">
-                See pricing while you wait
+                See pricing
               </Link>
             </Rv>
           </div>
