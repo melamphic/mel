@@ -1,0 +1,455 @@
+/* ==========================================================================
+   Product film — the real Salvia UI, redrawn in the site's own language.
+
+   Not screenshots. Every pixel here is DOM, so it stays crisp at any density,
+   inherits our tokens, and can move. The rules:
+   - Warm chrome, not the cold grey of a default admin panel.
+   - One accent. State colours (warn / danger) are state, never decoration.
+   - The frame gets the site's 1.5px ink edge and hard offset shadow, so it
+     sits ON the paper like every other card rather than floating in a void.
+   - Labels are verbatim from the product. If it isn't in the app, it isn't
+     on this page.
+   ========================================================================== */
+
+.pf-stage {
+  position: relative;
+  aspect-ratio: 1000 / 640;
+  /* Frame, caption and chapters should land in one screen. Setting the width
+     from the *available height* (and capping it at the container) lets the
+     aspect ratio derive the rest, so the whole unit fits without the frame
+     ever distorting. 390px is the measured cost of everything under it:
+     header, section padding, the two gaps, caption and chapter row. */
+  width: min(100%, calc((100dvh - 350px) * 1000 / 640));
+  margin-inline: auto;
+  border: 1.5px solid var(--ink);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+/* The canvas is authored at a fixed 1000x640 and scaled to fit. Text is vector,
+   so this loses nothing, and it means one layout rather than one per breakpoint
+   — including on phones, where the same interface simply arrives smaller.
+
+   `--pf-scale` is set by a ResizeObserver in ProductFilm.tsx. CSS cannot do it:
+   `scale(calc(100cqw / 1000))` divides a length by a number, which yields a
+   length, and `scale()` needs a bare number — so it resolves to `none` and the
+   canvas silently sits unscaled inside a wider frame. */
+.pf-canvas {
+  width: 1000px;
+  height: 640px;
+  transform: scale(var(--pf-scale, 1));
+  transform-origin: top left;
+  font: var(--weight-normal) 13px/1.45 var(--font-body);
+  color: var(--body);
+  display: grid;
+  grid-template-columns: 152px 1fr;
+  grid-template-rows: 100%;      /* pin the row, or tall scenes push past 640 */
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+  will-change: transform;
+}
+
+/* ---- sidebar --------------------------------------------------------- */
+.pf-side {
+  background: var(--surface-2);
+  overflow: hidden;
+  border-right: 1px solid var(--line);
+  padding: 12px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.pf-brand {
+  display: flex; align-items: center; gap: 7px;
+  padding: 2px 6px 12px;
+}
+.pf-mark {
+  width: 17px; height: 17px; border-radius: 5px;
+  background: var(--accent); flex: none;
+  display: grid; place-items: center;
+  color: #fff; font-size: 10px; font-weight: var(--weight-bold);
+}
+.pf-brand b { font: var(--weight-semi) 13px/1.1 var(--font-display); color: var(--ink); display: block; }
+.pf-brand span { font-size: 10.5px; color: var(--muted); }
+
+.pf-group {
+  font: var(--weight-semi) 9.5px/1 var(--font-body);
+  letter-spacing: .09em; text-transform: uppercase;
+  color: var(--faint); padding: 12px 8px 5px;
+}
+.pf-nav {
+  display: flex; align-items: center; gap: 8px;
+  padding: 6px 8px; border-radius: 6px;
+  color: var(--body); font-size: 12px;
+  transition: background var(--t-hover) var(--ease-out),
+              color var(--t-hover) var(--ease-out);
+}
+.pf-nav i { width: 13px; height: 13px; flex: none; opacity: .62; }
+.pf-nav.is-on { background: var(--accent-soft); color: var(--accent); font-weight: var(--weight-semi); }
+.pf-nav.is-on i { opacity: 1; }
+.pf-side-foot { margin-top: auto; padding-top: 12px; border-top: 1px solid var(--line); }
+
+/* ---- tab strip ------------------------------------------------------- */
+.pf-main { min-width: 0; min-height: 0; display: flex; flex-direction: column; background: var(--surface); }
+.pf-tabs {
+  display: flex; align-items: stretch; gap: 1px;
+  border-bottom: 1px solid var(--line);
+  background: var(--surface-2);
+  padding: 0 6px; flex: none;
+}
+.pf-tab {
+  display: flex; align-items: center; gap: 5px;
+  padding: 7px 10px; font-size: 11.5px; color: var(--muted);
+  white-space: nowrap; border-bottom: 2px solid transparent;
+  transition: color var(--t-hover) var(--ease-out),
+              border-color var(--t-hover) var(--ease-out),
+              background var(--t-hover) var(--ease-out);
+}
+.pf-x { color: var(--faint); font-size: 11px; }
+.pf-tab.is-on {
+  background: var(--surface); color: var(--ink);
+  font-weight: var(--weight-medium); border-bottom-color: var(--accent);
+}
+
+.pf-body { flex: 1; min-height: 0; overflow: hidden; position: relative; }
+
+/* ---- glass control bar ------------------------------------------------ */
+/* Docked to the bottom of the frame rather than following the cursor, so the
+   pause control is something you can actually hit. It sits above the scaled
+   canvas, so its text stays at real size however far the frame has been
+   shrunk. Frosted, but in our palette — deep ink, one hairline, no chrome. */
+.pf-glass {
+  position: absolute; z-index: 3;
+  left: 50%; bottom: var(--space-4);
+  width: max-content; max-width: min(660px, calc(100% - 2 * var(--space-5)));
+  display: flex; align-items: center; gap: var(--space-4);
+  padding: 10px 12px 10px 10px;
+  border-radius: 14px;
+  background: hsl(210 24% 10% / .74);
+  -webkit-backdrop-filter: blur(20px) saturate(1.7);
+  backdrop-filter: blur(20px) saturate(1.7);
+  border: 1px solid hsl(0 0% 100% / .13);
+  box-shadow: 0 10px 34px hsl(210 24% 6% / .3);
+  opacity: 0; transform: translate(-50%, 8px);
+  transition: opacity 200ms var(--ease-out), transform 200ms var(--ease-out);
+  pointer-events: none;
+}
+.pf-stage.is-hot .pf-glass {
+  opacity: 1; transform: translate(-50%, 0); pointer-events: auto;
+}
+
+.pf-glass p {
+  flex: 1; min-width: 0; margin: 0;
+  font: var(--weight-normal) 13px/1.45 var(--font-body);
+  color: hsl(210 14% 82%);
+  animation: pfIn 260ms var(--ease-out) both;
+}
+.pf-count {
+  font: var(--weight-semi) 11px/1 var(--font-body);
+  color: hsl(210 12% 58%); font-variant-numeric: tabular-nums; flex: none;
+}
+
+.pf-play {
+  flex: none; width: 30px; height: 30px; border-radius: 9px;
+  display: grid; place-items: center; cursor: pointer;
+  background: hsl(0 0% 100% / .1); border: 1px solid hsl(0 0% 100% / .16);
+  transition: background var(--t-hover) var(--ease-out),
+              transform var(--t-press) var(--ease-out);
+}
+.pf-play:hover { background: hsl(0 0% 100% / .2); }
+.pf-play:active { transform: scale(.94); }
+.pf-play svg { width: 11px; height: 11px; fill: #fff; }
+
+/* A hoverable region of the interface reads as one, faintly. */
+.pf-canvas [data-tip] { transition: box-shadow var(--t-hover) var(--ease-out); }
+/* Inset, so a highlighted region never paints over its neighbours. */
+.pf-canvas [data-tip]:hover {
+  box-shadow: inset 0 0 0 1.5px hsl(158 64% 24% / .3);
+}
+
+/* ---- shared app furniture -------------------------------------------- */
+.pf-pad { padding: 16px 20px; }
+.pf-h { font: var(--weight-semi) 20px/1.2 var(--font-display); color: var(--ink); letter-spacing: -.02em; }
+.pf-sub { font-size: 11.5px; color: var(--muted); margin-top: 3px; }
+
+.pf-card {
+  border: 1px solid var(--line); border-radius: 8px;
+  background: var(--surface);
+}
+.pf-chip {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 3px 9px; border-radius: 999px;
+  border: 1px solid var(--line); background: var(--surface);
+  font-size: 10.5px; font-weight: var(--weight-medium); color: var(--muted);
+  white-space: nowrap;
+}
+.pf-chip::before {
+  content: ""; width: 6px; height: 6px; border-radius: 50%;
+  background: currentColor; flex: none;
+}
+.pf-chip--bare::before { display: none; }
+.pf-chip--ok    { color: var(--accent); border-color: var(--accent-line); background: var(--accent-soft); }
+.pf-chip--warn  { color: var(--warn);   border-color: hsl(35 60% 84%);  background: hsl(35 80% 96%); }
+.pf-chip--soon  { color: hsl(210 50% 40%); border-color: hsl(210 40% 86%); background: hsl(210 60% 97%); }
+.pf-chip--out   { color: var(--faint); }
+.pf-chip--stop  { color: var(--danger); border-color: hsl(9 50% 84%); background: hsl(9 70% 97%); }
+
+.pf-btn {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 5px 11px; border-radius: 6px; font-size: 11.5px;
+  font-weight: var(--weight-semi); border: 1px solid var(--line);
+  background: var(--surface); color: var(--ink); white-space: nowrap;
+}
+.pf-btn--go { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+.pf-meter { height: 5px; border-radius: 3px; background: var(--line-soft); overflow: hidden; display: flex; }
+.pf-meter i { display: block; height: 100%; background: var(--accent); }
+.pf-meter i.w { background: var(--warn); }
+
+/* ---- scene entrance --------------------------------------------------- */
+/* Each scene remounts, so a one-shot animation plays without JS timing. */
+@keyframes pfIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+@keyframes pfSlide { from { opacity: 0; transform: translateX(-10px); } to { opacity: 1; transform: none; } }
+@keyframes pfGrow { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes pfPulse {
+  0%, 100% { box-shadow: 0 0 0 0 hsl(158 64% 24% / 0); }
+  40%      { box-shadow: 0 0 0 5px hsl(158 64% 24% / .18); }
+}
+
+.pf-in > * { animation: pfIn 420ms var(--ease-out) both; }
+.pf-in > *:nth-child(1) { animation-delay: 60ms; }
+.pf-in > *:nth-child(2) { animation-delay: 140ms; }
+.pf-in > *:nth-child(3) { animation-delay: 220ms; }
+.pf-in > *:nth-child(4) { animation-delay: 300ms; }
+.pf-in > *:nth-child(5) { animation-delay: 380ms; }
+.pf-in > *:nth-child(6) { animation-delay: 460ms; }
+.pf-in > *:nth-child(7) { animation-delay: 540ms; }
+.pf-in > *:nth-child(8) { animation-delay: 620ms; }
+.pf-in > *:nth-child(9) { animation-delay: 700ms; }
+.pf-in > *:nth-child(10) { animation-delay: 780ms; }
+.pf-in > *:nth-child(n+11) { animation-delay: 860ms; }
+
+.pf-late  { animation: pfIn 500ms var(--ease-out) 900ms both; }
+.pf-late2 { animation: pfIn 500ms var(--ease-out) 1500ms both; }
+.pf-late3 { animation: pfIn 500ms var(--ease-out) 2100ms both; }
+.pf-meter i { transform-origin: left; animation: pfGrow 900ms var(--ease-out) 400ms both; }
+.pf-approve { animation: pfPulse 1400ms var(--ease-in-out) 2400ms 2; }
+
+/* ---- scene: form builder ---------------------------------------------- */
+.pf-form { display: grid; grid-template-columns: 118px 1fr 250px; height: 100%; }
+.pf-palette { overflow: hidden; border-right: 1px solid var(--line); padding: 10px 8px; background: var(--surface); }
+.pf-ptype {
+  display: flex; align-items: center; gap: 6px;
+  padding: 3.5px 6px; font-size: 11px; color: var(--body); border-radius: 5px;
+}
+.pf-ptype b { color: var(--accent); font-weight: var(--weight-semi); width: 11px; flex: none; text-align: center; }
+.pf-fields { overflow: hidden; padding: 12px 14px; overflow: hidden; }
+.pf-frow {
+  display: flex; align-items: center; gap: 9px;
+  border: 1px solid var(--line); border-radius: 7px;
+  padding: 7px 10px; margin-bottom: 5px; background: var(--surface);
+  font-size: 12px; color: var(--ink);
+}
+.pf-frow--head {
+  background: var(--surface-2); border-style: dashed; color: var(--muted);
+  font-weight: var(--weight-semi); font-size: 11px;
+  letter-spacing: .04em; text-transform: uppercase;
+}
+.pf-frow .pf-grab { color: var(--faint); font-size: 11px; letter-spacing: -1px; }
+.pf-frow .pf-type { margin-left: auto; font-size: 10.5px; color: var(--muted); }
+.pf-toggle {
+  width: 24px; height: 13px; border-radius: 999px; background: var(--line);
+  flex: none; position: relative;
+}
+.pf-toggle::after {
+  content: ""; position: absolute; top: 2px; left: 2px;
+  width: 9px; height: 9px; border-radius: 50%; background: var(--surface);
+  transition: transform var(--t-hover) var(--ease-out);
+}
+.pf-toggle.is-on { background: var(--accent); }
+.pf-toggle.is-on::after { transform: translateX(11px); }
+
+.pf-preview { overflow: hidden; border-left: 1px solid var(--line); background: var(--surface-2); padding: 14px; }
+.pf-paper {
+  background: #fff; border: 1px solid var(--line); border-radius: 3px;
+  height: 100%; padding: 12px 11px; font-size: 8px; line-height: 1.5;
+  box-shadow: var(--shadow-lift);
+}
+.pf-paper .r { height: 4px; border-radius: 2px; background: var(--line-soft); margin: 4px 0; }
+.pf-paper .band {
+  background: var(--accent-soft); color: var(--accent);
+  font-weight: var(--weight-bold); font-size: 7px; letter-spacing: .1em;
+  padding: 3px 5px; margin: 8px 0 5px; border-radius: 2px;
+}
+
+/* ---- scene: policy ---------------------------------------------------- */
+.pf-policy { display: grid; grid-template-columns: 1fr 1fr; height: 100%; }
+.pf-clause { border: 1px solid var(--line); border-radius: 7px; padding: 8px 10px; margin-bottom: 7px; }
+.pf-clause .n { font-size: 10.5px; color: var(--faint); font-weight: var(--weight-semi); }
+.pf-clause .t { font-size: 12px; color: var(--ink); font-weight: var(--weight-medium); }
+.pf-clause .d { font-size: 10.5px; color: var(--muted); margin: 5px 0 7px; }
+.pf-doc { overflow: hidden; border-left: 1px solid var(--line); background: var(--surface-2); padding: 16px 18px; }
+.pf-doc .num {
+  font: var(--weight-bold) 15px/1 var(--font-display);
+  color: var(--deep); flex: none; width: 22px;
+}
+
+/* ---- scene: subject --------------------------------------------------- */
+.pf-subject { display: grid; grid-template-columns: 1fr 168px; height: 100%; }
+.pf-avatar {
+  width: 38px; height: 38px; border-radius: 50%; flex: none;
+  background: var(--accent); color: #fff;
+  display: grid; place-items: center;
+  font: var(--weight-bold) 16px/1 var(--font-display);
+}
+.pf-stat { border: 1px solid var(--line); border-radius: 7px; padding: 8px 10px; }
+.pf-stat b { font: var(--weight-bold) 19px/1 var(--font-display); color: var(--ink); }
+.pf-stat b s { text-decoration: none; font-size: 11px; color: var(--muted); font-weight: var(--weight-normal); }
+.pf-stat span { display: block; font-size: 9.5px; color: var(--muted); letter-spacing: .06em; text-transform: uppercase; margin-bottom: 4px; }
+.pf-timeline { overflow: hidden; border-left: 1px solid var(--line); background: var(--surface-2); padding: 12px; }
+.pf-tl {
+  position: relative; padding-left: 13px; padding-bottom: 12px;
+  border-left: 1px solid var(--line); margin-left: 3px;
+}
+.pf-tl::before {
+  content: ""; position: absolute; left: -4.5px; top: 3px;
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--surface-2); border: 1.5px solid var(--faint);
+}
+.pf-tl.is-new::before { background: var(--accent); border-color: var(--accent); }
+
+/* ---- scene: compliance ------------------------------------------------ */
+.pf-req {
+  display: grid; grid-template-columns: 62px 1fr 90px 34px;
+  align-items: center; gap: 10px;
+  padding: 6px 10px; border-bottom: 1px solid var(--line-soft);
+  font-size: 11.5px;
+}
+.pf-req code { font-size: 10.5px; color: var(--ink); font-weight: var(--weight-semi); }
+.pf-req .pct { text-align: right; color: var(--muted); font-variant-numeric: tabular-nums; }
+.pf-req--top { background: var(--surface-2); font-weight: var(--weight-semi); }
+.pf-backing {
+  background: var(--surface-2); border: 1px solid var(--line);
+  border-radius: 6px; padding: 8px 10px; margin: 6px 0 6px 72px;
+  font-size: 10.5px; color: var(--muted);
+}
+.pf-backing b { color: var(--ink); font-weight: var(--weight-semi); }
+.pf-backing kbd {
+  font: var(--weight-medium) 10px/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+  background: var(--surface); border: 1px solid var(--line);
+  border-radius: 3px; padding: 2px 5px; color: var(--body);
+}
+
+/* ---- scene: copilot --------------------------------------------------- */
+.pf-copilot { display: grid; grid-template-columns: 148px 1fr 168px; height: 100%; }
+.pf-chats { overflow: hidden; border-right: 1px solid var(--line); padding: 10px; }
+.pf-thread { overflow: hidden; padding: 14px 18px; overflow: hidden; }
+.pf-said {
+  align-self: flex-end; background: var(--ink); color: var(--paper);
+  padding: 6px 11px; border-radius: 12px 12px 3px 12px;
+  font-size: 11.5px; max-width: 60%;
+}
+.pf-tool { display: flex; align-items: center; gap: 6px; font-size: 10.5px; color: var(--muted); }
+.pf-tool b { color: var(--accent); }
+.pf-tool kbd {
+  font: var(--weight-medium) 10px/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+  background: var(--surface-2); border: 1px solid var(--line);
+  border-radius: 3px; padding: 2px 5px;
+}
+.pf-panel { overflow: hidden; border-left: 1px solid var(--line); background: var(--surface-2); padding: 12px; font-size: 10.5px; }
+
+/* ---- chapters -------------------------------------------------------- */
+.pf-chapters {
+  display: grid; grid-template-columns: repeat(5, 1fr);
+  gap: var(--space-5); margin-top: var(--space-5);
+}
+.pf-chapter {
+  appearance: none; background: none; border: 0; padding: 0;
+  text-align: left; cursor: pointer; color: var(--muted);
+  border-top: 2px solid var(--line);
+  padding-top: var(--space-3);
+  transition: color var(--t-hover) var(--ease-out);
+  position: relative;
+}
+.pf-chapter b {
+  display: block; font: var(--weight-semi) var(--text-sm)/1.3 var(--font-body);
+  color: inherit;
+}
+.pf-chapter em {
+  display: block; font-style: normal; font-size: var(--text-xs);
+  color: var(--faint); margin-top: 2px;
+}
+.pf-chapter:hover { color: var(--ink); }
+.pf-chapter[aria-current="true"] { color: var(--ink); }
+.pf-chapter[aria-current="true"] em { color: var(--muted); }
+/* The progress line doubles as the chapter's top border filling up. */
+.pf-chapter::after {
+  content: ""; position: absolute; top: -2px; left: 0; width: 0;
+  height: 2px; background: var(--accent);
+}
+/* The bar IS the timer: when it finishes, `animationend` advances the film. */
+.pf-chapter[aria-current="true"]::after {
+  width: 100%;
+  transform-origin: left;
+  animation: pfGrow var(--pf-dur) linear forwards;
+}
+.pf-chapter.is-held::after { animation-play-state: paused; }
+
+
+/* The caption sits directly under the frame, so it is unambiguously about the
+   scene above it rather than about whichever chapter it happens to land over.
+   It is re-keyed on scene change, so it fades in with the screen. */
+/* Scoped under `.pf` on purpose: `.s-page p { margin: 0 }` in site.css is
+   (0,1,1) and out-specifies a bare `.pf-caption`, which silently zeroed this. */
+.pf .pf-caption {
+  margin-top: var(--space-7); max-width: 68ch; min-height: 4.2em;
+  font-size: var(--text-lg); color: var(--body);
+  animation: pfIn 420ms var(--ease-out) both;
+}
+.pf-caption b { color: var(--ink); font-weight: var(--weight-semi); }
+
+.pf-step {
+  display: inline-grid; place-items: center;
+  width: 18px; height: 18px; border-radius: 50%;
+  border: 1.5px solid var(--line); background: var(--surface);
+  font: var(--weight-semi) 10px/1 var(--font-body);
+  color: var(--faint); margin-bottom: var(--space-2);
+  transition: border-color var(--t-hover) var(--ease-out),
+              background var(--t-hover) var(--ease-out),
+              color var(--t-hover) var(--ease-out);
+}
+.pf-chapter[aria-current="true"] .pf-step {
+  background: var(--accent); border-color: var(--accent); color: #fff;
+}
+
+/* ---- narrow ---------------------------------------------------------- */
+/* Same film, same chrome, scaled to fit. Hiding the sidebar would show a
+   different product from the one on desktop, and the point of this section is
+   that it is the actual interface. The caption underneath stays full size and
+   carries the meaning at any width. */
+@media (max-width: 899px) {
+  /* Full-bleed, so the frame gets the whole width instead of losing 48px to
+     the page gutter — on a phone that is the difference between a legible
+     interface and a thumbnail. */
+  .pf-stage {
+    width: auto;
+    margin-inline: calc(var(--space-5) * -1);
+    border-inline: 0; border-radius: 0;
+    box-shadow: none; border-block-color: var(--ink);
+  }
+  .pf-glass { max-width: calc(100% - var(--space-4)); padding: 8px 10px 8px 8px; }
+  .pf-glass p { font-size: 12px; }
+  .pf .pf-caption { min-height: 0; font-size: var(--text-base); margin-top: var(--space-6); }
+  .pf-chapters { grid-template-columns: repeat(2, 1fr); gap: var(--space-4); margin-top: var(--space-5); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pf-in > *, .pf-late, .pf-late2, .pf-late3,
+  .pf-meter i, .pf-approve, .pf-chapter::after {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}

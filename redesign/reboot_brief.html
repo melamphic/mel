@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Salvia — website reboot brief (research · inspiration · how to proceed)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --grass:#48CD5F; --grass-ink:#1c7a2f; --grass-wash:#eafaec;
+  --ink:#10231a; --body:#31423a; --muted:#67766e; --line:#e3ebe5; --line2:#eef3ef;
+  --bg:#f7faf7; --card:#ffffff; --canvas:#fbfdfb;
+  --keep:#2fa85f; --rework:#e0912b; --cut:#c65454; --new:#3d7fe0;
+  --keep-bg:#e7f6ee; --rework-bg:#fbf1e0; --cut-bg:#fbe9e6; --new-bg:#e8f0fd;
+  --radius:14px; --maxw:1080px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--body);
+  font-family:"Archivo",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  font-size:15.5px;line-height:1.62;-webkit-font-smoothing:antialiased}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 22px}
+a{color:var(--grass-ink);text-decoration:none} a:hover{text-decoration:underline}
+.top{background:var(--ink);color:#fff;padding:52px 0 44px}
+.kick{font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--grass);font-weight:700}
+.top h1{font-size:33px;line-height:1.1;margin:12px 0 10px;font-weight:800;letter-spacing:-.02em;color:#fff}
+.top p{margin:0;color:#b9c7bd;font-size:16px;max-width:74ch}
+.top .meta{margin-top:18px;font-size:12.5px;color:#8fa295}
+nav.jump{position:sticky;top:0;z-index:10;background:rgba(251,253,251,.92);
+  backdrop-filter:blur(8px);border-bottom:1px solid var(--line);padding:11px 0}
+nav.jump .wrap{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+nav.jump a{font-size:12.5px;font-weight:600;color:var(--muted);padding:5px 10px;border-radius:8px}
+nav.jump a:hover{background:var(--grass-wash);color:var(--grass-ink);text-decoration:none}
+section{padding:44px 0 8px}
+h2{font-size:24px;font-weight:800;letter-spacing:-.02em;color:var(--ink);margin:0 0 4px;display:flex;align-items:center;gap:11px}
+h2 .num{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;background:var(--grass);color:#fff;border-radius:9px;font-size:14px;font-weight:800;flex:none}
+.lead{color:var(--muted);font-size:14.5px;margin:2px 0 22px 41px}
+h3{font-size:17px;font-weight:800;color:var(--ink);margin:26px 0 8px;letter-spacing:-.01em}
+h4{font-size:14.5px;font-weight:800;color:var(--ink);margin:16px 0 4px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:20px 22px;margin:14px 0}
+.card.tight{padding:15px 17px}
+.callout{background:var(--grass-wash);border:1px solid #cdeed3;border-radius:var(--radius);padding:18px 20px;margin:16px 0}
+.callout b{color:var(--grass-ink)}
+.warn{background:#fff7ec;border:1px solid #f2e2c0;border-radius:var(--radius);padding:16px 18px;margin:14px 0}
+.copyex{background:var(--canvas);border-left:3px solid var(--grass);border-radius:0 10px 10px 0;padding:12px 16px;margin:10px 0;font-size:15px;color:var(--ink)}
+.copyex .h{font-size:10.5px;font-weight:800;text-transform:uppercase;letter-spacing:.09em;color:var(--muted);margin-bottom:5px}
+.copyex .big{font-weight:800;font-size:18px;letter-spacing:-.01em;line-height:1.25}
+.copyex .sub{color:var(--body);font-size:14px;margin-top:5px}
+.mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;color:#4a5a51;background:var(--line2);padding:1px 6px;border-radius:5px}
+table{width:100%;border-collapse:collapse;margin:10px 0;font-size:13.5px}
+th{text-align:left;font-weight:700;color:var(--muted);font-size:11.5px;text-transform:uppercase;letter-spacing:.05em;padding:9px 10px;border-bottom:2px solid var(--line)}
+td{padding:10px;border-bottom:1px solid var(--line2);vertical-align:top;color:var(--body)}
+td b{color:var(--ink)}
+tr:hover td{background:var(--canvas)}
+ul.clean{list-style:none;padding:0;margin:8px 0}
+ul.clean li{padding:7px 0 7px 26px;position:relative;border-bottom:1px solid var(--line2);font-size:14px}
+ul.clean li:before{content:"→";position:absolute;left:2px;color:var(--grass);font-weight:800}
+ul.clean li b{color:var(--ink)}
+.chip{display:inline-flex;align-items:center;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;padding:3px 9px;border-radius:6px}
+.k-keep{background:var(--keep-bg);color:#1c6e3d}.k-rework{background:var(--rework-bg);color:#8a5a10}
+.k-cut{background:var(--cut-bg);color:#9a2f2f}.k-new{background:var(--new-bg);color:#254e91}
+.pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:14px 0}
+.pillars .p{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 17px;border-top:3px solid var(--grass)}
+.pillars .p .t{font-weight:800;color:var(--ink);font-size:15px;margin-bottom:4px}
+.pillars .p .d{font-size:13px;color:var(--body);line-height:1.5}
+.pillars .p .n{font-size:11px;font-weight:800;color:var(--grass-ink);letter-spacing:.08em;text-transform:uppercase}
+@media(max-width:720px){.pillars{grid-template-columns:1fr}}
+.seq{margin:14px 0}
+.seq .step{display:grid;grid-template-columns:auto 1fr;gap:15px;padding:14px 0;border-bottom:1px solid var(--line2)}
+.seq .step .n{width:34px;height:34px;border-radius:10px;background:var(--ink);color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center;font-size:15px;flex:none}
+.seq .step h4{margin:2px 0 3px}
+.seq .step p{margin:0;font-size:13.5px;color:var(--body)}
+.dec{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--new);border-radius:0 12px 12px 0;padding:14px 17px;margin:12px 0}
+.dec .q{font-weight:800;color:var(--ink);font-size:15px}
+.dec .rec{font-size:13.5px;color:var(--body);margin-top:5px}
+.dec .rec b{color:var(--grass-ink)}
+.foot{margin:50px 0 40px;padding-top:20px;border-top:1px solid var(--line);color:var(--muted);font-size:12.5px}
+.src{font-size:12px;color:var(--muted)}
+</style></head>
+<body>
+
+<header class="top"><div class="wrap">
+  <div class="kick">Salvia · mel reboot — companion to overhaul_plan.html</div>
+  <h1>Reboot the site around continuous compliance. Research, inspiration, and how to proceed.</h1>
+  <p>The strategy was already set in <b style="color:#eafaec">overhaul_plan.html</b> (the clinical Vanta — compliance-lead,
+  worldwide, framework-differentiated, grass kept). This brief <b style="color:#eafaec">evolves</b> it: it sharpens the three
+  stories that plan under-sold — <b style="color:#eafaec">measure the unmeasurable · real-time to the person in charge ·
+  integrations</b> — hands you an inspiration board, and lays out the order of work and the decisions needed.</p>
+  <div class="meta">Sources: in-repo 16-competitor scan (competitor_research.md) + full site audit (audit_current_site.md) + current product knowledge. Live copy/URLs to spot-check before use.</div>
+</div></header>
+
+<nav class="jump"><div class="wrap">
+  <a href="#where">Where we are</a>
+  <a href="#arc">The narrative arc</a>
+  <a href="#angles">3 sharpened angles</a>
+  <a href="#home">Home map (updated)</a>
+  <a href="#insp-msg">Inspiration · messaging</a>
+  <a href="#insp-viz">Inspiration · visual</a>
+  <a href="#artdir">Art direction</a>
+  <a href="#purge">Residue to purge</a>
+  <a href="#proceed">How to proceed</a>
+</div></nav>
+
+<!-- WHERE -->
+<section id="where"><div class="wrap">
+  <h2><span class="num">0</span>Where we are — don't restart, evolve</h2>
+  <div class="lead">A strong plan exists. This brief adds the missing angles, the inspiration, and the sequencing.</div>
+  <div class="callout">
+    <b>The diagnosis and skeleton are done.</b> The audit proved the confusion is one root cause — a beautiful India-first
+    front-end over a multi-country / per-seat / four-vertical back-end, with the agentic-compliance north star absent.
+    The overhaul plan already commits to: compliance-lead hero (Connect · Agent · Any framework), a new nav that <i>is</i>
+    the strategy (<span class="mono">Platform · Frameworks · For Clinicians · For Hospitals · Pricing · Resources</span>),
+    worldwide + framework-differentiated + no country names, and grass kept. <b>We build on that — we don't redo it.</b>
+  </div>
+  <p>What your latest direction adds: make <b>continuous compliance measurable</b> the emotional core, make the
+  <b>real-time watch + alert-the-owner</b> tangible, and make <b>integrations</b> a first-class promise — then purge every
+  flag and India-residue so the global story is clean everywhere.</p>
+</div></section>
+
+<!-- ARC -->
+<section id="arc"><div class="wrap">
+  <h2><span class="num">1</span>The narrative arc — the Vanta playbook, completed for clinical</h2>
+  <div class="lead">Four verbs. The current plan nails "connect" and "prove"; your direction completes "monitor" and "alert".</div>
+  <div class="pillars">
+    <div class="p"><div class="n">1 · Connect</div><div class="t">Your clinical stack</div><div class="d">Voice notes, consent, prescriptions, drug-admin, incidents, vitals — <b>and your HMIS / EMR / LIS / PACS</b>. Each becomes structured, checkable evidence.</div></div>
+    <div class="p"><div class="n">2 · Measure</div><div class="t">Make policy a number</div><div class="d">Every policy that was a PDF nobody could prove is now <b>scored on every note</b>. The unmeasurable becomes a live metric.</div></div>
+    <div class="p"><div class="n">3 · Monitor</div><div class="t">Always on, real-time</div><div class="d">A live posture score that moves as care happens — and the agent <b>tells the person in charge the moment something drifts</b>, not once a year.</div></div>
+    <div class="p" style="grid-column:1/-1;max-width:none"><div class="n">4 · Prove — any framework, global</div><div class="t">One capture engine → NABH · JCI · NSQHS · CMS · HEDIS · …</div><div class="d">The agent maps your evidence to whatever standard you answer to, worldwide. Add a framework, not a rebuild. You confirm; it never submits unsupervised. <b>The framework is the geography — the site never names a country.</b></div></div>
+  </div>
+  <p class="src">This is the whole moat sentence in motion: <b>"prove any framework from the clinical record."</b> Nobody in scribe-land or GRC-land says it.</p>
+</div></section>
+
+<!-- ANGLES -->
+<section id="angles"><div class="wrap">
+  <h2><span class="num">2</span>The three sharpened angles (with real copy)</h2>
+  <div class="lead">These are the new first-class stories. Each gets a homepage section and a page anchor.</div>
+
+  <h3>A · Measure the unmeasurable <span class="chip k-new">new hero section</span></h3>
+  <p>The single most differentiated line available. A policy has always been a document you <i>hoped</i> was followed.
+  Salvia turns each into a measurement. This reframes the whole category from "documentation" to "measurement of care."</p>
+  <div class="copyex"><div class="h">Section copy — candidate</div>
+    <div class="big">The policy you couldn't measure is now a number.</div>
+    <div class="sub">You wrote the hand-hygiene rule, the consent SOP, the sepsis pathway. Could you ever prove they were
+    followed — without a manual chart pull? Salvia scores every record against every policy the moment it's signed.
+    A binder becomes a live gauge.</div></div>
+  <p class="src">Visual: a <b>policy → live % gauge</b>. Left, the clause ("Hand hygiene documented before procedure"); right,
+  a green number ticking with each note. Borrow the observability trope — <i>"you can't improve what you can't measure"</i> —
+  applied to care, not servers.</p>
+
+  <h3>B · Real-time, to the person in charge <span class="chip k-new">new section</span></h3>
+  <p>"Always-on" only lands when it's tangible: a posture that updates as care happens, and a named human who is told the
+  instant it slips. This is Vanta's <i>"continuous, real-time evidence of your active controls — beyond a one-time
+  snapshot,"</i> made clinical.</p>
+  <div class="copyex"><div class="h">Section copy — candidate</div>
+    <div class="big">Your quality lead finds out in real time — not at the audit.</div>
+    <div class="sub">Salvia watches every record as it's signed, keeps a live compliance posture, and flags the drift the
+    moment it happens — the missing consent, the unmonitored high-risk drug, the pathway skipped. No more pre-assessment
+    scramble.</div></div>
+  <p class="src">Visual: the <b>one-time-snapshot vs continuous</b> contrast (a dusty binder / annual audit spike, versus a
+  flat live line + an alert card to the compliance officer). Personify the agent with the <b>real Copilot screenshots</b> we
+  already have (the propose→commit card is a perfect "you confirm; it never acts alone" proof).</p>
+
+  <h3>C · Integrations — connect your stack <span class="chip k-rework">promote to first-class</span></h3>
+  <p>The plan has "Connections"; make it a proper section. Salvia sits <b>on top of</b> what a hospital already runs — it's
+  additive, not rip-and-replace. This de-risks the buy and reinforces "the compliance layer over your systems."</p>
+  <div class="copyex"><div class="h">Section copy — candidate</div>
+    <div class="big">Works with what you already run.</div>
+    <div class="sub">Connect your HMIS, EMR, LIS and PACS — plus Salvia's own capture. Every source becomes structured
+    evidence the agent reads. FHIR / HL7 in; audit-ready records out.</div></div>
+  <p class="src">Visual: a <b>connections grid</b> (system logos / typed source tiles) flowing into one evidence graph
+  (Vanta "connect your stack" analog; Zapier/Merge-style grid). Even pre-integrations, show the <i>data-point</i> tiles we
+  do ingest — the surface area reads real.</p>
+</div></section>
+
+<!-- HOME MAP -->
+<section id="home"><div class="wrap">
+  <h2><span class="num">3</span>Updated homepage section map</h2>
+  <div class="lead">The plan's home order, with the three new sections slotted in. Compliance/agent leads; clinical capture shows as the <i>mechanism</i>.</div>
+  <table>
+    <tr><th>#</th><th>Section</th><th>Job</th><th>Status</th></tr>
+    <tr><td>1</td><td><b>Hero — three pillars</b> (Connect · Agent · Any framework, global) + dual CTA + framework strip (never a country strip)</td><td>The vision in one screen</td><td><span class="chip k-rework">rework</span></td></tr>
+    <tr><td>2</td><td><b>Measure the unmeasurable</b> — policy → live number</td><td>The differentiator, emotional core</td><td><span class="chip k-new">new</span></td></tr>
+    <tr><td>3</td><td><b>The compliance agent</b> — always-on, drafts/flags/maps, you confirm; live posture score</td><td>The north star, personified</td><td><span class="chip k-new">new</span></td></tr>
+    <tr><td>4</td><td><b>Real-time to the person in charge</b> — snapshot-vs-continuous contrast + alert card</td><td>"Always-on" made tangible</td><td><span class="chip k-new">new</span></td></tr>
+    <tr><td>5</td><td><b>Frameworks grid</b> — one engine → many standards, clickable, off the real coverage engine</td><td>The global differentiation</td><td><span class="chip k-rework">rework</span></td></tr>
+    <tr><td>6</td><td><b>How it works</b> — voice → SOAP+vitals → typed widgets → policy check → agent maps to framework (keep drawn UIs, trim vet/aged-care examples)</td><td>Capture feeds the vision</td><td><span class="chip k-keep">keep+trim</span></td></tr>
+    <tr><td>7</td><td><b>Integrations</b> — connect your HMIS/EMR/LIS/PACS + FHIR/HL7</td><td>Additive, de-risks the buy</td><td><span class="chip k-new">new</span></td></tr>
+    <tr><td>8</td><td><b>Proof + Trust</b> — every stat "[X] per [source]"; framework-contextual badges (SOC2/ISO/GDPR/DPDP/FHIR surface by the standard picked)</td><td>Credibility</td><td><span class="chip k-rework">rework</span></td></tr>
+    <tr><td>9</td><td><b>Pricing teaser · Final CTA · Footer</b> — one source of truth; dual CTA that works; framework/badge footer, no flags</td><td>Convert + clean exit</td><td><span class="chip k-rework">rework</span></td></tr>
+  </table>
+</div></section>
+
+<!-- INSP MESSAGING -->
+<section id="insp-msg"><div class="wrap">
+  <h2><span class="num">4</span>Inspiration board — messaging & positioning</h2>
+  <div class="lead">Who to study for each angle, and exactly what to steal. Verbatim lines below are from the in-repo scan; treat others as patterns to confirm live.</div>
+
+  <table>
+    <tr><th>Source</th><th>Why study it</th><th>What to steal</th></tr>
+    <tr><td><b>Vanta</b> · vanta.com</td><td>The template. "Trust is everything" / "automated, continuously monitored across 35+ frameworks."</td><td>Outcome-noun hero, frameworks in the <i>sub</i>-head. The AI agent as "the GRC engineer you never had to hire — 24/7." <b>The live-evidence line:</b> "continuous, real-time evidence of your active controls — beyond a one-time snapshot." A hard number (95% acceptance).</td></tr>
+    <tr><td><b>Drata</b> · drata.com</td><td>"Explore the World of Agentic Trust"; autonomous agents "continuously prove your posture."</td><td>The verb <b>"continuously prove."</b> Agent as the brand. Stage-segmented pricing (opacity = enterprise motion).</td></tr>
+    <tr><td><b>Secureframe</b> · secureframe.com</td><td>Automation <b>+ human experts</b>; "Comply AI."</td><td>The assist-plus-human framing — a direct fit for our <b>propose→commit</b> ("you confirm; it never submits unsupervised").</td></tr>
+    <tr><td><b>Sprinto / Thoropass / Hyperproof</b></td><td>Continuous-control-monitoring challengers.</td><td>"Know your compliance status in real time" phrasing; "a control tested once a year is now tested every day" — the exact reframe for our <b>measure-the-unmeasurable</b> section.</td></tr>
+    <tr><td><b>Datadog · Honeycomb · Sentry · PagerDuty</b></td><td>Observability/alerting — the masters of "measure the invisible" + "know before your customers do."</td><td>The <b>gauge/score</b> visual language; "you can't fix what you can't see"; alert-the-owner-the-moment-it-breaks → our "the quality lead knows in real time."</td></tr>
+    <tr><td><b>Watershed</b> · watershed.com</td><td>Carbon/compliance-adjacent, <b>green brand</b>, serious data, editorial — proof a "measurement of the previously-unmeasured" category can look human, not navy.</td><td>How a green, editorial brand carries a serious measurement product credibly. Direct tonal analog.</td></tr>
+    <tr><td><b>Prowler</b> · prowler.com</td><td>Open-source "Agentic Cloud Defender"; transparent <b>$99</b>; Lighthouse AI + MCP.</td><td>Pricing transparency as a segment tell (our public clinic tiers). The founder loved its "Compliance" section tree — model our Frameworks page on it.</td></tr>
+    <tr><td><b>Eka / EkaScribe · Augnito</b> (India)</td><td>The India incumbents — but scribe/EMR-led; compliance is a <b>badge</b>, never the product.</td><td>What NOT to be. Confirms the whitespace: "prove compliance from the clinical record" is unclaimed. (Eka's India-native rails = the moat a Western scribe can't touch.)</td></tr>
+    <tr><td><b>Ambience</b> · ambiencehealthcare.com</td><td>Closest clinical analog — names "ensure compliance" in the hero (but means US coding/revenue integrity).</td><td>Proof a clinical-lead hero that says "compliance" works. We take the word and make it mean <i>accreditation</i>, not coding.</td></tr>
+  </table>
+
+  <div class="callout"><b>Transferable GRC playbook (from the scan) — apply all seven:</b>
+    <ul class="clean" style="margin-top:6px">
+      <li>Lead with an <b>outcome noun</b>; frameworks live in the sub-head, never the promise.</li>
+      <li>Make "continuous" tangible via the <b>live-evidence-vs-snapshot</b> contrast, not the adjective.</li>
+      <li><b>Personify the agent</b>: a role, a shift (24/7), and one hard number.</li>
+      <li>The agent's job is three verbs — <b>draft · flag · prove</b> — with a human-in-loop "second set of eyes."</li>
+      <li><b>Quantify everything</b>, sourced to a named customer/standard.</li>
+      <li>"One platform, many frameworks" = a <b>clickable grid</b> + a "by framework" nav path.</li>
+      <li>Ship a <b>Trust Center</b> that is both proof and product (live posture others can view).</li>
+    </ul>
+  </div>
+</div></section>
+
+<!-- INSP VISUAL -->
+<section id="insp-viz"><div class="wrap">
+  <h2><span class="num">5</span>Inspiration board — visual & design</h2>
+  <div class="lead">All chosen to FIT the grass system (white/cream, one green, Archivo, drawn UI) — the deliberate anti-navy stance. Not to import a new skin.</div>
+
+  <h4>Sites whose craft to borrow (clean, human, product-forward — not navy)</h4>
+  <table>
+    <tr><th>Site</th><th>What to steal</th></tr>
+    <tr><td><b>Linear</b> · linear.app</td><td>Restraint: monochrome + one accent, immaculate type rhythm, product shots at pixel fidelity, "fast" feel. The gold standard for section pacing.</td></tr>
+    <tr><td><b>Stripe</b> · stripe.com</td><td>Annotated, <b>drawn</b> product diagrams; "everything on screen is a real UI." The reference for product-dense-but-elegant — exactly our g-ui panels done at their level.</td></tr>
+    <tr><td><b>Ramp</b> · ramp.com</td><td>Confident, real-UI-heavy, <b>one green-ish accent</b> disciplined across the whole site. Closest palette cousin.</td></tr>
+    <tr><td><b>Mercury</b> · mercury.com</td><td>Calm, editorial tone for a "serious" (finance) category — proves seriousness ≠ navy. Soft depth, generous whitespace.</td></tr>
+    <tr><td><b>Retool</b> · retool.com</td><td>"The product IS the hero" — big, honest screenshots as the primary visual. Reuse our real Copilot / coverage-grid / policy-check UIs the same way.</td></tr>
+    <tr><td><b>Vercel</b> · vercel.com</td><td>Huge type scale + whitespace discipline; how to make a dense platform feel airy.</td></tr>
+    <tr><td><b>Sanity · Resend · Cal.com</b></td><td>Crisp dev-tool cards, one accent, tasteful motion, hairline structure — the "clean modern SaaS" baseline our grass already aims at.</td></tr>
+    <tr><td><b>Vanta / Secureframe</b> (their actual craft)</td><td>Proof a <b>compliance</b> product can look warm — they use bright illustration + product shots, not navy dashboards. Study their section-to-section rhythm.</td></tr>
+  </table>
+
+  <h4>How to visualize the hard concepts (find one strong reference each, then draw ours in grass)</h4>
+  <ul class="clean">
+    <li><b>Live posture / compliance score</b> — an animated green gauge or big % that ticks. Refs: Vanta posture, Datadog SLO/health, a credit-score dial. <i>Ours:</i> the homepage's signature moment — a number climbing as notes come in.</li>
+    <li><b>Framework / coverage grid</b> — clickable tiles → per-requirement state (measured / needs-one-datapoint / coming-soon / out-of-scope). Refs: Prowler Compliance tab, Vanta frameworks page. <i>Ours:</i> fed by the real coverage engine.</li>
+    <li><b>The agent, personified</b> — a copilot/chat surface + a "prepared change, you approve" card. Ref: Vanta AI, Intercom Fin. <i>Ours:</i> use the actual Copilot screenshots + the propose→commit card.</li>
+    <li><b>Integrations grid</b> — a logo/tile grid feeding one graph. Refs: Vanta integrations, Zapier/Merge. <i>Ours:</i> HMIS/EMR/LIS/PACS + FHIR/HL7 tiles → evidence graph.</li>
+    <li><b>Snapshot vs continuous</b> — a two-state before/after. Refs: Vanta's live-vs-one-time line. <i>Ours:</i> binder + audit-spike vs. flat live line + alert card.</li>
+  </ul>
+
+  <h4>Galleries to mine (browse with these terms — I couldn't crawl them live; open in a browser)</h4>
+  <ul class="clean">
+    <li><b>Land-book</b> (land-book.com) — search "compliance", "healthcare", "AI", "dashboard"; filter light/green.</li>
+    <li><b>SaaS Landing Page (saaslandingpage.com) · saaspo.com</b> — real B2B landing teardowns; filter by "security/compliance".</li>
+    <li><b>Godly (godly.website) · Awwwards</b> — "clean/minimal/SaaS" for the high-craft bar; steal motion + type, not palette.</li>
+    <li><b>Mobbin</b> — real product UI flows (compliance dashboards, onboarding) for the drawn-UI panels.</li>
+  </ul>
+  <p class="src">Note: the two research agents hit gallery fetch-blocks (403) and API errors, so specific award URLs aren't listed here — the named product sites above are stable and high-signal; verify any exact copy live before shipping it.</p>
+</div></section>
+
+<!-- ART DIRECTION -->
+<section id="artdir"><div class="wrap">
+  <h2><span class="num">6</span>Art-direction recommendations (inside grass)</h2>
+  <div class="lead">Five calls that keep the differentiator (clean/green/human) while raising the craft.</div>
+  <ul class="clean">
+    <li><b>The product is the hero.</b> Lead sections with real drawn Salvia UI (Copilot, coverage grid, policy-check rows, PDF hash) — Stripe/Retool ethos. We already have these; use them, not stock art.</li>
+    <li><b>One signature motion moment:</b> the live posture gauge ticking up in green on the homepage. Everything else stays still — restraint (Linear) beats scattered animation.</li>
+    <li><b>The framework grid is the centerpiece</b> of the differentiation — make it genuinely clickable and fed by the real coverage engine, not a static logo wall.</li>
+    <li><b>Personify the agent with the real thing</b> — actual Copilot screenshots + a propose→commit card — never an abstract "AI" glow/blob.</li>
+    <li><b>Hold the discipline:</b> white/cream · one green <span class="mono">#48CD5F</span> · Archivo · hairlines · generous whitespace. Borrow Linear's rhythm + Watershed's "green = serious measurement" credibility. Never navy, never purple-gradient, never a dark compliance skin (already rejected).</li>
+  </ul>
+</div></section>
+
+<!-- PURGE -->
+<section id="purge"><div class="wrap">
+  <h2><span class="num">7</span>The flags & residue to purge (global, everywhere)</h2>
+  <div class="lead">The confusion is one root cause: an India-front over a multi-country back-end. Kill the axis, not just the veneer.</div>
+  <ul class="clean">
+    <li><b>Country as an axis → gone.</b> Remove <span class="mono">CountrySwitcher.tsx</span>, the 7-country signup dropdown, and the country filter on <span class="mono">/frameworks</span>. Frameworks are the geography.</li>
+    <li><b>Structured data leak.</b> <span class="mono">prerender.mjs</span> bakes "Made in India 🇮🇳" + <span class="mono">areaServed: AU, NZ, UK, IE, US</span> + foreign-regulator copy into <b>every</b> page. Rewrite worldwide, framework-described, country-name-free.</li>
+    <li><b>Scribe framing.</b> Demote <span class="mono">ScribeVsSalvia.tsx</span> and any "documentation software" lead — comparing to scribes keeps us in their category.</li>
+    <li><b>IA bloat.</b> Fold 4 vertical + 6 discipline pages into <b>For Clinicians</b>; retire the off-strategy vet page; kill the dead blog rails (they 404).</li>
+    <li><b>Pricing = one source of truth.</b> Collapse the three contradictory models in <span class="mono">data/pricing.ts</span>; keep multi-currency worldwide; reconcile on-page vs meta prices.</li>
+    <li><b>Fix-now bugs.</b> <span class="mono">/hospitals</span> bakes as a 404 (SSR route table); <span class="mono">ArticlePage</span> on legacy orange; <span class="mono">/assets</span> + <span class="mono">/404</span> on legacy header/footer; <span class="mono">#demo</span> anchor missing; ~23 dead components (~5,200 LOC).</li>
+  </ul>
+</div></section>
+
+<!-- PROCEED -->
+<section id="proceed"><div class="wrap">
+  <h2><span class="num">8</span>How to proceed</h2>
+  <div class="lead">Dependency-ordered. Each phase leaves the site shippable. I build a page, you review, we move on.</div>
+  <div class="seq">
+    <div class="step"><div class="n">1</div><div><h4>Fix-now bugs + residue purge</h4><p>Un-break <span class="mono">/hospitals</span>, one pricing source of truth, strip country/flags from structured data + signup, migrate the two legacy pages, delete dead code. <b>No positioning decision needed — do first.</b></p></div></div>
+    <div class="step"><div class="n">2</div><div><h4>Home rebuild — the vision</h4><p>Three-pillar hero + the three new sections (measure the unmeasurable · the agent · real-time-to-the-person-in-charge). Everything downstream inherits this language.</p></div></div>
+    <div class="step"><div class="n">3</div><div><h4>Platform + Frameworks — the moat pages</h4><p>Connect → capture → check → agent → prove. The clickable worldwide framework grid off the coverage engine. This is the "prove any framework from the record" story nobody else tells.</p></div></div>
+    <div class="step"><div class="n">4</div><div><h4>The two doors</h4><p>For Clinicians (the wedge — absorbs the good vertical copy) + For Hospitals (rework the strong page). New nav goes live. Integrations section lands here + on Home.</p></div></div>
+    <div class="step"><div class="n">5</div><div><h4>Pricing + Resources, then prune + SEO</h4><p>Pricing on one truth, split by door. Blog → framework/compliance taxonomy, off legacy orange. Worldwide, country-name-free structured data. Stand up Customers when the first real pilot logo exists.</p></div></div>
+  </div>
+
+  <h3>Decisions I need from you first</h3>
+  <div class="dec"><div class="q">1 · Hero headline lane</div><div class="rec">Options: (a) "Compliance that proves itself — from the clinical record"; (b) "Every note, continuously proving your compliance. Any framework"; (c) a measure-the-unmeasurable line ("Turn every policy into a number"). <b>My pick: (a)</b> — it's the moat sentence, and the measure/monitor sections carry the rest.</div></div>
+  <div class="dec"><div class="q">2 · Public pricing model</div><div class="rec">Keep <b>transparent multi-currency clinic tiers worldwide + "contact sales" for hospitals</b> (recommended — transparency is the SMB/PLG counter-move in a "book a demo" field), or hospitals-only sales-led? <b>My pick: transparent clinic tiers + sales-led hospitals.</b></div></div>
+  <div class="dec"><div class="q">3 · Scope of this pass</div><div class="rec">Full reboot in one sweep, or <b>fix-now bugs + Home first, then page-by-page</b>? <b>My pick: the latter</b> — the bugs make the current site coherent immediately, and Home sets the language everything inherits.</div></div>
+
+  <div class="callout" style="margin-top:18px"><b>Say the word on the three decisions</b> (or "use your picks and go") and I'll start with Phase 1 — the fix-now bugs + residue purge — which needs no further input and un-confuses the live site on its own.</div>
+</div></section>
+
+<div class="wrap foot">
+  Salvia · mel reboot brief · companion to <b>overhaul_plan.html</b> + <b>competitor_research.md</b> + <b>audit_current_site.md</b>.
+  Position: the compliance platform for clinical care — connect · measure · monitor · prove any framework, global. Grass kept; sold vision-first, wedged with clinical pilots.
+  A plan, not a spec — each page is refined as it's built.
+</div>
+
+</body></html>

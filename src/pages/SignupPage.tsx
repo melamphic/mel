@@ -2,9 +2,10 @@ import { useEffect, useMemo, useRef, useState, type CSSProperties, type FormEven
 import { useSearchParams, Link } from 'react-router-dom';
 
 import { SEO } from '../components/SEO';
-import { GrassFooter } from '../components/grass/GrassFooter';
-import { GrassHeader } from '../components/grass/GrassHeader';
-import { Rv } from '../components/grass/Rv';
+import { SiteFooter } from '../components/SiteFooter';
+import { SiteHeader } from '../components/SiteHeader';
+import '../styles/site.css';
+import { Rv } from '../components/Rv';
 import { SAL_API_BASE, INDIA_ONLY } from '../config';
 import type { Vertical } from '../data/pricing';
 import { identify, track } from '../lib/posthog';
@@ -221,47 +222,42 @@ export const SignupPage = () => {
   return (
     <>
       <SEO
-        title="Start your free Salvia trial"
-        description="Get started with Salvia — AI clinical documentation and compliance for Indian clinics, hospitals, dental and veterinary practices. 21 days free, no card, cancel anytime."
+        title="Talk to us"
+        description="Tell us where the paperwork breaks in your practice. We set Salvia up with your own forms and the framework you are assessed against — CQC, HIQA, CMS, NABH or JCI."
         path="/start"
-        keywords={['Salvia free trial', 'AI clinical documentation India', 'clinic compliance software trial', 'AI medical scribe India signup']}
+        keywords={['clinical compliance software', 'CQC record keeping software', 'NABH documentation software', 'audit readiness']}
       />
-      <GrassHeader />
-      <main style={{ flex: 1, zIndex: 10, background: '#fff' }}>
+      <SiteHeader />
+      <main style={{ flex: 1 }}>
         <SignupStyles />
-        <section className="g-section" style={{ padding: '140px 0 96px' }}>
-          <div className="g-container">
+        <section className="s-section">
+          <div className="s-wrap">
             <div className="su-grid">
 
               {/* ── Left: the pitch ── */}
               <div>
-                <Rv as="h1" className="g-h1" style={{ fontSize: 'clamp(36px, 4.2vw, 58px)', marginBottom: 18 }}>
-                  Get started with <span className="g-hl">Salvia.</span>
-                </Rv>
-                <Rv as="p" className="g-sub" delay={1}>
-                  Tell us about your clinic and we'll set you up in Salvia — your actual forms,
-                  your workflow, <b>no slides, no pitch deck</b>. 21 days of full access, free,
-                  no card.
-                </Rv>
-                <Rv delay={2}>
-                  <img
-                    src="/illustrations/signup_scene.webp"
-                    alt="A friendly Salvia team member welcoming you, waving hello"
-                    style={{ width: 'min(380px, 88%)', height: 'auto', display: 'block', margin: '30px 0 4px' }}
-                  />
-                </Rv>
-                <Rv className="g-facts" delay={3}>
-                  {STEPS.map((s) => (
-                    <div className="g-fact" key={s.label}>
-                      <span>{s.label}</span>
-                      <b>{s.value}</b>
-                    </div>
+                <h1 style={{ fontSize: 'clamp(2rem, 4.2vw, 3.1rem)', maxWidth: '15ch' }}>
+                  Tell us where the paperwork breaks.
+                </h1>
+                <p className="s-lede" style={{ marginTop: 'var(--space-5)' }}>
+                  We set Salvia up with your own forms and the framework you are assessed
+                  against, then walk your last inspection findings with you. No slides.
+                </p>
+
+                <ol className="su-steps">
+                  {STEPS.map((s2, i) => (
+                    <li key={s2.label}>
+                      <span className="num">{String(i + 1).padStart(2, '0')}</span>
+                      <span><b>{s2.label}</b><em>{s2.value}</em></span>
+                    </li>
                   ))}
-                </Rv>
-                <Rv as="p" className="g-small" delay={3} style={{ marginTop: 18 }}>
-                  No credit card during the trial · 21 days of full access · Cancel any time
-                  before day 22
-                </Rv>
+                </ol>
+
+                <p style={{ marginTop: 'var(--space-6)', fontSize: 'var(--text-sm)', color: 'var(--muted)' }}>
+                  We are building this with a small number of practices. If you know exactly
+                  which part of the record never gets written, that is worth more to us than
+                  a sale.
+                </p>
               </div>
 
               {/* ── Right: the form ── */}
@@ -387,13 +383,6 @@ export const SignupPage = () => {
                       </Field>
                     </div>
 
-                    {country === 'IN' && (
-                      <p className="su-note">
-                        Salvia supports recording in <b>English, Hindi, Malayalam, Tamil</b> or
-                        any mix — notes come out in clean English automatically.
-                      </p>
-                    )}
-
                     <Field label="Best time to reach you" htmlFor="callWindow" required>
                       <select
                         id="callWindow"
@@ -456,7 +445,7 @@ export const SignupPage = () => {
 
                     <p className="g-small" style={{ textAlign: 'center', margin: 0 }}>
                       By submitting you agree to our Terms and Privacy Policy.{' '}
-                      <Link to="/pricing" style={{ color: 'var(--g-green)', fontWeight: 600 }}>
+                      <Link to="/pricing" style={{ color: 'var(--accent)', fontWeight: 600 }}>
                         See pricing
                       </Link>
                     </p>
@@ -468,7 +457,7 @@ export const SignupPage = () => {
           </div>
         </section>
       </main>
-      <GrassFooter />
+      <SiteFooter />
     </>
   );
 };
@@ -480,7 +469,7 @@ function SuccessPage({ email, clinicName, country }: { email: string; clinicName
     COUNTRY_OPTIONS.find((c) => c.value === country)?.label ?? 'local';
   return (
     <>
-      <GrassHeader />
+      <SiteHeader />
       <main style={{ flex: 1, zIndex: 10, background: '#fff' }}>
         <section className="g-section g-center" style={{ padding: '168px 0 120px' }}>
           <div className="g-container">
@@ -509,7 +498,7 @@ function SuccessPage({ email, clinicName, country }: { email: string; clinicName
           </div>
         </section>
       </main>
-      <GrassFooter />
+      <SiteFooter />
     </>
   );
 }
@@ -529,10 +518,10 @@ function Field({ label, htmlFor, children, hint }: FieldProps) {
     <label htmlFor={htmlFor} style={{ display: 'flex', flexDirection: 'column', gap: 6, minWidth: 0 }}>
       <span style={{
         display: 'flex', justifyContent: 'space-between', alignItems: 'baseline',
-        fontFamily: 'var(--g-font)', fontSize: 13, fontWeight: 600, color: 'var(--g-ink)',
+        fontFamily: 'var(--font-body)', fontSize: 13.5, fontWeight: 600, color: 'var(--ink)',
       }}>
         <span>{label}</span>
-        {hint && <span style={{ fontWeight: 500, fontSize: 12, color: 'var(--g-ink-faint)' }}>{hint}</span>}
+        {hint && <span style={{ fontWeight: 500, fontSize: 12, color: 'var(--muted)' }}>{hint}</span>}
       </span>
       {children}
     </label>
@@ -551,17 +540,22 @@ async function safeJson(res: Response): Promise<Record<string, unknown> | null> 
 
 // ── Styles ───────────────────────────────────────────────────────────────────
 
+/* Inline, because these win over the <style> block below — and the previous
+   values pointed at grass.css variables that no longer exist, so the border
+   resolved to nothing and a white field sat on a white card with no edge at
+   all. The field is recessed: warm inset ground, a rule you can actually see. */
 const inputStyle: CSSProperties = {
   width: '100%',
+  minHeight: 46,
   padding: '11px 14px',
-  fontFamily: 'var(--g-font)',
-  fontSize: 14.5,
-  border: '1px solid var(--g-line)',
-  borderRadius: 12,
-  backgroundColor: '#fff',
-  color: 'var(--g-ink)',
+  fontFamily: 'var(--font-body)',
+  fontSize: 15,
+  border: '1.5px solid var(--faint)',
+  borderRadius: 'var(--radius)',
+  backgroundColor: 'var(--surface-2)',
+  color: 'var(--ink)',
   outline: 'none',
-  transition: 'border-color 0.15s ease, box-shadow 0.15s ease',
+  transition: 'border-color 160ms ease, box-shadow 160ms ease, background 160ms ease',
   boxSizing: 'border-box',
 };
 
@@ -571,49 +565,67 @@ function SignupStyles() {
       .su-grid {
         display: grid;
         grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-        gap: 56px;
+        gap: var(--space-9);
         align-items: start;
       }
-      .su-sticky { position: sticky; top: 84px; }
+      .su-sticky { position: sticky; top: var(--space-7); }
       .su-card {
-        background: #fff;
-        border: 1px solid var(--g-line);
-        border-radius: 18px;
-        padding: 30px 30px 26px;
-        box-shadow: var(--g-shadow);
+        background: var(--surface);
+        border: 1.5px solid var(--ink);
+        border-radius: var(--radius-lg);
+        padding: var(--space-6);
+        box-shadow: var(--shadow);
       }
-      .su-form { display: flex; flex-direction: column; gap: 16px; }
-      .su-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+      .su-form { display: flex; flex-direction: column; gap: var(--space-4); }
+      .su-row { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-3); }
+      .su-form label { font-size: var(--text-sm); font-weight: var(--weight-medium); color: var(--ink); }
+      /* The card is white, so a white field is invisible. Fields sit on the
+         warm inset tone with a darker rule — the typable area is the thing that
+         should read as recessed, not as more card. */
+      .su-form input, .su-form select, .su-form textarea {
+        width: 100%; min-height: 46px; padding: var(--space-3);
+        border: 1.5px solid var(--faint); border-radius: var(--radius);
+        background: var(--surface-2); color: var(--ink);
+        font: var(--weight-normal) var(--text-base)/1.4 var(--font-body);
+        transition: border-color var(--t-hover) var(--ease-out);
+      }
+      .su-form textarea { min-height: 92px; resize: vertical; }
+      .su-form input::placeholder, .su-form textarea::placeholder { color: var(--muted); }
+      .su-form input:hover, .su-form select:hover, .su-form textarea:hover { border-color: var(--body); }
       .su-form input:focus, .su-form select:focus, .su-form textarea:focus {
-        border-color: var(--g-green);
-        box-shadow: 0 0 0 3px rgba(72, 205, 95, 0.18);
+        outline: none; border-color: var(--accent); background: var(--surface);
+        box-shadow: 0 0 0 3px var(--accent-line);
       }
+      /* The plan, as a numbered sequence rather than four boxes. */
+      .su-steps { list-style: none; padding: 0; margin: var(--space-8) 0 0; border-top: 1.5px solid var(--ink); }
+      .su-steps li {
+        display: grid; grid-template-columns: 34px 1fr; gap: var(--space-4);
+        padding: var(--space-4) 0; border-bottom: 1px solid var(--line);
+      }
+      .su-steps .num { color: var(--faint); font-weight: var(--weight-semi); font-size: var(--text-sm); }
+      .su-steps b { display: block; font-size: var(--text-base); color: var(--ink); }
+      .su-steps em { display: block; font-style: normal; font-size: var(--text-sm); color: var(--muted); margin-top: 3px; }
       .su-note {
-        font-family: var(--g-font); font-size: 13px; line-height: 1.55;
-        color: var(--g-ink-soft); background: var(--g-green-soft);
-        border: 1px solid rgba(72, 205, 95, 0.3); border-radius: 12px;
-        padding: 10px 14px; margin: 0;
+        font-size: var(--text-sm); line-height: 1.55;
+        color: var(--body); background: var(--accent-soft);
+        border: 1px solid var(--accent-line); border-radius: var(--radius);
+        padding: var(--space-3) var(--space-4); margin: 0;
       }
-      .su-note b { color: var(--g-ink); }
-      .su-details {
-        border: 1px dashed var(--g-line); border-radius: 12px; padding: 12px 14px;
-      }
-      .su-details summary {
-        cursor: pointer; font-family: var(--g-font); font-size: 13px;
-        font-weight: 600; color: var(--g-ink-soft);
-      }
+      .su-note b { color: var(--ink); }
+      .su-details { border: 1px dashed var(--line); border-radius: var(--radius); padding: var(--space-3) var(--space-4); }
+      .su-details summary { cursor: pointer; font-size: var(--text-sm); font-weight: var(--weight-semi); color: var(--body); }
       .su-error {
-        font-family: var(--g-font); font-size: 13.5px; line-height: 1.5;
-        color: #B91C1C; background: #FEF2F2;
-        border: 1px solid rgba(185, 28, 28, 0.2); border-radius: 12px;
-        padding: 12px 14px;
+        font-size: var(--text-sm); line-height: 1.5;
+        color: var(--danger); background: hsl(9 70% 97%);
+        border: 1px solid hsl(9 50% 84%); border-radius: var(--radius);
+        padding: var(--space-3) var(--space-4);
       }
       @media (max-width: 960px) {
-        .su-grid { grid-template-columns: 1fr; gap: 40px; }
+        .su-grid { grid-template-columns: 1fr; gap: var(--space-8); }
         .su-sticky { position: static; }
       }
       @media (max-width: 560px) {
-        .su-card { padding: 22px 18px; }
+        .su-card { padding: var(--space-5) var(--space-4); }
         .su-row { grid-template-columns: 1fr; }
       }
     `}</style>

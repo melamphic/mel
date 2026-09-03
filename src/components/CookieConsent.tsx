@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import '../styles/site.css';
 import { getConsent, setAnalyticsConsent, capturePageview } from '../lib/posthog';
 
 // Cookie consent banner. Analytics (PostHog) stays off until the visitor accepts.
@@ -37,33 +38,14 @@ export const CookieConsent = () => {
   };
 
   return (
-    <div
-      role="dialog"
-      aria-label="Cookie consent"
-      style={{
-        position: 'fixed', bottom: '1rem', left: '1rem', right: '1rem', zIndex: 1000,
-        maxWidth: 540, margin: '0 auto',
-        background: '#fff', border: '1px solid var(--border-strong)', borderRadius: 'var(--radius-lg)',
-        boxShadow: 'var(--shadow-3)', padding: '1.2rem 1.3rem',
-      }}
-    >
-      <p style={{ fontSize: 'var(--text-sm)', lineHeight: 1.55, color: 'var(--salvia-text-muted)', margin: '0 0 0.9rem' }}>
-        We use essential cookies to run the site, and optional analytics (PostHog) to improve it.
-        You can accept or decline analytics. See our <Link to="/cookies/" style={{ color: 'var(--salvia-accent)', fontWeight: 600 }}>Cookie Policy</Link>.
+    <div role="dialog" aria-label="Cookie consent" className="cc">
+      <p>
+        We use essential cookies to run the site, and optional analytics (PostHog) to
+        improve it. See our <Link to="/cookies">Cookie Policy</Link>.
       </p>
-      <div style={{ display: 'flex', gap: '0.6rem', flexWrap: 'wrap' }}>
-        <button
-          onClick={() => choose(true)}
-          style={{ flex: '1 1 auto', background: 'var(--salvia-primary)', color: '#fff', border: 'none', borderRadius: 'var(--salvia-radius-full)', padding: '0.6rem 1.2rem', fontWeight: 700, fontSize: 'var(--text-sm)', cursor: 'pointer' }}
-        >
-          Accept analytics
-        </button>
-        <button
-          onClick={() => choose(false)}
-          style={{ flex: '1 1 auto', background: 'transparent', color: 'var(--salvia-primary)', border: '1px solid var(--border-strong)', borderRadius: 'var(--salvia-radius-full)', padding: '0.6rem 1.2rem', fontWeight: 700, fontSize: 'var(--text-sm)', cursor: 'pointer' }}
-        >
-          Decline
-        </button>
+      <div className="cc-actions">
+        <button className="s-btn s-btn--primary" onClick={() => choose(true)}>Accept analytics</button>
+        <button className="s-btn s-btn--ghost" onClick={() => choose(false)}>Decline</button>
       </div>
     </div>
   );
