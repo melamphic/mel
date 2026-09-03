@@ -1,65 +1,92 @@
 # Salvia
 
-> Salvia turns a post-encounter voice note into a policy-checked, audit-locked clinical record before anyone signs off. AI + audio + clinical documentation + compliance, built for every clinical specialty. Not a scribe — a compliance suite.
+> Salvia is a clinical compliance platform. It holds a practice's policies as
+> enforceable rules, checks every record against them before it can be filed,
+> and maps what the practice holds onto the framework it is assessed against.
 
-Salvia is a clinical governance automation platform. Clinicians dictate a post-encounter voice note; Salvia transcribes, extracts structured fields into the right statutory form, runs it against the clinic's linked regulatory framework pack, and locks the record with an audit trail. Every note checks itself. Every record defends itself.
+Salvia is not a scribe. Capture is one input: staff speak, and what they say
+lands in typed fields — consent, prescription, incident, pain score — that write
+real records rather than paragraphs. The record is then checked against the
+clinic's own policy clauses, each of which carries a severity. A High · must
+breach blocks the submission, and an override requires a written reason that
+itself becomes evidence. Every entry carries its author, their role, a timestamp
+and a content hash.
 
-Salvia is a global, domain-agnostic product. The current launch market is India — clinics, small hospitals, dental and veterinary practices — with records mapped to Indian frameworks (NMC/IMC record rules, NABH, ABDM, DPDP Act, Schedule H1, Consumer Protection Act 2019). International frameworks (UK, AU, NZ, US, IE) ship in the same catalog.
+Salvia is domain-agnostic and organised by the body that inspects a practice
+rather than by clinical vertical, because one regulator usually covers several
+professions: CQC inspects GP surgeries and dental practices under the same
+regulation, and AHPRA governs six professions under one scheme. India has no
+equivalent single inspectorate, so accreditation and reimbursement bodies carry
+the obligation there instead.
 
-## Product pillars
+## Scale
 
-- [Point-of-Care Evidence](https://hellosalvia.com/products/point-of-care-evidence): Audio capture → transcription → structured field extraction → typed clinical record. Works with code-mixed Indian-language dictation (Hindi/Malayalam/English).
-- [Statutory Form Infrastructure](https://hellosalvia.com/products/statutory-form-infrastructure): Jurisdiction- and vertical-specific forms with typed widgets (consent, drug register, incident, pain scale) — never free text where structure is required.
-- [Institutional Compliance Hub](https://hellosalvia.com/products/institutional-compliance-hub): Policy framework linked to forms; every submission is policy-checked pre sign-off, with full audit trail and PDF export themed per clinic.
+- 60 frameworks across 6 countries (GB, IE, US, AU, NZ, IN) and 4 kinds of
+  practice, with 302 record-keeping clauses mapped to the field that satisfies
+  each one.
+- Five of those are walked requirement by requirement, with an honest four-state
+  result — measured now, needs data, coming soon, or out of scope. Out of scope
+  is shown but excluded from the denominator, so a score can actually reach 100%:
+  NABH 6th ed. (639 requirements, 51% of 227 in scope), JCI 7th ed. (171, 53% of
+  103), NSQHS (149, 25% of 87), CMS eCQM (49, 23% of 39), HEDIS (79, 19% of 37).
 
-## Verticals
+## Frameworks with a full page
 
-- [General practice & clinics](https://hellosalvia.com/general-practice): IMC Ethics 2002 record rules (3-year retention, 72-hour patient copies), NABH / NABH Entry-Level, ABDM/ABHA, Clinical Establishments Act, PC-PNDT, Telemedicine Practice Guidelines 2020.
-- [Dental](https://hellosalvia.com/dental): Dentists Act 1948 / DCI Code of Ethics 2014 records, NABH Entry-Level for dental clinics, consumer-court-defensible charting.
-- [Veterinary](https://hellosalvia.com/veterinary): VCI practice standards, Schedule H1 drug register, structured SOAP records.
-- [Allied health](https://hellosalvia.com/allied-health): Physiotherapy, osteopathy, chiropractic, occupational therapy, podiatry, speech therapy — structured outcome measures and session records. Six disciplines as dedicated pages.
+- [CQC — England](https://hellosalvia.com/frameworks/cqc): Regulation 17 of the
+  Health and Social Care Act 2008 (Regulated Activities) Regulations 2014.
+  Covers care homes, domiciliary care, GP practices, dental practices, mental
+  health services and independent hospitals. Of the 1,199 most recently
+  published reports read, 1,126 name the record, the care plan, the audit or the
+  risk assessment — and 103 of those services were rated Good overall and still
+  carried a record-keeping finding.
+- [HIQA — Ireland](https://hellosalvia.com/frameworks/hiqa): S.I. 415/2013,
+  Regulation 21 (Records), Regulation 5 (Individual assessment and care plan) and
+  Regulation 23 (Governance and management), which is the most-failed regulation
+  in the reports read. Schedule 2 records are retained not less than 7 years.
+- [CMS — United States](https://hellosalvia.com/frameworks/cms): State
+  Operations Manual Appendix PP. F656 (comprehensive care plan), F641 (accuracy
+  of assessments), F842 (medical records). 5,780 facilities across 53 states and
+  territories carried a documentation deficiency at their most recent survey;
+  2,805 were cited on more than one documentation tag.
+- [NABH — India](https://hellosalvia.com/frameworks/nabh): Accreditation
+  Standards for Hospitals, 6th edition, and Entry-Level certification for Small
+  Healthcare Organisations, which gates CGHS empanelment and raises PM-JAY
+  package rates. Information Management System standards govern documentation.
+- [JCI](https://hellosalvia.com/frameworks/jci): Accreditation Standards for
+  Hospitals, 7th edition. Surveyed by tracing a patient through the record.
+
+- [All frameworks](https://hellosalvia.com/frameworks): the full catalogue,
+  grouped by country and regulator.
 
 ## Core pages
 
 - [Home](https://hellosalvia.com/)
-- [Pricing](https://hellosalvia.com/pricing): India pricing in INR, per-clinic (not per-seat), AI included on every tier. Starter ₹1,000/mo (400 AI notes), Clinic ₹3,000/mo (1,500 notes), Group ₹6,000/mo (3,000 notes, multi-location); annual = 2 months free; hospitals and high-volume on custom quotes. Excl. GST 18%.
-- [Frameworks](https://hellosalvia.com/frameworks): Public catalog of every regulatory framework Salvia generates records against — Indian frameworks first, filterable by country and vertical.
-- [Early access signup](https://hellosalvia.com/start)
+- [Writing](https://hellosalvia.com/blog): record-keeping questions answered
+  against the primary source, with citations.
+- [Talk to us](https://hellosalvia.com/start)
 
-## Regulatory frameworks supported
+## What the product captures
 
-Salvia ships a hand-curated regulatory framework pack per clinic context (country + vertical + discipline). The pack splices into every AI form-gen prompt automatically.
+Typed system field types write records rather than text: consent (scope, who
+took it, expiry), prescription, incident (its own number and approval workflow),
+pain score, drug register entries, outcome measures. Forms are built as typed
+fields and publish to a PDF themed per clinic. Policies are held as numbered
+clauses, each with a severity, and render both as an enforceable check and as
+the document staff and inspectors read. A compliance copilot reads only the
+clinic's own data, proposes changes, and never writes a record on its own —
+approving runs the change under the approver's permissions.
 
-- India: IMC/NMC Ethics Regulations 2002 (records + 72-hour access), NABH, NABH Entry-Level (SHCO), ABDM/ABHA, DPDP Act 2023, Clinical Establishments Act 2010, Consumer Protection Act 2019, Schedule H1 register, PC-PNDT, Telemedicine Practice Guidelines 2020, VCI, DCI Code of Ethics.
-- International catalog: UK (RCVS PSS, CMA Remedies, VMR, CQC Reg 17, GDC, HCPC, GOsC, GCC), Australia (AHPRA boards, ARPANSA, AVA), New Zealand (VCNZ, NZDA, MCNZ, PBNZ, OTBNZ, OCNZ, CBNZ, NZSTA), United States (AVMA, AAHA, ADA CDT, FSBPT, NBCOT, ASHA, HIPAA), Ireland (CORU boards), cross-cutting GDPR and ISO 27001.
+## Legal
 
-## Blog — India compliance
+- [Privacy](https://hellosalvia.com/privacy)
+- [Terms](https://hellosalvia.com/terms)
+- [Cookies](https://hellosalvia.com/cookies)
+- [Data processing](https://hellosalvia.com/dpa)
+- [Security](https://hellosalvia.com/security)
 
-- [AI medical scribe pricing in India](https://hellosalvia.com/blog/ai-scribe-pricing-india): What AI documentation actually costs in 2026, in rupees.
-- [Consumer court cases and thin records](https://hellosalvia.com/blog/consumer-court-records): Consumer Protection Act 2019, burden of proof, defensible records.
-- [Patient access to hospital files](https://hellosalvia.com/blog/patient-records-access-india): The 72-hour rule, RTI route, complete-file contents.
-- [NABH Entry-Level for small clinics](https://hellosalvia.com/blog/nabh-small-clinic-worth-it): Costs, incentives, and whether it's worth it.
-- [Is ABDM/ABHA mandatory?](https://hellosalvia.com/blog/abdm-mandatory-clinic): Voluntary on paper, mandatory in practice.
-- [AI scribes in Hindi and Malayalam](https://hellosalvia.com/blog/ai-scribe-indian-languages): Code-mixed dictation and where English-first tools break.
+## Notes for machine readers
 
-## Blog — practice operations
-
-- [Pajama time](https://hellosalvia.com/blog/pajama-time): After-hours documentation burden.
-- [Informed refusal](https://hellosalvia.com/blog/informed-refusal): Documenting declined treatment.
-- [The stranger rule](https://hellosalvia.com/blog/stranger-rule): Records readable by clinicians who weren't there.
-- [Difficult patients](https://hellosalvia.com/blog/difficult-patients): Defensible documentation under conflict.
-- [Pediatric records](https://hellosalvia.com/blog/pediatric-records): Minors, confidentiality, and the chart.
-- [EMR crash recovery](https://hellosalvia.com/blog/emr-crash-vet): Charting through downtime.
-- [Audit prep](https://hellosalvia.com/blog/vet-audit-prep): What an inspector actually checks.
-
-## Blog — dental
-
-- [Dental malpractice charting](https://hellosalvia.com/blog/malpractice-dental)
-- [Oral photography](https://hellosalvia.com/blog/oral-photography)
-- [Manual dental record risk](https://hellosalvia.com/blog/manual-dental-risk)
-- [Surgical prep documentation](https://hellosalvia.com/blog/surgical-prep-dental)
-
-## Optional
-
-- [Sitemap](https://hellosalvia.com/sitemap.xml)
-- [Robots](https://hellosalvia.com/robots.txt)
+Salvia is operated by Melamphic AI Pvt Ltd. Every regulation quoted on the
+framework pages was read from the primary source and carries the date it was
+checked. Inspection findings quoted on those pages are verbatim from published
+reports and are attributed to a region and a month, never to a named provider.

@@ -1,204 +1,155 @@
-import React, { useState, useMemo } from 'react';
+/**
+ * /blog — the index.
+ *
+ * Filtered by market rather than by clinical vertical, because the writing now
+ * follows the same five frameworks the rest of the site sells against. The
+ * vertical filter (vet / dental) went with the posts it filtered.
+ *
+ * No cover images. Every one was a generated illustration that said nothing
+ * about its post; a question set in the display face is a better card than a
+ * picture of a stethoscope.
+ */
+import React, { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { SEO } from '../components/SEO';
-import { GrassFooter } from '../components/grass/GrassFooter';
-import { GrassHeader } from '../components/grass/GrassHeader';
-import { Rv } from '../components/grass/Rv';
+import { SiteFooter } from '../components/SiteFooter';
+import { SiteHeader } from '../components/SiteHeader';
 import { VISIBLE_BLOG_CONTENT } from '../data/blogContent';
-import { blogArt } from '../lib/blogArt';
+import { BLOG_MARKETS } from '../data/blogMarkets.mjs';
+import '../styles/site.css';
 
-type BlogDomain = 'GENERAL' | 'VETERINARY' | 'DENTAL';
+/* Width rhythm over a six-column grid, and the two grounds that break it up.
+   Six entries, so the pattern restarts every two rows. */
+const SPAN = [4, 2, 3, 3, 2, 4];
+const TONE = ['deep', '', '', 'accent', '', ''];
 
-const DOMAIN_META: Record<BlogDomain, { label: string; cls: string }> = {
-  GENERAL: { label: 'Clinic', cls: 'g-tpl-vert' },
-  VETERINARY: { label: 'Vet', cls: 'g-tpl-vert g-tpl-vert--vet' },
-  DENTAL: { label: 'Dental', cls: 'g-tpl-vert g-tpl-vert--dental' },
+const MARKET_LABEL: Record<string, string> = {
+  IN: 'India',
+  GB: 'England',
+  US: 'United States',
+  GLOBAL: 'Anywhere',
 };
 
-
 export const InsightsPage: React.FC = () => {
-  const [activeDomain, setActiveDomain] = useState<BlogDomain | 'ALL'>('ALL');
-  const [searchQuery, setSearchQuery] = useState('');
+  const [market, setMarket] = useState<string>('ALL');
+  const [query, setQuery] = useState('');
 
-  const allArticles = useMemo(
-    () => Object.entries(VISIBLE_BLOG_CONTENT).map(([id, data]) => ({ id, ...data })),
+  const all = useMemo(
+    () => Object.entries(VISIBLE_BLOG_CONTENT).map(([id, data]) => ({
+      id,
+      market: (BLOG_MARKETS as Record<string, string>)[id] ?? 'GLOBAL',
+      ...data,
+    })),
     []
   );
 
-  const filteredArticles = allArticles.filter(art => {
-    if (activeDomain !== 'ALL' && art.domain !== activeDomain) return false;
-    if (searchQuery.trim()) {
-      const q = searchQuery.toLowerCase();
-      return (
-        art.q.toLowerCase().includes(q) ||
-        art.excerpt.toLowerCase().includes(q) ||
-        art.keywords.some(k => k.toLowerCase().includes(q))
-      );
-    }
-    return true;
+  const shown = all.filter((a) => {
+    if (market !== 'ALL' && a.market !== market) return false;
+    const q = query.trim().toLowerCase();
+    if (!q) return true;
+    return (
+      a.q.toLowerCase().includes(q) ||
+      a.excerpt.toLowerCase().includes(q) ||
+      a.keywords.some((k) => k.toLowerCase().includes(q))
+    );
   });
 
-  const featured = filteredArticles[0];
-  const rest = filteredArticles.slice(1);
-
-  const domainTabs: { label: string; value: BlogDomain | 'ALL'; count: number }[] = [
-    { label: 'Everything', value: 'ALL', count: allArticles.length },
-    { label: 'Clinics', value: 'GENERAL', count: allArticles.filter(a => a.domain === 'GENERAL').length },
-    { label: 'Vets', value: 'VETERINARY', count: allArticles.filter(a => a.domain === 'VETERINARY').length },
-    { label: 'Dental', value: 'DENTAL', count: allArticles.filter(a => a.domain === 'DENTAL').length },
+  const tabs = [
+    { label: 'Everything', value: 'ALL', n: all.length },
+    ...['IN', 'GB', 'US', 'GLOBAL']
+      .map((m) => ({ label: MARKET_LABEL[m], value: m, n: all.filter((a) => a.market === m).length }))
+      .filter((t) => t.n > 0),
   ];
 
   return (
-    <>
+    <div className="s-page">
       <SEO
-        title="From the compliance desk"
-        description="Clinical documentation, compliance law, and audit readiness — written for vets, dentists, and clinicians who've been burned by bad records."
+        title="Writing — record keeping, and the rules that judge it"
+        description="What inspectors and courts actually look for in a clinical record, written for the people who have to produce one. CQC, HIQA, CMS, NABH."
         path="/blog"
-        keywords={['clinical documentation', 'veterinary compliance', 'dental records', 'NABH audit', 'medical record keeping India']}
+        keywords={['clinical documentation', 'record keeping', 'CQC Regulation 17', 'NABH records', 'medical record keeping India']}
       />
-      <GrassHeader />
-      <main style={{ flex: 1, zIndex: 10, background: '#fff' }}>
-        <section className="g-section" style={{ padding: '148px 0 104px' }}>
-          <div className="g-container">
+      <SiteHeader />
 
-            {/* Header */}
-            <Rv as="h1" className="g-h1" style={{ fontSize: 'clamp(36px, 4.4vw, 62px)', maxWidth: '20ch' }}>
-              The questions clinicians actually ask. <span className="g-hl">Straight answers.</span>
-            </Rv>
-            <Rv as="p" className="g-sub" delay={1} style={{ marginTop: 18 }}>
-              No corporate fluff, no SEO filler. We trawl forums, boards and subreddits for the
-              documentation questions people actually have — then write the answers we wish had
-              existed when we were figuring it out ourselves.
-            </Rv>
+      <section className="s-section" style={{ paddingBottom: 'var(--space-6)' }}>
+        <div className="s-wrap">
+          <h1 style={{ fontSize: 'clamp(2rem, 4.4vw, 3.25rem)', maxWidth: '18ch' }}>
+            Questions we kept being asked, answered against the source.
+          </h1>
+          <p className="s-lede" style={{ marginTop: 'var(--space-5)' }}>
+            Each of these starts from something a clinician actually said, and answers it
+            with the regulation, the case, or the standard — cited, so you can check it.
+          </p>
+        </div>
+      </section>
 
-            {/* Search + tabs */}
-            <Rv delay={2} style={{ display: 'flex', alignItems: 'center', gap: 14, flexWrap: 'wrap', margin: '40px 0 8px' }}>
-              <div
-                style={{
-                  display: 'flex', alignItems: 'center', gap: 9,
-                  border: '1px solid var(--g-line)', borderRadius: 12,
-                  padding: '11px 14px', flex: '1 1 280px', minWidth: 0, background: '#fff',
-                }}
-              >
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--g-ink-faint)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
-                  <circle cx="11" cy="11" r="8" />
-                  <line x1="21" y1="21" x2="16.65" y2="16.65" />
-                </svg>
-                <input
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder="Search questions, keywords, situations…"
-                  style={{
-                    flex: 1, minWidth: 0, border: 'none', outline: 'none', background: 'transparent',
-                    fontFamily: 'var(--g-font)', fontSize: 14.5, fontWeight: 500, color: 'var(--g-ink)',
-                  }}
-                />
-              </div>
-              <div className="g-tabs" style={{ margin: 0, borderBottom: 'none', flexShrink: 0 }}>
-                {domainTabs.map(d => (
-                  <button
-                    key={d.value}
-                    onClick={() => setActiveDomain(d.value)}
-                    className={`g-tab${activeDomain === d.value ? ' g-tab--on' : ''}`}
-                    style={{ padding: '10px 12px' }}
-                  >
-                    {d.label} <span style={{ color: 'var(--g-ink-faint)', fontWeight: 600 }}>{d.count}</span>
-                  </button>
-                ))}
-              </div>
-            </Rv>
-
-            {/* Featured */}
-            {featured && (
-              <Rv delay={3}>
-                <Link
-                  to={`/blog/${featured.id}`}
-                  className="g-tpl"
-                  style={{
-                    display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-                    gap: 36, alignItems: 'center',
-                    textDecoration: 'none', padding: '38px 40px', marginBottom: 28,
-                  }}
+      <section style={{ paddingBottom: 'var(--space-9)' }}>
+        <div className="s-wrap">
+          <div className="bl-controls">
+            <div className="bl-tabs" role="tablist" aria-label="Filter by market">
+              {tabs.map((t) => (
+                <button
+                  key={t.value}
+                  role="tab"
+                  aria-selected={market === t.value}
+                  className={'bl-tab' + (market === t.value ? ' is-on' : '')}
+                  onClick={() => setMarket(t.value)}
                 >
-                  <div>
-                    <div className="g-tpl-meta" style={{ margin: '0 0 16px' }}>
-                      <span className={DOMAIN_META[featured.domain].cls}>{DOMAIN_META[featured.domain].label}</span>
-                      <span>Featured · {featured.tag}</span>
-                    </div>
-                    <h2 className="g-h2" style={{ fontSize: 'clamp(24px, 2.8vw, 38px)', maxWidth: '28ch' }}>
-                      {featured.q}
-                    </h2>
-                    <p className="g-sub">
-                      {featured.excerpt}
-                    </p>
-                    <p className="g-small" style={{ marginTop: 18 }}>
-                      {featured.author} · {featured.date} · {featured.readTime} ·{' '}
-                      <span style={{ color: 'var(--g-green)', fontWeight: 700 }}>Read the answer →</span>
-                    </p>
-                  </div>
-                  <div style={{ display: 'flex', justifyContent: 'center' }}>
-                    <img
-                      src={blogArt(featured.id, featured.domain)}
-                      alt=""
-                      loading="lazy"
-                      style={{ maxWidth: '90%', maxHeight: 280, objectFit: 'contain' }}
-                    />
-                  </div>
-                </Link>
-              </Rv>
-            )}
-
-            {/* Grid */}
-            {rest.length > 0 && (
-              <div className="g-grid" style={{ marginTop: 0 }}>
-                {rest.map((art, i) => (
-                  <Rv key={art.id} delay={(Math.min((i % 3) + 1, 4)) as 1 | 2 | 3 | 4}>
-                    <Link to={`/blog/${art.id}`} className="g-tpl" style={{ display: 'flex', flexDirection: 'column', textDecoration: 'none', height: '100%', padding: '22px 22px 18px' }}>
-                      <div style={{ height: 140, display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 16, borderBottom: '1px solid var(--g-line-soft)', paddingBottom: 14 }}>
-                        <img
-                          src={blogArt(art.id, art.domain)}
-                          alt=""
-                          loading="lazy"
-                          style={{ maxHeight: 118, maxWidth: '80%', objectFit: 'contain' }}
-                        />
-                      </div>
-                      <div className="g-tpl-meta" style={{ margin: '0 0 12px' }}>
-                        <span className={DOMAIN_META[art.domain].cls}>{DOMAIN_META[art.domain].label}</span>
-                        <span>{art.tag}</span>
-                      </div>
-                      <h3 style={{ fontFamily: 'var(--g-font)', fontSize: 16.5, fontWeight: 700, letterSpacing: '-0.01em', lineHeight: 1.35, color: 'var(--g-ink)', margin: '0 0 10px' }}>
-                        {art.q}
-                      </h3>
-                      <p
-                        style={{
-                          fontFamily: 'var(--g-font)', fontSize: 13.5, color: 'var(--g-ink-soft)', lineHeight: 1.55,
-                          margin: '0 0 16px', flex: 1,
-                          display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical', overflow: 'hidden',
-                        }}
-                      >
-                        {art.excerpt}
-                      </p>
-                      <p className="g-small" style={{ marginTop: 'auto', paddingTop: 12, borderTop: '1px solid var(--g-line-soft)', display: 'flex', justifyContent: 'space-between' }}>
-                        <span>{art.readTime}</span>
-                        <span style={{ fontWeight: 600 }}>{art.date}</span>
-                      </p>
-                    </Link>
-                  </Rv>
-                ))}
-              </div>
-            )}
-
-            {filteredArticles.length === 0 && (
-              <p className="g-sub" style={{ padding: '72px 0', textAlign: 'center', margin: '0 auto' }}>
-                No posts match that — try a different search or domain.
-              </p>
-            )}
-
+                  {t.label}<span className="num">{t.n}</span>
+                </button>
+              ))}
+            </div>
+            <label className="bl-search">
+              <span className="sr-only">Search the writing</span>
+              <input
+                type="search"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                placeholder="Search"
+              />
+            </label>
           </div>
-        </section>
-      </main>
-      <GrassFooter />
-    </>
+
+          {shown.length === 0 ? (
+            <p style={{ marginTop: 'var(--space-7)', color: 'var(--muted)' }}>
+              Nothing matches “{query}”.
+            </p>
+          ) : (
+            <div className="blq">
+              {shown.map((a, i) => {
+                /* A repeating rhythm of widths and grounds, keyed to position
+                   rather than to content — so the page has shape without
+                   pretending one post matters more than another. */
+                const span = SPAN[i % SPAN.length];
+                const tone = TONE[i % TONE.length];
+                return (
+                  <Link
+                    key={a.id}
+                    to={`/blog/${a.id}`}
+                    className={`blq-card blq-${span}${tone ? ' blq-' + tone : ''}`}
+                  >
+                    <span className="blq-top">
+                      <em>{a.tag}</em>
+                      <i>{MARKET_LABEL[a.market]}</i>
+                    </span>
+                    <span className="blq-q">{a.q}</span>
+                    {span >= 3 && <span className="blq-ex">{a.excerpt}</span>}
+                    <span className="blq-foot">
+                      <span>{a.readTime}</span>
+                      <svg viewBox="0 0 20 12" aria-hidden="true">
+                        <path d="M1 6h17M13 1l5 5-5 5" />
+                      </svg>
+                    </span>
+                  </Link>
+                );
+              })}
+            </div>
+          )}
+        </div>
+      </section>
+
+      <SiteFooter />
+    </div>
   );
 };

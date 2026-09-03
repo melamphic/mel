@@ -1,230 +1,49 @@
+/**
+ * 404. Short, human, and none of the visitor's business why — an explanation of
+ * our own content decisions belongs in a commit message, not on a dead end.
+ */
 import { Link } from 'react-router-dom';
-import { Header } from '../components/Header';
-import { Footer } from '../components/Footer';
 import { SEO } from '../components/SEO';
+import { SiteHeader } from '../components/SiteHeader';
+import { SiteFooter } from '../components/SiteFooter';
+import '../styles/site.css';
 
-const QUICK_LINKS = [
-  {
-    label: 'Point-of-Care Evidence',
-    desc: 'Voice note in, audit-ready record out',
-    href: '/products/point-of-care-evidence',
-    icon: (
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-        <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" />
-        <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
-        <line x1="12" y1="19" x2="12" y2="23" />
-        <line x1="8" y1="23" x2="16" y2="23" />
-      </svg>
-    ),
-  },
-  {
-    label: 'Statutory Form Infrastructure',
-    desc: 'Immutable, versioned clinical records',
-    href: '/products/statutory-form-infrastructure',
-    icon: (
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-        <polyline points="14 2 14 8 20 8" />
-        <line x1="16" y1="13" x2="8" y2="13" />
-        <line x1="16" y1="17" x2="8" y2="17" />
-        <polyline points="10 9 9 9 8 9" />
-      </svg>
-    ),
-  },
-  {
-    label: 'Institutional Compliance Hub',
-    desc: 'Turn policy PDFs into active governance',
-    href: '/products/institutional-compliance-hub',
-    icon: (
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-        <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
-        <line x1="3" y1="9" x2="21" y2="9" />
-        <line x1="9" y1="21" x2="9" y2="9" />
-      </svg>
-    ),
-  },
-  {
-    label: 'Compliance Blog',
-    desc: 'Records, audits, and governance insights',
-    href: '/blog',
-    icon: (
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-        <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
-        <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
-      </svg>
-    ),
-  },
+const ELSEWHERE = [
+  { to: '/frameworks', title: 'Frameworks', note: 'Every standard Salvia maps, by the body that inspects you' },
+  { to: '/blog', title: 'Writing', note: 'Record-keeping questions, answered against the source' },
+  { to: '/start', title: 'Talk to us', note: 'Tell us where the paperwork breaks in your practice' },
 ];
 
-export const NotFoundPage = () => {
-  return (
-    <div style={{ backgroundColor: '#fff', minHeight: '100vh' }}>
-      <SEO
-        title="Page not found"
-        description="This page doesn't exist. Return to Salvia — AI clinical documentation and compliance for clinics, hospitals, dental and veterinary practices."
-        path="/404"
-        noindex
-      />
-      <Header />
+export const NotFoundPage = () => (
+  <div className="s-page">
+    <SEO title="Page not found" description="That page isn’t here." path="/404" noindex />
+    <SiteHeader />
 
-      <main style={{ paddingTop: '10rem', paddingBottom: '8rem' }}>
-        <div className="container" style={{ maxWidth: '720px', textAlign: 'center' }}>
+    <section className="s-section">
+      <div className="s-wrap s-wrap--narrow">
+        <p className="nf-code num">404</p>
+        <h1 style={{ fontSize: 'clamp(2rem, 4.4vw, 3.1rem)', marginTop: 'var(--space-4)', maxWidth: '16ch' }}>
+          Uh oh. Wrong place.
+        </h1>
+        <p className="s-lede" style={{ marginTop: 'var(--space-5)' }}>
+          There’s no record of this page — which, on a site about record keeping, is a
+          bit much. Try one of these instead.
+        </p>
 
-          {/* 404 visual */}
-          <div style={{ marginBottom: '2.5rem' }}>
-            <div style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '0.5rem',
-              backgroundColor: 'rgba(255,78,0,0.07)',
-              border: '1.5px solid rgba(255,78,0,0.18)',
-              borderRadius: 'var(--radius-md)',
-              padding: '0.4rem 0.9rem',
-              marginBottom: '1.75rem',
-            }}>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--salvia-accent)" strokeWidth="2.5">
-                <circle cx="11" cy="11" r="8" />
-                <line x1="21" y1="21" x2="16.65" y2="16.65" />
-                <line x1="11" y1="8" x2="11" y2="12" />
-                <line x1="11" y1="16" x2="11.01" y2="16" />
-              </svg>
-              <span style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--salvia-accent)', letterSpacing: '0.06em' }}>
-                PAGE NOT FOUND
-              </span>
-            </div>
+        <ol className="lg-index" style={{ marginTop: 'var(--space-8)' }}>
+          {ELSEWHERE.map((e, i) => (
+            <li key={e.to}>
+              <Link to={e.to}>
+                <span className="num">{String(i + 1).padStart(2, '0')}</span>
+                <span className="lg-index-t">{e.title}</span>
+                <span className="lg-index-d">{e.note}</span>
+              </Link>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
 
-            <div style={{
-              fontSize: 'var(--text-display)',
-              fontWeight: 800,
-              letterSpacing: '-0.06em',
-              lineHeight: 0.9,
-              background: 'linear-gradient(135deg, var(--salvia-primary) 0%, var(--salvia-text-muted) 100%)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
-              userSelect: 'none',
-              marginBottom: '0.25rem',
-            }}>
-              404
-            </div>
-          </div>
-
-          <h1 style={{
-            fontSize: 'var(--text-2xl)',
-            fontWeight: 800,
-            color: 'var(--salvia-primary)',
-            letterSpacing: '-0.03em',
-            marginBottom: '1rem',
-          }}>
-            That page doesn't exist
-          </h1>
-          <p style={{
-            fontSize: 'var(--text-md)',
-            color: 'var(--salvia-text-muted)',
-            lineHeight: 1.65,
-            marginBottom: '2.5rem',
-          }}>
-            The link may have moved, been renamed, or never existed.
-            Here's where you probably want to go:
-          </p>
-
-          {/* Primary CTA */}
-          <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '4rem' }}>
-            <Link to="/" style={{
-              display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
-              backgroundColor: 'var(--salvia-primary)',
-              color: '#fff',
-              padding: '0.7rem 1.5rem',
-              borderRadius: 'var(--radius-md)',
-              fontWeight: 700,
-              fontSize: 'var(--text-sm)',
-              textDecoration: 'none',
-              transition: 'opacity 0.2s',
-            }}>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-                <polyline points="9 22 9 12 15 12 15 22" />
-              </svg>
-              Back to home
-            </Link>
-            <Link to="/start" style={{
-              display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
-              backgroundColor: 'transparent',
-              color: 'var(--salvia-accent)',
-              padding: '0.7rem 1.5rem',
-              borderRadius: 'var(--radius-md)',
-              fontWeight: 700,
-              fontSize: 'var(--text-sm)',
-              border: '1.5px solid rgba(255,78,0,0.25)',
-              textDecoration: 'none',
-            }}>
-              Book a demo
-            </Link>
-          </div>
-
-          {/* Quick links */}
-          <div style={{
-            textAlign: 'left',
-            borderTop: '1px solid var(--border-subtle)',
-            paddingTop: '2.5rem',
-          }}>
-            <p className="eyebrow" style={{
-              marginBottom: '1.25rem',
-            }}>
-              Quick links
-            </p>
-            <div style={{ display: 'grid', gap: '0.75rem' }}>
-              {QUICK_LINKS.map(link => (
-                <Link key={link.href} to={link.href} style={{
-                  display: 'flex', alignItems: 'center', gap: '1rem',
-                  padding: '1rem 1.25rem',
-                  border: '1px solid var(--border-subtle)',
-                  borderRadius: 'var(--radius-md)',
-                  backgroundColor: '#FAFBFC',
-                  textDecoration: 'none',
-                  transition: 'all 0.2s ease',
-                }} className="nf-link-card">
-                  <div style={{
-                    width: '40px', height: '40px', flexShrink: 0,
-                    borderRadius: 'var(--radius-md)',
-                    backgroundColor: 'rgba(255,78,0,0.06)',
-                    display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    color: 'var(--salvia-accent)',
-                  }}>
-                    {link.icon}
-                  </div>
-                  <div style={{ flex: 1, minWidth: 0 }}>
-                    <div style={{ fontWeight: 700, fontSize: 'var(--text-sm)', color: 'var(--salvia-primary)' }}>
-                      {link.label}
-                    </div>
-                    <div style={{ fontSize: 'var(--text-xs)', color: 'var(--salvia-text-muted)', marginTop: '0.15rem' }}>
-                      {link.desc}
-                    </div>
-                  </div>
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#CBD5E1" strokeWidth="2.5" style={{ flexShrink: 0 }}>
-                    <line x1="5" y1="12" x2="19" y2="12" />
-                    <polyline points="12 5 19 12 12 19" />
-                  </svg>
-                </Link>
-              ))}
-            </div>
-          </div>
-
-        </div>
-      </main>
-
-      <Footer />
-
-      <style>{`
-        .nf-link-card:hover {
-          border-color: rgba(255,78,0,0.2);
-          background-color: rgba(255,78,0,0.02);
-          transform: translateX(3px);
-        }
-        .nf-link-card:hover svg:last-child {
-          stroke: var(--salvia-accent);
-        }
-      `}</style>
-    </div>
-  );
-};
+    <SiteFooter />
+  </div>
+);

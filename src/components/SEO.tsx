@@ -2,8 +2,8 @@ import { Helmet } from 'react-helmet-async';
 
 const SITE = 'https://hellosalvia.com';
 const SITE_NAME = 'Salvia';
-const DEFAULT_DESC = 'Salvia is a compliance and governance suite for clinical practices — voice notes in, audit-ready records out. Clinical documentation, controlled drug logs, and incident trails, automated.';
-const DEFAULT_OG_IMAGE = 'https://hellosalvia.com/og-image.png?v=2';
+const DEFAULT_DESC = 'Salvia holds your policies as enforceable rules, checks every record against them before it is filed, and maps what you hold onto the framework you are assessed against — CQC, HIQA, CMS, NABH and JCI.';
+const DEFAULT_OG_IMAGE = 'https://hellosalvia.com/og-image.png?v=3';
 
 interface SEOProps {
   title: string;

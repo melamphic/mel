@@ -1,0 +1,143 @@
+{
+ "cqcAdultSocialCare": {
+  "total": 1199,
+  "aboutRecord": 1126,
+  "goodButCited": 103,
+  "quotes": [
+   {
+    "quote": "However, training records had not been kept up to date.",
+    "region": "East Midlands",
+    "month": "2025-03",
+    "rating": "Good"
+   },
+   {
+    "quote": "Care records did not always reflect people’s care needs.",
+    "region": "South East",
+    "month": "2025-10",
+    "rating": "Good"
+   },
+   {
+    "quote": "Care records were not always reviewed on a regular basis.",
+    "region": "West Midlands",
+    "month": "2017-12",
+    "rating": "Good"
+   },
+   {
+    "quote": "There were shortfalls in medicines records and care plans.",
+    "region": "North East",
+    "month": "2025-12",
+    "rating": "Good"
+   },
+   {
+    "quote": "One person said, “I’m not aware of having a care plan”.",
+    "region": "East of England",
+    "month": "2025-03",
+    "rating": "Requires improvement"
+   },
+   {
+    "quote": "Care plans were incomplete or not followed in practice.",
+    "region": "South East",
+    "month": "2026-04",
+    "rating": "Inadequate"
+   }
+  ]
+ },
+ "cqcGp": {
+  "total": 50,
+  "aboutRecord": 48,
+  "quotes": [
+   {
+    "quote": "However, we saw that risk assessments were not comprehensive.",
+    "region": "West Midlands",
+    "month": "2026-07",
+    "rating": "Requires improvement"
+   },
+   {
+    "quote": "They did not maintain appropriate personnel records for staff.",
+    "region": "Yorkshire and The Humber",
+    "month": "2026-05",
+    "rating": "Good"
+   },
+   {
+    "quote": "In addition to this, medicines reviews were not always documented.",
+    "region": "London",
+    "month": "2025-01",
+    "rating": "Good"
+   }
+  ]
+ },
+ "cqcMentalHealth": {
+  "total": 10,
+  "aboutRecord": 10,
+  "quotes": [
+   {
+    "quote": "Audits and checks were not always effective in ensuring continuous improvement.",
+    "region": "West Midlands",
+    "month": "2025-02",
+    "rating": "Requires improvement"
+   },
+   {
+    "quote": "There were also inconsistencies in the recording and locations of certain documentation.",
+    "region": "North West",
+    "month": "2025-07",
+    "rating": "Requires improvement"
+   }
+  ]
+ },
+ "hiqa": {
+  "total": 10,
+  "aboutRecord": 8,
+  "quotes": [
+   {
+    "quote": "As a result, completed audits did not drive improvements.",
+    "region": "Shanganagh Road, Shankill",
+    "month": "2026-05",
+    "rating": null
+   },
+   {
+    "quote": "Some care plans were not detailed enough to reflect the care being provided.",
+    "region": "Northwood Park, Santry",
+    "month": "2026-05",
+    "rating": null
+   },
+   {
+    "quote": "The residents' care plan was not always updated after changes being made to their plan of care.",
+    "region": "Kenure, Skerries Road, Rush",
+    "month": "2026-06",
+    "rating": null
+   }
+  ],
+  "failedRegulations": [
+   {
+    "name": "Reg 23 Governance and management",
+    "n": 7
+   },
+   {
+    "name": "Reg 5 Individual assessment and care plan",
+    "n": 4
+   },
+   {
+    "name": "Reg 16 Training and staff development",
+    "n": 4
+   },
+   {
+    "name": "Reg 31 Notification of incidents",
+    "n": 2
+   },
+   {
+    "name": "Reg 34 Complaints procedure",
+    "n": 2
+   },
+   {
+    "name": "Reg 28 Fire precautions",
+    "n": 2
+   }
+  ],
+  "centres": 10
+ },
+ "cmsSkilledNursing": {
+  "facilities": 5780,
+  "states": 53,
+  "multiTag": 2805
+ }
+}

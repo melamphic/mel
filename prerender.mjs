@@ -10,6 +10,26 @@ import { readFileSync, writeFileSync, mkdirSync } from 'fs';
 import { resolve, dirname } from 'path';
 import { fileURLToPath } from 'url';
 import { visibleBlogSlugs } from './src/data/blogMarkets.mjs';
+import { frameworkKeys } from './src/data/frameworkKeys.mjs';
+import { createRequire } from 'node:module';
+const require_ = createRequire(import.meta.url);
+const FRAMEWORKS = require_('./src/data/frameworks-index.json');
+const DEEP_META = {
+  cqc:  ['CQC record keeping — what the inspection actually checks',
+         'Regulation 17 quoted from the source, the findings that recur in published CQC reports, and the field in Salvia that answers each one.'],
+  hiqa: ['HIQA record keeping — the regulations that actually fail',
+         'Regulation 21, Regulation 5 and Regulation 23 quoted from S.I. 415/2013, with the failures that recur across published inspection reports.'],
+  cms:  ['CMS documentation — F656, F641 and F842, and what satisfies them',
+         'The documentation F-tags surveyors cite from Appendix PP, and how a record has to be shaped to answer them.'],
+  nabh: ['NABH documentation — all 639 requirements, marked honestly',
+         'What NABH Information Management System standards require, and how much of the 6th edition Salvia measures from data you already hold.'],
+  jci:  ['JCI record keeping — all 171 standards, walked',
+         'How a JCI tracer follows one patient through the record, and which measurable elements Salvia can evidence today.'],
+};
+
+// Keep in step with DEEP in src/data/deepFrameworks.ts and the routes in App.tsx.
+const DEEP_FRAMEWORK_SLUGS = ['cqc', 'hiqa', 'cms', 'nabh', 'jci'];
+const catalogueOnly = new Set(frameworkKeys.map(k => `/frameworks/${k}`));
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const distDir = resolve(__dirname, 'dist');
@@ -22,39 +42,25 @@ const INDIA_ONLY = (process.env.VITE_INDIA_ONLY ?? 'true') !== 'false';
 // All routes that should be pre-rendered
 const STATIC_ROUTES = [
   '/',
-  '/assets',
-  '/pricing',
+  '/frameworks',
   '/blog',
   '/start',
-  '/contact-sales',
-  '/hospitals',
-  '/frameworks',
-  '/melamphic',
-  '/veterinary',
-  '/dental',
-  '/general-practice',
-  '/allied-health',
-  '/physiotherapy',
-  '/osteopathy',
-  '/chiropractic',
-  '/occupational-therapy',
-  '/podiatry',
-  '/speech-therapy',
-  '/products/point-of-care-evidence',
-  '/products/statutory-form-infrastructure',
-  '/products/institutional-compliance-hub',
-  '/privacy', '/terms', '/cookies', '/dpa', '/subprocessors',
-  '/refund-policy', '/acceptable-use', '/security',
+  '/privacy', '/terms', '/cookies', '/dpa', '/security',
 ];
 
 // Derived from src/data/blogMarkets.mjs — the same map the app filters on.
-// While INDIA_ONLY, rest-of-world regulator posts are neither prerendered
-// nor listed in the sitemap, so crawlers never see content users can't reach.
-const BLOG_SLUGS = visibleBlogSlugs(INDIA_ONLY);
+// Every post is prerendered and listed — the blog spans the same five
+// frameworks the site sells against.
+const BLOG_SLUGS = visibleBlogSlugs();
 
 const ALL_ROUTES = [
   ...STATIC_ROUTES,
   ...BLOG_SLUGS.map(s => `/blog/${s}`),
+  // One page per regulator, generated from the product's framework catalogue.
+  ...frameworkKeys.map(k => `/frameworks/${k}`),
+  // The five that campaigns point at. Hand-built, indexed, and the only
+  // framework pages in the sitemap — see DEEP_SITEMAP below.
+  ...DEEP_FRAMEWORK_SLUGS.map(s => `/frameworks/${s}`),
 ];
 
 // Meta map — what title/description to inject per route
@@ -62,92 +68,20 @@ const ALL_ROUTES = [
 // the HTML shell so crawlers see them before JS executes)
 const META = {
   '/': {
-    title: 'Clinical Governance Automation | Salvia',
-    desc: 'Salvia is an AI compliance suite for vet, dental and clinical practices. Voice note in — audit-ready records, controlled-drug logs and incident trails out.',
-  },
-  '/pricing': {
-    title: 'AI Clinical Documentation & Compliance Pricing | Salvia',
-    desc: 'Salvia pricing for vet, dental, GP and allied health — Practice plan from $229/mo. Compliance-grade documentation, controlled-drug logs and audit trails.',
-  },
-  '/assets': {
-    title: 'Brand Assets | Salvia',
-    desc: 'Official Salvia brand assets, logos, and illustrations available for press and partners.',
+    title: 'Salvia — know where you stand against the standard',
+    desc: 'Salvia holds your policies as enforceable rules, checks every record against them before it is filed, and maps what you hold onto the framework you are assessed against — CQC, HIQA, CMS, NABH and JCI.',
   },
   '/blog': {
-    title: 'From the compliance desk | Salvia',
-    desc: 'Clinical documentation, compliance law, and audit readiness — written for vets, dentists, and clinicians who\'ve been burned by bad records.',
+    title: 'Writing — record keeping, and the rules that judge it',
+    desc: 'What inspectors and courts actually look for in a clinical record, answered against the primary source with citations. CQC, HIQA, CMS, NABH.',
   },
   '/start': {
-    title: 'Start your free Salvia trial | Salvia',
-    desc: 'Request early access to Salvia — AI clinical documentation and compliance for Indian clinics, hospitals, dental and veterinary practices. 21 days free, no card.',
-  },
-  '/contact-sales': {
-    title: 'Book a demo | Salvia',
-    desc: 'See Salvia in action — compliance and governance automation for vet, dental, and clinical practices.',
-  },
-  '/hospitals': {
-    title: 'Evidence & Compliance Platform for Indian Hospitals | Salvia',
-    desc: 'Your HMIS bills and schedules — it was never built to defend you. Salvia sits on top: every consult becomes a clinician-verified, sealed record you can produce when a complaint arrives.',
-  },
-  '/melamphic': {
-    title: 'Melamphic AI Private Limited',
-    desc: 'Melamphic is an applied-AI company for high-stakes, regulated work. Our mission: make trustworthy documentation effortless. Our first product is Salvia.',
-  },
-  '/veterinary': {
-    title: 'Veterinary Compliance Software | Salvia',
-    desc: 'Salvia keeps vet records audit-ready for RCVS, VCNZ, VPB and CMA — clinical records, controlled-drug logs, consent and audit trail from one voice note.',
-  },
-  '/dental': {
-    title: 'Dental Compliance Software | Salvia',
-    desc: 'Salvia keeps dental practice records audit-ready for CQC, GDC, and AHPRA. BPE, STE, radiograph justification, and treatment plans captured at every visit.',
-  },
-  '/general-practice': {
-    title: 'General Practice Compliance Software | Salvia',
-    desc: 'Salvia keeps GP and clinic records audit-ready for CQC, AHPRA and MCNZ — structured records, prescribing logs, referral trails and consent from a voice note.',
-  },
-  '/allied-health': {
-    title: 'Allied Health Compliance Software | Salvia',
-    desc: 'Salvia keeps allied-health records audit-ready for CORU, HCPC, AHPRA, PBNZ and more — voice note to SOAP record, outcome measures, treatment log and discharge.',
-  },
-  '/physiotherapy': {
-    title: 'Physiotherapy Compliance Software | CORU, HCPC, AHPRA, PBNZ | Salvia',
-    desc: 'Salvia keeps physiotherapy records audit-ready for CORU, HCPC, AHPRA and PBNZ — voice note to SOAP record, outcome measures, treatment log and discharge.',
-  },
-  '/osteopathy': {
-    title: 'Osteopathy Practice Software | GOsC, AHPRA, OCNZ | Salvia',
-    desc: 'Salvia generates osteopathy records aligned with GOsC Osteopathic Practice Standards, AHPRA Osteopathy Board, and OCNZ. Voice note → structured treatment record.',
-  },
-  '/chiropractic': {
-    title: 'Chiropractic Practice Software | GCC, AHPRA, CBNZ | Salvia',
-    desc: 'Salvia generates chiropractic records aligned with GCC, AHPRA and CBNZ — voice note to a structured adjustment record, imaging log, consent and audit trail.',
-  },
-  '/occupational-therapy': {
-    title: 'Occupational Therapy Software | CORU, HCPC, AHPRA, OTBNZ | Salvia',
-    desc: 'Salvia keeps OT records audit-ready for CORU, HCPC, AHPRA OT Board and OTBNZ. Voice note → functional assessment, goals, intervention, outcome review.',
-  },
-  '/podiatry': {
-    title: 'Podiatry Practice Software | CORU, HCPC, AHPRA | Salvia',
-    desc: 'Salvia keeps podiatry records audit-ready for CORU, HCPC, AHPRA and PBNZ — voice note to assessment, wound register, sharps log, consent and treatment record.',
-  },
-  '/speech-therapy': {
-    title: 'Speech Therapy Software | CORU, HCPC, SPA, ASHA | Salvia',
-    desc: 'Salvia keeps speech and language therapy records audit-ready for CORU, HCPC, SPA, NZSTA and ASHA. Voice note → assessment, goals, intervention, progress review.',
+    title: 'Talk to us',
+    desc: 'Tell us where the paperwork breaks in your practice. We set Salvia up with your own forms and the framework you are assessed against.',
   },
   '/frameworks': {
-    title: 'Regulatory Frameworks We Support | Salvia',
-    desc: 'Salvia generates audit-ready clinical records against 40+ regulatory frameworks across vet, dental, GP and allied health — CORU, HCPC, AHPRA, RCVS, CQC and more.',
-  },
-  '/products/point-of-care-evidence': {
-    title: 'Statutory Evidence Capture | Salvia',
-    desc: 'Voice note after each consult — Salvia maps audio directly to compliance-grade clinical records, controlled drug logs, and audit trails.',
-  },
-  '/products/statutory-form-infrastructure': {
-    title: 'Statutory Form Infrastructure | Salvia',
-    desc: 'Salvia\'s form infrastructure turns clinical notes into immutable, versioned records — audit-ready for CQC, VMR, and GDC compliance.',
-  },
-  '/products/institutional-compliance-hub': {
-    title: 'Institutional Compliance Hub | Salvia',
-    desc: 'Turn static policy PDFs into active clinical governance. Salvia maps your internal rules to CQC, VMR, and GDC frameworks.',
+    title: 'Frameworks — every standard Salvia maps, by country and regulator',
+    desc: '60 frameworks across 6 countries and 4 kinds of practice, with 302 record-keeping clauses mapped to the field that satisfies each one.',
   },
   '/privacy': {
     title: 'Privacy Policy | Salvia',
@@ -165,18 +99,6 @@ const META = {
     title: 'Data Processing Agreement (DPA) | Salvia',
     desc: 'Salvia\'s DPA for clinics: roles, instructions, sub-processors, security, transfers and breach handling under DPDP, GDPR, AU and NZ law.',
   },
-  '/subprocessors': {
-    title: 'Sub-processors | Salvia',
-    desc: 'The third-party sub-processors Salvia uses to deliver its services (Deepgram, Google Gemini, Cloudflare, PostHog), what they do, and where they process data.',
-  },
-  '/refund-policy': {
-    title: 'Refund & Cancellation Policy | Salvia',
-    desc: 'How cancellations and refunds work for Salvia subscriptions.',
-  },
-  '/acceptable-use': {
-    title: 'Acceptable Use Policy | Salvia',
-    desc: 'The rules for using Salvia responsibly and lawfully — consents, security, and clinician review of AI output.',
-  },
   '/security': {
     title: 'Security Overview | Salvia',
     desc: 'How Salvia protects clinical data: encryption (TLS 1.2+, AES-256), least-privilege access, tamper-evident audit trails and 72-hour breach response.',
@@ -186,52 +108,19 @@ const META = {
 // India-launch overrides — the client pages already render India copy via
 // useIsIndia(); these keep the CRAWLER view (static META) in sync so Google
 // India isn't served RCVS/CQC/"$229 per month" copy on an India-only site.
-const INDIA_META = {
-  '/': {
-    title: 'The Evidence Layer for Indian Healthcare | Salvia',
-    desc: 'Salvia turns what clinicians say — ambient or dictated, any Indian language — into verified, sealed clinical records. Files you can produce when a complaint arrives, context at every visit.',
-  },
-  '/pricing': {
-    title: 'AI Clinical Documentation & Compliance Pricing | Salvia',
-    desc: 'Salvia pricing for Indian clinics — Starter ₹1,000/mo, Clinic ₹3,000/mo, Group ₹6,000/mo. Per-clinic, not per-seat; AI notes, drug register and audit trails on every tier.',
-  },
-  '/veterinary': {
-    title: 'Veterinary Compliance Software | Salvia',
-    desc: 'Salvia keeps vet records audit-ready for VCI, the IVC Act 1984, Schedule H1 and state veterinary councils — records, drug logs, consent and audit trail from one voice note.',
-  },
-  '/dental': {
-    title: 'Dental Compliance Software | Salvia',
-    desc: 'Salvia keeps dental clinic records audit-ready for DCI, NABH and AERB. BPE, radiograph justification and treatment plans captured at every visit.',
-  },
-  '/general-practice': {
-    title: 'General Practice Compliance Software | Salvia',
-    desc: 'Salvia keeps clinic and GP records audit-ready for NMC, NABH and ABDM — structured records, prescribing logs, referral trails and consent from a voice note.',
-  },
-  '/allied-health': {
-    title: 'Allied Health Compliance Software | Salvia',
-    desc: 'Salvia keeps allied-health records structured and defensible — voice note to SOAP record, outcome measures, treatment log and discharge, built for Indian practices.',
-  },
-  '/frameworks': {
-    title: 'Regulatory Frameworks We Support | Salvia',
-    desc: 'Audit-ready records against 50+ frameworks — NABH, ABDM, NMC record rules, DPDP Act, Schedule H1, PC-PNDT and Consumer Protection Act 2019, plus international regulators.',
-  },
-  '/products/statutory-form-infrastructure': {
-    title: 'Statutory Form Infrastructure | Salvia',
-    desc: 'Salvia\'s form infrastructure turns clinical notes into immutable, versioned records — audit-ready for NABH assessments, NMC record rules and consumer-court scrutiny.',
-  },
-  '/products/institutional-compliance-hub': {
-    title: 'Institutional Compliance Hub | Salvia',
-    desc: 'Turn static policy PDFs into active clinical governance. Salvia maps your internal rules to NABH, ABDM and NMC frameworks — every record checked before sign-off.',
-  },
-};
+// INDIA_META used to override the home and frameworks meta with India-launch
+// copy. The site now sells across five frameworks in four countries, so the
+// override contradicted the pages it sat on top of. META is the only source.
+const INDIA_META = {};
 if (INDIA_ONLY) {
   for (const [route, m] of Object.entries(INDIA_META)) META[route] = { ...META[route], ...m };
 }
 
-function injectMeta(html, title, desc, path, author = 'Salvia') {
+function injectMeta(html, title, desc, path, author = 'Salvia', noindex = false) {
   // Use exact route path without appending trailing slashes to match internal links
   const canonical = `https://hellosalvia.com${path === '/' ? '/' : path}`;
-  const ogImage = 'https://hellosalvia.com/og-image.png?v=2';
+  // Keep in step with DEFAULT_OG_IMAGE in src/components/SEO.tsx.
+  const ogImage = 'https://hellosalvia.com/og-image.png?v=3';
   // Strip the template's default <title>/<meta description> so each page emits
   // exactly one of each (no duplicate tags for crawlers to disagree over).
   html = html
@@ -254,7 +143,8 @@ function injectMeta(html, title, desc, path, author = 'Salvia') {
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="${t}" />
     <meta name="twitter:description" content="${d}" />
-    <meta name="twitter:image" content="${ogImage}" />`;
+    <meta name="twitter:image" content="${ogImage}" />${
+      noindex ? '\n    <meta name="robots" content="noindex, follow" />' : ''}`;
 
   return html.replace('</head>', `${metaTags}\n  </head>`);
 }
@@ -301,16 +191,16 @@ const BLOG_META = {
 // these client-side, but those bots don't run JS — so the static copy is what
 // earns the structured-data + E-E-A-T credit. -----------------------------------
 const SITE = 'https://hellosalvia.com';
-// Salvia is a GLOBAL product — India is one market, not the whole company.
-const AREA_SERVED = ['Australia', 'New Zealand', 'United Kingdom', 'Ireland', 'United States', 'India']
-  .map((name) => ({ '@type': 'Country', name }));
+// Salvia is a GLOBAL product, differentiated by FRAMEWORKS, not countries — the
+// schema is worldwide and country-name-free (frameworks are the localization).
+const AREA_SERVED = 'Worldwide';
 const ORG_SCHEMA = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
   name: 'Salvia',
   url: SITE,
   logo: `${SITE}/favicon.png`,
-  description: 'AI clinical documentation and compliance suite for veterinary, dental, general-practice and allied-health clinics — a post-consult voice note in, an audit-ready, regulator-compliant record out. Serving Australia, New Zealand, the UK, the EU, the US and India.',
+  description: 'The compliance platform for clinical care. Salvia turns every clinical record into structured evidence, and an always-on agent continuously proves your compliance against any framework — NABH, JCI, NSQHS, CMS, HEDIS and more.',
   areaServed: AREA_SERVED,
   sameAs: [],
 };
@@ -326,9 +216,11 @@ const SOFTWARE_SCHEMA = {
   offers: { '@type': 'Offer', category: 'subscription' },
   publisher: { '@type': 'Organization', name: 'Salvia', url: SITE },
   featureList: [
+    'Continuous clinical-compliance monitoring against any framework',
+    'Always-on compliance agent — drafts, flags gaps, maps every record to your standards',
+    'Policy engine that measures each policy on every note',
     'AI clinical documentation from voice notes (multilingual)',
-    'Regulator-mapped compliance checks — RCVS, CQC, GDC, AHPRA, VCNZ, NABH, ABDM and more',
-    'Controlled-drug register', 'Consent and incident records', 'Audit-ready report export',
+    'Consent, prescription and incident records', 'Audit-ready evidence export',
   ],
 };
 const BLOG_DATES = {
@@ -395,6 +287,20 @@ for (const route of ALL_ROUTES) {
   if (meta) {
     title = meta.title; desc = meta.desc;
     html = injectMeta(template, title, desc, route);
+  } else if (route.startsWith('/frameworks/')) {
+    const key = route.replace('/frameworks/', '');
+    const deep = DEEP_META[key];
+    if (deep) {
+      [title, desc] = deep;
+      html = injectMeta(template, title, desc, route);
+    } else {
+      const fw = FRAMEWORKS.find((f) => f.key === key);
+      title = fw ? `${fw.body} — record-keeping requirements | Salvia` : `${titleCase(key)} | Salvia`;
+      desc = fw ? clip(fw.summary) : 'Record-keeping requirements and what satisfies them.';
+      // Catalogue pages are reachable and useful on a call, but not indexed:
+      // sixty pages off one template is the shape a scaled-content policy targets.
+      html = injectMeta(template, title, desc, route, 'Salvia', true);
+    }
   } else if (route.startsWith('/blog/')) {
     const slug = route.replace('/blog/', '');
     const bm = BLOG_META[slug];
@@ -446,7 +352,10 @@ function sitemapEntry(route) {
   ].join('\n');
 }
 
-const SITEMAP_ROUTES = ALL_ROUTES.filter((r) => r !== '/contact-sales'); // redirect — not a page
+const SITEMAP_ROUTES = ALL_ROUTES.filter((r) =>
+  r !== '/contact-sales' &&        // redirect — not a page
+  !catalogueOnly.has(r)            // generated catalogue pages ship noindex
+);
 const sitemap = [
   '<?xml version="1.0" encoding="UTF-8"?>',
   '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
@@ -455,4 +364,4 @@ const sitemap = [
   '',
 ].join('\n');
 writeFileSync(resolve(distDir, 'sitemap.xml'), sitemap, 'utf-8');
-console.log(`✓ Sitemap written — ${SITEMAP_ROUTES.length} URLs${INDIA_ONLY ? ' (India-only surface)' : ''}`);
+console.log(`✓ Sitemap written — ${SITEMAP_ROUTES.length} URLs`);

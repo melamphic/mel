@@ -1,41 +1,19 @@
 import React from 'react';
-import { INDIA_ONLY } from '../config';
-import { BLOG_MARKETS } from './blogMarkets.mjs';
 
 // Specialized Domain Content Imports
 import { content as pajamaTime } from '../content/blog/pajama-time';
 import { content as informedRefusal } from '../content/blog/informed-refusal';
-import { content as copyPaste } from '../content/blog/copy-paste';
-import { content as vetTpr } from '../content/blog/vet-tpr';
-import { content as malpracticeDental } from '../content/blog/malpractice-dental';
 import { content as aiLegal } from '../content/blog/ai-legal';
 import { content as strangerRule } from '../content/blog/stranger-rule';
 import { content as auditTrail } from '../content/blog/audit-trail';
-import { content as emrCrash } from '../content/blog/emr-crash';
-import { content as oralPhotos } from '../content/blog/wound-photos';
-import { content as aiLegalStatus } from '../content/blog/ai-legal-status';
-import { content as clinicalGuidelines } from '../content/blog/clinical-guidelines';
-import { content as signedEdits } from '../content/blog/signed-edits';
-import { content as telehealthStandards } from '../content/blog/telehealth-standards';
-import { content as retentionPolicy } from '../content/blog/retention-policy';
-import { content as manualChartingLiability } from '../content/blog/manual-charting-liability';
 import { content as difficultPatients } from '../content/blog/difficult-patients';
-import { content as institutionalEthics } from '../content/blog/institutional-ethics';
 import { content as pediatricRecords } from '../content/blog/pediatric-records';
-import { content as dentalSurgical } from '../content/blog/surgical-notes';
-import { content as cmaVetDeadline } from '../content/blog/cma-vet-deadline';
-import { content as rcvsRecordInspection } from '../content/blog/rcvs-record-inspection';
 import { content as cqcDental2026 } from '../content/blog/cqc-dental-2026';
-import { content as avmaAuRecords } from '../content/blog/avma-au-records';
-import { content as ahpraDentalAu } from '../content/blog/ahpra-dental-au';
-import { content as vcnzRecordsNz } from '../content/blog/vcnz-records-nz';
 // India
 import { content as consumerCourtRecords } from '../content/blog/consumer-court-records';
 import { content as patientRecordsAccessIndia } from '../content/blog/patient-records-access-india';
 import { content as nabhSmallClinicWorthIt } from '../content/blog/nabh-small-clinic-worth-it';
 import { content as abdmMandatoryClinic } from '../content/blog/abdm-mandatory-clinic';
-import { content as aiScribeIndianLanguages } from '../content/blog/ai-scribe-indian-languages';
-import { content as aiScribePricingIndia } from '../content/blog/ai-scribe-pricing-india';
 
 export type Domain = 'GENERAL' | 'VETERINARY' | 'DENTAL';
 
@@ -56,22 +34,6 @@ export interface BlogPost {
 
 export const BLOG_CONTENT: Record<string, BlogPost> = {
   // --- INDIA ---
-  'ai-scribe-pricing-india': {
-    tag: 'Pricing',
-    domain: 'GENERAL',
-    q: "What does an AI medical scribe cost in India?",
-    excerpt: "From free trial tiers to ~₹1,500 per doctor per month for an ambient scribe — and why per-clinic compliance suites start around ₹1,000 for the whole practice. The real 2026 pricing math for Indian clinics, including the compliance line item nobody quotes.",
-    readTime: '6 min read',
-    author: 'Salvia Editorial',
-    date: 'June 14, 2026',
-    keywords: ['AI medical scribe pricing India', 'AI scribe cost India', 'medical scribe price India', 'clinical documentation software pricing India', 'AI scribe cost per month'],
-    content: aiScribePricingIndia,
-    sources: [
-      { label: 'Eka Care — EkaScribe (pricing and features)', url: 'https://ekascribe.ai/' },
-      { label: 'Augnito Medical Dictation — App Store (India) in-app pricing', url: 'https://apps.apple.com/in/app/augnito-medical-dictation-app/id1526630374' },
-      { label: 'NABH — AB-PMJAY quality-certification incentive framework', url: 'https://nabh.co/programmes/ab-pmjay-empanelment-programme/' },
-    ],
-  },
   'consumer-court-records': {
     tag: 'Medico-Legal',
     domain: 'GENERAL',
@@ -134,22 +96,6 @@ export const BLOG_CONTENT: Record<string, BlogPost> = {
       { label: 'ABDM — Digital Health Incentive Scheme, Corrigendum 7 (incentive window Apr–Sep 2026)', url: 'https://abdm.gov.in/strapicms/uploads/Corrigendum_7_f456cb207a.pdf' },
       { label: 'National Health Claims Exchange (NHCX) — ABDM', url: 'https://abdm.gov.in/nhcx' },
       { label: 'NRCeS — India FHIR implementation guide (NDHM)', url: 'https://nrces.in/ndhm' },
-    ],
-  },
-  'ai-scribe-indian-languages': {
-    tag: 'AI & Scribes',
-    domain: 'GENERAL',
-    q: "Do AI scribes actually work in Hindi or Malayalam?",
-    excerpt: "Most demos are filmed in clean English. A real Indian OPD is code-mixed and noisy. Where English-first scribes break, how to test one on your worst Tuesday, and why a perfect transcript still is not a record.",
-    readTime: '6 min read',
-    author: 'Salvia Editorial',
-    date: 'June 13, 2026',
-    keywords: ['AI medical scribe India', 'multilingual clinical documentation', 'code-mixed speech'],
-    content: aiScribeIndianLanguages,
-    sources: [
-      { label: 'HiACC: a Hindi–English code-switched clinical speech corpus (Data in Brief, 2025) — 250M+ code-switching estimate', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC12329218/' },
-      { label: 'Eka Care — EkaScribe language support', url: 'https://ekascribe.ai/' },
-      { label: 'How Augnito grew out of Scribetech medical transcription (IndiaAI)', url: 'https://indiaai.gov.in/article/from-a-bpo-to-an-ai-company-how-augnito-is-revamping-the-medical-transcription-industry' },
     ],
   },
 
@@ -237,175 +183,10 @@ export const BLOG_CONTENT: Record<string, BlogPost> = {
   },
 
   // --- VETERINARY ---
-  'vet-tpr': {
-    tag: 'Board Citation',
-    domain: 'VETERINARY',
-    q: "Board cited me for a 'missing TPR' — what does a minimum SOAP note actually need?",
-    excerpt: "Veterinary boards reject SOAP notes for surprisingly consistent reasons. A checklist of what AVMA and VMR inspectors look for in the first 10 seconds of reviewing a chart.",
-    readTime: '6 min read',
-    author: 'Salvia Editorial',
-    date: 'April 20, 2026',
-    keywords: ['TPR', 'AVMA', 'SOAP'],
-    content: vetTpr,
-  },
-  'copy-paste-vet': {
-    tag: 'Templates',
-    domain: 'VETERINARY',
-    q: "Vet board flagged me for 'cloned exam notes' — is copy-pasting normal exams really illegal?",
-    excerpt: "Cloning a normal exam template is legal. Cloning it *identically*, *repeatedly*, and *without edits* is how you end up in front of the board. What the line actually is.",
-    readTime: '5 min read',
-    author: 'Salvia Editorial',
-    date: 'April 19, 2026',
-    keywords: ['templates', 'fraud', 'cloning'],
-    content: copyPaste,
-  },
-  'emr-crash-vet': {
-    tag: 'Downtime',
-    domain: 'VETERINARY',
-    q: "Our EMR crashed mid-surgery — how are we supposed to chart that?",
-    excerpt: "When your practice management software goes down, paper is your friend — but only if you bridge it back into the record with the right timestamps and addenda.",
-    readTime: '5 min read',
-    author: 'Salvia Editorial',
-    date: 'April 25, 2026',
-    keywords: ['downtime', 'backup', 'addendum'],
-    content: emrCrash,
-  },
-  'ai-vet-legal': {
-    tag: 'AI & Scribes',
-    domain: 'VETERINARY',
-    q: "Can I legally use an AI scribe for veterinary records in AU/NZ?",
-    excerpt: "AVA, VCNZ and state boards all have positions — most of them written for human scribes, none of them explicitly banning AI. Here's how to stay ahead of the regulation that's coming.",
-    readTime: '7 min read',
-    author: 'Salvia Editorial',
-    date: 'April 27, 2026',
-    keywords: ['AI law', 'AVA', 'AI-assisted'],
-    content: aiLegalStatus,
-  },
-  'vet-audit-prep': {
-    tag: 'Board Audit',
-    domain: 'VETERINARY',
-    q: "The VMR board is auditing us next month — what do they actually check?",
-    excerpt: "A former VMR inspector walked us through the first five records she pulls in every audit. Spoiler: your S/O/A/P structure is the least of her concerns.",
-    readTime: '8 min read',
-    author: 'Salvia Editorial',
-    date: 'April 28, 2026',
-    keywords: ['audit readiness', 'VMR', 'inspection'],
-    content: clinicalGuidelines,
-  },
-  'retention-vet': {
-    tag: 'Records Retention',
-    domain: 'VETERINARY',
-    q: "Dog passed away 3 years ago — can I delete the records yet?",
-    excerpt: "Probably not. Retention rules for deceased patients differ by state, by species, and by whether any controlled drugs were dispensed. A one-page guide.",
-    readTime: '4 min read',
-    author: 'Salvia Editorial',
-    date: 'May 1, 2026',
-    keywords: ['retention', 'archiving', 'statutory'],
-    content: retentionPolicy,
-  },
-  'logic-vet': {
-    tag: 'Standards',
-    domain: 'VETERINARY',
-    q: "How do I know my vet notes actually meet VMR standards?",
-    excerpt: "Reading the VMR code is a two-hour job, followed by a hope-and-pray. Running your notes through a live policy checker is better — and perfectly auditable.",
-    readTime: '6 min read',
-    author: 'Salvia Editorial',
-    date: 'May 4, 2026',
-    keywords: ['VMR', 'standards', 'policy'],
-    content: institutionalEthics,
-  },
 
   // --- DENTAL ---
-  'malpractice-dental': {
-    tag: 'Malpractice',
-    domain: 'DENTAL',
-    q: "Missed a perio pocket two years ago — patient now has bone loss. How do I defend my charting?",
-    excerpt: "Perio-charting suits almost always turn on whether pocket depths were recorded at every hygiene visit. What a defensible periodontal record looks like in practice.",
-    readTime: '7 min read',
-    author: 'Salvia Editorial',
-    date: 'April 21, 2026',
-    keywords: ['periodontal', 'probing', 'malpractice'],
-    content: malpracticeDental,
-  },
-  'oral-photography': {
-    tag: 'Insurance',
-    domain: 'DENTAL',
-    q: "Insurance keeps denying my crown claims 'for lack of documentation' — what do they want?",
-    excerpt: "Delta, Cigna and the big insurers have quietly raised the photographic evidence bar for restorative claims. A shot-list that stops 90% of denials.",
-    readTime: '5 min read',
-    author: 'Salvia Editorial',
-    date: 'April 26, 2026',
-    keywords: ['photography', 'intraoral', 'claims'],
-    content: oralPhotos,
-  },
-  'signed-edits-dental': {
-    tag: 'Corrections',
-    domain: 'DENTAL',
-    q: "Billed the wrong CDT code on a signed note — how do I fix it without looking dodgy?",
-    excerpt: "Overwriting a signed note is the fastest way to turn a billing mistake into an insurance-fraud investigation. The right way to addendum — with the versioning to prove it.",
-    readTime: '5 min read',
-    author: 'Salvia Editorial',
-    date: 'April 29, 2026',
-    keywords: ['addendum', 'CDT', 'billing'],
-    content: signedEdits,
-  },
-  'teledentistry-standards': {
-    tag: 'Telehealth',
-    domain: 'DENTAL',
-    q: "First time doing a tele-dental consult — what's the charting standard?",
-    excerpt: "Tele-dentistry rules are still patchwork across the DCA, GDC and state boards. A short guide to what every remote consult note must contain, regardless of jurisdiction.",
-    readTime: '6 min read',
-    author: 'Salvia Editorial',
-    date: 'April 30, 2026',
-    keywords: ['teledentistry', 'remote', 'charting'],
-    content: telehealthStandards,
-  },
-  'manual-dental-risk': {
-    tag: 'Risk',
-    domain: 'DENTAL',
-    q: "We're still on paper charts — is this a malpractice suit waiting to happen?",
-    excerpt: "Paper is legal. What isn't legal is illegible paper, missing paper, and paper that can't be cross-referenced with your imaging. The real exposure of a paper practice.",
-    readTime: '6 min read',
-    author: 'Salvia Editorial',
-    date: 'May 2, 2026',
-    keywords: ['paper charts', 'liability', 'digitisation'],
-    content: manualChartingLiability,
-  },
-  'surgical-prep-dental': {
-    tag: 'Surgery',
-    domain: 'DENTAL',
-    q: "Hospital rejected my oral surgery report — what format do they expect?",
-    excerpt: "Hospital-linked oral surgery has a stricter documentation standard than office practice — and most GPs and oral surgeons learn this the hard way. A template that passes review.",
-    readTime: '7 min read',
-    author: 'Salvia Editorial',
-    date: 'May 6, 2026',
-    keywords: ['oral surgery', 'hospital', 'report'],
-    content: dentalSurgical,
-  },
 
   // --- UK VETERINARY ---
-  'cma-vet-deadline': {
-    tag: 'CMA Compliance',
-    domain: 'VETERINARY',
-    q: "September 23 2026: which of the 21 CMA remedies does your vet practice actually need to act on?",
-    excerpt: "Most practices have ticked the price list box and stopped there. The four CMA remedies with direct clinical records implications — itemised billing, written estimates, controlled drug transparency, complaint trail — are the ones that will catch practices off guard.",
-    readTime: '8 min read',
-    author: 'Salvia Editorial',
-    date: 'May 8, 2026',
-    keywords: ['CMA compliance', 'CMA veterinary', 'vet records UK', 'CMA remedies 2026', 'Competition and Markets Authority vets'],
-    content: cmaVetDeadline,
-  },
-  'rcvs-record-inspection': {
-    tag: 'RCVS Standards',
-    domain: 'VETERINARY',
-    q: "What do RCVS Practice Standards assessors actually check in your clinical records?",
-    excerpt: "PSS assessors aren't primarily looking at your facilities — they're looking at your records. A look at the specific record elements that trigger findings, and the three structural gaps most UK practices have.",
-    readTime: '7 min read',
-    author: 'Salvia Editorial',
-    date: 'May 10, 2026',
-    keywords: ['RCVS records', 'Practice Standards Scheme', 'RCVS compliance', 'UK vet records', 'veterinary board UK'],
-    content: rcvsRecordInspection,
-  },
 
   // --- UK DENTAL ---
   'cqc-dental-2026': {
@@ -421,51 +202,12 @@ export const BLOG_CONTENT: Record<string, BlogPost> = {
   },
 
   // --- AU VETERINARY ---
-  'au-vet-board-records': {
-    tag: 'VPB Compliance',
-    domain: 'VETERINARY',
-    q: "What do Australian vet boards actually cite in complaints? A look at VIC, NSW and QLD records findings",
-    excerpt: "State board fitness-to-practise decisions are published, and the records failures they cite are consistent. Controlled drug register discrepancies, generic consent, late timestamps, and weight-based dose gaps — a pattern worth knowing before it applies to you.",
-    readTime: '7 min read',
-    author: 'Salvia Editorial',
-    date: 'May 14, 2026',
-    keywords: ['Australian vet board', 'VPB records', 'veterinary compliance Australia', 'controlled drug register AU', 'AVA records'],
-    content: avmaAuRecords,
-  },
 
   // --- AU DENTAL ---
-  'ahpra-dental-records': {
-    tag: 'AHPRA',
-    domain: 'DENTAL',
-    q: "AHPRA dental complaints are records-first — is your charting defensible?",
-    excerpt: "Australia's Dental Board doesn't do routine inspections, but a single complaint triggers a records audit that moves fast. The three categories of records failure that feature in almost every substantiated AHPRA dental complaint.",
-    readTime: '6 min read',
-    author: 'Salvia Editorial',
-    date: 'May 15, 2026',
-    keywords: ['AHPRA dental', 'Dental Board Australia', 'AHPRA records', 'dental compliance Australia', 'AHPRA complaint records'],
-    content: ahpraDentalAu,
-  },
 
   // --- NZ VETERINARY ---
-  'vcnz-records-standard': {
-    tag: 'VCNZ Code',
-    domain: 'VETERINARY',
-    q: "VCNZ's 2024 Code of Professional Conduct — what changed for clinical records?",
-    excerpt: "The updated VCNZ Code is the most operationally demanding it's ever been. A breakdown of the new explicit requirements for vitals, drug dose tracing, consent, and the controlled drug register — and how fast the complaints process moves if these aren't met.",
-    readTime: '7 min read',
-    author: 'Salvia Editorial',
-    date: 'May 16, 2026',
-    keywords: ['VCNZ records', 'VCNZ 2024 code', 'New Zealand vet records', 'veterinary compliance NZ', 'controlled drugs NZ vets'],
-    content: vcnzRecordsNz,
-  },
 };
 
-// Market-gated view of the registry. While INDIA_ONLY, rest-of-world
-// regulator posts (HIPAA / RCVS / CQC / AHPRA / VCNZ / CMA / AVMA / CDT)
-// disappear from the blog index, article routes, related-post rails and
-// the prerender pipeline (prerender.mjs reads the same blogMarkets map).
-export const VISIBLE_BLOG_CONTENT: Record<string, BlogPost> = INDIA_ONLY
-  ? Object.fromEntries(
-      Object.entries(BLOG_CONTENT).filter(([slug]) => BLOG_MARKETS[slug] !== 'ROW')
-    )
-  : BLOG_CONTENT;
+/** Every post is visible. The site sells across five frameworks, so gating the
+ *  writing to one country would hide the very posts its framework pages link to. */
+export const VISIBLE_BLOG_CONTENT: Record<string, BlogPost> = BLOG_CONTENT;

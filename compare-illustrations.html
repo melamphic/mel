@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Illustration options — in place</title>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="src/styles/tokens.css">
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--body);
+       font:400 16px/1.6 var(--font-body);-webkit-font-smoothing:antialiased}
+  h1,h2{font-family:var(--font-display);color:var(--ink);margin:0;letter-spacing:-.03em;
+        line-height:1.15}
+  .wrap{max-width:var(--container);margin:0 auto;padding:0 var(--space-5)}
+  .opt{border-top:1.5px solid var(--ink);padding:var(--space-8) 0}
+  .tag{display:inline-flex;gap:var(--space-3);align-items:baseline;
+       font:600 var(--text-xs)/1 var(--font-body);letter-spacing:.1em;
+       text-transform:uppercase;color:var(--muted);margin-bottom:var(--space-6)}
+  .tag b{background:var(--ink);color:var(--paper);padding:4px 8px;border-radius:4px;
+         letter-spacing:.06em}
+  .hero{display:grid;gap:var(--space-7);align-items:center}
+  @media(min-width:900px){.hero{grid-template-columns:1.05fr .95fr}}
+  .hero h2{font-size:clamp(2rem,4.4vw,3.25rem);max-width:14ch}
+  .lede{font-size:var(--text-lg);max-width:60ch;margin-top:var(--space-5)}
+  .btn{display:inline-flex;padding:var(--space-3) var(--space-5);border-radius:var(--radius);
+       background:var(--accent);color:#fff;text-decoration:none;font-weight:600;
+       border:1px solid var(--ink);box-shadow:var(--shadow-sm);margin-top:var(--space-6)}
+  .art{display:flex;align-items:center;justify-content:center;min-height:300px}
+  .art img{width:100%;max-width:520px;height:auto}
+  .verdict{max-width:62ch;margin-top:var(--space-6);font-size:var(--text-sm);
+           border-left:2px solid var(--accent);padding-left:var(--space-4)}
+  .verdict b{color:var(--ink)}
+  .swatch{display:inline-block;width:11px;height:11px;border-radius:2px;
+          border:1px solid var(--line);vertical-align:-1px;margin-right:4px}
+</style>
+</head>
+<body>
+<div class="wrap" style="padding-top:var(--space-8);padding-bottom:var(--space-6)">
+  <h1 style="font-size:var(--text-2xl)">Same hero, three illustrations</h1>
+  <p style="margin-top:var(--space-3);color:var(--muted)">Judge them in place, at real size,
+    on the real ground. Pick one and it becomes the house style for every page.</p>
+</div>
+
+<!-- A -->
+<div class="wrap opt">
+  <div class="tag"><b>A</b> Notebook — Storyset “Amico”</div>
+  <div class="hero">
+    <div>
+      <h2>The care happened.<br>The record didn't.</h2>
+      <p class="lede">Inspectors mark homes down for what wasn't written, not for what
+        wasn't done. Salvia turns what your staff say into the record.</p>
+      <a class="btn" href="#">Check your last report</a>
+    </div>
+    <div class="art"><img src="public/illustrations/Notebook-amico.svg" alt=""></div>
+  </div>
+  <p class="verdict"><b>Amico.</b> Flat shapes, no outline, muted greys with the accent.
+    Nameable in one sentence about your business: a notebook. Closest to the subject.
+    Palette is correct — <span class="swatch" style="background:#166448"></span>#166448
+    is in there.</p>
+</div>
+
+<!-- B -->
+<div class="wrap opt">
+  <div class="tag"><b>B</b> Book lover — Storyset “Rafiki”</div>
+  <div class="hero">
+    <div>
+      <h2>The care happened.<br>The record didn't.</h2>
+      <p class="lede">Inspectors mark homes down for what wasn't written, not for what
+        wasn't done. Salvia turns what your staff say into the record.</p>
+      <a class="btn" href="#">Check your last report</a>
+    </div>
+    <div class="art"><img src="public/illustrations/Book-lover-rafiki.svg" alt=""></div>
+  </div>
+  <p class="verdict"><b>Rafiki.</b> Outlined, more detail, a figure reading. Carries a
+    brown <span class="swatch" style="background:#7f3e3b"></span>#7f3e3b and a red
+    <span class="swatch" style="background:#630f0f"></span>#630f0f that are not in our
+    palette — fixable, but it means editing every file. A person reading a book is
+    further from “a record that was never written”.</p>
+</div>
+
+<!-- C -->
+<div class="wrap opt">
+  <div class="tag"><b>C</b> Markdown file — unDraw</div>
+  <div class="hero">
+    <div>
+      <h2>The care happened.<br>The record didn't.</h2>
+      <p class="lede">Inspectors mark homes down for what wasn't written, not for what
+        wasn't done. Salvia turns what your staff say into the record.</p>
+      <a class="btn" href="#">Check your last report</a>
+    </div>
+    <div class="art"><img src="public/illustrations/undraw_markdown-file_io4x.svg" alt=""></div>
+  </div>
+  <p class="verdict"><b>unDraw.</b> Wrong colours out of the box —
+    <span class="swatch" style="background:#3f3d56"></span>#3f3d56 purple and
+    <span class="swatch" style="background:#49942b"></span>#49942b green, neither ours.
+    A markdown file is a developer's object, not a care manager's. And unDraw is the most
+    recognisable free set on the web.</p>
+</div>
+
+<!-- D — the drawn one, for reference -->
+<div class="wrap opt">
+  <div class="tag"><b>D</b> Drawn for Salvia — for comparison</div>
+  <div class="hero">
+    <div>
+      <h2>The care happened.<br>The record didn't.</h2>
+      <p class="lede">Inspectors mark homes down for what wasn't written, not for what
+        wasn't done. Salvia turns what your staff say into the record.</p>
+      <a class="btn" href="#">Check your last report</a>
+    </div>
+    <div class="art" style="color:var(--ink)">
+      <img src="public/illustrations/salvia-unwritten.svg" alt="">
+    </div>
+  </div>
+  <p class="verdict"><b>Ours.</b> A line that starts as writing and gives up. No licence,
+    no attribution, nobody else has it. Included only so you can compare — if a Storyset
+    style wins, this goes.</p>
+</div>
+
+<div class="wrap" style="padding:var(--space-8) 0;border-top:1.5px solid var(--ink)">
+  <p style="max-width:62ch">Whichever wins becomes the locked style. Every later
+    illustration gets fetched in that same style, at <b>#166448</b>, background hidden.</p>
+</div>
+</body>
+</html>

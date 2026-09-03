@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Salvia homepage — story blueprint</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{--ink:#111318;--ink2:#454b57;--ink3:#868d9b;--line:rgba(17,19,24,.1);--warm:#ff5a26;--warm2:#f5308f}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Manrope',system-ui,sans-serif;color:var(--ink);background:#faf9f7;-webkit-font-smoothing:antialiased;line-height:1.5}
+  .wrap{max-width:940px;margin:0 auto;padding:64px 28px 100px}
+  .kick{font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--warm)}
+  h1{font-size:44px;font-weight:800;letter-spacing:-.03em;line-height:1.05;margin:12px 0 0}
+  .lede{margin-top:18px;font-size:18px;line-height:1.55;color:var(--ink2);font-weight:450;max-width:44em}
+  h2{font-size:22px;font-weight:800;letter-spacing:-.02em;margin:56px 0 6px}
+  .sub{color:var(--ink3);font-size:14.5px;font-weight:500;margin-bottom:18px}
+  .pos{margin-top:26px;background:#fff;border:1px solid var(--line);border-left:4px solid var(--warm);border-radius:14px;padding:22px 24px}
+  .pos b{font-weight:800}
+  .rules{display:grid;grid-template-columns:1fr 1fr;gap:10px 26px;margin-top:14px}
+  .rule{font-size:14.5px;color:var(--ink2);font-weight:500;display:flex;gap:9px;align-items:flex-start}
+  .rule i{color:var(--warm);font-style:normal;font-weight:800}
+  .flow{font-size:14px;font-weight:600;color:var(--ink2);background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px 18px;line-height:1.9}
+  .flow b{color:var(--ink)}
+  .sec{background:#fff;border:1px solid var(--line);border-radius:18px;padding:26px 28px;margin-top:16px;position:relative;overflow:hidden}
+  .sec::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px}
+  .sec.keep::before{background:#17b26a}.sec.new::before{background:var(--warm)}.sec.rewrite::before{background:#f59e0b}
+  .sec .top{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+  .sec .n{font-size:13px;font-weight:800;color:var(--ink3);font-variant-numeric:tabular-nums}
+  .sec .nm{font-size:18px;font-weight:800;letter-spacing:-.01em}
+  .tag{font-size:11px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;padding:4px 10px;border-radius:999px}
+  .tag.keep{color:#067647;background:#e8f6ee}.tag.new{color:#b2380f;background:#ffe9e0}.tag.rewrite{color:#8a5a00;background:#fdf0d9}
+  .sec .job{margin-top:10px;font-size:13px;font-weight:700;color:var(--ink3);letter-spacing:.02em;text-transform:uppercase}
+  .sec .hl{margin-top:6px;font-size:20px;font-weight:800;letter-spacing:-.02em;line-height:1.2}
+  .sec .hl.warm{background:linear-gradient(90deg,var(--warm),var(--warm2));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .sec .body{margin-top:8px;font-size:15px;line-height:1.55;color:var(--ink2);font-weight:450}
+  .sec .meta{margin-top:14px;display:flex;gap:22px;flex-wrap:wrap;font-size:13px;color:var(--ink3);font-weight:600}
+  .sec .meta b{color:var(--ink2);font-weight:700}
+  .foot{margin-top:56px;font-size:14px;color:var(--ink3);font-weight:500}
+</style></head>
+<body>
+<div class="wrap">
+
+  <div class="kick">Salvia · homepage rework</div>
+  <h1>From a feature list to a story that sells.</h1>
+  <p class="lede">The site today shows <em>what the product does</em>. It never says <em>what you lose without it</em>, never frames the agent as someone you'd hire, and the sections don't hand off to each other. This is the arc, drawn from StoryBrand, Julian Shapiro, and teardowns of Vanta, Drata, Secureframe, Cluely and Linear.</p>
+
+  <div class="pos">
+    <div class="kick" style="color:var(--ink3)">The one-line position</div>
+    <div style="margin-top:8px;font-size:19px;font-weight:700;letter-spacing:-.01em;line-height:1.4">Salvia is <b>Vanta for clinical compliance</b> — an always-on agent that keeps every hospital audit-ready, with a clinician's sign-off on every action.</div>
+    <div style="margin-top:12px;font-size:14.5px;color:var(--ink2)">Sell the outcome the administrator loses sleep over — <b>always audit-ready</b> — not the category (“documentation software”). The mechanism lives in the subhead.</div>
+  </div>
+
+  <h2>The story arc</h2>
+  <div class="sub">Customer (quality lead / medical superintendent) is the hero. Salvia is the guide. Every section answers the question the last one raised, and opens the next.</div>
+  <div class="flow">
+    <b>Hero</b> → <b>Frameworks</b> (borrowed credibility) → <b>The problem</b> (you find the gap at the inspection) → <b>The loop</b> (capture→check→seal) → <b>The agent</b> (a compliance officer that never sleeps + you approve everything) → <b>Coverage</b> (know where you stand) → <b>Policy</b> → <b>Registers</b> → <b>The numbers</b> → <b>Trust/data</b> → <b>Close</b>
+  </div>
+
+  <h2>Copy rules (kill the AI-slop)</h2>
+  <div class="rules">
+    <div class="rule"><i>›</i>Specific noun + number over adjectives (“PRE.4.a consent”, “62%”, “at submit”).</div>
+    <div class="rule"><i>›</i>One idea per section. Two ideas → split.</div>
+    <div class="rule"><i>›</i>Active, present tense: “the agent flags” not “is designed to flag”.</div>
+    <div class="rule"><i>›</i>A real point of view: “nothing writes to a record without a clinician.”</div>
+    <div class="rule"><i>›</i>No “not X, but Y”, no rule-of-three adjectives, no “in today's landscape”.</div>
+    <div class="rule"><i>›</i>Show, don't claim — real product, real sourced stat, never a fake logo or quote.</div>
+  </div>
+
+  <h2>Section by section</h2>
+  <div class="sub"><span class="tag keep">keep</span> ships already · <span class="tag rewrite">rewrite</span> exists, new copy · <span class="tag new">new</span> doesn't exist yet</div>
+
+  <div class="sec keep">
+    <div class="top"><span class="n">01</span><span class="nm">Hero</span><span class="tag keep">leave for now</span></div>
+    <div class="body">You said you're not sure about the top yet — untouched this pass. Everything below is where the story actually happens.</div>
+  </div>
+
+  <div class="sec rewrite">
+    <div class="top"><span class="n">02</span><span class="nm">Frameworks strip</span><span class="tag rewrite">rewrite</span></div>
+    <div class="job">Job — borrowed credibility, instantly: “this is built for the standard I'm held to”</div>
+    <div class="hl">Built for the standards you're accountable to.</div>
+    <div class="body">NABH · JCI · NSQHS · CMS · HEDIS. No fake customer logos — frameworks are the honest trust signal until real hospitals sign.</div>
+    <div class="meta"><span><b>Proof:</b> the framework names themselves</span><span><b>Component:</b> quiet logo-row</span></div>
+  </div>
+
+  <div class="sec new">
+    <div class="top"><span class="n">03</span><span class="nm">The problem &amp; stakes</span><span class="tag new">new — the biggest gap</span></div>
+    <div class="job">Job — “they understand my problem better than I do”, and raise the cost of the status quo</div>
+    <div class="hl warm">You find the missing consent at the inspection. That's the worst place to find it.</div>
+    <div class="body">62% of NABH non-compliances are documentation gaps — a consent nobody signed, an assessment logged a day late, an entry with no name against it. The care happened. The record didn't prove it. And the assessor is the one who notices.</div>
+    <div class="meta"><span><b>Proof:</b> sourced 62% stat · PRE.4.a · AAC.4</span><span><b>Component:</b> editorial split, no product UI</span></div>
+  </div>
+
+  <div class="sec keep">
+    <div class="top"><span class="n">04</span><span class="nm">The loop</span><span class="tag keep">keep</span></div>
+    <div class="job">Job — collapse perceived effort: “the path to value looks simple”</div>
+    <div class="hl">How every consult becomes provable compliance.</div>
+    <div class="body">Capture trio: Speak, it writes → Checked before signed → Sealed as evidence. This is the “demo the loop first” move (Cluely). Already shipped and strong.</div>
+    <div class="meta"><span><b>Component:</b> CaptureTrio (tricolor)</span></div>
+  </div>
+
+  <div class="sec new">
+    <div class="top"><span class="n">05</span><span class="nm">The agent, as a hire</span><span class="tag new">new</span></div>
+    <div class="job">Job — make the agent legible &amp; safe: “a tireless officer I control”. Folds in the #1 trust objection.</div>
+    <div class="hl warm">A compliance officer that never sleeps.</div>
+    <div class="body">The agent reads every note as it's written, checks it against your frameworks, and flags what's missing while there's still time to fix it. It drafts the correction and hands it to you — it never writes to a record on its own. You approve; it runs under your permissions.</div>
+    <div class="meta"><span><b>Proof:</b> propose→commit, audit trail</span><span><b>Component:</b> the Copilot gradient card (library 01)</span></div>
+  </div>
+
+  <div class="sec rewrite">
+    <div class="top"><span class="n">06</span><span class="nm">Coverage</span><span class="tag rewrite">rewrite headline</span></div>
+    <div class="job">Job — turn claim into belief: “I can see exactly where I stand”</div>
+    <div class="hl">Know exactly where you stand — before the assessor does.</div>
+    <div class="body">Pick your framework; every requirement it defines is scored from your real records, and drills to the exact signal it needs. (Currently headed “Capture exactly what your standard demands” — swap to the outcome.)</div>
+    <div class="meta"><span><b>Component:</b> interactive CoverageDrill</span></div>
+  </div>
+
+  <div class="sec keep">
+    <div class="top"><span class="n">07</span><span class="nm">Policy engine</span><span class="tag keep">keep</span></div>
+    <div class="hl">Write the rule once. Every note obeys it.</div>
+    <div class="body">Product proof — enforcement. MUST/SHOULD/TRY, override needs written justification. Already sharp.</div>
+  </div>
+
+  <div class="sec keep">
+    <div class="top"><span class="n">08</span><span class="nm">Registers</span><span class="tag keep">keep</span></div>
+    <div class="hl">The records an assessor asks for. Proven.</div>
+    <div class="body">Product proof — the output. Tabbed, every row traceable to a sealed note. Already sharp.</div>
+  </div>
+
+  <div class="sec new">
+    <div class="top"><span class="n">09</span><span class="nm">The numbers</span><span class="tag new">new (replaces grass “six-year”)</span></div>
+    <div class="job">Job — proof with figures: “continuous beats the annual scramble”</div>
+    <div class="hl warm">Why continuous beats the annual scramble.</div>
+    <div class="body">100% of admissions checked, not a 5% sample · 62% of non-compliances are documentation-fixable · every note, in real time. Sourced only — no invented metrics.</div>
+    <div class="meta"><span><b>Component:</b> dark stat band</span></div>
+  </div>
+
+  <div class="sec new">
+    <div class="top"><span class="n">10</span><span class="nm">Trust &amp; data</span><span class="tag new">new</span></div>
+    <div class="job">Job — “safe to hand clinical data to”</div>
+    <div class="hl">Built to hold clinical data.</div>
+    <div class="body">Your data never trains a model · an audit trail on every action · every entry authenticated and sealed. A hospital is handing you PHI — show it's safe.</div>
+  </div>
+
+  <div class="sec rewrite">
+    <div class="top"><span class="n">11</span><span class="nm">Close</span><span class="tag rewrite">rewrite</span></div>
+    <div class="hl">Built for the era of accountable care. Ready for your next audit.</div>
+    <div class="body">Restate the promise, one CTA — Book a demo. (Linear's “future / available today” reassurance register.)</div>
+  </div>
+
+  <div class="foot">Sources folded in: StoryBrand (hero→problem→guide→plan→stakes→success) · Julian Shapiro (Desire − Labor − Confusion; claim + mechanism) · Harry Dry / Copyhackers (specificity, VoC, kill adjectives) · Vanta / Drata / Secureframe / Cluely / Linear teardowns (agent-as-a-hire, demo-the-loop, human-in-loop as trust-killer). Grass sections still on the homepage after this: PDF, hospitals band — next pass.</div>
+
+</div>
+</body></html>

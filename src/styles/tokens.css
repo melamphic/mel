@@ -1,0 +1,118 @@
+/* ==========================================================================
+   Salvia design tokens — the single source of truth.
+
+   Rules this file exists to enforce:
+   - TWO typefaces. Not six. Headings and body, nothing else.
+   - ONE accent colour. It appears on calls to action and nowhere else.
+   - A FIXED spacing scale. No one-off pixel values anywhere in a component.
+   - Contrast at WCAG AA minimum (4.5:1 body, 3:1 large text and controls),
+     because this audience skews older and it is not decoration.
+
+   Reference: Razorpay's restraint — white ground, near-black type, one blue,
+   generous space, product imagery doing the talking rather than gradients.
+   ========================================================================== */
+
+:root {
+  /* ---- Type ---------------------------------------------------------- */
+  /* Headings. Geometric, confident, slightly tight. */
+  --font-display: "Archivo", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  /* Body. Neutral, boring on purpose, excellent at 16px. */
+  --font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+  /* Type scale. Nothing between these steps. */
+  --text-xs: 0.8125rem;   /* 13 — labels, captions */
+  --text-sm: 0.875rem;    /* 14 — secondary */
+  --text-base: 1rem;      /* 16 — body minimum */
+  --text-lg: 1.125rem;    /* 18 — lead paragraph */
+  --text-xl: 1.375rem;    /* 22 */
+  --text-2xl: 1.75rem;    /* 28 */
+  --text-3xl: 2.25rem;    /* 36 */
+  --text-4xl: 3rem;       /* 48 */
+  --text-5xl: 3.75rem;    /* 60 — hero only */
+
+  --leading-tight: 1.15;  /* display */
+  --leading-snug: 1.35;   /* subheads */
+  --leading-body: 1.6;    /* body — never below 1.5 */
+  --measure: 66ch;        /* line length. 45–90 is readable, 66 is optimal. */
+
+  --weight-normal: 400;
+  --weight-medium: 500;
+  --weight-semi: 600;
+  --weight-bold: 700;
+
+  /* ---- Colour -------------------------------------------------------- */
+  /* Greys carry the page. Built in HSL so the scale stays coherent. */
+  --ink:        hsl(210 24%  10%);   /* headings, near black */
+  --body:       hsl(210 12%  32%);   /* body copy — 8.9:1 on white */
+  --muted:      hsl(210 10%  48%);   /* secondary — 4.6:1, still AA */
+  --faint:      hsl(210 12%  64%);   /* decorative only, never body text */
+  --line:       hsl(210 16%  90%);   /* borders */
+  --line-soft:  hsl(210 20%  95%);   /* dividers */
+  /* Warm paper, not cold white. A cool grey-white is the browser default and
+     reads as unchosen; the references all sit on cream. This is the single
+     biggest reason the page felt lifeless. */
+  --paper:      hsl(40 33% 96%);     /* page ground */
+  --surface:    hsl(0 0% 100%);      /* cards sit ON the paper */
+  --surface-2:  hsl(40 25% 93%);     /* alternating bands */
+  --surface-3:  hsl(40 20% 90%);     /* inset panels */
+
+  /* ONE accent. Deep green: reads clinical and calm, not startup-purple,
+     and it is not the grass green that was rejected. 5.8:1 on white. */
+  --accent:       hsl(158 64%  24%);
+  --accent-hover: hsl(158 64%  19%);
+  --accent-soft:  hsl(158 44%  96%);  /* tinted background only */
+  --accent-line:  hsl(158 30%  86%);
+
+  /* A second DEEP tone, for card grounds only - never for a call to action.
+     Tonal variety without a second accent competing for the eye. */
+  --deep:      hsl(355 42% 24%);     /* claret */
+  --deep-soft: hsl(355 30% 88%);
+
+  /* Semantic. Used for state, never for decoration. */
+  --warn:   hsl(35 84% 32%);
+  --danger: hsl(9 62% 42%);
+
+  /* ---- Spacing. Every margin and pad comes from here. ----------------- */
+  --space-1: 0.25rem;   /*  4 */
+  --space-2: 0.5rem;    /*  8 */
+  --space-3: 0.75rem;   /* 12 */
+  --space-4: 1rem;      /* 16 */
+  --space-5: 1.5rem;    /* 24 */
+  --space-6: 2rem;      /* 32 */
+  --space-7: 3rem;      /* 48 */
+  --space-8: 4rem;      /* 64 */
+  --space-9: 6rem;      /* 96 */
+  --space-10: 8rem;     /* 128 — section rhythm on desktop */
+
+  /* ---- Structure ----------------------------------------------------- */
+  --container: 1120px;
+  --container-narrow: 720px;   /* prose */
+  --radius-sm: 4px;
+  --radius: 8px;
+  --radius-lg: 14px;
+
+  /* Hard offset, not a blur. A soft drop shadow is the framework default;
+     a solid offset edge is a decision. */
+  --shadow-sm: 2px 2px 0 hsl(210 24% 10%);
+  --shadow: 4px 4px 0 hsl(210 24% 10%);
+  --shadow-lift: 0 1px 3px hsl(40 20% 20% / .08);
+
+  --section-y: var(--space-9);
+}
+
+@media (min-width: 900px) {
+  :root { --section-y: var(--space-10); }
+}
+
+/* ==========================================================================
+   Banned, and why. Kept here so it is enforceable in review.
+
+   - No gradient backgrounds on sections. The single clearest "generated page"
+     tell, especially purple and indigo.
+   - No three-equal-icon feature grids.
+   - No stock illustration and no generic 3D shapes.
+   - No second accent colour. If something needs to stand out and the accent is
+     taken, it does not need to stand out.
+   - No font-size below 16px for anything a buyer must read.
+   - No pixel value that is not on the spacing scale.
+   ========================================================================== */

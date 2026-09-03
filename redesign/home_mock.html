@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Salvia — homepage (Fiscal.ai-style, compliance)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0f1218; --ink-2:#454b57; --ink-3:#868d9b;
+    --line:rgba(15,18,24,.09);
+    --accent:#2f6bff; --accent-deep:#1b3fcf;
+    --panel:#f4f6fa; --panel-2:#eef2f8;
+    --sky-1:#cfe0ff; --sky-2:#e9f1ff; --sky-3:#f6f9ff;
+    --maxw:1180px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'Manrope',system-ui,sans-serif;color:var(--ink);background:#fff;-webkit-font-smoothing:antialiased;line-height:1.5}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}
+  .serif{font-family:'Instrument Serif',Georgia,serif;font-style:italic;font-weight:400;letter-spacing:.005em}
+  a{color:inherit;text-decoration:none}
+  .eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:var(--ink-2);
+    background:rgba(255,255,255,.7);border:1px solid var(--line);border-radius:999px;padding:7px 14px;backdrop-filter:blur(6px)}
+  .eyebrow .dot{width:7px;height:7px;border-radius:999px;background:var(--accent);box-shadow:0 0 0 4px rgba(47,107,255,.16)}
+  .btn{display:inline-flex;align-items:center;gap:8px;font-family:inherit;font-size:15px;font-weight:700;border-radius:999px;
+    padding:13px 26px;border:1px solid transparent;cursor:pointer;transition:transform .15s ease}
+  .btn:hover{transform:translateY(-1px)}
+  .btn--dark{background:var(--ink);color:#fff}
+  .btn--light{background:#fff;color:var(--ink);border-color:var(--line);box-shadow:0 1px 2px rgba(15,18,24,.05)}
+  .btn--accent{background:var(--accent);color:#fff}
+
+  /* ---------- NAV ---------- */
+  .nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.72);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+  .nav .row{display:flex;align-items:center;justify-content:space-between;height:68px}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:20px;letter-spacing:-.02em}
+  .brand .mark{width:26px;height:26px;border-radius:8px;background:linear-gradient(135deg,var(--accent),#7aa2ff);display:inline-block}
+  .nav nav{display:flex;gap:30px}
+  .nav nav a{font-size:15px;font-weight:600;color:var(--ink-2)}
+  .nav nav a:hover{color:var(--ink)}
+  .nav .right{display:flex;align-items:center;gap:16px}
+  .nav .right .signin{font-size:15px;font-weight:600;color:var(--ink-2)}
+
+  /* ---------- HERO ---------- */
+  .hero{position:relative;overflow:hidden;
+    background:
+      radial-gradient(38% 30% at 68% 20%, rgba(255,255,255,.92) 0%, rgba(255,255,255,0) 70%),
+      radial-gradient(30% 24% at 30% 30%, rgba(255,255,255,.72) 0%, rgba(255,255,255,0) 72%),
+      radial-gradient(64% 54% at 88% 2%, #b6d2ff 0%, rgba(182,210,255,0) 58%),
+      radial-gradient(52% 44% at 8% -2%, #cfe0ff 0%, rgba(207,224,255,0) 58%),
+      linear-gradient(180deg, #cfe1ff 0%, #e5efff 38%, #f4f8ff 70%, #fff 100%);}
+  .hero::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.4;mix-blend-mode:soft-light;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:180px}
+  .hero .row{position:relative;z-index:1;display:grid;grid-template-columns:1.04fr .96fr;gap:56px;align-items:center;padding:86px 0 116px}
+  .h1{font-size:64px;line-height:1.0;font-weight:800;letter-spacing:-.03em;margin-top:22px}
+  .h1 .serif{font-size:1.04em;letter-spacing:0}
+  .lede{margin-top:22px;font-size:19px;line-height:1.55;color:var(--ink-2);max-width:34em;font-weight:500}
+  .hero .cta{display:flex;gap:12px;margin-top:30px}
+  .hero .assure{margin-top:18px;font-size:13.5px;color:var(--ink-3);font-weight:600}
+
+  /* the locked Compliance Copilot card (Sky palette) */
+  .copcard{position:relative;background:#fff;border-radius:26px;overflow:hidden;padding:32px 34px 34px;isolation:isolate;
+    box-shadow:0 2px 6px rgba(15,18,24,.06),0 40px 80px -42px rgba(15,18,24,.4);transform:rotate(.6deg)}
+  .copcard::before{content:"";position:absolute;inset:0;z-index:-2;background:
+    radial-gradient(85% 105% at 74% -8%, #3f74ff 0%, rgba(63,116,255,0) 56%),
+    radial-gradient(78% 98% at 96% 38%, #6a4bff 0%, rgba(106,75,255,0) 58%),
+    radial-gradient(70% 90% at 116% 72%, #8a5cff 0%, rgba(138,92,255,0) 56%),
+    radial-gradient(92% 104% at 66% 118%, #62c6f5 0%, rgba(98,198,245,0) 56%),
+    radial-gradient(58% 66% at 82% 16%, #33cfe0 0%, rgba(51,207,224,0) 50%),
+    radial-gradient(56% 62% at 102% 54%, #5b8bff 0%, rgba(91,139,255,0) 52%);}
+  .copcard::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;opacity:.9;mix-blend-mode:soft-light;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:180px}
+  .copcard .ct{font-size:23px;font-weight:800;letter-spacing:-.02em}
+  .copcard .cm{margin-top:12px;font-size:17px;line-height:1.5;font-weight:400;max-width:22em}
+  .copcard .cact{display:flex;gap:14px;margin-top:26px;align-items:flex-start}
+  .copcard .spark{width:30px;height:30px;flex:none;margin-top:2px}
+  .copcard .ct2{font-size:16.5px;font-weight:700;letter-spacing:-.01em}
+  .copcard .cd{margin-top:5px;font-size:13px;line-height:1.45;color:var(--ink-2);font-weight:500;max-width:30ch}
+  .copcard .cbtns{display:flex;gap:9px;margin-top:15px}
+  .copcard .cb{font-size:13px;font-weight:700;border-radius:999px;padding:9px 20px;border:0;cursor:pointer}
+  .copcard .cb--a{background:var(--ink);color:#fff}
+  .copcard .cb--r{background:rgba(255,255,255,.6);color:var(--ink-2);border:1px solid var(--line)}
+
+  /* layered floating chips around the hero card */
+  .hero-visual{position:relative}
+  .hero-visual .copcard{position:relative;z-index:2}
+  .hero-visual::before{content:"";position:absolute;inset:24px -14px -18px 30px;z-index:0;border-radius:26px;
+    background:#fff;opacity:.55;transform:rotate(-2.4deg);box-shadow:0 30px 60px -50px rgba(15,18,24,.4)}
+  .float-chip{position:absolute;z-index:3;background:rgba(255,255,255,.82);backdrop-filter:blur(12px);
+    border:1px solid rgba(255,255,255,.7);border-radius:16px;box-shadow:0 24px 50px -30px rgba(15,18,24,.45);padding:13px 16px}
+  .chip--fw{top:-20px;left:-24px;font-size:12.5px;font-weight:700;color:var(--ink-2);display:flex;align-items:center;gap:9px}
+  .chip--fw .g{width:8px;height:8px;border-radius:999px;background:#20c07a;box-shadow:0 0 0 4px rgba(32,192,122,.16)}
+  .chip--cov{right:-26px;bottom:-24px;display:flex;align-items:center;gap:13px}
+  .chip--cov .ring{width:46px;height:46px;flex:none}
+  .chip--cov b{font-size:22px;font-weight:800;letter-spacing:-.02em;display:block;line-height:1}
+  .chip--cov span{font-size:12px;color:var(--ink-3);font-weight:700}
+
+  /* ---------- TRUST ROW ---------- */
+  .trust{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:#fff}
+  .trust .row{display:flex;align-items:center;justify-content:center;flex-direction:column;gap:20px;padding:34px 0}
+  .trust .lbl{font-size:14px;color:var(--ink-3);font-weight:600}
+  .trust .logos{display:flex;flex-wrap:wrap;gap:44px;align-items:center;justify-content:center}
+  .trust .logos span{font-size:20px;font-weight:800;letter-spacing:.02em;color:#aeb4c0}
+
+  /* ---------- SECTION SHELL ---------- */
+  section.blk{padding:96px 0}
+  .h2{font-size:44px;line-height:1.06;font-weight:800;letter-spacing:-.025em}
+  .h2 .serif{font-size:1.06em}
+  .sub{margin-top:14px;font-size:17px;color:var(--ink-2);font-weight:500;max-width:38em}
+  .center{text-align:center;display:flex;flex-direction:column;align-items:center}
+  .center .sub{margin-left:auto;margin-right:auto}
+
+  /* product screenshot placeholder */
+  .shot{position:relative;border-radius:18px;background:linear-gradient(180deg,#fbfcfe,#eef2f8);border:1px solid var(--line);
+    box-shadow:0 30px 60px -40px rgba(15,18,24,.35);overflow:hidden;aspect-ratio:16/10}
+  .shot .bar{display:flex;gap:6px;padding:14px 16px;border-bottom:1px solid var(--line);background:#fff}
+  .shot .bar i{width:10px;height:10px;border-radius:999px;background:#e2e6ee;display:inline-block}
+  .shot .body{padding:20px;display:grid;gap:12px}
+  .shot .ln{height:12px;border-radius:6px;background:#e7ebf3}
+  .shot .ln.s{width:52%} .shot .ln.m{width:74%}
+  .shot .blkrow{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:6px}
+  .shot .tile{height:70px;border-radius:10px;background:#eaeef6;border:1px solid #e2e6ee}
+  .shot .tile.acc{background:linear-gradient(135deg,rgba(47,107,255,.16),rgba(47,107,255,.05));border-color:rgba(47,107,255,.2)}
+  .shot .cap{position:absolute;bottom:12px;right:14px;font-size:11px;font-weight:700;color:var(--ink-3);
+    background:rgba(255,255,255,.85);border:1px solid var(--line);border-radius:999px;padding:5px 11px}
+
+  /* "what it can do" split panel */
+  .tabs{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:34px 0 30px}
+  .tab{font-size:14.5px;font-weight:700;color:var(--ink-2);padding:10px 18px;border-radius:999px;border:1px solid var(--line);background:#fff}
+  .tab.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+  .panel{display:grid;grid-template-columns:.85fr 1.15fr;gap:34px;align-items:center;
+    background:var(--panel);border:1px solid var(--line);border-radius:26px;padding:38px}
+  .panel h3{font-size:26px;font-weight:800;letter-spacing:-.02em}
+  .panel h3 .serif{font-size:1.05em}
+  .panel .plist{margin-top:18px;display:grid;gap:12px}
+  .panel .pitem{display:flex;gap:11px;align-items:flex-start;font-size:15.5px;font-weight:600;color:var(--ink-2)}
+  .panel .pitem .ck{width:22px;height:22px;flex:none;border-radius:999px;background:rgba(47,107,255,.12);color:var(--accent);
+    display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;margin-top:1px}
+  .panel .btn{margin-top:24px}
+
+  /* how it works — 3 cards */
+  .cards3{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:44px}
+  .card{background:#fff;border:1px solid var(--line);border-radius:22px;padding:22px;box-shadow:0 24px 50px -44px rgba(15,18,24,.4)}
+  .card .shot{aspect-ratio:16/11;margin-bottom:20px}
+  .card h4{font-size:19px;font-weight:800;letter-spacing:-.02em}
+  .card p{margin-top:8px;font-size:15px;color:var(--ink-2);font-weight:500}
+
+  /* stat band */
+  .statband{background:linear-gradient(135deg,var(--accent),#5b8bff);border-radius:30px;padding:52px 44px;color:#fff;
+    box-shadow:0 40px 80px -50px rgba(47,107,255,.9)}
+  .statband h3{font-size:30px;font-weight:800;letter-spacing:-.02em;text-align:center}
+  .statband h3 .serif{font-size:1.08em}
+  .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:38px}
+  .stat{text-align:center}
+  .stat .n{font-size:58px;font-weight:800;letter-spacing:-.03em;line-height:1}
+  .stat .d{margin-top:10px;font-size:14.5px;font-weight:600;color:rgba(255,255,255,.86);max-width:22ch;margin-left:auto;margin-right:auto}
+
+  /* testimonials */
+  .quotes{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:44px}
+  .quote{background:#fff;border:1px solid var(--line);border-radius:20px;padding:26px;box-shadow:0 24px 50px -46px rgba(15,18,24,.35)}
+  .quote .mk{font-family:'Instrument Serif',serif;font-size:48px;line-height:.4;color:var(--accent);opacity:.4}
+  .quote p{margin-top:14px;font-size:16px;font-weight:600;color:var(--ink);line-height:1.5}
+  .quote .who{margin-top:22px;display:flex;align-items:center;gap:12px}
+  .quote .av{width:38px;height:38px;border-radius:999px;background:linear-gradient(135deg,#cdd8ff,#eef2ff);border:1px solid var(--line)}
+  .quote .who b{font-size:14px;font-weight:800;display:block}
+  .quote .who span{font-size:13px;color:var(--ink-3);font-weight:600}
+
+  /* resources */
+  .res{display:grid;gap:2px;margin-top:40px;border-top:1px solid var(--line)}
+  .res a{display:grid;grid-template-columns:120px 1fr auto;gap:22px;align-items:center;padding:22px 6px;border-bottom:1px solid var(--line)}
+  .res a:hover{background:var(--sky-3)}
+  .res .thumb{width:120px;height:74px;border-radius:12px;background:linear-gradient(135deg,#e6edfb,#f4f7fc);border:1px solid var(--line)}
+  .res .rt{font-size:19px;font-weight:800;letter-spacing:-.02em}
+  .res .rm{margin-top:5px;font-size:13.5px;color:var(--ink-3);font-weight:600}
+  .res .go{font-size:14px;font-weight:700;color:var(--accent);white-space:nowrap}
+
+  /* final CTA */
+  .finalcta{position:relative;overflow:hidden;border-radius:34px;padding:70px 44px;text-align:center;
+    background:
+      radial-gradient(80% 120% at 50% -20%, var(--sky-1) 0%, rgba(207,224,255,0) 60%),
+      linear-gradient(180deg,var(--sky-2),#fff);
+    border:1px solid var(--line)}
+  .finalcta .h2{position:relative;z-index:1}
+  .finalcta .cta{position:relative;z-index:1;display:flex;gap:12px;justify-content:center;margin-top:28px}
+
+  /* footer */
+  footer{background:var(--ink);color:#fff;margin-top:90px}
+  footer .row{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:36px;padding:66px 0 40px}
+  footer .brand{color:#fff}
+  footer .fdesc{margin-top:16px;font-size:14.5px;color:rgba(255,255,255,.6);font-weight:500;max-width:26em}
+  footer h5{font-size:13px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:16px}
+  footer .col a{display:block;font-size:15px;color:rgba(255,255,255,.8);font-weight:600;margin-bottom:11px}
+  footer .col a:hover{color:#fff}
+  footer .bottom{border-top:1px solid rgba(255,255,255,.12);padding:22px 0;display:flex;justify-content:space-between;align-items:center}
+  footer .bottom span{font-size:13.5px;color:rgba(255,255,255,.5);font-weight:600}
+</style></head>
+<body>
+
+  <!-- NAV -->
+  <header class="nav"><div class="wrap row">
+    <div class="brand"><span class="mark"></span>Salvia</div>
+    <nav><a>Platform</a><a>Frameworks</a><a>For Hospitals</a><a>Resources</a></nav>
+    <div class="right"><a class="signin">Sign in</a><a class="btn btn--dark">Book a demo</a></div>
+  </div></header>
+
+  <!-- HERO -->
+  <section class="hero"><div class="wrap row">
+    <div>
+      <span class="eyebrow"><span class="dot"></span>Continuous compliance, not the annual scramble</span>
+      <h1 class="h1">Your always-on<br><span class="serif">compliance</span> copilot</h1>
+      <p class="lede">Capture clinical work once. An always-on agent measures every note against NABH, JCI, NSQHS — any framework — and flags what’s missing before an auditor ever does.</p>
+      <div class="cta">
+        <a class="btn btn--dark">Book a demo</a>
+        <a class="btn btn--light">See the platform</a>
+      </div>
+      <div class="assure">Built for hospitals & clinics worldwide · Your data never trains a model</div>
+    </div>
+    <div class="hero-visual">
+      <div class="float-chip chip--fw"><span class="g"></span>NABH · live check</div>
+      <div class="copcard">
+        <div class="ct">Compliance Copilot</div>
+        <div class="cm">3 admissions this week are missing a signed consent (PRE.4.a). I’ve prepared the flags for your review.</div>
+        <div class="cact">
+          <svg class="spark" viewBox="0 0 100 100" aria-hidden="true"><defs><radialGradient id="sp" cx="44%" cy="42%" r="62%"><stop offset="0%" stop-color="#93e8d8"/><stop offset="36%" stop-color="#ffd44a"/><stop offset="70%" stop-color="#ff7a3f"/><stop offset="100%" stop-color="#e0466a"/></radialGradient></defs><path d="M50 2 C55 32 68 45 98 50 C68 55 55 68 50 98 C45 68 32 55 2 50 C32 45 45 32 50 2 Z" fill="url(#sp)"/></svg>
+          <div>
+            <div class="ct2">Flag 3 admissions for missing consent</div>
+            <div class="cd">The copilot never writes to a record — approving runs it under your permissions.</div>
+            <div class="cbtns"><button class="cb cb--a">Approve</button><button class="cb cb--r">Reject</button></div>
+          </div>
+        </div>
+      </div>
+      <div class="float-chip chip--cov">
+        <svg class="ring" viewBox="0 0 36 36" aria-hidden="true">
+          <circle cx="18" cy="18" r="15.5" fill="none" stroke="#e7ebf3" stroke-width="4"/>
+          <circle cx="18" cy="18" r="15.5" fill="none" stroke="#2f6bff" stroke-width="4" stroke-linecap="round" pathLength="100" stroke-dasharray="94 100" transform="rotate(-90 18 18)"/>
+        </svg>
+        <div><b>94%</b><span>Coverage · NABH</span></div>
+      </div>
+    </div>
+  </div></section>
+
+  <!-- TRUST -->
+  <div class="trust"><div class="wrap row">
+    <div class="lbl">Built for the frameworks hospitals are held to</div>
+    <div class="logos"><span>NABH</span><span>JCI</span><span>NSQHS</span><span>CMS</span><span>HEDIS</span><span>NABL</span></div>
+  </div></div>
+
+  <!-- WHAT IT CAN DO -->
+  <section class="blk"><div class="wrap">
+    <div class="center">
+      <h2 class="h2">What your compliance<br><span class="serif">copilot</span> can do</h2>
+      <p class="sub">One agent watches every note the moment it’s captured — measuring coverage, flagging gaps, and drafting the evidence you’d otherwise chase at audit time.</p>
+    </div>
+    <div class="tabs">
+      <span class="tab on">Measure coverage</span>
+      <span class="tab">Flag gaps</span>
+      <span class="tab">Draft evidence</span>
+      <span class="tab">Prove any framework</span>
+    </div>
+    <div class="panel">
+      <div>
+        <h3>Measure <span class="serif">coverage</span>, live</h3>
+        <div class="plist">
+          <div class="pitem"><span class="ck">✓</span>Every admission scored against your active framework</div>
+          <div class="pitem"><span class="ck">✓</span>Clause-by-clause: satisfied, needs data, or missing</div>
+          <div class="pitem"><span class="ck">✓</span>Coverage you can show an auditor — not a 5% sample</div>
+        </div>
+        <a class="btn btn--dark">See how it works</a>
+      </div>
+      <div class="shot">
+        <div class="bar"><i></i><i></i><i></i></div>
+        <div class="body">
+          <div class="ln m"></div><div class="ln s"></div>
+          <div class="blkrow"><div class="tile acc"></div><div class="tile"></div><div class="tile"></div></div>
+          <div class="ln m"></div><div class="ln s"></div>
+        </div>
+        <div class="cap">Coverage dashboard · your asset</div>
+      </div>
+    </div>
+  </div></section>
+
+  <!-- HOW IT WORKS -->
+  <section class="blk" style="background:var(--sky-3);border-top:1px solid var(--line);border-bottom:1px solid var(--line)"><div class="wrap">
+    <div class="center">
+      <h2 class="h2">How it works —<br><span class="serif">for your clinic</span></h2>
+      <p class="sub">No new workflow to learn. Your team captures care the way they already do; the agent does the compliance work in the background.</p>
+    </div>
+    <div class="cards3">
+      <div class="card">
+        <div class="shot"><div class="bar"><i></i><i></i><i></i></div><div class="body"><div class="ln m"></div><div class="ln s"></div><div class="tile acc" style="height:44px"></div></div><div class="cap">Capture · your asset</div></div>
+        <h4>Capture once</h4>
+        <p>A voice note or a form after the encounter — that’s the only step your clinicians take.</p>
+      </div>
+      <div class="card">
+        <div class="shot"><div class="bar"><i></i><i></i><i></i></div><div class="body"><div class="ln m"></div><div class="blkrow"><div class="tile acc"></div><div class="tile"></div><div class="tile"></div></div></div><div class="cap">Agent · your asset</div></div>
+        <h4>The agent checks continuously</h4>
+        <p>Every note is scored against your frameworks the moment it lands — no batch, no backlog.</p>
+      </div>
+      <div class="card">
+        <div class="shot"><div class="bar"><i></i><i></i><i></i></div><div class="body"><div class="ln m"></div><div class="ln s"></div><div class="ln m"></div><div class="tile acc" style="height:40px"></div></div><div class="cap">Evidence · your asset</div></div>
+        <h4>Prove any framework</h4>
+        <p>Coverage, gaps and evidence are always audit-ready — export the moment an assessor asks.</p>
+      </div>
+    </div>
+  </div></section>
+
+  <!-- STAT BAND -->
+  <section class="blk"><div class="wrap"><div class="statband">
+    <h3>Why <span class="serif">continuous</span> compliance matters</h3>
+    <div class="stats">
+      <div class="stat"><div class="n">62%</div><div class="d">of accreditation non-compliances are documentation-fixable — before an auditor arrives</div></div>
+      <div class="stat"><div class="n">100%</div><div class="d">of admissions checked, not a 5% retrospective audit sample</div></div>
+      <div class="stat"><div class="n">0</div><div class="d">surprises at accreditation — you already know where the gaps are</div></div>
+    </div>
+  </div></div></section>
+
+  <!-- TESTIMONIALS -->
+  <section class="blk" style="background:var(--sky-3);border-top:1px solid var(--line);border-bottom:1px solid var(--line)"><div class="wrap">
+    <div class="center">
+      <h2 class="h2">What compliance<br><span class="serif">leads</span> say</h2>
+      <p class="sub">Placeholder quotes — swap in real voices from your pilot hospitals.</p>
+    </div>
+    <div class="quotes">
+      <div class="quote"><div class="mk">“</div><p>We used to find the missing consents at audit. Now we find them the same week — and fix them.</p><div class="who"><span class="av"></span><span><b>Quality Lead</b><span>Tertiary hospital · placeholder</span></span></div></div>
+      <div class="quote"><div class="mk">“</div><p>Every admission is checked against NABH, not a sample. That changes the whole conversation with assessors.</p><div class="who"><span class="av"></span><span><b>Medical Superintendent</b><span>Multi-specialty · placeholder</span></span></div></div>
+      <div class="quote"><div class="mk">“</div><p>The copilot flags the gap and drafts the fix. My team approves — it never writes to a record on its own.</p><div class="who"><span class="av"></span><span><b>Accreditation Coordinator</b><span>Clinic group · placeholder</span></span></div></div>
+    </div>
+  </div></section>
+
+  <!-- RESOURCES -->
+  <section class="blk"><div class="wrap">
+    <div class="center">
+      <h2 class="h2">Deep dives into<br><span class="serif">clinical compliance</span></h2>
+      <p class="sub">The failure points we see most — and how continuous checking closes them.</p>
+    </div>
+    <div class="res">
+      <a><div class="thumb"></div><div><div class="rt">The 62% you can fix before an auditor arrives</div><div class="rm">NABH · documentation · Aug 2026</div></div><div class="go">Read →</div></a>
+      <a><div class="thumb"></div><div><div class="rt">Consent (PRE.4.a): the most-missed signature in the file</div><div class="rm">NABH · consent · Aug 2026</div></div><div class="go">Read →</div></a>
+      <a><div class="thumb"></div><div><div class="rt">Initial assessment within 24 hours (AAC.4): who signs, when</div><div class="rm">NABH · assessment · Aug 2026</div></div><div class="go">Read →</div></a>
+    </div>
+  </div></section>
+
+  <!-- FINAL CTA -->
+  <section class="blk" style="padding-top:0"><div class="wrap"><div class="finalcta">
+    <h2 class="h2">Take control of<br><span class="serif">your compliance</span></h2>
+    <p class="sub" style="margin:14px auto 0">Stop discovering gaps at audit time. Start proving compliance every single day.</p>
+    <div class="cta"><a class="btn btn--dark">Book a demo</a><a class="btn btn--light">See the platform</a></div>
+  </div></div></section>
+
+  <!-- FOOTER -->
+  <footer><div class="wrap">
+    <div class="row">
+      <div>
+        <div class="brand"><span class="mark"></span>Salvia</div>
+        <div class="fdesc">The continuous-compliance platform for hospitals and clinics. Capture care once; prove any framework, every day.</div>
+      </div>
+      <div class="col"><h5>Product</h5><a>Platform</a><a>Compliance Copilot</a><a>Coverage</a><a>Security</a></div>
+      <div class="col"><h5>Frameworks</h5><a>NABH</a><a>JCI</a><a>NSQHS</a><a>CMS · HEDIS</a></div>
+      <div class="col"><h5>Company</h5><a>For Hospitals</a><a>Resources</a><a>Book a demo</a><a>Contact</a></div>
+    </div>
+    <div class="bottom"><span>© 2026 Salvia</span><span>Privacy · Terms · Security</span></div>
+  </div></footer>
+
+</body></html>

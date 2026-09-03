@@ -1,0 +1,376 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Salvia — mel website overhaul plan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --grass:#48CD5F; --grass-ink:#1c7a2f; --grass-wash:#eafaec;
+  --ink:#10231a; --body:#31423a; --muted:#67766e; --line:#e3ebe5; --line2:#eef3ef;
+  --bg:#f7faf7; --card:#ffffff; --canvas:#fbfdfb;
+  --keep:#2fa85f; --rework:#e0912b; --cut:#c65454; --new:#3d7fe0;
+  --keep-bg:#e7f6ee; --rework-bg:#fbf1e0; --cut-bg:#fbe9e6; --new-bg:#e8f0fd;
+  --radius:14px; --maxw:1080px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--body);
+  font-family:"Archivo",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  font-size:15.5px;line-height:1.62;-webkit-font-smoothing:antialiased}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 22px}
+a{color:var(--grass-ink);text-decoration:none}
+a:hover{text-decoration:underline}
+.top{background:var(--ink);color:#fff;padding:52px 0 44px}
+.kick{font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--grass);font-weight:700}
+.top h1{font-size:34px;line-height:1.08;margin:12px 0 10px;font-weight:800;letter-spacing:-.02em;color:#fff}
+.top p{margin:0;color:#b9c7bd;font-size:16px;max-width:72ch}
+.top .meta{margin-top:18px;font-size:12.5px;color:#8fa295}
+nav.jump{position:sticky;top:0;z-index:10;background:rgba(251,253,251,.92);
+  backdrop-filter:blur(8px);border-bottom:1px solid var(--line);padding:11px 0}
+nav.jump .wrap{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+nav.jump a{font-size:12.5px;font-weight:600;color:var(--muted);padding:5px 10px;border-radius:8px}
+nav.jump a:hover{background:var(--grass-wash);color:var(--grass-ink);text-decoration:none}
+section{padding:44px 0 8px}
+h2{font-size:24px;font-weight:800;letter-spacing:-.02em;color:var(--ink);margin:0 0 4px;
+  display:flex;align-items:center;gap:11px}
+h2 .num{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;
+  background:var(--grass);color:#fff;border-radius:9px;font-size:14px;font-weight:800;flex:none}
+.lead{color:var(--muted);font-size:14.5px;margin:2px 0 22px 41px}
+h3{font-size:17px;font-weight:800;color:var(--ink);margin:26px 0 8px;letter-spacing:-.01em}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:20px 22px;margin:14px 0}
+.card.tight{padding:16px 18px}
+.callout{background:var(--grass-wash);border:1px solid #cdeed3;border-radius:var(--radius);padding:18px 20px;margin:16px 0}
+.callout b{color:var(--grass-ink)}
+.warn{background:#fff7ec;border:1px solid #f2e2c0;border-radius:var(--radius);padding:16px 18px;margin:14px 0}
+.chip{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:800;
+  text-transform:uppercase;letter-spacing:.04em;padding:3px 9px;border-radius:6px;white-space:nowrap}
+.k-keep{background:var(--keep-bg);color:#1c6e3d}
+.k-rework{background:var(--rework-bg);color:#8a5a10}
+.k-cut{background:var(--cut-bg);color:#9a2f2f}
+.k-new{background:var(--new-bg);color:#254e91}
+table{width:100%;border-collapse:collapse;margin:10px 0;font-size:13.5px}
+th{text-align:left;font-weight:700;color:var(--muted);font-size:11.5px;text-transform:uppercase;
+  letter-spacing:.05em;padding:9px 10px;border-bottom:2px solid var(--line)}
+td{padding:10px;border-bottom:1px solid var(--line2);vertical-align:top;color:var(--body)}
+td b{color:var(--ink)}
+tr:hover td{background:var(--canvas)}
+.mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;color:#4a5a51;
+  background:var(--line2);padding:1px 6px;border-radius:5px}
+.nb{display:grid;grid-template-columns:1fr auto 1fr;gap:14px;align-items:stretch;margin:10px 0}
+.nb .col{background:var(--canvas);border:1px solid var(--line);border-radius:11px;padding:13px 15px}
+.nb .col.was{border-left:3px solid var(--cut)}
+.nb .col.now{border-left:3px solid var(--grass)}
+.nb .arrow{align-self:center;color:var(--grass);font-size:22px;font-weight:800}
+.nb .lbl{font-size:10.5px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:4px}
+.nb .col.was .lbl{color:#b06a6a}
+.nb .col.now .lbl{color:var(--grass-ink)}
+.nb p{margin:0;font-size:13px;line-height:1.5}
+@media(max-width:720px){.nb{grid-template-columns:1fr}.nb .arrow{transform:rotate(90deg)}}
+.pfate{border:1px solid var(--line);border-radius:12px;padding:15px 17px;margin:12px 0;background:var(--card)}
+.pfate .h{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:7px}
+.pfate .h .path{font-family:ui-monospace,Menlo,monospace;font-size:13px;font-weight:700;color:var(--ink)}
+.pfate .h .name{font-weight:700;color:var(--ink);font-size:14.5px}
+.pfate p{margin:5px 0 0;font-size:13.5px}
+ul.clean{list-style:none;padding:0;margin:8px 0}
+ul.clean li{padding:7px 0 7px 26px;position:relative;border-bottom:1px solid var(--line2);font-size:14px}
+ul.clean li:before{content:"→";position:absolute;left:2px;color:var(--grass);font-weight:800}
+ul.clean li b{color:var(--ink)}
+.tag{font-size:11px;font-weight:700;color:var(--grass-ink);background:var(--grass-wash);padding:2px 7px;border-radius:5px;margin-left:6px}
+.pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:14px 0}
+.pillars .p{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 17px;border-top:3px solid var(--grass)}
+.pillars .p .t{font-weight:800;color:var(--ink);font-size:15px;margin-bottom:4px}
+.pillars .p .d{font-size:13px;color:var(--body);line-height:1.5}
+.pillars .p .n{font-size:11px;font-weight:800;color:var(--grass-ink);letter-spacing:.08em;text-transform:uppercase}
+@media(max-width:720px){.pillars{grid-template-columns:1fr}}
+.seq{counter-reset:step;margin:14px 0}
+.seq .step{display:grid;grid-template-columns:auto 1fr;gap:15px;padding:14px 0;border-bottom:1px solid var(--line2)}
+.seq .step .n{counter-increment:step;width:34px;height:34px;border-radius:10px;background:var(--ink);
+  color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center;font-size:15px}
+.seq .step .n:before{content:"P" counter(step)}
+.seq .step h4{margin:2px 0 3px;font-size:15.5px;color:var(--ink);font-weight:800}
+.seq .step p{margin:0;font-size:13.5px;color:var(--body)}
+.seq .step .dep{font-size:12px;color:var(--muted);margin-top:4px}
+.legendbar{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0 0 41px}
+.foot{margin:50px 0 40px;padding-top:20px;border-top:1px solid var(--line);color:var(--muted);font-size:12.5px}
+</style></head>
+<body>
+
+<header class="top"><div class="wrap">
+  <div class="kick">Salvia · mel website overhaul</div>
+  <h1>The compliance platform for clinical care — agent-run, any framework, global.</h1>
+  <p>A page-by-page plan to rebuild the marketing site around the real strategy: <b style="color:#eafaec">lead
+  with the compliance vision</b> — connect your data, an always-on agent, any framework, worldwide — and wedge
+  it with clinical pilots. Keep the grass design system. No country names anywhere; frameworks are the
+  differentiation. Grounded in a full site audit + a 16-competitor scan.</p>
+  <div class="meta">Decisions locked · grass style · worldwide / framework-differentiated · compliance-lead hero (the Vanta pattern, clinical)</div>
+</div></header>
+
+<nav class="jump"><div class="wrap">
+  <a href="#position">The position</a>
+  <a href="#diagnosis">Diagnosis</a>
+  <a href="#architecture">New architecture</a>
+  <a href="#home">Home, section-by-section</a>
+  <a href="#pages">Page fates</a>
+  <a href="#bugs">Fix-now bugs</a>
+  <a href="#sequence">Build order</a>
+</div></nav>
+
+<!-- POSITION -->
+<section id="position"><div class="wrap">
+  <h2><span class="num">0</span>The position — the clinical Vanta</h2>
+  <div class="lead">Decided: lead with the compliance vision, not the scribe. Worldwide. Frameworks are the differentiation, not countries.</div>
+
+  <div class="callout">
+    <b>Salvia is the compliance platform for clinical care — the “clinical Vanta.”</b> Vanta leads
+    <i>“Trust is everything,”</i> not “we automate paperwork.” We run the same, correct playbook for clinical:
+    connect your data → an always-on agent continuously proves your posture → against any framework, worldwide.
+    The scribe lane (Nabla, Abridge, Augnito, Eka) is a red ocean; <b>“continuous clinical compliance, any framework”
+    is an empty category we get to define.</b> Nobody sells “prove any framework from the clinical record” — anywhere.
+  </div>
+
+  <h3>The homepage hero — three pillars (the Vanta pattern, clinical)</h3>
+  <div class="pillars">
+    <div class="p"><div class="n">Connect</div><div class="t">Your clinical data points</div>
+      <div class="d">Voice notes, consent, prescriptions, drug administration, incidents, vitals — and your HMIS / EMR.
+      Salvia turns each into structured, checkable evidence.</div></div>
+    <div class="p"><div class="n">The agent</div><div class="t">Always-on, self-improving</div>
+      <div class="d">Reads that evidence and continuously proves your posture — drafts, flags gaps <i>before the audit</i>,
+      maps every note to your standards. You confirm; it never submits unsupervised.</div></div>
+    <div class="p"><div class="n">Any framework</div><div class="t">Global by design</div>
+      <div class="d">NABH, JCI, NSQHS, CMS, HEDIS and more — one capture engine maps to all of them.
+      Add a framework, not a rebuild. The framework is the localization; the site never names a country.</div></div>
+  </div>
+
+  <div class="warn">
+    <b>The wedge, handled — so leading compliance costs nothing.</b> A doctor doesn’t wake up wanting compliance.
+    So the homepage sells the vision, but the <b>“For Clinicians” page leads with the daily clinical win</b>
+    (hours saved, in your language, before you leave the room). Pilot doctors land there and see themselves.
+    Vision up front, the doctor’s relief one click in.
+  </div>
+
+  <div class="card tight">
+    <b>Hero headline — candidates to pick from:</b>
+    <ul class="clean" style="margin-top:6px">
+      <li>“Compliance that proves itself — from the clinical record.”</li>
+      <li>“Every note, continuously proving your compliance. Any framework.”</li>
+      <li>“The compliance agent for clinical care. Connected, always on, global.”</li>
+    </ul>
+    <p style="color:var(--muted);font-size:13px;margin-top:8px">Sub-headline names the mechanism: “Connect your clinical data; an always-on agent maps every note to your framework and flags the gaps before an audit does.”</p>
+  </div>
+</div></section>
+
+<!-- 1 DIAGNOSIS -->
+<section id="diagnosis"><div class="wrap">
+  <h2><span class="num">1</span>Why the current site feels like a confused mess</h2>
+  <div class="lead">One root cause, not a hundred small ones.</div>
+
+  <div class="callout">
+    <b>The redesign built a gorgeous front end, but left the old back end running underneath it.</b>
+    The nav, Landing and <span class="mono">/hospitals</span> sell one story; the footer, pricing engine,
+    <span class="mono">/frameworks</span>, <span class="mono">/start</span>, the blog and the structured data sell a
+    <i>different</i> one — a per-seat, multi-country, four-vertical SaaS. <span class="mono">INDIA_ONLY=true</span>
+    is a view-filter bolted over that machinery, so the seams show on every secondary page. A visitor can’t tell
+    which product is real, or that the actual north star — <b>the agentic-compliance vision — exists at all.</b>
+  </div>
+
+  <h3>The five that hurt most</h3>
+  <table>
+    <tr><th style="width:34px">#</th><th>Problem</th><th>Why it matters</th></tr>
+    <tr><td><b>1</b></td><td><b>Two identities, one site.</b> A clean front story over a contradictory multi-market back end.</td><td>The core confusion. No coherent answer to “what is this?”</td></tr>
+    <tr><td><b>2</b></td><td><b>Pricing contradicts itself 3 ways.</b> Per-seat Practice/Pro, per-note tiers, and a dead “source of truth” wired to nothing. Even the meta tags disagree with the page.</td><td>Pricing is where trust dies. No single source of truth.</td></tr>
+    <tr><td><b>3</b></td><td><b><span class="mono">/hospitals</span> renders as a 404 in the static build.</b> The SSR route table is missing it → the pre-rendered body is the “Post not found” page.</td><td>A strong page. Crawlers + first paint see nothing. <span class="chip k-cut">live bug</span></td></tr>
+    <tr><td><b>4</b></td><td><b>Dead internal links.</b> Vertical “compliance desk” blog rails point at hidden posts → all render “Post not found.”</td><td>Half-finished market swap; broken on real pages.</td></tr>
+    <tr><td><b>5</b></td><td><b>The north star is invisible.</b> The self-improving compliance <i>agent</i>, the <i>connections</i>, the <i>framework coverage</i> — the whole vision you now lead with — appear <b>nowhere</b>. The site sells document-sealing, not the agent.</td><td>You’re hiding the one thing that defines the category.</td></tr>
+  </table>
+
+  <h3>What’s already good — reuse, don’t nuke</h3>
+  <ul class="clean">
+    <li><b>The grass design system</b> — white canvas, one green <span class="mono">#48CD5F</span>, Archivo, hairlines, <span class="mono">.g-*</span> primitives. <b>Confirmed: this stays.</b> Clean, human, and a differentiator in a category that all looks the same shade of corporate navy.</li>
+    <li><b>The <span class="mono">/hospitals</span> page</b> — the clearest articulation on the site (“That gap is the product.”). Use its structure as the template.</li>
+    <li><b>The drawn product UIs</b> — register showcase, form-builder, policy-check rows, PDF SHA-256 card, coverage map. Screenshot-fidelity, product-true. More distinctive than any stock photo. High reuse.</li>
+    <li><b>The sourced stats</b> — real, cited negligence/records data. Keep the substance; rebalance where it leads.</li>
+    <li><b>The multi-framework machinery + SSG/SEO plumbing</b> — the mechanism is solid. <b>We keep it worldwide</b> (frameworks, multi-currency, schema) and just make it framework-led and country-name-free — the opposite of collapsing it.</li>
+    <li><b>The honest-scope pattern</b> (“what it does — and what it won’t”). Keep everywhere.</li>
+  </ul>
+  <p style="color:var(--muted);font-size:13px;margin-top:14px">Also flagged: <b>23 of 30 components are dead code</b> (~5,200 LOC), <span class="mono">ArticlePage</span> still renders in the <b>legacy orange</b> theme, <span class="mono">/assets</span> + <span class="mono">/404</span> use the old header/footer, and <b>Instrument Serif never shipped</b> (grass is Archivo-only).</p>
+</div></section>
+
+<!-- 3 ARCHITECTURE -->
+<section id="architecture"><div class="wrap">
+  <h2><span class="num">2</span>The new site architecture</h2>
+  <div class="lead">Compliance vision leads. Two buyer doors underneath (clinics / hospitals). Worldwide, framework-differentiated, grass throughout. No country names.</div>
+
+  <div class="card tight">
+    <b>New nav:</b> &nbsp;
+    <span class="mono">Platform</span> · <span class="mono">Frameworks</span> · <span class="mono">For Clinicians</span> ·
+    <span class="mono">For Hospitals</span> · <span class="mono">Pricing</span> · <span class="mono">Resources</span>
+    &nbsp;+&nbsp; <span class="tag">Book a demo</span> <span class="tag">Start free</span>
+    <p style="color:var(--muted);font-size:13px;margin-top:8px"><b>Platform</b> = the agent + the connections + how it works (the vision). <b>Frameworks</b> = the differentiation grid (any standard, global). <b>For Clinicians</b> carries the clinical-relief wedge. The nav <i>is</i> the strategy.</p>
+  </div>
+
+  <h3>Every current page — its fate</h3>
+  <div class="legendbar">
+    <span class="chip k-keep">keep</span><span class="chip k-rework">rework</span>
+    <span class="chip k-cut">cut / defer</span><span class="chip k-new">new</span>
+  </div>
+
+  <div class="pfate"><div class="h"><span class="chip k-rework">rework</span><span class="path">/</span><span class="name">Home</span></div>
+    <p>Re-sequenced around the compliance vision: the three-pillar hero (connect · agent · frameworks · global), the agent section and the framework grid ride high. Clinical value is shown as <i>how the evidence is captured</i>, not the lead. Full breakdown in §3.</p></div>
+
+  <div class="pfate"><div class="h"><span class="chip k-new">new</span><span class="path">/platform</span><span class="name">Platform / How it works</span></div>
+    <p>The vision made concrete: <b>Connect</b> (data points + HMIS/EMR) → <b>capture</b> (voice→SOAP+vitals, typed widgets) → <b>check</b> (policy engine) → <b>the agent</b> maps to your frameworks and flags gaps. Absorbs the 3 module pages (Audio→Forms / Form Engine / Policy Engine) into one flow — kills the three-names-per-module problem.</p></div>
+
+  <div class="pfate"><div class="h"><span class="chip k-rework">rework</span><span class="path">/frameworks</span><span class="name">Frameworks — the differentiation grid</span></div>
+    <p>Promoted to a primary nav page. “Whatever standard you answer to, Salvia proves it from your notes.” Worldwide grid (NABH · JCI · NSQHS · CMS · HEDIS · …), each tile driving off the real coverage engine (measured / needs-one-datapoint / coming-soon / out-of-scope). <b>No country filter, no country stamping</b> — the framework <i>is</i> the geography. Reinforces “add a framework, not a rebuild.”</p></div>
+
+  <div class="pfate"><div class="h"><span class="chip k-new">new</span><span class="path">/clinicians</span><span class="name">For Clinicians — the wedge</span></div>
+    <p>The one page that leads clinical: hours saved, multilingual capture, voice-to-note, less typing, before-you-leave-the-room. Where the pilot doctor sees themselves. Public, transparent pricing lives adjacent.</p></div>
+
+  <div class="pfate"><div class="h"><span class="chip k-keep">keep</span><span class="path">/hospitals</span><span class="name">For Hospitals</span></div>
+    <p>The strongest existing page — keep its structure, fix the SSG-404 (§4). The compliance-and-scale story: evidence burden removed, audit-ready, quality indicators, multi-department, sales-led. The agent leads here too.</p></div>
+
+  <div class="pfate"><div class="h"><span class="chip k-rework">rework</span><span class="path">/pricing</span><span class="name">Pricing</span></div>
+    <p>One source of truth (§4). <b>Transparent multi-currency clinic tiers</b> (auto-detected; the transparency that wins small clinics, kept worldwide) + “Contact sales” for hospitals. Split by door. <span class="chip k-rework">confirm currency model</span></p></div>
+
+  <div class="pfate"><div class="h"><span class="chip k-cut">cut / defer</span><span class="path">4 vertical + 6 discipline pages</span><span class="name">Verticals</span></div>
+    <p>10+ near-duplicate thin pages, orphaned from nav. Fold the good copy into <b>For Clinicians</b>; bring back per-vertical SEO landing pages after traction, from one clean template. Retire the off-strategy vet page.</p></div>
+
+  <div class="pfate"><div class="h"><span class="chip k-rework">rework</span><span class="path">/blog + /blog/:id</span><span class="name">Resources</span></div>
+    <p>New taxonomy (framework / hospital / compliance lens, not per-vertical). Fix the dead links. Migrate <span class="mono">ArticlePage</span> off legacy orange onto grass. Framework + agentic-compliance explainers for SEO. “Salvia Editorial” byline — never fake doctor authors.</p></div>
+
+  <div class="pfate"><div class="h"><span class="chip k-new">new</span><span class="path">/customers</span><span class="name">Customers / Case studies</span></div>
+    <p>Stand up when pilots go live — clinic/hospital logos + outcome metrics. Until then, “in talks” only, <b>never “signed.”</b></p></div>
+
+  <div class="pfate"><div class="h"><span class="chip k-keep">keep</span><span class="path">/melamphic</span><span class="name">About</span></div>
+    <p>On-brand, real founders. Keep; thread the compliance-vision narrative through it. (About/legal are the only place a real jurisdiction fact may live — a company exists somewhere; that’s not positioning.)</p></div>
+
+  <div class="pfate"><div class="h"><span class="chip k-rework">rework</span><span class="path">/start · /assets · /404 · legal ×7</span><span class="name">Utility</span></div>
+    <p>Signup: add <b>Hospital</b>, drop the country-stamping (framework-led, not country-led), stop defaulting to a vertical. Migrate <span class="mono">/assets</span> + <span class="mono">/404</span> onto grass. Fix the orphaned <span class="mono">/subprocessors</span> route.</p></div>
+</div></section>
+
+<!-- 4 HOME -->
+<section id="home"><div class="wrap">
+  <h2><span class="num">3</span>Home — section by section</h2>
+  <div class="lead">Re-sequenced around the vision. Compliance/agent leads; clinical value shows as the capture mechanism. NOW → BECOMES.</div>
+
+  <h3>1 · Hero — the three pillars</h3>
+  <div class="nb">
+    <div class="col was"><div class="lbl">Now</div><p>“Every consult, on the record.” Evidence-first, <b>no CTA</b>, agent/frameworks/connections absent.</p></div>
+    <div class="arrow">→</div>
+    <div class="col now"><div class="lbl">Becomes</div><p>Compliance-lead headline + the sub that names the mechanism. Beneath it, the three pillars — <b>Connect · The agent · Any framework (global)</b>. Dual CTA (Book a demo / Start free). A framework strip (NABH·JCI·NSQHS·CMS·HEDIS…), never a country strip.</p></div>
+  </div>
+
+  <h3>2 · Connections <span class="tag">new — first-class</span></h3>
+  <div class="nb">
+    <div class="col was"><div class="lbl">Now</div><p>Absent. The “connect your data points” idea isn’t on the site.</p></div>
+    <div class="arrow">→</div>
+    <div class="col now"><div class="lbl">Becomes</div><p>The Vanta “connect your stack” analog, clinical: the data points Salvia ingests (notes, consent, rx, drug-admin, incidents, vitals) + your HMIS/EMR → each becomes structured evidence the agent reads. Shows the surface area is real.</p></div>
+  </div>
+
+  <h3>3 · The compliance agent <span class="tag">the vision — rides high</span></h3>
+  <div class="nb">
+    <div class="col was"><div class="lbl">Now</div><p><b>Nowhere.</b> Closest is a static “coverage map / 58 policies” on a buried module page.</p></div>
+    <div class="arrow">→</div>
+    <div class="col now"><div class="lbl">Becomes</div><p>Personified (the GRC playbook): the always-on, self-improving colleague that <b>drafts, flags gaps before the audit, and maps every note to your standards.</b> Human-in-loop (“you confirm; it never submits unsupervised”). Live coverage/posture score visual. One hard number.</p></div>
+  </div>
+
+  <h3>4 · Frameworks grid — the differentiation</h3>
+  <div class="nb">
+    <div class="col was"><div class="lbl">Now</div><p>Buried on a separate page that leads with foreign-regulator chips + a country filter.</p></div>
+    <div class="arrow">→</div>
+    <div class="col now"><div class="lbl">Becomes</div><p>“One capture engine, many standards.” Worldwide tiles fed by the real coverage data; “add a framework, not a rebuild.” The localization mechanism — no country named.</p></div>
+  </div>
+
+  <h3>5 · How it works — the encounter flow</h3>
+  <div class="nb">
+    <div class="col was"><div class="lbl">Now</div><p>Strong but sprawling: ColorTrio + separate builder/policy/templates/registers/PDF, cross-vertical (aged-care, vet euthanasia).</p></div>
+    <div class="arrow">→</div>
+    <div class="col now"><div class="lbl">Becomes</div><p>One tight flow: <b>voice note → SOAP + vitals → typed widgets → policy check → the agent maps to your framework.</b> Keep the drawn UIs; trim the examples. This is where the clinical capture visibly <i>feeds</i> the compliance vision.</p></div>
+  </div>
+
+  <h3>6 · Proof &nbsp;·&nbsp; 7 · Security/Trust</h3>
+  <div class="nb">
+    <div class="col was"><div class="lbl">Now</div><p>Mostly fear stats; thin trust surface.</p></div>
+    <div class="arrow">→</div>
+    <div class="col now"><div class="lbl">Becomes</div><p>Every stat as “[X] per [source].” Security row shows <b>framework-contextual</b> badges (SOC2/ISO/GDPR/DPDP/FHIR surface by the standard you pick), not one region’s set. Links to the full Trust page.</p></div>
+  </div>
+
+  <h3>8 · Pricing teaser &nbsp;·&nbsp; 9 · Final CTA &nbsp;·&nbsp; 10 · Footer</h3>
+  <div class="nb">
+    <div class="col was"><div class="lbl">Now</div><p>Teaser pulls from tiers that contradict the pricing file; CTA “Watch the demo” → a <span class="mono">#demo</span> anchor that doesn’t exist; footer exposes all legacy surface + country flags.</p></div>
+    <div class="arrow">→</div>
+    <div class="col now"><div class="lbl">Becomes</div><p>“Transparent pricing for clinics · custom for hospitals,” one source of truth. Dual CTA that works. Footer = framework/badge row + a clean sitemap matching the new nav. No flags, no country lines.</p></div>
+  </div>
+</div></section>
+
+<!-- 5 BUGS -->
+<section id="bugs"><div class="wrap">
+  <h2><span class="num">4</span>Fix-now bugs — independent of the redesign</h2>
+  <div class="lead">These make the <i>current</i> site coherent and un-break it — no positioning decision required. Worth doing first.</div>
+  <table>
+    <tr><th style="width:30px">#</th><th>Fix</th><th>Where</th></tr>
+    <tr><td><b>1</b></td><td><b><span class="mono">/hospitals</span> baking as a 404.</b> Add <span class="mono">/hospitals</span>, <span class="mono">/assets</span>, <span class="mono">/subprocessors</span> to the SSR route table so the static body isn’t NotFoundPage.</td><td><span class="mono">entry-server.tsx</span></td></tr>
+    <tr><td><b>2</b></td><td><b>Pricing single source of truth.</b> Collapse to one model; delete the dead paths; reconcile the on-page vs meta price mismatch; fix the FAQ that contradicts the tiers. Keep it <b>multi-currency worldwide</b>, not stamped to one market.</td><td><span class="mono">data/pricing.ts</span></td></tr>
+    <tr><td><b>3</b></td><td><b>Dead blog rails.</b> Vertical “compliance desk” links point at hidden posts → “Post not found.” Repoint to visible posts or remove the rail.</td><td><span class="mono">VeterinaryPage / DentalPage</span></td></tr>
+    <tr><td><b>4</b></td><td><b>Structured-data leak.</b> ORG/SOFTWARE schema hard-codes a stale country set + foreign-regulator description on every page. Make it <b>worldwide, framework-described, country-name-free.</b></td><td><span class="mono">prerender.mjs</span></td></tr>
+    <tr><td><b>5</b></td><td><b>Signup options.</b> Add <b>Hospital</b>; drop the country-stamping (framework-led); stop defaulting to a vertical.</td><td><span class="mono">SignupPage.tsx</span></td></tr>
+    <tr><td><b>6</b></td><td><b><span class="mono">ArticlePage</span> off-system.</b> Migrate from legacy orange (<span class="mono">#FF4E00</span>) to grass tokens.</td><td><span class="mono">ArticlePage.tsx</span></td></tr>
+    <tr><td><b>7</b></td><td><b><span class="mono">/assets</span> + <span class="mono">/404</span> on legacy header/footer.</b> Swap to grass <span class="mono">GrassHeader/GrassFooter</span>.</td><td>2 pages</td></tr>
+    <tr><td><b>8</b></td><td><b>Dead code.</b> Delete the 23 orphaned pre-grass components (~5,200 LOC) once the two legacy pages above are migrated.</td><td><span class="mono">src/components/</span></td></tr>
+    <tr><td><b>9</b></td><td><b>Broken anchors.</b> <span class="mono">#demo</span> (final CTA) and the “Aged care” template promise with no page.</td><td><span class="mono">LandingPage</span></td></tr>
+  </table>
+</div></section>
+
+<!-- 6 SEQUENCE -->
+<section id="sequence"><div class="wrap">
+  <h2><span class="num">5</span>Build order</h2>
+  <div class="lead">Phases by dependency, not calendar. Each phase leaves the site shippable.</div>
+  <div class="seq">
+    <div class="step"><div class="n"></div><div>
+      <h4>Fix-now bugs</h4>
+      <p>The nine fixes in §4. Un-breaks <span class="mono">/hospitals</span>, kills the pricing contradiction and dead links, stops the structured data telling the wrong story.</p>
+      <div class="dep">Depends on: nothing. Do immediately.</div>
+    </div></div>
+    <div class="step"><div class="n"></div><div>
+      <h4>Home rebuild — the vision hero</h4>
+      <p>The three-pillar hero (connect · agent · frameworks · global), the agent section, the framework grid. Pick the headline. Everything downstream inherits this language.</p>
+      <div class="dep">Depends on: headline choice (§0).</div>
+    </div></div>
+    <div class="step"><div class="n"></div><div>
+      <h4>Platform + Frameworks — the vision pages</h4>
+      <p>“Platform / How it works” (connect → capture → check → agent) and the worldwide Frameworks grid off the coverage engine. This is the moat — the “prove any framework from the record” story nobody else tells.</p>
+      <div class="dep">Depends on: coverage data (done); Home language.</div>
+    </div></div>
+    <div class="step"><div class="n"></div><div>
+      <h4>The two doors</h4>
+      <p>“For Clinicians” (the clinical wedge for pilot doctors) + “For Hospitals” (rework the strong existing page). New nav goes live.</p>
+      <div class="dep">Depends on: Home + Platform language. Reuses existing drawn UIs.</div>
+    </div></div>
+    <div class="step"><div class="n"></div><div>
+      <h4>Pricing + Resources</h4>
+      <p>Pricing on one source of truth, split by door, multi-currency. Blog taxonomy → framework/hospital/compliance; ArticlePage on grass.</p>
+      <div class="dep">Depends on: pricing fix (P1) + currency-model confirm.</div>
+    </div></div>
+    <div class="step"><div class="n"></div><div>
+      <h4>Prune + SEO cleanup</h4>
+      <p>Retire vet + defer the vertical pages (archive copy). Make frameworks catalog + structured data worldwide + country-name-free. Stand up Customers when the first pilot logo is real.</p>
+      <div class="dep">Depends on: For Clinicians absorbing the useful vertical copy first.</div>
+    </div></div>
+  </div>
+
+  <div class="callout" style="margin-top:22px">
+    <b>Two small things to land, then we build:</b> (1) pick the <b>hero headline</b> from §0’s three candidates (or riff);
+    (2) confirm the <b>pricing currency model</b> (multi-currency public clinic tiers is the recommendation).
+    Then we start with the fix-now bugs and the Home hero. One page at a time — I build, you review, we move on.
+  </div>
+</div></section>
+
+<div class="wrap foot">
+  Salvia · mel overhaul plan · generated from a full-site audit + a 16-competitor scan.
+  Position: the compliance platform for clinical care — agent-run, any framework, global; grass design system; sold vision-first, wedged with clinical pilots.
+  A plan, not a spec — we refine each page as we build it.
+</div>
+
+</body></html>

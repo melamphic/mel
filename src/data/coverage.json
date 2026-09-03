@@ -1,0 +1,232 @@
+[
+ {
+  "id": "NABH",
+  "name": "NABH Accreditation Standards for Hospitals (National Accreditation Board for Hospitals & Healthcare Providers, Quality Council of India)",
+  "edition": "6th edition",
+  "total": 639,
+  "inScope": 227,
+  "measuredNow": 116,
+  "needsData": 14,
+  "comingSoon": 97,
+  "outOfScope": 412,
+  "pct": 51,
+  "groups": [
+   {
+    "code": "AAC",
+    "title": "Access, Assessment and Continuity of Care"
+   },
+   {
+    "code": "COP",
+    "title": "Care of Patients"
+   },
+   {
+    "code": "MOM",
+    "title": "Management of Medication"
+   },
+   {
+    "code": "PRE",
+    "title": "Patient Rights and Education"
+   },
+   {
+    "code": "IPC",
+    "title": "Infection Prevention and Control"
+   },
+   {
+    "code": "PSQ",
+    "title": "Patient Safety and Quality Improvement"
+   },
+   {
+    "code": "ROM",
+    "title": "Responsibilities of Management"
+   },
+   {
+    "code": "FMS",
+    "title": "Facility Management and Safety"
+   },
+   {
+    "code": "HRM",
+    "title": "Human Resource Management"
+   },
+   {
+    "code": "IMS",
+    "title": "Information Management System"
+   }
+  ]
+ },
+ {
+  "id": "JCI",
+  "name": "Joint Commission International Accreditation Standards for Hospitals",
+  "edition": "7th edition",
+  "total": 171,
+  "inScope": 103,
+  "measuredNow": 55,
+  "needsData": 13,
+  "comingSoon": 35,
+  "outOfScope": 68,
+  "pct": 53,
+  "groups": [
+   {
+    "code": "APR",
+    "title": "Accreditation Participation Requirements"
+   },
+   {
+    "code": "IPSG",
+    "title": "International Patient Safety Goals"
+   },
+   {
+    "code": "ACC",
+    "title": "Access to Care and Continuity of Care"
+   },
+   {
+    "code": "PCC",
+    "title": "Patient-Centered Care"
+   },
+   {
+    "code": "AOP",
+    "title": "Assessment of Patients"
+   },
+   {
+    "code": "COP",
+    "title": "Care of Patients"
+   },
+   {
+    "code": "ASC",
+    "title": "Anesthesia and Surgical Care"
+   },
+   {
+    "code": "MMU",
+    "title": "Medication Management and Use"
+   },
+   {
+    "code": "QPS",
+    "title": "Quality Improvement and Patient Safety"
+   },
+   {
+    "code": "PCI",
+    "title": "Prevention and Control of Infections"
+   },
+   {
+    "code": "GLD",
+    "title": "Governance, Leadership, and Direction"
+   },
+   {
+    "code": "FMS",
+    "title": "Facility Management and Safety"
+   },
+   {
+    "code": "SQE",
+    "title": "Staff Qualifications and Education"
+   },
+   {
+    "code": "MOI",
+    "title": "Management of Information"
+   }
+  ]
+ },
+ {
+  "id": "NSQHS",
+  "name": "National Safety and Quality Health Service Standards",
+  "edition": "2nd edition (2017), incorporating the 2021 Preventing and Controlling Infections (Standard 3) update",
+  "total": 149,
+  "inScope": 87,
+  "measuredNow": 22,
+  "needsData": 19,
+  "comingSoon": 46,
+  "outOfScope": 62,
+  "pct": 25,
+  "groups": [
+   {
+    "code": "1",
+    "title": "Clinical Governance"
+   },
+   {
+    "code": "2",
+    "title": "Partnering with Consumers"
+   },
+   {
+    "code": "3",
+    "title": "Preventing and Controlling Infections (2021 update)"
+   },
+   {
+    "code": "4",
+    "title": "Medication Safety"
+   },
+   {
+    "code": "5",
+    "title": "Comprehensive Care"
+   },
+   {
+    "code": "6",
+    "title": "Communicating for Safety"
+   },
+   {
+    "code": "7",
+    "title": "Blood Management"
+   },
+   {
+    "code": "8",
+    "title": "Recognising and Responding to Acute Deterioration"
+   }
+  ]
+ },
+ {
+  "id": "CMS_eCQM",
+  "name": "CMS electronic Clinical Quality Measures (Eligible Professional / Eligible Clinician)",
+  "edition": null,
+  "total": 49,
+  "inScope": 39,
+  "measuredNow": 9,
+  "needsData": 27,
+  "comingSoon": 3,
+  "outOfScope": 10,
+  "pct": 23,
+  "groups": [
+   {
+    "code": "measured_now",
+    "title": "Measured now"
+   },
+   {
+    "code": "needs_data",
+    "title": "Needs data"
+   },
+   {
+    "code": "coming_soon",
+    "title": "Coming soon"
+   },
+   {
+    "code": "out_of_scope",
+    "title": "Out of scope"
+   }
+  ]
+ },
+ {
+  "id": "HEDIS",
+  "name": "Healthcare Effectiveness Data and Information Set (NCQA)",
+  "edition": null,
+  "total": 79,
+  "inScope": 37,
+  "measuredNow": 7,
+  "needsData": 21,
+  "comingSoon": 9,
+  "outOfScope": 42,
+  "pct": 19,
+  "groups": [
+   {
+    "code": "measured_now",
+    "title": "Measured now"
+   },
+   {
+    "code": "needs_data",
+    "title": "Needs data"
+   },
+   {
+    "code": "coming_soon",
+    "title": "Coming soon"
+   },
+   {
+    "code": "out_of_scope",
+    "title": "Out of scope"
+   }
+  ]
+ }
+]

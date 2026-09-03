@@ -1,8 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { SEO } from '../components/SEO';
-import { GrassFooter } from '../components/grass/GrassFooter';
-import { GrassHeader } from '../components/grass/GrassHeader';
+import { SiteFooter } from '../components/SiteFooter';
+import { SiteHeader } from '../components/SiteHeader';
+import '../styles/site.css';
 
 // ⚠️ These are DRAFTS generated to give Salvia a complete starting point. Because
 // Salvia processes health data across India (DPDP Act 2023), Australia (Privacy
@@ -25,29 +26,21 @@ type Doc = {
   body: React.ReactNode;
 };
 
+/* These four carry the whole document. They were written against grass.css
+   custom properties that no longer exist, which is why the legal pages looked
+   unstyled — every colour resolved to nothing. */
 const H = ({ children }: { children: React.ReactNode }) => (
-  <h2 style={{ fontFamily: 'var(--g-font)', fontSize: 21, fontWeight: 800, color: 'var(--g-ink)', margin: '2.2rem 0 0.8rem', letterSpacing: '-0.02em' }}>{children}</h2>
+  <h2 className="lg-h">{children}</h2>
 );
 const P = ({ children }: { children: React.ReactNode }) => (
-  <p style={{ fontFamily: 'var(--g-font)', fontSize: 15.5, lineHeight: 1.75, color: 'var(--g-ink-soft)', margin: '0 0 1rem' }}>{children}</p>
+  <p className="lg-p">{children}</p>
 );
 const UL = ({ children }: { children: React.ReactNode }) => (
-  <ul style={{ margin: '0 0 1rem', paddingLeft: '1.2rem', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>{children}</ul>
+  <ul className="lg-ul">{children}</ul>
 );
 const LI = ({ children }: { children: React.ReactNode }) => (
-  <li style={{ fontFamily: 'var(--g-font)', fontSize: 15.5, lineHeight: 1.7, color: 'var(--g-ink-soft)', listStyle: 'disc' }}>{children}</li>
+  <li>{children}</li>
 );
-
-// Per-document illustration, so even legal pages carry the house style.
-const DOC_ART: Record<string, string> = {
-  privacy: '/illustrations/shield.webp',
-  terms: '/illustrations/vet_estimate.webp',
-  cookies: '/illustrations/ill_globe_india.webp',
-  dpa: '/illustrations/story_policy.webp',
-  'refund-policy': '/illustrations/price_coins.webp',
-  'acceptable-use': '/illustrations/shield_cross.webp',
-  security: '/illustrations/vault.webp',
-};
 
 const DOCS: Doc[] = [
   {
@@ -216,36 +209,57 @@ export const LEGAL_DOCS = DOCS;
 
 export const LegalPage: React.FC<{ slug: string }> = ({ slug }) => {
   const doc = DOCS.find((d) => d.slug === slug) ?? DOCS[0];
+  const index = DOCS.findIndex((d) => d.slug === doc.slug) + 1;
+  const pad = (n: number) => String(n).padStart(2, '0');
+
   return (
-    <>
+    <div className="s-page">
       <SEO title={doc.seoTitle.replace(' | Salvia', '')} description={doc.seoDesc} path={`/${doc.slug}`} />
-      <GrassHeader />
-      <main style={{ flex: 1, zIndex: 10, position: 'relative', background: '#fff' }}>
-        <section style={{ padding: 'clamp(7rem, 12vw, 9.5rem) 0 5.5rem' }}>
-          <div className="g-container" style={{ maxWidth: 860 }}>
-            <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 24, flexWrap: 'wrap' }}>
-              <div style={{ flex: '1 1 420px', minWidth: 0 }}>
-                <h1 className="g-h2" style={{ margin: '0 0 8px' }}>{doc.title}</h1>
-                <p className="g-small" style={{ margin: '0 0 22px' }}>Last updated: {UPDATED}</p>
-              </div>
-              <img
-                src={DOC_ART[doc.slug] ?? '/illustrations/shield.webp'}
-                alt=""
-                loading="lazy"
-                style={{ width: 'clamp(110px, 14vw, 170px)', height: 'auto', flexShrink: 0 }}
-              />
-            </div>
-            {doc.body}
-            <p style={{ marginTop: '3rem', fontFamily: 'var(--g-font)', fontSize: 14.5 }}>
-              <Link to="/privacy/" style={{ color: 'var(--g-green)', fontWeight: 600 }}>Privacy</Link>{' · '}
-              <Link to="/terms/" style={{ color: 'var(--g-green)', fontWeight: 600 }}>Terms</Link>{' · '}
-              <Link to="/dpa/" style={{ color: 'var(--g-green)', fontWeight: 600 }}>DPA</Link>{' · '}
-              <Link to="/security/" style={{ color: 'var(--g-green)', fontWeight: 600 }}>Security</Link>
-            </p>
+      <SiteHeader />
+
+      {/* Masthead. These are legal instruments, so they get a document's front
+          matter — where it sits in the set, when it took effect, who is bound
+          — rather than a decorative badge. */}
+      <section className="s-section" style={{ paddingBottom: 'var(--space-7)' }}>
+        <div className="s-wrap s-wrap--narrow">
+          <div className="lg-rule">
+            <span>Legal</span>
+            <span className="num">{pad(index)} / {pad(DOCS.length)}</span>
           </div>
-        </section>
-      </main>
-      <GrassFooter />
-    </>
+          <h1 style={{ fontSize: 'clamp(2rem, 4.4vw, 3.1rem)', marginTop: 'var(--space-5)' }}>
+            {doc.title}
+          </h1>
+          <dl className="lg-front">
+            <div><dt>Effective</dt><dd><time>{UPDATED}</time></dd></div>
+            <div><dt>Issued by</dt><dd>{ENTITY}</dd></div>
+            <div><dt>Contact</dt><dd><a href={`mailto:${PRIVACY_EMAIL}`}>{PRIVACY_EMAIL}</a></dd></div>
+          </dl>
+        </div>
+      </section>
+
+      <section style={{ paddingBottom: 'var(--space-9)' }}>
+        <div className="s-wrap s-wrap--narrow lg-body">{doc.body}</div>
+      </section>
+
+      {/* A contents page, not a card grid. */}
+      <section className="s-band s-section">
+        <div className="s-wrap s-wrap--narrow">
+          <h2 className="lg-kicker">The complete set</h2>
+          <ol className="lg-index">
+            {DOCS.map((d, i) => (
+              <li key={d.slug}>
+                <Link to={`/${d.slug}`} aria-current={d.slug === doc.slug}>
+                  <span className="num">{pad(i + 1)}</span>
+                  <span className="lg-index-t">{d.title}</span>
+                  <span className="lg-index-d">{d.seoDesc.split(/(?<=\.)\s/)[0]}</span>
+                </Link>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+
+      <SiteFooter />
+    </div>
   );
 };

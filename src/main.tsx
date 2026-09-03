@@ -1,8 +1,8 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { HelmetProvider } from 'react-helmet-async'
+import './styles/tokens.css'
 import './index.css'
-import './styles/grass.css'
 import App from './App.tsx'
 import { initPostHog, hasAnalyticsConsent } from './lib/posthog'
 
