@@ -73,21 +73,20 @@ const ALL_ROUTES = [
 // (react-helmet-async writes these client-side, but we bake them into
 // the HTML shell so crawlers see them before JS executes)
 const META = {
+  // Keep these in step with the <SEO> props on the matching page. This map is
+  // what a crawler and a link preview read, and it is baked in before any JS
+  // runs — a stale entry here silently outranks whatever the page says.
   '/': {
-    title: 'Salvia — know where you stand against the standard',
-    desc: 'Salvia holds your policies as enforceable rules, checks every record against them before it is filed, and maps what you hold onto the framework you are assessed against — CQC, HIQA, CMS, NABH and JCI.',
+    title: 'Salvia — the evidence a claim needs, captured before discharge',
+    desc: 'Insurers pay on evidence, and evidence is written too late. Salvia turns what clinicians say into structured clinical documentation, checks it against the payer\'s requirements while the patient is still admitted, and shows the desk what is missing.',
   },
   '/blog': {
     title: 'Writing — record keeping, and the rules that judge it',
-    desc: 'What inspectors and courts actually look for in a clinical record, answered against the primary source with citations. CQC, HIQA, CMS, NABH.',
+    desc: 'What payers, courts and NABH actually look for in a clinical record, answered against the primary source with citations.',
   },
   '/start': {
-    title: 'Talk to us',
-    desc: 'Tell us where the paperwork breaks in your practice. We set Salvia up with your own forms and the framework you are assessed against.',
-  },
-  '/frameworks': {
-    title: 'Frameworks — every standard Salvia maps, by country and regulator',
-    desc: '60 frameworks across 6 countries and 4 kinds of practice, with 302 record-keeping clauses mapped to the field that satisfies each one.',
+    title: 'Show us the claims you lost',
+    desc: 'Bring twenty deductions with the reasons the payer gave. We set Salvia up with your own forms and walk them with you, one by one.',
   },
   '/privacy': {
     title: 'Privacy Policy | Salvia',
