@@ -9,7 +9,8 @@ const InsightsPage = lazy(() => import('./pages/InsightsPage').then(m => ({ defa
 const ArticlePage = lazy(() => import('./pages/ArticlePage').then(m => ({ default: m.ArticlePage })));
 const SignupPage = lazy(() => import('./pages/SignupPage').then(m => ({ default: m.SignupPage })));
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage').then(m => ({ default: m.NotFoundPage })));
-const FrameworksPage = lazy(() => import('./pages/FrameworksPage').then(m => ({ default: m.FrameworksPage })));
+// FrameworksPage (the 60-framework directory) is intentionally unrouted — see
+// the /frameworks redirect below. The page is kept on disk, not deleted.
 const FrameworkPage = lazy(() => import('./pages/FrameworkPage').then(m => ({ default: m.FrameworkPage })));
 const DeepFrameworkPage = lazy(() => import('./pages/DeepFrameworkPage').then(m => ({ default: m.DeepFrameworkPage })));
 const LegalPage = lazy(() => import('./pages/LegalPage').then(m => ({ default: m.LegalPage })));
@@ -59,7 +60,12 @@ function App() {
         <Suspense fallback={null}>
           <Routes>
             <Route path="/" element={<HomePage />} />
-            <Route path="/frameworks" element={<FrameworksPage />} />
+            {/* The 60-framework directory is no longer a front door. It told every
+                visitor we were a compliance directory across six countries, which
+                is not the business. Anyone landing on the old URL goes to the one
+                framework that still matters here. The page itself is untouched on
+                disk — point a route back at it the day it is wanted again. */}
+            <Route path="/frameworks" element={<Navigate to="/frameworks/nabh" replace />} />
             {/* The five deep pages, listed explicitly: two dynamic segments of the
                 same shape would make the first one swallow all 60. Keep in step
                 with DEEP in src/data/deepFrameworks.ts. */}

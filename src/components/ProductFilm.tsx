@@ -41,14 +41,14 @@ const NAV: Array<[string, string] | string> = [
   ['home', 'Home'],
   'Care',
   ['forms', 'Forms'], ['subjects', 'Subjects'], ['notes', 'Notes'],
-  'Compliance',
-  ['compliance', 'Compliance'], ['copilot', 'Copilot'], ['policies', 'Policies'],
+  'Claims',
+  ['compliance', 'Claims'], ['copilot', 'Copilot'], ['policies', 'Policies'],
   ['incidents', 'Incidents'], ['reports', 'Reports'], ['approvals', 'Approvals'],
 ];
 
-const TABS = ['Home', 'Compliance', 'Team', 'All policies', 'Copilot', 'Incidents',
+const TABS = ['Home', 'Claim readiness', 'Team', 'All policies', 'Copilot', 'Incidents',
               'Reports', 'Patients', 'All forms', 'General OPD Consultation',
-              'Clinical Hygiene'];
+              'Cashless Claim Evidence'];
 
 function Chrome({ nav, tab, children }: { nav: string; tab: string; children: React.ReactNode }) {
   return (
@@ -56,7 +56,7 @@ function Chrome({ nav, tab, children }: { nav: string; tab: string; children: Re
       <aside className="pf-side">
         <div className="pf-brand">
           <span className="pf-mark">S</span>
-          <span><b>Salvia</b><span>Pensbury Clinic</span></span>
+          <span><b>Salvia</b><span>Pensbury Hospital</span></span>
         </div>
         {NAV.map((n, i) =>
           typeof n === 'string'
@@ -151,7 +151,7 @@ function SceneForm() {
           {FIELDS.map(([name, type, req]) => req === null ? (
             <div className="pf-frow pf-frow--head" key={name}>{name}</div>
           ) : (
-            <div className="pf-frow" key={name} data-tip={type === 'Prescription' || type === 'Consent' ? `A system field. This one writes a real ${type.toLowerCase()} record, which is what a framework can be measured against.` : `A ${type.toLowerCase()} field${req ? ', required before the note can be submitted' : ''}.`}>
+            <div className="pf-frow" key={name} data-tip={type === 'Prescription' || type === 'Consent' ? `A system field. This one writes a real ${type.toLowerCase()} record, which is what a payer's clause can actually be checked against.` : `A ${type.toLowerCase()} field${req ? ', required before the note can be submitted' : ''}.`}>
               <span className="pf-grab">⠿</span>
               {name}
               <span className="pf-type">{type} · Required</span>
@@ -161,10 +161,10 @@ function SceneForm() {
         </div>
       </div>
 
-      <div className="pf-preview" data-tip="The PDF that actually gets filed, rendering as you build. Header, footer and watermark come from the clinic's own document theme.">
+      <div className="pf-preview" data-tip="The PDF that actually gets filed, rendering as you build. Header, footer and watermark come from the hospital's own document theme.">
         <div className="pf-paper">
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
-            <b style={{ color: 'var(--ink)' }}>Pensbury Clinic</b>
+            <b style={{ color: 'var(--ink)' }}>Pensbury Hospital</b>
             <span style={{ color: 'var(--muted)' }}>General OPD Consultation</span>
           </div>
           <div style={{ borderTop: '1px solid var(--line)', margin: '7px 0' }} />
@@ -192,17 +192,21 @@ function SceneForm() {
 
 /* ---- scene 2 — the policy ---------------------------------------------- */
 
+/* A payer's evidence requirements, written as clauses. Deliberately the
+   obvious ones — anything a billing desk could recite from memory. The mapping
+   from a specific insurer and package to a specific clause set is the part
+   that does not go on a marketing site. */
 const CLAUSES: Array<[string, string, string]> = [
-  ['Perform hand hygiene',
-   'You must perform and document hand hygiene before and after every patient contact, following the WHO 5 moments of hand hygiene.', 'must'],
-  ['Use appropriate PPE',
-   'You must assess the risk of exposure to bodily fluids and document the use of appropriate personal protective equipment (PPE) for every procedure.', 'must'],
-  ['Maintain aseptic technique',
-   'You must document the use of aseptic technique for all invasive procedures, including site preparation and sterile equipment handling.', 'must'],
-  ['Segregate biomedical waste',
-   'You must ensure that all clinical waste generated during the encounter is segregated according to the prescribed biomedical waste management standards.', 'must'],
-  ['Sanitize examination surfaces',
-   'You should clean and disinfect examination surfaces between patients using an approved disinfectant.', 'should'],
+  ['Admission note, timed and authored',
+   'You must record the presenting complaint, provisional diagnosis and admitting consultant, with the date and time of admission, authenticated to its author.', 'must'],
+  ['Consent naming the procedure performed',
+   'You must hold signed informed consent that names the procedure actually performed, dated before the procedure and witnessed.', 'must'],
+  ['Intra-procedure photograph',
+   'You must capture and attach an intra-procedure image for every package that requires photographic evidence of the procedure being performed.', 'must'],
+  ['Implant and high-value drug record',
+   'You must record every implant and high-value drug administered, with its batch number and the sticker where one is issued.', 'must'],
+  ['Discharge summary with final diagnosis',
+   'You should issue a discharge summary carrying the final diagnosis, the procedure performed and the treating consultant, before the patient leaves.', 'should'],
 ];
 
 function SceneClauses() {
@@ -234,18 +238,19 @@ function SceneClauses() {
         </div>
       </div>
 
-      <div className="pf-doc" data-tip="The same clauses, rendered as the document staff and inspectors read. One source, two outputs — so the policy and the check can never drift apart.">
+      <div className="pf-doc" data-tip="The same clauses, rendered as the document the billing desk and the payer read. One source, two outputs — so what the desk believes and what the check enforces can never drift apart.">
         <div style={{ fontSize: 9.5, letterSpacing: '.12em', color: 'var(--muted)', fontWeight: 600 }}>POLICY</div>
         <div className="pf-h" style={{ fontSize: 18, marginTop: 4 }}>
-          Clinical Hygiene and Infection Control Policy
+          Cashless Claim Evidence — Network Insurer
         </div>
         <div className="pf-sub">v1.0 · Effective 02 Sep 2026</div>
         <div style={{
           borderLeft: '2px solid var(--accent)', paddingLeft: 9, margin: '10px 0 14px',
           fontSize: 10.5, fontStyle: 'italic', color: 'var(--muted)',
         }}>
-          Policy governing clinical hygiene practices, infection control, and waste
-          management to ensure patient safety and compliance with clinical standards.
+          The evidence this insurer requires before it will settle a cashless claim in
+          full — checked on the ward while the patient is still admitted, not at the
+          desk after the file comes back.
         </div>
         <div className="pf-in">
           {CLAUSES.map(([t, d, p], i) => (
@@ -319,7 +324,7 @@ function SceneCapture() {
         <div style={{ marginTop: 12, display: 'grid', gap: 7 }}>
           <div className="pf-ledger pf-late" data-tip="A consent record, not a sentence — it carries the scope, who took it, and when it expires.">
             <span className="pf-chip pf-chip--ok">Consent</span>
-            <b>Audio recording · verbal, in clinic</b>
+            <b>Audio recording · verbal, on the ward</b>
             <em>Ram · Staff · expires 03 Sep 2027</em>
           </div>
           <div className="pf-ledger pf-late2" data-tip="An incident opened from the same dictation, with its own number, its own workflow and its own approval.">
@@ -440,14 +445,14 @@ function SceneSubject() {
                 <span className="pf-chip pf-chip--ok">ACTIVE</span>
               </div>
               <div style={{ fontSize: 10, color: 'var(--muted)', marginTop: 4 }}>
-                Verbal — in clinic · exp Aug 10, 2027
+                Verbal — on the ward · exp Aug 10, 2027
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      <div className="pf-timeline" data-tip="The audit trail. Every entry stamped with who filed it, in what role and at what time — the thing an inspector actually asks you to produce.">
+      <div className="pf-timeline" data-tip="The audit trail. Every entry stamped with who filed it, in what role and at what time — the thing a payer asks you to produce when it disputes the file.">
         <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 10 }}>
           <span style={{ fontSize: 9, letterSpacing: '.1em', color: 'var(--muted)', fontWeight: 600 }}>
             RECENT ACTIVITY
@@ -481,46 +486,49 @@ function SceneSubject() {
 
 /* ---- scene 4 — coverage ------------------------------------------------ */
 
+/* The desk view: who is admitted right now, and what the payer will ask for
+   that is not in the file yet. Ward and bed rather than names — this is the
+   screen a billing desk works down before discharge rounds. */
 const REQS: Array<[string, string, number, string]> = [
-  ['IPSG', 'International Patient Safety Goals', 50, 'top'],
-  ['IPSG.1', 'Identify patients correctly.', 100, ''],
-  ['IPSG.3', 'Improve the safety of high-alert medications.', 50, 'open'],
-  ['IPSG.6', 'Reduce the risk of patient harm resulting from falls (inpatient).', 50, ''],
-  ['IPSG.6.1', 'Reduce the risk of falls for outpatients.', 0, ''],
-  ['ACC', 'Access to Care and Continuity of Care', 100, 'top'],
-  ['ACC.3.1', 'A qualified individual is responsible for coordinating the patient\'s care.', 100, ''],
+  ['SURGICAL', 'Surgical ward · 6 admitted', 78, 'top'],
+  ['B-204', 'Laparoscopic appendicectomy · day 2', 100, ''],
+  ['B-207', 'Total knee replacement · day 4', 60, 'open'],
+  ['B-211', 'Laparoscopic cholecystectomy · day 1', 80, ''],
+  ['B-216', 'Hernia repair, unilateral · day 3', 100, ''],
+  ['MEDICAL', 'Medical ward · 9 admitted', 100, 'top'],
+  ['C-102', 'Acute gastroenteritis · day 2', 100, ''],
 ];
 
 function SceneCoverage() {
   return (
     <div className="pf-pad" style={{ height: '100%', overflow: 'hidden' }}>
-      <div className="pf-h">Compliance</div>
+      <div className="pf-h">Claim readiness</div>
       <div className="pf-sub">
-        Your policy-engine evidence — framework-agnostic. Every check and every resolution, captured once.
+        Every admitted patient, and what the payer will ask for that is not in the file yet.
       </div>
 
       <div style={{ display: 'flex', gap: 6, margin: '12px 0 10px' }}>
-        {['Overview', 'Activity', 'Coverage'].map(t => (
+        {['Overview', 'Activity', 'Queries'].map(t => (
           <span className="pf-chip pf-chip--bare" key={t}>{t}</span>
         ))}
         <span className="pf-chip pf-chip--bare" style={{ borderColor: 'var(--ink)', color: 'var(--ink)' }}>
-          Frameworks
+          Admitted
         </span>
-        <span className="pf-btn" style={{ marginLeft: 12 }}>JCI · 171 ▾</span>
-        <span className="pf-chip pf-chip--bare">Confidence: Codes low · mapping solid</span>
+        <span className="pf-btn" style={{ marginLeft: 12 }}>All payers ▾</span>
+        <span className="pf-chip pf-chip--bare">Discharge rounds · 11:00</span>
       </div>
 
-      <div style={{ display: 'flex', gap: 6, marginBottom: 10 }} data-tip="Four states, not a pass mark. Out of scope means the requirement is about something software has no business measuring — it is shown, and never counted against you.">
-        <span className="pf-chip pf-chip--ok">Measured now</span>
-        <span className="pf-chip pf-chip--warn">Needs data</span>
-        <span className="pf-chip pf-chip--soon">Coming soon</span>
-        <span className="pf-chip pf-chip--out">Out of scope</span>
+      <div style={{ display: 'flex', gap: 6, marginBottom: 10 }} data-tip="Four states, not a pass mark. Not required means this payer's package does not ask for it — it is shown, and never counted against the file.">
+        <span className="pf-chip pf-chip--ok">Evidence held</span>
+        <span className="pf-chip pf-chip--warn">Missing</span>
+        <span className="pf-chip pf-chip--soon">Awaiting result</span>
+        <span className="pf-chip pf-chip--out">Not required</span>
       </div>
 
-      <div className="pf-in" data-tip="Measured divided by in-scope. Excluding out-of-scope from the denominator is why a clinic can actually reach 100% rather than chasing a number it can never hit." style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: 8 }}>
-        {[['53%', 'Measured of in-scope', 'var(--accent)'],
-          ['55', 'Measured now', ''], ['13', 'Needs data', ''],
-          ['35', 'Coming soon', ''], ['68', 'Out of scope', '']].map(([n, l, c], i) => (
+      <div className="pf-in" data-tip="Held divided by required. Excluding what this package does not ask for is why a file can actually reach 100% rather than chasing a number it can never hit." style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: 8 }}>
+        {[['87%', 'Held of required', 'var(--accent)'],
+          ['13', 'Ready to file', ''], ['2', 'Missing', ''],
+          ['1', 'Awaiting result', ''], ['9', 'Not required', '']].map(([n, l, c], i) => (
           <div className="pf-stat" key={i}>
             <b style={{ color: (c as string) || 'var(--ink)' }}>{n}</b>
             <span style={{ textTransform: 'none', letterSpacing: 0, marginTop: 3, marginBottom: 0 }}>{l}</span>
@@ -529,14 +537,14 @@ function SceneCoverage() {
       </div>
 
       <div className="pf-meter" style={{ margin: '10px 0 5px', height: 7 }}>
-        <i style={{ width: '32%' }} />
+        <i style={{ width: '52%' }} />
         <i className="w" style={{ width: '8%' }} />
-        <i style={{ width: '20%', background: 'hsl(210 50% 52%)' }} />
-        <i style={{ width: '40%', background: 'var(--line)' }} />
+        <i style={{ width: '4%', background: 'hsl(210 50% 52%)' }} />
+        <i style={{ width: '36%', background: 'var(--line)' }} />
       </div>
       <div style={{ fontSize: 10, color: 'var(--muted)', marginBottom: 10 }}>
-        Score = measured now ÷ (all requirements − out-of-scope). Out-of-scope is shown
-        but never counted against a clinic.
+        Readiness = evidence held ÷ (everything this package requires − what it does not
+        ask for). Two patients are still on the ward, so both gaps are still fixable.
       </div>
 
       <div className="pf-card" style={{ overflow: 'hidden' }}>
@@ -551,24 +559,24 @@ function SceneCoverage() {
             {kind === 'open' && (
               <div className="pf-late">
                 <div style={{ display: 'flex', gap: 7, alignItems: 'baseline', padding: '6px 10px 0 72px' }}>
-                  <span className="pf-chip pf-chip--warn">Needs data</span>
-                  <b style={{ fontSize: 10.5, color: 'var(--ink)' }}>IPSG.3 ME1</b>
+                  <span className="pf-chip pf-chip--warn">Missing</span>
+                  <b style={{ fontSize: 10.5, color: 'var(--ink)' }}>Implant sticker</b>
                   <span style={{ fontSize: 10.5, color: 'var(--muted)' }}>
-                    A list of high-alert medications is defined and managed to reduce risk.
+                    Batch number and sticker for every implant used in the procedure.
                   </span>
                 </div>
-                <div className="pf-backing" data-tip="Open a requirement and it names the exact fields it reads, and what is still missing before it can be scored.">
-                  <div><b>Backing:</b> system.rx / system.drug_op</div>
-                  <div style={{ margin: '4px 0' }}>Evaluable signals (any required):
-                    {' '}<kbd>rx.drug</kbd> <kbd>drug_op.drug</kbd></div>
-                  <div>MED-005 hidden — drug data present; a high-alert/LASA drug list
-                    (small config) would enable flagging.</div>
+                <div className="pf-backing" data-tip="Open a gap and it names the exact field the check reads, who can still fill it, and how long is left before discharge closes the window.">
+                  <div><b>Reads:</b> system.implant / system.drug_op</div>
+                  <div style={{ margin: '4px 0' }}>Required by: <kbd>package</kbd> <kbd>payer clause 04</kbd>
+                    {' '}· Fillable by theatre staff on the ward</div>
+                  <div>Patient is on day 4 of an expected 5-day stay — roughly 26 hours
+                    before discharge closes this.</div>
                 </div>
                 <div style={{ display: 'flex', gap: 7, alignItems: 'baseline', padding: '0 10px 6px 72px' }}>
-                  <span className="pf-chip pf-chip--ok">Measured now</span>
-                  <b style={{ fontSize: 10.5, color: 'var(--ink)' }}>IPSG.3 ME2</b>
+                  <span className="pf-chip pf-chip--ok">Evidence held</span>
+                  <b style={{ fontSize: 10.5, color: 'var(--ink)' }}>Intra-procedure image</b>
                   <span style={{ fontSize: 10.5, color: 'var(--muted)' }}>
-                    High-alert medications require an independent double-check before administration.
+                    Captured in theatre, attached to the note, authored and timestamped.
                   </span>
                 </div>
               </div>
@@ -590,8 +598,8 @@ function SceneCopilot() {
           <b style={{ fontSize: 11.5, color: 'var(--ink)' }}>Chats</b>
           <span style={{ fontSize: 10.5, color: 'var(--accent)', fontWeight: 600 }}>+ New</span>
         </div>
-        {[['on a scale of 1 to 10 how ready are we for NABH, what steps w…', 'just now'],
-          ['Are we NABH-ready?', '17h ago']].map(([t, d], i) => (
+        {[['which deductions last quarter were about something we never wr…', 'just now'],
+          ['What is Star asking for that we do not capture?', '17h ago']].map(([t, d], i) => (
           <div key={i} style={{ marginBottom: 9 }}>
             <div style={{ fontSize: 10.5, color: 'var(--ink)', lineHeight: 1.4 }}>{t}</div>
             <div style={{ fontSize: 9.5, color: 'var(--faint)' }}>{d}</div>
@@ -604,7 +612,7 @@ function SceneCopilot() {
           <div style={{ display: 'flex', alignItems: 'center', gap: 7 }}>
             <span className="pf-mark" style={{ width: 19, height: 19 }}>✦</span>
             <span>
-              <b style={{ fontSize: 12.5, color: 'var(--ink)' }}>Compliance Copilot</b>
+              <b style={{ fontSize: 12.5, color: 'var(--ink)' }}>Claims Copilot</b>
               <span style={{ display: 'block', fontSize: 10, color: 'var(--muted)' }}>
                 Grounded only in your data · you confirm every change
               </span>
@@ -613,32 +621,32 @@ function SceneCopilot() {
         </div>
 
         <div className="pf-in" style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-          <div className="pf-said">what policy can we make ?</div>
-          <div className="pf-tool" data-tip="The copilot's actual tool calls, shown as it makes them. It reads what you hold; it has no other source."><b>✓</b> Read <kbd>list_forms</kbd></div>
+          <div className="pf-said">what are we missing most often ?</div>
           <div className="pf-tool" data-tip="The copilot's actual tool calls, shown as it makes them. It reads what you hold; it has no other source."><b>✓</b> Read <kbd>list_policies</kbd></div>
+          <div className="pf-tool" data-tip="The copilot's actual tool calls, shown as it makes them. It reads what you hold; it has no other source."><b>✓</b> Read <kbd>list_deductions</kbd></div>
           <div style={{ fontSize: 11, color: 'var(--body)' }}>
-            Since you're aiming for NABH, we should focus on policies that directly impact
-            patient safety and documentation quality. You already have a Clinical Hygiene and
-            Infection Control Policy, which is a great start. To build on that, here are three
-            high-impact policies we could create next.
+            Across the deductions you have loaded, the same gap comes back more than any
+            other: the implant batch record. Your evidence policy asks for it, but no form
+            captures it as a field, so it is being written into free text where the check
+            cannot read it — and the payer cannot either.
           </div>
           <div className="pf-card" style={{ padding: '8px 10px' }}>
-            <b style={{ fontSize: 11, color: 'var(--ink)' }}>• Existing Policy Found</b>
+            <b style={{ fontSize: 11, color: 'var(--ink)' }}>• Gap found</b>
             <div style={{ fontSize: 10.5, color: 'var(--muted)', marginTop: 3 }}>
-              You have a published Clinical Hygiene and Infection Control Policy which covers
-              hand hygiene, PPE, and waste management.
+              Clause 04 of Cashless Claim Evidence has no field backing it on the theatre
+              form. Nothing can satisfy it as things stand.
             </div>
           </div>
-          <div className="pf-said">Create Informed Consent Policy</div>
+          <div className="pf-said">Add the field</div>
         </div>
 
         <div className="pf-late2">
           <div className="pf-tool" style={{ marginBottom: 6 }}>
-            <b>✦</b> Prepared <kbd>propose_create_policy</kbd>
+            <b>✦</b> Prepared <kbd>propose_add_field</kbd>
           </div>
           <div className="pf-card pf-approve" data-tip="Nothing is written until you approve. When you do, it runs under your permissions and the change carries your name." style={{ padding: '9px 11px', borderColor: 'var(--accent-line)' }}>
             <b style={{ fontSize: 11.5, color: 'var(--ink)' }}>
-              ✦ Create the policy "Informed Consent Policy" (as a draft)
+              ✦ Add "Implant batch and sticker" to the theatre form (as a draft)
             </b>
             <div style={{ fontSize: 10, color: 'var(--muted)', fontStyle: 'italic', margin: '4px 0 8px' }}>
               The copilot never writes a record — approving runs this under your permissions.
@@ -652,21 +660,21 @@ function SceneCopilot() {
         </div>
 
         <div className="pf-late3" style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-          {['Create a new consent form', 'Link an existing form', 'Move on to Patient Rights policy']
+          {['Backfill the open admissions', 'Link it to clause 04', 'Show the next most-missed gap']
             .map(c => <span className="pf-chip pf-chip--ok pf-chip--bare" key={c}>{c}</span>)}
         </div>
       </div>
 
-      <div className="pf-panel" data-tip="What you tell it once about your clinic, read into every chat — so you are not re-explaining who you are each time.">
+      <div className="pf-panel" data-tip="What you tell it once about your hospital, read into every chat — so you are not re-explaining who you are each time.">
         <b style={{ fontSize: 10.5, color: 'var(--ink)', display: 'block', marginBottom: 5 }}>Goals</b>
         <div style={{ color: 'var(--muted)' }}>
           No goals yet. Ask the copilot for a plan and it can track the steps here.
         </div>
         <div style={{ borderTop: '1px solid var(--line)', margin: '12px 0' }} />
-        <b style={{ fontSize: 10.5, color: 'var(--ink)', display: 'block', marginBottom: 5 }}>About this clinic</b>
+        <b style={{ fontSize: 10.5, color: 'var(--ink)', display: 'block', marginBottom: 5 }}>About this hospital</b>
         <div style={{ color: 'var(--muted)', fontStyle: 'italic' }}>
-          Tell the copilot about your clinic — what you are, your departments, the framework
-          you're aiming for. It reads this in every chat.
+          Tell the copilot about your hospital — your departments, your payers, the packages
+          you do most. It reads this in every chat.
         </div>
       </div>
     </div>
@@ -824,7 +832,7 @@ function MChecked() {
       <div className="pf-m-check pf-late">
         <div className="pf-m-check-h">
           <span className="pf-chip pf-chip--stop">1 must</span>
-          Checked against Clinical Hygiene Policy
+          Checked against Cashless Claim Evidence
         </div>
         <div className="pf-m-clause">
           <b>Perform hand hygiene</b>
@@ -846,7 +854,7 @@ function MFiled() {
   return (
     <div className="pf-m">
       <div className="pf-m-h">John</div>
-      <div className="pf-m-sub">Male · 23 yrs · Pensbury Clinic</div>
+      <div className="pf-m-sub">Male · 23 yrs · Pensbury Hospital</div>
 
       <div className="pf-in" style={{ marginTop: 12 }}>
         {[['Note submitted · General OPD', 'just now', true],
@@ -869,7 +877,7 @@ function MFiled() {
       </div>
 
       <div className="pf-m-foot pf-late">
-        Author, role and time on every entry — the thing an inspector asks you to produce.
+        Author, role and time on every entry — the thing a payer asks for when it disputes the file.
       </div>
     </div>
   );
@@ -907,27 +915,27 @@ function MTracked() {
   );
 }
 
-/* --- 6. where the clinic stands ----------------------------------------- */
+/* --- 6. what is still missing on the ward -------------------------------- */
 function MCoverage() {
   return (
     <div className="pf-m">
-      <div className="pf-m-sub" style={{ marginTop: 0 }}>NABH · 6th edition · 639 requirements</div>
+      <div className="pf-m-sub" style={{ marginTop: 0 }}>Admitted now · 15 patients · 4 payers</div>
 
       <div className="pf-m-score pf-late">
-        <b className="num">51%</b>
-        <span>measured of in-scope</span>
+        <b className="num">87%</b>
+        <span>evidence held of required</span>
       </div>
 
       <div className="pf-meter" style={{ height: 7, marginTop: 10 }}>
-        <i style={{ width: '18%' }} />
-        <i className="w" style={{ width: '3%' }} />
-        <i style={{ width: '15%', background: 'hsl(210 50% 52%)' }} />
-        <i style={{ width: '64%', background: 'var(--line)' }} />
+        <i style={{ width: '52%' }} />
+        <i className="w" style={{ width: '8%' }} />
+        <i style={{ width: '4%', background: 'hsl(210 50% 52%)' }} />
+        <i style={{ width: '36%', background: 'var(--line)' }} />
       </div>
 
       <div className="pf-m-states">
-        {[['Measured now', '116', 'ok'], ['Needs data', '14', 'warn'],
-          ['Coming soon', '97', 'soon'], ['Out of scope', '412', 'out']].map(([l, n, k]) => (
+        {[['Ready to file', '13', 'ok'], ['Missing', '2', 'warn'],
+          ['Awaiting result', '1', 'soon'], ['Not required', '9', 'out']].map(([l, n, k]) => (
           <div key={l as string}>
             <span className={'pf-chip pf-chip--' + k}>{l as string}</span>
             <b className="num">{n as string}</b>
@@ -936,9 +944,9 @@ function MCoverage() {
       </div>
 
       <div className="pf-in" style={{ marginTop: 12 }}>
-        {[['AAC', 'Access, Assessment and Continuity', 62],
-          ['IMS', 'Information Management System', 78],
-          ['PRE', 'Patient Rights and Education', 40]].map(([c, t, pct]) => (
+        {[['B-207', 'Implant sticker · day 4 of 5', 60],
+          ['B-211', 'Consent names a different procedure', 80],
+          ['C-102', 'Discharge summary not issued', 90]].map(([c, t, pct]) => (
           <div className="pf-m-req" key={c as string}>
             <code>{c as string}</code>
             <span>{t as string}</span>
@@ -947,7 +955,7 @@ function MCoverage() {
         ))}
       </div>
 
-      <div className="pf-m-foot">Out of scope is shown, and never counted against you.</div>
+      <div className="pf-m-foot">All three are still on the ward. All three are still fixable.</div>
     </div>
   );
 }
@@ -961,12 +969,12 @@ function MCopilot() {
       </div>
 
       <div className="pf-in" style={{ marginTop: 12, display: 'flex', flexDirection: 'column', gap: 8 }}>
-        <div className="pf-said" style={{ fontSize: 11.5 }}>Are we NABH-ready?</div>
+        <div className="pf-said" style={{ fontSize: 11.5 }}>What are we missing most often?</div>
         <div className="pf-tool"><b>✓</b> Read <kbd>list_policies</kbd></div>
-        <div className="pf-tool"><b>✓</b> Read <kbd>coverage</kbd></div>
+        <div className="pf-tool"><b>✓</b> Read <kbd>list_deductions</kbd></div>
         <div style={{ fontSize: 11.5, color: 'var(--body)' }}>
-          You are at 51% of in-scope requirements. The largest single gap is a documented
-          Informed Consent Policy — 14 requirements are waiting on it.
+          The implant batch record. Your evidence policy asks for it, but no form captures
+          it as a field — so it lands in free text, where the check cannot read it.
         </div>
       </div>
 
@@ -974,7 +982,7 @@ function MCopilot() {
         borderColor: 'var(--accent-line)', background: 'var(--accent-soft)',
       }}>
         <div className="pf-m-check-h" style={{ color: 'var(--accent)', fontWeight: 600 }}>
-          ✦ Create “Informed Consent Policy” (as a draft)
+          ✦ Add “Implant batch and sticker” to the theatre form
         </div>
         <div style={{ fontSize: 10, color: 'var(--muted)', fontStyle: 'italic', marginTop: 4 }}>
           The copilot never writes a record — approving runs this under your permissions.
@@ -1010,16 +1018,17 @@ const PHONE_SCENES = [
     chapter: 'Checked', blurb: 'Before it can be filed',
     title: 'Notes', tab: 'Notes', dur: 10000,
     render: () => <MChecked />,
-    caption: <>Before it files, the note is checked against your own policy clauses.
-      <b> A High · must breach blocks the submission</b>, and an override needs a written
-      reason that itself becomes evidence.</>,
+    caption: <>Before it files, the note is checked against the clauses that will judge it
+      — yours, and the payer&rsquo;s. <b>A High · must breach blocks the submission</b>, and
+      an override needs a written reason that itself becomes evidence. The patient is still
+      in the bed, so the missing thing can still be got.</>,
   },
   {
     chapter: 'Filed', blurb: 'Attributed and timestamped',
     title: 'Patients', tab: 'Patients', dur: 9000,
     render: () => <MFiled />,
     caption: <>It lands on the patient with everything else. <b>Author, role and time on
-      every entry</b> — the thing an inspector actually asks you to produce.</>,
+      every entry</b> — the thing a payer asks you to produce when it disputes the file.</>,
   },
   {
     chapter: 'Approve', blurb: 'Nothing files itself',
@@ -1031,10 +1040,10 @@ const PHONE_SCENES = [
       evidence in front of them.</>,
   },
   {
-    chapter: 'Coverage', blurb: 'Where the clinic stands',
-    title: 'Compliance', tab: 'Home', dur: 10000,
+    chapter: 'Readiness', blurb: 'What is still missing',
+    title: 'Claims', tab: 'Home', dur: 10000,
     render: () => <MCoverage />,
-    caption: <>Every requirement in the framework, in one of four honest states, on the
+    caption: <>Every admitted patient, in one of four honest states, on the
       same phone. <b>Out of scope is shown but never counted against you</b> — which is why
       the number can actually reach 100 rather than being a score nobody trusts.</>,
   },
@@ -1066,12 +1075,13 @@ const DESKTOP_SCENES = [
   },
   {
     chapter: 'Write the rules', hint: 'Hover a clause, a parity chip, or the rendered document.', blurb: 'Clauses with a severity',
-    nav: 'Policies', tab: 'Clinical Hygiene', dur: 10000,
+    nav: 'Policies', tab: 'Cashless Claim Evidence', dur: 10000,
     render: () => <SceneClauses />,
-    caption: <>Then the policy that form has to satisfy. Each clause is one enforceable
-      rule with a severity: <b>High · must blocks a submission that breaches it</b>, medium
-      · should warns. The document on the right is what staff and an inspector read — one
-      source, two outputs.</>,
+    caption: <>Then the rules that form has to satisfy — your own protocols, and what the
+      payer requires before it will pay. Each clause is one enforceable rule with a
+      severity: <b>High · must blocks a submission that breaches it</b>, medium · should
+      warns. When a payer changes what it asks for, you change the clause, not the
+      workflow.</>,
   },
   {
     chapter: 'Capture it', hint: 'Hover the transcript, or what it became on the right.',
@@ -1087,10 +1097,10 @@ const DESKTOP_SCENES = [
     chapter: 'See a patient', hint: 'Hover the capture row, the pain panel, or the timeline on the right.', blurb: 'The record, as it happens',
     nav: 'Subjects', tab: 'Patients', dur: 11000,
     render: () => <SceneSubject />,
-    caption: <>Now a patient. The note is recorded against that form and checked against
-      those clauses before it can be filed — and it lands here with the consents, pain
-      scores and incidents already attached. <b>Every entry carries who filed it, in what
-      role, at what time.</b></>,
+    caption: <>Now a patient. The note is checked against those clauses before it can be
+      filed, and it lands here with the consents, pain scores and incidents already
+      attached. <b>Every entry carries who filed it, in what role, at what time</b> — which
+      is exactly what gets asked for when a payer disputes it months later.</>,
   },
   {
     chapter: 'Let the agent work', hint: 'Hover the tool calls or the proposal card.', blurb: 'It proposes, you approve',
@@ -1102,13 +1112,13 @@ const DESKTOP_SCENES = [
       under your permissions and the change is signed with your name.</>,
   },
   {
-    chapter: 'Know where you stand', hint: 'Hover the four states, the score, or an open requirement.', blurb: 'Coverage you can click into',
-    nav: 'Compliance', tab: 'Compliance', dur: 11500,
+    chapter: 'Know what is missing', hint: 'Hover the four states, the score, or an open gap.', blurb: 'The desk view, before discharge',
+    nav: 'Claims', tab: 'Claim readiness', dur: 11500,
     render: () => <SceneCoverage />,
-    caption: <>And this is what all of it adds up to: every requirement in the framework,
-      in one of four honest states. <b>Out of scope is shown but never counted against
-      you</b>, so the number means something. Open a requirement and it names the exact
-      field it reads, and what is still missing.</>,
+    caption: <>And this is what all of it adds up to: every requirement, in one of four
+      honest states, updating as records arrive. <b>Out of scope is shown but never counted
+      against you</b>, so the number means something. Open one and it names the exact field
+      it reads, and what is still missing — before anyone is waiting on it.</>,
   },
 ];
 

@@ -107,7 +107,7 @@ const CALL_WINDOW_OPTIONS = [
 
 const STEPS: { label: string; value: string }[] = [
   { label: 'Today', value: 'Sign up — six quick fields, under a minute' },
-  { label: 'Within a day', value: 'Your Salvia workspace is set up with your clinic’s forms' },
+  { label: 'Within a day', value: 'Your Salvia workspace is set up with your hospital’s forms' },
   { label: 'Next 21 days', value: 'Full access, no card — everything unlocked' },
   { label: 'Day 22', value: 'Continue only if you say yes — cancel any time, no charge' },
 ];
@@ -125,7 +125,14 @@ export const SignupPage = () => {
     return isVertical(v) ? v : 'veterinary';
   }, [params]);
 
-  const [vertical, setVertical] = useState<Vertical>(initialVertical);
+  // India sells to one kind of buyer — a hospital with cashless claim volume.
+  // The practice-type selector is a leftover from the multi-vertical site and
+  // defaulted to "Veterinary clinic", which contradicts everything else on the
+  // page. Under INDIA_ONLY we hide it and send general_clinic, which is the
+  // value the backend already accepts; the Vertical union is unchanged.
+  const [vertical, setVertical] = useState<Vertical>(
+    INDIA_ONLY ? 'general_clinic' : initialVertical,
+  );
   const [country, setCountry] = useState(INDIA_ONLY ? 'IN' : 'NZ');
 
   // Abuse protection: honeypot field (bots autofill it), form-mount
@@ -237,11 +244,13 @@ export const SignupPage = () => {
               {/* ── Left: the pitch ── */}
               <div>
                 <h1 style={{ fontSize: 'clamp(2rem, 4.2vw, 3.1rem)', maxWidth: '15ch' }}>
-                  Tell us where the paperwork breaks.
+                  Show us the claims you lost.
                 </h1>
                 <p className="s-lede" style={{ marginTop: 'var(--space-5)' }}>
-                  We set Salvia up with your own forms and the framework you are assessed
-                  against, then walk your last inspection findings with you. No slides.
+                  Bring twenty deductions with the reasons the payer gave. We set Salvia up
+                  with your own forms, and walk them with you one by one — which were
+                  decided by something nobody wrote down, and which had nothing to do with
+                  the record at all. No slides.
                 </p>
 
                 <ol className="su-steps">
@@ -265,7 +274,7 @@ export const SignupPage = () => {
                 <Rv className="su-card" delay={1}>
                   <h2 className="g-h3" style={{ marginBottom: 4 }}>Get started</h2>
                   <p className="g-small" style={{ marginBottom: 22 }}>
-                    Six quick fields — under a minute, and your clinic is set up.
+                    Six quick fields — under a minute, and your hospital is set up.
                   </p>
 
                   <form onSubmit={onSubmit} className="su-form">
@@ -297,7 +306,7 @@ export const SignupPage = () => {
                           style={inputStyle}
                         />
                       </Field>
-                      <Field label="Clinic name" htmlFor="clinicName" required>
+                      <Field label="Hospital name" htmlFor="clinicName" required>
                         <input
                           id="clinicName"
                           type="text"
@@ -307,7 +316,7 @@ export const SignupPage = () => {
                           value={clinicName}
                           onChange={(e) => setClinicName(e.target.value)}
                           autoComplete="organization"
-                          placeholder="Greenwood Clinic"
+                          placeholder="Baby Memorial Hospital"
                           style={inputStyle}
                         />
                       </Field>
@@ -321,7 +330,7 @@ export const SignupPage = () => {
                         value={contactEmail}
                         onChange={(e) => setContactEmail(e.target.value)}
                         autoComplete="email"
-                        placeholder="you@clinic.com"
+                        placeholder="you@hospital.com"
                         style={inputStyle}
                       />
                     </Field>
@@ -355,19 +364,21 @@ export const SignupPage = () => {
                     </Field>
 
                     <div className="su-row">
-                      <Field label="Type of practice" htmlFor="vertical" required>
-                        <select
-                          id="vertical"
-                          value={vertical}
-                          onChange={(e) => setVertical(e.target.value as Vertical)}
-                          required
-                          style={inputStyle}
-                        >
-                          {VERTICAL_OPTIONS.map((o) => (
-                            <option key={o.value} value={o.value}>{o.label}</option>
-                          ))}
-                        </select>
-                      </Field>
+                      {!INDIA_ONLY && (
+                        <Field label="Type of practice" htmlFor="vertical" required>
+                          <select
+                            id="vertical"
+                            value={vertical}
+                            onChange={(e) => setVertical(e.target.value as Vertical)}
+                            required
+                            style={inputStyle}
+                          >
+                            {VERTICAL_OPTIONS.map((o) => (
+                              <option key={o.value} value={o.value}>{o.label}</option>
+                            ))}
+                          </select>
+                        </Field>
+                      )}
                       <Field label="Country" htmlFor="country" required>
                         <select
                           id="country"

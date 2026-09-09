@@ -11,19 +11,17 @@ const YEAR = new Date().getFullYear();
 
 const COLUMNS: { title: string; links: { label: string; to: string }[] }[] = [
   {
-    title: 'Frameworks',
+    title: 'Salvia',
     links: [
-      { label: 'CQC — England', to: '/frameworks/cqc' },
-      { label: 'HIQA — Ireland', to: '/frameworks/hiqa' },
-      { label: 'CMS — United States', to: '/frameworks/cms' },
-      { label: 'NABH — India', to: '/frameworks/nabh' },
-      { label: 'All frameworks', to: '/frameworks' },
+      { label: 'The deductions', to: '/#cost' },
+      { label: 'The product', to: '/#product' },
+      { label: 'What is live', to: '/#arc' },
+      { label: 'NABH coverage', to: '/frameworks/nabh' },
     ],
   },
   {
-    title: 'Salvia',
+    title: 'More',
     links: [
-      { label: 'The product', to: '/#product' },
       { label: 'Writing', to: '/blog' },
       { label: 'Talk to us', to: '/start' },
     ],
@@ -47,8 +45,8 @@ export function SiteFooter() {
         <div>
           <Link to="/" className="sf-logo">Salvia<i>.</i></Link>
           <p className="sf-line">
-            Compliance evidence for clinical practice. Your policies as enforceable
-            rules, checked before a record is filed.
+            The evidence a cashless claim needs, captured while the patient is still
+            admitted — not chased after the deduction lands.
           </p>
         </div>
 

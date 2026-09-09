@@ -1,4 +1,5 @@
 import React from 'react';
+import { visibleBlogSlugs } from './blogMarkets.mjs';
 
 // Specialized Domain Content Imports
 import { content as pajamaTime } from '../content/blog/pajama-time';
@@ -208,6 +209,13 @@ export const BLOG_CONTENT: Record<string, BlogPost> = {
   // --- NZ VETERINARY ---
 };
 
-/** Every post is visible. The site sells across five frameworks, so gating the
- *  writing to one country would hide the very posts its framework pages link to. */
-export const VISIBLE_BLOG_CONTENT: Record<string, BlogPost> = BLOG_CONTENT;
+/** India and the jurisdiction-neutral posts only — the same list prerender.mjs
+ *  and the sitemap are built from, so what a visitor sees, what gets rendered
+ *  and what Google is told can never drift apart. The England and United States
+ *  posts stay in BLOG_CONTENT above; they are simply not part of the site's
+ *  argument while we sell one thing in one country. */
+export const VISIBLE_BLOG_CONTENT: Record<string, BlogPost> = Object.fromEntries(
+  visibleBlogSlugs()
+    .filter((slug) => slug in BLOG_CONTENT)
+    .map((slug) => [slug, BLOG_CONTENT[slug]]),
+);

@@ -36,8 +36,15 @@ export const BLOG_MARKETS = {
   'pediatric-records': 'GLOBAL',
 };
 
-/** Every post is visible: the site sells across five frameworks, so gating the
- *  writing to one country would hide the posts its own framework pages link to. */
+/** India only, plus the jurisdiction-neutral posts.
+ *
+ *  The site sells one thing in one country now: evidence for cashless claims in
+ *  India. A visitor who finds a CQC dental post in the writing has to work out
+ *  what business we are actually in, and the answer they arrive at is the wrong
+ *  one. The England and United States posts stay on disk — nothing is deleted —
+ *  they are simply not part of the site's argument any more. */
+const SHOWN_MARKETS = new Set(['IN', 'GLOBAL']);
+
 export function visibleBlogSlugs() {
-  return Object.keys(BLOG_MARKETS);
+  return Object.keys(BLOG_MARKETS).filter((s) => SHOWN_MARKETS.has(BLOG_MARKETS[s]));
 }

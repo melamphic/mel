@@ -39,28 +39,34 @@ const template = readFileSync(resolve(distDir, 'index.html'), 'utf-8');
 // prerendered surface (pages, sitemap) matches what the app actually shows.
 const INDIA_ONLY = (process.env.VITE_INDIA_ONLY ?? 'true') !== 'false';
 
-// All routes that should be pre-rendered
+// All routes that should be pre-rendered.
+// /frameworks is gone: it is a redirect to /frameworks/nabh now, and a
+// prerendered directory of 60 regulators across 6 countries told every crawler
+// (and every investor reading the site) that we are a compliance catalogue.
 const STATIC_ROUTES = [
   '/',
-  '/frameworks',
   '/blog',
   '/start',
   '/privacy', '/terms', '/cookies', '/dpa', '/security',
 ];
 
-// Derived from src/data/blogMarkets.mjs — the same map the app filters on.
-// Every post is prerendered and listed — the blog spans the same five
-// frameworks the site sells against.
+// Derived from src/data/blogMarkets.mjs — the same map the app filters on, so
+// prerendering, the sitemap and what a visitor sees can never drift apart.
 const BLOG_SLUGS = visibleBlogSlugs();
+
+// Under INDIA_ONLY the only framework page that ships is NABH. The others still
+// route client-side and still exist on disk — they are simply not prerendered,
+// not in the sitemap, and not part of what the site argues.
+const SHIPPED_FRAMEWORK_SLUGS = INDIA_ONLY ? ['nabh'] : DEEP_FRAMEWORK_SLUGS;
+const SHIPPED_CATALOGUE_KEYS = INDIA_ONLY ? [] : frameworkKeys;
 
 const ALL_ROUTES = [
   ...STATIC_ROUTES,
   ...BLOG_SLUGS.map(s => `/blog/${s}`),
   // One page per regulator, generated from the product's framework catalogue.
-  ...frameworkKeys.map(k => `/frameworks/${k}`),
-  // The five that campaigns point at. Hand-built, indexed, and the only
-  // framework pages in the sitemap — see DEEP_SITEMAP below.
-  ...DEEP_FRAMEWORK_SLUGS.map(s => `/frameworks/${s}`),
+  ...SHIPPED_CATALOGUE_KEYS.map(k => `/frameworks/${k}`),
+  // Hand-built, indexed, and the only framework pages in the sitemap.
+  ...SHIPPED_FRAMEWORK_SLUGS.map(s => `/frameworks/${s}`),
 ];
 
 // Meta map — what title/description to inject per route

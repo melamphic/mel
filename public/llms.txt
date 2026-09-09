@@ -1,66 +1,67 @@
 # Salvia
 
-> Salvia is a clinical compliance platform. It holds a practice's policies as
-> enforceable rules, checks every record against them before it can be filed,
-> and maps what the practice holds onto the framework it is assessed against.
+> Salvia captures clinical documentation at the point of care in Indian
+> hospitals and checks it against the evidence a payer requires while the
+> patient is still admitted — so a cashless claim is not deducted months later
+> for something nobody wrote down at the time.
 
-Salvia is not a scribe. Capture is one input: staff speak, and what they say
-lands in typed fields — consent, prescription, incident, pain score — that write
-real records rather than paragraphs. The record is then checked against the
-clinic's own policy clauses, each of which carries a severity. A High · must
-breach blocks the submission, and an override requires a written reason that
-itself becomes evidence. Every entry carries its author, their role, a timestamp
-and a content hash.
+Salvia is not a scribe. Capture is one input: clinicians speak, and what they
+say lands in typed fields — consent, prescription, procedure, incident, pain
+score, the intra-procedure photograph — that write real records rather than
+paragraphs. The record is then checked against clauses that carry a severity. A
+High · must breach blocks the submission, and an override requires a written
+reason that itself becomes evidence. Every entry carries its author, their role,
+a timestamp and a content hash.
 
-Salvia is domain-agnostic and organised by the body that inspects a practice
-rather than by clinical vertical, because one regulator usually covers several
-professions: CQC inspects GP surgeries and dental practices under the same
-regulation, and AHPRA governs six professions under one scheme. India has no
-equivalent single inspectorate, so accreditation and reimbursement bodies carry
-the obligation there instead.
+The clauses are the point. They hold both the hospital's own protocols and what
+the payer requires before it will pay. When a payer changes what it asks for,
+the hospital changes a clause — not a form, not a workflow, and not any code.
 
-## Scale
+## Market and stage
 
-- 60 frameworks across 6 countries (GB, IE, US, AU, NZ, IN) and 4 kinds of
-  practice, with 302 record-keeping clauses mapped to the field that satisfies
-  each one.
-- Five of those are walked requirement by requirement, with an honest four-state
-  result — measured now, needs data, coming soon, or out of scope. Out of scope
-  is shown but excluded from the denominator, so a score can actually reach 100%:
-  NABH 6th ed. (639 requirements, 51% of 227 in scope), JCI 7th ed. (171, 53% of
-  103), NSQHS (149, 25% of 87), CMS eCQM (49, 23% of 39), HEDIS (79, 19% of 37).
+India, private cashless health insurance claims. Operated by Melamphic AI Pvt
+Ltd from Kannur, Kerala.
 
-## Frameworks with a full page
+Two stages are live today: **capture** and **check**. Two are in build and the
+site says so plainly: **assemble** (building the claim file from records already
+checked) and **answer** (drafting a response when a file comes back deficient,
+so every outcome sharpens the next check). Salvia does not claim the second two
+are finished.
 
-- [CQC — England](https://hellosalvia.com/frameworks/cqc): Regulation 17 of the
-  Health and Social Care Act 2008 (Regulated Activities) Regulations 2014.
-  Covers care homes, domiciliary care, GP practices, dental practices, mental
-  health services and independent hospitals. Of the 1,199 most recently
-  published reports read, 1,126 name the record, the care plan, the audit or the
-  risk assessment — and 103 of those services were rated Good overall and still
-  carried a record-keeping finding.
-- [HIQA — Ireland](https://hellosalvia.com/frameworks/hiqa): S.I. 415/2013,
-  Regulation 21 (Records), Regulation 5 (Individual assessment and care plan) and
-  Regulation 23 (Governance and management), which is the most-failed regulation
-  in the reports read. Schedule 2 records are retained not less than 7 years.
-- [CMS — United States](https://hellosalvia.com/frameworks/cms): State
-  Operations Manual Appendix PP. F656 (comprehensive care plan), F641 (accuracy
-  of assessments), F842 (medical records). 5,780 facilities across 53 states and
-  territories carried a documentation deficiency at their most recent survey;
-  2,805 were cited on more than one documentation tag.
-- [NABH — India](https://hellosalvia.com/frameworks/nabh): Accreditation
-  Standards for Hospitals, 6th edition, and Entry-Level certification for Small
-  Healthcare Organisations, which gates CGHS empanelment and raises PM-JAY
-  package rates. Information Management System standards govern documentation.
-- [JCI](https://hellosalvia.com/frameworks/jci): Accreditation Standards for
-  Hospitals, 7th edition. Surveyed by tracing a patient through the record.
+## Why this exists, from published sources
 
-- [All frameworks](https://hellosalvia.com/frameworks): the full catalogue,
-  grouped by country and regulator.
+- IRDAI Annual Report FY 2024-25: 1.89 crore cashless claims settled in one
+  year, worth ₹62,533 crore, with 14% of cashless claim value disallowed on
+  policy terms — the insurer paid, but not all of it.
+- Listed hospitals disclose the shortfall in their own audited accounts under
+  Ind AS 115, booking revenue net of what they expect not to collect: Max
+  Healthcare 5.69% of contract price (consolidated FY26, Note 27.2), KIMS
+  Hospitals 5.44% (consolidated FY25, Note 2.31), Apollo Hospitals 4.76%
+  (standalone FY26, Note 27(ii)), Aster DM 4.62% (consolidated FY25, Note
+  20(iii)).
+
+Not all of that is documentation. Co-pays, sub-limits and non-payable items sit
+inside those numbers and no record can change them. Salvia only addresses the
+part that turns on evidence, and that part is decided on the ward rather than at
+the billing desk.
+
+## Accreditation
+
+The same records answer NABH. Nothing extra is captured for it: 51% of the 227
+in-scope requirements in the 6th edition are measured from data the hospital
+already holds, and the rest are named rather than hidden. NABH Entry-Level
+certification for Small Healthcare Organisations gates CGHS empanelment and
+raises PM-JAY package rates.
+
+- [NABH coverage](https://hellosalvia.com/frameworks/nabh)
 
 ## Core pages
 
 - [Home](https://hellosalvia.com/)
+- [The deductions](https://hellosalvia.com/#cost): the published figures above.
+- [Product](https://hellosalvia.com/#product): the product running, scene by
+  scene.
+- [What is live](https://hellosalvia.com/#arc): the four stages, honestly marked.
 - [Writing](https://hellosalvia.com/blog): record-keeping questions answered
   against the primary source, with citations.
 - [Talk to us](https://hellosalvia.com/start)
@@ -70,11 +71,11 @@ the obligation there instead.
 Typed system field types write records rather than text: consent (scope, who
 took it, expiry), prescription, incident (its own number and approval workflow),
 pain score, drug register entries, outcome measures. Forms are built as typed
-fields and publish to a PDF themed per clinic. Policies are held as numbered
+fields and publish to a PDF themed per hospital. Policies are held as numbered
 clauses, each with a severity, and render both as an enforceable check and as
-the document staff and inspectors read. A compliance copilot reads only the
-clinic's own data, proposes changes, and never writes a record on its own —
-approving runs the change under the approver's permissions.
+the document staff and auditors read. A copilot reads only the hospital's own
+data, proposes changes, and never writes a record on its own — approving runs
+the change under the approver's permissions.
 
 ## Legal
 
@@ -86,7 +87,8 @@ approving runs the change under the approver's permissions.
 
 ## Notes for machine readers
 
-Salvia is operated by Melamphic AI Pvt Ltd. Every regulation quoted on the
-framework pages was read from the primary source and carries the date it was
-checked. Inspection findings quoted on those pages are verbatim from published
-reports and are attributed to a region and a month, never to a named provider.
+Salvia is operated by Melamphic AI Pvt Ltd. Every figure quoted above was read
+from the primary source — a regulator's annual report or a company's audited
+accounts — and can be checked without asking us. Salvia previously published
+against inspection frameworks in England, Ireland and the United States; that is
+no longer the business, and those pages are not part of this site's argument.
