@@ -105,11 +105,13 @@ const CALL_WINDOW_OPTIONS = [
   { value: 'weekend', label: 'Weekend' },
 ];
 
+/* Pilots are set up by hand, so the steps promise a conversation, not a
+   self-serve trial. There is no trial clock and no card step to describe. */
 const STEPS: { label: string; value: string }[] = [
-  { label: 'Today', value: 'Sign up — six quick fields, under a minute' },
-  { label: 'Within a day', value: 'Your Salvia workspace is set up with your hospital’s forms' },
-  { label: 'Next 21 days', value: 'Full access, no card — everything unlocked' },
-  { label: 'Day 22', value: 'Continue only if you say yes — cancel any time, no charge' },
+  { label: 'Today', value: 'Tell us about your hospital — six quick fields, under a minute' },
+  { label: 'Within a day', value: 'We call you, and ask for twenty deducted claims with the payer’s reasons' },
+  { label: 'The walk-through', value: 'We go through them with you, one by one — which turned on missing evidence, and which did not' },
+  { label: 'Then', value: 'A pilot on your own wards, only if the walk-through was worth your time' },
 ];
 
 function isVertical(v: string | null): v is Vertical {
@@ -263,7 +265,7 @@ export const SignupPage = () => {
                 </ol>
 
                 <p style={{ marginTop: 'var(--space-6)', fontSize: 'var(--text-sm)', color: 'var(--muted)' }}>
-                  We are building this with a small number of practices. If you know exactly
+                  We are building this with a small number of hospitals. If you know exactly
                   which part of the record never gets written, that is worth more to us than
                   a sale.
                 </p>
@@ -274,7 +276,7 @@ export const SignupPage = () => {
                 <Rv className="su-card" delay={1}>
                   <h2 className="g-h3" style={{ marginBottom: 4 }}>Get started</h2>
                   <p className="g-small" style={{ marginBottom: 22 }}>
-                    Six quick fields — under a minute, and your hospital is set up.
+                    Six quick fields, under a minute. We reply within one working day.
                   </p>
 
                   <form onSubmit={onSubmit} className="su-form">
@@ -419,18 +421,18 @@ export const SignupPage = () => {
                             max={10000}
                             value={numStaff}
                             onChange={(e) => setNumStaff(e.target.value)}
-                            placeholder="e.g. 5"
+                            placeholder="e.g. 60"
                             style={inputStyle}
                           />
                         </Field>
-                        <Field label="What's frustrating about your current workflow?" htmlFor="pain">
+                        <Field label="What goes wrong with your claims today?" htmlFor="pain">
                           <textarea
                             id="pain"
                             maxLength={4000}
                             rows={3}
                             value={pain}
                             onChange={(e) => setPain(e.target.value)}
-                            placeholder="e.g. 'I spend 2 hours after clinic writing notes'"
+                            placeholder="e.g. 'Implant invoices go missing and we only find out at settlement'"
                             style={{ ...inputStyle, resize: 'vertical', lineHeight: 1.5 }}
                           />
                         </Field>
@@ -455,10 +457,7 @@ export const SignupPage = () => {
                     </button>
 
                     <p className="g-small" style={{ textAlign: 'center', margin: 0 }}>
-                      By submitting you agree to our Terms and Privacy Policy.{' '}
-                      <Link to="/pricing" style={{ color: 'var(--accent)', fontWeight: 600 }}>
-                        See pricing
-                      </Link>
+                      By submitting you agree to our Terms and Privacy Policy.
                     </p>
                   </form>
                 </Rv>
@@ -484,26 +483,17 @@ function SuccessPage({ email, clinicName, country }: { email: string; clinicName
       <main style={{ flex: 1, zIndex: 10, background: '#fff' }}>
         <section className="g-section g-center" style={{ padding: '168px 0 120px' }}>
           <div className="g-container">
-            <Rv>
-              <img
-                src="/illustrations/signup_scene.webp"
-                alt="A friendly Salvia team member welcoming you, waving hello"
-                style={{ width: 'min(340px, 80%)', height: 'auto', display: 'block', margin: '0 auto 26px' }}
-              />
-            </Rv>
             <Rv as="h1" className="g-h2" delay={1} style={{ margin: '0 auto 14px' }}>
-              Thanks{clinicName ? <>, <span className="g-hl">{clinicName}</span></> : ''}. You're all set.
+              Thanks{clinicName ? <>, <span className="g-hl">{clinicName}</span></> : ''}. We&rsquo;ll be in touch.
             </Rv>
             <Rv as="p" className="g-sub" delay={2}>
-              We're setting up your workspace now — watch <b>{email || 'your inbox'}</b> for
-              your login, usually within {countryLabel} business hours.
+              We&rsquo;ll call within one working day, {countryLabel} time, and write to{' '}
+              <b>{email || 'your inbox'}</b>. Have your last twenty deducted claims to hand,
+              with the reasons the payer gave.
             </Rv>
             <Rv className="g-hero-ctas" delay={3} style={{ marginTop: 30 }}>
               <Link className="g-btn g-btn--green" to="/">
                 Back to home
-              </Link>
-              <Link className="g-btn g-btn--ghost" to="/pricing">
-                See pricing
               </Link>
             </Rv>
           </div>

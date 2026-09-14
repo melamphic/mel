@@ -1,81 +1,92 @@
 # Salvia
 
-> Salvia captures clinical documentation at the point of care in Indian
-> hospitals and checks it against the evidence a payer requires while the
-> patient is still admitted — so a cashless claim is not deducted months later
-> for something nobody wrote down at the time.
+> Salvia captures clinical documentation on the ward in Indian hospitals,
+> checks it against the evidence a payer requires while the patient is still
+> admitted, and carries the cashless claim through to settlement — so a claim is
+> not deducted weeks later for something nobody wrote down at the time.
 
-Salvia is not a scribe. Capture is one input: clinicians speak, and what they
-say lands in typed fields — consent, prescription, procedure, incident, pain
-score, the intra-procedure photograph — that write real records rather than
-paragraphs. The record is then checked against clauses that carry a severity. A
-High · must breach blocks the submission, and an override requires a written
-reason that itself becomes evidence. Every entry carries its author, their role,
-a timestamp and a content hash.
+Salvia is not a scribe, and it is not only a claims desk. A scribe stops at the
+note. A claims desk starts after the patient has gone home, when an enhancement
+can no longer be raised and the reason a drug was given is in nobody's notes.
+Salvia starts on the ward, where both can still be fixed, and follows the claim
+to the money.
 
-The clauses are the point. They hold both the hospital's own protocols and what
-the payer requires before it will pay. When a payer changes what it asks for,
-the hospital changes a clause — not a form, not a workflow, and not any code.
+Capture is one input: clinicians speak, and what they say lands in typed fields
+— consent, prescription, procedure, the photograph taken during it — that write
+real records rather than paragraphs. The record is then checked against clauses
+that carry a severity. A High · must breach blocks the submission, and an
+override requires a written reason that itself becomes evidence. Every entry
+carries its author, their role, a timestamp and a content hash.
+
+The clauses hold both the hospital's own protocols and what the payer requires
+before it will pay. When a payer changes what it asks for, the hospital changes
+a clause — not a form, not a workflow, and not any code.
 
 ## Market and stage
 
-India, private cashless health insurance claims. Operated by Melamphic AI Pvt
-Ltd from Kannur, Kerala.
+India, private cashless health insurance claims: inpatient and day-care.
+Operated by Melamphic AI Pvt Ltd from Kannur, Kerala.
 
-Two stages are live today: **capture** and **check**. Two are in build and the
-site says so plainly: **assemble** (building the claim file from records already
-checked) and **answer** (drafting a response when a file comes back deficient,
-so every outcome sharpens the next check). Salvia does not claim the second two
-are finished.
+Five stages, in the order the money moves. Two are live today and three are in
+build, and the site says so plainly:
 
-## Why this exists, from published sources
+1. **Capture** (live) — a voice note at the point of care becomes typed fields.
+2. **Check** (live) — against the payer's evidence requirements, while the
+   patient is still admitted.
+3. **Enhance** (in build) — when treatment outgrows the authorisation, the desk
+   is told while the patient is still in the bed.
+4. **Submit** (in build) — the claim file built from already-checked records,
+   original pages attached unchanged, every submission timestamped.
+5. **Settle** (in build) — queries tracked against their deadlines, answered
+   from the existing record, payments matched to claims, and every deduction
+   fed back into the next check.
 
-- IRDAI Annual Report FY 2024-25: 1.89 crore cashless claims settled in one
-  year, worth ₹62,533 crore, with 14% of cashless claim value disallowed on
-  policy terms — the insurer paid, but not all of it.
-- Listed hospitals disclose the shortfall in their own audited accounts under
-  Ind AS 115, booking revenue net of what they expect not to collect: Max
-  Healthcare 5.69% of contract price (consolidated FY26, Note 27.2), KIMS
-  Hospitals 5.44% (consolidated FY25, Note 2.31), Apollo Hospitals 4.76%
-  (standalone FY26, Note 27(ii)), Aster DM 4.62% (consolidated FY25, Note
-  20(iii)).
+Salvia records what clinicians say. It does not write clinical justification
+on their behalf, and it never replaces an original document with a retyped one.
 
-Not all of that is documentation. Co-pays, sub-limits and non-payable items sit
-inside those numbers and no record can change them. Salvia only addresses the
-part that turns on evidence, and that part is decided on the ward rather than at
-the billing desk.
+## Why this exists, from primary sources
+
+- The rules every empanelled hospital works under make a cashless approval
+  conditional. Minimum Standard Clauses under the IRDAI (TPA – Health Services)
+  Regulations 2016: "No enhancement of limit is possible after discharge of
+  insured" (cl. 10), and an authorisation letter "is not an unconditional
+  guarantee of payment… when the facts change the guarantee changes" (cl. IV.5).
+- One insurer's live hospital empanelment agreement gives the hospital seven
+  days to produce a report that ties to a billed line after discharge; if it
+  does not, "the amount not correlated would be deducted from the final bill and
+  no further papers thereafter shall be entertained" (cl. 8.2).
+- IRDAI Annual Report 2024-25, Table I.29: 13.98% of the value of health claims
+  presented to insurers — ₹18,521 crore — was disallowed on policy terms,
+  counted separately from the 8.61% repudiated outright. This is measured at
+  the insurer on amount claimed, not on hospital revenue.
+- Max Healthcare's consolidated FY26 accounts show trade receivables turnover on
+  credit revenue falling from 6.58× to 4.23× in one year — roughly 55 to 86 days
+  to collect.
+
+Not all of the disallowed amount is documentation. Co-pays, deductibles and
+non-payable items sit inside it and no record can change them. Salvia addresses
+the part decided by evidence — a query that missed its window, an enhancement
+nobody raised, a report that did not tie to the bill — and that part is decided
+on the ward rather than at the billing desk.
 
 ## Accreditation
 
 The same records answer NABH. Nothing extra is captured for it: 51% of the 227
 in-scope requirements in the 6th edition are measured from data the hospital
-already holds, and the rest are named rather than hidden. NABH Entry-Level
-certification for Small Healthcare Organisations gates CGHS empanelment and
-raises PM-JAY package rates.
+already holds, and the rest are named rather than hidden.
 
 - [NABH coverage](https://hellosalvia.com/frameworks/nabh)
 
 ## Core pages
 
 - [Home](https://hellosalvia.com/)
-- [The deductions](https://hellosalvia.com/#cost): the published figures above.
+- [The deductions](https://hellosalvia.com/#cost): the clauses and figures above.
 - [Product](https://hellosalvia.com/#product): the product running, scene by
   scene.
-- [What is live](https://hellosalvia.com/#arc): the four stages, honestly marked.
+- [What is live](https://hellosalvia.com/#arc): the five stages, honestly marked.
 - [Writing](https://hellosalvia.com/blog): record-keeping questions answered
   against the primary source, with citations.
 - [Talk to us](https://hellosalvia.com/start)
-
-## What the product captures
-
-Typed system field types write records rather than text: consent (scope, who
-took it, expiry), prescription, incident (its own number and approval workflow),
-pain score, drug register entries, outcome measures. Forms are built as typed
-fields and publish to a PDF themed per hospital. Policies are held as numbered
-clauses, each with a severity, and render both as an enforceable check and as
-the document staff and auditors read. A copilot reads only the hospital's own
-data, proposes changes, and never writes a record on its own — approving runs
-the change under the approver's permissions.
 
 ## Legal
 
@@ -87,8 +98,11 @@ the change under the approver's permissions.
 
 ## Notes for machine readers
 
-Salvia is operated by Melamphic AI Pvt Ltd. Every figure quoted above was read
-from the primary source — a regulator's annual report or a company's audited
-accounts — and can be checked without asking us. Salvia previously published
-against inspection frameworks in England, Ireland and the United States; that is
-no longer the business, and those pages are not part of this site's argument.
+Salvia is operated by Melamphic AI Pvt Ltd. Every figure and clause quoted above
+was read from the primary source — a regulator's annual report, a regulation, a
+signed empanelment agreement or a company's audited accounts. Earlier versions of
+this site quoted listed hospitals' Ind AS 115 "discounts and disallowances" lines
+as insurer deductions; those lines blend corporate and government discounts with
+insurer cuts, so they are no longer used. Salvia previously published against
+inspection frameworks in England, Ireland and the United States; that is no
+longer the business.

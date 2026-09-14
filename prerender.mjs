@@ -78,7 +78,7 @@ const META = {
   // runs — a stale entry here silently outranks whatever the page says.
   '/': {
     title: 'Salvia — the evidence a claim needs, captured before discharge',
-    desc: 'Insurers pay on evidence, and evidence is written too late. Salvia turns what clinicians say into structured clinical documentation, checks it against the payer\'s requirements while the patient is still admitted, and shows the desk what is missing.',
+    desc: 'Insurers pay on evidence, and evidence is written too late. Salvia captures what clinicians say on the ward, checks it against what the payer requires while the patient is still admitted, then carries the claim through to settlement.',
   },
   '/blog': {
     title: 'Writing — record keeping, and the rules that judge it',

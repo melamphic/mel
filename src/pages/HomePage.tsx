@@ -12,31 +12,52 @@ import '../styles/film.css';
    cannot drift from what Salvia actually maps. */
 const COVERAGE_BY_ID = Object.fromEntries(coverage.map((c) => [c.id, c]));
 
-/* The money, from published sources only. Every figure here is either a
-   regulator's own annual report or a listed hospital's audited accounts, so a
-   CFO can check it without asking us. Nothing modelled, nothing estimated. */
-const CLAIMS = {
-  disallowedPct: '14%',
-  disallowedNote: 'of cashless claim value was disallowed on policy terms — the insurer paid, but not all of it',
-  disallowedSrc: 'IRDAI Annual Report FY 2024-25',
-  cashlessCount: '1.89 crore',
-  cashlessNote: 'cashless claims settled in a single year, worth ₹62,533 crore',
-  cashlessSrc: 'IRDAI Annual Report FY 2024-25',
-};
-
-/* Listed hospitals disclose this themselves under Ind AS 115 — revenue is
-   booked net of what they expect not to collect. These are their own auditors'
-   numbers, which is why they are the most persuasive line on the page. */
-const WRITE_OFFS = [
-  { who: 'Max Healthcare',  pct: '5.69%', what: 'of contract price, consolidated FY26', where: 'Note 27.2' },
-  { who: 'KIMS Hospitals',  pct: '5.44%', what: 'of contract price, consolidated FY25', where: 'Note 2.31' },
-  { who: 'Apollo Hospitals', pct: '4.76%', what: 'of contract price, standalone FY26',  where: 'Note 27(ii)' },
-  { who: 'Aster DM',        pct: '4.62%', what: 'of contract price, consolidated FY25', where: 'Note 20(iii)' },
+/* The rules that decide where the money goes once the patient leaves. Quoted
+   from the documents themselves, so a hospital can check every word against
+   the agreement it already signed. The third is one insurer's live
+   empanelment agreement — named clause, unnamed insurer, because it is one
+   contract and not a regulation. */
+const CLAUSES = [
+  {
+    quote: 'No enhancement of limit is possible after discharge of insured.',
+    means: 'If the treatment grew and nobody raised the enhancement while the patient was still admitted, the difference is not deducted. It is gone.',
+    src: 'Minimum Standard Clauses, IRDAI TPA Regulations 2016 · cl. 10',
+  },
+  {
+    quote: 'AL is not an unconditional guarantee of payment… when the facts change the guarantee changes.',
+    means: 'The pre-authorisation was approved on what the file said then. If the discharge summary tells a different story, the approval moves with it.',
+    src: 'Minimum Standard Clauses, IRDAI TPA Regulations 2016 · cl. IV.5',
+  },
+  {
+    quote: '…the amount not correlated would be deducted from the final bill and no further papers thereafter shall be entertained.',
+    means: 'Seven days to produce a report that ties to a billed line, after the patient has gone home. Miss the window and the amount is lost for good.',
+    src: 'An insurer’s hospital empanelment agreement · cl. 8.2',
+  },
 ] as const;
 
-/* The arc, honestly staged. Two of these are live and two are not, and the page
-   says which — a hospital tests the claims end in week one, so a promise here
-   is a problem later. Order is the order the money moves. */
+/* Published figures only, each stated against its real denominator. The
+   13.98% is measured at the insurer on what was claimed, not on hospital
+   revenue — the card below says so before anyone else has to. Listed
+   hospitals' "discounts and disallowances" lines are deliberately not here:
+   they blend corporate and PSU discounts with insurer cuts, and a CFO who has
+   read the note would be right to discount the whole page. */
+const NUMBERS = {
+  disallowed: {
+    big: '13.98%',
+    line: 'of the value of health claims presented to insurers in FY 2024-25 was disallowed on policy terms — ₹18,521 crore, counted separately from claims rejected outright.',
+    src: 'IRDAI Annual Report 2024-25 · Table I.29',
+  },
+  days: {
+    big: '55 → 86',
+    line: 'days for Max Healthcare to collect on credit billing, in a single year. The money still arrives. It arrives a month later.',
+    src: 'Max Healthcare, consolidated FY26 · receivables turnover 6.58× → 4.23×',
+  },
+} as const;
+
+/* The arc, honestly staged. Two are live and three are not, and the page says
+   which — a hospital tests the claims end in week one, so a promise here is a
+   problem later. Order is the order the money moves: the first two happen on
+   the ward and decide everything after them. */
 const ARC = [
   {
     stage: 'Capture', live: true,
@@ -44,30 +65,31 @@ const ARC = [
   },
   {
     stage: 'Check', live: true,
-    line: 'Every note is checked against the evidence the payer requires, while the patient is still admitted. What is missing surfaces to the desk with hours left to fix it, not weeks.',
+    line: 'Every note is checked against the evidence the payer requires while the patient is still admitted. What is missing surfaces with hours left to fix it, not weeks.',
   },
   {
-    stage: 'Assemble', live: false,
-    line: 'The claim file built from records that were already checked, in the shape the payer expects to receive it.',
+    stage: 'Enhance', live: false,
+    line: 'When the treatment outgrows the authorisation, the desk hears about it while the patient is still in the bed — because no enhancement is possible after discharge.',
   },
   {
-    stage: 'Answer', live: false,
-    line: 'When a file comes back deficient, the answer is drafted from the record that already exists — and every outcome sharpens the next check.',
+    stage: 'Submit', live: false,
+    line: 'The claim file, built from records that were already checked, with the original pages attached unchanged. Every submission is timestamped, so the hospital can prove when it filed.',
+  },
+  {
+    stage: 'Settle', live: false,
+    line: 'Queries arrive with their deadline already counting. The answer is drawn from the record that exists, the payment is matched to the claim, and every deduction sharpens the next check.',
   },
 ] as const;
 
 
-/* The real widgets, with the ones already shipped first. Breadth is the point:
-   a scribe writes prose, this captures the things a regulator actually asks for. */
+/* What a payer actually asks to see, as typed fields rather than prose. Only
+   what ships is listed as a card; the rest is named as in build. */
 const MODULES = [
-  { name: 'Consent',          note: 'Who agreed, to what, when — and who witnessed it.' },
-  { name: 'Drug register',    note: 'Controlled drugs in, out, wasted. Signed and counter-signed.' },
-  { name: 'Incidents',        note: 'What happened, who was told, what changed afterwards.' },
-  { name: 'Pain scores',      note: 'Before and after, with what was given in between.' },
-  { name: 'Outcome measures', note: 'The same scale over time, so change is provable.' },
-  { name: 'Prescriptions',    note: 'Issued, dispensed, reviewed — against the record.' },
+  { name: 'Consent',        note: 'Who agreed, to what, when — and who witnessed it. A consent that names a different procedure is caught on the ward.' },
+  { name: 'Prescriptions',  note: 'Issued, dispensed, reviewed — against the record, so the drug on the bill has a reason on the chart.' },
+  { name: 'Photographs',    note: 'Taken during the procedure and attached to the record they prove, with the time and the person who took them.' },
 ];
-const COMING = ['Vaccination', 'Treatment plans', 'Sterilisation', 'Radiographs', 'Anaesthesia', 'CPD'];
+const COMING = ['Implant stickers and invoices', 'Evidence checklists per procedure, per payer', 'Pre-authorisation against discharge summary'];
 
 /** Reveal on scroll. Adds a class; CSS owns the animation so it stays
  *  interruptible and honours prefers-reduced-motion. */
@@ -105,15 +127,15 @@ export default function HomePage() {
     <div className="s-page">
       <SEO
         title="Salvia — the evidence a claim needs, captured before discharge"
-        description="Insurers pay on evidence, and evidence is written too late. Salvia turns what clinicians say into structured clinical documentation, checks it against the payer's requirements while the patient is still admitted, and shows the desk what is missing."
+        description="Insurers pay on evidence, and evidence is written too late. Salvia captures what clinicians say on the ward, checks it against what the payer requires while the patient is still admitted, then carries the claim through to settlement."
         path="/"
         keywords={[
           'cashless claim documentation',
           'hospital insurance claim deductions',
           'TPA claim evidence',
-          'clinical documentation AI',
-          'NABH records',
+          'cashless claim enhancement',
           'hospital revenue cycle India',
+          'NABH records',
         ]}
       />
 
@@ -127,15 +149,15 @@ export default function HomePage() {
           a scribe is a category we lose. */}
       <section className="s-section" style={{ paddingTop: 'var(--space-8)', paddingBottom: 'var(--space-6)' }}>
         <div className="s-wrap">
-          <h1 style={{ fontSize: 'clamp(2.25rem, 5vw, 4rem)', maxWidth: '16ch' }}>
-            Deductions are decided before discharge. So is the fix.
+          <h1 style={{ fontSize: 'clamp(2.25rem, 5vw, 4rem)', maxWidth: '24ch' }}>
+            Every cashless claim is decided on the ward.
           </h1>
           <p className="s-lede" style={{ marginTop: 'var(--space-5)' }}>
             Insurers pay on evidence, and the evidence is written too late to change.
             Salvia turns what clinicians say on the ward — spoken, in any language — into
-            structured clinical documentation, checks it against what the payer requires
-            while the patient is still admitted, and tells the desk what is missing
-            in time to go and get it.
+            structured records, checks them against what the payer requires while the
+            patient is still admitted, then carries the claim through to settlement.
+            The desk finds out what is missing in time to go and get it.
           </p>
           <div style={{ display: 'flex', gap: 'var(--space-3)', marginTop: 'var(--space-6)', flexWrap: 'wrap' }}>
             <Link className="s-btn s-btn--primary" to="/start">Talk to us</Link>
@@ -152,35 +174,35 @@ export default function HomePage() {
       </section>
 
       {/* ---------- the money ----------
-          Published figures only — a regulator's own annual report and four sets
-          of audited accounts. A CFO can check every number here without asking
-          us, which is the point: we are not the ones claiming there is a hole. */}
+          The clauses first, because they are the mechanism: a hospital does not
+          lose a cashless claim at the desk, it loses it the day the patient
+          leaves, and the rules it signed say so. The numbers follow, each against
+          its real denominator. */}
       <section className="s-band s-section" id="cost">
         <div className="s-wrap">
           <h2 style={{ fontSize: 'var(--text-3xl)', maxWidth: '22ch' }}>
-            The hole is already in your accounts. Your auditors put it there.
+            A cashless approval is not a promise to pay.
           </h2>
           <p className="s-lede" style={{ marginTop: 'var(--space-4)' }}>
-            Listed hospitals book revenue net of what they expect not to collect. That
-            number is disclosed, every year, in the notes to their own accounts.
+            The rules every empanelled hospital works under say so in writing — and most
+            of the doors close the day the patient goes home.
           </p>
 
           <div
             className="s-stagger is-in"
             style={{
               display: 'grid', gap: 'var(--space-4)', marginTop: 'var(--space-7)',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
             }}
           >
-            {WRITE_OFFS.map((w) => (
-              <div key={w.who} className="s-card">
-                <b className="num" style={{ display: 'block', fontFamily: 'var(--font-display)', fontSize: 'clamp(2rem,4vw,2.75rem)', color: 'var(--accent)', lineHeight: 1, letterSpacing: '-.04em' }}>
-                  {w.pct}
-                </b>
-                <h3 style={{ fontSize: 'var(--text-base)', margin: 'var(--space-3) 0 var(--space-2)' }}>{w.who}</h3>
-                <p style={{ fontSize: 'var(--text-sm)' }}>{w.what}</p>
-                <p style={{ marginTop: 'var(--space-3)', fontSize: 'var(--text-xs)', color: 'var(--muted)', letterSpacing: '.06em', textTransform: 'uppercase' }}>
-                  Ind AS 115 · {w.where}
+            {CLAUSES.map((c) => (
+              <div key={c.src} className="s-card">
+                <p style={{ fontFamily: 'var(--font-display)', fontSize: 'var(--text-lg)', color: 'var(--ink)', lineHeight: 'var(--leading-snug)' }}>
+                  &ldquo;{c.quote}&rdquo;
+                </p>
+                <p style={{ marginTop: 'var(--space-4)', fontSize: 'var(--text-sm)' }}>{c.means}</p>
+                <p style={{ marginTop: 'var(--space-4)', fontSize: 'var(--text-xs)', color: 'var(--muted)', letterSpacing: '.06em', textTransform: 'uppercase' }}>
+                  {c.src}
                 </p>
               </div>
             ))}
@@ -189,46 +211,48 @@ export default function HomePage() {
           <div style={{ display: 'grid', gap: 'var(--space-5)', marginTop: 'var(--space-7)', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))' }}>
             <div className="s-card s-card--accent">
               <b className="num" style={{ display: 'block', fontFamily: 'var(--font-display)', fontSize: 'clamp(2.5rem,5vw,3.5rem)', lineHeight: 1, letterSpacing: '-.04em' }}>
-                {CLAIMS.disallowedPct}
+                {NUMBERS.disallowed.big}
               </b>
-              <p style={{ marginTop: 'var(--space-4)' }}>{CLAIMS.disallowedNote}</p>
+              <p style={{ marginTop: 'var(--space-4)' }}>{NUMBERS.disallowed.line}</p>
               <p style={{ marginTop: 'var(--space-4)', fontSize: 'var(--text-xs)', letterSpacing: '.06em', textTransform: 'uppercase', opacity: .8 }}>
-                {CLAIMS.disallowedSrc}
+                {NUMBERS.disallowed.src}
               </p>
             </div>
             <div className="s-card">
               <b className="num" style={{ display: 'block', fontFamily: 'var(--font-display)', fontSize: 'clamp(2.5rem,5vw,3.5rem)', color: 'var(--accent)', lineHeight: 1, letterSpacing: '-.04em' }}>
-                {CLAIMS.cashlessCount}
+                {NUMBERS.days.big}
               </b>
-              <p style={{ marginTop: 'var(--space-4)' }}>{CLAIMS.cashlessNote}</p>
+              <p style={{ marginTop: 'var(--space-4)' }}>{NUMBERS.days.line}</p>
               <p style={{ marginTop: 'var(--space-4)', fontSize: 'var(--text-xs)', color: 'var(--muted)', letterSpacing: '.06em', textTransform: 'uppercase' }}>
-                {CLAIMS.cashlessSrc}
+                {NUMBERS.days.src}
               </p>
             </div>
             <div className="s-card s-card--deep">
               <h3 style={{ fontSize: 'var(--text-lg)', marginBottom: 'var(--space-3)' }}>
                 Not all of it is documentation
               </h3>
-              <p>Co-pays, sub-limits and non-payable items sit inside that number and no
-                record can change them. We only claim the part that turns on evidence —
-                and that part is decided on the ward, not at the desk.</p>
+              <p>Co-pays, deductibles and non-payable items sit inside that 13.98%, and no
+                record can change them. We only claim the part decided by evidence — a query
+                that missed its window, an enhancement nobody raised, a report that did not
+                tie to the bill. That part is decided on the ward.</p>
             </div>
           </div>
         </div>
       </section>
 
       {/* ---------- the arc ----------
-          Two of these are live and two are not, and the page says which. A
+          Two of these are live and three are not, and the page says which. A
           hospital tests the claims end in week one; a promise here is a problem
           later. Same pattern the modules section already uses. */}
       <section className="s-section" id="arc">
         <div className="s-wrap">
-          <h2 style={{ fontSize: 'var(--text-3xl)', maxWidth: '20ch' }}>
-            Four things have to happen. The first two decide the other two.
+          <h2 style={{ fontSize: 'var(--text-3xl)', maxWidth: '22ch' }}>
+            Five things have to happen. The first two decide the other three.
           </h2>
           <p className="s-lede" style={{ marginTop: 'var(--space-4)' }}>
             By the time a file comes back deficient, the evidence that would have answered
-            it either exists or it does not. Everything downstream is decided upstream.
+            it either exists or it does not. So Salvia starts on the ward, while it can
+            still be written, and carries the claim all the way to the money.
           </p>
 
           <div style={{ display: 'grid', gap: 'var(--space-4)', marginTop: 'var(--space-7)' }}>
@@ -257,7 +281,7 @@ export default function HomePage() {
           </div>
 
           <p style={{ marginTop: 'var(--space-6)', fontSize: 'var(--text-sm)', color: 'var(--muted)' }}>
-            We will not tell you the last two are finished. They are being built with the
+            We will not tell you the last three are finished. They are being built with the
             hospitals whose desks we are sitting in.
           </p>
         </div>
@@ -319,10 +343,11 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ---------- what is the same everywhere ----------
-          The scribe distinction. This is the category fight: a scribe is judged
-          on transcription accuracy, we are judged on whether the record clears
-          the thing that reads it next. */}
+      {/* ---------- the category fight ----------
+          Two neighbours, both wrong for the same reason. A scribe is judged on
+          transcription and stops at the note. A claims desk starts after the
+          patient has gone. We are judged on whether the record clears the thing
+          that reads it next, and we start while it can still be written. */}
       <section className="s-section">
         <div className="s-wrap s-reveal" ref={proofRef}>
           <h2 style={{ fontSize: 'var(--text-3xl)', maxWidth: '22ch' }}>
@@ -336,6 +361,13 @@ export default function HomePage() {
             person who reads it next.
           </p>
           <p className="s-lede" style={{ marginTop: 'var(--space-4)' }}>
+            A claims desk starts too late from the other side. It sees the file after the
+            patient has gone home — when the enhancement can no longer be raised, and the
+            reason the drug was given is in nobody&rsquo;s notes. Salvia starts on the ward,
+            where both can still be fixed, and the desk works from records that were checked
+            while they could still change.
+          </p>
+          <p className="s-lede" style={{ marginTop: 'var(--space-4)' }}>
             The rules are yours, held as clauses with a severity. High blocks a submission,
             medium warns. When a payer changes what it asks for, you change the clause —
             not the form, not the workflow, and not a line of code.
@@ -344,7 +376,7 @@ export default function HomePage() {
       </section>
 
 
-      {/* ---------- breadth: what actually gets captured ---------- */}
+      {/* ---------- what actually gets captured ---------- */}
       <section className="s-section" id="capture">
         <div className="s-wrap">
           <h2 style={{ fontSize: 'var(--text-3xl)', maxWidth: '20ch' }}>
@@ -385,47 +417,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ---------- the agent: the actual differentiator ---------- */}
-      <section className="s-band s-section">
-        <div className="s-wrap" style={{ display: 'grid', gap: 'var(--space-7)' }}>
-          <div>
-            <h2 style={{ fontSize: 'var(--text-3xl)', maxWidth: '22ch' }}>
-              Then something works the gap, every day, without being asked.
-            </h2>
-            <p className="s-lede" style={{ marginTop: 'var(--space-4)' }}>
-              Capture is the easy half. The hard half is that a framework has hundreds of
-              requirements and no one has time to walk them. Salvia&rsquo;s agent reads what
-              you already hold, works out which requirements you can evidence and which you
-              cannot, and keeps going as records arrive.
-            </p>
-          </div>
-
-          <div style={{ display: 'grid', gap: 'var(--space-5)', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))' }}>
-            <div className="s-card s-card--accent">
-              <h3 style={{ fontSize: 'var(--text-lg)', marginBottom: 'var(--space-3)' }}>
-                It reads what you have
-              </h3>
-              <p>Your policies, your records, your last inspection report. It starts from
-                the paperwork you already own, not an empty checklist.</p>
-            </div>
-            <div className="s-card">
-              <h3 style={{ fontSize: 'var(--text-lg)', marginBottom: 'var(--space-3)' }}>
-                It never writes on its own
-              </h3>
-              <p>The agent drafts and flags; a clinician approves. When it does act, it runs
-                under that person&rsquo;s permissions, and the approval is part of the record.</p>
-            </div>
-            <div className="s-card s-card--deep">
-              <h3 style={{ fontSize: 'var(--text-lg)', marginBottom: 'var(--space-3)' }}>
-                It tells you what is missing
-              </h3>
-              <p>Requirement by requirement — met, partly met, or nothing to show. Honest
-                about the gaps, because a green tick you cannot evidence is worse than none.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* ---------- how ---------- */}
       <section className="s-band s-section" id="how">
         <div className="s-wrap">
@@ -451,15 +442,15 @@ export default function HomePage() {
               <h3 style={{ fontSize: 'var(--text-lg)', marginBottom: 'var(--space-2)' }}>
                 It becomes the record
               </h3>
-              <p>Structured fields, not prose. Consent, medication, incidents, pain —
-                in the shape your regulator expects them.</p>
+              <p>Structured fields, not prose. Consent, medication, procedures — in the
+                shape the payer expects to see them.</p>
             </div>
             <div className="s-card">
               <h3 style={{ fontSize: 'var(--text-lg)', marginBottom: 'var(--space-2)' }}>
                 Checked before you file
               </h3>
-              <p>Against the regulation it has to satisfy. Gaps surface while the person
-                who was there can still answer.</p>
+              <p>Against what the payer requires. Gaps surface while the person who was
+                there can still answer.</p>
             </div>
           </div>
         </div>
