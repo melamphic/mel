@@ -1,9 +1,15 @@
 /**
  * The product, playing.
  *
- * Five real screens from Salvia, rebuilt as DOM in the site's own tokens
- * rather than pasted in as screenshots — so they stay sharp, match the page,
- * and can move. Every label here is verbatim from the app.
+ * One inpatient claim, followed from the ward to the money: what the payer will
+ * ask for, what the surgeon said after theatre, the admission it lands on, what
+ * is still missing before discharge, the enhancement, and the file that gets
+ * settled. Rebuilt as DOM in the site's own tokens rather than pasted in as
+ * screenshots — so it stays sharp, matches the page, and can move.
+ *
+ * Scenes flagged `soon` show screens that are being built, and say so on the
+ * frame itself. The site promises two live stages and three in build; the film
+ * keeps the same promise.
  *
  * It plays on a loop and does not stop — no pause on hover, because a film that
  * halts whenever the cursor drifts over it reads as broken. The only thing that
@@ -19,7 +25,6 @@ const ICONS: Record<string, string> = {
   subjects: 'M8 8a2.5 2.5 0 100-5 2.5 2.5 0 000 5z M3 14c0-2.5 2.2-4 5-4s5 1.5 5 4',
   notes: 'M8 2v7 M5.5 9a2.5 2.5 0 005 0V4.5a2.5 2.5 0 00-5 0z M3.5 8.5a4.5 4.5 0 009 0',
   compliance: 'M8 2l5 2v4c0 3-2 5-5 6-3-1-5-3-5-6V4z M6 8l1.5 1.5L10.5 6.5',
-  copilot: 'M8 2l1.6 3.9L13.5 7 9.6 8.6 8 12.5 6.4 8.6 2.5 7l3.9-1.1z',
   policies: 'M3 4h10 M3 8h10 M3 12h6 M11.5 11.5l1.5 1.5',
   incidents: 'M8 2l6 11H2z M8 6.5v3 M8 11h.01',
   reports: 'M3 13V7 M6.5 13V3 M10 13V9 M13.5 13v-4',
@@ -39,16 +44,15 @@ function Ico({ k }: { k: string }) {
 
 const NAV: Array<[string, string] | string> = [
   ['home', 'Home'],
-  'Care',
-  ['forms', 'Forms'], ['subjects', 'Subjects'], ['notes', 'Notes'],
+  'Ward',
+  ['subjects', 'Patients'], ['notes', 'Notes'], ['forms', 'Forms'],
   'Claims',
-  ['compliance', 'Claims'], ['copilot', 'Copilot'], ['policies', 'Policies'],
-  ['incidents', 'Incidents'], ['reports', 'Reports'], ['approvals', 'Approvals'],
+  ['compliance', 'Readiness'], ['policies', 'Policies'], ['reports', 'Claim files'],
+  ['approvals', 'Approvals'],
 ];
 
-const TABS = ['Home', 'Claim readiness', 'Team', 'All policies', 'Copilot', 'Incidents',
-              'Reports', 'Patients', 'All forms', 'General OPD Consultation',
-              'Cashless Claim Evidence'];
+const TABS = ['Home', 'Claim readiness', 'Cashless Claim Evidence', 'Ravi Kumar · B-207',
+              'OT note — TKR', 'Enhancement · B-207', 'Claim file · B-207'];
 
 function Chrome({ nav, tab, children }: { nav: string; tab: string; children: React.ReactNode }) {
   return (
@@ -84,113 +88,20 @@ function Chrome({ nav, tab, children }: { nav: string; tab: string; children: Re
   );
 }
 
-/* ---- scene 1 — the form ------------------------------------------------ */
-
-const PALETTE: Array<[string, string]> = [
-  ['TEXT', ''], ['', 'Short text'], ['', 'Paragraph'],
-  ['CHOICE', ''], ['', 'Single choice'], ['', 'Multiple choice'], ['', 'Button group'],
-  ['', 'Radio'], ['', 'Yes / No'],
-  ['NUMBERS', ''], ['', 'Number'], ['', 'Decimal'], ['', 'Slider'], ['', 'Percentage'],
-  ['OTHER', ''], ['', 'Date picker'], ['', 'Signature'],
-  ['SYSTEM', ''], ['✦', 'Consent'], ['✦', 'Prescription'], ['✦', 'Incident'], ['✦', 'Pain score'],
-  ['LAYOUT', ''], ['', 'Section heading'], ['', 'Divider'],
-];
-
-const FIELDS: Array<[string, string, boolean | null]> = [
-  ['Clinical Assessment', '', null],
-  ['Presenting complaint', 'Paragraph', true],
-  ['History of presenting illness', 'Paragraph', true],
-  ['Vitals', '', null],
-  ['Temperature (C)', 'Decimal', false],
-  ['Heart Rate (bpm)', 'Number', false],
-  ['Blood Pressure (mmHg)', 'Short text', false],
-  ['Examination & Assessment', '', null],
-  ['Examination findings', 'Paragraph', true],
-  ['Diagnosis', 'Paragraph', true],
-  ['Management Plan', '', null],
-  ['Prescriptions', 'Prescription', true],
-  ['Follow-up interval', 'Single choice', false],
-  ['Consent to treatment', 'Consent', true],
-];
-
-function SceneForm() {
+/* Small shared pieces, so every scene says "who, what role, when" the same way. */
+function Who({ i, who }: { i: string; who: string }) {
   return (
-    <div className="pf-form">
-      <div className="pf-palette" data-tip="Every field type the builder offers. The four under SYSTEM aren't text — they write a consent, a prescription, an incident or a pain score into the record.">
-        {PALETTE.map(([g, t], i) =>
-          t
-            ? <div className="pf-ptype" key={i}><b>{g || '·'}</b>{t}</div>
-            : <div className="pf-group" key={i} style={{ padding: '9px 4px 3px' }}>{g}</div>
-        )}
-      </div>
-
-      <div className="pf-fields">
-        <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 10 }}>
-          <span className="pf-chip pf-chip--bare">v1.0</span>
-          <span className="pf-chip pf-chip--ok">Basics</span>
-          <span style={{ color: 'var(--faint)' }}>—</span>
-          <span className="pf-chip pf-chip--bare" style={{ borderColor: 'var(--ink)', color: 'var(--ink)' }}>2 Fields</span>
-          <span style={{ color: 'var(--faint)' }}>—</span>
-          <span className="pf-chip pf-chip--bare">3 Review &amp; Publish</span>
-          <span style={{ marginLeft: 'auto', fontSize: 11, color: 'var(--accent)' }}>✓ Saved</span>
-        </div>
-
-        <div className="pf-card" data-tip="The model drafts the form; a person reviews and publishes it. Nothing goes live unread." style={{
-          background: 'var(--accent-soft)', borderColor: 'var(--accent-line)',
-          padding: '7px 10px', marginBottom: 10,
-        }}>
-          <div style={{ fontSize: 11.5, fontWeight: 600, color: 'var(--accent)' }}>
-            ✦ AI drafted — review before publishing
-          </div>
-          <div style={{ fontSize: 10.5, color: 'var(--muted)' }}>
-            Drafted with gemini-3.1-flash-lite · 1 auto-correction
-          </div>
-        </div>
-
-        <div className="pf-in">
-          {FIELDS.map(([name, type, req]) => req === null ? (
-            <div className="pf-frow pf-frow--head" key={name}>{name}</div>
-          ) : (
-            <div className="pf-frow" key={name} data-tip={type === 'Prescription' || type === 'Consent' ? `A system field. This one writes a real ${type.toLowerCase()} record, which is what a payer's clause can actually be checked against.` : `A ${type.toLowerCase()} field${req ? ', required before the note can be submitted' : ''}.`}>
-              <span className="pf-grab">⠿</span>
-              {name}
-              <span className="pf-type">{type} · Required</span>
-              <span className={'pf-toggle' + (req ? ' is-on' : '')} />
-            </div>
-          ))}
-        </div>
-      </div>
-
-      <div className="pf-preview" data-tip="The PDF that actually gets filed, rendering as you build. Header, footer and watermark come from the hospital's own document theme.">
-        <div className="pf-paper">
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
-            <b style={{ color: 'var(--ink)' }}>Pensbury Hospital</b>
-            <span style={{ color: 'var(--muted)' }}>General OPD Consultation</span>
-          </div>
-          <div style={{ borderTop: '1px solid var(--line)', margin: '7px 0' }} />
-          <div style={{ display: 'flex', gap: 8, color: 'var(--muted)' }}>
-            <b style={{ color: 'var(--ink)' }}>Sample Patient</b><span>23 yrs · Female</span>
-          </div>
-          <div className="pf-late">
-            <div className="band">CLINICAL ASSESSMENT</div>
-            <div className="r" /><div className="r" style={{ width: '80%' }} />
-            <div className="r" /><div className="r" style={{ width: '62%' }} />
-          </div>
-          <div className="pf-late2">
-            <div className="band">VITALS</div>
-            <div className="r" style={{ width: '55%' }} /><div className="r" style={{ width: '48%' }} />
-          </div>
-          <div className="pf-late3">
-            <div className="band">MANAGEMENT PLAN</div>
-            <div className="r" /><div className="r" style={{ width: '70%' }} />
-          </div>
-        </div>
-      </div>
+    <div style={{ display: 'flex', alignItems: 'center', gap: 5, fontSize: 9.5, color: 'var(--muted)' }}>
+      <span style={{
+        width: 13, height: 13, borderRadius: '50%', background: 'var(--accent)',
+        color: '#fff', display: 'grid', placeItems: 'center', fontSize: 8, fontWeight: 700,
+      }}>{i}</span>
+      {who}
     </div>
   );
 }
 
-/* ---- scene 2 — the policy ---------------------------------------------- */
+/* ---- scene 1 — the payer's rules --------------------------------------- */
 
 /* A payer's evidence requirements, written as clauses. Deliberately the
    obvious ones — anything a billing desk could recite from memory. The mapping
@@ -271,18 +182,30 @@ function SceneClauses() {
   );
 }
 
-/* ---- scene: capture ----------------------------------------------------- */
-/* The desktop has capture too — it opens as a tab, not a modal. Transcript on
-   the left, what it became on the right, so the two are visibly the same act.
-   TRANSCRIPT is shared with the phone film: one dictation, one truth. */
+/* ---- scene 2 — said on the ward ---------------------------------------- */
+/* The surgeon's OT note, dictated after theatre. Transcript on the left, what it
+   became on the right, so the two are visibly the same act. TRANSCRIPT is
+   shared with the phone film: one dictation, one truth.
+
+   The implant is mentioned but its sticker is not attached — that is the gap
+   the check catches in the next scenes, so the story has one thread. */
+const TRANSCRIPT: Array<[string, string, string?]> = [
+  ['Right total knee replacement under spinal, uneventful.', 'Procedure performed'],
+  ['Consent was taken yesterday for the right knee, witnessed by Sister Anu.', 'Consent', 'record'],
+  ['Tricompartmental osteoarthritis, no intra-operative complications.', 'Findings'],
+  ['Cemented posterior-stabilised implant — the sticker is with the theatre nurse.', 'Implant sticker', 'photo'],
+  ['Enoxaparin forty once daily for five days, for DVT prophylaxis.', 'Prescription · indication', 'record'],
+  ['Mobilise day one, expected discharge day five.', 'Plan'],
+];
+
 function SceneCapture() {
   return (
     <div className="pf-cap">
       <div className="pf-pad" style={{ overflow: 'hidden' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 9, marginBottom: 12 }}>
           <div>
-            <div className="pf-h" style={{ fontSize: 17 }}>General OPD Consultation</div>
-            <div className="pf-sub">John · 23 yrs · 02:41</div>
+            <div className="pf-h" style={{ fontSize: 17 }}>OT note — Total knee replacement</div>
+            <div className="pf-sub">Ravi Kumar · 64 yrs · B-207 · 01:58</div>
           </div>
           <span className="pf-chip pf-chip--stop" style={{ marginLeft: 'auto' }}>Recording</span>
         </div>
@@ -314,28 +237,28 @@ function SceneCapture() {
         </div>
 
         <div style={{ marginTop: 10 }}>
-          {[['Presenting complaint', 'Fever, cold, cough · 3 days'],
-            ['History', 'No family affected · temp 99'],
-            ['Examination findings', 'Chest clear, breath sounds normal']].map(([k, v]) => (
+          {[['Procedure performed', 'Right total knee replacement · spinal'],
+            ['Findings', 'Tricompartmental OA · no complications'],
+            ['Plan', 'Mobilise day 1 · discharge day 5']].map(([k, v]) => (
             <div className="pf-m-field" key={k}><em>{k}</em><b>{v}</b></div>
           ))}
         </div>
 
         <div style={{ marginTop: 12, display: 'grid', gap: 7 }}>
-          <div className="pf-ledger pf-late" data-tip="A consent record, not a sentence — it carries the scope, who took it, and when it expires.">
+          <div className="pf-ledger pf-late" data-tip="A consent record, not a sentence — it names the procedure, who took it and who witnessed it, which is what a payer checks it against.">
             <span className="pf-chip pf-chip--ok">Consent</span>
-            <b>Audio recording · verbal, on the ward</b>
-            <em>Ram · Staff · expires 03 Sep 2027</em>
+            <b>Right total knee replacement · written</b>
+            <em>Dr Menon · witnessed by Sister Anu · 11 Sep</em>
           </div>
-          <div className="pf-ledger pf-late2" data-tip="An incident opened from the same dictation, with its own number, its own workflow and its own approval.">
-            <span className="pf-chip pf-chip--warn">Incident</span>
-            <b>Fall in corridor · no injury · family informed</b>
-            <em>INC-0412 · awaiting approval</em>
-          </div>
-          <div className="pf-ledger pf-late3" data-tip="A prescription the drug register can count, rather than free text inside a paragraph.">
+          <div className="pf-ledger pf-late2" data-tip="The reason is recorded against the drug, so the drug on the bill has a reason on the chart — the relatedness question a payer asks.">
             <span className="pf-chip pf-chip--ok">Prescription</span>
-            <b>Dolo 650 mg · 0-0-1 · 4 days</b>
-            <em>Viral fever</em>
+            <b>Enoxaparin 40 mg · once daily · 5 days</b>
+            <em>Indication: DVT prophylaxis after joint replacement</em>
+          </div>
+          <div className="pf-ledger pf-late3" data-tip="Said, but not yet evidenced. The note mentions the implant; the check will hold it until the sticker's photograph is attached.">
+            <span className="pf-chip pf-chip--warn">Implant sticker</span>
+            <b>Not attached yet</b>
+            <em>Clause 04 needs it · theatre nurse to photograph</em>
           </div>
         </div>
       </div>
@@ -343,20 +266,20 @@ function SceneCapture() {
   );
 }
 
-/* ---- scene 3 — the subject --------------------------------------------- */
+/* ---- scene 3 — the admission ------------------------------------------- */
 
-function SceneSubject() {
+function SceneAdmission() {
   return (
     <div className="pf-subject">
       <div className="pf-pad" style={{ overflow: 'hidden' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 11 }}>
-          <span className="pf-avatar">J</span>
+          <span className="pf-avatar">R</span>
           <span>
             <span style={{ display: 'flex', alignItems: 'center', gap: 7 }}>
-              <b className="pf-h">John</b>
-              <span className="pf-chip pf-chip--ok">ACTIVE</span>
+              <b className="pf-h">Ravi Kumar</b>
+              <span className="pf-chip pf-chip--ok">ADMITTED</span>
             </span>
-            <span className="pf-sub">Male · 23 yrs 3 mos · Born May 20, 2003</span>
+            <span className="pf-sub">Male · 64 yrs · B-207 · Surgical ward · day 4 of 5</span>
           </span>
           <span style={{ marginLeft: 'auto', display: 'flex', gap: 6 }}>
             <span className="pf-btn">Edit</span>
@@ -364,38 +287,37 @@ function SceneSubject() {
           </span>
         </div>
 
-        <div className="pf-card" data-tip="Capture straight onto the patient. A consent or an incident does not need a consultation to exist first." style={{ display: 'flex', gap: 7, padding: 8, margin: '12px 0' }}>
-          {['Note', 'Incident', 'Consent', 'Pain'].map(b => <span className="pf-btn" key={b}>{b}</span>)}
+        <div className="pf-card" data-tip="Capture straight onto the admission. A consent or a photograph does not need a note to exist first." style={{ display: 'flex', gap: 7, padding: 8, margin: '12px 0' }}>
+          {['Note', 'Consent', 'Photo'].map(b => <span className="pf-btn" key={b}>{b}</span>)}
         </div>
 
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 190px', gap: 12 }}>
           <div className="pf-in">
-            <div className="pf-card" style={{ padding: '9px 11px' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 11 }}>
-                <b style={{ color: 'var(--ink)' }}>Last note</b>
-                <span style={{ color: 'var(--muted)' }}>Aug 23 · 6:10 PM</span>
+            <div className="pf-card" data-tip="What the insurer agreed to pay, and when. Every later document is read against it — a discharge summary that tells a different story is how an approval moves." style={{ padding: '9px 11px' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: 11 }}>
+                <b style={{ color: 'var(--ink)' }}>Pre-authorisation</b>
+                <span className="pf-chip pf-chip--ok">APPROVED</span>
               </div>
-              <div style={{ fontSize: 10.5, color: 'var(--muted)', margin: '6px 0 7px' }}>
-                Fever, cold, chest pain, and cough. Symptoms present for two to three days.
-                No other family members affected. Temperature 99 degrees. Viral fever.
-                Dolo 650 mg (Tablet): 0-0-1 · 4 days
-              </div>
-              <span className="pf-chip pf-chip--ok">SUBMITTED</span>
-              <span style={{ fontSize: 10, color: 'var(--muted)', marginLeft: 7 }}>By staff · tap to open</span>
+              {[['Package', 'Total knee replacement, right'],
+                ['Authorised', '₹1,20,000 · Network insurer via TPA'],
+                ['Approved', '11 Sep · 10:42']].map(([k, v]) => (
+                <div key={k} style={{ display: 'flex', gap: 8, fontSize: 10.5, marginTop: 6 }}>
+                  <span style={{ color: 'var(--muted)', width: 64, flex: 'none' }}>{k}</span>
+                  <b style={{ color: 'var(--ink)', fontWeight: 500 }}>{v}</b>
+                </div>
+              ))}
             </div>
 
             <div className="pf-card" style={{ padding: '9px 11px', marginTop: 8 }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 11, marginBottom: 7 }}>
-                <b style={{ color: 'var(--ink)' }}>All notes</b>
-                <span style={{ color: 'var(--muted)' }}>20</span>
+                <b style={{ color: 'var(--ink)' }}>Notes</b>
+                <span style={{ color: 'var(--muted)' }}>5</span>
               </div>
-              {[['General OPD Consultation v1.0', '2026-08-23 · 18:10'],
-                ['General OPD Consultation v1.0', '2026-08-23 · 18:07'],
-                ['General OPD Consultation v4.0', '2026-08-10 · 18:19'],
-                ['General OPD Consultation v4.0', '2026-08-10 · 18:17'],
-                ['General OPD Consultation v3.0', '2026-08-10 · 18:11'],
-                ['General OPD Consultation v3.0', '2026-08-10 · 18:04'],
-                ['General OPD Consultation v3.0', '2026-07-29 · 11:52']].map(([n, d], i) => (
+              {[['Ward round — day 4', '2026-09-14 · 09:05'],
+                ['Ward round — day 3', '2026-09-13 · 09:10'],
+                ['OT note — Total knee replacement', '2026-09-12 · 14:02'],
+                ['Pre-operative assessment', '2026-09-11 · 17:40'],
+                ['Admission note', '2026-09-11 · 08:15']].map(([n, d], i) => (
                 <div key={i} style={{
                   display: 'flex', alignItems: 'center', gap: 8, fontSize: 10.5,
                   padding: '5px 0', borderTop: i ? '1px solid var(--line-soft)' : 0,
@@ -410,43 +332,29 @@ function SceneSubject() {
           </div>
 
           <div className="pf-in">
-            <div className="pf-card" data-tip="Pain is a typed widget, not a sentence — so it trends over thirty days instead of being re-read one note at a time." style={{ padding: '9px 11px' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
-                <b style={{ fontSize: 11, color: 'var(--ink)' }}>Pain</b>
-                <span className="pf-btn pf-btn--go">+ Score</span>
-              </div>
-              <div style={{ display: 'grid', gap: 6 }}>
-                <div className="pf-stat"><span>Latest</span><b>3<s> / 10</s></b></div>
-                <div className="pf-stat"><span>Avg · 30d</span><b>3.0<s> / 10</s></b></div>
-              </div>
-              <div style={{ marginTop: 8 }}>
-                {[['3', 'FLACC · Manual', '2026-08-04 · 21:06'],
-                  ['4', 'FLACC · Manual', '2026-07-17 · 13:49']].map(([s, k, d], i) => (
-                  <div key={i} style={{ display: 'flex', gap: 7, alignItems: 'center', padding: '4px 0', fontSize: 10 }}>
-                    <span style={{
-                      width: 16, height: 16, borderRadius: 4, flex: 'none',
-                      background: i ? 'var(--warn)' : 'var(--accent)', color: '#fff',
-                      display: 'grid', placeItems: 'center', fontWeight: 700,
-                    }}>{s}</span>
-                    <span><b style={{ color: 'var(--ink)', fontWeight: 500 }}>{k}</b>
-                      <span style={{ display: 'block', color: 'var(--muted)' }}>{d}</span></span>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="pf-card" style={{ padding: '9px 11px', marginTop: 8 }}>
+            <div className="pf-card" style={{ padding: '9px 11px' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 7 }}>
                 <b style={{ fontSize: 11, color: 'var(--ink)' }}>Consents</b>
                 <span className="pf-btn pf-btn--go">+ Capture</span>
               </div>
               <div style={{ display: 'flex', gap: 7, alignItems: 'baseline' }}>
-                <b style={{ fontSize: 10.5, color: 'var(--ink)' }}>Audio recording</b>
+                <b style={{ fontSize: 10.5, color: 'var(--ink)' }}>Right knee replacement</b>
                 <span className="pf-chip pf-chip--ok">ACTIVE</span>
               </div>
               <div style={{ fontSize: 10, color: 'var(--muted)', marginTop: 4 }}>
-                Verbal — on the ward · exp Aug 10, 2027
+                Written · witnessed by Sister Anu · 11 Sep
               </div>
+            </div>
+
+            <div className="pf-card" data-tip="Evidence a payer asks for by package, held as photographs on the record they prove — with who took them and when." style={{ padding: '9px 11px', marginTop: 8 }}>
+              <b style={{ fontSize: 11, color: 'var(--ink)', display: 'block', marginBottom: 7 }}>Photographs</b>
+              {[['Intra-procedure image', 'Attached', 'ok'],
+                ['Implant sticker', 'Missing', 'warn']].map(([n, st, k]) => (
+                <div key={n} style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 10.5, padding: '4px 0' }}>
+                  <b style={{ color: 'var(--ink)', fontWeight: 500 }}>{n}</b>
+                  <span className={'pf-chip pf-chip--' + k} style={{ marginLeft: 'auto' }}>{st}</span>
+                </div>
+              ))}
             </div>
           </div>
         </div>
@@ -457,25 +365,19 @@ function SceneSubject() {
           <span style={{ fontSize: 9, letterSpacing: '.1em', color: 'var(--muted)', fontWeight: 600 }}>
             RECENT ACTIVITY
           </span>
-          <span className="pf-chip pf-chip--ok">Drafts · 2</span>
+          <span className="pf-chip pf-chip--ok">Drafts · 1</span>
         </div>
         <div className="pf-in">
-          {[['Consent captured', 'Aug 10, 2026', true],
-            ['Pain recorded · 3 / 10 · FLACC', 'Aug 4, 2026', false],
-            ['Note submitted · General OPD', 'Aug 4, 2026', false],
-            ['Consent captured', 'Jul 24, 2026', false]].map(([t, d, isNew], i) => (
-            <div className={'pf-tl' + (isNew ? ' is-new' : '')} key={i}>
+          {[['OT note submitted', 'Sep 12, 2026', true, 'M', 'Dr Menon · Surgeon'],
+            ['Consent captured', 'Sep 11, 2026', false, 'M', 'Dr Menon · Surgeon'],
+            ['Pre-auth approved · ₹1,20,000', 'Sep 11, 2026', false, 'D', 'Desk · Insurance'],
+            ['Admitted · B-207', 'Sep 11, 2026', false, 'D', 'Desk · Insurance']].map(([t, d, isNew, i, who], n) => (
+            <div className={'pf-tl' + (isNew ? ' is-new' : '')} key={n}>
               <div style={{ fontSize: 9.5, color: 'var(--muted)' }}>{d as string}</div>
               <b style={{ fontSize: 11, color: 'var(--ink)', display: 'block', margin: '1px 0 4px' }}>
                 {t as string}
               </b>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 5, fontSize: 9.5, color: 'var(--muted)' }}>
-                <span style={{
-                  width: 13, height: 13, borderRadius: '50%', background: 'var(--accent)',
-                  color: '#fff', display: 'grid', placeItems: 'center', fontSize: 8, fontWeight: 700,
-                }}>R</span>
-                Ram · Staff
-              </div>
+              <Who i={i as string} who={who as string} />
             </div>
           ))}
         </div>
@@ -484,7 +386,7 @@ function SceneSubject() {
   );
 }
 
-/* ---- scene 4 — coverage ------------------------------------------------ */
+/* ---- scene 4 — what is still missing ----------------------------------- */
 
 /* The desk view: who is admitted right now, and what the payer will ask for
    that is not in the file yet. Ward and bed rather than names — this is the
@@ -525,7 +427,7 @@ function SceneCoverage() {
         <span className="pf-chip pf-chip--out">Not required</span>
       </div>
 
-      <div className="pf-in" data-tip="Held divided by required. Excluding what this package does not ask for is why a file can actually reach 100% rather than chasing a number it can never hit." style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: 8 }}>
+      <div className="pf-in" data-tip="Held divided by required. Leaving out what this package does not ask for is why a file can actually reach 100%." style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: 8 }}>
         {[['87%', 'Held of required', 'var(--accent)'],
           ['13', 'Ready to file', ''], ['2', 'Missing', ''],
           ['1', 'Awaiting result', ''], ['9', 'Not required', '']].map(([n, l, c], i) => (
@@ -566,7 +468,7 @@ function SceneCoverage() {
                   </span>
                 </div>
                 <div className="pf-backing" data-tip="Open a gap and it names the exact field the check reads, who can still fill it, and how long is left before discharge closes the window.">
-                  <div><b>Reads:</b> system.implant / system.drug_op</div>
+                  <div><b>Reads:</b> OT note → Implant sticker (photograph)</div>
                   <div style={{ margin: '4px 0' }}>Required by: <kbd>package</kbd> <kbd>payer clause 04</kbd>
                     {' '}· Fillable by theatre staff on the ward</div>
                   <div>Patient is on day 4 of an expected 5-day stay — roughly 26 hours
@@ -588,93 +490,166 @@ function SceneCoverage() {
   );
 }
 
-/* ---- scene 5 — the copilot --------------------------------------------- */
+/* ---- scene 5 — the enhancement (in build) ------------------------------ */
+/* The bill has outgrown the authorisation and the patient goes home tomorrow.
+   Every rupee of the request points at a record that already exists — Salvia
+   gathers the reasons, it does not write them. */
+const GREW: Array<[string, string, string]> = [
+  ['ICU · 1 day', 'Post-operative hypotension — ward round, 13 Sep, Dr Menon', '₹28,000'],
+  ['Enoxaparin 40 mg × 5', 'DVT prophylaxis — OT note, 12 Sep', '₹6,900'],
+  ['Physiotherapy × 4', 'Mobilisation plan — ward round, 13 Sep', '₹7,500'],
+];
 
-function SceneCopilot() {
+function SceneEnhance() {
   return (
-    <div className="pf-copilot">
-      <div className="pf-chats">
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: 9 }}>
-          <b style={{ fontSize: 11.5, color: 'var(--ink)' }}>Chats</b>
-          <span style={{ fontSize: 10.5, color: 'var(--accent)', fontWeight: 600 }}>+ New</span>
-        </div>
-        {[['which deductions last quarter were about something we never wr…', 'just now'],
-          ['What is Star asking for that we do not capture?', '17h ago']].map(([t, d], i) => (
-          <div key={i} style={{ marginBottom: 9 }}>
-            <div style={{ fontSize: 10.5, color: 'var(--ink)', lineHeight: 1.4 }}>{t}</div>
-            <div style={{ fontSize: 9.5, color: 'var(--faint)' }}>{d}</div>
+    <div className="pf-cap">
+      <div className="pf-pad" style={{ overflow: 'hidden' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 9, marginBottom: 12 }}>
+          <div>
+            <div className="pf-h" style={{ fontSize: 17 }}>Enhancement · B-207</div>
+            <div className="pf-sub">Ravi Kumar · Total knee replacement, right · Network insurer via TPA</div>
           </div>
-        ))}
-      </div>
+          <span className="pf-chip pf-chip--warn" style={{ marginLeft: 'auto' }}>Due before discharge</span>
+        </div>
 
-      <div className="pf-thread" style={{ display: 'flex', flexDirection: 'column', gap: 9 }}>
-        <div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 7 }}>
-            <span className="pf-mark" style={{ width: 19, height: 19 }}>✦</span>
-            <span>
-              <b style={{ fontSize: 12.5, color: 'var(--ink)' }}>Claims Copilot</b>
-              <span style={{ display: 'block', fontSize: 10, color: 'var(--muted)' }}>
-                Grounded only in your data · you confirm every change
+        <div className="pf-in" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 8 }}>
+          {[['₹1,20,000', 'Authorised', ''],
+            ['₹1,62,400', 'Bill so far', ''],
+            ['₹42,400', 'To raise', 'var(--warn)']].map(([n, l, c]) => (
+            <div className="pf-stat" key={l}>
+              <b style={{ color: c || 'var(--ink)' }}>{n}</b>
+              <span style={{ textTransform: 'none', letterSpacing: 0, marginTop: 3, marginBottom: 0 }}>{l}</span>
+            </div>
+          ))}
+        </div>
+
+        <div className="pf-meter" style={{ margin: '10px 0 5px', height: 7 }}>
+          <i style={{ width: '74%' }} />
+          <i className="w" style={{ width: '26%' }} />
+        </div>
+        <div style={{ fontSize: 10.5, color: 'var(--body)', marginBottom: 12 }}>
+          Discharge is planned for tomorrow at 11:00. <b style={{ color: 'var(--ink)' }}>No
+          enhancement is possible after discharge</b> — raised later, this gap is simply unpaid.
+        </div>
+
+        <div className="pf-card pf-late" data-tip="Each line points at the record that already justifies it. Salvia gathers them; it does not write the reasons." style={{ padding: '9px 11px' }}>
+          <b style={{ fontSize: 11, color: 'var(--ink)', display: 'block', marginBottom: 6 }}>
+            Why the bill grew — from the record
+          </b>
+          {GREW.map(([what, why, amt], i) => (
+            <div key={what} style={{
+              display: 'flex', gap: 8, alignItems: 'baseline', fontSize: 10.5,
+              padding: '5px 0', borderTop: i ? '1px solid var(--line-soft)' : 0,
+            }}>
+              <span><b style={{ color: 'var(--ink)', fontWeight: 500 }}>{what}</b>
+                <span style={{ display: 'block', color: 'var(--muted)', fontSize: 10 }}>{why}</span>
               </span>
-            </span>
-          </div>
-        </div>
-
-        <div className="pf-in" style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-          <div className="pf-said">what are we missing most often ?</div>
-          <div className="pf-tool" data-tip="The copilot's actual tool calls, shown as it makes them. It reads what you hold; it has no other source."><b>✓</b> Read <kbd>list_policies</kbd></div>
-          <div className="pf-tool" data-tip="The copilot's actual tool calls, shown as it makes them. It reads what you hold; it has no other source."><b>✓</b> Read <kbd>list_deductions</kbd></div>
-          <div style={{ fontSize: 11, color: 'var(--body)' }}>
-            Across the deductions you have loaded, the same gap comes back more than any
-            other: the implant batch record. Your evidence policy asks for it, but no form
-            captures it as a field, so it is being written into free text where the check
-            cannot read it — and the payer cannot either.
-          </div>
-          <div className="pf-card" style={{ padding: '8px 10px' }}>
-            <b style={{ fontSize: 11, color: 'var(--ink)' }}>• Gap found</b>
-            <div style={{ fontSize: 10.5, color: 'var(--muted)', marginTop: 3 }}>
-              Clause 04 of Cashless Claim Evidence has no field backing it on the theatre
-              form. Nothing can satisfy it as things stand.
+              <b className="num" style={{ marginLeft: 'auto', color: 'var(--ink)', fontWeight: 600 }}>{amt}</b>
             </div>
-          </div>
-          <div className="pf-said">Add the field</div>
-        </div>
-
-        <div className="pf-late2">
-          <div className="pf-tool" style={{ marginBottom: 6 }}>
-            <b>✦</b> Prepared <kbd>propose_add_field</kbd>
-          </div>
-          <div className="pf-card pf-approve" data-tip="Nothing is written until you approve. When you do, it runs under your permissions and the change carries your name." style={{ padding: '9px 11px', borderColor: 'var(--accent-line)' }}>
-            <b style={{ fontSize: 11.5, color: 'var(--ink)' }}>
-              ✦ Add "Implant batch and sticker" to the theatre form (as a draft)
-            </b>
-            <div style={{ fontSize: 10, color: 'var(--muted)', fontStyle: 'italic', margin: '4px 0 8px' }}>
-              The copilot never writes a record — approving runs this under your permissions.
-            </div>
-            <div style={{ display: 'flex', gap: 6 }}>
-              <span className="pf-btn pf-btn--go">Approve</span>
-              <span className="pf-btn">Edit</span>
-              <span className="pf-btn">Cancel</span>
-            </div>
-          </div>
-        </div>
-
-        <div className="pf-late3" style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-          {['Backfill the open admissions', 'Link it to clause 04', 'Show the next most-missed gap']
-            .map(c => <span className="pf-chip pf-chip--ok pf-chip--bare" key={c}>{c}</span>)}
+          ))}
         </div>
       </div>
 
-      <div className="pf-panel" data-tip="What you tell it once about your hospital, read into every chat — so you are not re-explaining who you are each time.">
-        <b style={{ fontSize: 10.5, color: 'var(--ink)', display: 'block', marginBottom: 5 }}>Goals</b>
-        <div style={{ color: 'var(--muted)' }}>
-          No goals yet. Ask the copilot for a plan and it can track the steps here.
+      <div className="pf-doc" style={{ padding: '16px 18px' }}>
+        <div style={{ fontSize: 9.5, letterSpacing: '.12em', color: 'var(--muted)', fontWeight: 600 }}>
+          WHAT GOES TO THE INSURER
         </div>
-        <div style={{ borderTop: '1px solid var(--line)', margin: '12px 0' }} />
-        <b style={{ fontSize: 10.5, color: 'var(--ink)', display: 'block', marginBottom: 5 }}>About this hospital</b>
-        <div style={{ color: 'var(--muted)', fontStyle: 'italic' }}>
-          Tell the copilot about your hospital — your departments, your payers, the packages
-          you do most. It reads this in every chat.
+
+        <div style={{ marginTop: 10 }}>
+          {[['Request', 'Enhancement · ₹42,400'],
+            ['Against', 'Pre-auth approved 11 Sep · ₹1,20,000'],
+            ['Attached', 'Ward round 13 Sep · OT note 12 Sep · interim bill']].map(([k, v]) => (
+            <div className="pf-m-field" key={k}><em>{k}</em><b>{v}</b></div>
+          ))}
+        </div>
+
+        <div style={{ marginTop: 12, display: 'grid', gap: 7 }}>
+          <div className="pf-ledger pf-late2" data-tip="Timestamped the moment it leaves. If the insurer is slow, the hospital can prove when it asked.">
+            <span className="pf-chip pf-chip--soon">Waiting</span>
+            <b>Sent to TPA · 14 Sep · 16:32</b>
+            <em>A reply is due within 24 hours — silence counts as a denial</em>
+          </div>
+        </div>
+
+        <div className="pf-m-acts pf-late3" style={{ marginTop: 12 }}>
+          <span className="pf-btn">Edit</span>
+          <span className="pf-btn pf-btn--go">Send to TPA</span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ---- scene 6 — file and settle (in build) ------------------------------ */
+
+const FILE_DOCS: Array<[string, string]> = [
+  ['Pre-auth request and approval', '2 pages · original'],
+  ['Enhancement approval · ₹42,400', '1 page'],
+  ['Consent — right knee replacement', '1 page · original, signed'],
+  ['OT note', '2 pages'],
+  ['Implant sticker', 'photograph · attached 14 Sep, 16:10'],
+  ['Intra-procedure image', 'photograph'],
+  ['Discharge summary', '2 pages'],
+  ['Final bill · ₹1,62,400', '3 pages'],
+];
+
+function SceneClaim() {
+  return (
+    <div className="pf-cap">
+      <div className="pf-pad" style={{ overflow: 'hidden' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 9, marginBottom: 12 }}>
+          <div>
+            <div className="pf-h" style={{ fontSize: 17 }}>Claim file · B-207</div>
+            <div className="pf-sub">Ravi Kumar · discharged 15 Sep · Network insurer via TPA</div>
+          </div>
+          <span className="pf-chip pf-chip--ok" style={{ marginLeft: 'auto' }}>Submitted</span>
+        </div>
+
+        <div className="pf-card pf-in" data-tip="Built from records that were checked on the ward. The original pages go as they are — never retyped, so nothing in the file can disagree with the record." style={{ padding: '6px 11px' }}>
+          {FILE_DOCS.map(([d, m], i) => (
+            <div key={d} style={{
+              display: 'flex', gap: 8, alignItems: 'center', fontSize: 10.5,
+              padding: '5px 0', borderTop: i ? '1px solid var(--line-soft)' : 0,
+            }}>
+              <span className="pf-chip pf-chip--ok">✓</span>
+              <b style={{ color: 'var(--ink)', fontWeight: 500 }}>{d}</b>
+              <span style={{ marginLeft: 'auto', color: 'var(--muted)', fontSize: 10 }}>{m}</span>
+            </div>
+          ))}
+        </div>
+
+        <div data-tip="The timestamp is the hospital's proof of when it filed — against the insurer's own deadlines." style={{ fontSize: 10.5, color: 'var(--muted)', marginTop: 10 }}>
+          Submitted <b style={{ color: 'var(--ink)' }}>15 Sep · 12:04</b> via the TPA portal ·
+          14 pages, originals unchanged
+        </div>
+      </div>
+
+      <div className="pf-doc" style={{ padding: '16px 18px' }}>
+        <div style={{ fontSize: 9.5, letterSpacing: '.12em', color: 'var(--muted)', fontWeight: 600 }}>
+          AFTER IT LEFT
+        </div>
+
+        <div className="pf-card pf-late" style={{ padding: '9px 11px', marginTop: 10 }}>
+          <div style={{ display: 'flex', alignItems: 'baseline', gap: 7 }}>
+            <span className="pf-chip pf-chip--warn">Query · 18 Sep</span>
+            <b style={{ fontSize: 11, color: 'var(--ink)' }}>Justify ICU stay on 13 Sep</b>
+          </div>
+          <div className="pf-meter" style={{ margin: '8px 0 4px', height: 6 }}>
+            <i className="w" style={{ width: '43%' }} />
+          </div>
+          <div style={{ fontSize: 10, color: 'var(--muted)' }}>4 of 7 working days left to answer</div>
+          <div className="pf-m-field" data-tip="The answer is the note written at the time, not a justification written afterwards." style={{ marginTop: 8 }}>
+            <em>Answer · ward round, 13 Sep</em>
+            <b>BP 86/50 after spinal · moved to ICU for monitoring · Dr Menon</b>
+          </div>
+        </div>
+
+        <div style={{ marginTop: 10, display: 'grid', gap: 7 }}>
+          <div className="pf-ledger pf-late2" data-tip="Every deduction is kept with its reason and fed back into the check, so the next file does not lose the same way.">
+            <span className="pf-chip pf-chip--ok">Settled</span>
+            <b>₹1,58,900 paid · 26 Sep</b>
+            <em>₹3,500 deducted — non-payable consumables (List I) · fed into the next check</em>
+          </div>
         </div>
       </div>
     </div>
@@ -741,42 +716,29 @@ function MPickForm() {
       <div className="pf-m-sub">Pick a form to start.</div>
       <div className="pf-m-search">Search forms</div>
       <div className="pf-in" style={{ marginTop: 8 }}>
-        {[['General OPD Consultation', 'v4.0 · 14 fields'],
+        {[['OT note', 'v3.0 · 12 fields'],
+          ['Ward round — surgical', 'v2.0 · 9 fields'],
           ['Consent — procedure', 'v2.0 · system'],
-          ['Incident report', 'v1.0 · system'],
-          ['Wound review', 'v1.0 · 8 fields'],
-          ['Pain score', 'v1.0 · system'],
+          ['Pre-operative assessment', 'v1.0 · 10 fields'],
           ['Discharge summary', 'v2.0 · 11 fields'],
-          ['Follow-up review', 'v1.0 · 6 fields']].map(([n, m], i) => (
+          ['Nursing handover', 'v1.0 · 7 fields']].map(([n, m], i) => (
           <div className={'pf-m-row' + (i === 0 ? ' is-on' : '')} key={n}>
             <span><b>{n}</b><em>{m}</em></span>
             <span className="pf-m-chev">›</span>
           </div>
         ))}
       </div>
-      <div className="pf-m-foot">Link a patient · optional</div>
+      <div className="pf-m-foot">Linked to Ravi Kumar · B-207</div>
     </div>
   );
 }
 
 /* --- 2. recording ------------------------------------------------------- */
-/* One dictation, six landings — and two of them are not text at all. A consent
-   and an incident become records in their own right, which is the whole reason
-   these are system field types rather than paragraphs. */
-const TRANSCRIPT: Array<[string, string, string?]> = [
-  ['Fever, cold and cough for the last three days.', 'Presenting complaint'],
-  ['Patient agreed to the consultation being recorded.', 'Consent', 'ledger'],
-  ['No other family members affected. Temperature ninety-nine.', 'History'],
-  ['He had a fall in the corridor on the way in — no injury, family told.', 'Incident', 'ledger'],
-  ['Chest clear on auscultation, breath sounds normal.', 'Examination findings'],
-  ['Viral fever. Dolo 650, one at night, four days.', 'Diagnosis · Prescription', 'ledger'],
-];
-
 function MRecording() {
   return (
     <div className="pf-m">
-      <div className="pf-m-h" style={{ textAlign: 'center' }}>General OPD Consultation</div>
-      <div className="pf-m-sub" style={{ textAlign: 'center' }}>John · 23 yrs</div>
+      <div className="pf-m-h" style={{ textAlign: 'center' }}>OT note — right TKR</div>
+      <div className="pf-m-sub" style={{ textAlign: 'center' }}>Ravi Kumar · B-207</div>
 
       <div className="pf-rec">
         <div className="pf-wave">
@@ -785,7 +747,7 @@ function MRecording() {
           ))}
         </div>
         <div>
-          <div className="pf-m-timer num">02:41</div>
+          <div className="pf-m-timer num">01:58</div>
           <div className="pf-m-state"><span className="pf-dot" />Recording</div>
         </div>
       </div>
@@ -819,12 +781,12 @@ function MChecked() {
   return (
     <div className="pf-m">
       <div className="pf-m-h">Review note</div>
-      <div className="pf-m-sub">Captured · 02:41 · draft</div>
+      <div className="pf-m-sub">OT note · 01:58 · draft</div>
 
       <div className="pf-in" style={{ marginTop: 10 }}>
-        {[['Presenting complaint', 'Fever, cough, 3 days'],
-          ['Diagnosis', 'Viral fever'],
-          ['Prescriptions', 'Dolo 650 mg · 0-0-1 · 4 days']].map(([k, v]) => (
+        {[['Procedure performed', 'Right TKR · spinal'],
+          ['Consent', 'Right knee · witnessed'],
+          ['Prescriptions', 'Enoxaparin 40 mg · 5 days · DVT prophylaxis']].map(([k, v]) => (
           <div className="pf-m-field" key={k}><em>{k}</em><b>{v}</b></div>
         ))}
       </div>
@@ -835,43 +797,37 @@ function MChecked() {
           Checked against Cashless Claim Evidence
         </div>
         <div className="pf-m-clause">
-          <b>Perform hand hygiene</b>
-          <em>Required before and after every patient contact. Not evidenced in this note.</em>
+          <b>Clause 04 · Implant sticker</b>
+          <em>Every implant needs its batch sticker. The note mentions one, but no photograph is attached.</em>
         </div>
       </div>
 
       <div className="pf-m-acts pf-late2">
         <span className="pf-btn pf-btn--blocked">Submit blocked</span>
-        <span className="pf-btn">Add reason</span>
+        <span className="pf-btn">Attach photo</span>
       </div>
-      <div className="pf-m-foot">An override needs a written reason, and that becomes evidence.</div>
+      <div className="pf-m-foot">Or override with a written reason — and the reason becomes evidence.</div>
     </div>
   );
 }
 
-/* --- 4. it lands on the patient ----------------------------------------- */
+/* --- 4. it lands on the admission --------------------------------------- */
 function MFiled() {
   return (
     <div className="pf-m">
-      <div className="pf-m-h">John</div>
-      <div className="pf-m-sub">Male · 23 yrs · Pensbury Hospital</div>
+      <div className="pf-m-h">Ravi Kumar</div>
+      <div className="pf-m-sub">Male · 64 yrs · B-207 · day 4 of 5</div>
 
       <div className="pf-in" style={{ marginTop: 12 }}>
-        {[['Note submitted · General OPD', 'just now', true],
-          ['Consent captured · audio recording', 'Aug 10', false],
-          ['Pain recorded · 3 / 10 · FLACC', 'Aug 4', false]].map(([t, w, isNew]) => (
+        {[['Implant sticker attached · photograph', 'just now', true, 'A', 'Anu · Nurse · 16:10'],
+          ['OT note submitted · right TKR', 'Sep 12', false, 'M', 'Dr Menon · Surgeon · 14:02'],
+          ['Consent captured · right knee', 'Sep 11', false, 'M', 'Dr Menon · Surgeon · 18:30']].map(([t, w, isNew, i, who]) => (
           <div className={'pf-tl' + (isNew ? ' is-new' : '')} key={t as string} style={{ paddingLeft: 14 }}>
             <div style={{ fontSize: 9.5, color: 'var(--muted)' }}>{w as string}</div>
             <b style={{ fontSize: 11.5, color: 'var(--ink)', display: 'block', margin: '1px 0 4px' }}>
               {t as string}
             </b>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 5, fontSize: 9.5, color: 'var(--muted)' }}>
-              <span style={{
-                width: 13, height: 13, borderRadius: '50%', background: 'var(--accent)',
-                color: '#fff', display: 'grid', placeItems: 'center', fontSize: 8, fontWeight: 700,
-              }}>R</span>
-              Ram · Staff · 14:02
-            </div>
+            <Who i={i as string} who={who as string} />
           </div>
         ))}
       </div>
@@ -883,39 +839,7 @@ function MFiled() {
   );
 }
 
-/* --- 5. the queue ------------------------------------------------------- */
-function MTracked() {
-  return (
-    <div className="pf-m">
-      <div className="pf-m-tabs" style={{ marginTop: 0 }}>
-        <span className="is-on">To approve</span>
-        <span>Submitted by you</span>
-      </div>
-
-      <div className="pf-in" style={{ marginTop: 10 }}>
-        {[['General OPD Consultation', 'Ram · Staff · 14:02', 'Override — reason given', true],
-          ['Drug register — morphine 10mg', 'Anu · Nurse · 13:40', 'Needs counter-signature', false],
-          ['Consent — procedure', 'Ram · Staff · 11:18', 'Awaiting approval', false],
-          ['Incident report — fall, bay 3', 'Sara · Nurse · 09:55', 'Awaiting approval', false]].map(
-          ([t, who, note, flag]) => (
-          <div className="pf-m-queue" key={t as string}>
-            <span>
-              <b>{t as string}</b>
-              <em>{who as string}</em>
-            </span>
-            <span className={'pf-chip ' + (flag ? 'pf-chip--warn' : 'pf-chip--bare')}>
-              {note as string}
-            </span>
-          </div>
-        ))}
-      </div>
-
-      <div className="pf-m-foot">Nothing files itself. Someone signs, and the signature is the record.</div>
-    </div>
-  );
-}
-
-/* --- 6. what is still missing on the ward -------------------------------- */
+/* --- 5. what is still missing on the ward -------------------------------- */
 function MCoverage() {
   return (
     <div className="pf-m">
@@ -944,8 +868,8 @@ function MCoverage() {
       </div>
 
       <div className="pf-in" style={{ marginTop: 12 }}>
-        {[['B-207', 'Implant sticker · day 4 of 5', 60],
-          ['B-211', 'Consent names a different procedure', 80],
+        {[['B-211', 'Consent names a different procedure', 80],
+          ['B-216', 'Intra-procedure image not attached', 70],
           ['C-102', 'Discharge summary not issued', 90]].map(([c, t, pct]) => (
           <div className="pf-m-req" key={c as string}>
             <code>{c as string}</code>
@@ -960,43 +884,40 @@ function MCoverage() {
   );
 }
 
-/* --- 7. the agent ------------------------------------------------------- */
-function MCopilot() {
+/* --- 6. the enhancement, on the phone (in build) ------------------------- */
+function MEnhance() {
   return (
     <div className="pf-m">
-      <div className="pf-m-sub" style={{ marginTop: 0 }}>
-        Grounded only in your data · you confirm every change
+      <div className="pf-m-h">B-207 · enhancement due</div>
+      <div className="pf-m-sub">Ravi Kumar · Total knee replacement</div>
+
+      <div className="pf-in" style={{ marginTop: 10 }}>
+        {[['Authorised', '₹1,20,000'],
+          ['Bill so far', '₹1,62,400'],
+          ['To raise', '₹42,400']].map(([k, v]) => (
+          <div className="pf-m-field" key={k}><em>{k}</em><b>{v}</b></div>
+        ))}
       </div>
 
-      <div className="pf-in" style={{ marginTop: 12, display: 'flex', flexDirection: 'column', gap: 8 }}>
-        <div className="pf-said" style={{ fontSize: 11.5 }}>What are we missing most often?</div>
-        <div className="pf-tool"><b>✓</b> Read <kbd>list_policies</kbd></div>
-        <div className="pf-tool"><b>✓</b> Read <kbd>list_deductions</kbd></div>
-        <div style={{ fontSize: 11.5, color: 'var(--body)' }}>
-          The implant batch record. Your evidence policy asks for it, but no form captures
-          it as a field — so it lands in free text, where the check cannot read it.
+      <div className="pf-m-check pf-late">
+        <div className="pf-m-check-h">
+          <span className="pf-chip pf-chip--warn">Discharge tomorrow 11:00</span>
         </div>
-      </div>
-
-      <div className="pf-m-check pf-late2" style={{
-        borderColor: 'var(--accent-line)', background: 'var(--accent-soft)',
-      }}>
-        <div className="pf-m-check-h" style={{ color: 'var(--accent)', fontWeight: 600 }}>
-          ✦ Add “Implant batch and sticker” to the theatre form
-        </div>
-        <div style={{ fontSize: 10, color: 'var(--muted)', fontStyle: 'italic', marginTop: 4 }}>
-          The copilot never writes a record — approving runs this under your permissions.
-        </div>
-        <div className="pf-m-acts" style={{ marginTop: 10 }}>
-          <span className="pf-btn pf-btn--go pf-approve">Approve</span>
-          <span className="pf-btn">Edit</span>
+        <div className="pf-m-clause">
+          <b>No enhancement is possible after discharge</b>
+          <em>ICU day · post-op hypotension (ward round, 13 Sep) · enoxaparin × 5 (OT note) · physio × 4</em>
         </div>
       </div>
 
-      <div className="pf-m-foot">It proposes. You approve. Your name goes on the change.</div>
+      <div className="pf-m-acts pf-late2">
+        <span className="pf-btn">Later</span>
+        <span className="pf-btn pf-btn--go">Send to desk</span>
+      </div>
+      <div className="pf-m-foot">Raised with the patient still in the bed — not found at the desk a week later.</div>
     </div>
   );
 }
+
 
 const PHONE_SCENES = [
   {
@@ -1004,121 +925,109 @@ const PHONE_SCENES = [
     title: 'Notes', tab: 'Notes', dur: 8000,
     render: () => <MPickForm />,
     caption: <>It starts on the phone, because that is where care happens. The form is
-      <b> your form</b> — the same typed fields the desktop builder published.</>,
+      <b> your form</b> — the OT note, the ward round, the consent — already linked to the
+      patient in the bed.</>,
   },
   {
-    chapter: 'Speak', blurb: 'Any language, one record',
+    chapter: 'Speak', blurb: 'Any language, typed records',
     title: 'Notes', tab: 'Notes', dur: 12000,
     render: () => <MRecording />,
-    caption: <>Speak the way you would to a colleague. Each line lands against the field
-      it belongs in — and <b>the consent and the fall become records of their own</b>, not
-      sentences buried in a note. That is the difference a standard can measure.</>,
+    caption: <>The surgeon speaks after theatre, the way they would to a colleague. Each
+      line lands against the field it belongs in — and <b>the consent and the prescription
+      become records of their own</b>, with the reason for the drug written on it.</>,
   },
   {
     chapter: 'Checked', blurb: 'Before it can be filed',
     title: 'Notes', tab: 'Notes', dur: 10000,
     render: () => <MChecked />,
-    caption: <>Before it files, the note is checked against the clauses that will judge it
-      — yours, and the payer&rsquo;s. <b>A High · must breach blocks the submission</b>, and
-      an override needs a written reason that itself becomes evidence. The patient is still
-      in the bed, so the missing thing can still be got.</>,
+    caption: <>Before it files, the note is checked against what the payer will ask for.
+      The implant was mentioned but its sticker is not attached, so <b>the submission is
+      blocked</b> — while the patient is still here and the nurse can still photograph it.</>,
   },
   {
     chapter: 'Filed', blurb: 'Attributed and timestamped',
     title: 'Patients', tab: 'Patients', dur: 9000,
     render: () => <MFiled />,
-    caption: <>It lands on the patient with everything else. <b>Author, role and time on
-      every entry</b> — the thing a payer asks you to produce when it disputes the file.</>,
-  },
-  {
-    chapter: 'Approve', blurb: 'Nothing files itself',
-    title: 'Inbox', tab: 'Inbox', dur: 9000,
-    render: () => <MTracked />,
-    caption: <>Anything needing a second pair of eyes waits in the inbox — a counter-signature
-      on the drug register, or the note that was submitted with an override.
-      <b> The reason given is attached to it</b>, so the approver is deciding with the
-      evidence in front of them.</>,
+    caption: <>The sticker goes on, and it lands on the admission with everything else.
+      <b> Author, role and time on every entry</b> — the thing a payer asks you to produce
+      when it disputes the file.</>,
   },
   {
     chapter: 'Readiness', blurb: 'What is still missing',
-    title: 'Claims', tab: 'Home', dur: 10000,
+    title: 'Readiness', tab: 'Home', dur: 10000,
     render: () => <MCoverage />,
-    caption: <>Every admitted patient, in one of four honest states, on the
-      same phone. <b>Out of scope is shown but never counted against you</b> — which is why
-      the number can actually reach 100 rather than being a score nobody trusts.</>,
+    caption: <>Every admitted patient, on the same phone. <b>What is missing is named while
+      it can still be fixed</b> — not found by the desk a week after discharge.</>,
   },
   {
-    chapter: 'Copilot', blurb: 'It proposes, you approve',
-    title: 'Copilot', tab: 'Home', dur: 10000,
-    render: () => <MCopilot />,
-    caption: <>The copilot reads what you already hold and proposes the next change — here,
-      the policy that fourteen requirements are waiting on. <b>It never writes a record on
-      its own.</b> Approving runs it under your permissions, with your name on it.</>,
+    chapter: 'Enhance', blurb: 'In build — before discharge', soon: true,
+    title: 'Enhancement', tab: 'Inbox', dur: 10000,
+    render: () => <MEnhance />,
+    caption: <>When the bill outgrows the authorisation, the desk hears about it with the
+      patient still admitted — <b>because no enhancement is possible after
+      discharge</b>.</>,
   },
 ];
 
 /* ---- the film ---------------------------------------------------------- */
 
-/* The order is the story, and the story is the order a practice actually does
-   this in: build the paperwork, write the rules, see a patient, let the agent
-   work on what is now there, and read where you stand. Ending on coverage
-   matters — it is the only scene that answers "so what". */
+/* The order is the story, and the story is one admission in the order the money
+   moves: what the payer will ask for, what was said on the ward, the admission
+   it lands on, what is still missing before discharge, the enhancement, and
+   the file that gets settled. The last two are in build and say so. */
 const DESKTOP_SCENES = [
   {
-    chapter: 'Build the form', hint: 'Hover any part of the screen to see what it does.', blurb: 'Your paperwork, as fields',
-    nav: 'Forms', tab: 'General OPD Consultation', dur: 10000,
-    render: () => <SceneForm />,
-    caption: <>It starts with your own consultation form, built as typed fields rather than
-      a blank page. <b>Consent, prescription, incident and pain score are system field
-      types</b> — they write to the record, not just into a paragraph. The PDF that gets
-      filed is on the right, updating as you build.</>,
-  },
-  {
-    chapter: 'Write the rules', hint: 'Hover a clause, a parity chip, or the rendered document.', blurb: 'Clauses with a severity',
+    chapter: 'The payer’s rules', hint: 'Hover a clause, a parity chip, or the rendered document.', blurb: 'What this insurer will ask for',
     nav: 'Policies', tab: 'Cashless Claim Evidence', dur: 10000,
     render: () => <SceneClauses />,
-    caption: <>Then the rules that form has to satisfy — your own protocols, and what the
-      payer requires before it will pay. Each clause is one enforceable rule with a
-      severity: <b>High · must blocks a submission that breaches it</b>, medium · should
-      warns. When a payer changes what it asks for, you change the clause, not the
-      workflow.</>,
+    caption: <>It starts with what the payer will ask for, written as clauses — the consent
+      that names the procedure, the photograph, the implant sticker. <b>High · must blocks a
+      note that breaches one</b>; medium · should warns. When a payer changes what it asks
+      for, you change the clause, not the workflow.</>,
   },
   {
-    chapter: 'Capture it', hint: 'Hover the transcript, or what it became on the right.',
-    blurb: 'One dictation, six records',
-    nav: 'Notes', tab: 'General OPD Consultation', dur: 13000,
+    chapter: 'Said on the ward', hint: 'Hover the transcript, or what it became on the right.',
+    blurb: 'One dictation, typed records',
+    nav: 'Notes', tab: 'OT note — TKR', dur: 13000,
     render: () => <SceneCapture />,
-    caption: <>Then the encounter itself. Each line of the dictation lands against the
-      field it belongs in — and <b>the consent, the fall and the prescription become
-      records of their own</b>, with their own numbers and their own approvals, rather
-      than sentences buried in a note.</>,
+    caption: <>The surgeon dictates the OT note after theatre. Each line lands against the
+      field it belongs in — <b>the consent and the prescription become records of their
+      own</b>, and the drug carries its reason. The implant was mentioned, but its sticker
+      is not attached yet.</>,
   },
   {
-    chapter: 'See a patient', hint: 'Hover the capture row, the pain panel, or the timeline on the right.', blurb: 'The record, as it happens',
-    nav: 'Subjects', tab: 'Patients', dur: 11000,
-    render: () => <SceneSubject />,
-    caption: <>Now a patient. The note is checked against those clauses before it can be
-      filed, and it lands here with the consents, pain scores and incidents already
-      attached. <b>Every entry carries who filed it, in what role, at what time</b> — which
-      is exactly what gets asked for when a payer disputes it months later.</>,
+    chapter: 'The admission', hint: 'Hover the pre-authorisation, the photographs, or the timeline.', blurb: 'One patient, one file',
+    nav: 'Patients', tab: 'Ravi Kumar · B-207', dur: 11000,
+    render: () => <SceneAdmission />,
+    caption: <>Everything lands on the admission, next to what the insurer authorised.
+      <b> Every entry carries who filed it, in what role, at what time</b> — which is exactly
+      what gets asked for when a payer disputes the file.</>,
   },
   {
-    chapter: 'Let the agent work', hint: 'Hover the tool calls or the proposal card.', blurb: 'It proposes, you approve',
-    nav: 'Copilot', tab: 'Copilot', dur: 11500,
-    render: () => <SceneCopilot />,
-    caption: <>With real forms, policies and records in place, the copilot has something to
-      read. It proposes the next change — the policy you are missing, the form that would
-      evidence it. <b>It never writes a record on its own.</b> When you approve, it runs
-      under your permissions and the change is signed with your name.</>,
-  },
-  {
-    chapter: 'Know what is missing', hint: 'Hover the four states, the score, or an open gap.', blurb: 'The desk view, before discharge',
-    nav: 'Claims', tab: 'Claim readiness', dur: 11500,
+    chapter: 'What is still missing', hint: 'Hover the four states, the score, or an open gap.', blurb: 'The desk view, before discharge',
+    nav: 'Readiness', tab: 'Claim readiness', dur: 11500,
     render: () => <SceneCoverage />,
-    caption: <>And this is what all of it adds up to: every requirement, in one of four
-      honest states, updating as records arrive. <b>Out of scope is shown but never counted
-      against you</b>, so the number means something. Open one and it names the exact field
-      it reads, and what is still missing — before anyone is waiting on it.</>,
+    caption: <>Every admitted patient, and what their payer&rsquo;s package will ask for
+      that is not in the file yet. Open B-207 and it names the missing implant sticker,
+      <b> who on the ward can still attach it, and how long is left before
+      discharge</b>.</>,
+  },
+  {
+    chapter: 'Raise the enhancement', hint: 'Hover the reasons, or what goes to the insurer.', blurb: 'In build — before discharge', soon: true,
+    nav: 'Claim files', tab: 'Enhancement · B-207', dur: 11000,
+    render: () => <SceneEnhance />,
+    caption: <>The bill has outgrown the authorisation, and the patient goes home tomorrow.
+      <b> No enhancement is possible after discharge</b>, so it is raised now — with every
+      rupee pointed at the record that already justifies it.</>,
+  },
+  {
+    chapter: 'File and settle', hint: 'Hover the documents, the query, or the settlement.', blurb: 'In build — to the money', soon: true,
+    nav: 'Claim files', tab: 'Claim file · B-207', dur: 12000,
+    render: () => <SceneClaim />,
+    caption: <>The file is built from records that were checked on the ward, with the
+      original pages attached unchanged. A query arrives with its deadline counting,
+      <b> and the answer is the note written at the time</b>. Every deduction feeds the
+      next check.</>,
   },
 ];
 
@@ -1191,6 +1100,12 @@ export default function ProductFilm() {
         {phone
           ? <Phone key={i} title={(s as typeof PHONE_SCENES[number]).title} tab={s.tab}>{s.render()}</Phone>
           : <Chrome key={i} nav={(s as typeof DESKTOP_SCENES[number]).nav} tab={s.tab}>{s.render()}</Chrome>}
+
+        {/* A screen that is not shipped says so on the screen, not only in the
+            caption — the same promise the arc section makes. */}
+        {s.soon ? (
+          <span className="pf-chip pf-chip--soon pf-soon">In build</span>
+        ) : null}
 
         {/* Glass control bar. Docked rather than cursor-following, so the pause
             control is something you can actually hit. */}
