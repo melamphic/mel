@@ -47,10 +47,10 @@ const DOCS: Doc[] = [
     slug: 'privacy',
     title: 'Privacy Policy',
     seoTitle: 'Privacy Policy | Salvia',
-    seoDesc: 'How Salvia collects, uses, stores and protects personal and health data under India’s DPDP Act 2023 and equivalent laws in AU, NZ, UK and the EU.',
+    seoDesc: 'How Salvia collects, uses, stores and protects personal and health data under India’s DPDP Act 2023.',
     body: (
       <>
-        <P>This Privacy Policy explains how {ENTITY} (“Melamphic AI”, “we”), the company behind the <strong>Salvia</strong> product, handles personal data when you use our website (hellosalvia.com), our application, and our clinical documentation and compliance services (the “Services”).</P>
+        <P>This Privacy Policy explains how {ENTITY} (“Melamphic AI”, “we”), the company behind the <strong>Salvia</strong> product, handles personal data when you use our website (hellosalvia.com), our application, and our claims and clinical record services (the “Services”).</P>
         <P><strong>Our role.</strong> For data about visitors and account holders, Salvia is the data controller / Data Fiduciary. For patient/clinical data that a clinic puts into the Services, the <strong>clinic is the controller / Data Fiduciary and Salvia is the processor / Data Processor</strong> acting on the clinic’s instructions — see our <Link to="/dpa/">Data Processing Agreement</Link>.</P>
         <H>1. Data we process</H>
         <UL>
@@ -79,7 +79,7 @@ const DOCS: Doc[] = [
     slug: 'terms',
     title: 'Terms of Service',
     seoTitle: 'Terms of Service | Salvia',
-    seoDesc: 'The terms governing use of Salvia’s clinical documentation and compliance Services, including your responsibilities, acceptable use, and clinical-safety disclaimers.',
+    seoDesc: 'The terms governing use of Salvia’s claims and clinical record Services, including your responsibilities, acceptable use and clinical-safety disclaimers.',
     body: (
       <>
         <P>These Terms govern your access to and use of Salvia’s Services. By using the Services you agree to them. If you use the Services for a clinic, you confirm you are authorised to bind that clinic.</P>
@@ -127,7 +127,7 @@ const DOCS: Doc[] = [
     slug: 'dpa',
     title: 'Data Processing Agreement',
     seoTitle: 'Data Processing Agreement (DPA) | Salvia',
-    seoDesc: 'Salvia’s DPA for clinics and hospitals: roles, instructions, sub-processors, security, transfers and breach handling under DPDP, GDPR, AU and NZ law.',
+    seoDesc: 'Salvia’s DPA for hospitals: roles, instructions, sub-processors, security, transfers and breach handling under India’s DPDP Act.',
     body: (
       <>
         <P>This DPA forms part of the agreement between the customer (clinic/hospital — the “Controller” / Data Fiduciary) and {ENTITY} (the “Processor” / Data Processor) when Salvia processes personal and health data on the customer’s behalf.</P>
@@ -189,7 +189,7 @@ const DOCS: Doc[] = [
     seoDesc: 'How Salvia protects clinical data: encryption, access control, hosting, audit trails and breach response.',
     body: (
       <>
-        <P>Security is core to a compliance product. This overview summarises our technical and organisational measures, which we are finalising with our engineering team.</P>
+        <P>Security is core to a product that holds clinical records. This overview summarises our technical and organisational measures, which we are finalising with our engineering team.</P>
         <H>Encryption</H>
         <P>Data is encrypted in transit (TLS 1.2+) and at rest (AES-256).</P>
         <H>Access control</H>

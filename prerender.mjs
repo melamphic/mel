@@ -47,7 +47,7 @@ const STATIC_ROUTES = [
   '/',
   '/blog',
   '/start',
-  '/privacy', '/terms', '/cookies', '/dpa', '/security',
+  '/privacy', '/terms', '/cookies', '/dpa', '/refund-policy', '/acceptable-use', '/security',
 ];
 
 // Derived from src/data/blogMarkets.mjs — the same map the app filters on, so
@@ -80,36 +80,44 @@ const META = {
   // what a crawler and a link preview read, and it is baked in before any JS
   // runs — a stale entry here silently outranks whatever the page says.
   '/': {
-    title: 'Salvia — the evidence a claim needs, captured before discharge',
-    desc: 'Insurers pay on evidence, and evidence is written too late. Salvia captures what clinicians say on the ward, checks it against what the payer requires while the patient is still admitted, then carries the claim through to settlement.',
+    title: 'Salvia — the claim integrity layer for Indian hospitals',
+    desc: 'Every admission and every document reaches the insurance desk live, so the cashless file is complete while the evidence can still be created rather than chased after the patient has gone home.',
   },
   '/blog': {
-    title: 'Writing — record keeping, and the rules that judge it',
+    title: 'Writing — the record, and the rules that judge it',
     desc: 'What a payer, a court or a regulator actually looks for in a clinical record, answered against the primary source with citations.',
   },
   '/start': {
-    title: 'Show us the claims you lost',
-    desc: 'Bring twenty deductions with the reasons the payer gave. We set Salvia up with your own forms and walk them with you, one by one.',
+    title: 'Show us one week of discharged files',
+    desc: 'We will sit with your insurance desk for a day, take the last week of files you have already closed, and show you what was missing and the exact moment it could still have been produced.',
   },
   '/privacy': {
     title: 'Privacy Policy | Salvia',
-    desc: 'How Salvia collects, uses, stores and protects personal and health data under India\'s DPDP Act 2023 and equivalent laws in AU, NZ, UK and the EU.',
+    desc: 'How Salvia collects, uses, stores and protects personal and health data under India\'s DPDP Act 2023.',
   },
   '/terms': {
     title: 'Terms of Service | Salvia',
-    desc: 'The terms governing use of Salvia\'s clinical documentation and compliance services — your responsibilities, plans, and clinical-safety disclaimers.',
+    desc: 'The terms governing use of Salvia\'s claims and clinical record services — your responsibilities, acceptable use, and clinical-safety disclaimers.',
   },
   '/cookies': {
     title: 'Cookie Policy | Salvia',
-    desc: 'The cookies and similar technologies Salvia uses for essential functionality and analytics (PostHog, Cloudflare), and how to control them.',
+    desc: 'The cookies and similar technologies Salvia uses for essential functionality and analytics, and how to control them.',
   },
   '/dpa': {
     title: 'Data Processing Agreement (DPA) | Salvia',
-    desc: 'Salvia\'s DPA for clinics: roles, instructions, sub-processors, security, transfers and breach handling under DPDP, GDPR, AU and NZ law.',
+    desc: 'Salvia\'s DPA for hospitals: roles, instructions, sub-processors, security, transfers and breach handling under India\'s DPDP Act.',
+  },
+  '/refund-policy': {
+    title: 'Refund & Cancellation Policy | Salvia',
+    desc: 'How cancellations and refunds work for Salvia subscriptions.',
+  },
+  '/acceptable-use': {
+    title: 'Acceptable Use Policy | Salvia',
+    desc: 'The rules for using Salvia responsibly and lawfully.',
   },
   '/security': {
     title: 'Security Overview | Salvia',
-    desc: 'How Salvia protects clinical data: encryption (TLS 1.2+, AES-256), least-privilege access, tamper-evident audit trails and 72-hour breach response.',
+    desc: 'How Salvia protects clinical data: encryption in transit, least-privilege access, tamper-evident audit trails and breach response.',
   },
 };
 
@@ -128,7 +136,7 @@ function injectMeta(html, title, desc, path, author = 'Salvia', noindex = false)
   // Use exact route path without appending trailing slashes to match internal links
   const canonical = `https://hellosalvia.com${path === '/' ? '/' : path}`;
   // Keep in step with DEFAULT_OG_IMAGE in src/components/SEO.tsx.
-  const ogImage = 'https://hellosalvia.com/og-image.png?v=3';
+  const ogImage = 'https://hellosalvia.com/og-image.png?v=4';
   // Strip the template's default <title>/<meta description> so each page emits
   // exactly one of each (no duplicate tags for crawlers to disagree over).
   html = html
@@ -331,31 +339,37 @@ console.log(`✓ Pre-rendered ${count} pages`);
 // --- sitemap.xml — generated from the SAME route list we just prerendered,
 // so the sitemap can never advertise a page that doesn't exist (or, under
 // INDIA_ONLY, a rest-of-world post the app hides). ---------------------------
-const LEGAL_PRIORITY = { '/security': '0.5', '/dpa': '0.4', '/subprocessors': '0.4' };
-const LEGAL_ROUTES = ['/privacy', '/terms', '/cookies', '/dpa', '/subprocessors', '/refund-policy', '/acceptable-use', '/security'];
-const ALLIED_ROUTES = ['/physiotherapy', '/osteopathy', '/chiropractic', '/occupational-therapy', '/podiatry', '/speech-therapy'];
+const LEGAL_PRIORITY = { '/security': '0.5', '/dpa': '0.4' };
+const LEGAL_ROUTES = ['/privacy', '/terms', '/cookies', '/dpa', '/refund-policy', '/acceptable-use', '/security'];
+
+/* Every URL carries a lastmod.
+   Only the blog posts had one before, so for two thirds of the sitemap the
+   single field a crawler actually acts on was missing — Google has said for
+   years that it ignores <priority> and largely ignores <changefreq>, and
+   uses <lastmod> when it is honest. Static pages take the build date, which
+   is honest: they change when the site is deployed. */
+const BUILD_DAY = new Date().toISOString().slice(0, 10);
 
 function sitemapEntry(route) {
   const loc = `${SITE}${route === '/' ? '/' : route}`;
   let changefreq = 'monthly';
   let priority = '0.7';
-  let lastmod;
+  let lastmod = BUILD_DAY;
 
   if (route === '/') { changefreq = 'weekly'; priority = '1.0'; }
   else if (route === '/blog') { changefreq = 'weekly'; priority = '0.8'; }
+  else if (route === '/start') { priority = '0.9'; }
   else if (LEGAL_ROUTES.includes(route)) { changefreq = 'yearly'; priority = LEGAL_PRIORITY[route] ?? '0.3'; }
-  else if (ALLIED_ROUTES.includes(route)) { priority = '0.85'; }
   else if (route.startsWith('/blog/')) {
     const slug = route.replace('/blog/', '');
-    priority = BLOG_DATES[slug] ? '0.85' : '0.7'; // India cluster ranks first
-    lastmod = BLOG_DATES[slug] ?? BLOG_REGISTRY_DATES[slug];
+    priority = '0.8';
+    lastmod = BLOG_DATES[slug] ?? BLOG_REGISTRY_DATES[slug] ?? BUILD_DAY;
   }
-  else { priority = '0.9'; } // pricing, verticals, products, frameworks
 
   return [
     '  <url>',
     `    <loc>${loc}</loc>`,
-    ...(lastmod ? [`    <lastmod>${lastmod}</lastmod>`] : []),
+    `    <lastmod>${lastmod}</lastmod>`,
     `    <changefreq>${changefreq}</changefreq>`,
     `    <priority>${priority}</priority>`,
     '  </url>',

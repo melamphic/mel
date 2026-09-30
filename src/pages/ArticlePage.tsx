@@ -68,33 +68,32 @@ export const ArticlePage: React.FC = () => {
       <article>
         <section className="s-section" style={{ paddingBottom: 'var(--space-6)' }}>
           <div className="s-wrap s-wrap--narrow">
-            <div className="fwx-crumbs">
-              <Link to="/blog">Writing</Link><span>/</span><span>{MARKET_LABEL[market]}</span>
+            <div className="ar-kicker">
+              <Link to="/blog">Writing</Link>
+              <span>{article.tag}</span>
+              <span>{MARKET_LABEL[market]}</span>
             </div>
 
-            <h1 style={{ fontSize: 'clamp(1.9rem, 4vw, 2.9rem)', marginTop: 'var(--space-4)' }}>
-              {article.q}
-            </h1>
-            <p className="s-lede" style={{ marginTop: 'var(--space-5)' }}>{article.excerpt}</p>
+            <h1 className="ar-title">{article.q}</h1>
+            <p className="ar-standfirst">{article.excerpt}</p>
 
             <div className="ar-meta">
-              <span>{article.author}</span>
+              <span><b>{article.author}</b></span>
               <span>{article.date}</span>
               <span>{article.readTime}</span>
-              <span className="ar-tag">{article.tag}</span>
             </div>
           </div>
         </section>
 
         <section style={{ paddingBottom: 'var(--space-8)' }}>
-          <div className="s-wrap s-wrap--narrow lg-body ar-body">{article.content}</div>
+          <div className="s-wrap s-wrap--narrow ar-body">{article.content}</div>
         </section>
 
         {article.sources && article.sources.length > 0 && (
           <section style={{ paddingBottom: 'var(--space-8)' }}>
             <div className="s-wrap s-wrap--narrow">
               <div className="ar-sources">
-                <h2 className="lg-kicker">Sources</h2>
+                <h2>Sources</h2>
                 <ol>
                   {article.sources.map((s) => (
                     <li key={s.url}>
@@ -127,7 +126,7 @@ export const ArticlePage: React.FC = () => {
       {related.length > 0 && (
         <section className="s-section">
           <div className="s-wrap s-wrap--narrow">
-            <h2 className="lg-kicker">More on {MARKET_LABEL[market].toLowerCase()}</h2>
+            <h2 className="ar-more-h">More on {MARKET_LABEL[market].toLowerCase()}</h2>
             <div className="bl-list" style={{ marginTop: 'var(--space-5)' }}>
               {related.map((r) => (
                 <Link key={r.slug} to={`/blog/${r.slug}`} className="bl-row">

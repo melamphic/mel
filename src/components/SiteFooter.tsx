@@ -14,10 +14,9 @@ const COLUMNS: { title: string; links: { label: string; to: string }[] }[] = [
     title: 'Salvia',
     links: [
       { label: 'The desk', to: '/#desk' },
-      { label: 'What is live', to: '/#live' },
-      { label: 'The rules', to: '/#cost' },
-      { label: 'What we will not do', to: '/#trust' },
-      { label: 'Questions', to: '/#faq' },
+      { label: 'Two departments, one desk', to: '/#shift' },
+      { label: 'The rules that decide it', to: '/#cost' },
+      { label: 'Straight answers', to: '/#trust' },
     ],
   },
   {

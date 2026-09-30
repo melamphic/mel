@@ -228,10 +228,13 @@ export const SignupPage = () => {
     return <SuccessPage email={contactEmail} clinicName={clinicName} country={country} />;
   }
 
+  /* .s-page carries the ground, the body font and the heading colours. Both
+     branches of this page used to render outside it, so /start looked like a
+     different site from every other page. */
   return (
-    <>
+    <div className="s-page">
       <SEO
-        title="Talk to us"
+        title="Book a demo"
         description="Tell us where the claim breaks in your hospital. Send us a week of files you have already closed and we will show you what was missing, and the moment it could still have been produced."
         path="/start"
         keywords={['cashless claim software India', 'hospital insurance desk', 'claim integrity', 'TPA claim evidence']}
@@ -468,7 +471,7 @@ export const SignupPage = () => {
         </section>
       </main>
       <SiteFooter />
-    </>
+    </div>
   );
 };
 
