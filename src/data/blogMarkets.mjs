@@ -45,6 +45,25 @@ export const BLOG_MARKETS = {
  *  they are simply not part of the site's argument any more. */
 const SHOWN_MARKETS = new Set(['IN', 'GLOBAL']);
 
+/** Retired regardless of market, because the post argues against the product.
+ *
+ *  - nabh-small-clinic-worth-it: Salvia does not sell accreditation. A post
+ *    weighing up an NABH sticker tells a hospital we are in the compliance
+ *    business, which is the business we left.
+ *  - abdm-mandatory-clinic: its thesis is that ABDM is "voluntary on paper,
+ *    mandatory in practice" and that "the mandate is arriving". There is no
+ *    mandate. The strongest language in any IRDAI instrument is that insurers
+ *    "may endeavor to" onboard hospitals onto NHCX, and a CIO who checks will
+ *    find that and stop trusting the rest of the site.
+ *
+ *  Both stay on disk. Neither is linked, prerendered or in the sitemap. */
+const RETIRED = new Set([
+  'nabh-small-clinic-worth-it',
+  'abdm-mandatory-clinic',
+]);
+
 export function visibleBlogSlugs() {
-  return Object.keys(BLOG_MARKETS).filter((s) => SHOWN_MARKETS.has(BLOG_MARKETS[s]));
+  return Object.keys(BLOG_MARKETS)
+    .filter((s) => SHOWN_MARKETS.has(BLOG_MARKETS[s]))
+    .filter((s) => !RETIRED.has(s));
 }

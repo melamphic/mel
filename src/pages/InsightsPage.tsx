@@ -65,10 +65,10 @@ export const InsightsPage: React.FC = () => {
   return (
     <div className="s-page">
       <SEO
-        title="Writing — record keeping, and the rules that judge it"
-        description="What inspectors and courts actually look for in a clinical record, written for the people who have to produce one. CQC, HIQA, CMS, NABH."
+        title="Writing — the record, and the rules that judge it"
+        description="What a payer, a court or a regulator actually looks for in a clinical record, written for the people who have to produce one."
         path="/blog"
-        keywords={['clinical documentation', 'record keeping', 'CQC Regulation 17', 'NABH records', 'medical record keeping India']}
+        keywords={['clinical documentation', 'medical record keeping India', 'cashless claim evidence', 'patient records access India']}
       />
       <SiteHeader />
 

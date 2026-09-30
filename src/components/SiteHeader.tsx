@@ -19,10 +19,15 @@ export function SiteHeader() {
     <header className="sh">
       <Link to="/" className="sh-logo">Salvia<i>.</i></Link>
       <nav className="sh-nav">
-        <Link to="/#cost" className="sh-link">The deductions</Link>
-        <Link to="/#product" className="sh-link">Product</Link>
-        <Link to="/blog" className="sh-link">Writing</Link>
-        <Link className="s-btn s-btn--primary sh-cta" to="/start">Talk to us</Link>
+        {/* display:contents above the breakpoint, a scrolling strip below it,
+            so the links survive on a phone without a menu to open. */}
+        <span className="sh-links">
+          <Link to="/#desk" className="sh-link">The desk</Link>
+          <Link to="/#live" className="sh-link">What is live</Link>
+          <Link to="/#cost" className="sh-link">The rules</Link>
+          <Link to="/blog" className="sh-link">Writing</Link>
+        </span>
+        <Link className="s-btn s-btn--primary sh-cta" to="/start">Book a demo</Link>
       </nav>
     </header>
   );

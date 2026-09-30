@@ -18,12 +18,8 @@ const MARKET_LABEL: Record<string, string> = {
   IN: 'India', GB: 'England', US: 'United States', GLOBAL: 'Anywhere',
 };
 
-/* Where a post should send a reader next, when its market has a framework page. */
-const MARKET_FRAMEWORK: Record<string, { slug: string; body: string }> = {
-  IN: { slug: 'nabh', body: 'NABH' },
-  GB: { slug: 'cqc', body: 'CQC' },
-  US: { slug: 'cms', body: 'CMS' },
-};
+/* The framework pages this used to send readers to are retired. A post now
+   ends on the product itself rather than on an accreditation page. */
 
 export const ArticlePage: React.FC = () => {
   const { id } = useParams();
@@ -51,8 +47,6 @@ export const ArticlePage: React.FC = () => {
   }
 
   const market = (BLOG_MARKETS as Record<string, string>)[id as string] ?? 'GLOBAL';
-  const fw = MARKET_FRAMEWORK[market];
-
   const related = Object.entries(VISIBLE_BLOG_CONTENT)
     .filter(([slug]) => slug !== id)
     .filter(([slug]) => (BLOG_MARKETS as Record<string, string>)[slug] === market)
@@ -114,22 +108,21 @@ export const ArticlePage: React.FC = () => {
         )}
       </article>
 
-      {fw && (
-        <section className="s-band s-section">
-          <div className="s-wrap s-wrap--narrow">
-            <h2 style={{ fontSize: 'var(--text-2xl)', maxWidth: '24ch' }}>
-              What {fw.body} actually asks for, and what satisfies it
-            </h2>
-            <p style={{ marginTop: 'var(--space-4)', color: 'var(--body)', maxWidth: 'var(--measure)' }}>
-              The regulation quoted from the source, the findings that keep recurring, and
-              the field in Salvia that answers each one.
-            </p>
-            <Link className="s-btn s-btn--primary" to={`/frameworks/${fw.slug}`} style={{ marginTop: 'var(--space-5)' }}>
-              Read the {fw.body} page
-            </Link>
-          </div>
-        </section>
-      )}
+      <section className="s-band s-section">
+        <div className="s-wrap s-wrap--narrow">
+          <h2 style={{ fontSize: 'var(--text-2xl)', maxWidth: '24ch' }}>
+            The same record decides whether the claim gets paid
+          </h2>
+          <p style={{ marginTop: 'var(--space-4)', color: 'var(--body)', maxWidth: '62ch' }}>
+            Salvia is the claim integrity layer for Indian hospitals. Every admission and
+            every document reaches the insurance desk live, so the file is complete while
+            the evidence can still be created.
+          </p>
+          <Link className="s-btn s-btn--primary" to="/" style={{ marginTop: 'var(--space-5)' }}>
+            See how it works
+          </Link>
+        </div>
+      </section>
 
       {related.length > 0 && (
         <section className="s-section">

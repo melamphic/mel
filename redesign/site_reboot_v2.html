@@ -1,0 +1,704 @@
+<title>Salvia site reboot v2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   SALVIA — "THE LEDGER"
+   A hospital record sheet, set properly. Ruled hairlines, a margin
+   rail carrying ordinals and state, tabular figures, deep green as
+   the only accent on light ground, bright mint reserved for live
+   state and field blocks.
+   Accent rule borrowed from Replicas' published tokens:
+   bright green on dark surfaces, deep green on light.
+   ============================================================ */
+:root{
+  --canvas:#F4F5F1;
+  --paper:#FFFFFF;
+  --ink:#111511;
+  --ink2:#3C433B;
+  --mute:#767E74;
+  --faint:#9AA197;
+  --rule:#E0E3DA;
+  --rule2:#C9CEC2;
+  --green:#0F5D36;
+  --green-deep:#0A3F25;
+  --mint:#3EEBA3;
+  --mint-wash:#DDF8EA;
+  --amber:#A96A12;
+  --amber-wash:#FBF0DC;
+  --sans:"Schibsted Grotesk",-apple-system,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,monospace;
+  --ease:cubic-bezier(.2,0,0,1);
+  --gut:clamp(20px,4vw,56px);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--canvas);color:var(--ink);font-family:var(--sans);
+  font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;
+  font-variant-numeric:tabular-nums;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+
+/* ---------- the ledger frame ---------- */
+.sheet{max-width:1240px;margin:0 auto;padding:0 var(--gut);position:relative}
+.row{display:grid;grid-template-columns:76px 1fr;gap:0}
+.rail{border-right:1px solid var(--rule);padding:38px 18px 38px 0;
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;
+  color:var(--faint);text-align:right;position:relative}
+.rail b{display:block;color:var(--green);font-weight:500}
+.body{padding:38px 0 38px clamp(22px,3vw,48px);min-width:0}
+section{border-top:1px solid var(--rule)}
+.tall .rail,.tall .body{padding-top:clamp(64px,8vw,116px);padding-bottom:clamp(64px,8vw,116px)}
+
+/* ---------- type ---------- */
+h1{font-size:clamp(42px,5.6vw,74px);line-height:.98;letter-spacing:-.038em;font-weight:500;text-wrap:balance}
+h2{font-size:clamp(30px,3.6vw,48px);line-height:1.03;letter-spacing:-.032em;font-weight:500;max-width:17ch;text-wrap:balance}
+h3{font-size:18px;line-height:1.3;letter-spacing:-.015em;font-weight:600}
+.lede{font-size:clamp(16px,1.35vw,19px);color:var(--ink2);max-width:52ch;line-height:1.5}
+p{color:var(--mute);max-width:56ch}
+.mono{font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-transform:uppercase}
+.tnum{font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+
+/* ---------- controls ---------- */
+.btn{display:inline-flex;align-items:center;gap:9px;font-family:var(--mono);
+  font-size:11px;letter-spacing:.11em;text-transform:uppercase;padding:12px 18px;
+  border:1px solid var(--ink);transition:.22s var(--ease);white-space:nowrap}
+.btn:hover{background:var(--ink);color:var(--canvas)}
+.btn.fill{background:var(--green);border-color:var(--green);color:#fff}
+.btn.fill:hover{background:var(--green-deep);border-color:var(--green-deep)}
+.btn svg{width:11px;height:11px;transition:transform .22s var(--ease)}
+.btn:hover svg{transform:translateX(3px)}
+
+/* ---------- nav ---------- */
+header{position:sticky;top:0;z-index:60;background:rgba(244,245,241,.88);
+  backdrop-filter:blur(14px);border-bottom:1px solid var(--rule)}
+nav{display:flex;align-items:center;justify-content:space-between;height:64px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:600;font-size:17px;letter-spacing:-.02em}
+.mark{width:19px;height:19px;flex:none;display:grid;grid-template-columns:1fr 1fr;
+  grid-template-rows:1fr 1fr;gap:2px}
+.mark i{background:var(--green);display:block}
+.mark i:nth-child(2){background:var(--mint)}
+.mark i:nth-child(3){opacity:.35}
+.navlinks{display:flex;gap:30px;font-size:14.5px;color:var(--ink2)}
+.navlinks a{position:relative}
+.navlinks a::after{content:"";position:absolute;left:0;bottom:-3px;width:0;height:1px;
+  background:var(--green);transition:width .25s var(--ease)}
+.navlinks a:hover::after{width:100%}
+.navact{display:flex;gap:10px;align-items:center}
+@media(max-width:860px){.navlinks{display:none}}
+
+/* ============================================================
+   01 · HERO
+   ============================================================ */
+.hero{border-top:0;position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+  background:
+    repeating-linear-gradient(90deg,transparent 0 119px,var(--rule) 119px 120px),
+    repeating-linear-gradient(0deg,transparent 0 119px,var(--rule) 119px 120px);
+  -webkit-mask-image:radial-gradient(90% 70% at 72% 40%,#000 0%,transparent 78%);
+          mask-image:radial-gradient(90% 70% at 72% 40%,#000 0%,transparent 78%);
+  opacity:.75}
+.herogrid{position:relative;z-index:1;display:grid;
+  grid-template-columns:minmax(0,1.04fr) minmax(0,.96fr);
+  gap:clamp(30px,5vw,80px);align-items:center;
+  padding:clamp(60px,8vw,104px) 0 clamp(52px,6vw,80px)}
+@media(max-width:940px){.herogrid{grid-template-columns:1fr;gap:44px}}
+.hero h1 .dim{color:var(--mute)}
+.herosub{margin-top:24px}
+.herocta{display:flex;gap:11px;margin-top:34px;flex-wrap:wrap}
+.herofoot{margin-top:30px;display:flex;align-items:center;gap:10px;
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--faint)}
+.herofoot .dot{width:6px;height:6px;background:var(--mint);border-radius:50%;
+  box-shadow:0 0 0 3px var(--mint-wash);animation:pulse 2.6s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+
+/* --- MOTION 01 : the claim file assembling --- */
+.filecard{background:var(--paper);border:1px solid var(--rule2);
+  box-shadow:0 1px 0 var(--rule),0 24px 56px -30px rgba(17,21,17,.3)}
+.fc-head{display:flex;align-items:center;justify-content:space-between;
+  padding:13px 16px;border-bottom:1px solid var(--rule)}
+.fc-head .who{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;color:var(--ink2)}
+.fc-head .st{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--green);background:var(--mint-wash);padding:3px 8px}
+.fc-rows{padding:5px 0}
+.fr{display:grid;grid-template-columns:22px 1fr auto;align-items:center;gap:11px;
+  padding:9px 16px;font-size:13.5px;opacity:0;
+  animation:frIn 13s var(--ease) infinite;animation-delay:calc(var(--i)*.62s)}
+@keyframes frIn{
+  0%{opacity:0;transform:translateY(7px)}
+  4%{opacity:1;transform:none}
+  92%{opacity:1;transform:none}
+  97%,100%{opacity:0;transform:translateY(-4px)}}
+.fr .tick{width:15px;height:15px;border:1px solid var(--rule2);position:relative}
+.fr .tick::after{content:"";position:absolute;left:4px;top:1px;width:4px;height:8px;
+  border:solid var(--green);border-width:0 1.5px 1.5px 0;transform:rotate(42deg) scale(0);
+  transform-origin:center;animation:tick 13s var(--ease) infinite;
+  animation-delay:calc(var(--i)*.62s + .35s)}
+@keyframes tick{0%,1%{transform:rotate(42deg) scale(0)}6%,100%{transform:rotate(42deg) scale(1)}}
+.fr .nm{color:var(--ink2)}
+.fr .tm{font-family:var(--mono);font-size:10px;color:var(--faint);letter-spacing:.06em}
+/* the one that goes missing, then resolves */
+.fr.gap{background:var(--amber-wash);animation:frGap 13s var(--ease) infinite;
+  animation-delay:calc(var(--i)*.62s)}
+@keyframes frGap{
+  0%{opacity:0;transform:translateY(7px);background:var(--amber-wash)}
+  4%{opacity:1;transform:none;background:var(--amber-wash)}
+  58%{background:var(--amber-wash)}
+  66%,92%{background:var(--mint-wash)}
+  97%,100%{opacity:0;background:var(--mint-wash)}}
+.fr.gap .tick{border-color:var(--amber);animation:gapBorder 13s infinite;
+  animation-delay:calc(var(--i)*.62s)}
+@keyframes gapBorder{0%,58%{border-color:var(--amber)}66%,100%{border-color:var(--green)}}
+.fr.gap .tick::after{animation:tick 13s var(--ease) infinite;
+  animation-delay:calc(var(--i)*.62s + 8.1s)}
+.fr.gap .tm{color:var(--amber);animation:gapLabel 13s infinite;animation-delay:calc(var(--i)*.62s)}
+@keyframes gapLabel{0%,58%{opacity:1}62%,100%{opacity:0}}
+.fc-foot{border-top:1px solid var(--rule);padding:12px 16px;display:flex;
+  align-items:center;gap:9px;font-family:var(--mono);font-size:10px;
+  letter-spacing:.08em;color:var(--mute);min-height:42px}
+.fc-foot .q{opacity:0;animation:qFlash 13s infinite}
+@keyframes qFlash{0%,44%{opacity:0}50%,62%{opacity:1}68%,100%{opacity:0}}
+.fc-foot .done{opacity:0;color:var(--green);animation:dFlash 13s infinite}
+@keyframes dFlash{0%,68%{opacity:0}74%,94%{opacity:1}98%,100%{opacity:0}}
+
+/* ============================================================
+   02 · PROOF (logos)
+   ============================================================ */
+.proof{display:grid;grid-template-columns:repeat(3,1fr);border-left:1px solid var(--rule)}
+.proof>div{border-right:1px solid var(--rule);padding:26px clamp(16px,2.4vw,32px);
+  display:flex;align-items:center;gap:15px;min-height:104px}
+.logoslot{width:52px;height:52px;flex:none;border:1px dashed var(--rule2);
+  display:grid;place-items:center;font-family:var(--mono);font-size:8px;
+  letter-spacing:.06em;color:var(--faint);text-align:center;line-height:1.3}
+.proof .t{font-size:14.5px;font-weight:600;letter-spacing:-.012em}
+.proof .s{font-family:var(--mono);font-size:10px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--faint);margin-top:3px}
+@media(max-width:800px){.proof{grid-template-columns:1fr}
+  .proof>div{border-bottom:1px solid var(--rule)}}
+
+/* ============================================================
+   shared section furniture
+   ============================================================ */
+.hsplit{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.86fr);
+  gap:clamp(26px,5vw,72px);align-items:end}
+@media(max-width:900px){.hsplit{grid-template-columns:1fr;gap:22px;align-items:start}}
+.hsplit .rhs{padding-bottom:6px}
+
+/* motion marker */
+.mk{position:absolute;top:10px;right:10px;z-index:5;font-family:var(--mono);
+  font-size:8.5px;letter-spacing:.14em;color:var(--green);background:var(--mint-wash);
+  padding:3px 7px;border:1px solid rgba(15,93,54,.16);pointer-events:none}
+.slot{position:relative}
+
+/* placeholder motion slot */
+.plan{position:relative;border:1px dashed var(--rule2);background:
+  repeating-linear-gradient(45deg,transparent 0 8px,rgba(17,21,17,.014) 8px 16px);
+  padding:26px;display:flex;flex-direction:column;justify-content:flex-end;gap:7px}
+.plan .cap{font-size:13.5px;color:var(--ink2);max-width:46ch;line-height:1.45}
+
+/* ============================================================
+   03 · THE PROBLEM — dependency on people
+   ============================================================ */
+.deplist{margin-top:44px;border-top:1px solid var(--rule)}
+.dep{display:grid;grid-template-columns:44px 1fr;gap:clamp(16px,2.4vw,34px);
+  padding:22px 0;border-bottom:1px solid var(--rule);align-items:start;
+  transition:.3s var(--ease)}
+.dep:hover{background:rgba(255,255,255,.55)}
+.dep .n{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;color:var(--faint);padding-top:4px}
+.dep h3{margin-bottom:5px}
+.dep p{font-size:14.5px;max-width:64ch}
+
+/* ============================================================
+   04 · THE SHIFT — two teams become one
+   ============================================================ */
+.shift{display:grid;grid-template-columns:1fr auto 1fr;gap:clamp(14px,2.6vw,34px);
+  align-items:center;margin-top:52px}
+@media(max-width:820px){.shift{grid-template-columns:1fr;gap:16px}}
+.team{border:1px solid var(--rule2);background:var(--paper);padding:22px}
+.team .lbl{font-family:var(--mono);font-size:9.5px;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--faint);margin-bottom:11px}
+.team .nm2{font-size:17px;font-weight:600;letter-spacing:-.018em;margin-bottom:8px}
+.team ul{list-style:none;font-size:13.5px;color:var(--mute);line-height:1.85}
+.team li::before{content:"";display:inline-block;width:4px;height:4px;
+  background:var(--rule2);margin-right:9px;vertical-align:middle}
+.arrow{display:grid;place-items:center;font-family:var(--mono);font-size:10px;
+  letter-spacing:.12em;color:var(--green);gap:7px}
+.arrow .ln{width:54px;height:1px;background:var(--rule2);position:relative;overflow:hidden}
+.arrow .ln::after{content:"";position:absolute;inset:0;background:var(--green);
+  transform:translateX(-100%);animation:sweep 3.4s var(--ease) infinite}
+@keyframes sweep{0%{transform:translateX(-100%)}55%,100%{transform:translateX(100%)}}
+@media(max-width:820px){.arrow .ln{width:100%}}
+.team.one{border-color:var(--green);background:linear-gradient(180deg,var(--mint-wash),var(--paper) 62%);
+  box-shadow:0 20px 44px -30px rgba(15,93,54,.5)}
+.team.one .lbl{color:var(--green)}
+.team.one li::before{background:var(--mint)}
+
+/* ============================================================
+   05 · THE DESK — product shot on mint field
+   ============================================================ */
+.field{margin-top:52px;border:1px solid var(--rule2);position:relative;overflow:hidden;
+  background:radial-gradient(130% 120% at 50% -10%,var(--mint) 0%,#9FEFC8 34%,#DCF7E9 66%,#F2FBF6 100%)}
+.field::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.5;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/></filter><rect width='120' height='120' filter='url(%23n)' opacity='.34'/></svg>")}
+.fieldinner{position:relative;z-index:2;padding:clamp(34px,5.4vw,76px) clamp(20px,4vw,64px) 0;
+  display:flex;justify-content:center}
+.fieldcap{position:relative;z-index:2;background:var(--paper);
+  border-top:1px solid var(--rule2);padding:20px clamp(20px,3vw,30px);
+  display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(18px,3vw,40px)}
+@media(max-width:820px){.fieldcap{grid-template-columns:1fr;gap:16px}}
+.fieldcap h3{font-size:15px;margin-bottom:5px}
+.fieldcap p{font-size:13.5px}
+.deskshot{width:100%;max-width:1000px;background:var(--paper);
+  border:1px solid rgba(17,21,17,.14);box-shadow:0 40px 80px -40px rgba(10,63,37,.5);
+  transform:translateY(8px)}
+
+/* ============================================================
+   06 · CAPABILITY LEDGER
+   ============================================================ */
+.caps{margin-top:46px;border-top:1px solid var(--rule)}
+.cap{display:grid;grid-template-columns:clamp(150px,20vw,240px) 1fr auto;
+  gap:clamp(16px,3vw,40px);padding:20px 0;border-bottom:1px solid var(--rule);
+  align-items:baseline;transition:.28s var(--ease)}
+.cap:hover{background:rgba(255,255,255,.55);padding-left:10px}
+.cap .k{font-size:15.5px;font-weight:600;letter-spacing:-.016em}
+.cap .v{font-size:14.5px;color:var(--mute);max-width:62ch}
+.cap .st{font-family:var(--mono);font-size:9.5px;letter-spacing:.11em;
+  text-transform:uppercase;color:var(--green);white-space:nowrap}
+@media(max-width:760px){.cap{grid-template-columns:1fr;gap:5px}}
+
+/* ============================================================
+   07 · ONE INTEGRATION
+   ============================================================ */
+.pipe{margin-top:48px;border:1px solid var(--rule2);background:var(--paper);
+  padding:clamp(28px,4vw,56px) clamp(20px,3vw,44px);position:relative}
+.pipe svg{width:100%;height:auto;display:block;max-height:300px}
+.dashdraw{stroke-dasharray:5 4;animation:dash 2.6s linear infinite}
+@keyframes dash{to{stroke-dashoffset:-18}}
+.nodepulse{animation:npulse 3s var(--ease) infinite}
+@keyframes npulse{0%,100%{opacity:.5}50%{opacity:1}}
+
+/* ============================================================
+   08 · WON'T DO
+   ============================================================ */
+.nots{margin-top:44px;border-top:1px solid var(--rule)}
+.not{display:grid;grid-template-columns:78px 1fr;gap:clamp(14px,2.4vw,30px);
+  padding:19px 0;border-bottom:1px solid var(--rule);align-items:baseline}
+.not .x{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;color:var(--amber)}
+.not .t{font-size:15.5px;color:var(--ink2);max-width:66ch}
+
+/* ============================================================
+   09 · CLOSER (dark — bright green belongs here)
+   ============================================================ */
+.closer{background:#101310;color:#F1F3EE;border-top:0}
+.closer .rail{border-right-color:#262A25;color:#5F6A5C}
+.closer .rail b{color:var(--mint)}
+.closer h2{color:#fff}
+.closer .lede{color:#A8B0A4}
+.closer .btn{border-color:#F1F3EE;color:#F1F3EE}
+.closer .btn:hover{background:#F1F3EE;color:#101310}
+.closer .btn.fill{background:var(--mint);border-color:var(--mint);color:#0A2417}
+.closer .btn.fill:hover{background:#6BF2BA;border-color:#6BF2BA}
+footer{background:#101310;color:#5F6A5C;border-top:1px solid #1D211C;
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.09em;padding:22px 0}
+.footrow{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+
+/* ============================================================
+   build sheet
+   ============================================================ */
+.build{background:#191C18;color:#C8CFC5;border-top:0}
+.build .rail{border-right-color:#2B2F29;color:#69725F}
+.build h2{color:#fff;font-size:30px}
+.build p{color:#8D958A}
+.mtable{width:100%;border-collapse:collapse;margin-top:32px;font-size:13px;text-align:left}
+.mtable th{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;
+  text-transform:uppercase;color:#69725F;padding:0 14px 11px 0;
+  border-bottom:1px solid #31362F;font-weight:400;vertical-align:bottom}
+.mtable td{padding:14px 14px 14px 0;border-bottom:1px solid #242822;
+  vertical-align:top;color:#AFB7AC}
+.mtable td:first-child{font-family:var(--mono);color:var(--mint);font-size:11px;white-space:nowrap}
+.mtable .done{color:var(--mint);font-family:var(--mono);font-size:9.5px;letter-spacing:.1em}
+.mtable .todo{color:#8D958A;font-family:var(--mono);font-size:9.5px;letter-spacing:.1em}
+.rules{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));
+  gap:1px;background:#31362F;border:1px solid #31362F;margin-top:34px}
+.rules div{background:#191C18;padding:18px 20px;font-size:13.5px;color:#8D958A;line-height:1.5}
+.rules b{color:#fff;display:block;margin-bottom:5px;font-size:14px}
+
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .fr,.fr.gap{opacity:1!important;transform:none!important}
+  .fr .tick::after{transform:rotate(42deg) scale(1)!important}
+}
+@media(max-width:700px){
+  .row{grid-template-columns:1fr}
+  .rail{border-right:0;border-bottom:1px solid var(--rule);text-align:left;
+    padding:20px 0 12px;display:flex;gap:14px}
+  .body{padding-left:0}
+}
+</style>
+
+<header><div class="sheet"><nav>
+  <a class="brand" href="#"><span class="mark"><i></i><i></i><i></i><i></i></span> Salvia</a>
+  <div class="navlinks">
+    <a href="#problem">Why now</a><a href="#desk">Platform</a>
+    <a href="#caps">What it does</a><a href="#trust">Trust</a>
+  </div>
+  <div class="navact"><a class="btn" href="#">Sign in</a><a class="btn fill" href="#closer">Book a demo</a></div>
+</nav></div></header>
+
+<!-- ══════════ 01 HERO ══════════ -->
+<section class="hero"><div class="sheet"><div class="herogrid">
+  <div>
+    <h1>Insurance, finished<br>before the patient<br><span class="dim">leaves.</span></h1>
+    <p class="lede herosub">Salvia is the claim integrity layer for Indian hospitals. Your insurance
+      work stops being a pile of paper assembled after discharge, and becomes a live file that is
+      already complete when the patient is ready to go.</p>
+    <div class="herocta">
+      <a class="btn fill" href="#closer">Book a demo
+        <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M1 6h9M6.5 2.5 10 6l-3.5 3.5"/></svg></a>
+      <a class="btn" href="#desk">See the platform</a>
+    </div>
+    <div class="herofoot"><span class="dot"></span> Built with hospitals in Kerala</div>
+  </div>
+
+  <div class="slot"><span class="mk">MOTION 01 · LIVE</span>
+    <div class="filecard">
+      <div class="fc-head">
+        <span class="who">ADMISSION · IP-40712</span>
+        <span class="st">Claim building</span>
+      </div>
+      <div class="fc-rows">
+        <div class="fr" style="--i:0"><span class="tick"></span><span class="nm">Admission note</span><span class="tm">09:14</span></div>
+        <div class="fr" style="--i:1"><span class="tick"></span><span class="nm">Pre-authorisation</span><span class="tm">09:41</span></div>
+        <div class="fr" style="--i:2"><span class="tick"></span><span class="nm">Investigation reports</span><span class="tm">11:02</span></div>
+        <div class="fr" style="--i:3"><span class="tick"></span><span class="nm">Operation theatre note</span><span class="tm">14:26</span></div>
+        <div class="fr gap" style="--i:4"><span class="tick"></span><span class="nm">Implant sticker</span><span class="tm">Missing</span></div>
+        <div class="fr" style="--i:5"><span class="tick"></span><span class="nm">Daily progress notes</span><span class="tm">18:00</span></div>
+        <div class="fr" style="--i:6"><span class="tick"></span><span class="nm">Discharge summary</span><span class="tm">07:50</span></div>
+        <div class="fr" style="--i:7"><span class="tick"></span><span class="nm">Final bill</span><span class="tm">08:05</span></div>
+      </div>
+      <div class="fc-foot">
+        <span class="q">→ QUERY RAISED TO THEATRE · AWAITING</span>
+        <span class="done">✓ FILE COMPLETE · READY TO SUBMIT</span>
+      </div>
+    </div>
+  </div>
+</div></div></section>
+
+<!-- ══════════ 02 PROOF ══════════ -->
+<section><div class="sheet"><div class="proof">
+  <div><div class="logoslot">KSUM<br>LOGO</div>
+    <div><div class="t">Kerala Startup Mission</div><div class="s">Supported</div></div></div>
+  <div><div class="logoslot">STARTUP<br>INDIA</div>
+    <div><div class="t">Startup India</div><div class="s">Recognised</div></div></div>
+  <div><div class="logoslot">HOSPEX<br>LOGO</div>
+    <div><div class="t">Best healthcare startup</div><div class="s">HOSPEX · winner</div></div></div>
+</div></div></section>
+
+<!-- ══════════ 03 PROBLEM ══════════ -->
+<section id="problem" class="tall"><div class="sheet"><div class="row">
+  <div class="rail"><b>03</b>WHY NOW</div>
+  <div class="body">
+    <div class="hsplit">
+      <h2>A great insurance team is a room full of people you cannot replace.</h2>
+      <div class="rhs"><p class="lede">Everything that makes a claim succeed lives in somebody's head.
+        Which insurer wants what. Which document gets queried. What to write when a diagnosis changes
+        after admission. None of it is written down, and it walks out of the building when they do.</p></div>
+    </div>
+
+    <div class="deplist">
+      <div class="dep"><span class="n">01</span><div>
+        <h3>Most of the process was never online</h3>
+        <p>Insurance in Indian hospitals still runs on paper, scanning, phone calls and email. There is
+          no system of record for the work itself, only for its output.</p></div></div>
+      <div class="dep"><span class="n">02</span><div>
+        <h3>Nobody notices a gap until it is too late to fix</h3>
+        <p>By the time a query arrives, the patient has gone home. Evidence that could have been created
+          in thirty seconds on the ward now cannot be created at all.</p></div></div>
+      <div class="dep"><span class="n">03</span><div>
+        <h3>The same work is done twice</h3>
+        <p>Once for the patient, once for the claim. Two departments, two sets of paper, one admission,
+          and no shared view between them.</p></div></div>
+      <div class="dep"><span class="n">04</span><div>
+        <h3>The bed stays blocked</h3>
+        <p>Discharge waits on the file. The file waits on people. The next admission waits on the bed.</p></div></div>
+    </div>
+  </div>
+</div></div></section>
+
+<!-- ══════════ 04 THE SHIFT ══════════ -->
+<section class="tall" style="background:rgba(255,255,255,.5)"><div class="sheet"><div class="row">
+  <div class="rail"><b>04</b>THE SHIFT</div>
+  <div class="body">
+    <div class="hsplit">
+      <h2>Two departments become one desk.</h2>
+      <div class="rhs"><p class="lede">The team that handles inpatients and the team that handles
+        insurance are doing one job in two places. On Salvia they are doing one job in one place,
+        and most of the work between them stops existing.</p></div>
+    </div>
+
+    <div class="shift">
+      <div class="team">
+        <div class="lbl">Today</div>
+        <div class="nm2">Inpatient and counselling</div>
+        <ul><li>Admits the patient</li><li>Explains the policy</li><li>Collects the paperwork</li>
+          <li>Hands it over</li></ul>
+      </div>
+      <div class="arrow"><span class="ln"></span>ONE DESK<span class="ln"></span></div>
+      <div class="team">
+        <div class="lbl">Today</div>
+        <div class="nm2">Insurance</div>
+        <ul><li>Receives a finished pile</li><li>Scans and uploads</li><li>Answers queries blind</li>
+          <li>Chases the money</li></ul>
+      </div>
+    </div>
+
+    <div class="team one" style="margin-top:22px;max-width:none">
+      <div class="lbl">On Salvia</div>
+      <div class="nm2">One team, one live view, one submission</div>
+      <ul style="columns:2;column-gap:44px">
+        <li>Every admission visible the moment it opens</li>
+        <li>Deficiencies surfaced while they can still be fixed</li>
+        <li>Queries answered by the person who has the answer</li>
+        <li>Pre-auth, enhancement and final claim from one screen</li>
+        <li>Settlement matched back automatically</li>
+        <li>Fewer people to manage, not more</li>
+      </ul>
+    </div>
+    <div class="slot plan" style="margin-top:22px;min-height:150px"><span class="mk">MOTION 02 · TO BUILD</span>
+      <span class="cap">Two columns of tasks slide together into one column and roughly half the rows
+        disappear, because they were the same task done twice. Six seconds, loops.</span></div>
+  </div>
+</div></div></section>
+
+<!-- ══════════ 05 THE DESK ══════════ -->
+<section id="desk" class="tall"><div class="sheet"><div class="row">
+  <div class="rail"><b>05</b>PLATFORM</div>
+  <div class="body">
+    <div class="hsplit">
+      <h2>Autopilot. Human led.</h2>
+      <div class="rhs"><p class="lede">Salvia does the reading, the checking and the chasing. A person
+        still decides. Nothing is submitted, worded or answered without someone on your team saying yes.</p></div>
+    </div>
+
+    <div class="field">
+      <div class="fieldinner">
+        <div class="slot deskshot" style="min-height:400px;display:grid;place-items:center">
+          <span class="mk">MOTION 03 · TO BUILD · THE BIG ONE</span>
+          <span style="font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--mute);
+            text-align:center;max-width:44ch;line-height:1.9;padding:40px">
+            THE REAL DESK UI, BUILT IN DOM<br><br>
+            <span style="font-family:var(--sans);font-size:14px;letter-spacing:0;text-transform:none;
+              color:var(--ink2);line-height:1.5;display:block">
+              Admission list, one claim open, live deficiency panel. Watch a document land, a check clear,
+              a query go out and an answer come back onto the file. Fourteen seconds, pausable.
+              Built from the real app, not drawn.</span></span>
+        </div>
+      </div>
+      <div class="fieldcap">
+        <div><h3>Live, not retrospective</h3><p>Every admission and document appears as it happens,
+          not when someone gets round to uploading it.</p></div>
+        <div><h3>Deficiencies, not opinions</h3><p>What is missing against what this claim needs.
+          Specific, addressed to a person, with a deadline that matters.</p></div>
+        <div><h3>One place to submit</h3><p>Pre-authorisation, enhancement, query response and the
+          final claim leave from the same screen.</p></div>
+      </div>
+    </div>
+  </div>
+</div></div></section>
+
+<!-- ══════════ 06 CAPABILITIES ══════════ -->
+<section id="caps" class="tall" style="background:rgba(255,255,255,.5)"><div class="sheet"><div class="row">
+  <div class="rail"><b>06</b>CAPABILITY</div>
+  <div class="body">
+    <div class="hsplit">
+      <h2>What the desk actually watches.</h2>
+      <div class="rhs"><p class="lede">Not a dashboard of numbers you already knew. A running check on
+        the one thing that decides whether a claim survives.</p></div>
+    </div>
+    <div class="caps">
+      <div class="cap"><span class="k">Missing evidence</span>
+        <span class="v">What this admission needs but does not yet have, flagged while the patient
+          is still in the bed.</span><span class="st">Live</span></div>
+      <div class="cap"><span class="k">Changed diagnosis</span>
+        <span class="v">When the diagnosis moves after admission and the authorisation no longer
+          matches what is being treated.</span><span class="st">Live</span></div>
+      <div class="cap"><span class="k">Query prediction</span>
+        <span class="v">Whether this file will draw a query before it is submitted, and what to add
+          so that it does not.</span><span class="st">In build</span></div>
+      <div class="cap"><span class="k">Policy rules</span>
+        <span class="v">What each insurer will and will not pay for, applied to this claim rather than
+          remembered by one person.</span><span class="st">In build</span></div>
+      <div class="cap"><span class="k">Appeal support</span>
+        <span class="v">When a claim is cut, the evidence and the wording for the appeal, drawn from
+          the file that already exists.</span><span class="st">In build</span></div>
+      <div class="cap"><span class="k">Settlement matching</span>
+        <span class="v">What was paid, what was deducted, and the insurer's own stated reason, against
+          the claim it belongs to.</span><span class="st">In build</span></div>
+    </div>
+  </div>
+</div></div></section>
+
+<!-- ══════════ 07 ONE INTEGRATION ══════════ -->
+<section class="tall"><div class="sheet"><div class="row">
+  <div class="rail"><b>07</b>ADOPTION</div>
+  <div class="body">
+    <div class="hsplit">
+      <h2>You do not build the integration. We already did.</h2>
+      <div class="rhs"><p class="lede">One connection into your HMS, and your hospital is live.
+        No eighteen month integration project, no vendor selection, no committee.</p></div>
+    </div>
+
+    <div class="pipe slot"><span class="mk">MOTION 04 · PARTIAL</span>
+      <svg viewBox="0 0 900 260" fill="none" aria-label="Many hospitals, one integration">
+        <g font-family="IBM Plex Mono, monospace" font-size="10.5" letter-spacing=".08em" fill="#767E74">
+          <text x="4" y="40">HOSPITAL A</text><text x="4" y="90">HOSPITAL B</text>
+          <text x="4" y="140">HOSPITAL C</text><text x="4" y="190">HOSPITAL D</text>
+          <text x="4" y="240">HOSPITAL E</text>
+          <text x="742" y="112" fill="#0F5D36">INSURERS</text>
+          <text x="742" y="160" fill="#0F5D36">TPAs</text>
+        </g>
+        <g stroke="#C9CEC2" stroke-width="1.25">
+          <path class="dashdraw" d="M96 36 C 220 36, 250 120, 372 128"/>
+          <path class="dashdraw" d="M96 86 C 220 86, 250 124, 372 130"/>
+          <path class="dashdraw" d="M96 136 H 372"/>
+          <path class="dashdraw" d="M96 186 C 220 186, 250 140, 372 132"/>
+          <path class="dashdraw" d="M96 236 C 220 236, 250 144, 372 134"/>
+        </g>
+        <rect x="372" y="98" width="164" height="68" fill="#0F5D36"/>
+        <text x="454" y="128" text-anchor="middle" fill="#fff" font-family="Schibsted Grotesk, sans-serif"
+          font-size="16" font-weight="600" letter-spacing="-.02em">Salvia</text>
+        <text x="454" y="147" text-anchor="middle" fill="#3EEBA3" font-family="IBM Plex Mono, monospace"
+          font-size="9" letter-spacing=".14em">ONE INTEGRATION</text>
+        <g stroke="#0F5D36" stroke-width="1.6">
+          <path class="dashdraw" d="M536 120 C 640 120, 640 106, 730 106"/>
+          <path class="dashdraw" d="M536 144 C 640 144, 640 154, 730 154"/>
+        </g>
+        <g fill="#3EEBA3" class="nodepulse">
+          <circle cx="96" cy="36" r="3.4"/><circle cx="96" cy="86" r="3.4"/>
+          <circle cx="96" cy="136" r="3.4"/><circle cx="96" cy="186" r="3.4"/>
+          <circle cx="96" cy="236" r="3.4"/>
+        </g>
+      </svg>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(18px,3vw,40px);
+        margin-top:34px;padding-top:26px;border-top:1px solid var(--rule)">
+        <div><h3 style="font-size:15px;margin-bottom:5px">Nothing changes on the ward</h3>
+          <p style="font-size:13.5px">Your clinical staff keep working exactly as they do today.
+            That is a design constraint, not a nice to have.</p></div>
+        <div><h3 style="font-size:15px;margin-bottom:5px">Live from the start</h3>
+          <p style="font-size:13.5px">You do not wait for the integration to finish before the desk
+            is useful. It works from the first admission.</p></div>
+        <div><h3 style="font-size:15px;margin-bottom:5px">Built on the national rails</h3>
+          <p style="font-size:13.5px">We are building on NHCX so one certification carries every
+            hospital that joins us.</p></div>
+      </div>
+    </div>
+  </div>
+</div></div></section>
+
+<!-- ══════════ 08 WON'T DO ══════════ -->
+<section id="trust" class="tall" style="background:rgba(255,255,255,.5)"><div class="sheet"><div class="row">
+  <div class="rail"><b>08</b>TRUST</div>
+  <div class="body">
+    <div class="hsplit">
+      <h2>What Salvia will not do.</h2>
+      <div class="rhs"><p class="lede">Worth writing down, because every other vendor in this market
+        is careful not to.</p></div>
+    </div>
+    <div class="nots">
+      <div class="not"><span class="x">NEVER</span><span class="t">Upcode. We will not suggest a
+        diagnosis or a procedure that did not happen, at any margin.</span></div>
+      <div class="not"><span class="x">NEVER</span><span class="t">Write a clinical note on a
+        clinician's behalf. We show what is missing and ask the person who knows.</span></div>
+      <div class="not"><span class="x">NEVER</span><span class="t">Submit anything without a person
+        on your team approving it. Autopilot still has a pilot.</span></div>
+      <div class="not"><span class="x">NEVER</span><span class="t">Take a percentage of your claim
+        value. Our incentive should not move with your billing.</span></div>
+      <div class="not"><span class="x">NEVER</span><span class="t">Ask your ward staff to work
+        differently to make our software look good.</span></div>
+    </div>
+  </div>
+</div></div></section>
+
+<!-- ══════════ 09 CLOSER ══════════ -->
+<section id="closer" class="closer tall"><div class="sheet"><div class="row">
+  <div class="rail"><b>09</b>START</div>
+  <div class="body">
+    <h2>Show us one week of<br>discharged files.</h2>
+    <p class="lede" style="margin-top:22px">We will sit with your insurance desk for a day, take the
+      last week of files you have already closed, and show you what was missing and the exact moment
+      it could still have been produced. No slides.</p>
+    <div class="herocta" style="margin-top:34px">
+      <a class="btn fill" href="#">Book a demo
+        <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M1 6h9M6.5 2.5 10 6l-3.5 3.5"/></svg></a>
+      <a class="btn" href="#">Talk to the founders</a>
+    </div>
+  </div>
+</div></div></section>
+
+<footer><div class="sheet"><div class="footrow">
+  <span>SALVIA · MELAMPHIC AI PVT LTD · KANNUR, KERALA</span>
+  <span>SECURITY · DPDP · PRIVACY · CONTACT</span>
+</div></div></footer>
+
+<!-- ══════════ BUILD SHEET — not part of the site ══════════ -->
+<section class="build tall"><div class="sheet"><div class="row">
+  <div class="rail"><b>—</b>BUILD</div>
+  <div class="body">
+    <h2>Motion manifest</h2>
+    <p style="margin-top:14px;max-width:70ch">All HTML, CSS and a little JS. No mp4, no gif, no Lottie,
+      no stock footage. Real text inside every frame, so it stays crisp, themeable and translatable.</p>
+    <table class="mtable">
+      <thead><tr><th>ID</th><th>Where</th><th style="width:38%">What moves</th><th>Technique</th><th>State</th></tr></thead>
+      <tbody>
+        <tr><td>01</td><td>Hero</td>
+          <td>A claim file assembling in real time. Rows tick in, one goes amber and missing, a query is
+            raised, the row clears, the file reads complete. Thirteen second loop.</td>
+          <td>CSS keyframes, per-row stagger via <code>--i</code></td><td class="done">BUILT</td></tr>
+        <tr><td>02</td><td>The shift</td>
+          <td>Two columns of tasks slide into one and half the rows vanish, because they were the same
+            task twice.</td>
+          <td>CSS transforms on a task list</td><td class="todo">TO BUILD</td></tr>
+        <tr><td>03</td><td>The desk</td>
+          <td>The real desk UI. Document lands, check clears, query goes to theatre, answer returns onto
+            the file. The single most important thing on the page.</td>
+          <td>DOM replica of the app, scripted state machine</td><td class="todo">TO BUILD</td></tr>
+        <tr><td>04</td><td>Adoption</td>
+          <td>Hospitals converge on one Salvia node, one line out to the insurers. Flow runs continuously.</td>
+          <td>SVG stroke-dashoffset</td><td class="done">PARTIAL</td></tr>
+        <tr><td>05</td><td>Capability rows</td>
+          <td>Rows lift and inset on hover. Small, but it makes a long list feel like an instrument.</td>
+          <td>CSS transition</td><td class="done">BUILT</td></tr>
+      </tbody>
+    </table>
+
+    <h3 style="color:#fff;margin:44px 0 0;font-size:17px">Rules that keep this out of AI slop territory</h3>
+    <div class="rules">
+      <div><b>Motion equals a state change</b>Nothing floats, bobs, parallaxes or shimmers to fill space.
+        If it moves, that thing genuinely happens in the product.</div>
+      <div><b>Real strings only</b>IP-40712. Implant sticker. Query raised to theatre. A hospital person
+        should recognise every word on screen.</div>
+      <div><b>One thing moves at a time</b>Inside a frame, one change, then rest. Three simultaneous
+        animations is what makes a page feel generated.</div>
+      <div><b>No bounce, no spring, no glow</b>cubic-bezier(.2,0,0,1) at 220 to 400ms. Opacity and
+        transform. Nothing pulses for decoration.</div>
+      <div><b>Deep green on light, bright green on dark</b>The accent is one hue with two values. Mint
+        never touches a light background except as a field or a live signal.</div>
+      <div><b>Reduced motion is honest</b>prefers-reduced-motion renders the finished frame, not a
+        degraded wobble. Already wired.</div>
+    </div>
+
+    <h3 style="color:#fff;margin:44px 0 0;font-size:17px">Design system</h3>
+    <div class="rules">
+      <div><b>Concept: the ledger</b>A hospital record sheet set properly. Ruled hairlines, a margin rail
+        carrying the ordinal, tabular figures, generous rag. Not a dev-tools lattice.</div>
+      <div><b>Type</b>Schibsted Grotesk 500 for display at -0.032em tracking. IBM Plex Mono for state,
+        IDs and labels only. Two families, strict roles.</div>
+      <div><b>The ordinal lives in the margin</b>You did not want a label sitting on top of a title.
+        The section number moved into the left rail instead, so the technical layer survives and the
+        headline stands alone.</div>
+      <div><b>Colour</b>Canvas #F4F5F1, ink #111511, accent #0F5D36 deep green, #3EEBA3 mint for live
+        state and field blocks, #A96A12 amber for a gap. One dark section, the closer.</div>
+    </div>
+  </div>
+</div></div></section>

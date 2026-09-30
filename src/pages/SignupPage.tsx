@@ -232,9 +232,9 @@ export const SignupPage = () => {
     <>
       <SEO
         title="Talk to us"
-        description="Tell us where the paperwork breaks in your practice. We set Salvia up with your own forms and the framework you are assessed against — CQC, HIQA, CMS, NABH or JCI."
+        description="Tell us where the claim breaks in your hospital. Send us a week of files you have already closed and we will show you what was missing, and the moment it could still have been produced."
         path="/start"
-        keywords={['clinical compliance software', 'CQC record keeping software', 'NABH documentation software', 'audit readiness']}
+        keywords={['cashless claim software India', 'hospital insurance desk', 'claim integrity', 'TPA claim evidence']}
       />
       <SiteHeader />
       <main style={{ flex: 1 }}>
@@ -477,30 +477,31 @@ export const SignupPage = () => {
 function SuccessPage({ email, clinicName, country }: { email: string; clinicName: string; country: string }) {
   const countryLabel =
     COUNTRY_OPTIONS.find((c) => c.value === country)?.label ?? 'local';
+  /* .s-page is what carries the ground, the type and the heading colours. This
+     branch used to render outside it, so the header and footer looked like a
+     different site the moment the form was submitted. */
   return (
-    <>
+    <div className="s-page">
       <SiteHeader />
-      <main style={{ flex: 1, zIndex: 10, background: '#fff' }}>
-        <section className="g-section g-center" style={{ padding: '168px 0 120px' }}>
-          <div className="g-container">
-            <Rv as="h1" className="g-h2" delay={1} style={{ margin: '0 auto 14px' }}>
+      <main style={{ flex: 1 }}>
+        <section className="s-section g-center" style={{ paddingTop: 'var(--space-9)' }}>
+          <div className="s-wrap s-wrap--narrow">
+            <Rv as="h1" delay={1} style={{ fontSize: 'clamp(1.9rem, 4vw, 2.9rem)', margin: '0 auto 14px' }}>
               Thanks{clinicName ? <>, <span className="g-hl">{clinicName}</span></> : ''}. We&rsquo;ll be in touch.
             </Rv>
-            <Rv as="p" className="g-sub" delay={2}>
+            <Rv as="p" className="s-lede" delay={2} style={{ margin: '0 auto' }}>
               We&rsquo;ll call within one working day, {countryLabel} time, and write to{' '}
-              <b>{email || 'your inbox'}</b>. Have your last twenty deducted claims to hand,
-              with the reasons the payer gave.
+              <b>{email || 'your inbox'}</b>. Have a week of discharged files to hand, with
+              the reasons the payer gave on any that were cut.
             </Rv>
-            <Rv className="g-hero-ctas" delay={3} style={{ marginTop: 30 }}>
-              <Link className="g-btn g-btn--green" to="/">
-                Back to home
-              </Link>
+            <Rv className="g-hero-ctas" delay={3} style={{ marginTop: 30, justifyContent: 'center' }}>
+              <Link className="s-btn s-btn--primary" to="/">Back to home</Link>
             </Rv>
           </div>
         </section>
       </main>
       <SiteFooter />
-    </>
+    </div>
   );
 }
 
@@ -547,16 +548,16 @@ async function safeJson(res: Response): Promise<Record<string, unknown> | null> 
    all. The field is recessed: warm inset ground, a rule you can actually see. */
 const inputStyle: CSSProperties = {
   width: '100%',
-  minHeight: 46,
+  minHeight: 44,
   padding: '11px 14px',
   fontFamily: 'var(--font-body)',
   fontSize: 15,
-  border: '1.5px solid var(--faint)',
-  borderRadius: 'var(--radius)',
+  border: '1px solid var(--line-strong)',
+  borderRadius: 0,
   backgroundColor: 'var(--surface-2)',
   color: 'var(--ink)',
   outline: 'none',
-  transition: 'border-color 160ms ease, box-shadow 160ms ease, background 160ms ease',
+  transition: 'border-color var(--dur-fast) var(--ease), box-shadow var(--dur-fast) var(--ease), background var(--dur-fast) var(--ease)',
   boxSizing: 'border-box',
 };
 
@@ -572,33 +573,34 @@ function SignupStyles() {
       .su-sticky { position: sticky; top: var(--space-7); }
       .su-card {
         background: var(--surface);
-        border: 1.5px solid var(--ink);
-        border-radius: var(--radius-lg);
+        border: 1px solid var(--line-strong);
+        border-radius: 0;
         padding: var(--space-6);
-        box-shadow: var(--shadow);
       }
       .su-form { display: flex; flex-direction: column; gap: var(--space-4); }
       .su-row { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-3); }
-      .su-form label { font-size: var(--text-sm); font-weight: var(--weight-medium); color: var(--ink); }
+      .su-form label { font-size: var(--text-xs); font-weight: var(--weight-medium); color: var(--muted); }
       /* The card is white, so a white field is invisible. Fields sit on the
-         warm inset tone with a darker rule — the typable area is the thing that
-         should read as recessed, not as more card. */
+         inset tone with a darker rule — the typable area should read as
+         recessed, not as more card. Square, to match everything else. */
       .su-form input, .su-form select, .su-form textarea {
-        width: 100%; min-height: 46px; padding: var(--space-3);
-        border: 1.5px solid var(--faint); border-radius: var(--radius);
+        width: 100%; min-height: 44px; padding: var(--space-3);
+        border: 1px solid var(--line-strong); border-radius: 0;
         background: var(--surface-2); color: var(--ink);
         font: var(--weight-normal) var(--text-base)/1.4 var(--font-body);
-        transition: border-color var(--t-hover) var(--ease-out);
+        transition: border-color var(--dur-fast) var(--ease), background var(--dur-fast) var(--ease);
       }
       .su-form textarea { min-height: 92px; resize: vertical; }
-      .su-form input::placeholder, .su-form textarea::placeholder { color: var(--muted); }
+      .su-form input::placeholder, .su-form textarea::placeholder { color: var(--faint); }
       .su-form input:hover, .su-form select:hover, .su-form textarea:hover { border-color: var(--body); }
+      /* A halo outside the border, not a ring inside it: an inner ring draws a
+         second box around the text. Same rule the product uses. */
       .su-form input:focus, .su-form select:focus, .su-form textarea:focus {
         outline: none; border-color: var(--accent); background: var(--surface);
-        box-shadow: 0 0 0 3px var(--accent-line);
+        box-shadow: 0 0 0 3px var(--accent-soft);
       }
       /* The plan, as a numbered sequence rather than four boxes. */
-      .su-steps { list-style: none; padding: 0; margin: var(--space-8) 0 0; border-top: 1.5px solid var(--ink); }
+      .su-steps { list-style: none; padding: 0; margin: var(--space-8) 0 0; border-top: 1px solid var(--ink); }
       .su-steps li {
         display: grid; grid-template-columns: 34px 1fr; gap: var(--space-4);
         padding: var(--space-4) 0; border-bottom: 1px solid var(--line);
@@ -609,16 +611,16 @@ function SignupStyles() {
       .su-note {
         font-size: var(--text-sm); line-height: 1.55;
         color: var(--body); background: var(--accent-soft);
-        border: 1px solid var(--accent-line); border-radius: var(--radius);
+        border: 1px solid var(--accent-line); border-radius: 0;
         padding: var(--space-3) var(--space-4); margin: 0;
       }
       .su-note b { color: var(--ink); }
-      .su-details { border: 1px dashed var(--line); border-radius: var(--radius); padding: var(--space-3) var(--space-4); }
+      .su-details { border: 1px dashed var(--line-strong); border-radius: 0; padding: var(--space-3) var(--space-4); }
       .su-details summary { cursor: pointer; font-size: var(--text-sm); font-weight: var(--weight-semi); color: var(--body); }
       .su-error {
         font-size: var(--text-sm); line-height: 1.5;
-        color: var(--danger); background: hsl(9 70% 97%);
-        border: 1px solid hsl(9 50% 84%); border-radius: var(--radius);
+        color: var(--danger); background: var(--danger-soft);
+        border: 1px solid #F0C4C4; border-radius: 0;
         padding: var(--space-3) var(--space-4);
       }
       @media (max-width: 960px) {

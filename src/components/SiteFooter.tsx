@@ -13,17 +13,18 @@ const COLUMNS: { title: string; links: { label: string; to: string }[] }[] = [
   {
     title: 'Salvia',
     links: [
-      { label: 'The deductions', to: '/#cost' },
-      { label: 'The product', to: '/#product' },
-      { label: 'What is live', to: '/#arc' },
-      { label: 'NABH coverage', to: '/frameworks/nabh' },
+      { label: 'The desk', to: '/#desk' },
+      { label: 'What is live', to: '/#live' },
+      { label: 'The rules', to: '/#cost' },
+      { label: 'What we will not do', to: '/#trust' },
+      { label: 'Questions', to: '/#faq' },
     ],
   },
   {
     title: 'More',
     links: [
       { label: 'Writing', to: '/blog' },
-      { label: 'Talk to us', to: '/start' },
+      { label: 'Book a demo', to: '/start' },
     ],
   },
   {
@@ -45,8 +46,8 @@ export function SiteFooter() {
         <div>
           <Link to="/" className="sf-logo">Salvia<i>.</i></Link>
           <p className="sf-line">
-            The evidence a cashless claim needs, captured while the patient is still
-            admitted — not chased after the deduction lands.
+            The claim integrity layer for Indian hospitals. Every admission and every
+            document, live to the insurance desk, while the evidence can still be created.
           </p>
         </div>
 

@@ -65,7 +65,11 @@ function App() {
                 is not the business. Anyone landing on the old URL goes to the one
                 framework that still matters here. The page itself is untouched on
                 disk — point a route back at it the day it is wanted again. */}
-            <Route path="/frameworks" element={<Navigate to="/frameworks/nabh" replace />} />
+            {/* The frameworks surface is retired. It argued for the compliance
+                product, not the claims one, and its coverage score came from an
+                engine that no longer exists. Pages stay on disk; nothing links
+                here and nothing is indexed. */}
+            <Route path="/frameworks" element={<Navigate to="/" replace />} />
             {/* The five deep pages, listed explicitly: two dynamic segments of the
                 same shape would make the first one swallow all 60. Keep in step
                 with DEEP in src/data/deepFrameworks.ts. */}
