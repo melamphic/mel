@@ -25,7 +25,7 @@ a clause — not a form, not a workflow, and not any code.
 ## Market and stage
 
 India, private cashless health insurance claims: inpatient and day-care.
-Operated by Melamphic AI Pvt Ltd from Kannur, Kerala.
+Operated by Melamphic AI Pvt Ltd, India.
 
 Five stages, in the order the money moves. Two are live today and three are in
 build, and the site says so plainly:
@@ -69,13 +69,8 @@ the part decided by evidence — a query that missed its window, an enhancement
 nobody raised, a report that did not tie to the bill — and that part is decided
 on the ward rather than at the billing desk.
 
-## Accreditation
-
-The same records answer NABH. Nothing extra is captured for it: 51% of the 227
-in-scope requirements in the 6th edition are measured from data the hospital
-already holds, and the rest are named rather than hidden.
-
-- [NABH coverage](https://hellosalvia.com/frameworks/nabh)
+Salvia does not sell accreditation coverage and makes no claim against any
+accreditation standard.
 
 ## Core pages
 

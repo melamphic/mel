@@ -1,0 +1,437 @@
+<title>Salvia site reboot wireframe</title>
+<style>
+:root{
+  --ground:#FAFAF8;
+  --ground2:#F2F2EE;
+  --ink:#0E1210;
+  --mute:#6E7671;
+  --line:#E3E5E1;
+  --line2:#CFD3CD;
+  --mint:#6FE3A4;
+  --mint-soft:#C9F5DC;
+  --deep:#0B4A2F;
+  --dark:#0B0C0B;
+  --mono:ui-monospace,"SF Mono",Menlo,monospace;
+  --sans:-apple-system,"Inter","Helvetica Neue",Arial,sans-serif;
+}
+*{box-sizing:border-box}
+body{background:var(--ground);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1180px;margin:0 auto;padding:0 40px}
+
+/* --- wireframe chrome --- */
+.spec{background:#1B1E1B;color:#D8DDD8;font-family:var(--mono);font-size:12px;line-height:1.6;padding:14px 40px}
+.spec b{color:var(--mint)}
+.sectiontag{position:absolute;top:0;left:0;background:var(--ink);color:var(--mint);font-family:var(--mono);font-size:10px;letter-spacing:.08em;padding:3px 8px}
+section{position:relative;border-top:1px solid var(--line)}
+.note{font-family:var(--mono);font-size:11px;color:#9AA29C;border-left:2px solid var(--mint);padding-left:10px;margin-top:14px;max-width:640px}
+
+/* --- shared type --- */
+.eyebrow{display:flex;align-items:center;gap:9px;font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);margin-bottom:26px}
+.eyebrow::before{content:"";width:9px;height:9px;background:var(--deep);flex:none}
+h1{font-size:60px;line-height:1.02;letter-spacing:-.03em;font-weight:500;margin:0}
+h2{font-size:40px;line-height:1.08;letter-spacing:-.025em;font-weight:500;margin:0 0 18px}
+h3{font-size:17px;font-weight:600;margin:0 0 8px;letter-spacing:-.01em}
+p{margin:0 0 14px;color:var(--mute);max-width:56ch}
+.lead{font-size:18px;color:var(--mute);max-width:60ch}
+
+/* --- motion slot --- */
+.movie{border:1px dashed var(--line2);background:
+  repeating-linear-gradient(45deg,transparent,transparent 7px,rgba(0,0,0,.018) 7px,rgba(0,0,0,.018) 14px);
+  min-height:190px;display:flex;flex-direction:column;justify-content:center;padding:22px;gap:6px}
+.movie .mid{font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:var(--deep);background:var(--mint-soft);align-self:flex-start;padding:2px 7px}
+.movie .what{font-size:13px;color:#59615B;max-width:44ch;line-height:1.45}
+.movie.field{background:radial-gradient(120% 130% at 50% 0%,var(--mint) 0%,#BFF3D6 55%,#F0FBF4 100%);border:1px solid var(--line)}
+.movie.field .what{color:#0B3A25}
+.movie.field .mid{background:rgba(255,255,255,.75)}
+.movie.tall{min-height:380px}
+
+/* --- nav --- */
+nav{display:flex;align-items:center;justify-content:space-between;height:62px;border-bottom:1px solid var(--line)}
+.logo{display:flex;align-items:center;gap:9px;font-weight:600;letter-spacing:-.01em}
+.logo i{width:16px;height:16px;background:var(--deep);display:block;font-style:normal}
+.navlinks{display:flex;gap:26px;font-size:14px;color:var(--mute)}
+.navcta{display:flex;gap:10px}
+.btn{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;padding:9px 14px;border:1px solid var(--ink)}
+.btn.solid{background:var(--mint);border-color:var(--mint)}
+
+/* --- hero --- */
+.hero{padding:0;overflow:hidden}
+.herostage{position:relative;min-height:560px;display:grid;place-items:center;
+  background:repeating-linear-gradient(0deg,transparent,transparent 47px,var(--line) 47px,var(--line) 48px),
+             repeating-linear-gradient(90deg,transparent,transparent 79px,var(--line) 79px,var(--line) 80px)}
+.herocard{background:var(--ground);border:1px solid var(--line);padding:54px 46px;text-align:center;max-width:720px;position:relative}
+.herocard .corner{position:absolute;width:7px;height:7px;color:var(--line2);font-family:var(--mono);font-size:11px}
+.herocta{display:flex;gap:10px;justify-content:center;margin-top:28px}
+.microcopy{font-size:12px;color:#9AA29C;margin-top:16px;font-style:italic}
+.awardbar{display:flex;gap:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.awardbar div{flex:1;padding:22px 24px;border-right:1px solid var(--line)}
+.awardbar div:last-child{border-right:0}
+.awardbar .n{font-size:26px;letter-spacing:-.02em;margin-bottom:3px}
+.awardbar .l{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute)}
+
+/* --- layout blocks --- */
+.pad{padding:96px 0}
+.three{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-top:44px}
+.three>div{background:var(--ground);padding:26px}
+.two{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-top:44px}
+.two>div{background:var(--ground)}
+.cardhead{display:flex;align-items:center;gap:9px;padding:14px 20px;border-bottom:1px solid var(--line);font-weight:600;font-size:15px}
+.cardhead i{width:14px;height:14px;background:var(--mint);display:block;font-style:normal}
+.cardbody{padding:18px 20px;font-size:14px;color:var(--mute)}
+.split{display:grid;grid-template-columns:1.1fr 1fr;gap:60px;align-items:start}
+.panel{border:1px solid var(--line);margin-top:44px}
+.panelhead{display:flex;align-items:center;gap:9px;padding:14px 20px;border-bottom:1px solid var(--line);font-family:var(--mono);font-size:12px;letter-spacing:.06em}
+.caption{padding:18px 20px;border-top:1px solid var(--line);font-size:14px;color:var(--mute)}
+.honest{border:1px solid var(--line);margin-top:34px}
+.honest div{padding:16px 20px;border-bottom:1px solid var(--line);font-size:14px;display:flex;gap:14px}
+.honest div:last-child{border-bottom:0}
+.honest span{font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:var(--mute);flex:none;width:76px;padding-top:2px}
+
+/* --- dark closer --- */
+.dark{background:var(--dark);color:#F2F4F1;border-top:0}
+.dark h2{color:#fff}
+.dark p{color:#9AA29C}
+.dark .eyebrow{color:#7F8A82}
+.dark .eyebrow::before{background:var(--mint)}
+.dark .btn{border-color:#F2F4F1;color:#F2F4F1}
+.dark .btn.solid{background:var(--mint);color:var(--dark);border-color:var(--mint)}
+footer{background:var(--dark);color:#6F7A72;font-family:var(--mono);font-size:11px;padding:26px 0;border-top:1px solid #1E211E}
+</style>
+
+<div class="spec">
+  SALVIA SITE REBOOT <b>/ WIREFRAME v1</b> &nbsp;·&nbsp; light ground, mint field, hairline rules, mono eyebrows &nbsp;·&nbsp;
+  refs: replicas.dev + unifold.io &nbsp;·&nbsp; <b>dashed boxes = HTML movies</b> (CSS/DOM animation, no video files) &nbsp;·&nbsp;
+  copy is real, not lorem &nbsp;·&nbsp; <b>11 motion pieces across 6 slots</b>, manifest at the bottom
+</div>
+
+<div class="wrap">
+  <nav>
+    <div class="logo"><i></i> Salvia</div>
+    <div class="navlinks"><span>Product</span><span>For hospitals</span><span>Security</span><span>Company</span></div>
+    <div class="navcta"><span class="btn">Sign in</span><span class="btn solid">Book a demo</span></div>
+  </nav>
+</div>
+
+<!-- 01 HERO -->
+<section class="hero">
+  <div class="sectiontag">01 HERO</div>
+  <div class="herostage">
+    <div class="herocard">
+      <span class="corner" style="top:-4px;left:-4px">+</span>
+      <span class="corner" style="top:-4px;right:-4px">+</span>
+      <span class="corner" style="bottom:-4px;left:-4px">+</span>
+      <span class="corner" style="bottom:-4px;right:-4px">+</span>
+      <h1>Insurance, finished<br>before the patient leaves.</h1>
+      <p class="lead" style="margin:20px auto 0">The claim integrity layer for Indian hospitals. Every document and
+        every team on one live view, so the file is complete while the evidence can still be created.</p>
+      <div class="herocta"><span class="btn">See how it works</span><span class="btn solid">Book a demo</span></div>
+      <div class="microcopy">Best healthcare startup 2026, HOSPEX Kochi</div>
+    </div>
+  </div>
+  <div class="wrap" style="padding-top:22px;padding-bottom:22px">
+    <div class="movie" style="min-height:0;border:0;background:none;padding:0">
+      <span class="mid">MOVIE 01 · HERO BACKGROUND (behind the card)</span>
+      <span class="what">The grid is a live ward. Cells light mint as evidence lands: <code>BED 214 · OT NOTE</code>,
+        <code>BED 108 · VITALS</code>, <code>BED 331 · IMPLANT STICKER</code>. A few cells pulse amber for missing
+        evidence, then turn mint when a query is answered. Slow, ambient, never distracting. Pause control bottom right,
+        same as Replicas.</span>
+    </div>
+  </div>
+</section>
+
+<!-- 02 PROOF -->
+<section>
+  <div class="sectiontag">02 PROOF STRIP</div>
+  <div class="wrap" style="padding:0">
+    <div class="awardbar">
+      <div><div class="n">10</div><div class="l">Hospitals interviewed in depth</div></div>
+      <div><div class="n">50+</div><div class="l">Conversations at HOSPEX Kochi</div></div>
+      <div><div class="n">3</div><div class="l">Site visits inside the claims desk</div></div>
+      <div><div class="n">6 to 8 hrs</div><div class="l">Typical discharge wait they reported</div></div>
+    </div>
+  </div>
+  <div class="wrap"><div class="note">No customer logo wall yet. Pilot hospitals are "in talks", not signed, so we
+    show primary research instead. Swap to logos the day one signs.</div></div>
+</section>
+
+<!-- 03 PROBLEM -->
+<section class="pad">
+  <div class="sectiontag">03 PROBLEM</div>
+  <div class="wrap">
+    <div class="split">
+      <div>
+        <div class="eyebrow">The problem</div>
+        <h2>Three teams touch one admission.<br>None of them can see each other.</h2>
+      </div>
+      <div style="padding-top:58px">
+        <p>The ward writes the notes. The counselling desk handles the patient. The insurance department receives a
+          finished pile of paper, scans it, uploads it, then argues about it weeks later.</p>
+        <p>By the time anyone notices a document is missing, the patient has gone home and the evidence can no longer
+          be created. The bed stays blocked while the file gets assembled after the fact.</p>
+      </div>
+    </div>
+    <div class="movie" style="margin-top:44px">
+      <span class="mid">MOVIE 02 · THE GAP</span>
+      <span class="what">Three horizontal lanes, ward / counselling / insurance, each producing its own paper on its own
+        clock. Documents slide right and pile up at a wall marked DISCHARGE. One is missing. The pile stops. Then the
+        same three lanes replay on a single shared track and the pile clears. Roughly eight seconds, loops.</span>
+    </div>
+  </div>
+</section>
+
+<!-- 04 HOW IT WORKS -->
+<section class="pad" style="background:var(--ground2)">
+  <div class="sectiontag">04 HOW IT WORKS</div>
+  <div class="wrap">
+    <div class="eyebrow">How it works</div>
+    <h2>Capture it where it happens.<br>Work it in one place.</h2>
+    <div class="three">
+      <div>
+        <h3>Evidence lands as it is made</h3>
+        <p style="font-size:14px">Bedside voice note, the documents the hospital already prints, a photo of the OT note
+          or the implant sticker. Nobody does extra work.</p>
+        <div class="movie" style="min-height:150px">
+          <span class="mid">MOVIE 03a</span>
+          <span class="what">A print job, a voice waveform and a photo each fly into one patient card and stamp it
+            with a timestamp.</span>
+        </div>
+      </div>
+      <div>
+        <h3>The desk sees everything live</h3>
+        <p style="font-size:14px">Every admission, every document, checked against that payer's rules the moment it
+          arrives. Missing evidence is flagged while it can still be produced.</p>
+        <div class="movie" style="min-height:150px">
+          <span class="mid">MOVIE 03b</span>
+          <span class="what">A checklist fills itself row by row. One row stays amber, a query button appears next
+            to it.</span>
+        </div>
+      </div>
+      <div>
+        <h3>One submission, one inbox</h3>
+        <p style="font-size:14px">Pre-auth, enhancement, query response and final submission from one screen. Then we
+          read the settlement advice back out of the email inbox.</p>
+        <div class="movie" style="min-height:150px">
+          <span class="mid">MOVIE 03c</span>
+          <span class="what">Claim goes out, an email arrives back, the paid and deducted amounts land on the same
+            claim row.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 05 THE DESK -->
+<section class="pad">
+  <div class="sectiontag">05 THE DESK · hero feature</div>
+  <div class="wrap">
+    <div class="eyebrow">The desk</div>
+    <h2>Your insurance department<br>works inside Salvia.</h2>
+    <p class="lead">Not a folder of scans. The place they spend the day.</p>
+    <div class="panel">
+      <div class="panelhead"><span style="width:9px;height:9px;background:var(--deep);display:block"></span> Insurance desk</div>
+      <div class="movie field tall">
+        <span class="mid">MOVIE 04 · THE PRODUCT SHOT</span>
+        <span class="what">Real desk UI floating on the mint field, same treatment as the Replicas dashboard shot.
+          Admission list on the left, one claim open in the middle with its evidence checklist, payer rule panel on the
+          right. Watch a document arrive, a rule go green, a query fire to the ward, an answer come back. The one
+          animation worth the most screen on the page.</span>
+      </div>
+      <div class="caption">Live admissions, live document status, live payer rules. Queries go to the person who can
+        still produce the evidence, and the answer comes back onto the claim.</div>
+    </div>
+  </div>
+</section>
+
+<!-- 06 NOTHING CHANGES -->
+<section class="pad" style="background:var(--ground2)">
+  <div class="sectiontag">06 INTAKE LANES</div>
+  <div class="wrap">
+    <div class="eyebrow">Nothing changes for the ward</div>
+    <h2>We do not ask your staff<br>to work differently.</h2>
+    <p class="lead">Every hospital we visited said the same thing. Change what the nurses do and the project dies. So
+      Salvia takes what already exists, four ways.</p>
+    <div class="two">
+      <div>
+        <div class="cardhead"><i></i> Voice at the bedside</div>
+        <div class="movie" style="min-height:230px;border:0;border-bottom:1px solid var(--line)">
+          <span class="mid">MOVIE 05a</span>
+          <span class="what">Waveform on a phone, turning into a structured round note with the fields the admission
+            requires.</span>
+        </div>
+        <div class="cardbody">The clinician speaks the round. We turn it into the evidence the admission needs.</div>
+      </div>
+      <div>
+        <div class="cardhead"><i></i> What you already print</div>
+        <div class="movie" style="min-height:230px;border:0;border-bottom:1px solid var(--line)">
+          <span class="mid">MOVIE 05b</span>
+          <span class="what">A print dialog fires, paper comes out of the printer as normal, and the same page appears
+            on the claim. The point is that printing never breaks.</span>
+        </div>
+        <div class="cardbody">Discharge summaries, bills, lab reports. They print exactly as they do today and a copy
+          reaches the desk.</div>
+      </div>
+      <div>
+        <div class="cardhead"><i></i> Photo for what never prints</div>
+        <div class="movie" style="min-height:230px;border:0;border-bottom:1px solid var(--line)">
+          <span class="mid">MOVIE 05c</span>
+          <span class="what">Phone camera over a handwritten OT note and an implant sticker, each snapping onto the
+            right patient.</span>
+        </div>
+        <div class="cardbody">OT notes, vitals screens, implant stickers, consent forms. One photo, tied to the right
+          patient.</div>
+      </div>
+      <div>
+        <div class="cardhead"><i></i> Queries on WhatsApp</div>
+        <div class="movie" style="min-height:230px;border:0;border-bottom:1px solid var(--line)">
+          <span class="mid">MOVIE 05d</span>
+          <span class="what">WhatsApp message arrives, staff taps the link, one field to fill, done. No patient
+            details in the message itself.</span>
+        </div>
+        <div class="cardbody">The desk asks, the ward answers on the phone already in their pocket. No new app to
+          learn.</div>
+      </div>
+    </div>
+    <div class="note">Print lane is still an open design question, see proposed_solution.html. Do not promise a
+      specific mechanism on the site until a site visit settles it.</div>
+  </div>
+</section>
+
+<!-- 07 ONE INTEGRATION -->
+<section class="pad">
+  <div class="sectiontag">07 SCALE STORY</div>
+  <div class="wrap">
+    <div class="split">
+      <div>
+        <div class="eyebrow">One integration</div>
+        <h2>You do not build<br>an NHCX integration.</h2>
+      </div>
+      <div style="padding-top:58px">
+        <p>Salvia certifies once. A hospital joins with its facility ID and an OTP. No integration project, no vendor
+          selection, no eighteen month wait.</p>
+        <p>The same applies to your HMS. Until the integration is live, Salvia runs on what already prints and what
+          staff already photograph, from day one.</p>
+      </div>
+    </div>
+    <div class="movie field" style="margin-top:44px;min-height:260px">
+      <span class="mid">MOVIE 06 · ONE PIPE</span>
+      <span class="what">Many hospital marks on the left, each connecting to a single Salvia node, then one line out to
+        NHCX and on to the insurers. New hospitals keep joining the same node. The visual argument for the whole
+        business.</span>
+    </div>
+    <div class="note">NHCX is in build, sandbox awaiting approval. Site copy must say "we are building on NHCX",
+      never "live on NHCX".</div>
+  </div>
+</section>
+
+<!-- 08 HONEST -->
+<section class="pad" style="background:var(--ground2)">
+  <div class="sectiontag">08 WHAT WE DO NOT DO</div>
+  <div class="wrap">
+    <div class="eyebrow">Deliberately out of scope</div>
+    <h2>What Salvia will not do.</h2>
+    <p class="lead">Worth saying plainly, because every other vendor is vague about it.</p>
+    <div class="honest">
+      <div><span>NO</span> We do not upcode. We never suggest a diagnosis or a procedure that was not performed.</div>
+      <div><span>NO</span> We do not write clinical notes on a clinician's behalf. We show what is missing and ask.</div>
+      <div><span>NO</span> We do not take a percentage of your claim value.</div>
+      <div><span>NO</span> We do not change how a single ward staff member does their job.</div>
+    </div>
+  </div>
+</section>
+
+<!-- 09 CLOSER -->
+<section class="pad dark">
+  <div class="sectiontag">09 CLOSER</div>
+  <div class="wrap">
+    <div class="eyebrow">Get started</div>
+    <h2>See it against one week<br>of your own admissions.</h2>
+    <p class="lead">We will sit at your insurance desk for a day, take the last week of discharged files, and show you
+      what was missing and when it could still have been produced.</p>
+    <div style="display:flex;gap:10px;margin-top:28px"><span class="btn solid">Book a demo</span><span class="btn">Read the approach</span></div>
+  </div>
+</section>
+
+<footer><div class="wrap">Salvia · Melamphic AI Pvt Ltd · Kannur, Kerala &nbsp;&nbsp;·&nbsp;&nbsp; Security · DPDP · Contact</div></footer>
+
+<!-- ============ MOTION MANIFEST (build sheet, not part of the site) ============ -->
+<section class="pad" style="background:#1B1E1B;color:#D8DDD8;border-top:0">
+  <div class="wrap">
+    <div class="eyebrow" style="color:#8A948C">Build sheet · not a page section</div>
+    <h2 style="color:#fff;font-size:32px">Motion manifest</h2>
+    <p style="color:#9AA29C;max-width:70ch">Everything below is HTML, CSS and a little JS. No mp4, no gif, no Lottie,
+      no stock video. Ships as part of the bundle, scales on retina, stays crisp at any width, and the text inside it is
+      real text.</p>
+
+    <table style="width:100%;border-collapse:collapse;margin-top:34px;font-size:13px;text-align:left">
+      <thead>
+        <tr style="font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#7F8A82">
+          <th style="padding:10px 12px;border-bottom:1px solid #313531">ID</th>
+          <th style="padding:10px 12px;border-bottom:1px solid #313531">Section</th>
+          <th style="padding:10px 12px;border-bottom:1px solid #313531;width:30%">What moves</th>
+          <th style="padding:10px 12px;border-bottom:1px solid #313531;width:26%">Technique</th>
+          <th style="padding:10px 12px;border-bottom:1px solid #313531">Length</th>
+          <th style="padding:10px 12px;border-bottom:1px solid #313531">Trigger</th>
+        </tr>
+      </thead>
+      <tbody style="color:#B9C2BB">
+        <tr><td style="padding:12px;border-bottom:1px solid #262926;font-family:var(--mono);color:var(--mint)">01</td>
+          <td style="padding:12px;border-bottom:1px solid #262926">Hero background</td>
+          <td style="padding:12px;border-bottom:1px solid #262926">Ward grid. Cells light mint as evidence lands, amber when something is missing, mint again when a query is answered.</td>
+          <td style="padding:12px;border-bottom:1px solid #262926">CSS grid, JS scheduler picking random cells, opacity and background transitions only</td>
+          <td style="padding:12px;border-bottom:1px solid #262926">Ambient, endless</td>
+          <td style="padding:12px;border-bottom:1px solid #262926">Autoplay, pause button</td></tr>
+
+        <tr><td style="padding:12px;border-bottom:1px solid #262926;font-family:var(--mono);color:var(--mint)">02</td>
+          <td style="padding:12px;border-bottom:1px solid #262926">Problem</td>
+          <td style="padding:12px;border-bottom:1px solid #262926">Three lanes pile paper at a discharge wall, one document missing stops it. Replays as one shared track and clears.</td>
+          <td style="padding:12px;border-bottom:1px solid #262926">Absolutely positioned divs, keyframed transforms</td>
+          <td style="padding:12px;border-bottom:1px solid #262926">8s loop</td>
+          <td style="padding:12px;border-bottom:1px solid #262926">In view</td></tr>
+
+        <tr><td style="padding:12px;border-bottom:1px solid #262926;font-family:var(--mono);color:var(--mint)">03a b c</td>
+          <td style="padding:12px;border-bottom:1px solid #262926">How it works, 3 columns</td>
+          <td style="padding:12px;border-bottom:1px solid #262926">a. print, voice and photo fly into one patient card. b. checklist fills, one row stays amber. c. claim out, email back, amounts land.</td>
+          <td style="padding:12px;border-bottom:1px solid #262926">Small DOM fragments, staggered transitions</td>
+          <td style="padding:12px;border-bottom:1px solid #262926">3 to 4s each, staggered 400ms apart</td>
+          <td style="padding:12px;border-bottom:1px solid #262926">IntersectionObserver, once per entry</td></tr>
+
+        <tr><td style="padding:12px;border-bottom:1px solid #262926;font-family:var(--mono);color:var(--mint)">04</td>
+          <td style="padding:12px;border-bottom:1px solid #262926">The desk, hero feature</td>
+          <td style="padding:12px;border-bottom:1px solid #262926">The real desk UI on the mint field. Document arrives, rule goes green, query fires to the ward, answer returns onto the claim.</td>
+          <td style="padding:12px;border-bottom:1px solid #262926">Full DOM replica of the desk driven by a scripted state machine. The most expensive piece and the one worth it.</td>
+          <td style="padding:12px;border-bottom:1px solid #262926">14 to 18s</td>
+          <td style="padding:12px;border-bottom:1px solid #262926">In view, scrub or pause</td></tr>
+
+        <tr><td style="padding:12px;border-bottom:1px solid #262926;font-family:var(--mono);color:var(--mint)">05a to d</td>
+          <td style="padding:12px;border-bottom:1px solid #262926">Intake lanes, 2 by 2</td>
+          <td style="padding:12px;border-bottom:1px solid #262926">Voice waveform to structured note · print dialog to paper to claim · phone camera over an OT note · WhatsApp query, tap, one field, done.</td>
+          <td style="padding:12px;border-bottom:1px solid #262926">Four small looped fragments, each self contained</td>
+          <td style="padding:12px;border-bottom:1px solid #262926">5 to 6s each</td>
+          <td style="padding:12px;border-bottom:1px solid #262926">In view, paused off screen</td></tr>
+
+        <tr><td style="padding:12px;font-family:var(--mono);color:var(--mint)">06</td>
+          <td style="padding:12px">Scale story</td>
+          <td style="padding:12px">Many hospitals converge on one Salvia node, one line out to NHCX, on to the insurers. New hospitals keep joining.</td>
+          <td style="padding:12px">SVG paths, stroke-dashoffset draw</td>
+          <td style="padding:12px">6s loop</td>
+          <td style="padding:12px">In view</td></tr>
+      </tbody>
+    </table>
+
+    <h3 style="color:#fff;margin:48px 0 14px;font-size:18px">Rules that keep it out of AI slop territory</h3>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:#313531;border:1px solid #313531">
+      <div style="background:#1B1E1B;padding:18px 20px"><b style="color:#fff">Motion equals a state change.</b>
+        <span style="color:#9AA29C">Nothing floats, bobs, parallaxes or shimmers for decoration. If a thing moves, it is because that thing actually happens in the product.</span></div>
+      <div style="background:#1B1E1B;padding:18px 20px"><b style="color:#fff">Real strings, never lorem.</b>
+        <span style="color:#9AA29C">Bed 214. OT note. Pre-auth 4/6. Implant sticker missing. A hospital person should recognise every word on screen.</span></div>
+      <div style="background:#1B1E1B;padding:18px 20px"><b style="color:#fff">One thing moves at a time.</b>
+        <span style="color:#9AA29C">Inside a single frame, one change, then rest. Three simultaneous animations is what makes a page feel generated.</span></div>
+      <div style="background:#1B1E1B;padding:18px 20px"><b style="color:#fff">No bounce, no spring, no glow.</b>
+        <span style="color:#9AA29C">cubic-bezier(.2,0,0,1), 240 to 400ms. Opacity and transform only. No drop shadows that pulse.</span></div>
+      <div style="background:#1B1E1B;padding:18px 20px"><b style="color:#fff">Green is a field, not a coat of paint.</b>
+        <span style="color:#9AA29C">Mint appears as the ground behind a floating UI shot, and as the one primary button. Body text and borders stay neutral.</span></div>
+      <div style="background:#1B1E1B;padding:18px 20px"><b style="color:#fff">Pausable and reduced-motion honest.</b>
+        <span style="color:#9AA29C">Every loop has a pause control. prefers-reduced-motion renders the final frame, not a degraded wobble.</span></div>
+    </div>
+  </div>
+</section>

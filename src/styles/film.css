@@ -166,7 +166,7 @@
 .pf-canvas [data-tip] { transition: box-shadow var(--t-hover) var(--ease-out); }
 /* Inset, so a highlighted region never paints over its neighbours. */
 .pf-canvas [data-tip]:hover {
-  box-shadow: inset 0 0 0 1.5px hsl(158 64% 24% / .3);
+  box-shadow: inset 0 0 0 1.5px hsl(226 75% 43% / .3);
 }
 
 /* ---- shared app furniture -------------------------------------------- */
@@ -214,8 +214,8 @@
 @keyframes pfSlide { from { opacity: 0; transform: translateX(-10px); } to { opacity: 1; transform: none; } }
 @keyframes pfGrow { from { transform: scaleX(0); } to { transform: scaleX(1); } }
 @keyframes pfPulse {
-  0%, 100% { box-shadow: 0 0 0 0 hsl(158 64% 24% / 0); }
-  40%      { box-shadow: 0 0 0 5px hsl(158 64% 24% / .18); }
+  0%, 100% { box-shadow: 0 0 0 0 hsl(226 75% 43% / 0); }
+  40%      { box-shadow: 0 0 0 5px hsl(226 75% 43% / .18); }
 }
 
 .pf-in > * { animation: pfIn 420ms var(--ease-out) both; }

@@ -54,10 +54,13 @@ const STATIC_ROUTES = [
 // prerendering, the sitemap and what a visitor sees can never drift apart.
 const BLOG_SLUGS = visibleBlogSlugs();
 
-// Under INDIA_ONLY the only framework page that ships is NABH. The others still
-// route client-side and still exist on disk — they are simply not prerendered,
-// not in the sitemap, and not part of what the site argues.
-const SHIPPED_FRAMEWORK_SLUGS = INDIA_ONLY ? ['nabh'] : DEEP_FRAMEWORK_SLUGS;
+// Under INDIA_ONLY no framework page ships at all. NABH was the last one
+// standing and it was the stray: the site sells cashless claim integrity, and
+// an accreditation coverage page argued for a product that no longer exists —
+// the engine behind its coverage percentage has been removed from sal. The
+// pages still exist on disk and still route client-side; they are simply not
+// prerendered, not in the sitemap, and not linked from anywhere.
+const SHIPPED_FRAMEWORK_SLUGS = INDIA_ONLY ? [] : DEEP_FRAMEWORK_SLUGS;
 const SHIPPED_CATALOGUE_KEYS = INDIA_ONLY ? [] : frameworkKeys;
 
 const ALL_ROUTES = [
@@ -82,7 +85,7 @@ const META = {
   },
   '/blog': {
     title: 'Writing — record keeping, and the rules that judge it',
-    desc: 'What payers, courts and NABH actually look for in a clinical record, answered against the primary source with citations.',
+    desc: 'What a payer, a court or a regulator actually looks for in a clinical record, answered against the primary source with citations.',
   },
   '/start': {
     title: 'Show us the claims you lost',
@@ -196,16 +199,17 @@ const BLOG_META = {
 // these client-side, but those bots don't run JS — so the static copy is what
 // earns the structured-data + E-E-A-T credit. -----------------------------------
 const SITE = 'https://hellosalvia.com';
-// Salvia is a GLOBAL product, differentiated by FRAMEWORKS, not countries — the
-// schema is worldwide and country-name-free (frameworks are the localization).
-const AREA_SERVED = 'Worldwide';
+// One product, one country. The old schema described a worldwide compliance
+// platform differentiated by accreditation frameworks; that is not what is
+// sold here, and it is the copy every non-JS crawler was reading.
+const AREA_SERVED = 'India';
 const ORG_SCHEMA = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
   name: 'Salvia',
   url: SITE,
   logo: `${SITE}/favicon.png`,
-  description: 'The compliance platform for clinical care. Salvia turns every clinical record into structured evidence, and an always-on agent continuously proves your compliance against any framework — NABH, JCI, NSQHS, CMS, HEDIS and more.',
+  description: 'The claim integrity layer for Indian hospitals. Salvia brings every admission and every document to the insurance desk live, so a cashless claim file is complete while the evidence can still be created rather than chased after the patient has gone home.',
   areaServed: AREA_SERVED,
   sameAs: [],
 };
@@ -221,11 +225,12 @@ const SOFTWARE_SCHEMA = {
   offers: { '@type': 'Offer', category: 'subscription' },
   publisher: { '@type': 'Organization', name: 'Salvia', url: SITE },
   featureList: [
-    'Continuous clinical-compliance monitoring against any framework',
-    'Always-on compliance agent — drafts, flags gaps, maps every record to your standards',
-    'Policy engine that measures each policy on every note',
-    'AI clinical documentation from voice notes (multilingual)',
-    'Consent, prescription and incident records', 'Audit-ready evidence export',
+    'Live view of every admission and every document on a cashless claim',
+    'Missing evidence surfaced while the patient is still admitted',
+    'Queries routed to the person who can still produce the evidence',
+    'Pre-authorisation, enhancement, query response and final claim from one screen',
+    'Ward rounds and vitals captured by voice at the bedside, in any language',
+    'ABHA creation and linking against the live registry',
   ],
 };
 const BLOG_DATES = {

@@ -1,0 +1,589 @@
+<title>Salvia site reboot v3</title>
+<style>
+/* v3 — v1's landing and palette. White ground, v1 mint, v1 gradient field.
+   No label text above any title. Sharp corners, hairlines, no shadows. */
+:root{
+  --ground:#FFFFFF;
+  --ground2:#F6F8F6;
+  --ink:#0E1210;
+  --ink2:#3F463E;
+  --mute:#6E7671;
+  --faint:#99A096;
+  --line:#E6E9E6;
+  --line2:#CFD4CE;
+  --mint:#6FE3A4;
+  --mint-soft:#C9F5DC;
+  --mint-wash:#EAFBF2;
+  --deep:#0B4A2F;
+  --deep2:#08351F;
+  --amber:#A2680F;
+  --amber-soft:#FBF2DE;
+  --dark:#0B0C0B;
+  --mono:ui-monospace,"SF Mono",SFMono-Regular,Menlo,monospace;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI","Helvetica Neue",Arial,sans-serif;
+  --ease:cubic-bezier(.2,0,0,1);
+  --field:radial-gradient(120% 130% at 50% 0%,#6FE3A4 0%,#BFF3D6 55%,#F0FBF4 100%);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--ground);color:var(--ink);font-family:var(--sans);font-size:15px;
+  line-height:1.55;-webkit-font-smoothing:antialiased;font-variant-numeric:tabular-nums}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1180px;margin:0 auto;padding:0 clamp(20px,4vw,40px)}
+section{border-top:1px solid var(--line)}
+.pad{padding:clamp(60px,8vw,104px) 0}
+
+h1{font-size:clamp(38px,5vw,62px);line-height:1.03;letter-spacing:-.032em;font-weight:500;text-wrap:balance}
+h2{font-size:clamp(28px,3.4vw,42px);line-height:1.06;letter-spacing:-.028em;font-weight:500;max-width:18ch;text-wrap:balance}
+h3{font-size:17px;font-weight:600;letter-spacing:-.012em;line-height:1.3}
+p{color:var(--mute);max-width:56ch}
+.lede{font-size:clamp(15.5px,1.3vw,18px);color:var(--ink2);max-width:54ch;line-height:1.5}
+.mono{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase}
+
+.btn{display:inline-flex;align-items:center;gap:9px;font-family:var(--mono);font-size:11px;
+  letter-spacing:.09em;text-transform:uppercase;padding:11px 17px;border:1px solid var(--ink);
+  transition:.2s var(--ease);white-space:nowrap}
+.btn:hover{background:var(--ink);color:#fff}
+.btn.fill{background:var(--deep);border-color:var(--deep);color:#fff}
+.btn.fill:hover{background:var(--deep2);border-color:var(--deep2)}
+.btn svg{width:11px;height:11px;transition:transform .2s var(--ease)}
+.btn:hover svg{transform:translateX(3px)}
+
+header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);
+  backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+nav{display:flex;align-items:center;justify-content:space-between;height:62px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:600;font-size:16.5px;letter-spacing:-.018em}
+.mark{width:17px;height:17px;flex:none;display:grid;grid-template-columns:1fr 1fr;
+  grid-template-rows:1fr 1fr;gap:2px}
+.mark i{background:var(--deep);display:block}
+.mark i:nth-child(2){background:var(--mint)}
+.mark i:nth-child(3){opacity:.3}
+.navlinks{display:flex;gap:28px;font-size:14px;color:var(--ink2)}
+.navlinks a:hover{color:var(--deep)}
+.navact{display:flex;gap:9px}
+@media(max-width:880px){.navlinks{display:none}}
+
+/* ───────── hero: v1's stage and centred card ───────── */
+.hero{border-top:0;position:relative;overflow:hidden}
+.stage{position:relative;min-height:600px;display:grid;place-items:center;padding:60px 20px}
+#grid{position:absolute;inset:0;display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(78px,1fr));
+  grid-auto-rows:52px;pointer-events:none;
+  -webkit-mask-image:radial-gradient(78% 72% at 50% 46%,transparent 26%,#000 72%);
+          mask-image:radial-gradient(78% 72% at 50% 46%,transparent 26%,#000 72%)}
+#grid i{border-right:1px solid var(--line);border-bottom:1px solid var(--line);
+  background:transparent;transition:background 1.4s var(--ease)}
+#grid i.on{background:var(--mint-soft)}
+#grid i.hot{background:var(--mint)}
+.herocard{position:relative;z-index:2;background:var(--ground);border:1px solid var(--line2);
+  padding:clamp(38px,5vw,58px) clamp(26px,4.6vw,52px);text-align:center;max-width:740px}
+.herocard .c{position:absolute;font-family:var(--mono);font-size:12px;color:var(--line2);line-height:1}
+.herocard .c.tl{top:-6px;left:-5px}.herocard .c.tr{top:-6px;right:-5px}
+.herocard .c.bl{bottom:-6px;left:-5px}.herocard .c.br{bottom:-6px;right:-5px}
+.herocard .lede{margin:20px auto 0}
+.cta{display:flex;gap:10px;margin-top:30px;flex-wrap:wrap;justify-content:center}
+.micro{margin-top:18px;display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);
+  font-size:10px;letter-spacing:.11em;text-transform:uppercase;color:var(--faint)}
+.micro .d{width:6px;height:6px;background:var(--mint);border-radius:50%;
+  box-shadow:0 0 0 3px var(--mint-wash);animation:blink 2.8s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+.pausebtn{position:absolute;bottom:16px;right:16px;z-index:3;font-family:var(--mono);font-size:9px;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--mute);background:var(--ground);
+  border:1px solid var(--line);padding:6px 10px;cursor:pointer}
+.pausebtn:hover{border-color:var(--line2);color:var(--ink)}
+
+/* ───────── proof ───────── */
+.proof{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.proof>div{background:var(--ground);padding:24px clamp(16px,2.4vw,30px);display:flex;
+  align-items:center;gap:15px;min-height:100px}
+.slotlogo{width:48px;height:48px;flex:none;border:1px dashed var(--line2);display:grid;
+  place-items:center;font-family:var(--mono);font-size:7.5px;letter-spacing:.05em;
+  color:var(--faint);text-align:center;line-height:1.35}
+.proof .t{font-size:14px;font-weight:600;letter-spacing:-.01em}
+.proof .s{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--faint);margin-top:3px}
+@media(max-width:780px){.proof{grid-template-columns:1fr}}
+
+/* ───────── shared ───────── */
+.split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.82fr);
+  gap:clamp(24px,5vw,68px);align-items:end}
+@media(max-width:900px){.split{grid-template-columns:1fr;gap:20px;align-items:start}}
+.slot{position:relative}
+.mk{position:absolute;top:9px;right:9px;z-index:4;font-family:var(--mono);font-size:8px;
+  letter-spacing:.13em;color:var(--deep);background:var(--mint-soft);padding:3px 7px;pointer-events:none}
+
+.nlist{margin-top:40px;border-top:1px solid var(--line)}
+.nrow{display:grid;grid-template-columns:42px 1fr;gap:clamp(14px,2.4vw,32px);padding:21px 0;
+  border-bottom:1px solid var(--line);align-items:start}
+.nrow .n{font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:var(--faint);padding-top:4px}
+.nrow h3{margin-bottom:5px}
+.nrow p{font-size:14px;max-width:62ch}
+
+.shift{display:grid;grid-template-columns:1fr auto 1fr;gap:clamp(12px,2.4vw,30px);
+  align-items:stretch;margin-top:46px}
+@media(max-width:820px){.shift{grid-template-columns:1fr;gap:14px}}
+.tcard{border:1px solid var(--line2);background:var(--ground);padding:20px}
+.tcard .lbl{font-family:var(--mono);font-size:9px;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--faint);margin-bottom:10px}
+.tcard .nm2{font-size:16px;font-weight:600;letter-spacing:-.016em;margin-bottom:8px}
+.tcard ul{list-style:none;font-size:13px;color:var(--mute);line-height:1.8}
+.tcard li::before{content:"";display:inline-block;width:4px;height:4px;background:var(--line2);
+  margin-right:9px;vertical-align:middle}
+.arrow{display:grid;place-items:center;font-family:var(--mono);font-size:9px;letter-spacing:.12em;
+  color:var(--deep);gap:8px;align-content:center}
+.arrow .ln{width:46px;height:1px;background:var(--line2);position:relative;overflow:hidden}
+.arrow .ln::after{content:"";position:absolute;inset:0;background:var(--deep);
+  transform:translateX(-100%);animation:sw 3.4s var(--ease) infinite}
+@keyframes sw{0%{transform:translateX(-100%)}55%,100%{transform:translateX(100%)}}
+@media(max-width:820px){.arrow .ln{width:100%}}
+.tcard.one{border-color:var(--deep);background:var(--mint-wash);margin-top:20px}
+.tcard.one .lbl{color:var(--deep)}
+.tcard.one li::before{background:var(--mint)}
+.tcard.one ul{columns:2;column-gap:40px}
+@media(max-width:700px){.tcard.one ul{columns:1}}
+
+/* ───────── the gradient field ───────── */
+.field{margin-top:46px;border:1px solid var(--line2);background:var(--field);position:relative}
+.fin{padding:clamp(30px,5vw,68px) clamp(18px,3.4vw,56px) clamp(30px,5vw,68px);
+  display:flex;justify-content:center}
+.fcap{background:var(--ground);border-top:1px solid var(--line2);padding:19px clamp(18px,3vw,28px);
+  display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,3vw,38px)}
+@media(max-width:820px){.fcap{grid-template-columns:1fr;gap:15px}}
+.fcap h3{font-size:14.5px;margin-bottom:4px}
+.fcap p{font-size:13px}
+
+/* MOTION 01 — the claim file, real product vocabulary */
+.card{background:var(--ground);border:1px solid rgba(14,18,16,.14);width:100%;max-width:460px}
+.ch{display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding:12px 15px;border-bottom:1px solid var(--line)}
+.ch .id{font-family:var(--mono);font-size:10px;letter-spacing:.09em;color:var(--ink2)}
+.ch .clk{font-family:var(--mono);font-size:10px;letter-spacing:.07em;color:var(--amber);
+  background:var(--amber-soft);padding:3px 7px;white-space:nowrap}
+.cp{padding:11px 15px;font-size:12px;color:var(--mute);border-bottom:1px solid var(--line)}
+.cp b{color:var(--ink2);font-weight:500}
+.rows{padding:5px 0}
+.r{display:grid;grid-template-columns:16px 1fr auto;align-items:center;gap:11px;
+  padding:8px 15px;font-size:13px;opacity:0;
+  animation:rIn 13s var(--ease) infinite;animation-delay:calc(var(--i)*.6s)}
+@keyframes rIn{0%{opacity:0;transform:translateY(6px)}4%{opacity:1;transform:none}
+  92%{opacity:1;transform:none}97%,100%{opacity:0}}
+.r .bx{width:14px;height:14px;border:1px solid var(--line2);position:relative}
+.r .bx::after{content:"";position:absolute;left:4px;top:1px;width:3.5px;height:7.5px;
+  border:solid var(--deep);border-width:0 1.5px 1.5px 0;transform:rotate(42deg) scale(0);
+  animation:tk 13s var(--ease) infinite;animation-delay:calc(var(--i)*.6s + .3s)}
+@keyframes tk{0%,1%{transform:rotate(42deg) scale(0)}6%,100%{transform:rotate(42deg) scale(1)}}
+.r .nm{color:var(--ink2)}
+.r .tm{font-family:var(--mono);font-size:9.5px;color:var(--faint);letter-spacing:.05em}
+.r.gap{background:var(--amber-soft);animation:rGap 13s var(--ease) infinite;
+  animation-delay:calc(var(--i)*.6s)}
+@keyframes rGap{0%{opacity:0;transform:translateY(6px);background:var(--amber-soft)}
+  4%{opacity:1;transform:none}56%{background:var(--amber-soft)}
+  64%,92%{background:var(--mint-wash)}97%,100%{opacity:0}}
+.r.gap .bx{animation:bxc 13s infinite;animation-delay:calc(var(--i)*.6s)}
+@keyframes bxc{0%,56%{border-color:var(--amber)}64%,100%{border-color:var(--deep)}}
+.r.gap .bx::after{animation-delay:calc(var(--i)*.6s + 8s)}
+.r.gap .tm{color:var(--amber);animation:lbl 13s infinite;animation-delay:calc(var(--i)*.6s)}
+@keyframes lbl{0%,56%{opacity:1}60%,100%{opacity:0}}
+.cf{position:relative;border-top:1px solid var(--line);padding:11px 15px;min-height:40px;
+  display:flex;align-items:center;font-family:var(--mono);font-size:9.5px;letter-spacing:.07em;color:var(--mute)}
+.cf span{position:absolute;opacity:0}
+.cf .q{animation:fq 13s infinite}
+@keyframes fq{0%,42%{opacity:0}48%,60%{opacity:1}66%,100%{opacity:0}}
+.cf .ok{color:var(--deep);animation:fo 13s infinite}
+@keyframes fo{0%,66%{opacity:0}72%,94%{opacity:1}98%,100%{opacity:0}}
+
+/* ───────── capability ───────── */
+.caps{margin-top:42px;border-top:1px solid var(--line)}
+.cap{display:grid;grid-template-columns:clamp(140px,19vw,220px) 1fr auto;
+  gap:clamp(14px,3vw,38px);padding:19px 0;border-bottom:1px solid var(--line);align-items:baseline}
+.cap .k{font-size:15px;font-weight:600;letter-spacing:-.014em}
+.cap .v{font-size:14px;color:var(--mute);max-width:60ch}
+.cap .st{font-family:var(--mono);font-size:9px;letter-spacing:.11em;text-transform:uppercase;
+  color:var(--deep);white-space:nowrap}
+.cap .st.soon{color:var(--faint)}
+@media(max-width:760px){.cap{grid-template-columns:1fr;gap:4px}}
+
+/* ───────── pipe ───────── */
+.pipe{margin-top:44px;border:1px solid var(--line2);background:var(--ground);
+  padding:clamp(26px,4vw,52px) clamp(18px,3vw,42px)}
+.pipe svg{width:100%;height:auto;display:block;max-height:280px}
+.dd{stroke-dasharray:5 4;animation:dash 2.6s linear infinite}
+@keyframes dash{to{stroke-dashoffset:-18}}
+.np{animation:np 3s var(--ease) infinite}
+@keyframes np{0%,100%{opacity:.45}50%{opacity:1}}
+.pipefoot{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,3vw,38px);
+  margin-top:32px;padding-top:24px;border-top:1px solid var(--line)}
+@media(max-width:780px){.pipefoot{grid-template-columns:1fr;gap:18px}}
+.pipefoot h3{font-size:14.5px;margin-bottom:4px}
+.pipefoot p{font-size:13px}
+
+/* ───────── trust ───────── */
+.nots{margin-top:40px;border-top:1px solid var(--line)}
+.not{display:grid;grid-template-columns:70px 1fr;gap:clamp(12px,2.4vw,28px);padding:18px 0;
+  border-bottom:1px solid var(--line);align-items:baseline}
+.not .x{font-family:var(--mono);font-size:9px;letter-spacing:.12em;color:var(--amber)}
+.not .t{font-size:15px;color:var(--ink2);max-width:64ch}
+
+/* ───────── closer ───────── */
+.closer{background:var(--dark);color:#F1F3EF;border-top:0}
+.closer h2{color:#fff}
+.closer .lede{color:#A2AA9F}
+.closer .btn{border-color:#F1F3EF;color:#F1F3EF}
+.closer .btn:hover{background:#F1F3EF;color:var(--dark)}
+.closer .btn.fill{background:var(--mint);border-color:var(--mint);color:#082418}
+.closer .btn.fill:hover{background:#8BEDB6;border-color:#8BEDB6}
+.closer .cta{justify-content:flex-start}
+footer{background:var(--dark);color:#5D665B;border-top:1px solid #1B1E1A;font-family:var(--mono);
+  font-size:10px;letter-spacing:.09em;padding:22px 0}
+.frow{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+
+/* ───────── build sheet ───────── */
+.build{background:#171916;color:#C4CBC1;border-top:0}
+.build h2{color:#fff;font-size:28px}
+.build p{color:#8A9287}
+.mt{width:100%;border-collapse:collapse;margin-top:28px;font-size:12.5px;text-align:left}
+.mt th{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;
+  color:#67705E;padding:0 13px 10px 0;border-bottom:1px solid #2E332C;font-weight:400;vertical-align:bottom}
+.mt td{padding:13px 13px 13px 0;border-bottom:1px solid #222620;vertical-align:top;color:#ABB2A8}
+.mt td:first-child{font-family:var(--mono);color:var(--mint);font-size:10.5px;white-space:nowrap}
+.mt .ok2{color:var(--mint);font-family:var(--mono);font-size:9px;letter-spacing:.1em}
+.mt .td2{color:#8A9287;font-family:var(--mono);font-size:9px;letter-spacing:.1em}
+.rules{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1px;
+  background:#2E332C;border:1px solid #2E332C;margin-top:30px}
+.rules div{background:#171916;padding:17px 19px;font-size:13px;color:#8A9287;line-height:1.5}
+.rules b{color:#fff;display:block;margin-bottom:4px;font-size:13.5px}
+.flag{border-left:2px solid var(--mint);padding-left:14px;margin-top:22px;font-size:13px;color:#8A9287}
+.flag b{color:#fff}
+
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .r,.r.gap{opacity:1!important;transform:none!important}
+  .r .bx::after{transform:rotate(42deg) scale(1)!important}
+  .cf .ok{opacity:1!important}
+}
+</style>
+
+<header><div class="wrap"><nav>
+  <a class="brand" href="#"><span class="mark"><i></i><i></i><i></i><i></i></span> Salvia</a>
+  <div class="navlinks"><a href="#why">Why now</a><a href="#desk">Platform</a>
+    <a href="#caps">What it does</a><a href="#trust">Trust</a></div>
+  <div class="navact"><a class="btn" href="#">Sign in</a><a class="btn fill" href="#start">Book a demo</a></div>
+</nav></div></header>
+
+<!-- 01 HERO -->
+<section class="hero">
+  <div class="stage">
+    <div id="grid" aria-hidden="true"></div>
+    <div class="herocard">
+      <span class="c tl">+</span><span class="c tr">+</span><span class="c bl">+</span><span class="c br">+</span>
+      <h1>Insurance, finished<br>before the patient leaves.</h1>
+      <p class="lede">Salvia is the claim integrity layer for Indian hospitals. Your insurance work
+        stops being a pile of paper assembled after discharge and becomes a live file that is already
+        complete when the patient is ready to go.</p>
+      <div class="cta">
+        <a class="btn fill" href="#start">Book a demo
+          <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M1 6h9M6.5 2.5 10 6l-3.5 3.5"/></svg></a>
+        <a class="btn" href="#desk">See the platform</a>
+      </div>
+      <div class="micro"><span class="d"></span> Kannur, Kerala</div>
+    </div>
+    <button class="pausebtn" id="pause">Pause</button>
+  </div>
+</section>
+
+<!-- 02 PROOF -->
+<div class="wrap"><div class="proof">
+  <div><div class="slotlogo">KSUM<br>LOGO</div>
+    <div><div class="t">Kerala Startup Mission</div><div class="s">Registered</div></div></div>
+  <div><div class="slotlogo">STARTUP<br>INDIA</div>
+    <div><div class="t">Startup India</div><div class="s">Recognised</div></div></div>
+  <div><div class="slotlogo">HOSPEX<br>LOGO</div>
+    <div><div class="t">Best healthcare startup</div><div class="s">HOSPEX Kochi</div></div></div>
+</div></div>
+
+<!-- 03 WHY NOW -->
+<section id="why" class="pad"><div class="wrap">
+  <div class="split">
+    <h2>A great insurance team is a room full of people you cannot replace.</h2>
+    <p class="lede">Everything that makes a claim succeed lives in somebody's head. Which insurer wants
+      what. Which document draws a query. What to do when the diagnosis changes after admission. None
+      of it is written down, and it leaves the building when they do.</p>
+  </div>
+  <div class="nlist">
+    <div class="nrow"><span class="n">01</span><div>
+      <h3>Most of the process was never online</h3>
+      <p>Insurance in Indian hospitals still runs on paper, scanning, phone calls and email. There is a
+        system of record for the output, and none at all for the work.</p></div></div>
+    <div class="nrow"><span class="n">02</span><div>
+      <h3>Nobody sees a gap until it is too late to fix</h3>
+      <p>By the time a query arrives the patient has gone home. Evidence that would have taken thirty
+        seconds on the ward now cannot be created at all.</p></div></div>
+    <div class="nrow"><span class="n">03</span><div>
+      <h3>The same work is done twice</h3>
+      <p>Once for the patient, once for the claim. Two departments, two sets of paper, one admission,
+        and no shared view between them.</p></div></div>
+    <div class="nrow"><span class="n">04</span><div>
+      <h3>The bed stays blocked</h3>
+      <p>Discharge waits on the file. The file waits on people. The next admission waits on the bed.</p></div></div>
+  </div>
+</div></section>
+
+<!-- 04 THE SHIFT -->
+<section class="pad" style="background:var(--ground2)"><div class="wrap">
+  <div class="split">
+    <h2>Two departments become one desk.</h2>
+    <p class="lede">The team that handles inpatients and the team that handles insurance are doing one
+      job in two places. On Salvia they do one job in one place, and most of the work between them
+      stops existing.</p>
+  </div>
+  <div class="shift">
+    <div class="tcard"><div class="lbl">Today</div><div class="nm2">Inpatient and counselling</div>
+      <ul><li>Admits the patient</li><li>Explains the policy</li><li>Collects the paperwork</li><li>Hands it over</li></ul></div>
+    <div class="arrow"><span class="ln"></span>ONE DESK<span class="ln"></span></div>
+    <div class="tcard"><div class="lbl">Today</div><div class="nm2">Insurance</div>
+      <ul><li>Receives a finished pile</li><li>Scans and uploads</li><li>Answers queries blind</li><li>Chases the money</li></ul></div>
+  </div>
+  <div class="tcard one">
+    <div class="lbl">On Salvia</div>
+    <div class="nm2">One team, one live view, one submission</div>
+    <ul>
+      <li>Every admission visible the moment it opens</li>
+      <li>Deficiencies surfaced while they can still be fixed</li>
+      <li>Queries answered by the person who has the answer</li>
+      <li>Pre-auth, enhancement and final claim from one screen</li>
+      <li>Settlement matched back to the claim it belongs to</li>
+      <li>Fewer people to manage, not more</li>
+    </ul>
+  </div>
+</div></section>
+
+<!-- 05 THE DESK -->
+<section id="desk" class="pad"><div class="wrap">
+  <div class="split">
+    <h2>Autopilot. Human led.</h2>
+    <p class="lede">Salvia does the reading, the checking and the chasing. A person still decides.
+      Nothing is submitted, worded or answered without someone on your team saying yes.</p>
+  </div>
+  <div class="field">
+    <div class="fin">
+      <div class="card slot"><span class="mk">MOTION 01 · LIVE</span>
+        <div class="ch"><span class="id">IP 2026/4471</span><span class="clk">4h 12m left</span></div>
+        <div class="cp"><b>Fathima R</b> · 54 · F · Day 4 · Star Health via Medi Assist</div>
+        <div class="rows">
+          <div class="r" style="--i:0"><span class="bx"></span><span class="nm">Admission note</span><span class="tm">09:14</span></div>
+          <div class="r" style="--i:1"><span class="bx"></span><span class="nm">Pre-authorisation</span><span class="tm">09:41</span></div>
+          <div class="r" style="--i:2"><span class="bx"></span><span class="nm">Investigation reports</span><span class="tm">11:02</span></div>
+          <div class="r" style="--i:3"><span class="bx"></span><span class="nm">Operation theatre note</span><span class="tm">14:26</span></div>
+          <div class="r gap" style="--i:4"><span class="bx"></span><span class="nm">Implant sticker</span><span class="tm">Missing</span></div>
+          <div class="r" style="--i:5"><span class="bx"></span><span class="nm">Daily progress notes</span><span class="tm">18:00</span></div>
+          <div class="r" style="--i:6"><span class="bx"></span><span class="nm">Discharge summary</span><span class="tm">07:50</span></div>
+          <div class="r" style="--i:7"><span class="bx"></span><span class="nm">Final bill</span><span class="tm">08:05</span></div>
+        </div>
+        <div class="cf">
+          <span class="q">QUERY RAISED TO THEATRE · AWAITING</span>
+          <span class="ok">FILE COMPLETE · READY TO SUBMIT</span>
+        </div>
+      </div>
+    </div>
+    <div class="fcap">
+      <div><h3>Live, not retrospective</h3><p>Every admission and document appears as it happens, not
+        when somebody gets round to uploading it.</p></div>
+      <div><h3>Deficiencies, not opinions</h3><p>What is missing against what this claim needs.
+        Specific, addressed to a person, while there is still time.</p></div>
+      <div><h3>One place to submit</h3><p>Pre-authorisation, enhancement, query response and the final
+        claim all leave from the same screen.</p></div>
+    </div>
+  </div>
+</div></section>
+
+<!-- 06 CAPABILITY -->
+<section id="caps" class="pad" style="background:var(--ground2)"><div class="wrap">
+  <div class="split">
+    <h2>What the desk actually watches.</h2>
+    <p class="lede">Not a dashboard of numbers you already knew. A running check on the things that
+      decide whether a claim survives.</p>
+  </div>
+  <div class="caps">
+    <div class="cap"><span class="k">Missing evidence</span><span class="v">What this admission needs
+      but does not yet have, flagged while the patient is still in the bed.</span><span class="st soon">In build</span></div>
+    <div class="cap"><span class="k">Changed diagnosis</span><span class="v">When the diagnosis moves
+      after admission and the authorisation no longer matches what is being treated.</span><span class="st soon">In build</span></div>
+    <div class="cap"><span class="k">Query prediction</span><span class="v">Whether this file will draw
+      a query before you submit it, and what to add so that it does not.</span><span class="st soon">In build</span></div>
+    <div class="cap"><span class="k">Policy rules</span><span class="v">What each insurer will and will
+      not pay for, applied to this claim rather than remembered by one person.</span><span class="st soon">In build</span></div>
+    <div class="cap"><span class="k">Appeal support</span><span class="v">When a claim is cut, the
+      evidence and the wording for the appeal, drawn from the file that already exists.</span><span class="st soon">In build</span></div>
+    <div class="cap"><span class="k">Settlement matching</span><span class="v">What was paid, what was
+      deducted, and the insurer's own stated reason, against the claim it belongs to.</span><span class="st soon">In build</span></div>
+  </div>
+</div></section>
+
+<!-- 07 ADOPTION -->
+<section class="pad"><div class="wrap">
+  <div class="split">
+    <h2>You do not wait for an integration to start.</h2>
+    <p class="lede">An HMS integration is a project with a timeline. The desk should not sit idle until
+      it finishes, so it does not. You work from the first admission, and the integration deepens what
+      you see rather than switching it on.</p>
+  </div>
+  <div class="pipe slot"><span class="mk">MOTION 02 · LIVE</span>
+    <svg viewBox="0 0 900 250" fill="none" aria-label="Many hospitals, one integration">
+      <g font-family="ui-monospace,Menlo,monospace" font-size="10" letter-spacing=".08em" fill="#6E7671">
+        <text x="2" y="34">HOSPITAL A</text><text x="2" y="82">HOSPITAL B</text>
+        <text x="2" y="130">HOSPITAL C</text><text x="2" y="178">HOSPITAL D</text>
+        <text x="2" y="226">HOSPITAL E</text>
+        <text x="748" y="106" fill="#0B4A2F">INSURERS</text><text x="748" y="152" fill="#0B4A2F">TPAs</text>
+      </g>
+      <g stroke="#CFD4CE" stroke-width="1.2">
+        <path class="dd" d="M92 30 C 215 30, 245 116, 366 122"/>
+        <path class="dd" d="M92 78 C 215 78, 245 120, 366 124"/>
+        <path class="dd" d="M92 126 H 366"/>
+        <path class="dd" d="M92 174 C 215 174, 245 134, 366 128"/>
+        <path class="dd" d="M92 222 C 215 222, 245 138, 366 130"/>
+      </g>
+      <rect x="366" y="94" width="160" height="64" fill="#0B4A2F"/>
+      <text x="446" y="122" text-anchor="middle" fill="#fff" font-size="15" font-weight="600"
+        letter-spacing="-.02em" font-family="-apple-system,sans-serif">Salvia</text>
+      <text x="446" y="140" text-anchor="middle" fill="#6FE3A4" font-size="8.5" letter-spacing=".14em"
+        font-family="ui-monospace,Menlo,monospace">ONE CONNECTION</text>
+      <g stroke="#0B4A2F" stroke-width="1.5">
+        <path class="dd" d="M526 116 C 630 116, 630 100, 736 100"/>
+        <path class="dd" d="M526 138 C 630 138, 630 146, 736 146"/>
+      </g>
+      <g fill="#6FE3A4" class="np">
+        <circle cx="92" cy="30" r="3.2"/><circle cx="92" cy="78" r="3.2"/><circle cx="92" cy="126" r="3.2"/>
+        <circle cx="92" cy="174" r="3.2"/><circle cx="92" cy="222" r="3.2"/>
+      </g>
+    </svg>
+    <div class="pipefoot">
+      <div><h3>Nothing changes on the ward</h3><p>Your clinical staff keep working exactly as they do
+        today. That is a design constraint, not a nice to have.</p></div>
+      <div><h3>Live from the start</h3><p>You do not wait for the integration to finish before the desk
+        is useful. It works from the first admission.</p></div>
+      <div><h3>Built for the national rails</h3><p>Our claim model follows NHCX's own workflow
+        vocabulary, so the transport is a swap rather than a rebuild.</p></div>
+    </div>
+  </div>
+</div></section>
+
+<!-- 08 TRUST -->
+<section id="trust" class="pad" style="background:var(--ground2)"><div class="wrap">
+  <div class="split">
+    <h2>What Salvia will not do.</h2>
+    <p class="lede">Worth writing down, because every other vendor in this market is careful not to.</p>
+  </div>
+  <div class="nots">
+    <div class="not"><span class="x">NEVER</span><span class="t">Upcode. We will not suggest a diagnosis
+      or a procedure that did not happen, at any margin.</span></div>
+    <div class="not"><span class="x">NEVER</span><span class="t">Write a clinical note on a clinician's
+      behalf. We show what is missing and ask the person who knows.</span></div>
+    <div class="not"><span class="x">NEVER</span><span class="t">Submit anything without a person on your
+      team approving it. Autopilot still has a pilot.</span></div>
+    <div class="not"><span class="x">NEVER</span><span class="t">Take a percentage of your claim value.
+      Our incentive should not move with your billing.</span></div>
+    <div class="not"><span class="x">NEVER</span><span class="t">Ask your ward staff to work differently
+      to make our software look good.</span></div>
+    <div class="not"><span class="x">NEVER</span><span class="t">Give a false all clear. If the theatre
+      note never arrived it says not received, never fine.</span></div>
+  </div>
+</div></section>
+
+<!-- 09 CLOSER -->
+<section id="start" class="closer pad"><div class="wrap">
+  <h2>Show us one week of discharged files.</h2>
+  <p class="lede" style="margin-top:20px">We will sit with your insurance desk for a day, take the last
+    week of files you have already closed, and show you what was missing and the exact moment it could
+    still have been produced. No slides.</p>
+  <div class="cta">
+    <a class="btn fill" href="#">Book a demo
+      <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M1 6h9M6.5 2.5 10 6l-3.5 3.5"/></svg></a>
+    <a class="btn" href="#">Talk to the founders</a>
+  </div>
+</div></section>
+
+<footer><div class="wrap"><div class="frow">
+  <span>SALVIA · MELAMPHIC AI PVT LTD · KANNUR, KERALA</span>
+  <span>SECURITY · DPDP · PRIVACY · CONTACT</span>
+</div></div></footer>
+
+<!-- BUILD SHEET — not part of the site -->
+<section class="build pad"><div class="wrap">
+  <h2>Motion manifest</h2>
+  <p style="margin-top:12px;max-width:70ch">All HTML, CSS and a little JS. No mp4, no gif, no Lottie.
+    Real text inside every frame, so it stays crisp, themeable and translatable.</p>
+  <table class="mt">
+    <thead><tr><th>ID</th><th>Where</th><th style="width:40%">What moves</th><th>Technique</th><th>State</th></tr></thead>
+    <tbody>
+      <tr><td>00</td><td>Hero ground</td><td>The ruled grid behind the card. Cells light mint as evidence
+        lands somewhere in the hospital, then fade. Ambient, masked away from the card so it never fights
+        the headline.</td><td>JS scheduler over a CSS grid, pausable</td><td class="ok2">BUILT</td></tr>
+      <tr><td>01</td><td>The desk, on the gradient</td><td>A claim file assembling. Rows tick in, the
+        implant sticker goes amber and missing, a query is raised to theatre, the row clears, the file
+        reads ready to submit. The clock is the contractual one your app already computes.</td>
+        <td>CSS keyframes, per-row stagger</td><td class="ok2">BUILT</td></tr>
+      <tr><td>02</td><td>Adoption</td><td>Hospitals converge on one connection, one line out to the
+        insurers.</td><td>SVG stroke-dashoffset</td><td class="ok2">BUILT</td></tr>
+      <tr><td>03</td><td>The shift</td><td>Two task columns slide into one and half the rows vanish,
+        because they were the same task twice.</td><td>CSS transforms</td><td class="td2">TO BUILD</td></tr>
+      <tr><td>04</td><td>The desk, full</td><td>The whole desk UI rather than one card. Admission list,
+        deficiency panel, query going out and coming back. Needs the real app on screen.</td>
+        <td>DOM replica, scripted state machine</td><td class="td2">TO BUILD</td></tr>
+    </tbody>
+  </table>
+
+  <h3 style="color:#fff;margin:40px 0 0;font-size:16px">Rules that keep this out of AI slop territory</h3>
+  <div class="rules">
+    <div><b>Motion equals a state change</b>Nothing floats, bobs or shimmers to fill space. If it moves,
+      that thing genuinely happens in the product.</div>
+    <div><b>Real product strings only</b>IP 2026/4471. Star Health via Medi Assist. Day 4. Implant
+      sticker. All taken from the shipped app, not invented.</div>
+    <div><b>One thing moves at a time</b>Inside a frame, one change, then rest. Three simultaneous
+      animations is what makes a page feel generated.</div>
+    <div><b>No shadows, no glow</b>Hairlines and flat fills only. The gradient field is the single
+      exception and it appears once.</div>
+    <div><b>Deep green on light, mint on dark</b>One hue, two values. Mint is a field or a live signal,
+      never body colour.</div>
+    <div><b>Reduced motion is honest</b>prefers-reduced-motion renders the finished frame, not a
+      degraded wobble. Already wired.</div>
+  </div>
+
+  <h3 style="color:#fff;margin:40px 0 0;font-size:16px">Claims audit — before any of this goes public</h3>
+  <div class="flag"><b>The award is undocumented.</b> Nothing in the repo holds an organiser
+    announcement, certificate or email for HOSPEX. Keep the proof from Trithvam Integris before the
+    logo goes up, and settle whether the year reads 2026 or 2027.</div>
+  <div class="flag"><b>KSUM and Startup India need checking.</b> The KSUM unique ID is recorded as a
+    to-do, not an achievement, and nothing records a Startup India recognition number. Verify both
+    before those two logo slots are filled.</div>
+  <div class="flag"><b>Everything on the capability list is marked in build, because it is.</b> The
+    claims queue in the app runs on four hard-coded sample claims and sal has no claims endpoints.
+    What is shipped is capture: bedside rounds, outpatients, admissions, vitals, discharge,
+    prescriptions, ABHA.</div>
+  <div class="flag"><b>NHCX wording is deliberately narrow.</b> No date, no "ready", no "certified",
+    no "mandate". Only that the claim model follows NHCX's workflow vocabulary, which is true today.</div>
+  <div class="flag"><b>No hospital names anywhere, no deduction percentage anywhere.</b> Both are
+    barred by the audit. Aster in particular must never appear.</div>
+</div></section>
+
+<script>
+(function(){
+  var g=document.getElementById('grid'),btn=document.getElementById('pause');
+  if(!g)return;
+  var reduce=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+  for(var i=0;i<300;i++)g.appendChild(document.createElement('i'));
+  var cells=g.children,timer=null;
+  function tick(){
+    var n=2+Math.floor(Math.random()*3);
+    for(var k=0;k<n;k++){
+      var c=cells[Math.floor(Math.random()*cells.length)];
+      c.className=Math.random()<.28?'hot':'on';
+      (function(el){setTimeout(function(){el.className='';},1400+Math.random()*2200);})(c);
+    }
+  }
+  function start(){if(!timer)timer=setInterval(tick,520);btn.textContent='Pause';}
+  function stop(){clearInterval(timer);timer=null;btn.textContent='Play';}
+  btn.addEventListener('click',function(){timer?stop():start();});
+  if(!reduce)start();else btn.textContent='Play';
+})();
+</script>

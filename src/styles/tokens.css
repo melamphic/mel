@@ -2,22 +2,34 @@
    Salvia design tokens — the single source of truth.
 
    Rules this file exists to enforce:
-   - TWO typefaces. Not six. Headings and body, nothing else.
+   - ONE typeface. Not two, not six.
    - ONE accent colour. It appears on calls to action and nowhere else.
    - A FIXED spacing scale. No one-off pixel values anywhere in a component.
    - Contrast at WCAG AA minimum (4.5:1 body, 3:1 large text and controls),
      because this audience skews older and it is not decoration.
 
-   Reference: Razorpay's restraint — white ground, near-black type, one blue,
-   generous space, product imagery doing the talking rather than gradients.
+   The site now shares the product's system. Salvia the app runs Hairline —
+   cobalt on near-white, 1px borders, no shadows, square corners, colour
+   reserved for state. A marketing site in a different palette makes every
+   product shot look like another company's software, so the site moved to
+   the product rather than the other way round.
+
+   The previous direction (deep green accent, warm cream paper, Archivo +
+   Inter, hard offset shadows, 4/8/14 radii) is gone. Do not reintroduce it
+   piecemeal.
    ========================================================================== */
 
 :root {
   /* ---- Type ---------------------------------------------------------- */
-  /* Headings. Geometric, confident, slightly tight. */
-  --font-display: "Archivo", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  /* Body. Neutral, boring on purpose, excellent at 16px. */
-  --font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  /* One family. The system stack renders as SF on Mac and iOS, Segoe on
+     Windows, Roboto on Android — each one already tuned for its screen, and
+     none of them costs a network request. Headings differ from body by size,
+     weight and tracking, never by family. */
+  --font-display: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  --font-body: var(--font-display);
+  /* Product frames only — anything rendering real app UI. Matches the app. */
+  --font-product: "Public Sans", var(--font-body);
+  --font-mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, monospace;
 
   /* Type scale. Nothing between these steps. */
   --text-xs: 0.8125rem;   /* 13 — labels, captions */
@@ -30,47 +42,72 @@
   --text-4xl: 3rem;       /* 48 */
   --text-5xl: 3.75rem;    /* 60 — hero only */
 
-  --leading-tight: 1.15;  /* display */
-  --leading-snug: 1.35;   /* subheads */
-  --leading-body: 1.6;    /* body — never below 1.5 */
-  --measure: 66ch;        /* line length. 45–90 is readable, 66 is optimal. */
+  --leading-tight: 1.05;  /* display — tighter than before, it reads as set */
+  --leading-snug: 1.3;    /* subheads */
+  --leading-body: 1.55;   /* body — never below 1.5 */
+  --measure: 62ch;        /* line length */
 
   --weight-normal: 400;
   --weight-medium: 500;
   --weight-semi: 600;
   --weight-bold: 700;
 
+  /* Display type is tracked in, body is not. The single cheapest thing that
+     separates set type from default type. */
+  --track-display: -0.032em;
+  --track-title: -0.02em;
+
   /* ---- Colour -------------------------------------------------------- */
-  /* Greys carry the page. Built in HSL so the scale stays coherent. */
-  --ink:        hsl(210 24%  10%);   /* headings, near black */
-  --body:       hsl(210 12%  32%);   /* body copy — 8.9:1 on white */
-  --muted:      hsl(210 10%  48%);   /* secondary — 4.6:1, still AA */
-  --faint:      hsl(210 12%  64%);   /* decorative only, never body text */
-  --line:       hsl(210 16%  90%);   /* borders */
-  --line-soft:  hsl(210 20%  95%);   /* dividers */
-  /* Warm paper, not cold white. A cool grey-white is the browser default and
-     reads as unchosen; the references all sit on cream. This is the single
-     biggest reason the page felt lifeless. */
-  --paper:      hsl(40 33% 96%);     /* page ground */
-  --surface:    hsl(0 0% 100%);      /* cards sit ON the paper */
-  --surface-2:  hsl(40 25% 93%);     /* alternating bands */
-  --surface-3:  hsl(40 20% 90%);     /* inset panels */
+  /* Greys are cool, matching the app's #131820 ink. A warm cream ground went
+     muddy the moment cobalt sat on it. */
+  --ink:        #131820;   /* headings, near black — 16.8:1 on white */
+  --body:       #4B5563;   /* body copy — 7.6:1 */
+  --muted:      #5E6771;   /* secondary — 5.8:1, still AA */
+  --faint:      #8A929C;   /* decorative only, never body text */
+  --line:       #E7E9ED;   /* borders */
+  --line-soft:  #F1F3F7;   /* dividers */
+  --line-strong:#CDD3DB;   /* a border that has to be seen on white */
 
-  /* ONE accent. Deep green: reads clinical and calm, not startup-purple,
-     and it is not the grass green that was rejected. 5.8:1 on white. */
-  --accent:       hsl(158 64%  24%);
-  --accent-hover: hsl(158 64%  19%);
-  --accent-soft:  hsl(158 44%  96%);  /* tinted background only */
-  --accent-line:  hsl(158 30%  86%);
+  --paper:      #FFFFFF;   /* page ground */
+  --surface:    #FFFFFF;   /* cards */
+  --surface-2:  #F5F7FA;   /* alternating bands */
+  --surface-3:  #E7E9ED;   /* inset panels */
 
-  /* A second DEEP tone, for card grounds only - never for a call to action.
-     Tonal variety without a second accent competing for the eye. */
-  --deep:      hsl(355 42% 24%);     /* claret */
-  --deep-soft: hsl(355 30% 88%);
+  /* ONE accent. Cobalt, exactly the app's. 8.0:1 on white. */
+  --accent:       #1B44C0;
+  --accent-hover: #16379B;
+  --accent-soft:  #E9EEFC;  /* tinted background only */
+  --accent-line:  #C6D2F2;
+  /* Two steps between, for charts and diagrams that need more than one blue.
+     Never for a call to action, never for state. */
+  --accent-mid:   #4E6FD4;
+  --accent-pale:  #8CA2E5;
 
-  /* Semantic. Used for state, never for decoration. */
-  --warn:   hsl(35 84% 32%);
-  --danger: hsl(9 62% 42%);
+  /* Identity blue. Chrome only: the band behind a page title, a menu mark.
+     Never data, never a status, never a button. Same rule as the app. */
+  --chrome:      #1A5E8A;
+  --chrome-soft: #E7F0F6;
+  --chrome-line: #D3E2EC;
+  /* Kept as aliases because site.css still paints card grounds with them.
+     They used to be claret. A second warm hue against cobalt was the other
+     half of why the old page felt like two designs. */
+  --deep:      var(--chrome);
+  --deep-soft: var(--chrome-soft);
+
+  /* Semantic. State, never decoration. Every one of these carries a word
+     alongside it — colour is how you find the state, not how you read it. */
+  --ok:        #0F6B5C;
+  --ok-soft:   #E0F3EE;
+  --warn:      #8C4B00;
+  --warn-soft: #FFF1DC;
+  --danger:    #B42323;
+  --danger-soft:#FDE7E7;
+
+  /* The one gradient on the site, behind a product shot and nowhere else. */
+  --field: radial-gradient(120% 130% at 50% 0%, #1B44C0 0%, #5C7BD9 38%, #AFC1EE 70%, #EDF1FB 100%);
+
+  /* Near-black, for the closing section and the footer. */
+  --dark: #0B0D12;
 
   /* ---- Spacing. Every margin and pad comes from here. ----------------- */
   --space-1: 0.25rem;   /*  4 */
@@ -85,17 +122,25 @@
   --space-10: 8rem;     /* 128 — section rhythm on desktop */
 
   /* ---- Structure ----------------------------------------------------- */
-  --container: 1120px;
+  --container: 1180px;
   --container-narrow: 720px;   /* prose */
-  --radius-sm: 4px;
-  --radius: 8px;
-  --radius-lg: 14px;
 
-  /* Hard offset, not a blur. A soft drop shadow is the framework default;
-     a solid offset edge is a decision. */
-  --shadow-sm: 2px 2px 0 hsl(210 24% 10%);
-  --shadow: 4px 4px 0 hsl(210 24% 10%);
-  --shadow-lift: 0 1px 3px hsl(40 20% 20% / .08);
+  /* Square. A page made of rounded floating cards reads as a template; the
+     app is square for the same reason. Kept as variables so a rounded corner
+     is a deliberate override rather than scattered zeroes. */
+  --radius-sm: 0;
+  --radius: 0;
+  --radius-lg: 0;
+
+  /* No shadows. Elevation is a 1px border and a change of tone. The offset
+     shadows this file used to carry were the loudest thing on the page. */
+  --shadow-sm: none;
+  --shadow: none;
+  --shadow-lift: none;
+
+  --ease: cubic-bezier(.2, 0, 0, 1);
+  --dur-fast: 120ms;
+  --dur: 220ms;
 
   --section-y: var(--space-9);
 }
@@ -104,15 +149,22 @@
   :root { --section-y: var(--space-10); }
 }
 
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+
 /* ==========================================================================
    Banned, and why. Kept here so it is enforceable in review.
 
-   - No gradient backgrounds on sections. The single clearest "generated page"
-     tell, especially purple and indigo.
-   - No three-equal-icon feature grids.
-   - No stock illustration and no generic 3D shapes.
-   - No second accent colour. If something needs to stand out and the accent is
-     taken, it does not need to stand out.
+   - No gradient section backgrounds. --field is the single exception and it
+     appears once, behind a product shot.
+   - No second accent colour. If something needs to stand out and the accent
+     is taken, it does not need to stand out.
+   - No shadows outside a popover.
+   - No colour without a word beside it. A bare coloured dot is a bug.
+   - No ALL CAPS inside a product frame. The app is sentence case and a
+     screenshot that shouts is not the app.
+   - No three-equal-icon feature grids, no stock illustration, no generic 3D.
    - No font-size below 16px for anything a buyer must read.
    - No pixel value that is not on the spacing scale.
    ========================================================================== */
