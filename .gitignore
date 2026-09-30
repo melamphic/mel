@@ -32,3 +32,4 @@ dist-ssr
 
 # graphify knowledge graph output
 graphify-out/
+og/og-*.png

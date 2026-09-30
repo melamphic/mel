@@ -265,51 +265,6 @@
 @keyframes na { 0%,10%{opacity:0} 16%,58%{opacity:1} 64%,100%{opacity:0} }
 @keyframes nb { 0%,62%{opacity:0} 68%,96%{opacity:1} 99%,100%{opacity:0} }
 
-/* ── the two paths racing ───────────────────────────────────────────────── */
-.race { border:1px solid var(--ln); border-radius:6px; overflow:hidden; background:var(--sf); }
-.lane { padding:18px 20px 20px; }
-.lane + .lane { border-top:1px solid var(--ln); }
-.lane.on { background:var(--acs); }
-.lanehead { display:flex; align-items:center; justify-content:space-between; gap:14px;
-  margin-bottom:14px; flex-wrap:wrap; }
-.track { display:flex; gap:4px; align-items:stretch; }
-.seg { flex:var(--f); min-width:0; border-radius:2px; padding:9px 10px 10px; background:#fff;
-  box-shadow:inset 0 0 0 1px var(--ln);
-  animation:segOn 16s var(--ease) infinite; animation-delay:calc(var(--d) * 1s); }
-.lane.on .seg { animation-name:segOnOk; }
-.seg.wait { animation-name:segOnWait; }
-@keyframes segOn { 0%,1%{background:#fff;box-shadow:inset 0 0 0 1px var(--ln)}
-  5%,96%{background:var(--acs);box-shadow:inset 0 0 0 1px transparent}
-  99%,100%{background:#fff;box-shadow:inset 0 0 0 1px var(--ln)} }
-@keyframes segOnOk { 0%,1%{background:#fff;box-shadow:inset 0 0 0 1px var(--ln)}
-  5%,96%{background:var(--oks);box-shadow:inset 0 0 0 1px transparent}
-  99%,100%{background:#fff;box-shadow:inset 0 0 0 1px var(--ln)} }
-@keyframes segOnWait { 0%,1%{background:#fff;box-shadow:inset 0 0 0 1px var(--ln)}
-  5%,96%{background:var(--wns);box-shadow:inset 0 0 0 1px transparent}
-  99%,100%{background:#fff;box-shadow:inset 0 0 0 1px var(--ln)} }
-.seg em, .seg i { display:block; font-style:normal; overflow:hidden; text-overflow:ellipsis;
-  white-space:nowrap; animation:segInk 16s var(--ease) infinite; animation-delay:calc(var(--d) * 1s); }
-.seg em { font-size:12.5px; font-weight:600; }
-.seg i  { font-size:11.5px; font-weight:500; margin-top:1px; animation-name:segInkSub; }
-@keyframes segInk    { 0%,1%{color:var(--i4)} 5%,96%{color:var(--i1)} 99%,100%{color:var(--i4)} }
-@keyframes segInkSub { 0%,1%{color:var(--i4)} 5%,96%{color:var(--i3)} 99%,100%{color:var(--i4)} }
-.seg.wait em { animation-name:segInkWarn; }
-.seg.wait i  { animation-name:segInkWarnSub; }
-@keyframes segInkWarn    { 0%,1%{color:var(--i4)} 5%,96%{color:var(--wn)} 99%,100%{color:var(--i4)} }
-@keyframes segInkWarnSub { 0%,1%{color:var(--i4)} 5%,96%{color:#A9722B} 99%,100%{color:var(--i4)} }
-.spacer { flex:var(--f); min-width:0; }
-.finish { display:grid; margin-top:12px; }
-.finish > span { grid-area:1/1; opacity:0; }
-.finish .a { animation:finA 16s infinite; }
-.finish .b { animation:finB 16s infinite; }
-.lane.on .finish .a { animation-name:finAEarly; }
-.lane.on .finish .b { animation-name:finBEarly; }
-@keyframes finA { 0%,52%{opacity:1} 58%,100%{opacity:0} }
-@keyframes finB { 0%,54%{opacity:0} 60%,96%{opacity:1} 99%,100%{opacity:0} }
-@keyframes finAEarly { 0%,24%{opacity:1} 30%,100%{opacity:0} }
-@keyframes finBEarly { 0%,26%{opacity:0} 31%,96%{opacity:1} 99%,100%{opacity:0} }
-@media (max-width:760px) { .track{flex-direction:column} .seg{flex:none} .spacer{display:none} }
-
 /* ── the same desk, before and after the integration ────────────────────── */
 .twoup { display:grid; grid-template-columns:1fr 1fr; gap:clamp(18px,3vw,32px); align-items:start; }
 @media (max-width:860px) { .twoup { grid-template-columns:1fr; gap:30px; } }
@@ -349,16 +304,45 @@
 @media (max-width:860px) { .gbody{grid-template-columns:1fr} }
 .gpane { padding:16px 20px; border-right:1px solid var(--ln); }
 .gpane:last-child { border-right:0; }
-.chart { display:flex; align-items:flex-end; gap:clamp(4px,.9vw,8px); height:150px; margin-top:14px; }
-.bar { flex:1; display:flex; flex-direction:column; justify-content:flex-end; height:100%; }
-.bar u { display:block; text-decoration:none; transform-origin:bottom; transform:scaleY(0);
-  animation:grow .9s var(--ease) forwards; }
-@keyframes grow { to { transform:scaleY(1); } }
-.bar .g1{background:var(--accent)} .bar .g2{background:var(--accent-mid)}
-.bar .g3{background:var(--accent-pale)} .bar .g4{background:var(--accent-line)}
-.legend { display:flex; gap:14px; margin-top:12px; flex-wrap:wrap; }
-.legend span { display:inline-flex; align-items:center; gap:6px; font-size:12px; font-weight:500; color:var(--i3); }
-.legend i { width:8px; height:8px; display:block; border-radius:2px; }
+/* Ageing, not activity.
+   This pane used to plot documents-per-day by source: twelve stacked bars,
+   each normalised to full height, so every bar looked identical and volume
+   was invisible. It showed that things happen. An insurance head already
+   knows things happen — the question is how much money is sitting with a
+   payer and how long it has been there. */
+.aged { display: grid; gap: 10px; margin-top: 16px; }
+.age {
+  display: grid; grid-template-columns: 86px minmax(0, 1fr) 52px 48px;
+  gap: 12px; align-items: center; font-size: 12.5px;
+  animation: ageIn 520ms var(--ease) both; animation-delay: calc(var(--i) * 90ms);
+}
+@keyframes ageIn { from { opacity: 0; } to { opacity: 1; } }
+.age-l { color: var(--i3); font-weight: 500; }
+.age-bar { height: 22px; background: var(--sf2); border-radius: 2px; overflow: hidden; }
+/* One hue, four steps. Age is a gradient, not a state — so it reads in the
+   accent ramp rather than borrowing amber, which on this site means
+   something needs doing. The oldest money is the darkest bar, so the eye
+   lands on the short dark one: least volume, most trouble. */
+.age-bar i {
+  display: block; height: 100%; width: var(--w); background: var(--ac);
+  transform-origin: left; transform: scaleX(0);
+  animation: ageGrow 760ms var(--ease) forwards; animation-delay: calc(var(--i) * 90ms + 120ms);
+}
+@keyframes ageGrow { to { transform: scaleX(1); } }
+.age:nth-child(1) .age-bar i { background: var(--accent-line); }
+.age:nth-child(2) .age-bar i { background: var(--accent-pale); }
+.age:nth-child(3) .age-bar i { background: var(--accent-mid); }
+.age:nth-child(4) .age-bar i { background: var(--ac); }
+.age.is-late .age-v { color: var(--ac); }
+.age.is-late .age-l { color: var(--i2); font-weight: 600; }
+.age-v { font-weight: 600; color: var(--i1); font-variant-numeric: tabular-nums; text-align: right; }
+.age-n { color: var(--i4); font-size: 11.5px; text-align: right; }
+.age-note { font-size: 11.5px; line-height: 1.5; color: var(--i3); margin-top: 14px; max-width: 42ch; }
+.stats .cur { font-size: 20px; font-weight: 600; letter-spacing: 0; }
+@media (max-width: 560px) {
+  .age { grid-template-columns: 74px minmax(0, 1fr) 46px; gap: 9px; font-size: 11.5px; }
+  .age-n { display: none; }
+}
 .wlist { list-style:none; margin-top:12px; }
 .wlist li { display:grid; grid-template-columns:auto 1fr auto; gap:10px; align-items:center;
   padding:9px 0; border-bottom:1px solid var(--ln); }
@@ -455,12 +439,6 @@
 .sv-herocard .c.bl { bottom: -6px; left: -5px; } .sv-herocard .c.br { bottom: -6px; right: -5px; }
 .sv-herocta { display: flex; gap: var(--space-3); margin-top: var(--space-6);
   flex-wrap: wrap; justify-content: center; }
-.sv-micro { margin-top: var(--space-4); display: inline-flex; align-items: center; gap: 8px;
-  font-family: var(--font-mono); font-size: 10px; letter-spacing: .11em; text-transform: uppercase;
-  color: var(--faint); }
-.sv-micro .d { width: 6px; height: 6px; background: var(--accent-pale); border-radius: 50%;
-  box-shadow: 0 0 0 3px var(--accent-soft); animation: svBlink 2.8s infinite; }
-@keyframes svBlink { 0%,100% { opacity: 1; } 50% { opacity: .3; } }
 .sv-stage .pz { opacity: 1; bottom: 18px; right: 18px; }
 
 .sv-cred { display: flex; flex-wrap: wrap; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
@@ -502,7 +480,7 @@
   /* The desk shot is a two-pane application. Squeezing it to 340px makes it
      illegible, so it keeps its shape and scrolls, with the page kept still. */
   .fin { overflow-x: auto; justify-content: flex-start; -webkit-overflow-scrolling: touch; }
-  .appshot { min-width: 620px; }
+  .fin .appshot { min-width: 620px; }
 
   .sv-stage { min-height: 0; padding-top: var(--space-7); padding-bottom: var(--space-7); }
   .sv-herocard { padding: var(--space-6) var(--space-4); }
@@ -603,11 +581,26 @@
   border: 1px solid var(--line-strong);
   padding: clamp(20px, 3.2vw, 44px);
 }
+/* A fixed frame, like a video.
+   The panels inside change between beats — the rules appear, the notice
+   appears, the evidence list goes from one row to eight — and when the frame
+   was sized by its contents the whole page grew and shrank underneath the
+   reader. It now holds 16:10 and the content scrolls inside it, which is what
+   the real application does anyway. */
 .sv-frame .appshot {
-  max-width: none; min-height: 520px;
+  max-width: none; min-height: 0;
+  aspect-ratio: 16 / 10;
   border-color: rgba(19,24,32,.18);
   box-shadow: 0 34px 64px -40px rgba(19,24,32,.5);
 }
+.sv-frame .appmain { min-height: 0; }
+.sv-frame .appbody { min-height: 0; overflow: hidden; align-items: stretch; }
+/* The evidence panel owns the leftover height and its list scrolls. */
+.sv-frame .zone--evidence { display: flex; flex-direction: column; min-height: 0; }
+.sv-frame .zone--evidence > .ev-list { flex: 1; min-height: 0; overflow-y: auto;
+  scrollbar-width: thin; scroll-behavior: smooth; }
+.sv-frame .appbody > div:last-child { min-height: 0; overflow: hidden; }
+@media (max-width: 1100px) { .sv-frame .appshot { aspect-ratio: 16 / 11; } }
 
 /* Rows enter from the top of the list and settle. The one that matters — the
    gap, and the answer that closes it — gets a single tint pulse rather than a
@@ -642,10 +635,293 @@
 .sq-note.ok   { background: var(--oks); border: 1px solid #BFE3D9; }
 .sq-note.info { background: var(--acs); border: 1px solid var(--accent-line); }
 
-/* ── mobile: it still plays, it just stacks. No pinning, no hijack. ───── */
+/* ── phones: it still plays, it just gets smaller ────────────────────────
+   The shot shrinks and stacks rather than keeping desktop width behind a
+   sideways scroll. A claims desk squeezed onto a phone is still legible if
+   the rows give up their gaps before their content. */
 @media (max-width: 860px) {
+  .sv-movie { margin-top: var(--space-6); }
   .sv-frame { padding: var(--space-4); }
   .sv-frame .appshot { min-height: 0; box-shadow: 0 16px 30px -24px rgba(19,24,32,.5); }
-  .sv-movie { margin-top: var(--space-6); }
+  .appbody { padding: 12px; gap: 12px; }
+
+  /* The title band is a badge, a title and a long detail line. Let it wrap
+     instead of forcing the frame wide. */
+  .hl .band { padding: 12px 14px; flex-wrap: wrap; gap: 10px; }
+  .hl .band .t-title { font-size: 19px; line-height: 24px; }
+  .hl .band .detail { font-size: 12px; line-height: 17px; }
 }
 
+@media (max-width: 560px) {
+  /* Rows give up gap and a little size, and nothing is hidden. */
+  .sq, .sq-rule { gap: 8px; padding-left: 12px; padding-right: 12px; font-size: 12.5px; }
+  .sq .t-meta, .hl .st { font-size: 11px; }
+  .hl .st i { width: 6px; height: 6px; }
+  .hl .panel-h { padding: 10px 12px; }
+  .hl .t-h2 { font-size: 14.5px; line-height: 20px; }
+  .hl .t-display { font-size: 23px; line-height: 27px; }
+  .sq-note { padding: 10px 12px; }
+  .sv-frame { padding: 12px; }
+  .sv-cap h3 { font-size: 1rem; }
+  .sv-transport { gap: var(--space-3); }
+  .sv-playpause { padding: 6px 9px; font-size: 9px; }
+}
+
+
+/* ══ the pointer, the spotlight, and the phone ═════════════════════════════
+   A demo is more convincing when you can see a person using it. The pointer
+   travels to the thing the beat is about, says what it is in a bubble, and
+   presses only where a person would genuinely press. Everything else on the
+   screen recedes rather than the target growing — a literal magnifier reads
+   as a gimmick, a change of attention reads as a demo.
+   ═══════════════════════════════════════════════════════════════════════════ */
+.sv-frame { position: relative; }
+
+.sv-cursor {
+  position: absolute; left: 0; top: 0; z-index: 6; pointer-events: none;
+  display: flex; align-items: flex-start; gap: 7px;
+  transform: translate(var(--x), var(--y));
+  transition: transform 820ms cubic-bezier(.32, .72, 0, 1);
+  will-change: transform;
+}
+.sv-cursor svg { flex: none; filter: drop-shadow(0 2px 4px rgba(19,24,32,.28)); }
+.sv-bubble {
+  margin-top: 12px; white-space: nowrap;
+  background: var(--ink); color: #fff;
+  font-family: var(--font-mono); font-size: 10px; letter-spacing: .06em;
+  padding: 5px 8px; border-radius: 3px;
+  animation: bubbleIn 420ms var(--ease) both;
+}
+@keyframes bubbleIn {
+  from { opacity: 0; transform: translateY(-3px) scale(.94); }
+  to   { opacity: 1; transform: none; }
+}
+/* The press: one ring out from the tip, only on steps that click. */
+.sv-cursor.is-click::before {
+  content: ""; position: absolute; left: -8px; top: -8px; width: 28px; height: 28px;
+  border: 1.5px solid var(--accent); border-radius: 999px;
+  animation: press 1500ms var(--ease) infinite;
+}
+@keyframes press {
+  0%   { transform: scale(.35); opacity: 0; }
+  35%  { opacity: .9; }
+  70%  { transform: scale(1); opacity: 0; }
+  100% { transform: scale(1); opacity: 0; }
+}
+
+/* Attention, not magnification. */
+.zone { transition: opacity 420ms var(--ease), box-shadow 420ms var(--ease), transform 420ms var(--ease); }
+.sv-web[data-focus="band"]     .zone:not(.zone--band),
+.sv-web[data-focus="evidence"] .zone:not(.zone--evidence),
+.sv-web[data-focus="rules"]    .zone:not(.zone--rules),
+.sv-web[data-focus="notice"]   .zone:not(.zone--notice),
+.sv-web[data-focus="claim"]    .zone:not(.zone--claim) { opacity: .42; }
+.sv-web[data-focus="band"]     .zone--band,
+.sv-web[data-focus="evidence"] .zone--evidence,
+.sv-web[data-focus="rules"]    .zone--rules,
+.sv-web[data-focus="notice"]   .zone--notice,
+.sv-web[data-focus="claim"]    .zone--claim {
+  box-shadow: 0 0 0 2px var(--acs), 0 10px 26px -18px rgba(19,24,32,.45);
+  position: relative; z-index: 2;
+}
+
+/* ── the phone ──────────────────────────────────────────────────────────
+   A real device, not a slab. `.hl` paints a ground on everything it touches,
+   which put the phone on a grey block inside the gradient; the wrapper is
+   transparent and the device itself carries the surface. */
+.sv-phone { display: none; background: transparent; }
+/* A phone is a shape before it is a screen. Without a fixed aspect the device
+   grew with whatever the beat happened to contain and rendered as a long thin
+   sliver — which is what made it read as broken rather than as a phone. It
+   now holds 9:19 and the screen clips, exactly as the real one does. */
+.ph-device {
+  width: 100%; max-width: 306px; margin: 0 auto;
+  aspect-ratio: 9 / 19;
+  background: var(--sf);
+  border: 9px solid #12161C; border-radius: 38px; overflow: hidden;
+  box-shadow: 0 26px 50px -26px rgba(19,24,32,.55), 0 0 0 1px rgba(19,24,32,.25);
+  display: flex; flex-direction: column;
+}
+.ph-notch { height: 26px; background: #12161C; position: relative; flex: none; }
+.ph-notch::after {
+  content: ""; position: absolute; left: 50%; top: 8px; transform: translateX(-50%);
+  width: 62px; height: 5px; border-radius: 999px; background: #2B323C;
+}
+.ph-band { background: var(--crs); border-bottom: 1px solid var(--crl); padding: 11px 13px 12px; }
+.ph-band .eyebrow { font-size: 10.5px; font-weight: 600; color: var(--cr); letter-spacing: .02em; }
+.ph-title { display: flex; align-items: center; gap: 9px; margin-top: 6px; }
+.ph-title .t-bodystrong { font-size: 15px; letter-spacing: -.2px; }
+/* The screen clips like a screen. Content below the fold is simply below the
+   fold, which is more honest than squeezing eight rows into a phone. */
+.ph-body { padding: 11px; flex: 1; min-height: 0; overflow: hidden; background: var(--bg); }
+.ph-body .panel { border-radius: 8px; }
+.ph-body .sq-note { border-radius: 8px; padding: 11px 12px; }
+.ph-sq { grid-template-columns: minmax(0,1fr) auto; padding: 9px 11px; font-size: 12.5px; gap: 8px; }
+.ph-sq .t-bodymed { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ph-tabs {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  border-top: 1px solid var(--ln); background: var(--sf);
+  font-size: 9.5px; font-weight: 500; color: var(--i4); text-align: center;
+}
+.ph-tabs span { padding: 9px 2px 13px; }
+.ph-tabs .on { color: var(--cr); font-weight: 600; box-shadow: inset 0 2px 0 var(--cr); }
+
+/* Below the breakpoint the phone replaces the web shot outright, and the
+   pointer goes with it — a cursor on a touch screen is a lie. */
+@media (max-width: 860px) {
+  .sv-web, .sv-cursor { display: none; }
+  .sv-phone { display: block; }
+  .sv-frame { padding: var(--space-7) var(--space-4); }
+}
+
+/* ══ what the document actually is ════════════════════════════════════════
+   A claim is not a list of filenames. It is a spoken round, a photograph
+   taken in theatre, a report and a typed note — and which one it is changes
+   how it reached the file. The row says so, and the newest one is shown.
+   ═══════════════════════════════════════════════════════════════════════════ */
+.evn { display: inline-flex; align-items: center; gap: 8px; min-width: 0;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ty { width: 13px; height: 13px; flex: none; color: var(--i4); }
+.sq.miss .ty { color: var(--wn); }
+.sq.just .ty, .arte .ty { color: var(--ok); }
+
+.arte {
+  display: grid; grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 11px; align-items: center;
+  padding: 11px 14px; border-bottom: 1px solid var(--ln);
+  background: var(--acs);
+  animation: arteIn 460ms var(--ease) both;
+}
+@keyframes arteIn {
+  from { opacity: 0; transform: translateY(-10px) scale(.985); }
+  to   { opacity: 1; transform: none; }
+}
+.arte-vis {
+  width: 74px; height: 46px; flex: none; border-radius: 4px; overflow: hidden;
+  background: var(--sf); border: 1px solid var(--rl);
+  display: grid; place-items: center;
+}
+/* a spoken round */
+.wave { display: flex; align-items: center; gap: 2px; height: 26px; padding: 0 6px; }
+.wave i { width: 2px; height: var(--h); background: var(--ok); border-radius: 1px;
+  animation: waveUp 1100ms var(--ease) both; }
+@keyframes waveUp { from { transform: scaleY(.15); } to { transform: scaleY(1); } }
+/* a photograph */
+.shot { width: 100%; height: 100%; display: block;
+  background:
+    radial-gradient(circle at 34% 40%, #C9D3E4 0 18%, transparent 19%),
+    linear-gradient(160deg, #E4E9F2 0 52%, #CFD7E6 52% 100%); }
+/* a report */
+.page { width: 30px; display: grid; gap: 4px; }
+.page i { display: block; height: 2px; background: var(--rl); border-radius: 1px; }
+.page i:last-child { width: 60%; }
+
+@media (max-width: 860px) {
+  .arte { padding: 10px 11px; gap: 9px; }
+  .arte-vis { width: 58px; height: 38px; }
+  .arte .st { display: none; }
+}
+
+/* ══ two departments, one desk ═════════════════════════════════════════════
+   Shape carries this, not colour. An earlier version tagged every step with a
+   coloured chip per team — five hues on one picture, and the reader had to
+   decode a legend before the argument arrived.
+
+   Now the top lane is visibly broken into seven separate pieces with the team
+   named in plain text, and the Salvia lane is one unbroken bar. You see a
+   thing in bits and a thing whole before you read a word. The only colour is
+   the accent on the whole bar, and amber on the waits.
+   ═══════════════════════════════════════════════════════════════════════════ */
+.race { border: 1px solid var(--ln); border-radius: 8px; overflow: hidden;
+  background: var(--sf); margin-top: var(--space-7); }
+.lane { padding: 20px; }
+.lane + .lane { border-top: 1px solid var(--ln); }
+.lanehead { display: flex; align-items: baseline; justify-content: space-between;
+  gap: 14px; margin-bottom: 14px; flex-wrap: wrap; }
+.racechip { font-family: var(--font-mono); font-size: 10px; letter-spacing: .08em;
+  text-transform: uppercase; color: var(--i3); }
+.racechip.warn { color: var(--wn); }
+.racechip.ok { color: var(--ac); }
+
+.rtrack { list-style: none; display: flex; margin: 0; padding: 0; align-items: stretch; gap: 7px; }
+.rstep {
+  flex: 1; min-width: 0; padding: 11px 13px 13px; border-radius: 4px;
+  background: var(--sf); box-shadow: inset 0 0 0 1px var(--ln);
+  display: flex; flex-direction: column; gap: 3px;
+  animation: rStepIn 520ms var(--ease) both; animation-delay: calc(var(--d) * 260ms);
+}
+@keyframes rStepIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+/* A wait is an absence, so it is drawn as one: dashed, unfilled, quiet. */
+.rstep.is-wait { background: transparent; box-shadow: inset 0 0 0 1px transparent;
+  border: 1px dashed #E0CBA6; padding: 10px 12px 12px; }
+.rstep b { font-size: 13px; font-weight: 600; color: var(--i1); letter-spacing: -.01em; }
+.rstep.is-wait b { color: var(--wn); font-weight: 500; }
+.rsub { font-size: 11.5px; line-height: 1.4; color: var(--i3); }
+.rstep.is-wait .rsub { color: #9C7238; }
+/* The team, as a word. No chip, no hue. */
+.rteam { font-family: var(--font-mono); font-size: 8.5px; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--i4); margin-bottom: 2px; }
+.rstep.is-wait .rteam { color: #B49264; }
+
+/* The Salvia lane is one object. No gaps, one border, hairlines between. */
+.lane.on { background: var(--acs); }
+.lane.on .rtrack { gap: 0; border-radius: 5px; overflow: hidden;
+  box-shadow: inset 0 0 0 1px var(--ac); background: var(--sf); }
+.lane.on .rstep { background: transparent; box-shadow: none; border-radius: 0;
+  border-right: 1px solid var(--accent-line); }
+.lane.on .rstep:last-of-type { border-right: 0; }
+.lane.on .rteam { display: none; }
+.rspacer { display: none; }
+.rfoot { margin-top: 13px; }
+
+@media (max-width: 860px) {
+  /* Vertical, and the same contrast holds: the top lane is separate rows with
+     gaps between them, the Salvia lane is one continuous block.
+     Each step arrives as you reach it. The timed stagger was written for a
+     row seven across, where every step is on screen at once; down a phone it
+     fired against steps nobody had scrolled to yet. */
+  .rtrack { flex-direction: column; gap: 6px; }
+  .rstep { flex: none; padding: 10px 12px; }
+  .js .rstep {
+    animation: none; opacity: 0; transform: translateY(14px);
+    transition: opacity 460ms var(--ease), transform 460ms var(--ease);
+  }
+  .js .rstep.is-in { opacity: 1; transform: none; }
+  .rstep b { font-size: 12.5px; }
+  .lane.on .rtrack { gap: 0; }
+  .lane.on .rstep { border-right: 0; border-bottom: 1px solid var(--accent-line); }
+  .lane.on .rstep:last-of-type { border-bottom: 0; }
+  .lane { padding: 15px 14px 17px; }
+  .lanehead { gap: 6px; margin-bottom: 12px; }
+  .racechip { font-size: 9px; letter-spacing: .05em; }
+  .rfoot { margin-top: 11px; }
+}
+
+/* ══ what we will not do ══════════════════════════════════════════════════
+   Six short statements in a grid, not six long sentences in a ruled list.
+   The list read as a terms page; these read as a position. */
+.nevers { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
+  background: var(--line); border: 1px solid var(--line); margin-top: var(--space-7); }
+@media (max-width: 900px) { .nevers { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .nevers { grid-template-columns: 1fr; } }
+.never { background: var(--surface); padding: var(--space-5) var(--space-4); display: grid; gap: 4px;
+  transition: background var(--dur-fast) var(--ease); }
+.never:hover { background: var(--surface-2); }
+.never-k { font-family: var(--font-mono); font-size: 9px; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--warn); }
+.never b { font-size: 1.0625rem; font-weight: var(--weight-semi); letter-spacing: -.018em; color: var(--ink); }
+.never span:last-child { font-size: var(--text-sm); color: var(--muted); line-height: 1.5; }
+
+/* Three notes under a block. Was `.pipefoot`, whose styles went with the
+   section they were written for — leaving the markup with no grid and no
+   spacing, so the three ran together as one paragraph. */
+.notes3 {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: clamp(20px, 3vw, 44px);
+  margin-top: var(--space-6); padding-top: var(--space-5);
+  border-top: 1px solid var(--line);
+}
+@media (max-width: 800px) { .notes3 { grid-template-columns: 1fr; gap: var(--space-5); } }
+.notes3 h3 { font-size: var(--text-base); font-weight: var(--weight-semi);
+  letter-spacing: -.012em; line-height: 1.3; margin-bottom: 5px; }
+.notes3 p { font-size: var(--text-sm); color: var(--muted); line-height: 1.5; max-width: 44ch; }

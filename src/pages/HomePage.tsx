@@ -70,13 +70,14 @@ const NUMBERS = [
 ] as const;
 
 const NEVERS = [
-  'Upcode. We will not suggest a diagnosis or a procedure that did not happen, at any margin.',
-  'Write a clinical note on a clinician’s behalf. We show what is missing and ask the person who knows.',
-  'Submit anything without a person on your team approving it. Autopilot still has a pilot.',
-  'Take a percentage of your claim value. Our incentive should not move with your billing.',
-  'Ask your ward staff to work differently to make our software look good.',
-  'Give a false all clear. If the theatre note never arrived it says not received, never fine.',
+  { head: 'upcode', body: 'No diagnosis and no procedure that did not happen, at any margin.' },
+  { head: 'write the note', body: 'We show what is missing and ask the person who was there.' },
+  { head: 'submit alone', body: 'Nothing leaves without someone on your team approving it.' },
+  { head: 'take a cut', body: 'Our fee does not move with your billing, ever.' },
+  { head: 'touch the ward', body: 'Your clinical staff work exactly as they do today.' },
+  { head: 'say it is fine', body: 'If the theatre note never arrived, it says not received.' },
 ];
+
 
 const FAQ = [
   {
@@ -221,25 +222,21 @@ function usePageMotion() {
     };
     gridBtn?.addEventListener('click', onGridPause);
 
-    /* chart bars, built from data rather than markup so the shape is one edit */
-    const chart = document.getElementById('sv-chart');
-    const data = [[18, 9, 6, 4], [26, 12, 9, 5], [21, 10, 7, 4], [34, 16, 11, 7],
-      [29, 14, 9, 6], [41, 19, 13, 8], [37, 17, 12, 7], [46, 21, 15, 9],
-      [52, 24, 17, 10], [44, 20, 14, 8], [58, 27, 19, 11], [63, 29, 21, 12]];
-    if (chart && !chart.childElementCount) {
-      data.forEach((d, ix) => {
-        const bar = document.createElement('div');
-        bar.className = 'bar';
-        const total = d.reduce((a, c) => a + c, 0);
-        d.forEach((v, j) => {
-          const u = document.createElement('u');
-          u.className = `g${j + 1}`;
-          u.style.height = `${(v / total) * 100}%`;
-          u.style.animationDelay = `${ix * 0.07}s`;
-          bar.appendChild(u);
-        });
-        chart.appendChild(bar);
-      });
+    /* On a phone the two lanes are a long vertical list, so each step reveals
+       as it arrives rather than all seven racing on a timer the moment the
+       section mounts — which is what left a blank slot where a step had been
+       delayed past the point anyone was looking at it. */
+    let stepIo: IntersectionObserver | undefined;
+    if (!reduce && window.matchMedia('(max-width: 860px)').matches) {
+      stepIo = new IntersectionObserver(
+        (entries) => entries.forEach((e) => {
+          if (!e.isIntersecting) return;
+          e.target.classList.add('is-in');
+          stepIo?.unobserve(e.target);
+        }),
+        { threshold: 0.4, rootMargin: '0px 0px -6% 0px' },
+      );
+      document.querySelectorAll('.rstep').forEach((el) => stepIo?.observe(el));
     }
 
     /* counters, once, and only when the section is actually on screen */
@@ -276,6 +273,7 @@ function usePageMotion() {
       gridBtn?.removeEventListener('click', onGridPause);
       if (onResize) window.removeEventListener('resize', onResize);
       if (gridTimer) clearInterval(gridTimer);
+      stepIo?.disconnect();
       io?.disconnect();
     };
   }, []);
@@ -325,7 +323,6 @@ export default function HomePage() {
               <Link className="s-btn s-btn--primary" to="/start">Book a demo</Link>
               <a className="s-btn s-btn--ghost" href="#how">See how it works</a>
             </div>
-            <div className="sv-micro"><span className="d" />Built for Indian hospitals</div>
           </div>
           <button className="pz" type="button" data-grid>Pause</button>
         </div>
@@ -488,81 +485,11 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── §4 the structural promise ─────────────────────────────────────── */}
-      <section className="s-band s-section" id="shift">
-        <div className="s-wrap">
-          <div className="s-split">
-            <h2 style={{ fontSize: 'var(--text-3xl)', maxWidth: '20ch' }}>
-              Two departments become one desk.
-            </h2>
-            <p className="s-lede">
-              The team that handles inpatients and the team that handles insurance are doing
-              one job in two places. On Salvia they do one job in one place, and most of the
-              work between them stops existing.
-            </p>
-          </div>
-
-          <div className="race movie hl" style={{ marginTop: 'var(--space-7)' }}>
-            <div className="lane">
-              <div className="lanehead">
-                <span className="t-h2">One admission, today</span>
-                <span className="st wn"><i />Three waits, two departments</span>
-              </div>
-              <div className="track">
-                {[
-                  ['Admitted', 'IP desk', 2, 0, false],
-                  ['Waiting', 'for papers', 3, 1, true],
-                  ['Handed over', 'to insurance', 2, 2.6, false],
-                  ['Waiting', 'on a query', 3, 3.6, true],
-                  ['Back to the ward', 'IP desk', 2, 5.2, false],
-                  ['Waiting', 'patient discharged', 3, 6.2, true],
-                  ['Submitted', 'insurance', 2, 7.8, false],
-                ].map(([em, sub, f, d, wait], i) => (
-                  <span key={i} className={wait ? 'seg wait' : 'seg'}
-                    style={{ ['--f' as string]: f, ['--d' as string]: d }}>
-                    <em>{em as string}</em><i>{sub as string}</i>
-                  </span>
-                ))}
-              </div>
-              <div className="finish">
-                <span className="a"><span className="st nu"><i />Still open, patient still in the bed</span></span>
-                <span className="b"><span className="st wn"><i />Assembled after the patient went home</span></span>
-              </div>
-            </div>
-
-            <div className="lane on">
-              <div className="lanehead">
-                <span className="t-h2">One admission, on Salvia</span>
-                <span className="st ok"><i />No handover, one desk</span>
-              </div>
-              <div className="track">
-                {[
-                  ['Admitted', 'one desk', 2, 0],
-                  ['Evidence lands', 'as it is made', 3, 1],
-                  ['Checked', 'against the payer', 2, 2.2],
-                  ['Submitted', 'same desk', 2, 3.2],
-                ].map(([em, sub, f, d], i) => (
-                  <span key={i} className="seg" style={{ ['--f' as string]: f, ['--d' as string]: d }}>
-                    <em>{em as string}</em><i>{sub as string}</i>
-                  </span>
-                ))}
-                <span className="spacer" style={{ ['--f' as string]: 5 }} />
-              </div>
-              <div className="finish">
-                <span className="a"><span className="st nu"><i />Working, patient still in the bed</span></span>
-                <span className="b"><span className="st ok"><i />Done while the patient is still in the bed</span></span>
-              </div>
-            </div>
-            <button className="pz" type="button">Pause</button>
-          </div>
-        </div>
-      </section>
-
-      {/* ── §5 the desk, walked end to end ────────────────────────────────
+      {/* ── §4 the desk, walked end to end ────────────────────────────────
           The one pinned thing on the page. Everything else scrolls normally:
           a site where every section grabs the scroll is a site nobody can
           read. Mobile drops the pinning entirely. */}
-      <section className="s-section" id="desk" style={{ paddingBottom: 0 }}>
+      <section className="s-section" id="desk">
         <div className="s-wrap">
           <div className="s-split">
             <h2 style={{ fontSize: 'var(--text-3xl)', maxWidth: '22ch' }}>
@@ -584,6 +511,91 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ── §5 the structural promise ──────────────────────────────────────
+          Two lanes, and the thing to see is the colour changing: today the
+          file bounces between two departments with a wait at every handover.
+          On Salvia the colour never changes, because the desk never does. */}
+      <section className="s-band s-section" id="shift">
+        <div className="s-wrap">
+          <div className="s-split">
+            <h2 style={{ fontSize: 'var(--text-3xl)', maxWidth: '20ch' }}>
+              Two departments become one desk.
+            </h2>
+            <p className="s-lede">
+              The team that handles inpatients and the team that handles insurance are doing
+              one job in two places. Every handover between them is a wait, and every wait
+              is a day the evidence gets harder to produce.
+            </p>
+          </div>
+
+          <div className="race hl">
+            <div className="lane">
+              <div className="lanehead">
+                <span className="t-h2">One admission, today</span>
+                <span className="racechip warn">4 handovers · 3 waits · finishes after discharge</span>
+              </div>
+              <ol className="rtrack">
+                {[
+                  ['ip', 'Admitted', 'Admission slip typed at the counter', 0],
+                  ['wait', 'Waiting', 'Papers sit in a tray until someone walks them over', 1],
+                  ['ins', 'Handed over', 'Insurance scans what it was given', 2.4],
+                  ['wait', 'Waiting', 'A query comes back, nobody on the desk was in theatre', 3.4],
+                  ['ip', 'Back to the ward', 'Someone goes looking for the document', 4.8],
+                  ['wait', 'Waiting', 'The patient is discharged before it is found', 5.8],
+                  ['ins', 'Submitted', 'Assembled from whatever could still be gathered', 7.2],
+                ].map(([team, label, sub, d], n) => (
+                  <li
+                    key={n}
+                    className={`rstep${team === 'wait' ? ' is-wait' : ''}`}
+                    style={{ ['--d' as string]: d }}
+                  >
+                    <span className={`rteam rteam--${team}`}>
+                      {team === 'ip' ? 'Inpatient desk' : team === 'ins' ? 'Insurance' : 'Nobody'}
+                    </span>
+                    <b>{label as string}</b>
+                    <span className="rsub">{sub as string}</span>
+                  </li>
+                ))}
+              </ol>
+              <div className="rfoot warn">
+                <span className="st wn"><i />The file is finished after the patient has gone home</span>
+              </div>
+            </div>
+
+            <div className="lane on">
+              <div className="lanehead">
+                <span className="t-h2">One admission, on Salvia</span>
+                <span className="racechip ok">No handover · no wait · finishes before discharge</span>
+              </div>
+              <ol className="rtrack">
+                {[
+                  ['one', 'Admitted', 'The desk sees it as the ward opens it', 0],
+                  ['one', 'Evidence lands', 'Rounds, reports and photographs, as they are made', 0.9],
+                  ['one', 'Checked', 'Against what this payer needs, on arrival', 1.8],
+                  ['one', 'Submitted', 'From the same screen that watched it fill', 2.7],
+                ].map(([team, label, sub, d], n) => (
+                  <li key={n} className="rstep" style={{ ['--d' as string]: d }}>
+                    <span className={`rteam rteam--${team}`}>One desk</span>
+                    <b>{label as string}</b>
+                    <span className="rsub">{sub as string}</span>
+                  </li>
+                ))}
+                <li className="rspacer" aria-hidden="true" />
+              </ol>
+              <div className="rfoot ok">
+                <span className="st ok"><i />Done while the patient is still in the bed</span>
+              </div>
+            </div>
+          </div>
+
+          <div className="notes3">
+            <div><h3>One team, not two</h3><p>The people who admit the patient and the people who work the claim are looking at the same record at the same time.</p></div>
+            <div><h3>Queries go to whoever can answer</h3><p>Not into a pile that comes back two days later with the patient already gone.</p></div>
+            <div><h3>Fewer people to manage</h3><p>Hospitals told us this was the appeal. Not a bigger desk, a smaller one that does not lose things.</p></div>
+          </div>
+        </div>
+      </section>
+
       {/* ── §6 the floor at a glance ──────────────────────────────────────── */}
       <section className="s-band s-section">
         <div className="s-wrap">
@@ -599,22 +611,34 @@ export default function HomePage() {
 
           <div className="glance movie hl" id="sv-glance" style={{ marginTop: 'var(--space-7)' }}>
             <div className="stats">
+              <div><div className="n"><span className="cur">₹</span><span data-count="426">0</span><span className="cur">L</span></div><div className="l">With payers, unsettled</div></div>
               <div><div className="n" data-count="14">0</div><div className="l">In the hospital</div></div>
-              <div><div className="n" data-count="312">0</div><div className="l">Documents in today</div></div>
-              <div><div className="n" data-count="3">0</div><div className="l">Queries open</div></div>
+              <div><div className="n" data-count="3">0</div><div className="l">Queries open, oldest 2 days</div></div>
               <div><div className="n" data-count="9">0</div><div className="l">Files ready to submit</div></div>
             </div>
             <div className="gbody">
               <div className="gpane">
-                <div className="t-h2">Documents reaching the file</div>
-                <div className="t-meta">By day, this week</div>
-                <div className="chart" id="sv-chart" />
-                <div className="legend">
-                  <span><i style={{ background: 'var(--accent)' }} />Ward</span>
-                  <span><i style={{ background: 'var(--accent-mid)' }} />Theatre</span>
-                  <span><i style={{ background: 'var(--accent-pale)' }} />Lab</span>
-                  <span><i style={{ background: 'var(--accent-line)' }} />Billing</span>
+                <div className="t-h2">Money with payers</div>
+                <div className="t-meta">By how long it has been there</div>
+                <div className="aged">
+                  {[
+                    ['0 to 7 days', 18.2, 6, 100, false],
+                    ['8 to 15 days', 12.4, 4, 68, false],
+                    ['16 to 30 days', 7.9, 3, 43, false],
+                    ['Over 30 days', 4.1, 2, 23, true],
+                  ].map(([label, amt, files, pct, late], n) => (
+                    <div className={`age${late ? ' is-late' : ''}`} key={label as string} style={{ ['--i' as string]: n }}>
+                      <span className="age-l">{label as string}</span>
+                      <span className="age-bar"><i style={{ ['--w' as string]: `${pct}%` }} /></span>
+                      <span className="age-v">₹{amt as number}L</span>
+                      <span className="age-n">{files as number} files</span>
+                    </div>
+                  ))}
                 </div>
+                <p className="age-note">
+                  Everything over thirty days was queried at least once. That is the column
+                  the desk is trying to empty.
+                </p>
               </div>
               <div className="gpane">
                 <div className="t-h2">Needs you now</div>
@@ -695,33 +719,34 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── §10 what we will not do ───────────────────────────────────────── */}
+      {/* ── §8 straight answers ────────────────────────────────────────────
+          The commitments and the questions were two sections doing one job,
+          and the commitments were a ruled list of six long sentences — which
+          is the shape of a terms page, not of a position. They are six short
+          statements now, and the questions sit under them. */}
       <section className="s-band s-section" id="trust">
         <div className="s-wrap">
           <div className="s-split">
             <h2 style={{ fontSize: 'var(--text-3xl)', maxWidth: '18ch' }}>
-              What Salvia will not do.
+              Straight answers.
             </h2>
             <p className="s-lede">
-              Worth writing down, because every other vendor in this market is careful not
-              to.
+              What we will not do, and the questions you were going to ask on the call.
+              Both are here because every other vendor in this market makes you ask.
             </p>
           </div>
-          <div className="nots" style={{ marginTop: 'var(--space-6)' }}>
+
+          <div className="nevers">
             {NEVERS.map((n) => (
-              <div className="not" key={n}><span className="x">NEVER</span><span className="t">{n}</span></div>
+              <div className="never" key={n.head}>
+                <span className="never-k">We never</span>
+                <b>{n.head}</b>
+                <span>{n.body}</span>
+              </div>
             ))}
           </div>
-        </div>
-      </section>
 
-      {/* ── §11 FAQ ───────────────────────────────────────────────────────── */}
-      <section className="s-section" id="faq">
-        <div className="s-wrap">
-          <h2 style={{ fontSize: 'var(--text-3xl)', maxWidth: '18ch' }}>
-            The questions you were going to ask on the call.
-          </h2>
-          <div className="faq" style={{ marginTop: 'var(--space-6)' }}>
+          <div className="faq" style={{ marginTop: 'var(--space-8)' }}>
             {FAQ.map((f) => (
               <details key={f.q}>
                 <summary>{f.q}</summary>

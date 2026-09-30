@@ -23,8 +23,6 @@ export function SiteHeader() {
             so the links survive on a phone without a menu to open. */}
         <span className="sh-links">
           <Link to="/#desk" className="sh-link">The desk</Link>
-          <Link to="/#live" className="sh-link">What is live</Link>
-          <Link to="/#cost" className="sh-link">The rules</Link>
           <Link to="/blog" className="sh-link">Writing</Link>
         </span>
         <Link className="s-btn s-btn--primary sh-cta" to="/start">Book a demo</Link>

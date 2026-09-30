@@ -186,32 +186,14 @@
 .sh-link:hover::after { width: 100%; }
 .sh-cta { min-height: 36px; padding: 0 14px; margin-left: var(--space-2); }
 
-/* Mobile: two rows rather than a vanishing act. The links used to be hidden
-   outright below 860px with no menu behind them, so a phone visitor could
-   reach the demo form and nothing else. The mark and the call to action hold
-   the top row; the links scroll horizontally underneath, which needs no
-   toggle, no overlay and no JavaScript. */
+/* On a phone, the call to action only. Two links and a button wrapped into a
+   second row with the button landing before the links, which read as broken —
+   and on a page this short the links are a scroll away regardless. */
 @media (max-width: 860px) {
-  .sh {
-    height: auto; flex-wrap: wrap; row-gap: 0;
-    padding-top: var(--space-3); padding-bottom: 0;
-  }
-  .sh-logo { order: 1; }
-  .sh-nav { order: 2; margin-left: auto; gap: var(--space-2); }
-  .sh-links {
-    order: 3; width: 100%;
-    display: flex; gap: var(--space-4);
-    margin-top: var(--space-3);
-    padding-bottom: var(--space-3);
-    overflow-x: auto; scrollbar-width: none;
-    -webkit-overflow-scrolling: touch;
-  }
-  .sh-links::-webkit-scrollbar { display: none; }
-  .sh-links .sh-link { flex: none; font-size: var(--text-sm); }
+  .sh-links { display: none; }
   .sh-cta { margin-left: 0; }
 }
-/* Above the breakpoint the links sit inline in the nav and the wrapper does
-   nothing but pass them through. */
+/* Above the breakpoint the wrapper does nothing but pass its links through. */
 @media (min-width: 861px) {
   .sh-links { display: contents; }
 }
@@ -558,20 +540,31 @@
   padding-bottom: var(--space-3); border-bottom: 1px solid var(--line);
 }
 /* A contents page. Numbered, ruled, no boxes — a legal set reads as a list. */
+/* A contents page. Was three loose columns with the description running to
+   the full measure, so each entry took five lines and seven entries took a
+   screen and a half. Tighter grid, one line of description, the ordinal
+   hanging outside. */
 .lg-index { list-style: none; padding: 0; margin: var(--space-5) 0 0; border-top: 1px solid var(--ink); }
+.lg-index li { border-bottom: 1px solid var(--line); }
 .lg-index a {
-  display: grid; gap: 2px var(--space-5); align-items: baseline;
-  grid-template-columns: 34px 1fr;
-  padding: var(--space-4) var(--space-2);
-  border-bottom: 1px solid var(--line); text-decoration: none;
-  transition: background var(--t-hover) var(--ease-out),
-              padding-left var(--t-hover) var(--ease-out);
+  display: grid; grid-template-columns: 34px minmax(0, 1fr);
+  column-gap: var(--space-4); row-gap: 2px;
+  padding: var(--space-4) var(--space-3) var(--space-4) 0;
+  text-decoration: none; transition: background var(--dur-fast) var(--ease),
+    padding-left var(--dur-fast) var(--ease);
 }
-@media (min-width: 720px) { .lg-index a { grid-template-columns: 34px 230px 1fr; } }
-.lg-index a:hover { background: var(--surface); padding-left: var(--space-4); }
-.lg-index .num { color: var(--faint); font-weight: var(--weight-semi); font-size: var(--text-sm); }
-.lg-index-t { font: var(--weight-semi) var(--text-base)/1.3 var(--font-display); color: var(--ink); }
-.lg-index-d { font-size: var(--text-sm); color: var(--muted); grid-column: 2 / -1; }
+.lg-index a:hover { background: var(--surface); padding-left: var(--space-3); }
+.lg-index a[aria-current="true"] { background: var(--surface); }
+.lg-index a[aria-current="true"] .lg-index-t { color: var(--accent); }
+.lg-index .num {
+  grid-row: 1 / span 2; font-family: var(--font-mono); font-size: 10px;
+  letter-spacing: .1em; color: var(--faint); padding-top: 4px;
+}
+.lg-index a[aria-current="true"] .num { color: var(--accent); }
+.lg-index-t { font-size: var(--text-base); font-weight: var(--weight-semi);
+  color: var(--ink); letter-spacing: -.014em; }
+.lg-index-d { font-size: var(--text-sm); color: var(--muted); line-height: 1.5;
+  max-width: 62ch; }
 @media (min-width: 720px) { .lg-index-d { grid-column: 3; } }
 .lg-index a[aria-current="true"] { background: var(--surface); }
 .lg-index a[aria-current="true"] .num,
@@ -699,26 +692,116 @@
 .blq-accent .blq-foot svg { stroke: #C6D2F2; }
 
 /* ---- article ---------------------------------------------------------- */
+/* ==========================================================================
+   An article.
+
+   It was borrowing the legal pages' prose styles, and the posts are written
+   in raw <h3>/<p>/<ul>, which inherit `margin: 0` from the base — so every
+   heading sat flush on the paragraph above it and the whole page read as one
+   undifferentiated block. Prose needs its own rhythm, a real measure, and
+   space that belongs to the heading below rather than the text above.
+   ========================================================================== */
+.ar-kicker {
+  display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-3);
+  font-family: var(--font-mono); font-size: 10px; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--faint);
+}
+.ar-kicker a { color: var(--accent); text-decoration: none; }
+.ar-kicker a:hover { text-decoration: underline; }
+.ar-kicker > * + *::before { content: "·"; margin-right: var(--space-3); color: var(--line-strong); }
+
+.ar-title {
+  font-size: clamp(2rem, 4.2vw, 3.1rem) !important;
+  line-height: 1.06; letter-spacing: -.032em;
+  margin-top: var(--space-5) !important; max-width: 20ch;
+}
+.ar-standfirst {
+  margin-top: var(--space-5); max-width: 56ch;
+  font-size: clamp(1.0625rem, 1.5vw, 1.25rem); line-height: 1.5; color: var(--body);
+}
 .ar-meta {
-  display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-4);
+  display: flex; flex-wrap: wrap; gap: var(--space-4);
   margin-top: var(--space-6); padding-top: var(--space-4);
   border-top: 1px solid var(--line);
-  font-size: var(--text-sm); color: var(--muted);
+  font-size: var(--text-xs); color: var(--muted);
 }
-.ar-tag {
-  margin-left: auto; color: var(--accent);
-  font: var(--weight-semi) var(--text-xs)/1 var(--font-body);
-  letter-spacing: .08em; text-transform: uppercase;
+.ar-meta b { color: var(--ink); font-weight: var(--weight-semi); }
+
+/* ---- the prose ------------------------------------------------------- */
+.ar-body {
+  font-size: 1.0625rem; line-height: 1.72; color: var(--body);
+  max-width: 68ch;
 }
-.ar-body h2 { font-size: var(--text-2xl) !important; }
-.ar-body h3 { font-size: var(--text-xl) !important; }
-.ar-sources {
-  border-left: 2px solid var(--accent); padding-left: var(--space-5);
+.ar-body > * + * { margin-top: 1.15em; }
+.ar-body p { text-wrap: pretty; }
+
+/* Space belongs to the heading below, not the paragraph above. */
+.ar-body h2, .ar-body h3 {
+  color: var(--ink); letter-spacing: -.022em; line-height: 1.2;
+  text-wrap: balance; max-width: 30ch;
 }
-.ar-sources ol { margin: var(--space-4) 0 0; padding-left: var(--space-5); display: grid; gap: var(--space-3); }
-.ar-sources li { font-size: var(--text-sm); color: var(--muted); }
-.ar-sources a { color: var(--accent); font-weight: var(--weight-medium); text-decoration: none; }
-.ar-sources a:hover { text-decoration: underline; }
+.ar-body > h2 { font-size: 1.6rem !important; margin-top: 2.6em; }
+.ar-body > h3 { font-size: 1.2rem !important; margin-top: 2.1em; }
+.ar-body > h2 + *, .ar-body > h3 + * { margin-top: .7em; }
+.ar-body > :first-child { margin-top: 0; }
+
+/* The opening paragraph carries the reader in. */
+.ar-body > p:first-child { font-size: 1.125rem; line-height: 1.66; color: var(--ink); }
+
+.ar-body strong, .ar-body b { color: var(--ink); font-weight: var(--weight-semi); }
+.ar-body em { font-style: italic; }
+.ar-body a { color: var(--accent); font-weight: var(--weight-medium);
+  text-decoration: underline; text-underline-offset: 3px;
+  text-decoration-thickness: 1px; text-decoration-color: var(--accent-line); }
+.ar-body a:hover { text-decoration-color: var(--accent); }
+
+.ar-body ul, .ar-body ol { padding-left: 0; list-style: none; }
+.ar-body li { position: relative; padding-left: var(--space-5); }
+.ar-body li + li { margin-top: .6em; }
+.ar-body ul > li::before {
+  content: ""; position: absolute; left: 2px; top: .62em;
+  width: 5px; height: 5px; background: var(--accent-pale); border-radius: 1px;
+}
+.ar-body ol { counter-reset: ar; }
+.ar-body ol > li { counter-increment: ar; }
+.ar-body ol > li::before {
+  content: counter(ar); position: absolute; left: 0; top: .04em;
+  font-family: var(--font-mono); font-size: .72em; color: var(--faint);
+}
+
+.ar-body blockquote {
+  margin-left: 0; padding-left: var(--space-5);
+  border-left: 2px solid var(--accent-line);
+  color: var(--ink); font-size: 1.125rem; line-height: 1.5;
+}
+.ar-body code {
+  font-family: var(--font-mono); font-size: .88em;
+  background: var(--surface-2); padding: 2px 5px; border: 1px solid var(--line);
+}
+.ar-body hr { border: 0; border-top: 1px solid var(--line); margin: 2.4em 0; }
+
+/* ---- sources --------------------------------------------------------- */
+.ar-sources { border-top: 1px solid var(--line); padding-top: var(--space-5); }
+.ar-sources h2 {
+  font: var(--weight-medium) 10px/1 var(--font-mono) !important;
+  letter-spacing: .14em; text-transform: uppercase; color: var(--faint) !important;
+}
+.ar-sources ol { list-style: none; margin: var(--space-4) 0 0; padding: 0; counter-reset: src; }
+.ar-sources li {
+  counter-increment: src; position: relative; padding: var(--space-3) 0 var(--space-3) var(--space-6);
+  border-bottom: 1px solid var(--line); font-size: var(--text-sm);
+}
+.ar-sources li::before {
+  content: counter(src, decimal-leading-zero); position: absolute; left: 0; top: var(--space-3);
+  font-family: var(--font-mono); font-size: 10px; color: var(--faint);
+}
+.ar-sources a { color: var(--body); font-weight: var(--weight-normal); text-decoration: none; }
+.ar-sources a:hover { color: var(--accent); text-decoration: underline; }
+
+.ar-more-h {
+  font: var(--weight-medium) 10px/1 var(--font-mono) !important;
+  letter-spacing: .14em; text-transform: uppercase; color: var(--faint) !important;
+}
 
 /* ---- cookie consent ---------------------------------------------------- */
 .cc {

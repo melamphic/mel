@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet-async';
 const SITE = 'https://hellosalvia.com';
 const SITE_NAME = 'Salvia';
 const DEFAULT_DESC = 'Salvia is the claim integrity layer for Indian hospitals. Every admission and every document reaches the insurance desk live, so the cashless file is complete while the evidence can still be created rather than chased after the patient has gone home.';
-const DEFAULT_OG_IMAGE = 'https://hellosalvia.com/og-image.png?v=3';
+const DEFAULT_OG_IMAGE = 'https://hellosalvia.com/og-image.png?v=4';
 
 interface SEOProps {
   title: string;
