@@ -429,8 +429,8 @@
 .sv-herocard {
   position: relative; z-index: 2; background: var(--surface);
   border: 1px solid var(--line-strong);
-  padding: clamp(38px, 5vw, 58px) clamp(26px, 4.6vw, 52px);
-  text-align: center; max-width: 740px;
+  padding: clamp(32px, 3.9vw, 46px) clamp(24px, 3.6vw, 42px);
+  text-align: center; max-width: 640px;
 }
 .sv-herocard h1 { max-width: 15ch; margin: 0 auto; }
 .sv-herocard .c { position: absolute; font-family: var(--font-mono); font-size: 12px;

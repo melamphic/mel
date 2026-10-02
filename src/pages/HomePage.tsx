@@ -310,7 +310,7 @@ export default function HomePage() {
           <div className="sv-herocard">
             <span className="c tl">+</span><span className="c tr">+</span>
             <span className="c bl">+</span><span className="c br">+</span>
-            <h1 style={{ fontSize: 'clamp(2.25rem, 4.6vw, 3.6rem)' }}>
+            <h1 style={{ fontSize: 'clamp(1.95rem, 3.6vw, 2.85rem)' }}>
               Insurance, finished before the patient leaves.
             </h1>
             <p className="s-lede" style={{ margin: 'var(--space-5) auto 0' }}>
